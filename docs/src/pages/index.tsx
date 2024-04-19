@@ -71,7 +71,7 @@ export default function Home(): JSX.Element {
               href="https://www.npmjs.com/package/@devgrace/react"
               target="_blank">
               <img src="https://img.shields.io/npm/v/@devgrace/react.svg" />
-            </a>{' '}
+            </a>
             <a
               href="https://bundlephobia.com/package/@devgrace/react"
               target="_blank">

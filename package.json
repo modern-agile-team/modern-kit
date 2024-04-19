@@ -1,5 +1,5 @@
 {
-  "name": "devgrace",
+  "name": "modern-kit",
   "private": true,
   "workspaces": [
     "docs",
@@ -20,7 +20,7 @@
     "changeset:publish": "changeset publish",
     "changeset:version": "changeset version"
   },
-  "homepage": "https://github.com/Team-Grace/devgrace",
+  "homepage": "https://github.com/modern-agile-team/modern-kit",
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/preset-env": "^7.22.10",

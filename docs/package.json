@@ -24,11 +24,10 @@
     "prepare:docs": "yarn prepare:docs:en && yarn prepare:docs:ko"
   },
   "dependencies": {
-    "@devgrace/react": "workspace:*",
-    "@devgrace/ui": "workspace:*",
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/preset-classic": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
+    "@modern-kit/react": "workspace:*",
     "clsx": "^1.2.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^18.2.0",
