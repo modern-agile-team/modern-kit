@@ -1,0 +1,36 @@
+# useInterval
+
+A custom hook to conveniently use `window.setInterval`.
+
+The main difference between the `window.setInterval` you know and this `useInterval` hook is that its arguments are `dynamic`.
+
+You can stop the timer by putting `null` as the value of `delay`.
+
+<br />
+
+## Interface
+```tsx
+type SetIntervalParameters = Parameters<typeof setInterval>;
+
+const useInterval: (callback: SetIntervalParameters[0], delay?: SetIntervalParameters[1]) => void
+```
+
+## Usage
+
+```tsx
+import { useInterval } from '@devgrace/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  useInterval(() => setNumber(number + 1), 1000);
+
+  return (
+    <div>
+      <div>{number}</div>
+      <button onClick={() => setIsPlaying(false)}>button</button>
+    </div>
+  );
+};
+```

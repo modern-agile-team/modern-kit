@@ -1,0 +1,65 @@
+import { AB } from '@devgrace/react';
+import { useState } from 'react';
+
+# AB
+Component that can be used when `AB testing`.
+
+Returns `null` if not used correctly, as shown below.
+
+- Using an invalid component type (Available components: AB.CaseA. AB.CaseB)
+- Using a duplicate component type
+- children length is not `2`
+
+<br />
+
+## Interface
+```tsx
+interface ABProps {
+  renderAction?: () => void; // A function that is executed when rendered.
+}
+
+const AB: {
+  ({ children }: PropsWithChildren): JSX.Element | null;
+  CaseA({ children, renderAction }: PropsWithChildren<ABProps>): JSX.Element;
+  CaseB({ children, renderAction }: PropsWithChildren<ABProps>): JSX.Element;
+}
+```
+
+## Usage
+
+```tsx
+import { AB } from '@devgrace/react';
+
+const { CaseA, CaseB } = AB;
+
+const Example = () => {
+  return (
+    <AB>
+      <CaseA renderAction={() => console.log("CaseA Render")}>
+        <div>A</div>
+      </CaseA>
+      <CaseB renderAction={() => console.log("CaseB Render")}>
+        <div>B</div>
+      </CaseB>
+    </AB>
+  );
+}; 
+```
+
+## Example
+
+export const Example = () => {
+  const { CaseA, CaseB } = AB;
+  return (
+    <AB>
+      <CaseA renderAction={() => console.log("CaseA Render")}>
+        <div style={{ width: "50px", backgroundColor: "green", color: "white", fontSize: '2rem', textAlign: 'center'}}>A</div>
+      </CaseA>
+      <CaseB renderAction={() => console.log("CaseB Render")}>
+        <div style={{width: "50px", backgroundColor: "blue", color: "white", fontSize: '2rem', textAlign: 'center'}}>B</div>
+      </CaseB>
+    </AB>
+  );
+};
+
+<Example />

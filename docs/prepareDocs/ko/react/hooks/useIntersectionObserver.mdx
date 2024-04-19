@@ -1,0 +1,52 @@
+# useIntersectionObserver
+
+`ref`를 할당한 타겟 엘리먼트가 `Viewport`에 노출되는 시점에 `action` 콜백 함수를 호출시키는 커스텀 훅입니다.
+
+Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
+
+<br />
+
+## Interface
+```tsx
+interface UseIntersectionObserverProps {
+  action: (entry: IntersectionObserverEntry) => void;
+  calledOnce?: boolean;
+  threshold?: number | number[];
+  root?: Document | Element | null;
+  rootMargin?: string;
+}
+
+const useIntersectionObserver: <T extends HTMLElement>({ 
+  action, 
+  calledOnce, 
+  root, 
+  threshold, 
+  rootMargin
+}: UseIntersectionObserverProps) => React.RefObject<T>
+```
+
+## Usage
+
+```tsx
+import { useIntersectionObserver } from '@devgrace/react';
+
+const Example = () => {
+  const divRef = useIntersectionObserver<HTMLDivElement>({
+    action: () => { /* action */},
+  });
+  const imgRef = useIntersectionObserver<HTMLImageElement>({
+    action: (entry) => { /* 필요하다면 IntersectionObserverEntry 를 사용할 수 있습니다. */},
+  });
+
+  return (
+    <div>
+      {/* ... */}
+      <div ref={divRef}>Box</div>
+      <img ref={imgRef} src="url" alt="img" />
+    </div>
+  );
+};
+```
+
+## Note
+[Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)

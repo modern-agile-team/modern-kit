@@ -1,0 +1,21 @@
+# useUnMount
+
+a custom hook that calls a callback function when the component will `unmount`.
+
+<br />
+
+## Interface
+```tsx
+const useUnmount: (callback: () => any) => void
+```
+
+## Usage
+
+```tsx
+import { useUnmount } from '@devgrace/react';
+
+const Example = () => {
+  useUnmount(() => console.log("unmount"));
+
+  return <>{/* ... */}</>;
+};

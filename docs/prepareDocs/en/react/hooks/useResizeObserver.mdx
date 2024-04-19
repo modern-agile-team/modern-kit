@@ -1,0 +1,84 @@
+import { useResizeObserver } from '@devgrace/react';
+
+# useResizeObserver
+
+A custom hook to detect changes in the DOM size of target elements assigned a `ref`. 
+
+<br />
+
+## Interface
+```tsx
+/**
+ * type ContentRect = {
+    readonly bottom: number;
+    readonly height: number;
+    readonly left: number;
+    readonly right: number;
+    readonly top: number;
+    readonly width: number;
+    readonly x: number;
+    readonly y: number;
+  }
+ */
+type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
+
+const useResizeObserver: <T extends HTMLElement>(
+  action: (entry: ResizeObserverEntry) => void
+) => {
+  ref: React.RefObject<T>;
+  contentRect: ContentRect;
+};
+```
+
+## Usage
+
+```tsx
+import React, { forwardRef, useRef } from 'react';
+import { useResizeObserver } from '@devgrace/react';
+
+const Example = () => {
+  const { ref, contentRect } = useResizeObserver<HTMLDivElement>((entry) => {
+    console.log('resize', entry);
+  });
+
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      height: '400px', 
+      background: '#439966', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={boxStyle}>
+      Try reducing the width of your browser. <br />
+      {`width: ${contentRect.width}, height: ${contentRect.height}`}
+    </div>
+  );
+};
+```
+
+export const ResizeObserver = () => {
+  const { ref, contentRect } = useResizeObserver((entry) => {
+    console.log('resize', entry);
+  });
+  return (
+    <div
+      ref={ref}
+      style={{ width: '100%', height: '400px', background: '#439966', fontSize: '2rem', color: '#fff' }}>
+      Try reducing the width of your browser. <br />
+      {`width: ${contentRect.width}, height: ${contentRect.height}`}
+    </div>
+  );
+};
+
+<ResizeObserver />
+
+<br />
+
+## Note
+[ResizeObserver API](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)

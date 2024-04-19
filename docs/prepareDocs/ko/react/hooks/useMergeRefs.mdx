@@ -1,0 +1,29 @@
+# useMergeRefs
+
+인자로 주어진 여러 개의 `ref`를 하나로 병합할 때 활용할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+const useMergeRefs: <T = any>(
+  ...refs: (React.MutableRefObject<T> | React.LegacyRef<T>)[]
+) => (instance: T | null) => void;
+```
+
+## Usage
+
+```tsx
+import React, { forwardRef, useRef } from 'react';
+import { useMergeRefs } from '@devgrace/react';
+
+interface Props {
+  /* ... */
+}
+
+const Example = forwardRef<HTMLDivElement, Props>((props, ref) => {
+  const childRef = useRef<HTMLDivElement | null>(null);
+
+  return <div ref={useMergeRefs(childRef, ref)}>{/* ... */}</div>;
+});
+```

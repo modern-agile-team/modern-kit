@@ -1,0 +1,133 @@
+import { LazyImage } from '@devgrace/react';
+
+# LazyImage
+
+An image component that `Lazy loading` an assigned image when exposed to a `Viewport`.
+
+You can resize the image by entering `width`, `height` values and at the same time improve the `Layout Shift`.
+
+You can set the Intersection Observer Option (see `Note` below).
+
+<br />
+
+## Interface
+```tsx
+interface LazyImageProps extends React.ComponentProps<'img'> {
+  src: string;
+  threshold?: number | number[]; // default: 0
+  root?: Document | Element | null; // default: null
+  rootMargin?: string; // default: '0px 0px 0px 0px'
+}
+
+const LazyImage: React.ForwardRefExoticComponent<Omit<LazyImageProps, "ref"> & React.RefAttributes<HTMLDivElement>>
+```
+
+## Usage
+### Default
+```tsx
+import { LazyImage } from '@devgrace/react';
+import img1 from '../assets/img1.png';
+import img2 from '../assets/img2.png';
+
+const Example = () => {
+  return (
+    <div>
+      {/* ... */}
+      <LazyImage width={400} height={400} src={img1} alt="img1" />
+      {/* ... */}
+      <LazyImage width={400} height={400} src={img2} alt="img2" />
+      {/* ... */}
+    </div>
+  );
+}; 
+```
+
+<br />
+
+### Fallback
+```tsx
+import { LazyImage } from '@devgrace/react';
+import img1 from '../assets/img1.png';
+
+const Example = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const wrapperStyle: CSSProperties = {
+    position: 'relative',
+    width: '400px',
+    height: '400px',
+  };
+
+  const imgStyle: CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    opacity: isLoaded ? 1 : 0,
+    transition: 'opacity 0.2s',
+  };
+
+  const skeletonStyle: CSSProperties = {
+    width: '400px',
+    height: '400px',
+    backgroundColor: '#cdcbcb',
+  }
+
+  return (
+    <div style={wrapperStyle}>
+      {!isLoaded && <div style={skeletonStyle} />}
+      <LazyImage
+        style={imgStyle}
+        width={400}
+        height={400}
+        src={img1}
+        alt="img1"
+        onLoad={() => setIsLoaded(true)}
+      />
+    </div>
+  );
+}; 
+```
+
+## Example
+
+<div style={{ maxWidth: '500px', height: '500px', overflow:'scroll', background: '#f8f8f8' }}>
+  <div style={{ width: '100%', height: '500px',  textAlign: 'center', fontSize: '2rem' }}>
+    Please scroll down.
+  </div>
+  <LazyImage
+    width={"100%"}
+    height={400}
+    src={
+      'https://github.com/Team-Grace/devgrace/assets/64779472/b5640bec-2abc-4205-afbf-ccfd9876a90b'
+    }
+    alt="img1"
+    onClick={() => console.log('img click1')}
+  />
+
+  <div style={{ width: '100%', height: '150px' }} />
+
+  <LazyImage
+    width={"100%"}
+    height={400}
+    src={
+      'https://github.com/Team-Grace/devgrace/assets/64779472/207743a7-b29f-4826-bc08-8df0d67e568b'
+    }
+    alt="img2"
+    onClick={() => console.log('img click2')}
+  />
+
+  <div style={{ width: '100%', height: '150px' }} />
+
+  <LazyImage
+    width={"100%"}
+    height={400}
+    src={
+      'https://github.com/Team-Grace/devgrace/assets/64779472/d1957ec8-fe87-406e-bfda-fb4ee505b152'
+    }
+    alt="img3"
+    onClick={() => console.log('img click3')}
+  />
+</div>
+
+## Note
+[Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)

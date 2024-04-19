@@ -1,0 +1,54 @@
+import { usePrevious } from '@devgrace/react';
+import { useState } from 'react';
+
+# usePrevious
+
+이전 렌더링에서 인수의 값을 반환하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+const usePrevious: <T>(value: T) => T;
+```
+
+## Usage
+
+```tsx
+import { useState } from 'react';
+import { usePrevious } from '@devgrace/react';
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+
+  const onIncrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <div>Current Count is - {count}</div>
+      <div>Previous Count is - {previousCount}</div>
+      <button onClick={onIncrementCount}>Increment</button>
+    </div>
+  );
+};
+```
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+  const onIncrementCount = () => {
+    setCount(count + 1);
+  };
+  return (
+    <div>
+      <div>Current Count is - {count}</div>
+      <div>Previous Count is - {previousCount}</div>
+      <button onClick={onIncrementCount}>Increment</button>
+    </div>
+  );
+};
+
+<Example />

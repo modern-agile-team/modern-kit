@@ -1,0 +1,120 @@
+import { useWindowSize } from '@devgrace/react';
+import { useMemo } from 'react';
+
+# useWindowSize
+
+현재 브라우저 창의 너비와 높이 정보를 추적하고, 반환하는 커스텀 훅입니다. 또한, 불 필요한 호출을 방지하기위한 `debounce` 기능을 제공합니다.
+
+<br />
+
+## Interface
+```tsx
+interface Size {
+  width: number | null;
+  height: number | null;
+}
+
+interface useWindowSizeProps {
+  isDebounce?: boolean; // debounce options, default: false
+  wait?: number; // debounce delay time, default: 300
+}
+
+const useWindowSize: (options?: useWindowSizeProps) => Size
+```
+
+## Usage
+### Default
+```tsx
+import { useWindowSize } from '@devgrace/react';
+
+const Example = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#439966', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      브라우저 크기를 줄여보세요. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DefaultExample = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#439966', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      브라우저 크기를 줄여보세요. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DefaultExample />
+
+<br />
+
+### Debounce
+```tsx
+import { useWindowSize } from '@devgrace/react';
+
+const DebounceExample = () => {
+  const windowSize = useWindowSize({ isDebounce: true, wait: 300 });
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#0067A3', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      브라우저 크기를 줄여보세요. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DebounceExample = () => {
+  const windowSize = useWindowSize({ isDebounce: true, wait: 300 });
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#0067A3', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      브라우저 크기를 줄여보세요. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DebounceExample />
+
+<br />

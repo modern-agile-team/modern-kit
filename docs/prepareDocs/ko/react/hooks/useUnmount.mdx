@@ -1,0 +1,21 @@
+# useUnMount
+
+컴포넌트가 `언마운트`될 때 콜백 함수를 호출하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+const useUnmount: (callback: () => any) => void
+```
+
+## Usage
+
+```tsx
+import { useUnmount } from '@devgrace/react';
+
+const Example = () => {
+  useUnmount(() => console.log("unmount"));
+
+  return <>{/* ... */}</>;
+};

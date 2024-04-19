@@ -1,0 +1,39 @@
+# useImageStatus
+
+반환된 `ref`를 `<img />` 태그에 할당하면 이미지 로드하는 과정에서 `pending`, `loading`, `complete`, `error` 상태를 반환하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+type ImageStatus = 'pending' | 'loading' | 'complete' | 'error';
+
+const useImageStatus: () => {
+  ref: (imgElement: HTMLImageElement) => void;
+  imageStatus: ImageStatus;
+}
+```
+
+## Usage
+
+```tsx
+import { useImageStatus } from '@devgrace/react';
+import img1 from '../assets/img1.png';
+
+const Example = () => {
+  const { ref, imageStatus } = useImageStatus();
+
+  return (
+    <div>
+      <img 
+        ref={ref} 
+        width={400} 
+        height={400} 
+        src={img1} 
+        alt='img1' 
+      />
+      <p>{imageStatus}</p>
+    </div>
+  );
+};
+```

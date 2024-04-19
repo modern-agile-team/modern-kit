@@ -1,0 +1,120 @@
+import { useWindowSize } from '@devgrace/react';
+import { useMemo } from 'react';
+
+# useWindowSize
+
+A custom hook that tracks and returns the width and height information of the current browser window. It also provides a `debounce` function to prevent unnecessary calls.
+
+<br />
+
+## Interface
+```tsx
+interface Size {
+  width: number | null;
+  height: number | null;
+}
+
+interface useWindowSizeProps {
+  isDebounce?: boolean; // debounce options, default: false
+  wait?: number; // debounce delay time, default: 300
+}
+
+const useWindowSize: (options?: useWindowSizeProps) => Size
+```
+
+## Usage
+### Default
+```tsx
+import { useWindowSize } from '@devgrace/react';
+
+const Example = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#439966', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      Try reducing the width of your browser. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DefaultExample = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#439966', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      Try reducing the width of your browser. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DefaultExample />
+
+<br />
+
+### Debounce
+```tsx
+import { useWindowSize } from '@devgrace/react';
+
+const DebounceExample = () => {
+  const windowSize = useWindowSize({ isDebounce: true, wait: 300 });
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#0067A3', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      Try reducing the width of your browser. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DebounceExample = () => {
+  const windowSize = useWindowSize({ isDebounce: true, wait: 300 });
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%', 
+      background: '#0067A3', 
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      Try reducing the width of your browser. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DebounceExample />
+
+<br />

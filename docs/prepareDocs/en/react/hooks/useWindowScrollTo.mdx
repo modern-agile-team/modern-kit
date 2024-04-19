@@ -1,0 +1,33 @@
+# useWindowScrollTo
+
+A custom hook to conveniently call `window.scrollTo()`.
+
+<br />
+
+## Interface
+```tsx
+interface UseScrollToProps {
+  left?: ScrollToOptions['left']; // default: 0
+  top?: ScrollToOptions['top']; // default: 0
+  behavior?: ScrollToOptions['behavior']; // default: 'auto'
+  dependencies?: DependencyList; // default: []
+}
+
+const useWindowScrollTo: ({
+  left,
+  top,
+  behavior,
+  dependencies,
+}?: UseScrollToProps) => void;
+```
+
+## Usage
+```tsx
+import { useWindowScrollTo } from '@devgrace/react';
+
+const Example = () => {
+  useWindowScrollTo();
+
+  return (<div>{/* ... */}</div>);
+};
+```

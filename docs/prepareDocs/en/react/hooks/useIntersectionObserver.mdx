@@ -1,0 +1,52 @@
+# useIntersectionObserver
+
+A custom hook that calls the `action` callback function when the target element assigned `ref` is exposed to the `Viewport`.
+
+You can set the Intersection Observer Option (see `Note` below).
+
+<br />
+
+## Interface
+```tsx
+interface UseIntersectionObserverProps {
+  action: (entry: IntersectionObserverEntry) => void;
+  calledOnce?: boolean;
+  threshold?: number | number[];
+  root?: Document | Element | null;
+  rootMargin?: string;
+}
+
+const useIntersectionObserver: <T extends HTMLElement>({ 
+  action, 
+  calledOnce, 
+  root, 
+  threshold, 
+  rootMargin
+}: UseIntersectionObserverProps) => React.RefObject<T>
+```
+
+## Usage
+
+```tsx
+import { useIntersectionObserver } from '@devgrace/react';
+
+const Example = () => {
+  const divRef = useIntersectionObserver<HTMLDivElement>({
+    action: () => { /* action */},
+  });
+  const imgRef = useIntersectionObserver<HTMLImageElement>({
+    action: (entry) => { /* You can use IntersectionObserverEntry if needed. */},
+  });
+
+  return (
+    <div>
+      {/* ... */}
+      <div ref={divRef}>Box</div>
+      <img ref={imgRef} src="url" alt="img" />
+    </div>
+  );
+};
+```
+
+## Note
+[Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)

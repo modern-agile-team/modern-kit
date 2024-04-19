@@ -1,0 +1,36 @@
+# useVisibilityChange
+
+A custom hook that fires the `onShow` callback function when the `visibilitychange` event occurs, that is, when the content of the browser tab is visible, and the `onHide` callback function when the content is hidden.
+
+<br />
+
+## Interface
+```tsx
+type VisibilityChangeCallbackAction = (
+  event: Event,
+  visibilityState: DocumentVisibilityState
+) => void;
+
+interface useVisibilityChangeProps {
+  onShow?: VisibilityChangeCallbackAction;
+  onHide?: VisibilityChangeCallbackAction;
+}
+
+const useVisibilityChange: ({ onShow, onHide, }: useVisibilityChangeProps) => void
+```
+
+## Usage
+```tsx
+import { useVisibilityChange } from '@devgrace/react';
+
+const Example = () => {
+  useVisibilityEvent({
+    onShow: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */},
+    onHide: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */}
+  });
+
+  return (
+    <div>{/* ... */}</div>
+  )
+};
+```

@@ -1,0 +1,37 @@
+# useDebounce
+
+`debounce`를 쉽게 사용할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+// lodash-es DebounceSettings
+// https://www.geeksforgeeks.org/lodash-_-debounce-method/
+interface DebounceSettings {
+  leading?: boolean | undefined;
+  maxWait?: number | undefined;
+  trailing?: boolean | undefined;
+}
+
+type DebounceParameters = Parameters<typeof debounce>;
+
+const useDebounce: (
+  callback: DebounceParameters[0], //  (...args: any) => any
+  wait: DebounceParameters[1], // number
+  options?: DebounceParameters[2] // DebounceSettings
+) => DebouncedFunc<(...args: any) => any>;
+```
+
+## Usage
+
+```tsx
+import { useDebounce } from '@devgrace/react';
+
+const Example = () => {
+  const handle = useDebounce(() => {
+    console.log('debounce');
+  }, 500);
+
+  return <button onClick={handle}>button1</button>;
+};

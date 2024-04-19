@@ -1,0 +1,65 @@
+import { AB } from '@devgrace/react';
+
+# AB
+
+`AB 테스트`할 때 사용할 수 있는 컴포넌트입니다. 
+
+아래와 같이 올바르게 사용하지 않으면 `null`을 반환합니다.
+
+- 올바르지 않은 컴포넌트 타입을 사용 (사용 가능한 컴포넌트: AB.CaseA. AB.CaseB)
+- 중복된 컴포넌트 타입을 사용
+- 자식 컴포넌트 길이가 `2`가 아닌 경우
+
+<br />
+
+## Interface
+```tsx
+interface ABProps {
+  renderAction?: () => void; // 렌더링 될 때 실행되는 함수입니다.
+}
+
+const AB: {
+  ({ children }: PropsWithChildren): JSX.Element | null;
+  CaseA({ children, renderAction }: PropsWithChildren<ABProps>): JSX.Element;
+  CaseB({ children, renderAction }: PropsWithChildren<ABProps>): JSX.Element;
+}
+```
+
+## Usage
+
+```tsx
+import { AB } from '@devgrace/react';
+
+const { CaseA, CaseB } = AB;
+
+const Example = () => {
+  return (
+    <AB>
+      <CaseA renderAction={() => console.log("Case A Render")}>
+        <div>A</div>
+      </CaseA>
+      <CaseB renderAction={() => console.log("Case B Render")}>
+        <div>B</div>
+      </CaseB>
+    </AB>
+  );
+}; 
+```
+
+## Example
+
+export const Example = () => {
+  const { CaseA, CaseB } = AB;
+  return (
+    <AB>
+      <CaseA renderAction={() => console.log("CaseA Render")}>
+        <div style={{ width: "50px", backgroundColor: "green", color: "white", fontSize: '2rem', textAlign: 'center'}}>A</div>
+      </CaseA>
+      <CaseB renderAction={() => console.log("CaseB Render")}>
+        <div style={{width: "50px", backgroundColor: "blue", color: "white", fontSize: '2rem', textAlign: 'center'}}>B</div>
+      </CaseB>
+    </AB>
+  );
+};
+
+<Example />

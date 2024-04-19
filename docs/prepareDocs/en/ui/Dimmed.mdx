@@ -1,0 +1,86 @@
+import { useState } from 'react';
+import { Dimmed, Button } from '@devgrace/ui'
+import { useOnClickOutside } from '@devgrace/react';
+
+# Dimmed
+
+`@devgrace/ui` Dimmed Component
+
+<br />
+
+## interface
+```tsx
+const Dimmed: React.ForwardRefExoticComponent<
+  Omit<DimmedProps, 'ref'> & React.RefAttributes<HTMLDivElement>
+>;
+
+export interface DimmedProps
+  extends PropsWithChildren<React.ComponentProps<'div'>> {
+  alpha?: string | number; // default: 0.6, A in RGBA.
+  zIndex?: CSSProperties['zIndex']; // default: 1000, The z-index value of Dimmed.
+  isShow?: CSSTransitionProps['in']; // default: false, The value that determines whether "Dimmed" is visible or not.
+  isTransition?: boolean; // default: true, A value that determines whether to give the transition effect.
+  timeout?: CSSTransitionProps['timeout']; // default: 200, The duration value of the transition.
+  bodyStyle?: CSSProperties; // custom style
+}
+```
+
+<br />
+
+## Usage
+```tsx
+import { Dimmed, Button } from '@devgrace/ui';
+import { useOnClickOutside } from '@devgrace/react';
+
+const Example = () => {
+  const [isShow, setIsShow] = useState(false);
+  const { ref } = useOnClickOutside<HTMLDivElement>(() => setIsShow(false));
+
+  const boxStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '150px',
+    height: '150px',
+    backgroundColor: '#fff',
+  };
+
+  return (
+    <div>
+      <Button onClick={() => setIsShow(true)}>Open Dimmed</Button>
+      <Dimmed isShow={isShow}>
+        <div ref={ref} style={boxStyle}>
+          INNER BOX
+        </div>
+      </Dimmed>
+    </div>
+  );
+};
+```
+
+export const Example = () => {
+  const [isShow, setIsShow] = useState(false);
+  const { ref } = useOnClickOutside(() => setIsShow(false));
+  const boxStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '300px',
+    height: '300px',
+    backgroundColor: '#fff',
+  };
+  return (
+    <div>
+      <Button onClick={() => setIsShow(true)}>Open Dimmed</Button>
+      <Dimmed isShow={isShow}>
+        <div ref={ref} style={boxStyle}>
+          INNER BOX
+        </div>
+      </Dimmed>
+    </div>
+  );
+};
+
+## Example
+
+<Example />

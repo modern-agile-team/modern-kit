@@ -1,0 +1,112 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+
+ .banner {
+  padding: 5rem 0 5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #ededed;
+}
+
+.bannerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.buttons a + a {
+  margin-left: 10px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContentWrapper {
+  width: 1000px;
+  padding: 40px 20px;
+  margin-top: 30px;
+}
+
+.mainContentHead {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mainContentHead > a {
+  margin-left: 6px;
+  width: fit-content;
+}
+
+.mainContentParagraph {
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.mainContentTitle {
+  margin-left: 0px;
+  margin-bottom: 40px;
+  font-size: 21px;
+  max-width: 600px;
+  color: rgb(136, 136, 136);
+  padding: 0 20px;
+}
+
+.contributors {
+  width: 100%;
+  padding: 6rem 20px 6rem 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ededed;
+  background-color: #fbfbfb;
+}
+
+.contributors h2 {
+  font-size: 2.4rem;
+  text-align: center;
+}
+
+.contributors div {
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contributors a {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.contributors p {
+  font-size: 18px;
+  max-width: 600px;
+  color: rgb(136, 136, 136);
+  padding: 0 20px;
+  text-align: center;
+}

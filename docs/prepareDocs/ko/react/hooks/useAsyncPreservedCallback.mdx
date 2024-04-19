@@ -1,0 +1,12 @@
+# useAsyncPreservedCallback
+
+[usePreservedCallback](https://team-grace.github.io/devgrace/ko/docs/react/hooks/usePreservedCallback/) 과 유사하나 Promise를 반환하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+const useAsyncPreservedCallback: <T extends (...args: any[]) => Promise<any>>(
+  callback: T
+) => (...args: any[]) => Promise<any>;
+```

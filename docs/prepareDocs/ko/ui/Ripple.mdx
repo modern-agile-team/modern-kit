@@ -1,0 +1,129 @@
+import { Ripple } from '@devgrace/ui';
+import { useMemo } from 'react';
+
+# Ripple
+
+`@devgrace/ui` Ripple 컴포넌트
+
+클릭 시에 `Ripple` 효과가 발생합니다.
+
+#### 주의 사항
+1. 자식 요소에게 `position(static 제외)`, `z-index`를 명시적으로 줘야합니다.
+2. 자식 요소에게 background Color를 주지말고 `Ripple의 bgColor Props`를 이용해주세요.
+
+위 주의 사항을 지키지 않으면 자식 요소가 Ripple 효과에 가려지거나, 자식 요소의 click event가 실행되지 않을 수 있습니다.
+
+또한, 자식 요소에게 직접 background Color를 주면, Ripple 효과가 보여지지 않을 수 있습니다.
+
+<br />
+
+## Interface
+```tsx
+export interface RippleProps {
+  rippleColor?: CSSProperties['backgroundColor']; // default: "#E0E0E0"
+  bgColor?: CSSProperties['backgroundColor']; // default: "#FFFFFF"
+  borderRadius?: CSSProperties['borderRadius']; // default: '0'
+  duration?: number; // default: 800
+  fullWidth?: boolean; // default: false
+  disabled?: boolean; // default: false
+}
+
+const Ripple: ({
+  children,
+  disabled,
+  fullWidth,
+  borderRadius,
+  rippleColor,
+  bgColor,
+  duration,
+}: PropsWithChildren<RippleProps>) => JSX.Element;
+```
+
+<br />
+
+## Usage
+```tsx
+import { Ripple } from '@devgrace/ui';
+
+const Example = () => {
+  const rectBoxStyle = useMemo(() => {
+    return {
+      position: 'relative', // (*)
+      zIndex: '10', // (*)
+      padding: '10px 15px',
+      border: '1px solid #111',
+    };
+  }, []);
+
+  const roundBoxStyle = useMemo(() => {
+    return {
+      position: 'relative', // (*)
+      zIndex: '10', // (*)
+      padding: '10px 15px',
+      border: '1px solid #111',
+      borderRadius: '8px',
+    };
+  }, []);
+
+  return (
+    <>
+      <Ripple>
+        <div style={rectBoxStyle}>Default Ripple Rect Box</div>
+      </Ripple>
+      <br />
+      <Ripple borderRadius={8}>
+        <div style={roundBoxStyle}>Round Ripple Rect Box</div>
+      </Ripple>
+      <br />
+      <Ripple borderRadius={8} rippleColor={'#FBC02D'} bgColor={'#FFEB3B'}>
+        <div style={roundBoxStyle}>Ripple Rect Box</div>
+      </Ripple>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const rectBoxStyle = useMemo(() => {
+    return {
+      position: 'relative',
+      zIndex: '10',
+      padding: '10px 15px',
+      border: '1px solid #111',
+    };
+  }, []);
+  const roundBoxStyle = useMemo(() => {
+    return {
+      position: 'relative',
+      zIndex: '10',
+      padding: '10px 15px',
+      border: '1px solid #111',
+      borderRadius: '8px',
+    };
+  }, []);
+  return (
+    <>
+      <Ripple>
+        <div style={rectBoxStyle} onClick={() => console.log('1')}>
+          Ripple Rect Box
+        </div>
+      </Ripple>
+      <br />
+      <Ripple borderRadius={8}>
+        <div style={roundBoxStyle} onClick={() => console.log('2')}>
+          Ripple Round Box
+        </div>
+      </Ripple>
+      <br />
+      <Ripple borderRadius={8} rippleColor={'#FBC02D'} bgColor={'#FFEB3B'}>
+        <div style={roundBoxStyle} onClick={() => console.log('3')}>
+          Ripple Round Box
+        </div>
+      </Ripple>
+    </>
+  );
+};
+
+<Example />

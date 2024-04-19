@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.@devgrace/react": {
+    "message": "@devgrace/react",
+    "description": "The label for category @devgrace/react in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.@devgrace/ui": {
+    "message": "@devgrace/ui",
+    "description": "The label for category @devgrace/ui in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.@devgrace/utils": {
+    "message": "@devgrace/utils",
+    "description": "The label for category @devgrace/utils in sidebar tutorialSidebar"
+  }
+}

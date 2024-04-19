@@ -1,0 +1,36 @@
+# useVisibilityChange
+
+`visibilitychange` 이벤트가 발생할 때 즉, 브라우저 탭의 콘텐츠가 보여지면 `onShow` 콜백 함수를 실행하며, 콘텐츠가 숨겨지면 `onHide` 콜백 함수를 실행하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+type VisibilityChangeCallbackAction = (
+  event: Event,
+  visibilityState: DocumentVisibilityState
+) => void;
+
+interface useVisibilityChangeProps {
+  onShow?: VisibilityChangeCallbackAction;
+  onHide?: VisibilityChangeCallbackAction;
+}
+
+const useVisibilityChange: ({ onShow, onHide, }: useVisibilityChangeProps) => void
+```
+
+## Usage
+```tsx
+import { useVisibilityChange } from '@devgrace/react';
+
+const Example = () => {
+  useVisibilityEvent({
+    onShow: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */},
+    onHide: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */}
+  });
+
+  return (
+    <div>{/* ... */}</div>
+  )
+};
+```

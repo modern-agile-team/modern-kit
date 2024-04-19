@@ -1,0 +1,63 @@
+{
+  "name": "docs",
+  "version": "0.0.45",
+  "private": true,
+  "homepage": "https://github.com/Team-Grace/devgrace",
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "start:ko": "yarn start --locale ko",
+    "swizzle": "docusaurus swizzle",
+    "build:docs": "docusaurus build",
+    "publish:docs": "gh-pages -d build",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "mkdir:ko": "mkdir ./i18n/ko/docusaurus-plugin-content-docs/current",
+    "rm:ko": "rm -rf ./i18n/ko/docusaurus-plugin-content-docs/current",
+    "rm:en": "rm -rf ./docs",
+    "cp:ko": "cp -r ./prepareDocs/ko ./i18n/ko/docusaurus-plugin-content-docs/current",
+    "cp:en": "cp -r ./prepareDocs/en ./docs",
+    "prepare:docs:en": "yarn rm:en && yarn cp:en",
+    "prepare:docs:ko": "yarn rm:ko && yarn cp:ko",
+    "prepare:docs": "yarn prepare:docs:en && yarn prepare:docs:ko"
+  },
+  "dependencies": {
+    "@devgrace/react": "workspace:*",
+    "@devgrace/ui": "workspace:*",
+    "@docusaurus/core": "^3.0.0",
+    "@docusaurus/preset-classic": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^1.2.1",
+    "prism-react-renderer": "^1.3.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.0.0",
+    "@docusaurus/theme-classic": "^3.0.0",
+    "@docusaurus/types": "^3.0.0",
+    "@tsconfig/docusaurus": "^2.0.0",
+    "@types/node": "^20.5.1",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "gh-pages": "^6.0.0",
+    "typescript": "^5.1.6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.14"
+  }
+}

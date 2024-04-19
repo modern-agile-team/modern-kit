@@ -1,0 +1,56 @@
+{
+  "name": "@devgrace/utils",
+  "sideEffects": false,
+  "version": "0.9.3",
+  "description": "devgrace/utils",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "rm -rf dist && rollup -c",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "ssi02014 <ssi02014@naver.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@types/jest": "^29.5.3",
+    "core-js": "^3.32.0",
+    "jest": "^29.6.2",
+    "jest-environment-jsdom": "^29.6.2",
+    "rollup": "^4.14.3",
+    "ts-jest": "^29.1.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.1.6"
+  },
+  "keywords": [
+    "react",
+    "next",
+    "utils",
+    "component",
+    "ui",
+    "hooks",
+    "custom hooks"
+  ],
+  "gitHead": "7722785374b897572934e335817ec297ad45a943"
+}

@@ -1,0 +1,75 @@
+import { InView } from '@devgrace/react';
+
+# InView
+
+`Viewport`에 노출될 때 props로 넘겨주는 `action` 콜백 함수를 호출하는 컴포넌트입니다.
+
+<br />
+
+## Interface
+```tsx
+interface UseIntersectionObserverProps {
+  action: (entry: IntersectionObserverEntry) => void;
+  calledOnce?: boolean;
+  threshold?: number | number[];
+  root?: Document | Element | null;
+  rootMargin?: string;
+}
+
+type InViewProps = React.ComponentProps<'div'> & UseIntersectionObserverProps;
+
+const InView: React.ForwardRefExoticComponent<
+  Omit<React.PropsWithChildren<InViewProps>, 'ref'> &
+    React.RefAttributes<HTMLDivElement>
+>;
+```
+
+## Usage
+
+```tsx
+import { InView } from '@devgrace/react';
+
+const Example = () => {
+  const onAction = () => {
+    /* action */
+  }
+
+  return (
+    <div>
+      {/* ... */}
+      <InView action={onAction} calledOnce>Box1</InView>
+    </div>
+  );
+}; 
+```
+
+## Example
+
+<div style={{ maxWidth: "500px", height: "500px", overflow: "scroll", background: "#f1f3f5" }}>
+  <div style={{ width: "100%", height: "600px", textAlign: 'center', fontSize: '2rem' }}>스크롤 해주세요.</div>
+  <InView
+    style={{ width: "100%", height: "300px", background: "#c0392B", color: "white", textAlign: 'center', fontSize: "21px" }}
+    action={() => console.log("action callback(1)")}
+    calledOnce
+  >
+    <div>
+      <p>Box1</p>
+      <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
+      <p>action 콜백 함수가 최초 1회만 호출됩니다.</p>
+      <p>calledOnce: true</p>
+    </div>
+  </InView>
+  <div style={{ width: "100%", height: "100px" }} />
+  <InView
+    style={{ width: "100%", height: "300px", background: "#89a5ea", color: "white", textAlign: 'center', fontSize: "21px" }}
+    action={() => console.log("action callback(2)")}
+  >
+    <div>
+      <p>Box2</p>
+      <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
+      <p>action 콜백 함수가 여러 번 호출됩니다.</p>
+      <p>calledOnce: false</p>
+    </div>
+  </InView>
+  <div style={{ width: "100%", height: "600px", textAlign: 'center' }} />
+</div>

@@ -1,0 +1,58 @@
+# usePreservedCallback
+
+A custom hook that helps you preserve a given callback function and reuse it between component renders. 
+
+This hook is especially useful when callback functions change during rendering. It prevents and optimizes the creation of unnecessary functions, and ensures that the latest version of the callback function is used.
+
+<br />
+
+## Interface
+```tsx
+const usePreservedCallback: <T extends (...args: any[]) => any>(
+  callback: T
+) => (...args: any[]) => any;
+```
+
+## Usage
+### as-is
+```tsx
+import React, { useEffect, useState } from "react";
+
+const Example = () => {
+  const [state, setState] = useState(0);
+
+  const callback = () => {
+    setState(state + 1);
+  };
+
+  useEffect(() => {
+    callback(); // Infinite calls 
+  }, [callback]);
+
+  return (
+    <>{/* ... */}</>
+  );
+}
+```
+
+### to-be (usePreservedCallback)
+```tsx
+import React, { useEffect, useState } from "react";
+import { usePreservedCallback } from '@devgrace/react';
+
+const Example = () => {
+  const [state, setState] = useState(0);
+
+  const callback = usePreservedCallback(() => {
+    setState(state + 1);
+  });
+
+  useEffect(() => {
+    callback(); // one-time calls 
+  }, [callback]);
+
+  return (
+    <>{/* ... */}</>
+  );
+}
+```

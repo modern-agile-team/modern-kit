@@ -1,0 +1,43 @@
+# useOnClickOutside
+
+`ref`를 할당한 타겟 엘리먼트 외부 요소를 클릭 할 경우 콜백 함수를 호출하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+const useOnClickOutside: <T extends HTMLElement>(
+  action: (targetElement: T) => void
+) => {
+  ref: React.RefObject<T>;
+};
+```
+
+## Usage
+
+```tsx
+import { useMemo } from 'react';
+import { useOnClickOutside } from '@devgrace/react';
+
+const Example = () => {
+  const { ref } = useOnClickOutside<HTMLDivElement>(() => {
+    window.alert('outside click')
+  });
+  
+  const boxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      height: '400px',
+      background: '#439966',
+      fontSize: '1.5rem',
+      color: '#fff',
+    };
+  }, []);
+
+  return (
+    <div ref={ref} style={boxStyle}>
+      Target Box
+    </div>
+  );
+};
+```

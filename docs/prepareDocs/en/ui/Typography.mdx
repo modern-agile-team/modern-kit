@@ -1,0 +1,88 @@
+import { Typography } from '@devgrace/ui';
+
+# Typography
+
+`@devgrace/ui` Typography Component
+
+<br />
+
+## Interface
+### Typography
+```tsx
+interface BaseTypographyProps {
+  textAlign?: CSSProperties['textAlign'];
+  fontSize?: CSSProperties['fontSize'];
+  fontWeight?: CSSProperties['fontWeight'];
+  whiteSpace?: CSSProperties['whiteSpace'];
+  bodyStyle?: CSSProperties;
+}
+
+interface TitleProps
+  extends React.HTMLAttributes<HTMLHeadElement>,
+    BaseTypographyProps {
+  level?: 1 | 2 | 3 | 4 | 5;
+}
+
+type ParagraphProps = React.HTMLAttributes<HTMLParagraphElement> &
+  BaseTypographyProps;
+
+type TextProps = React.HTMLAttributes<HTMLSpanElement> &
+  BaseTypographyProps;
+
+const Typography: {
+  Title: ({
+    children,
+    level,
+    ...restProps
+  }: PropsWithChildren<TitleProps>) => JSX.Element;
+  Paragraph: ({
+    children,
+    ...restProps
+  }: PropsWithChildren<ParagraphProps>) => JSX.Element;
+  Text: ({
+    children,
+    ...restProps
+  }: PropsWithChildren<TextProps>) => JSX.Element;
+};
+```
+
+<br />
+
+## Usage
+```tsx
+import { Typography } from '@devgrace/ui';
+
+const Example = () => {
+  return (
+    <>
+      <Typography.Title level={1}>Typography h1 Tag</Typography.Title>
+      <Typography.Title level={2}>Typography h2 Tag</Typography.Title>
+      <Typography.Title level={3}>Typography h3 Tag</Typography.Title>
+      <Typography.Title level={4}>Typography h4 Tag</Typography.Title>
+      <Typography.Title level={5}>Typography h5 Tag</Typography.Title>
+      <Typography.Title level={5} color={"red"}>Typography h5 Tag (color: red)</Typography.Title>
+      <Typography.Paragraph>Typography p Tag</Typography.Paragraph>
+      <Typography.Text>Typography Span Tag</Typography.Text>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  return (
+    <>
+      <Typography.Title level={1}>Typography h1 Tag</Typography.Title>
+      <Typography.Title level={2}>Typography h2 Tag</Typography.Title>
+      <Typography.Title level={3}>Typography h3 Tag</Typography.Title>
+      <Typography.Title level={4}>Typography h4 Tag</Typography.Title>
+      <Typography.Title level={5}>Typography h5 Tag</Typography.Title>
+      <Typography.Title level={5} color={"red"}>Typography h5 Tag (color: red)</Typography.Title>
+      <Typography.Paragraph>Typography p Tag</Typography.Paragraph>
+      <Typography.Text>Typography Span Tag</Typography.Text>
+    </>
+  );
+};
+
+<Example />

@@ -1,0 +1,57 @@
+import { useState } from 'react';
+import { When } from '@devgrace/react';
+import { Button } from '@devgrace/ui';
+
+# When
+
+If condition prop is `true`, the child component is rendered; if `false`, the component is not rendered.
+
+A `function that returns a boolean` as a condition prop is also allowed.
+
+<br />
+
+## Interface
+```tsx
+type Condition = boolean | ((...args: any[]) => boolean);
+
+interface WhenProps {
+  condition: Condition;
+}
+
+const When: ({ children, condition }: PropsWithChildren<WhenProps>) => JSX.Element | null
+```
+
+## Usage
+
+```tsx
+import { When } from '@devgrace/react';
+import { Button } from '@devgrace/ui';
+
+const Example = () => {
+  const [state, setState] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setState(!state)}>Toggle Button</Button>
+
+      <When condition={state}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+```
+export const Example = () => {
+  const [state, setState] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setState(!state)}>Toggle Button</Button>
+
+      <When condition={state}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+
+<Example />
