@@ -11,7 +11,7 @@ const formatNumberWithCommas: (value: string | number) => string
 
 ## Usage
 ```ts
-import { formatNumberWithCommas } from '@devgrace/utils';
+import { formatNumberWithCommas } from '@modern-kit/utils';
 
 const numberWithComma1 = formatNumberWithCommas(200); // '200'
 const numberWithComma2 = formatNumberWithCommas(3000); // '3,000'

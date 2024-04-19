@@ -11,7 +11,7 @@ const isFunction: (arg: unknown) => arg is Function
 
 ## Usage
 ```ts
-import { isFunction } from '@devgrace/utils';
+import { isFunction } from '@modern-kit/utils';
 
 function example() {}
 

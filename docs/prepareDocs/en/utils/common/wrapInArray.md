@@ -13,7 +13,7 @@ const wrapInArray: <T>(value: T | T[]) => T[]
 
 ## Usage
 ```ts
-import { wrapInArray } from '@devgrace/utils';
+import { wrapInArray } from '@modern-kit/utils';
 
 const wrappedInArray1 = wrapInArray('DevGrace'); // ['DevGrace']
 const wrappedInArray2 = wrapInArray([1, 2, 3]); // [1, 2, 3]

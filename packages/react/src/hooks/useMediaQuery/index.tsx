@@ -1,4 +1,4 @@
-import { isClient } from '@devgrace/utils';
+import { isClient } from '@modern-kit/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 const getMatchMedia = (query: string) => {

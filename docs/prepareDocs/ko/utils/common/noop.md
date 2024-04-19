@@ -11,7 +11,7 @@ const noop: () => void
 
 ## Usage
 ```ts
-import { noop } from '@devgrace/utils';
+import { noop } from '@modern-kit/utils';
 
 const handleClick = (callback = noop) => {
   callback();

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { isMobile } from '@devgrace/utils';
+import { isMobile } from '@modern-kit/utils';
 
 export const useOnClickOutside = <T extends HTMLElement>(
   action: (targetElement: T) => void

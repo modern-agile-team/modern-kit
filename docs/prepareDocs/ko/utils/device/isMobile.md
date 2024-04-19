@@ -12,7 +12,7 @@ const isMobile: () => boolean
 
 ## Usage
 ```ts
-import { isMobile } from '@devgrace/utils';
+import { isMobile } from '@modern-kit/utils';
 
 if (isMobile()) {
   /* 모바일 환경 보장 */

@@ -11,7 +11,7 @@ const extractNumber: (value: string) => string
 
 ## Usage
 ```ts
-import { extractNumber } from '@devgrace/utils';
+import { extractNumber } from '@modern-kit/utils';
 
 const str1 = extractNumber('abc123sd45'); // '12345'
 const str2 = extractNumber('1 23 sd 4 5'); // '12345'

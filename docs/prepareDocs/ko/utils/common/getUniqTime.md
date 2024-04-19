@@ -12,7 +12,7 @@ const getUniqTime: () => number
 
 ## Usage
 ```ts
-import { getUniqTime } from '@devgrace/utils';
+import { getUniqTime } from '@modern-kit/utils';
 
 const uniqTime = getUniqTime();
 ```

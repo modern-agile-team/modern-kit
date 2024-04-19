@@ -5,12 +5,12 @@ All contributions are appreciated, and anyone is welcome to contribute to the li
 <br />
 
 ## Issues
-If you have any suggestions for improvements to `@devgrace` documentation, features, or otherwise, please raise an issue.
+If you have any suggestions for improvements to `@modern-kit` documentation, features, or otherwise, please raise an issue.
 
 <br />
 
 ## Pull Requests
-In addition to raising issues, you can fork `@devgrace` and raise pull requests after working on improvements yourself.
+In addition to raising issues, you can fork `@modern-kit` and raise pull requests after working on improvements yourself.
 
 Please see the caveats below 🙏
 - if you are adding a new feature, please open an issue to discuss it in advance.

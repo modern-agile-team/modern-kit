@@ -9,53 +9,53 @@
 
 <br />
 
-`@devgrace` is an open source library that provides useful `React UI Components`, `React Custom Hooks`, and various `Utility Functions`.
+`@modern-kit` is an open source library that provides useful `React UI Components`, `React Custom Hooks`, and various `Utility Functions`.
 
 🙏 <b>We're still working on the `v1.0.0` release.</b>
 
 <br />
 
 ## Documentation
-The official documentation for `@devgrace` can be found on the website below.
+The official documentation for `@modern-kit` can be found on the website below.
 - <a href="https://team-grace.github.io/devgrace/" target="_blank">https://team-grace.github.io/devgrace</a>
 
 <br />
 
 ## Usage
 
-### @devgrace/react <a href="https://www.npmjs.com/package/@devgrace/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/react.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/react" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/react/latest"></a>
+### @modern-kit/react <a href="https://www.npmjs.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/react.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest"></a>
 
 - A library that provides useful `Components` and `Custom Hooks` related to React. 
 
 ```shell
-npm i @devgrace/react
+npm i @modern-kit/react
 ```
 
 ```shell
-yarn add @devgrace/react
+yarn add @modern-kit/react
 ```
 
-### @devgrace/utils <a href="https://www.npmjs.com/package/@devgrace/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/utils.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/utils/latest"></a>
+### @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
 
 - A library that provides useful `Utility functions` related to client development. 
 
 ```shell
-npm i @devgrace/utils
+npm i @modern-kit/utils
 ```
 
 ```shell
-yarn add @devgrace/utils
+yarn add @modern-kit/utils
 ```
-### @devgrace/ui <a href="https://www.npmjs.com/package/@devgrace/ui" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/ui.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/ui" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/ui/latest"></a>
+### @modern-kit/ui <a href="https://www.npmjs.com/package/@modern-kit/ui" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/ui.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/ui" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/ui/latest"></a>
   
 - A library that provides `React UI Components`. (Example: `Button`, `Select`, `Checkbox`) 
 
 ```shell
-npm i @devgrace/ui
+npm i @modern-kit/ui
 ```
 
 ```shell
-yarn add @devgrace/ui
+yarn add @modern-kit/ui
 ```
 
 <br />

@@ -11,7 +11,7 @@ const isNumber: (arg: unknown) => arg is number
 
 ## Usage
 ```ts
-import { isNumber } from '@devgrace/utils';
+import { isNumber } from '@modern-kit/utils';
 
 
 isNumber(123); // true

@@ -17,7 +17,7 @@ function HomepageHeader() {
           {siteConfig.title}
         </h1>
         <p className={styles.mainContentTitle}>
-          @devgrace는 유용한 리액트 UI 컴포넌트, 리액트 커스텀 훅 및 다양한
+          @modern-kit는 유용한 리액트 UI 컴포넌트, 리액트 커스텀 훅 및 다양한
           유틸리티 함수를 제공하는 라이브러리 입니다.
         </p>
         <div className={styles.buttons}>
@@ -47,10 +47,10 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
 
       <Head>
-        <meta property="og:title" content="@devgrace" />
+        <meta property="og:title" content="@modern-kit" />
         <meta
           property="og:description"
-          content="@devgrace is an open source library that provides useful React UI Components, React Custom Hooks, and various Utility Functions"
+          content="@modern-kit is an open source library that provides useful React UI Components, React Custom Hooks, and various Utility Functions"
         />
         <meta
           property="og:url"
@@ -65,16 +65,16 @@ export default function Home(): JSX.Element {
       <main>
         <div className={styles.mainContentWrapper}>
           <h2 className={styles.mainContentHead}>
-            @devgrace/react
+            @modern-kit/react
             <a
-              href="https://www.npmjs.com/package/@devgrace/react"
+              href="https://www.npmjs.com/package/@modern-kit/react"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/react.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/react.svg" />
             </a>{' '}
             <a
-              href="https://bundlephobia.com/package/@devgrace/react"
+              href="https://bundlephobia.com/package/@modern-kit/react"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/react/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest" />
             </a>
           </h2>
           <p className={styles.mainContentParagraph}>
@@ -82,16 +82,16 @@ export default function Home(): JSX.Element {
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            @devgrace/utils
+            @modern-kit/utils
             <a
-              href="https://www.npmjs.com/package/@devgrace/utils"
+              href="https://www.npmjs.com/package/@modern-kit/utils"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/utils.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/utils.svg" />
             </a>{' '}
             <a
-              href="https://bundlephobia.com/package/@devgrace/utils"
+              href="https://bundlephobia.com/package/@modern-kit/utils"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/utils/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
             </a>
           </h2>
 
@@ -100,16 +100,16 @@ export default function Home(): JSX.Element {
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            @devgrace/ui
+            @modern-kit/ui
             <a
-              href="https://www.npmjs.com/package/@devgrace/ui"
+              href="https://www.npmjs.com/package/@modern-kit/ui"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/ui.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/ui.svg" />
             </a>{' '}
             <a
-              href="https://bundlephobia.com/package/@devgrace/ui"
+              href="https://bundlephobia.com/package/@modern-kit/ui"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/ui/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/ui/latest" />
             </a>
           </h2>
 
@@ -122,7 +122,7 @@ export default function Home(): JSX.Element {
       <div className={styles.contributors}>
         <h2>Thank you to all contributors! 💗</h2>
         <p>
-          @devgrace는 지속적으로 유지 관리되며, 여러분들의 모든 기여를
+          @modern-kit는 지속적으로 유지 관리되며, 여러분들의 모든 기여를
           환영합니다.
         </p>
         <div>

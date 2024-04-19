@@ -19,7 +19,7 @@ const hexToRgba: (hex: string, alpha?: number) => {
 
 ## Usage
 ```ts
-import { hexToRgba } from '@devgrace/utils';
+import { hexToRgba } from '@modern-kit/utils';
 
 const hex1 = '#1A2B3C';
 const rgbColor1 = hexToRgba(hex1); 

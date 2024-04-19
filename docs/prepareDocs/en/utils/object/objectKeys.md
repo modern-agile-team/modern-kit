@@ -20,7 +20,7 @@ const objectKeys: <T extends Record<ObjectKeys<T>, T[keyof T]>>(
 
 ## Usage
 ```ts
-import { objectKeys } from '@devgrace/utils';
+import { objectKeys } from '@modern-kit/utils';
 
 const symbol = Symbol('d');
 const obj = {

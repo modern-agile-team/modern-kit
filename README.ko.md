@@ -7,54 +7,54 @@
 
 <br />
 
-`@devgrace`는 유용한 `리액트 UI 컴포넌트`, `리액트 커스텀 훅` 및 다양한 `유틸리티 함수`를 제공하는 라이브러리 입니다.
+`@modern-kit`는 유용한 `리액트 UI 컴포넌트`, `리액트 커스텀 훅` 및 다양한 `유틸리티 함수`를 제공하는 라이브러리 입니다.
 
 🙏 <b>현재 v1.0.0을 릴리즈하기 위해 작업중에 있습니다.</b>
 
 <br />
 
 ## Documentation
-`@devgrace`의 공식 문서는 아래 웹사이트에서 확인하실 수 있습니다
+`@modern-kit`의 공식 문서는 아래 웹사이트에서 확인하실 수 있습니다
 - <a href="https://team-grace.github.io/devgrace/" target="_blank">https://team-grace.github.io/devgrace</a>
 
 <br />
 
 ## Usage
 
-### @devgrace/react <a href="https://www.npmjs.com/package/@devgrace/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/react.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/react" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/react/latest"></a>
+### @modern-kit/react <a href="https://www.npmjs.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/react.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest"></a>
 
 - React와 관련된 유용한 `컴포넌트`와 `커스텀 훅`을 제공하는 라이브러리입니다.
 
 ```shell
-npm i @devgrace/react
+npm i @modern-kit/react
 ```
 
 ```shell
-yarn add @devgrace/react
+yarn add @modern-kit/react
 ```
 
-### @devgrace/utils <a href="https://www.npmjs.com/package/@devgrace/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/utils.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/utils/latest"></a>
+### @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
 
 - 클라이언트 개발과 관련된 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
 
 ```shell
-npm i @devgrace/utils
+npm i @modern-kit/utils
 ```
 
 ```shell
-yarn add @devgrace/utils
+yarn add @modern-kit/utils
 ```
 
-### @devgrace/ui <a href="https://www.npmjs.com/package/@devgrace/ui" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@devgrace/ui.svg" /></a> <a href="https://bundlephobia.com/package/@devgrace/ui" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@devgrace/ui/latest"></a>
+### @modern-kit/ui <a href="https://www.npmjs.com/package/@modern-kit/ui" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/ui.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/ui" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/ui/latest"></a>
   
 - React UI 컴포넌트를 제공하는 라이브러리입니다. (예: `Button`, `Select`, `Checkbox`) 
 
 ```shell
-npm i @devgrace/ui
+npm i @modern-kit/ui
 ```
 
 ```shell
-yarn add @devgrace/ui
+yarn add @modern-kit/ui
 ```
 
 <br />

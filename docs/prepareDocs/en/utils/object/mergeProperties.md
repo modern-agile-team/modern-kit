@@ -19,7 +19,7 @@ const mergeProperties: <
 
 ## Usage
 ```ts
-import { mergeProperties } from '@devgrace/utils';
+import { mergeProperties } from '@modern-kit/utils';
 
   const target = {
     a: 1,

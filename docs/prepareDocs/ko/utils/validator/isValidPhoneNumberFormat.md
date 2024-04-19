@@ -19,7 +19,7 @@ const isValidPhoneNumberFormat: (value: string) => boolean
 
 ## Usage
 ```ts
-import { isValidPhoneNumberFormat, formatPhoneNumber } from '@devgrace/utils';
+import { isValidPhoneNumberFormat, formatPhoneNumber } from '@modern-kit/utils';
 
 const isPhoneNumberFormat1 = isValidPhoneNumberFormat('010-1234-1234'); // true
 const isPhoneNumberFormat2 = isValidPhoneNumberFormat('031-123-1234'); // true

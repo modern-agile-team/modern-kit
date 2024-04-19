@@ -11,7 +11,7 @@ const removeSpecialCharacters: (value: string) => string
 
 ## Usage
 ```ts
-import { removeSpecialCharacters } from '@devgrace/utils';
+import { removeSpecialCharacters } from '@modern-kit/utils';
 
 const str = removeSpecialCharacters('H@#!ello, @Wo!@!&@rld!'); // Hello World
 ```

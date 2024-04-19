@@ -11,7 +11,7 @@ const repeatCharacters: (value: string, repeatCount: number) => string
 
 ## Usage
 ```ts
-import { repeatCharacters } from '@devgrace/utils';
+import { repeatCharacters } from '@modern-kit/utils';
 
 const str1 = 'A!B@C';
 const repeatedStr1 = repeatCharacters(str1, 2); // 'AA!!BB@@CC'

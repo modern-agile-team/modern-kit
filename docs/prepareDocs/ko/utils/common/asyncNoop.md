@@ -11,7 +11,7 @@ const asyncNoop: () => Promise<void>
 
 ## Usage
 ```ts
-import { asyncNoop } from '@devgrace/utils';
+import { asyncNoop } from '@modern-kit/utils';
 
 const handleAsyncClick = (callback = asyncNoop) => {
   callback();

@@ -11,7 +11,7 @@ const formatPhoneNumber: (value: string) => string
 
 ## Usage
 ```ts
-import { formatPhoneNumber } from '@devgrace/utils';
+import { formatPhoneNumber } from '@modern-kit/utils';
 
 const phoneNumber0 = formatPhoneNumber('03112345678'); // '031-1234-5678'
 const phoneNumber1 = formatPhoneNumber('01012345678'); // '010-1234-5678'

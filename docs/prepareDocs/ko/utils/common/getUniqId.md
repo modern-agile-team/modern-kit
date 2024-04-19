@@ -12,7 +12,7 @@ const getUniqId: () => string
 
 ## Usage
 ```ts
-import { getUniqId } from '@devgrace/utils';
+import { getUniqId } from '@modern-kit/utils';
 
 const uniqId = getUniqId();
 ```

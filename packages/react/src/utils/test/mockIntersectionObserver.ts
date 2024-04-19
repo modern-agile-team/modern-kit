@@ -1,4 +1,4 @@
-import { noop } from '@devgrace/utils';
+import { noop } from '@modern-kit/utils';
 
 /**
  * This is the Intersection Observer Setup Code referring to "impression-area" in "@toss/react".

@@ -17,8 +17,8 @@ function HomepageHeader() {
           {siteConfig.title}
         </h1>
         <p className={styles.mainContentTitle}>
-          <span>@devgrace</span> is an open source library that provides useful
-          React UI Components, React Custom Hooks, and various Utility
+          <span>@modern-kit</span> is an open source library that provides
+          useful React UI Components, React Custom Hooks, and various Utility
           Functions.
         </p>
         <div className={styles.buttons}>
@@ -48,11 +48,12 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
 
       <Head>
-        <meta property="og:title" content="@devgrace" />
+        <meta property="og:title" content="@modern-kit" />
         <meta
           property="og:description"
-          content="@devgrace is an open source library that provides useful React UI Components, React Custom Hooks, and various Utility Functions"
+          content="@modern-kit is an open source library that provides useful React UI Components, React Custom Hooks, and various Utility Functions"
         />
+        {/* wip */}
         <meta
           property="og:url"
           content="https://team-grace.github.io/devgrace/"
@@ -66,16 +67,16 @@ export default function Home(): JSX.Element {
       <main>
         <div className={styles.mainContentWrapper}>
           <h2 className={styles.mainContentHead}>
-            @devgrace/react
+            @modern-kit/react
             <a
-              href="https://www.npmjs.com/package/@devgrace/react"
+              href="https://www.npmjs.com/package/@modern-kit/react"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/react.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/react.svg" />
             </a>
             <a
-              href="https://bundlephobia.com/package/@devgrace/react"
+              href="https://bundlephobia.com/package/@modern-kit/react"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/react/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest" />
             </a>
           </h2>
           <p className={styles.mainContentParagraph}>
@@ -83,16 +84,16 @@ export default function Home(): JSX.Element {
             to React.
           </p>
           <h2 className={styles.mainContentHead}>
-            @devgrace/utils
+            @modern-kit/utils
             <a
-              href="https://www.npmjs.com/package/@devgrace/utils"
+              href="https://www.npmjs.com/package/@modern-kit/utils"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/utils.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/utils.svg" />
             </a>{' '}
             <a
-              href="https://bundlephobia.com/package/@devgrace/utils"
+              href="https://bundlephobia.com/package/@modern-kit/utils"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/utils/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
             </a>
           </h2>
 
@@ -101,16 +102,16 @@ export default function Home(): JSX.Element {
             development.
           </p>
           <h2 className={styles.mainContentHead}>
-            @devgrace/ui
+            @modern-kit/ui
             <a
-              href="https://www.npmjs.com/package/@devgrace/ui"
+              href="https://www.npmjs.com/package/@modern-kit/ui"
               target="_blank">
-              <img src="https://img.shields.io/npm/v/@devgrace/ui.svg" />
+              <img src="https://img.shields.io/npm/v/@modern-kit/ui.svg" />
             </a>{' '}
             <a
-              href="https://bundlephobia.com/package/@devgrace/ui"
+              href="https://bundlephobia.com/package/@modern-kit/ui"
               target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@devgrace/ui/latest" />
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/ui/latest" />
             </a>
           </h2>
 
@@ -123,7 +124,8 @@ export default function Home(): JSX.Element {
       <div className={styles.contributors}>
         <h2>Thank you to all contributors! 💗</h2>
         <p>
-          @devgrace is continuously maintained and we welcome all contributions.
+          @modern-kit is continuously maintained and we welcome all
+          contributions.
         </p>
         <div>
           <img src="https://contrib.rocks/image?repo=Team-Grace/devgrace" />

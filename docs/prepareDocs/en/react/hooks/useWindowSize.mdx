@@ -1,4 +1,4 @@
-import { useWindowSize } from '@devgrace/react';
+import { useWindowSize } from '@modern-kit/react';
 import { useMemo } from 'react';
 
 # useWindowSize
@@ -25,7 +25,7 @@ const useWindowSize: (options?: useWindowSizeProps) => Size
 ## Usage
 ### Default
 ```tsx
-import { useWindowSize } from '@devgrace/react';
+import { useWindowSize } from '@modern-kit/react';
 
 const Example = () => {
   const windowSize = useWindowSize();
@@ -73,7 +73,7 @@ export const DefaultExample = () => {
 
 ### Debounce
 ```tsx
-import { useWindowSize } from '@devgrace/react';
+import { useWindowSize } from '@modern-kit/react';
 
 const DebounceExample = () => {
   const windowSize = useWindowSize({ isDebounce: true, wait: 300 });

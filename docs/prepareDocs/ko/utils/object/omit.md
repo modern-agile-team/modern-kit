@@ -24,7 +24,7 @@ const omit: <
 
 ## Usage
 ```ts
-import { omit } from '@devgrace/utils';
+import { omit } from '@modern-kit/utils';
 
 const symbol = Symbol('d');
 const omittedObj1 = omit({ a: 1, b: 2, c: 3, [symbol]: 4 }, 'b'); // { a: 1, c: 3 }

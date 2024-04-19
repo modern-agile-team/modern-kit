@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '@devgrace',
+  title: '@modern-kit',
   tagline: '',
   favicon: 'img/favicon.ico',
   staticDirectories: ['public', 'static'],
@@ -76,7 +76,7 @@ const config = {
       },
       // Replace with your project's social card
       navbar: {
-        title: '@devgrace',
+        title: '@modern-kit',
         items: [
           {
             type: 'docSidebar',
@@ -120,16 +120,16 @@ const config = {
             title: 'NPM',
             items: [
               {
-                label: '@devgrace/react',
-                href: 'https://www.npmjs.com/package/@devgrace/react',
+                label: '@modern-kit/react',
+                href: 'https://www.npmjs.com/package/@modern-kit/react',
               },
               {
-                label: '@devgrace/utils',
-                href: 'https://www.npmjs.com/package/@devgrace/utils',
+                label: '@modern-kit/utils',
+                href: 'https://www.npmjs.com/package/@modern-kit/utils',
               },
               {
-                label: '@devgrace/ui',
-                href: 'https://www.npmjs.com/package/@devgrace/ui',
+                label: '@modern-kit/ui',
+                href: 'https://www.npmjs.com/package/@modern-kit/ui',
               },
             ],
           },

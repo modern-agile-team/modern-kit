@@ -13,7 +13,7 @@ const isClient: () => boolean
 
 ## Usage
 ```ts
-import { isClient } from '@devgrace/utils';
+import { isClient } from '@modern-kit/utils';
 
 if (isClient()) {
   /* 브라우저 환경이 보장 */

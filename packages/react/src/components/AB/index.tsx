@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from 'react';
-import { abRandom, noop } from '@devgrace/utils';
+import { abRandom, noop } from '@modern-kit/utils';
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 
 interface ABProps {

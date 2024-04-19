@@ -14,7 +14,7 @@ const abRandom: () => 0 | 1
 
 ## Usage
 ```ts
-import { abRandom } from '@devgrace/utils';
+import { abRandom } from '@modern-kit/utils';
 
 const ab = abRandom();
 ```

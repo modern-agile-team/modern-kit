@@ -11,7 +11,7 @@ const deepEqual: (source: any, target: any) => boolean
 
 ## Usage
 ```ts
-import { deepEqual } from '@devgrace/utils';
+import { deepEqual } from '@modern-kit/utils';
 
 const isEqual1 = deepEqual(1, 1); // true
 const isEqual2 = deepEqual({ a: 1}, { a: 1}); // true

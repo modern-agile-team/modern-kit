@@ -1,4 +1,4 @@
-# @devgrace/react
+# @modern-kit/react
 
 ## 0.12.3
 

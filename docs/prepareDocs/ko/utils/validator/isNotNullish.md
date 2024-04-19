@@ -11,7 +11,7 @@ const isNotNullish: <T>(val: T | null | undefined) => val is T
 
 ## Usage
 ```ts
-import { isNotNullish } from '@devgrace/utils';
+import { isNotNullish } from '@modern-kit/utils';
 
 isNotNullish(1); // true
 isNotNullish(false); // true

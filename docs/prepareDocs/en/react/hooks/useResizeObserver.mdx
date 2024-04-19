@@ -1,4 +1,4 @@
-import { useResizeObserver } from '@devgrace/react';
+import { useResizeObserver } from '@modern-kit/react';
 
 # useResizeObserver
 
@@ -34,7 +34,7 @@ const useResizeObserver: <T extends HTMLElement>(
 
 ```tsx
 import React, { forwardRef, useRef } from 'react';
-import { useResizeObserver } from '@devgrace/react';
+import { useResizeObserver } from '@modern-kit/react';
 
 const Example = () => {
   const { ref, contentRect } = useResizeObserver<HTMLDivElement>((entry) => {

@@ -11,7 +11,7 @@ const deepCopy: <T>(source: T) => T
 
 ## Usage
 ```ts
-import { deepCopy } from '@devgrace/utils';
+import { deepCopy } from '@modern-kit/utils';
 
 const originNum = 42;
 const copyNum = deepCopy(originNum);

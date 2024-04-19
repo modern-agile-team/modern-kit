@@ -15,7 +15,7 @@ const isValidEmail: (email: string) => boolean
 
 ## Usage
 ```ts
-import { isValidEmail } from '@devgrace/utils';
+import { isValidEmail } from '@modern-kit/utils';
 
 const isEmail1 = isValidEmail('example@email.com'); // true
 const isEmail2 = isValidEmail('invalid-email'); // false

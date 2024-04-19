@@ -3,16 +3,16 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.@devgrace/react": {
-    "message": "@devgrace/react",
-    "description": "The label for category @devgrace/react in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.@modern-kit/react": {
+    "message": "@modern-kit/react",
+    "description": "The label for category @modern-kit/react in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.@devgrace/ui": {
-    "message": "@devgrace/ui",
-    "description": "The label for category @devgrace/ui in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.@modern-kit/ui": {
+    "message": "@modern-kit/ui",
+    "description": "The label for category @modern-kit/ui in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.@devgrace/utils": {
-    "message": "@devgrace/utils",
-    "description": "The label for category @devgrace/utils in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.@modern-kit/utils": {
+    "message": "@modern-kit/utils",
+    "description": "The label for category @modern-kit/utils in sidebar tutorialSidebar"
   }
 }

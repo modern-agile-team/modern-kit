@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { noop } from '@devgrace/utils';
+import { noop } from '@modern-kit/utils';
 
 type VisibilityChangeCallbackAction = (
   event: Event,

@@ -6,5 +6,5 @@
 
 - Updated dependencies [a9ff36e]
 - Updated dependencies [ca69a40]
-  - @devgrace/react@0.12.0
-  - @devgrace/ui@0.7.0
+  - @modern-kit/react@0.12.0
+  - @modern-kit/ui@0.7.0

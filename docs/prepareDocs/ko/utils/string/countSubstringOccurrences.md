@@ -11,7 +11,7 @@ const countSubstringOccurrences: (source: string, target: string) => number
 
 ## Usage
 ```ts
-import { countSubstringOccurrences } from '@devgrace/utils';
+import { countSubstringOccurrences } from '@modern-kit/utils';
 
 const str = 'apple banana apple grapes apple';
 const count1 = countSubstringOccurrences(str, 'apple'); // 3

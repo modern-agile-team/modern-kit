@@ -13,7 +13,7 @@ const deleteEmptyProperties: <T extends Record<PropertyKey, any>>(obj: T) => T
 
 ## Usage
 ```ts
-import { deleteEmptyProperties } from '@devgrace/utils';
+import { deleteEmptyProperties } from '@modern-kit/utils';
 
 const obj = deleteEmptyProperties({
   prop1: 1,

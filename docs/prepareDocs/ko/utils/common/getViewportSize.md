@@ -15,7 +15,7 @@ const getViewportSize: () => {
 
 ## Usage
 ```ts
-import { getViewportSize } from '@devgrace/utils';
+import { getViewportSize } from '@modern-kit/utils';
 
 const { width, height } = getViewportSize();
 ```

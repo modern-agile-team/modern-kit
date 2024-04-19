@@ -1,6 +1,6 @@
 ---
 "docs": patch
-"@devgrace/react": patch
+"/react": patch
 ---
 
 fix: when component

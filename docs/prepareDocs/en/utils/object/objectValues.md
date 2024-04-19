@@ -18,7 +18,7 @@ const objectValues: <T extends Record<PropertyKey, T[keyof T]>>(
 
 ## Usage
 ```ts
-import { objectValues } from '@devgrace/utils';
+import { objectValues } from '@modern-kit/utils';
 
 const symbol = Symbol('d');
 const obj = {

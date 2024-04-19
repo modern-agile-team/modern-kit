@@ -1,6 +1,6 @@
-# @devgrace/docs
+# @modern-kit/docs
 
-The folder that manages official documents for `@devgrace`.
+The folder that manages official documents for `@modern-kit`.
 
 <br />
 

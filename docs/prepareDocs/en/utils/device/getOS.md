@@ -17,7 +17,7 @@ const getOS: () => "server" | "ios" | "android" | "otherMobile" | "web"
 
 ## Usage
 ```ts
-import { getOS } from '@devgrace/utils';
+import { getOS } from '@modern-kit/utils';
 
 const os = getOS();
 ```
