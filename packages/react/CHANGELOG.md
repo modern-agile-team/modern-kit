@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.0.3
+
+### Patch Changes
+
+- 1053a64: fix: useAsyncProcessQueue
+
 ## 1.0.2
 
 ### Patch Changes
