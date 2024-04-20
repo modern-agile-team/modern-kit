@@ -19,6 +19,10 @@ npm i @modern-kit/react
 yarn add @modern-kit/react
 ```
 
+```shell
+pnpm i @modern-kit/react
+```
+
 <br />
 
 ## License

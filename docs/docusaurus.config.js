@@ -69,11 +69,7 @@ const config = {
             label: 'Docs',
           },
           {
-            type: 'localeDropdown',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/Team-Grace/devgrace',
+            href: 'https://github.com/modern-agile-team/modern-kit',
             label: 'GitHub',
             position: 'right',
           },
@@ -96,7 +92,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Team-Grace/devgrace',
+                href: 'https://github.com/modern-agile-team/modern-kit',
               },
             ],
           },
@@ -114,7 +110,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} devgrace, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Modern Agile, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

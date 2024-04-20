@@ -19,6 +19,11 @@ npm i @modern-kit/utils
 yarn add @modern-kit/utils
 ```
 
+
+```shell
+pnpm i @modern-kit/utils
+```
+
 <br />
 
 ## License
