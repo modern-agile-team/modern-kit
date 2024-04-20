@@ -35,6 +35,8 @@ yarn add @modern-kit/react
 pnpm i @modern-kit/react
 ```
 
+<br />
+
 ### @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
 
 - 클라이언트 개발과 관련된 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
@@ -87,8 +89,15 @@ yarn typecheck
 - Rollup, Babel
 - Yarn Berry(v4) & Workspaces
 - Lerna (for Versioning & Publishing)
-- github Actions, Changeset
 - docusaurus (documentation)
+
+<br />
+
+## Tools
+
+- `github actions`를 활용한 CI/CD 구축
+- `changeset`을 활용해 모노레포 환경에서 package 일관성 유지 및 NPM 배포 진행
+- `dependabot`을 활용한 의존성 관리
 
 <br />
 
