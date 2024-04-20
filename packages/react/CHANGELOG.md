@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.0.2
+
+### Patch Changes
+
+- 443f52b: fix(react): DebounceWrapper
+
 ## 1.0.1
 
 ### Patch Changes
