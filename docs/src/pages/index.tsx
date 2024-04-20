@@ -108,7 +108,7 @@ export default function Home(): JSX.Element {
           환영합니다.
         </p>
         <div>
-          <img src="https://contrib.rocks/image?repo=Team-Grace/devgrace" />
+          <img src="https://contrib.rocks/image?repo=Modern-Agile-Team/modern-kit" />
         </div>
       </div>
     </Layout>
