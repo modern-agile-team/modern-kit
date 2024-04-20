@@ -8,7 +8,7 @@
   "author": "ssi02014 <ssi02014@naver.com>",
   "scripts": {
     "typecheck": "lerna run typecheck",
-    "test": "lerna run test",
+    "test": "lerna run test:run",
     "build": "lerna run build && yarn typecheck && yarn test",
     "publish": "lerna version && lerna publish from-package",
     "start:docs:ko": "lerna run start:ko",

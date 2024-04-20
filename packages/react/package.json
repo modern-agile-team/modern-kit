@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "test": "vitest",
+    "test:run": "vitest run",
     "build": "rm -rf dist && rollup -c",
     "typecheck": "tsc --noEmit"
   },
