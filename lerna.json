@@ -9,7 +9,6 @@
     "**/*.stories.*",
     "**/__storybook__/*",
     "**/*.md",
-    "./packages/ui",
     "./docs"
   ]
 }

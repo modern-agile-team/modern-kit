@@ -1,7 +1,6 @@
 # Contributing
 All contributions are appreciated, and anyone is welcome to contribute to the library.
 
-
 <br />
 
 ## Issues
@@ -14,7 +13,7 @@ In addition to raising issues, you can fork `@modern-kit` and raise pull request
 
 Please see the caveats below 🙏
 - if you are adding a new feature, please open an issue to discuss it in advance.
-- The node version should be `v18.17.1`. You can easily version match with `nvm install`, `nvm use`.
+- The node version should be `v20+`. You can easily version match with `nvm install`, `nvm use`.
 ```shell
 nvm install
 ```
@@ -32,19 +31,12 @@ yarn typecheck
 
 <br />
 
-If you would like to contribute to the official documentation, please create a `.md` file in the `docs/prepareDocs` folder for `en` and `ko`.
-
-![스크린샷 2023-08-20 오전 1 30 55](https://github.com/Team-Grace/devgrace/assets/64779472/b5e772c9-89e1-4e31-8647-ffb1dfc26588)
-
-
-<br />
-
 ## Conventional Commits
 
 ```
 <type>(<package scope>): <descriptions>
 
-ex: feat(ui): Add Select Component
+ex: feat(react): Add Select Component
 ```
 
 ### Type
@@ -57,7 +49,6 @@ Type must be one of those
 
 ### Package Scope
 The name of package that you made changes.
-- ui
 - react
 - utils
 
