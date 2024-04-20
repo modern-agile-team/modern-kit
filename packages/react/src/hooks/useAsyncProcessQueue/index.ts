@@ -1,18 +1,18 @@
 import { useCallback, useState, useRef } from 'react';
 
-type RequestFunction<Data> = (requestData?: any) => Promise<Data>;
+type RequestFunction<T> = (requestData?: any) => Promise<T>;
 
 interface UseAsyncProcessQueueOptions {
   keepPreviousData?: boolean;
 }
 
-export const useAsyncProcessQueue = <Data = unknown, Error = unknown>({
+export const useAsyncProcessQueue = <T = unknown, E = unknown>({
   keepPreviousData = false,
 }: UseAsyncProcessQueueOptions = {}) => {
-  const requestQueue = useRef<RequestFunction<Data>[]>([]);
+  const requestQueue = useRef<RequestFunction<T>[]>([]);
 
-  const [data, setData] = useState<Data>();
-  const [error, setError] = useState<Error>();
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<E | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRequestQueue = useCallback(async () => {
@@ -27,10 +27,10 @@ export const useAsyncProcessQueue = <Data = unknown, Error = unknown>({
       const res = await requestFunc();
 
       setData(res);
-      setError(undefined);
+      setError(null);
     } catch (err) {
-      setData(undefined);
-      setError(err as Error);
+      setData(null);
+      setError(err as E);
     } finally {
       requestQueue.current.shift();
       setIsLoading(false);
@@ -40,13 +40,13 @@ export const useAsyncProcessQueue = <Data = unknown, Error = unknown>({
   }, []);
 
   const addToProcessQueue = useCallback(
-    async (callbackFunc: RequestFunction<Data>) => {
+    async (callbackFunc: RequestFunction<T>) => {
       requestQueue.current.push(callbackFunc);
 
       if (requestQueue.current.length === 1) {
         if (!keepPreviousData) {
-          setData(undefined);
-          setError(undefined);
+          setData(null);
+          setError(null);
         }
 
         await handleRequestQueue();
