@@ -64,18 +64,18 @@ yarn typecheck
 
 #### Contributors
 <a href="https://github.com/modern-agile-team/modern-kit/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=modern-agile-team/modern-kit">
+  <img src="https://contrib.rocks/image?repo=Modern-Agile-Team/modern-kit">
 </a>
 
 <br />
 <br />
 
-## Environment
-- React, TypeScript, @emotion
-- Jest, React-Testing-Library, Storybook
+## Stack
+- React, TypeScript
+- Vitest, React-Testing-Library
 - Rollup, Babel
 - Yarn Berry & Workspaces
-- Lerna 4 (for Versioning & Publishing)
+- Lerna (for Versioning & Publishing)
 - docusaurus (documentation)
 
 <br />
