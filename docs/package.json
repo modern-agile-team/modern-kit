@@ -14,11 +14,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "mkdir:ko": "mkdir ./i18n/ko/docusaurus-plugin-content-docs/current",
-    "rm:ko": "rm -rf ./i18n/ko/docusaurus-plugin-content-docs/current",
-    "rm:en": "rm -rf ./docs",
-    "cp:ko": "cp -r ./prepareDocs/ko ./i18n/ko/docusaurus-plugin-content-docs/current",
-    "cp:en": "cp -r ./prepareDocs/en ./docs"
+    "mkdir:ko": "mkdir ./i18n/ko/docusaurus-plugin-content-docs/current"
   },
   "dependencies": {
     "@docusaurus/core": "^3.0.0",
