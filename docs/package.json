@@ -1,8 +1,8 @@
 {
   "name": "docs",
-  "version": "0.0.45",
+  "version": "0.0.1",
   "private": true,
-  "homepage": "https://github.com/Team-Grace/devgrace",
+  "homepage": "https://github.com/modern-agile-team/modern-kit",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -18,10 +18,7 @@
     "rm:ko": "rm -rf ./i18n/ko/docusaurus-plugin-content-docs/current",
     "rm:en": "rm -rf ./docs",
     "cp:ko": "cp -r ./prepareDocs/ko ./i18n/ko/docusaurus-plugin-content-docs/current",
-    "cp:en": "cp -r ./prepareDocs/en ./docs",
-    "prepare:docs:en": "yarn rm:en && yarn cp:en",
-    "prepare:docs:ko": "yarn rm:ko && yarn cp:ko",
-    "prepare:docs": "yarn prepare:docs:en && yarn prepare:docs:ko"
+    "cp:en": "cp -r ./prepareDocs/en ./docs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.0.0",

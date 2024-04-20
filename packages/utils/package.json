@@ -2,7 +2,7 @@
   "name": "@modern-kit/utils",
   "sideEffects": false,
   "version": "1.0.0",
-  "description": "devgrace/utils",
+  "description": "modern-kit/utils",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

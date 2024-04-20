@@ -17,9 +17,8 @@ function HomepageHeader() {
           {siteConfig.title}
         </h1>
         <p className={styles.mainContentTitle}>
-          <span>@modern-kit</span> is an open source library that provides
-          useful React UI Components, React Custom Hooks, and various Utility
-          Functions.
+          @modern-kit는 클라이언트 개발에 유용한 리액트 커스텀 훅 및 유틸리티
+          함수를 제공하는 라이브러리 입니다.
         </p>
         <div className={styles.buttons}>
           <Link
@@ -29,7 +28,7 @@ function HomepageHeader() {
           </Link>
           <a
             className="button button--secondary button--lg"
-            href="https://github.com/Team-Grace/devgrace"
+            href="https://github.com/modern-agile-team/modern-kit"
             target="_blank">
             Github
           </a>
@@ -53,10 +52,9 @@ export default function Home(): JSX.Element {
           property="og:description"
           content="@modern-kit is an open source library that provides useful React UI Components, React Custom Hooks, and various Utility Functions"
         />
-        {/* wip */}
         <meta
           property="og:url"
-          content="https://team-grace.github.io/devgrace/"
+          content="https://modern-agile-team.github.io/modern-kit"
         />
         <meta
           property="og:image"
@@ -80,8 +78,8 @@ export default function Home(): JSX.Element {
             </a>
           </h2>
           <p className={styles.mainContentParagraph}>
-            A library that provides useful Components and Custom Hooks related
-            to React.
+            React와 관련된 유용한 컴포넌트와 커스텀 훅을 제공하는
+            라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
             @modern-kit/utils
@@ -98,34 +96,16 @@ export default function Home(): JSX.Element {
           </h2>
 
           <p className={styles.mainContentParagraph}>
-            A library that provides useful Utility functions related to client
-            development.
-          </p>
-          <h2 className={styles.mainContentHead}>
-            @modern-kit/ui
-            <a
-              href="https://www.npmjs.com/package/@modern-kit/ui"
-              target="_blank">
-              <img src="https://img.shields.io/npm/v/@modern-kit/ui.svg" />
-            </a>{' '}
-            <a
-              href="https://bundlephobia.com/package/@modern-kit/ui"
-              target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/ui/latest" />
-            </a>
-          </h2>
-
-          <p className={styles.mainContentParagraph}>
-            A library that provides React UI Components. (Example: Button,
-            Select, Checkbox)
+            클라이언트 개발과 관련된 유용한 유틸리티 함수를 제공하는
+            라이브러리입니다.
           </p>
         </div>
       </main>
       <div className={styles.contributors}>
         <h2>Thank you to all contributors! 💗</h2>
         <p>
-          @modern-kit is continuously maintained and we welcome all
-          contributions.
+          @modern-kit는 지속적으로 유지 관리되며, 여러분들의 모든 기여를
+          환영합니다.
         </p>
         <div>
           <img src="https://contrib.rocks/image?repo=Team-Grace/devgrace" />

@@ -6,7 +6,7 @@ A library that provides useful `Components` and `Custom Hooks` related to React.
 
 ## Documentation
 The official documentation for `@modern-kit` can be found on the website below.
-- <a href="https://team-grace.github.io/devgrace/" target="_blank">https://team-grace.github.io/devgrace</a>
+- <a href="https://modern-agile-team.github.io/modern-kit" target="_blank">https://modern-agile-team.github.io/modern-kit</a>
 
 <br />
 
@@ -22,6 +22,6 @@ yarn add @modern-kit/react
 <br />
 
 ## License
-MIT © devgrace. See [LICENSE](../../LICENSE) for details.
+MIT © Modern Agile. See [LICENSE](../../LICENSE) for details.
 
 <br />

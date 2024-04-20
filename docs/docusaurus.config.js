@@ -15,32 +15,16 @@ const config = {
   url: 'https://your-docusaurus-test-site.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/devgrace/',
+  baseUrl: '/modern-kit/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Team-Grace', // Usually your GitHub org/user name.
-  projectName: 'devgrace', // Usually your repo name.
+  organizationName: 'modern-agile-team', // Usually your GitHub org/user name.
+  projectName: 'modern-kit', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
-  i18n: {
-    path: './i18n',
-    defaultLocale: 'en',
-    locales: ['en', 'ko'],
-    localeConfigs: {
-      en: {
-        htmlLang: 'en-US',
-      },
-      ko: {
-        htmlLang: 'ko-KR',
-      },
-    },
-  },
   presets: [
     [
       'classic',
@@ -126,10 +110,6 @@ const config = {
               {
                 label: '@modern-kit/utils',
                 href: 'https://www.npmjs.com/package/@modern-kit/utils',
-              },
-              {
-                label: '@modern-kit/ui',
-                href: 'https://www.npmjs.com/package/@modern-kit/ui',
               },
             ],
           },

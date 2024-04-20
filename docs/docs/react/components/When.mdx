@@ -1,0 +1,54 @@
+import { useState } from 'react';
+import { When } from '@modern-kit/react';
+
+# When
+
+condition prop이 `true`면 자식 컴포넌트를 렌더링하고, `false`면 렌더링하지 않는 컴포넌트입니다.
+
+condition prop으로 `boolean을 반환하는 함수`도 허용됩니다.
+
+<br />
+
+## Interface
+```tsx
+type Condition = boolean | ((...args: any[]) => boolean);
+
+interface WhenProps {
+  condition: Condition;
+}
+
+const When: ({ children, condition }: PropsWithChildren<WhenProps>) => JSX.Element | null
+```
+
+## Usage
+
+```tsx
+import { When } from '@modern-kit/react';
+const Example = () => {
+  const [state, setState] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+
+      <When condition={state}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+```
+export const Example = () => {
+  const [state, setState] = useState(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+
+      <When condition={state}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+
+<Example />

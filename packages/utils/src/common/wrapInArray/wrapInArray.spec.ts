@@ -2,8 +2,8 @@ import { wrapInArray } from '.';
 
 describe('wrapInArray', () => {
   it('should wrap a non-array value in an array', () => {
-    const strValue = 'DevGrace';
-    const wrappedInArray = wrapInArray('DevGrace');
+    const strValue = 'ModernAgile';
+    const wrappedInArray = wrapInArray('ModernAgile');
 
     expect(wrappedInArray).toEqual([strValue]);
   });
