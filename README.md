@@ -55,10 +55,6 @@ yarn test
 yarn typecheck
 ```
 - 타입 체크를 할 수 있습니다.
-```shell
-yarn storybook
-```
-- `storybook`으로 UI 테스트를 실행할 수 있습니다.
 
 <br />
 
