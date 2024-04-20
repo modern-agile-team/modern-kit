@@ -17,7 +17,7 @@ export const DebounceWrapper = ({
   // If children is a valid element, returns that element. Otherwise, throws an error.
   const child = Children.only(children);
   const debouncedCallback = useDebounce(
-    (...args: any) => {
+    (...args: any[]) => {
       const childProps = child?.props;
 
       if (!childProps) return;
