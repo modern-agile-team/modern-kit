@@ -1,9 +1,18 @@
+import {
+  describe,
+  it,
+  expect,
+  afterEach,
+  beforeEach,
+  vi,
+  MockInstance,
+} from 'vitest';
 import { isClient } from '.';
 
-let windowSpy: jest.SpyInstance;
+let windowSpy: MockInstance;
 
 beforeEach(() => {
-  windowSpy = jest.spyOn(window, 'window', 'get');
+  windowSpy = vi.spyOn(window, 'window', 'get');
 });
 
 afterEach(() => {
@@ -12,6 +21,7 @@ afterEach(() => {
 
 describe('isClient', () => {
   it('should return "true" in client environment', () => {
+    windowSpy.mockImplementation(() => ({}));
     expect(isClient()).toBe(true);
   });
 

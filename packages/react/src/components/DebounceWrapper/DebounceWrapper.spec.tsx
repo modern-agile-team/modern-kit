@@ -1,10 +1,12 @@
+import { beforeAll, vi, describe, it, expect } from 'vitest';
+
 import { act, screen } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
 import { DebounceWrapper } from '.';
 import { ChangeEvent, useState } from 'react';
 
 beforeAll(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 interface TestComponentProps {
@@ -58,7 +60,7 @@ const TestComponentWithInput = ({ capture, wait }: TestComponentProps) => {
 
 describe('DebounceWrapper Component', () => {
   it('should debounce click event from child element', async () => {
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
     // https://github.com/testing-library/user-event/issues/833
     const { user } = renderSetup(
       <TestComponentWithButton capture="onClick" onClick={mockFn} wait={500} />,
@@ -68,20 +70,20 @@ describe('DebounceWrapper Component', () => {
     const button = screen.getByRole('button');
     await user.click(button);
 
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
     expect(mockFn).not.toBeCalled();
 
-    jest.advanceTimersByTime(200);
+    vi.advanceTimersByTime(200);
     expect(mockFn).toBeCalledTimes(1);
 
     await user.click(button);
     await user.click(button);
     await user.click(button);
 
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
     expect(mockFn).toBeCalledTimes(1);
 
-    jest.advanceTimersByTime(200);
+    vi.advanceTimersByTime(200);
     expect(mockFn).toBeCalledTimes(2);
   });
 
@@ -96,21 +98,21 @@ describe('DebounceWrapper Component', () => {
 
     await user.type(input, 'Debounce');
 
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
     expect(paragraph).toHaveTextContent('');
     expect(input).toHaveValue('Debounce');
 
-    jest.advanceTimersByTime(200);
+    vi.advanceTimersByTime(200);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce');
 
     await user.type(input, ' Test');
 
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce Test');
 
-    jest.advanceTimersByTime(200);
+    vi.advanceTimersByTime(200);
     expect(paragraph).toHaveTextContent('Debounce Test');
     expect(input).toHaveValue('Debounce Test');
   });

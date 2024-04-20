@@ -27,11 +27,7 @@ webpack.*.js
 babel.config.js
 rollup.config.mjs
 
-# storybook
-stories
-.storybook
-storybook-static
-
 # test
 coverage
-jest.config.ts
+vite.config.ts
+vite.setup.ts

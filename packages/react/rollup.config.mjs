@@ -36,7 +36,7 @@ export default {
     }),
     typescript({
       tsconfig: './tsconfig.json',
-      exclude: ['**/*.spec.tsx', '**/jest.setup.ts'],
+      exclude: ['**/*.spec.tsx'],
     }),
     terser(),
   ],

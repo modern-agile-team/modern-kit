@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import {
   act,
   fireEvent,
@@ -11,7 +12,7 @@ import { useState } from 'react';
 const delayTime = 1000;
 
 beforeAll(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 const TestComponent = () => {
@@ -35,19 +36,19 @@ const TestComponent = () => {
 
 describe('useInterval', () => {
   it('mockFn is called every time the specified delay passes', () => {
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
 
     renderHook(() => useInterval(mockFn, delayTime));
 
     expect(mockFn).not.toBeCalled();
 
-    jest.advanceTimersByTime(delayTime / 2);
+    vi.advanceTimersByTime(delayTime / 2);
     expect(mockFn).not.toBeCalled();
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(1);
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(2);
   });
 
@@ -57,18 +58,18 @@ describe('useInterval', () => {
 
     expect(screen.getByText('0')).toBeInTheDocument();
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(screen.getByText('1')).toBeInTheDocument();
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(screen.getByText('2')).toBeInTheDocument();
 
     fireEvent.click(button);
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(screen.getByText('2')).toBeInTheDocument();
 
-    jest.advanceTimersByTime(delayTime);
+    vi.advanceTimersByTime(delayTime);
     expect(screen.getByText('2')).toBeInTheDocument();
   });
 });

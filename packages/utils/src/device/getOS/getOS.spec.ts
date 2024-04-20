@@ -1,9 +1,18 @@
+import {
+  describe,
+  expect,
+  it,
+  vi,
+  beforeEach,
+  afterEach,
+  MockInstance,
+} from 'vitest';
 import { getOS } from '.';
 
-let windowSpy: jest.SpyInstance;
+let windowSpy: MockInstance;
 
 beforeEach(() => {
-  windowSpy = jest.spyOn(window, 'window', 'get');
+  windowSpy = vi.spyOn(window, 'window', 'get');
 });
 
 afterEach(() => {
@@ -20,9 +29,12 @@ describe('getOS', () => {
     };
 
     Object.entries(USER_AGENTS_OBJ).forEach(([key, value]) => {
-      Object.defineProperty(window.navigator, 'userAgent', {
-        value,
-        configurable: true,
+      windowSpy.mockImplementation(() => {
+        return {
+          navigator: {
+            userAgent: value,
+          },
+        };
       });
 
       expect(getOS()).toBe(key);

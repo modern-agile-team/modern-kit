@@ -22,7 +22,6 @@ build
 
 node_modules
 junit.xml
-storybook-static
 
 # testing
 coverage

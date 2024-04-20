@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { useEffect } from 'react';
 
 describe('useIsomorphicLayoutEffect in server', () => {

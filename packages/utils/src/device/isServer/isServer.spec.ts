@@ -1,9 +1,10 @@
+import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { isServer } from '.';
 
-let windowSpy: jest.SpyInstance;
+let windowSpy: any;
 
 beforeEach(() => {
-  windowSpy = jest.spyOn(window, 'window', 'get');
+  windowSpy = vi.spyOn(window, 'window', 'get');
 });
 
 afterEach(() => {
@@ -12,6 +13,8 @@ afterEach(() => {
 
 describe('isServer', () => {
   it('should return "false" in client environment', () => {
+    windowSpy.mockImplementation(() => ({}));
+
     expect(isServer()).toBe(false);
   });
 

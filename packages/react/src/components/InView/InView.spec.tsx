@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+
 import { screen, waitFor } from '@testing-library/react';
 import { InView } from '.';
 import {
@@ -34,8 +36,8 @@ const TestComponent = ({
 
 describe('InView Component', () => {
   it('should call the action function when the InView component is exposed to the viewport', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box1 = screen.getByText('box1');
@@ -52,8 +54,8 @@ describe('InView Component', () => {
   });
 
   it('should call the action callback function once if the calledOnce prop is true', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box1 = screen.getByText('box1');
@@ -72,8 +74,8 @@ describe('InView Component', () => {
   });
 
   it('should call the action callback function every time it is exposed to the viewport if the calledOnce prop is false', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box2 = screen.getByText('box2');
