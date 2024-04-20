@@ -22,8 +22,6 @@ jobs:
         run: yarn
       - name: packages build 🔨
         run: yarn build
-      - name: prepare 🔨
-        run: yarn prepare:docs
       - name: document build 🔨
         run: yarn build:docs
       - name: Deploy 🚀
