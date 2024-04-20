@@ -3,7 +3,8 @@
   "version": "independent",
   "npmClient": "yarn",
   "ignoreChanges": [
-    "**/jest.setup.ts",
+    "**/vite.config.ts",
+    "**/vite.setup.ts",
     "**/*.test.*",
     "**/*.spec.*",
     "**/*.stories.*",

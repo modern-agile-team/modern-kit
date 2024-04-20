@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "vitest --environment jsdom",
+    "test": "vitest",
     "build": "rm -rf dist && rollup -c",
     "typecheck": "tsc --noEmit"
   },

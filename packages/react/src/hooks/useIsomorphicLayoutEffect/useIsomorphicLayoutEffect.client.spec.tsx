@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { describe, it, expect } from 'vitest';
+import { useLayoutEffect } from 'react';
 
 describe('useIsomorphicLayoutEffect', () => {
   it('should return useLayoutEffect in client environment', async () => {

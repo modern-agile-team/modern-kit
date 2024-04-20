@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
   mockIntersecting,
   mockIntersectionObserverCleanup,
@@ -40,8 +41,8 @@ const TestComponent = ({
 
 describe('useIntersectionObserver', () => {
   it('should call the action callback function when the target element assigned to the returned "ref" is exposed to the Viewport', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box1 = screen.getByText('box1');
@@ -58,8 +59,8 @@ describe('useIntersectionObserver', () => {
   });
 
   it('should call the action callback function only once when the calledOnce option is true', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box1 = screen.getByText('box1');
@@ -78,8 +79,8 @@ describe('useIntersectionObserver', () => {
   });
 
   it('should call the action callback function every time the target element is exposed to the Viewport when the calledOnce option is false', async () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
     renderSetup(<TestComponent action1={mockFn1} action2={mockFn2} />);
 
     const box2 = screen.getByText('box2');

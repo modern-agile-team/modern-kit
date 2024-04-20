@@ -29,4 +29,5 @@ rollup.config.mjs
 
 # test
 coverage
-jest.config.ts
+vite.config.ts
+vite.setup.ts

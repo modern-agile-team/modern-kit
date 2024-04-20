@@ -1,9 +1,10 @@
+import { describe, it, expect, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useUnmount } from '.';
 
 describe('useUnMount', () => {
   it('should call provided callback on unmount', () => {
-    const mockFn = jest.fn();
+    const mockFn = vi.fn();
 
     const { unmount } = renderHook(() => useUnmount(mockFn));
 
@@ -15,9 +16,9 @@ describe('useUnMount', () => {
   });
 
   it('should call provided callback if is has been changed', () => {
-    const mockFn1 = jest.fn();
-    const mockFn2 = jest.fn();
-    const mockFn3 = jest.fn();
+    const mockFn1 = vi.fn();
+    const mockFn2 = vi.fn();
+    const mockFn3 = vi.fn();
 
     const { rerender, unmount } = renderHook(
       (callback) => useUnmount(callback),

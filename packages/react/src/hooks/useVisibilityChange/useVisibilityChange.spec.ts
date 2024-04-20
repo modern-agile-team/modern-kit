@@ -1,8 +1,9 @@
+import { describe, it, expect, vi, afterAll } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useVisibilityChange } from '.';
 
 describe('useVisibilityChange', () => {
-  const visibilityStateSpyOn = jest.spyOn(document, 'visibilityState', 'get');
+  const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
   const event = new Event('visibilitychange');
 
   afterAll(() => {
@@ -10,8 +11,8 @@ describe('useVisibilityChange', () => {
   });
 
   it('should call the onShow callback when the page becomes visible', () => {
-    const onShow = jest.fn();
-    const onHide = jest.fn();
+    const onShow = vi.fn();
+    const onHide = vi.fn();
 
     renderHook(() =>
       useVisibilityChange({
@@ -28,8 +29,8 @@ describe('useVisibilityChange', () => {
   });
 
   it('should call the onHide callback when the page becomes hidden', () => {
-    const onShow = jest.fn();
-    const onHide = jest.fn();
+    const onShow = vi.fn();
+    const onHide = vi.fn();
 
     renderHook(() =>
       useVisibilityChange({
