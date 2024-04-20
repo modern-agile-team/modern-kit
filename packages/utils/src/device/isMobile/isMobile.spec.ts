@@ -1,9 +1,18 @@
+import {
+  describe,
+  it,
+  expect,
+  afterEach,
+  beforeEach,
+  vi,
+  MockInstance,
+} from 'vitest';
 import { isMobile } from '.';
 
-let windowSpy: jest.SpyInstance;
+let windowSpy: MockInstance;
 
 beforeEach(() => {
-  windowSpy = jest.spyOn(window, 'window', 'get');
+  windowSpy = vi.spyOn(window, 'window', 'get');
 });
 
 afterEach(() => {
@@ -25,9 +34,12 @@ describe('isMobile', () => {
     ];
 
     USER_AGENTS.forEach((value) => {
-      Object.defineProperty(window.navigator, 'userAgent', {
-        value,
-        configurable: true,
+      windowSpy.mockImplementation(() => {
+        return {
+          navigator: {
+            userAgent: value,
+          },
+        };
       });
 
       expect(isMobile()).toBe(true);

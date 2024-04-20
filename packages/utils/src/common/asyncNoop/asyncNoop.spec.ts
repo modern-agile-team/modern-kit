@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { asyncNoop } from '.';
 
 describe('asyncNoop', () => {
