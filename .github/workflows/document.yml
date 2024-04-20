@@ -9,7 +9,7 @@ on:
 jobs:
   document-publish:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.title == 'chore":" version packages'
+    if: github.event.pull_request.merged == true && github.event.pull_request.user == 'github-actions[bot]'
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v4
