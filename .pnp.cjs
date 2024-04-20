@@ -5594,7 +5594,7 @@ const RAW_RUNTIME_STATE =
           ["combine-promises", "npm:1.2.0"],\
           ["commander", "npm:5.1.0"],\
           ["copy-webpack-plugin", "virtual:52b45b08fe9e3968a7010d5904d5d5ad89c9d254f137337a5b1c37c6322c7731f7eaadc84b7db267bb23d01849f6fd806e5f7e621b490faafbbfa5734f625ff8#npm:11.0.0"],\
-          ["core-js", "npm:3.33.3"],\
+          ["core-js", "npm:3.37.0"],\
           ["css-loader", "virtual:52b45b08fe9e3968a7010d5904d5d5ad89c9d254f137337a5b1c37c6322c7731f7eaadc84b7db267bb23d01849f6fd806e5f7e621b490faafbbfa5734f625ff8#npm:6.8.1"],\
           ["css-minimizer-webpack-plugin", "virtual:52b45b08fe9e3968a7010d5904d5d5ad89c9d254f137337a5b1c37c6322c7731f7eaadc84b7db267bb23d01849f6fd806e5f7e621b490faafbbfa5734f625ff8#npm:4.2.2"],\
           ["cssnano", "virtual:52b45b08fe9e3968a7010d5904d5d5ad89c9d254f137337a5b1c37c6322c7731f7eaadc84b7db267bb23d01849f6fd806e5f7e621b490faafbbfa5734f625ff8#npm:5.1.15"],\
@@ -7062,7 +7062,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.2.20"],\
           ["@types/react-dom", "npm:18.2.7"],\
-          ["core-js", "npm:3.32.0"],\
+          ["core-js", "npm:3.37.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.0.0"],\
           ["lodash", "npm:4.17.21"],\
           ["lodash-es", "npm:4.17.21"],\
@@ -7101,7 +7101,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.2.20"],\
           ["@types/react-dom", "npm:18.2.7"],\
-          ["core-js", "npm:3.32.0"],\
+          ["core-js", "npm:3.37.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.0.0"],\
           ["lodash", "npm:4.17.21"],\
           ["lodash-es", "npm:4.17.21"],\
@@ -7127,7 +7127,7 @@ const RAW_RUNTIME_STATE =
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:15.1.0"],\
           ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.3"],\
           ["@rollup/plugin-typescript", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:11.1.6"],\
-          ["core-js", "npm:3.32.0"],\
+          ["core-js", "npm:3.37.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.0.0"],\
           ["rollup", "npm:4.14.3"],\
           ["tslib", "npm:2.6.2"],\
@@ -12281,17 +12281,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["core-js", [\
-      ["npm:3.32.0", {\
-        "packageLocation": "./.yarn/unplugged/core-js-npm-3.32.0-ccedf4fd04/node_modules/core-js/",\
+      ["npm:3.37.0", {\
+        "packageLocation": "./.yarn/unplugged/core-js-npm-3.37.0-98818d5691/node_modules/core-js/",\
         "packageDependencies": [\
-          ["core-js", "npm:3.32.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:3.33.3", {\
-        "packageLocation": "./.yarn/unplugged/core-js-npm-3.33.3-1962d5ccd2/node_modules/core-js/",\
-        "packageDependencies": [\
-          ["core-js", "npm:3.33.3"]\
+          ["core-js", "npm:3.37.0"]\
         ],\
         "linkType": "HARD"\
       }]\
