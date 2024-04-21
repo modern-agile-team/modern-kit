@@ -13,9 +13,10 @@ describe('useImageStatus', () => {
     const img = document.createElement('img');
     img.setAttribute('src', 'imgUrl');
 
-    await waitFor(() => result.current.ref(img));
-
-    expect(result.current.imageStatus).toBe('loading');
+    await waitFor(() => {
+      result.current.ref(img);
+      expect(result.current.imageStatus).toBe('loading');
+    });
   });
 
   it('should change status to "complete" when an image loads successfully', async () => {
