@@ -94,10 +94,25 @@ export default function Home(): JSX.Element {
               <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
             </a>
           </h2>
-
           <p className={styles.mainContentParagraph}>
             클라이언트 개발과 관련된 유용한 유틸리티 함수를 제공하는
             라이브러리입니다.
+          </p>
+          <h2 className={styles.mainContentHead}>
+            @modern-kit/types
+            <a
+              href="https://www.npmjs.com/package/@modern-kit/types"
+              target="_blank">
+              <img src="https://img.shields.io/npm/v/@modern-kit/types.svg" />
+            </a>
+            <a
+              href="https://bundlephobia.com/package/@modern-kit/types"
+              target="_blank">
+              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest" />
+            </a>
+          </h2>
+          <p className={styles.mainContentParagraph}>
+            유용한 타입스크립트 유틸 타입들을 제공합니다.
           </p>
         </div>
       </main>
