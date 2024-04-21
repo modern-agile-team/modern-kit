@@ -1,0 +1,46 @@
+{
+  "name": "@modern-kit/types",
+  "sideEffects": false,
+  "version": "1.0.0",
+  "description": "modern-kit/types",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "typecheck": "tsc",
+    "build": "rm -rf dist && yarn typecheck"
+  },
+  "author": "ssi02014 <ssi02014@naver.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "tslib": "^2.6.2",
+    "typescript": "^5.1.6",
+    "vitest": "^1.5.0"
+  },
+  "keywords": [
+    "react",
+    "next",
+    "utils",
+    "component",
+    "ui",
+    "hooks",
+    "custom hooks"
+  ],
+  "gitHead": "7722785374b897572934e335817ec297ad45a943"
+}
