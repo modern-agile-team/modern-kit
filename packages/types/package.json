@@ -20,8 +20,8 @@
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run",
-    "build": "rm -rf dist && tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc",
+    "build": "rm -rf dist && yarn typecheck"
   },
   "author": "ssi02014 <ssi02014@naver.com>",
   "license": "MIT",
