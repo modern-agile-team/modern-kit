@@ -107,6 +107,10 @@ const config = {
                 label: '@modern-kit/utils',
                 href: 'https://www.npmjs.com/package/@modern-kit/utils',
               },
+              {
+                label: '@modern-kit/types',
+                href: 'https://www.npmjs.com/package/@modern-kit/types',
+              },
             ],
           },
         ],
