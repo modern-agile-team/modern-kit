@@ -9,6 +9,8 @@
 
 `@modern-kit`는 클라이언트 개발에 유용한 `리액트 커스텀 훅` 및 `유틸리티 함수`를 제공하는 라이브러리 입니다.
 
+`@modern-kit`는 Next.js의 `SSR(Server Side Rendering)`환경에서도 호환되기 위해 `CJS(CommonJs)`와 `ESM(ECMAScript Module)` 두 포맷을 모두 지원합니다.
+
 <br />
 
 ## Documentation
@@ -84,6 +86,7 @@ yarn typecheck
 <br />
 
 ## Stack
+- Node v20
 - React, TypeScript
 - Vitest, React-Testing-Library
 - Rollup, Babel
@@ -95,9 +98,13 @@ yarn typecheck
 
 ## Tools
 
+- `Yarn Berry`와 `workspaces`를 활용해 Monolithic Repository환경을 구축
+  - packages 내부의 패키지들은 `로컬 패키지`처럼 상호의존성을 갖습니다.
+- `lerna`를 통해 통합 빌드, 테스트, 배포 환경을 구축
 - `github actions`를 활용한 CI/CD 구축
 - `changeset`을 활용해 모노레포 환경에서 package 일관성 유지 및 NPM 배포 진행
-- `dependabot`을 활용한 의존성 관리
+- `dependabot`을 활용한 자동 의존성 관리
+- `docusaurus`를 활용한 문서화
 
 <br />
 
