@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.1.1
+
+### Patch Changes
+
+- 961a8aa: refac: ESLint 적용
+
 ## 1.1.0
 
 ### Minor Changes
