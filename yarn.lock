@@ -4202,6 +4202,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@modern-kit/types@workspace:packages/types":
+  version: 0.0.0-use.local
+  resolution: "@modern-kit/types@workspace:packages/types"
+  dependencies:
+    tslib: "npm:^2.6.2"
+    typescript: "npm:^5.1.6"
+    vitest: "npm:^1.5.0"
+  languageName: unknown
+  linkType: soft
+
 "@modern-kit/utils@workspace:*, @modern-kit/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"

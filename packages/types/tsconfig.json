@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true
+  },
+  "exclude": [
+    "**/*.spec.ts" // 모든 .test.ts 파일을 제외
+  ]
+}
