@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.1.0
+
+### Minor Changes
+
+- 4bd0e00: Migration Babel to ESBuild
+
 ## 1.0.3
 
 ### Patch Changes
