@@ -1,3 +1,4 @@
+export * from './hasProperty';
 export * from './isFunction';
 export * from './isNotNullish';
 export * from './isNullish';
