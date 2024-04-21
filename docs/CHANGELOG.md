@@ -1,5 +1,12 @@
 # docs
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [961a8aa]
+  - @modern-kit/react@1.1.1
+
 ## 0.0.6
 
 ### Patch Changes
