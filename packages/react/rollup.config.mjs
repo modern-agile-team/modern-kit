@@ -1,10 +1,10 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import pkg from './package.json' assert { type: 'json' };
+import esbuild from 'rollup-plugin-esbuild';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -29,11 +29,7 @@ export default {
       extensions,
     }),
     commonjs(),
-    babel({
-      exclude: /node_modules/,
-      extensions,
-      include: ['src/**/*'],
-    }),
+    esbuild(),
     typescript({
       tsconfig: './tsconfig.json',
       exclude: ['**/*.spec.tsx'],

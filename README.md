@@ -89,7 +89,7 @@ yarn typecheck
 - Node v20
 - React, TypeScript
 - Vitest, React-Testing-Library
-- Rollup, Babel
+- Rollup, ESBuild
 - Yarn Berry(v4) & Workspaces
 - Lerna (for Versioning & Publishing)
 - docusaurus (documentation)
