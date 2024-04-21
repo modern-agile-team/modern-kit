@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useMemo,
-} from 'react';
+import { createContext, useCallback, useContext, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';

@@ -4,7 +4,7 @@ export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
   const copiedObj: Record<PropertyKey, any> = {};
 
   for (const key in source) {
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       const value = source[key];
 
       if (value !== null && typeof value === 'object') {

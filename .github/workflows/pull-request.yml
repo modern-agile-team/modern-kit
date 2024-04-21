@@ -20,6 +20,8 @@ jobs:
         run: yarn install
       - name: build 🔨
         run: lerna run build
+      - name: eslint 🚀
+        run: yarn eslint packages
       - name: typecheck 🚀
         run: yarn typecheck
       - name: testing 🚀
