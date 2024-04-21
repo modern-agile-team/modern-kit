@@ -15,7 +15,7 @@ export const mergeProperties = <
   for (const key in source) {
     if (exclude && exclude.includes(key)) continue;
 
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       if (typeof source[key] === 'object') {
         if (Array.isArray(source[key])) {
           merged[key] = [...target[key], ...source[key]] as any;

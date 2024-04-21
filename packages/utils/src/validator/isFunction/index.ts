@@ -1,3 +1,5 @@
-export const isFunction = (arg: unknown): arg is Function => {
+export const isFunction = <T extends (...args: any[]) => any>(
+  arg: unknown
+): arg is T => {
   return arg instanceof Function;
 };

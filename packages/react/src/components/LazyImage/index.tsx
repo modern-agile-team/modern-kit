@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 

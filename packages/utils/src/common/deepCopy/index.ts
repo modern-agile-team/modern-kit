@@ -38,7 +38,7 @@ export const deepCopy = <T>(source: T): T => {
   const newObject: Record<string, any> = {};
 
   for (const key in source) {
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       newObject[key] = deepCopy(source[key]);
     }
   }

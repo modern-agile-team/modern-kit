@@ -6,7 +6,7 @@ export const hexToRgba = (hex: string, alpha = 1) => {
     return null;
   }
 
-  let convertedHex = hex.replace('#', '');
+  const convertedHex = hex.replace('#', '');
 
   const r = parseInt(convertedHex.slice(0, 2), HEXADECIMAL);
   const g = parseInt(convertedHex.slice(2, 4), HEXADECIMAL);
