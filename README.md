@@ -92,7 +92,7 @@ yarn typecheck
 <br />
 
 ## Contributing
-모든 기여에 감사드리며, 모던 애자일 소속이라면 누구나 라이브러리에 기여할 수 있습니다.
+모든 기여에 감사드립니다! 누구든지 라이브러리에 기여할 수 있습니다.
 [Contributing Guide](./.github/CONTRIBUTING.md)
 
 #### Contributors
