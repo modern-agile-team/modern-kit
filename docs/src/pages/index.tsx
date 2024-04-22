@@ -112,7 +112,7 @@ export default function Home(): JSX.Element {
             </a>
           </h2>
           <p className={styles.mainContentParagraph}>
-            유용한 타입스크립트 유틸 타입들을 제공합니다.
+            유용한 유틸 타입들을 제공하는 라이브러리 입니다.
           </p>
         </div>
       </main>

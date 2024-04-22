@@ -59,7 +59,7 @@ pnpm i @modern-kit/utils
 
 ### @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest"></a>
 
-- 유용한 타입스크립트 유틸 타입들을 제공합니다.
+- 유용한 유틸 타입들을 제공하는 라이브러리 입니다.
 
 ```shell
 npm i @modern-kit/types
