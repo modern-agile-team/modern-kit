@@ -1,4 +1,4 @@
-import { ObjectKeys } from '../types';
+import { ObjectKeys } from '@modern-kit/types';
 
 export const objectValues = <T extends Record<PropertyKey, T[keyof T]>>(
   obj: T
