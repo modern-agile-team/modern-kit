@@ -75,19 +75,34 @@ pnpm i @modern-kit/types
 
 <br />
 
-## Tests
+## Lint & Test & build
+
+- `root` 폴더에서 진행해주세요.
+- node 버전은 `v20+`이여야 합니다.
+
+```shell
+yarn eslint packages
+```
+
+- 위 명령어를 통해 모든 패키지의 `lint` 검사를 진행할 수 있습니다.
 
 ```shell
 yarn test
 ```
 
-- `vitest`와 `react-testing-library`로 테스트를 실행할 수 있습니다.
+- `test` 명령어를 통해 `vitest`와 `react-testing-library`로 테스트를 진행할 수 있습니다.
 
 ```shell
 yarn typecheck
 ```
 
-- 타입 체크를 할 수 있습니다.
+- `typecheck` 명령어를 통해 `typecheck`를 진행할 수 있습니다.
+
+```shell
+yarn build
+```
+
+- `build` 명령어를 통해 관리하는 모든 패키지들의 build, 상단의 lint, test, typecheck를 모두 진행합니다.
 
 <br />
 
