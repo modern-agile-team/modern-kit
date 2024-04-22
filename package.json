@@ -9,7 +9,7 @@
   "scripts": {
     "typecheck": "lerna run typecheck",
     "test": "lerna run test:run",
-    "build": "lerna run build && yarn typecheck && yarn test",
+    "build": "lerna run build && yarn eslint packages && yarn typecheck && yarn test",
     "publish": "lerna version && lerna publish from-package",
     "start:docs": "lerna run start",
     "build:docs": "lerna run build:docs",
