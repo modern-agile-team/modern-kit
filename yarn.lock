@@ -4202,7 +4202,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modern-kit/types@workspace:packages/types":
+"@modern-kit/types@workspace:*, @modern-kit/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@modern-kit/types@workspace:packages/types"
   dependencies:
@@ -4216,6 +4216,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"
   dependencies:
+    "@modern-kit/types": "workspace:*"
     "@rollup/plugin-commonjs": "npm:^25.0.4"
     "@rollup/plugin-node-resolve": "npm:^15.1.0"
     "@rollup/plugin-terser": "npm:^0.4.3"

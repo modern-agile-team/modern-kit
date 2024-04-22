@@ -1,10 +1,12 @@
+import { hasProperty } from '../../validator';
+
 export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
   source: T
 ): T => {
   const copiedObj: Record<PropertyKey, any> = {};
 
   for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if (hasProperty(source, key)) {
       const value = source[key];
 
       if (value !== null && typeof value === 'object') {
