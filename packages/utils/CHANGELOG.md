@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.2.2
+
+### Patch Changes
+
+- 98b58c0: @modern-kit/types 타입 적용
+
 ## 1.2.1
 
 ### Patch Changes
