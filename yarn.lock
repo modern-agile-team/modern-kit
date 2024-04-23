@@ -4713,18 +4713,18 @@ __metadata:
   linkType: hard
 
 "@rollup/plugin-terser@npm:^0.4.3":
-  version: 0.4.3
-  resolution: "@rollup/plugin-terser@npm:0.4.3"
+  version: 0.4.4
+  resolution: "@rollup/plugin-terser@npm:0.4.4"
   dependencies:
     serialize-javascript: "npm:^6.0.1"
     smob: "npm:^1.0.0"
     terser: "npm:^5.17.4"
   peerDependencies:
-    rollup: ^2.x || ^3.x
+    rollup: ^2.0.0||^3.0.0||^4.0.0
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: 22cab18203745e71e4ad2de9a4e984c385213e5327fd538c881860c7027ba52a6009e2148ad0bf383b0404bf1125d2254f5bb1545e3436cea702aa962f60ed1b
+  checksum: b9cb6c8f02ac1c1344019e9fb854321b74f880efebc41b6bdd84f18331fce0f4a2aadcdb481042245cd3f409b429ac363af71f9efec4a2024731d67d32af36ee
   languageName: node
   linkType: hard
 
