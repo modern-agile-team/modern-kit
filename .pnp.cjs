@@ -13321,7 +13321,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.79"],\
           ["@types/react-dom", "npm:18.2.7"],\
           ["clsx", "npm:1.2.1"],\
-          ["gh-pages", "npm:6.1.0"],\
+          ["gh-pages", "npm:6.1.1"],\
           ["prism-react-renderer", "virtual:b5b5dfb1662b30d0d5b62f084f8b8fddd0eee56dd8737572197395ab6309e644fa76525392b1d0250ce3c07c5eeeb90901439953af682fc76f8ab38f71b8b09d#npm:1.3.5"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:18.2.0"],\
@@ -15280,10 +15280,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["gh-pages", [\
-      ["npm:6.1.0", {\
-        "packageLocation": "./.yarn/cache/gh-pages-npm-6.1.0-bd68a9b948-ef61f856e1.zip/node_modules/gh-pages/",\
+      ["npm:6.1.1", {\
+        "packageLocation": "./.yarn/cache/gh-pages-npm-6.1.1-7bde86cdf6-1a0c184386.zip/node_modules/gh-pages/",\
         "packageDependencies": [\
-          ["gh-pages", "npm:6.1.0"],\
+          ["gh-pages", "npm:6.1.1"],\
           ["async", "npm:3.2.5"],\
           ["commander", "npm:11.1.0"],\
           ["email-addresses", "npm:5.0.0"],\
