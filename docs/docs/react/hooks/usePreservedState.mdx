@@ -1,0 +1,32 @@
+# usePreservedCallback
+
+`comparator`로 비교했을 때 값이 변경되었을 때에만 상태를 변경하는 커스텀 훅입니다.
+
+comparator를 넘기지 않는다면 `@modern-kit/utils`의 `deepEqual` 함수가 활용됩니다.
+  - [deepEqual](https://modern-agile-team.github.io/modern-kit/docs/utils/common/deepEqual)
+
+만약, 변경되는 값이 같다면 상태를 변경하지 않습니다. 또한 참조가 유지됩니다.
+
+<br />
+
+## Interface
+```tsx
+const usePreservedState: <T>(
+  value: T,
+  comparator?: ((source: T, target: T) => boolean) | undefined
+) => T;
+```
+
+## Usage
+```tsx
+import React, { useEffect, useState } from "react";
+import { usePreservedState } from "@modern-kit/react";
+
+const Example = () => {
+  const preservedState = usePreservedState(exampleState);
+
+  return (
+    <>{/* ... */}</>
+  );
+}
+```
