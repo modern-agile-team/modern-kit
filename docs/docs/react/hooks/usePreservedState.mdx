@@ -1,4 +1,4 @@
-# usePreservedCallback
+# usePreservedState
 
 `comparator`로 비교했을 때 값이 변경되었을 때 상태를 변경하는 커스텀 훅입니다.
 
@@ -44,7 +44,7 @@ const Example = () => {
   ) => source.exampleId === target.exampleId;
 
   const preservedState = usePreservedState({ exampleId: 1 }, comparator);
-  
+
   return <>{/* ... */}</>;
 };
 
