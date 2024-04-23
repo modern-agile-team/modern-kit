@@ -4,7 +4,7 @@ import { usePreservedState } from '.';
 
 describe('usePreservedState', () => {
   describe('Default Comparator Callback 사용', () => {
-    it('값이 같다면 상태의 변경되서는 안됩니다. 이때 참조도 유지되어야 합니다.', () => {
+    it('값이 동일한 경우 동일한 상태와 참조를 유지해야 합니다.', () => {
       const originObj = { group: 'modern-agile' };
       const targetObj = { group: 'modern-agile' };
 
@@ -21,7 +21,7 @@ describe('usePreservedState', () => {
       expect(result.current).toEqual(originObj);
     });
 
-    it('값이 변경되면 상태가 변경되야 합니다.', () => {
+    it('값이 변경되면 상태를 업데이트해야 합니다.', () => {
       const originObj = { group: 'modern-agile' };
       const targetObj = { group: 'frontend' };
 
@@ -40,7 +40,7 @@ describe('usePreservedState', () => {
   });
 
   describe('Custom Comparator Callback 사용', () => {
-    it('comparator가 true를 반환하면 상태가 변경되서는 안됩니다. 이때 참조도 유지되어야 합니다.', () => {
+    it('comparator가 true를 반환하면 상태와 참조를 유지해야 합니다.', () => {
       const comparator = (a: any, b: any) => a.group === b.group;
 
       const originObj = { group: 'modern-agile', title: 'origin' };
@@ -59,7 +59,7 @@ describe('usePreservedState', () => {
       expect(result.current).toEqual(originObj);
     });
 
-    it('comparator가 false를 반환하면 상태가 변경되야 합니다.', () => {
+    it('comparator가 false를 반환하면 상태를 업데이트해야 합니다.', () => {
       const comparator = (a: any, b: any) => a.group === b.group;
 
       const originObj = { group: 'modern-agile', title: 'origin' };
