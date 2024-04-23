@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.2.0
+
+### Minor Changes
+
+- [#42](https://github.com/modern-agile-team/modern-kit/pull/42) [`30eaf83`](https://github.com/modern-agile-team/modern-kit/commit/30eaf83544176fc9e589d0dfaa24cf96afa2713f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: usePreservedState 추가
+
 ## 1.1.1
 
 ### Patch Changes
