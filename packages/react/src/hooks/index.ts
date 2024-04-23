@@ -10,6 +10,7 @@ export * from './useIsomorphicLayoutEffect';
 export * from './useMediaQuery';
 export * from './useMergeRefs';
 export * from './useOnClickOutside';
+export * from './usePreservedState';
 export * from './usePreservedCallback';
 export * from './usePrevious';
 export * from './useResizeObserver';
