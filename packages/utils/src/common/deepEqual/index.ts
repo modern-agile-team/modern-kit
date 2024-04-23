@@ -1,3 +1,20 @@
+const compareObjectOrArray = (source: any, target: any) => {
+  const sourceKeys = Object.keys(source);
+  const targetKeys = Object.keys(target);
+
+  if (sourceKeys.length !== targetKeys.length) {
+    return false;
+  }
+
+  for (const key of sourceKeys) {
+    if (!targetKeys.includes(key) || !deepEqual(source[key], target[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 export const deepEqual = (source: any, target: any) => {
   // Primitive Type
   if (source === target) {
@@ -14,18 +31,23 @@ export const deepEqual = (source: any, target: any) => {
     return false;
   }
 
+  // Returns false if the constructors are different.
+  if (source.constructor !== target.constructor) {
+    return false;
+  }
+
   // Set
-  if (source instanceof Set && target instanceof Set) {
+  if (source instanceof Set) {
     if (source.size !== target.size) return false;
 
-    for (const value of source) {
-      if (!target.has(value)) return false;
-    }
-    return true;
+    const sourceSetToArr = [...source];
+    const targetSetToArr = [...target];
+
+    return compareObjectOrArray(sourceSetToArr, targetSetToArr);
   }
 
   // Map
-  if (source instanceof Map && target instanceof Map) {
+  if (source instanceof Map) {
     if (source.size !== target.size) return false;
 
     for (const [key, value] of source) {
@@ -37,18 +59,5 @@ export const deepEqual = (source: any, target: any) => {
   }
 
   // Object & Array
-  const keysA = Object.keys(source);
-  const keysB = Object.keys(target);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  for (const key of keysA) {
-    if (!keysB.includes(key) || !deepEqual(source[key], target[key])) {
-      return false;
-    }
-  }
-
-  return true;
+  return compareObjectOrArray(source, target);
 };
