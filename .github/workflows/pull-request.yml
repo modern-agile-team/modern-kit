@@ -26,3 +26,5 @@ jobs:
         run: yarn typecheck
       - name: testing 🚀
         run: yarn test
+      - name: document build 🔨
+        run: yarn build:docs

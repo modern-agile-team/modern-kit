@@ -21,7 +21,7 @@ jobs:
       - name: Link 🔨
         run: yarn
       - name: packages build 🔨
-        run: yarn build
+        run: lerna run build
       - name: document build 🔨
         run: yarn build:docs
       - name: Deploy 🚀
