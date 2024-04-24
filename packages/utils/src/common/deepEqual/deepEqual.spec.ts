@@ -51,32 +51,37 @@ describe('deepEqual', () => {
   });
 
   it('should return true if Set or Map are deeply equal', () => {
-    expect(deepEqual(new Set([1, 2, 3]), new Set([1, 2, 3]))).toBe(true);
     expect(
       deepEqual(
-        new Map([
-          [0, 'a'],
-          [1, 'b'],
-        ]),
-        new Map([
-          [0, 'a'],
-          [1, 'b'],
-        ])
+        new Set([1, { a: 1 }, [1, 2, { b: 2 }]]),
+        new Set([1, { a: 1 }, [1, 2, { b: 2 }]])
       )
     ).toBe(true);
 
-    expect(deepEqual(new Set([1, 2, 3]), new Set([1, 2, 4]))).toBe(false);
+    const map1 = new Map();
+    const map2 = new Map();
+
+    map1.set(1, { a: 1 });
+    map1.set(2, [1, 2, 3]);
+
+    map2.set(1, { a: 1 });
+    map2.set(2, [1, 2, 3]);
+
+    expect(deepEqual(map1, map2)).toBe(true);
+
     expect(
-      deepEqual(
-        new Map([
-          [0, 'a'],
-          [1, 'b'],
-        ]),
-        new Map([
-          [0, 'a'],
-          [1, 'c'],
-        ])
-      )
+      deepEqual(new Set([1, { a: 1 }, 2]), new Set([1, 2, { a: 1 }]))
     ).toBe(false);
+
+    const map3 = new Map();
+    const map4 = new Map();
+
+    map3.set(1, { a: 1 });
+    map3.set(2, [1, 2, 3]);
+
+    map4.set(1, { a: 2 });
+    map4.set(2, [1, 2, 4]);
+
+    expect(deepEqual(map3, map4)).toBe(false);
   });
 });
