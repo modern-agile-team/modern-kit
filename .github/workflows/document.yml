@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
-      - name: Link 🔨
-        run: yarn
+      - name: install 🔨
+        run: yarn install --frozen-lockfile
       - name: packages build 🔨
         run: lerna run build
       - name: document build 🔨
