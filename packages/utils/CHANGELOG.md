@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.2.3
+
+### Patch Changes
+
+- [#50](https://github.com/modern-agile-team/modern-kit/pull/50) [`92132c4`](https://github.com/modern-agile-team/modern-kit/commit/92132c4fafc26e99f7f69855d143f83e3a288c7e) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: deepEqual logic
+
 ## 1.2.2
 
 ### Patch Changes
