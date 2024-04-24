@@ -7904,6 +7904,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
+  languageName: node
+  linkType: hard
+
 "cmd-shim@npm:6.0.1":
   version: 6.0.1
   resolution: "cmd-shim@npm:6.0.1"
@@ -9150,7 +9157,7 @@ __metadata:
     "@types/node": "npm:^20.5.1"
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
-    clsx: "npm:^1.2.1"
+    clsx: "npm:^2.1.1"
     gh-pages: "npm:^6.0.0"
     prism-react-renderer: "npm:^2.3.1"
     react: "npm:^18.2.0"
