@@ -8855,10 +8855,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@tsconfig/docusaurus", [\
-      ["npm:2.0.2", {\
-        "packageLocation": "./.yarn/cache/@tsconfig-docusaurus-npm-2.0.2-9e1a4c398a-af39e4c07f.zip/node_modules/@tsconfig/docusaurus/",\
+      ["npm:2.0.3", {\
+        "packageLocation": "./.yarn/cache/@tsconfig-docusaurus-npm-2.0.3-3e635f391c-6e3d2739f3.zip/node_modules/@tsconfig/docusaurus/",\
         "packageDependencies": [\
-          ["@tsconfig/docusaurus", "npm:2.0.2"]\
+          ["@tsconfig/docusaurus", "npm:2.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13421,7 +13421,7 @@ const RAW_RUNTIME_STATE =
           ["@docusaurus/types", "virtual:b5b5dfb1662b30d0d5b62f084f8b8fddd0eee56dd8737572197395ab6309e644fa76525392b1d0250ce3c07c5eeeb90901439953af682fc76f8ab38f71b8b09d#npm:3.2.1"],\
           ["@mdx-js/react", "virtual:b5b5dfb1662b30d0d5b62f084f8b8fddd0eee56dd8737572197395ab6309e644fa76525392b1d0250ce3c07c5eeeb90901439953af682fc76f8ab38f71b8b09d#npm:3.0.1"],\
           ["@modern-kit/react", "virtual:b5b5dfb1662b30d0d5b62f084f8b8fddd0eee56dd8737572197395ab6309e644fa76525392b1d0250ce3c07c5eeeb90901439953af682fc76f8ab38f71b8b09d#workspace:packages/react"],\
-          ["@tsconfig/docusaurus", "npm:2.0.2"],\
+          ["@tsconfig/docusaurus", "npm:2.0.3"],\
           ["@types/node", "npm:20.12.7"],\
           ["@types/react", "npm:18.2.79"],\
           ["@types/react-dom", "npm:18.2.25"],\
