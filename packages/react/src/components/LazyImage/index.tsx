@@ -2,11 +2,10 @@ import React, { CSSProperties, forwardRef, useMemo } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
-interface LazyImageProps extends React.ComponentProps<'img'> {
+interface LazyImageProps
+  extends React.ComponentProps<'img'>,
+    IntersectionObserverInit {
   src: string;
-  threshold?: number | number[];
-  root?: Document | Element | null;
-  rootMargin?: string;
 }
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
