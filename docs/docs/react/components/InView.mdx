@@ -8,14 +8,6 @@ import { InView } from '@modern-kit/react';
 
 ## Interface
 ```tsx
-interface UseIntersectionObserverProps {
-  action: (entry: IntersectionObserverEntry) => void;
-  calledOnce?: boolean;
-  threshold?: number | number[];
-  root?: Document | Element | null;
-  rootMargin?: string;
-}
-
 type InViewProps = React.ComponentProps<'div'> & UseIntersectionObserverProps;
 
 const InView: React.ForwardRefExoticComponent<

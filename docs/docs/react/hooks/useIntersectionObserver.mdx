@@ -8,21 +8,18 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 
 ## Interface
 ```tsx
-interface UseIntersectionObserverProps {
+interface UseIntersectionObserverProps extends IntersectionObserverInit {
   action: (entry: IntersectionObserverEntry) => void;
   calledOnce?: boolean;
-  threshold?: number | number[];
-  root?: Document | Element | null;
-  rootMargin?: string;
 }
 
-const useIntersectionObserver: <T extends HTMLElement>({ 
-  action, 
-  calledOnce, 
-  root, 
-  threshold, 
-  rootMargin
-}: UseIntersectionObserverProps) => React.RefObject<T>
+const useIntersectionObserver: <T extends HTMLElement>({
+  action,
+  calledOnce,
+  root,
+  threshold,
+  rootMargin,
+}: UseIntersectionObserverProps) => (node: T) => void;
 ```
 
 ## Usage

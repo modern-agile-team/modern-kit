@@ -12,14 +12,13 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 
 ## Interface
 ```tsx
-interface LazyImageProps extends React.ComponentProps<'img'> {
+interface LazyImageProps
+  extends React.ComponentProps<'img'>,
+    IntersectionObserverInit {
   src: string;
-  threshold?: number | number[]; // default: 0
-  root?: Document | Element | null; // default: null
-  rootMargin?: string; // default: '0px 0px 0px 0px'
 }
 
-const LazyImage: React.ForwardRefExoticComponent<Omit<LazyImageProps, "ref"> & React.RefAttributes<HTMLDivElement>>
+const LazyImage: React.ForwardRefExoticComponent<Omit<LazyImageProps, "ref"> & React.RefAttributes<HTMLImageElement>>
 ```
 
 ## Usage
