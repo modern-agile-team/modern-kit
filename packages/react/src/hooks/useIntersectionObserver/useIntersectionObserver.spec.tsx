@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import {
   mockIntersecting,
   mockIntersectionObserverCleanup,

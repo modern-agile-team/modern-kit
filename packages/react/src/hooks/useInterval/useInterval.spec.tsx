@@ -1,4 +1,3 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
 import {
   act,
   fireEvent,
@@ -11,8 +10,12 @@ import { useState } from 'react';
 
 const delayTime = 1000;
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 const TestComponent = () => {

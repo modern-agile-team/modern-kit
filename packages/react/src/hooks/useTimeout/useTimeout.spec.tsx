@@ -1,4 +1,3 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { act, renderHook, screen } from '@testing-library/react';
 import { useTimeout } from '.';
 import { useState } from 'react';
@@ -6,8 +5,12 @@ import { renderSetup } from '../../utils/test/renderSetup';
 
 const delayTime = 1000;
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 const TestComponent = () => {
