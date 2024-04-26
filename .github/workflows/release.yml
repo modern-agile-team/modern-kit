@@ -17,6 +17,14 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: install 🔨
         run: yarn install --frozen-lockfile
+      - name: build 🔨
+        run: lerna run build
+      - name: eslint 🚀
+        run: yarn eslint packages
+      - name: typecheck 🚀
+        run: yarn typecheck
+      - name: testing 🚀
+        run: yarn test
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
         with:
