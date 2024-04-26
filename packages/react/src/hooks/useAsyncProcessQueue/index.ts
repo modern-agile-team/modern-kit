@@ -1,3 +1,4 @@
+import { Nullable } from '@modern-kit/types';
 import { useCallback, useState, useRef } from 'react';
 
 type RequestFunction<T> = (requestData?: any) => Promise<T>;
@@ -11,8 +12,8 @@ export const useAsyncProcessQueue = <T = unknown, E = unknown>({
 }: UseAsyncProcessQueueOptions = {}) => {
   const requestQueue = useRef<RequestFunction<T>[]>([]);
 
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<E | null>(null);
+  const [data, setData] = useState<Nullable<T>>(null);
+  const [error, setError] = useState<Nullable<E>>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRequestQueue = useCallback(async () => {
