@@ -1,7 +1,7 @@
-import { it, expect, describe, afterEach, beforeEach, vi } from 'vitest';
+import { MockInstance } from 'vitest';
 import { getViewportSize } from '.';
 
-let windowSpy: any;
+let windowSpy: MockInstance;
 
 beforeEach(() => {
   windowSpy = vi.spyOn(window, 'window', 'get');

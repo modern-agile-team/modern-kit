@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useForceUpdate } from '.';
 import { useCallback, useRef } from 'react';

@@ -1,4 +1,3 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
 import { hasProperty } from '.';
 
 describe('hasProperty', () => {

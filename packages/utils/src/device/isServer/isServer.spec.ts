@@ -1,7 +1,7 @@
-import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
+import { MockInstance } from 'vitest';
 import { isServer } from '.';
 
-let windowSpy: any;
+let windowSpy: MockInstance;
 
 beforeEach(() => {
   windowSpy = vi.spyOn(window, 'window', 'get');

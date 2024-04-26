@@ -1,12 +1,14 @@
-import { beforeAll, vi, describe, it, expect } from 'vitest';
-
 import { act, screen } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
 import { DebounceWrapper } from '.';
 import { ChangeEvent, useState } from 'react';
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 interface TestComponentProps {
@@ -68,22 +70,22 @@ describe('DebounceWrapper Component', () => {
     );
 
     const button = screen.getByRole('button');
-    await user.click(button);
+    user.click(button);
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(mockFn).not.toBeCalled();
 
-    vi.advanceTimersByTime(200);
+    await vi.advanceTimersByTimeAsync(200);
     expect(mockFn).toBeCalledTimes(1);
 
-    await user.click(button);
-    await user.click(button);
-    await user.click(button);
+    user.click(button);
+    user.click(button);
+    user.click(button);
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(mockFn).toBeCalledTimes(1);
 
-    vi.advanceTimersByTime(200);
+    await vi.advanceTimersByTimeAsync(200);
     expect(mockFn).toBeCalledTimes(2);
   });
 
@@ -96,23 +98,23 @@ describe('DebounceWrapper Component', () => {
     const input = screen.getByRole('textbox');
     const paragraph = screen.getByRole('paragraph');
 
-    await user.type(input, 'Debounce');
+    user.type(input, 'Debounce');
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(paragraph).toHaveTextContent('');
     expect(input).toHaveValue('Debounce');
 
-    vi.advanceTimersByTime(200);
+    await vi.advanceTimersByTimeAsync(200);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce');
 
-    await user.type(input, ' Test');
+    user.type(input, ' Test');
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce Test');
 
-    vi.advanceTimersByTime(200);
+    await vi.advanceTimersByTimeAsync(200);
     expect(paragraph).toHaveTextContent('Debounce Test');
     expect(input).toHaveValue('Debounce Test');
   });

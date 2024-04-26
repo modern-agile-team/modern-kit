@@ -1,8 +1,13 @@
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { getUniqId } from '.';
+import { beforeEach } from 'node:test';
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 describe('getUniqId', () => {

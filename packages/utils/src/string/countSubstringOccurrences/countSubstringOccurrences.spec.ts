@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { countSubstringOccurrences } from '.';
 
 describe('countSubstringOccurrences', () => {

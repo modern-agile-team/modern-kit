@@ -1,8 +1,12 @@
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { getUniqTime } from '.';
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 describe('getUniqTime', () => {

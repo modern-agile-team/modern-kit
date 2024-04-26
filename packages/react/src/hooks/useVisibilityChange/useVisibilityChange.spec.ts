@@ -1,4 +1,3 @@
-import { describe, it, expect, vi, afterAll } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useVisibilityChange } from '.';
 
