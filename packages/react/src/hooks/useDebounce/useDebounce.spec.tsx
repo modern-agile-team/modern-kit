@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { useDebounce } from '.';
 
-beforeAll(() => {
+beforeEach(() => {
   vi.useFakeTimers();
 });
 
