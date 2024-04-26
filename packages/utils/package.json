@@ -34,7 +34,6 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.2",
-    "core-js": "^3.32.0",
     "esbuild": "^0.20.2",
     "jsdom": "^24.0.0",
     "rollup": "^4.14.3",
