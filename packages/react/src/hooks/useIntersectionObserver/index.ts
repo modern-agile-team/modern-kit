@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { noop } from '@modern-kit/utils';
+import { Nullable } from '@modern-kit/types';
 
 export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   action: (entry: IntersectionObserverEntry) => void;
@@ -14,7 +15,7 @@ export const useIntersectionObserver = <T extends HTMLElement>({
   threshold = [0],
   rootMargin = '0px 0px 0px 0px',
 }: UseIntersectionObserverProps) => {
-  const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+  const intersectionObserverRef = useRef<Nullable<IntersectionObserver>>(null);
 
   const callbackAction = usePreservedCallback(action ?? noop);
 

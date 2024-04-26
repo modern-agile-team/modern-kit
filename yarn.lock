@@ -4298,6 +4298,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/react@workspace:packages/react"
   dependencies:
+    "@modern-kit/types": "workspace:*"
     "@modern-kit/utils": "workspace:*"
     "@rollup/plugin-commonjs": "npm:^25.0.4"
     "@rollup/plugin-node-resolve": "npm:^15.1.0"

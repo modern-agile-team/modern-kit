@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
+import { Nullable } from '@modern-kit/types';
 
 interface PortalProps {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ interface PortalProps {
 }
 
 const PortalContext = createContext<{
-  parentPortalElement: HTMLElement | null;
+  parentPortalElement: Nullable<HTMLElement>;
 }>({
   parentPortalElement: null,
 });

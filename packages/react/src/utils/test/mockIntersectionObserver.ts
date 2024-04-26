@@ -1,3 +1,4 @@
+import { Nullable } from '@modern-kit/types';
 import { noop } from '@modern-kit/utils';
 
 /**
@@ -44,7 +45,7 @@ export const mockIntersecting = ({
   type: 'view' | 'hide';
 }) => {
   const observer = new window.IntersectionObserver(noop);
-  let current: HTMLElement | null = element;
+  let current: Nullable<HTMLElement> = element;
 
   while (current != null) {
     const handler = handlers.get(current);

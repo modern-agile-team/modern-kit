@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { useDebounce } from '../useDebounce';
+import { Nullable } from '@modern-kit/types';
 
 interface WindowSize {
-  width: number | null;
-  height: number | null;
+  width: Nullable<number>;
+  height: Nullable<number>;
 }
 
 interface useWindowSizeProps {
