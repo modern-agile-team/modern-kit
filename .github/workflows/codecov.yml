@@ -13,14 +13,20 @@ jobs:
   codecov:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout 🔔
+        uses: actions/checkout@v4
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - name: Node Setup 🔔
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
-      - run: yarn install --immutable
-      - run: yarn test
-      - uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: install 🔨
+        run: yarn install --immutable
+      - name: build 🔨
+        run: lerna run build
+      - name: testing 🚀
+        run: yarn test
+      - uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
