@@ -22,3 +22,7 @@ component_management:
       name: '@modern-kit/utils'
       paths:
         - packages/utils/**
+    - component_id: types
+      name: '@modern-kit/types'
+      paths:
+        - packages/types/**
