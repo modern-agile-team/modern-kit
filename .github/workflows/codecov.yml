@@ -23,8 +23,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: install 🔨
         run: yarn install --immutable
-      - name: typecheck 🚀
-        run: yarn typecheck
+      - name: build 🔨
+        run: lerna run build
       - name: testing 🚀
         run: yarn test
       - uses: codecov/codecov-action@v4
