@@ -31,3 +31,4 @@ rollup.config.mjs
 coverage
 vite.config.ts
 vite.setup.ts
+*.spec.d.ts

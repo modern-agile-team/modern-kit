@@ -7234,7 +7234,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/types/",\
         "packageDependencies": [\
           ["@modern-kit/types", "workspace:packages/types"],\
-          ["@vitest/coverage-istanbul", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:1.5.2"],\
           ["tslib", "npm:2.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
           ["vitest", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:1.5.2"]\
@@ -9624,28 +9623,6 @@ const RAW_RUNTIME_STATE =
           ["picocolors", "npm:1.0.0"],\
           ["test-exclude", "npm:6.0.0"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.5.2"]\
-        ],\
-        "packagePeers": [\
-          "@types/vitest",\
-          "vitest"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:1.5.2", {\
-        "packageLocation": "./.yarn/__virtual__/@vitest-coverage-istanbul-virtual-ea5d149455/0/cache/@vitest-coverage-istanbul-npm-1.5.2-81922aa75e-c4e236dc29.zip/node_modules/@vitest/coverage-istanbul/",\
-        "packageDependencies": [\
-          ["@vitest/coverage-istanbul", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:1.5.2"],\
-          ["@types/vitest", null],\
-          ["debug", "virtual:feb0771c9f8eadaf509cfed41e14a8bebbea5442233275c1c87085111077a08ef71eb773b899665b154d8203a55a489610a54117ae059fce5f5b8b844493b1b1#npm:4.3.4"],\
-          ["istanbul-lib-coverage", "npm:3.2.2"],\
-          ["istanbul-lib-instrument", "npm:6.0.2"],\
-          ["istanbul-lib-report", "npm:3.0.1"],\
-          ["istanbul-lib-source-maps", "npm:5.0.4"],\
-          ["istanbul-reports", "npm:3.1.7"],\
-          ["magicast", "npm:0.3.4"],\
-          ["picocolors", "npm:1.0.0"],\
-          ["test-exclude", "npm:6.0.0"],\
-          ["vitest", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:1.5.2"]\
         ],\
         "packagePeers": [\
           "@types/vitest",\

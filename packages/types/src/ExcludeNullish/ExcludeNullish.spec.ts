@@ -1,4 +1,3 @@
-import { describe, expectTypeOf, it } from 'vitest';
 import { ExcludeNullish } from '.';
 
 describe('ExcludeNullish', () => {

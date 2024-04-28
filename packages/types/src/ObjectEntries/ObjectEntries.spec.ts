@@ -1,4 +1,3 @@
-import { describe, expectTypeOf, it } from 'vitest';
 import { ObjectEntries } from '.';
 
 describe('ObjectKeys', () => {
