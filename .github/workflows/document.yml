@@ -19,7 +19,7 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
       - name: install 🔨
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: packages build 🔨
         run: lerna run build
       - name: document build 🔨
