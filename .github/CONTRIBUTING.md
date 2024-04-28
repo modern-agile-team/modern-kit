@@ -28,13 +28,10 @@ nvm install
 nvm use
 ```
 
-- 작업 후 Pull Request 생성 전에 `test` 및 `typecheck`를 진행해주세요. 
+- 작업 후 Pull Request 생성 전에 `test` 를 진행해주세요. 
 
 ```shell
 yarn test
-```
-```shell
-yarn typecheck
 ```
 
 <br />
