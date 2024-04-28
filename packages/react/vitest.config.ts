@@ -11,12 +11,6 @@ export default defineConfig({
     setupFiles: './vitest.setup.ts',
     coverage: {
       provider: 'istanbul',
-      exclude: [
-        'src/index.ts',
-        'src/global.d.ts',
-        'src/components/index.ts',
-        'src/hooks/index.ts',
-      ],
     },
   },
 });
