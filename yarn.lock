@@ -285,7 +285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.23.3":
+"@babel/core@npm:^7.23.3, @babel/core@npm:^7.23.9":
   version: 7.24.4
   resolution: "@babel/core@npm:7.24.4"
   dependencies:
@@ -892,7 +892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1, @babel/parser@npm:^7.24.4":
+"@babel/parser@npm:^7.23.9, @babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1, @babel/parser@npm:^7.24.4":
   version: 7.24.4
   resolution: "@babel/parser@npm:7.24.4"
   bin:
@@ -4034,6 +4034,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@istanbuljs/schema@npm:^0.1.2, @istanbuljs/schema@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@istanbuljs/schema@npm:0.1.3"
+  checksum: 61c5286771676c9ca3eb2bd8a7310a9c063fb6e0e9712225c8471c582d157392c88f5353581c8c9adbe0dff98892317d2fdfc56c3499aa42e0194405206a963a
+  languageName: node
+  linkType: hard
+
 "@jest/schemas@npm:^29.6.0":
   version: 29.6.0
   resolution: "@jest/schemas@npm:29.6.0"
@@ -4136,7 +4143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
+"@jridgewell/trace-mapping@npm:^0.3.23, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
   version: 0.3.25
   resolution: "@jridgewell/trace-mapping@npm:0.3.25"
   dependencies:
@@ -4311,6 +4318,7 @@ __metadata:
     "@types/lodash-es": "npm:^4"
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
+    "@vitest/coverage-istanbul": "npm:^1.5.2"
     esbuild: "npm:^0.20.2"
     jsdom: "npm:^24.0.0"
     lodash-es: "npm:^4.17.21"
@@ -4332,6 +4340,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/types@workspace:packages/types"
   dependencies:
+    "@vitest/coverage-istanbul": "npm:^1.5.2"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.1.6"
     vitest: "npm:^1.5.0"
@@ -4347,6 +4356,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^15.1.0"
     "@rollup/plugin-terser": "npm:^0.4.3"
     "@rollup/plugin-typescript": "npm:^11.1.2"
+    "@vitest/coverage-istanbul": "npm:^1.5.2"
     esbuild: "npm:^0.20.2"
     jsdom: "npm:^24.0.0"
     rollup: "npm:^4.14.3"
@@ -6107,6 +6117,25 @@ __metadata:
   version: 1.2.0
   resolution: "@ungap/structured-clone@npm:1.2.0"
   checksum: 8209c937cb39119f44eb63cf90c0b73e7c754209a6411c707be08e50e29ee81356dca1a848a405c8bdeebfe2f5e4f831ad310ae1689eeef65e7445c090c6657d
+  languageName: node
+  linkType: hard
+
+"@vitest/coverage-istanbul@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "@vitest/coverage-istanbul@npm:1.5.2"
+  dependencies:
+    debug: "npm:^4.3.4"
+    istanbul-lib-coverage: "npm:^3.2.2"
+    istanbul-lib-instrument: "npm:^6.0.1"
+    istanbul-lib-report: "npm:^3.0.1"
+    istanbul-lib-source-maps: "npm:^5.0.4"
+    istanbul-reports: "npm:^3.1.6"
+    magicast: "npm:^0.3.3"
+    picocolors: "npm:^1.0.0"
+    test-exclude: "npm:^6.0.0"
+  peerDependencies:
+    vitest: 1.5.2
+  checksum: c4e236dc297a5b2bb5e820e09fbadd22c6283a89fd77e341c551a451c5dd56eb9997a00762f3ffced87b4cf6057bc233739889c965439ab1c9ebbe4156c1da58
   languageName: node
   linkType: hard
 
@@ -11411,7 +11440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-escaper@npm:^2.0.2":
+"html-escaper@npm:^2.0.0, html-escaper@npm:^2.0.2":
   version: 2.0.2
   resolution: "html-escaper@npm:2.0.2"
   checksum: 208e8a12de1a6569edbb14544f4567e6ce8ecc30b9394fcaa4e7bb1e60c12a7c9a1ed27e31290817157e8626f3a4f29e76c8747030822eb84a6abb15c255f0a0
@@ -12461,6 +12490,58 @@ __metadata:
   languageName: node
   linkType: hard
 
+"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.0, istanbul-lib-coverage@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "istanbul-lib-coverage@npm:3.2.2"
+  checksum: 6c7ff2106769e5f592ded1fb418f9f73b4411fd5a084387a5410538332b6567cd1763ff6b6cadca9b9eb2c443cce2f7ea7d7f1b8d315f9ce58539793b1e0922b
+  languageName: node
+  linkType: hard
+
+"istanbul-lib-instrument@npm:^6.0.1":
+  version: 6.0.2
+  resolution: "istanbul-lib-instrument@npm:6.0.2"
+  dependencies:
+    "@babel/core": "npm:^7.23.9"
+    "@babel/parser": "npm:^7.23.9"
+    "@istanbuljs/schema": "npm:^0.1.3"
+    istanbul-lib-coverage: "npm:^3.2.0"
+    semver: "npm:^7.5.4"
+  checksum: 405c6ac037bf8c7ee7495980b0cd5544b2c53078c10534d0c9ceeb92a9ea7dcf8510f58ccfce31336458a8fa6ccef27b570bbb602abaa8c1650f5496a807477c
+  languageName: node
+  linkType: hard
+
+"istanbul-lib-report@npm:^3.0.0, istanbul-lib-report@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "istanbul-lib-report@npm:3.0.1"
+  dependencies:
+    istanbul-lib-coverage: "npm:^3.0.0"
+    make-dir: "npm:^4.0.0"
+    supports-color: "npm:^7.1.0"
+  checksum: 84323afb14392de8b6a5714bd7e9af845cfbd56cfe71ed276cda2f5f1201aea673c7111901227ee33e68e4364e288d73861eb2ed48f6679d1e69a43b6d9b3ba7
+  languageName: node
+  linkType: hard
+
+"istanbul-lib-source-maps@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "istanbul-lib-source-maps@npm:5.0.4"
+  dependencies:
+    "@jridgewell/trace-mapping": "npm:^0.3.23"
+    debug: "npm:^4.1.1"
+    istanbul-lib-coverage: "npm:^3.0.0"
+  checksum: 48b48294590675005ba439888a53157fc71a99d78321428f3ce5f64e28cdfb6bc6eb45871333f448437118ef56a0ef371f4958163e2c2d066d3a703415a71b2e
+  languageName: node
+  linkType: hard
+
+"istanbul-reports@npm:^3.1.6":
+  version: 3.1.7
+  resolution: "istanbul-reports@npm:3.1.7"
+  dependencies:
+    html-escaper: "npm:^2.0.0"
+    istanbul-lib-report: "npm:^3.0.0"
+  checksum: a379fadf9cf8dc5dfe25568115721d4a7eb82fbd50b005a6672aff9c6989b20cc9312d7865814e0859cd8df58cbf664482e1d3604be0afde1f7fc3ccc1394a51
+  languageName: node
+  linkType: hard
+
 "jackspeak@npm:^2.0.3":
   version: 2.3.0
   resolution: "jackspeak@npm:2.3.0"
@@ -13282,7 +13363,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-dir@npm:4.0.0":
+"magicast@npm:^0.3.3":
+  version: 0.3.4
+  resolution: "magicast@npm:0.3.4"
+  dependencies:
+    "@babel/parser": "npm:^7.24.4"
+    "@babel/types": "npm:^7.24.0"
+    source-map-js: "npm:^1.2.0"
+  checksum: 7ebaaac397b13c31ca05e6d9649296751d76749b945d10a0800107872119fbdf267acdb604571d25e38ec6fd7ab3568a951b6e76eaef1caba9eaa11778fd9783
+  languageName: node
+  linkType: hard
+
+"make-dir@npm:4.0.0, make-dir@npm:^4.0.0":
   version: 4.0.0
   resolution: "make-dir@npm:4.0.0"
   dependencies:
@@ -18853,6 +18945,17 @@ __metadata:
   bin:
     terser: bin/terser
   checksum: 95817b86619af33d8d143d7ae02dfcd9ac2cf4ea5b5cb7b208aaccff4cdc5594893960a4c3dcdac09863ebd43e2835ab173997041790aa77092c1d31ff40c95a
+  languageName: node
+  linkType: hard
+
+"test-exclude@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "test-exclude@npm:6.0.0"
+  dependencies:
+    "@istanbuljs/schema": "npm:^0.1.2"
+    glob: "npm:^7.1.4"
+    minimatch: "npm:^3.0.4"
+  checksum: 019d33d81adff3f9f1bfcff18125fb2d3c65564f437d9be539270ee74b994986abb8260c7c2ce90e8f30162178b09dbbce33c6389273afac4f36069c48521f57
   languageName: node
   linkType: hard
 
