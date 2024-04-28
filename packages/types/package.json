@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "test": "vitest --typecheck",
-    "test:run": "vitest run --coverage --typecheck",
+    "test:run": "vitest run --typecheck",
     "typecheck": "tsc",
     "build": "rm -rf dist && yarn typecheck"
   },
