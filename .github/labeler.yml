@@ -1,0 +1,10 @@
+"@modern-kit/react":
+  - "packages/react/**/*"
+"@modern-kit/utils":
+  - "packages/utils/**/*"
+"@modern-kit/types":
+  - "packages/types/**/*"
+"dependencies":
+  - "yarn.lock"
+"workflows":
+  - ".github/workflows/**/*"
