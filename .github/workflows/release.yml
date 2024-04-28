@@ -16,7 +16,7 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
       - name: install 🔨
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable
       - name: build 🔨
         run: lerna run build
       - name: eslint 🚀

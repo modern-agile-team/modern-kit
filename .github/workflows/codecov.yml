@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
-      - run: yarn install --immutable --immutable-cache --check-cache
+      - run: yarn install --immutable
       - run: yarn test
       - uses: codecov/codecov-action@v4
         env:
