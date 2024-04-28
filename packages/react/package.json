@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "vitest --coverage --typecheck",
+    "test": "vitest --typecheck",
     "test:run": "vitest run --coverage --typecheck",
     "build": "rm -rf dist && rollup -c",
     "typecheck": "tsc --noEmit"
