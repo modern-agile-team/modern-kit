@@ -4798,8 +4798,8 @@ __metadata:
   linkType: hard
 
 "@rollup/plugin-node-resolve@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "@rollup/plugin-node-resolve@npm:15.1.0"
+  version: 15.2.3
+  resolution: "@rollup/plugin-node-resolve@npm:15.2.3"
   dependencies:
     "@rollup/pluginutils": "npm:^5.0.1"
     "@types/resolve": "npm:1.20.2"
@@ -4808,11 +4808,11 @@ __metadata:
     is-module: "npm:^1.0.0"
     resolve: "npm:^1.22.1"
   peerDependencies:
-    rollup: ^2.78.0||^3.0.0
+    rollup: ^2.78.0||^3.0.0||^4.0.0
   peerDependenciesMeta:
     rollup:
       optional: true
-  checksum: c26f1ee8cb0df284c021cb2fcecd8181249caa67cf4bafb528eb580f9b1f254ec8ba81cb3ddd34ee3eef376e97fb04c1ed49a3271e67c4f71284bbc89179aca0
+  checksum: 598c15615086f26e28c4b3dbf966682af7fb0e5bc277cc4e57f559668a3be675a63ab261eb34729ce9569c3a51342c48863e50b5efe02e0fc1571828f0113f9d
   languageName: node
   linkType: hard
 
