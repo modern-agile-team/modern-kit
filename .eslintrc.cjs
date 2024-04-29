@@ -3,6 +3,7 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
+    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
@@ -17,5 +18,6 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-type-constraint': 'off',
     'import/no-anonymous-default-export': 'off',
     'no-useless-escape': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
