@@ -70,19 +70,19 @@ describe('DebounceWrapper Component', () => {
     );
 
     const button = screen.getByRole('button');
-    user.click(button);
+    await user.click(button);
 
-    await vi.advanceTimersByTimeAsync(300);
+    vi.advanceTimersByTime(300);
     expect(mockFn).not.toBeCalled();
 
-    await vi.advanceTimersByTimeAsync(200);
+    vi.advanceTimersByTime(200);
     expect(mockFn).toBeCalledTimes(1);
 
-    user.click(button);
-    user.click(button);
-    user.click(button);
+    await user.click(button);
+    await user.click(button);
+    await user.click(button);
 
-    await vi.advanceTimersByTimeAsync(300);
+    vi.advanceTimersByTime(300);
     expect(mockFn).toBeCalledTimes(1);
 
     await vi.advanceTimersByTimeAsync(200);
@@ -98,23 +98,23 @@ describe('DebounceWrapper Component', () => {
     const input = screen.getByRole('textbox');
     const paragraph = screen.getByRole('paragraph');
 
-    user.type(input, 'Debounce');
+    await user.type(input, 'Debounce');
 
-    await vi.advanceTimersByTimeAsync(300);
+    vi.advanceTimersByTime(300);
     expect(paragraph).toHaveTextContent('');
     expect(input).toHaveValue('Debounce');
 
-    await vi.advanceTimersByTimeAsync(200);
+    vi.advanceTimersByTime(200);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce');
 
-    user.type(input, ' Test');
+    await user.type(input, ' Test');
 
-    await vi.advanceTimersByTimeAsync(300);
+    vi.advanceTimersByTime(300);
     expect(paragraph).toHaveTextContent('Debounce');
     expect(input).toHaveValue('Debounce Test');
 
-    await vi.advanceTimersByTimeAsync(200);
+    vi.advanceTimersByTime(200);
     expect(paragraph).toHaveTextContent('Debounce Test');
     expect(input).toHaveValue('Debounce Test');
   });
