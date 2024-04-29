@@ -40,3 +40,5 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
     );
   }
 );
+
+LazyImage.displayName = 'LazyImage';

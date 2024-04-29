@@ -28,3 +28,5 @@ export const InView = forwardRef<
     </div>
   );
 });
+
+InView.displayName = 'InView';
