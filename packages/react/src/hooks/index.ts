@@ -20,3 +20,4 @@ export * from './useUnMount';
 export * from './useVisibilityChange';
 export * from './useWindowScrollTo';
 export * from './useWindowSize';
+export * from './useBlockDoubleClick';
