@@ -22,10 +22,10 @@ describe('useBlockMultipleClick', () => {
     const mockFn = vi.fn(async () => await delay(1000));
     const { result } = renderHook(useBlockMultipleClick);
 
-    const { blockDoubleClick } = result.current;
+    const { blockMultipleClick } = result.current;
     expect(result.current.isLoading).toBe(false);
 
-    const onClick = () => blockDoubleClick(mockFn);
+    const onClick = () => blockMultipleClick(mockFn);
 
     const { user } = renderSetup(
       <button onClick={onClick}>TestButton</button>,

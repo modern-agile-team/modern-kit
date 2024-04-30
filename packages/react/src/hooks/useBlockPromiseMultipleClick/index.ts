@@ -4,7 +4,7 @@ export const useBlockMultipleClick = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isClicked = useRef(false);
 
-  const blockDoubleClick = async (callback: () => Promise<unknown>) => {
+  const blockMultipleClick = async (callback: () => Promise<unknown>) => {
     if (isClicked.current) {
       return;
     }
@@ -20,6 +20,6 @@ export const useBlockMultipleClick = () => {
 
   return {
     isLoading,
-    blockDoubleClick,
+    blockMultipleClick,
   };
 };
