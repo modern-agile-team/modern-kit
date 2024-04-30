@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-const useBlockDoubleClick = () => {
+export const useBlockMultipleClick = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isClicked = useRef(false);
 
@@ -23,5 +23,3 @@ const useBlockDoubleClick = () => {
     blockDoubleClick,
   };
 };
-
-export default useBlockDoubleClick;
