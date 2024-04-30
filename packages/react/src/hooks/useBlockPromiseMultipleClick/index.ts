@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-export const useBlockMultipleClick = () => {
+export const useBlockPromiseMultipleClick = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isClicked = useRef(false);
 

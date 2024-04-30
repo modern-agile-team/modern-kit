@@ -1,0 +1,99 @@
+import { useState } from 'react';
+import { useBlockPromiseMultipleClick } from '@modern-kit/react';
+
+# useBlockPromiseMultipleClick
+
+인자로 넘겨준 Callback 함수의 `Promise` 동작을 수행하는 동안 `중복 호출이 불가능하도록 차단`하는 커스텀 훅입니다.
+
+[useDebounce](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useDebounce)를 사용해 중복 호출을 방지할 수는 있지만, 시간 값에 의존하기 때문에 만약 `Promise`가 이행될 때까지 호출을 완벽하게 차단해야 한다면 부족합니다.
+
+해당 훅은 Promise 동작을 수행하는 동안 중복 호출을 방지하기 때문에, `Promise` 이행을 보장하면서 중복 호출을 방지하고 싶을 때 사용할 수 있습니다.
+
+<br />
+
+## Interface
+```tsx
+const useBlockPromiseMultipleClick: () => {
+  isLoading: boolean;
+  blockMultipleClick: (callback: () => Promise<unknown>) => Promise<void>;
+};
+```
+
+## Usage
+
+```tsx
+import React, { useState } from 'react';
+import { useBlockPromiseMultipleClick } from '@modern-kit/react';
+
+interface Value {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+const Example = () => {
+  const [blockingCount, setBlockingCount] = useState(1);
+  const [nonBlockingCount, setNonBlockingCount] = useState(1);
+  const [value, setValue] = useState<Value | null>(null);
+
+  const { isLoading, blockMultipleClick } = useBlockPromiseMultipleClick();
+
+  const fetchApi = async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
+    ).then((response) => response.json());
+
+    setValue(res);
+    setBlockingCount(blockingCount + 1);
+  };
+
+  const handleClick = () => {
+    setNonBlockingCount(nonBlockingCount + 1);
+    blockMultipleClick(fetchApi); // (*) Promise 반환하는 함수를 인자로 넣어주세요.
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>버튼 클릭</button>
+      <div>
+        <p>BlockingCount: {blockingCount}</p>
+        <p>NonBlockingCount: {nonBlockingCount}</p>
+      </div>
+      {isLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [blockingCount, setBlockingCount] = useState(1);
+  const [nonBlockingCount, setNonBlockingCount] = useState(1);
+  const [value, setValue] = useState(null);
+  const { isLoading, blockMultipleClick } = useBlockPromiseMultipleClick();
+  const fetchApi = async () => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
+    ).then((response) => response.json());
+    setValue(res);
+    setBlockingCount(blockingCount + 1);
+  };
+  const handleClick = () => {
+    setNonBlockingCount(nonBlockingCount + 1);
+    blockMultipleClick(fetchApi);
+  };
+  return (
+    <div>
+      <button onClick={handleClick}>버튼 클릭</button>
+      <div>
+        <p>BlockingCount: {blockingCount}</p>
+        <p>NonBlockingCount: {nonBlockingCount}</p>
+      </div>
+      {isLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
+    </div>
+  );
+};
+
+<Example />
