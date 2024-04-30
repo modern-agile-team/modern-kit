@@ -1,5 +1,15 @@
 # @modern-kit/react
 
+## 1.3.0
+
+### Minor Changes
+
+- [#87](https://github.com/modern-agile-team/modern-kit/pull/87) [`151bbd7`](https://github.com/modern-agile-team/modern-kit/commit/151bbd7f2258a79c1914ebb941a8cc1e8c404d7a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useBlockDoubleClick 추가 @Sangminnn
+
+### Patch Changes
+
+- [#80](https://github.com/modern-agile-team/modern-kit/pull/80) [`368c30c`](https://github.com/modern-agile-team/modern-kit/commit/368c30c0645c7dc6640ada893ef8d5385819c069) Thanks [@ssi02014](https://github.com/ssi02014)! - refac: eslint react/recomended rule 적용
+
 ## 1.2.1
 
 ### Patch Changes
