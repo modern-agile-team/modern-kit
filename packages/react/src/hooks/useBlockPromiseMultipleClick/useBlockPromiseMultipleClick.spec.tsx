@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { screen, renderHook } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
-import { useBlockMultipleClick } from '.';
+import { useBlockPromiseMultipleClick } from '.';
 
 const delay = (time: number) => {
   return new Promise<void>((resolve) => {
@@ -17,10 +17,10 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('useBlockMultipleClick', () => {
-  it('should block double click', async () => {
+describe('useBlockPromiseMultipleClick', () => {
+  it('should block multiple button clicks until the promise in the callback function is resolved', async () => {
     const mockFn = vi.fn(async () => await delay(1000));
-    const { result } = renderHook(useBlockMultipleClick);
+    const { result } = renderHook(useBlockPromiseMultipleClick);
 
     const { blockMultipleClick } = result.current;
     expect(result.current.isLoading).toBe(false);
@@ -29,7 +29,7 @@ describe('useBlockMultipleClick', () => {
 
     const { user } = renderSetup(
       <button onClick={onClick}>TestButton</button>,
-      { delay: null },
+      { delay: null }
     );
 
     const button = screen.getByRole('button');

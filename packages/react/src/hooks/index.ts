@@ -1,5 +1,6 @@
 export * from './useAsyncPreservedCallback';
 export * from './useAsyncProcessQueue';
+export * from './useBlockPromiseMultipleClick';
 export * from './useDebounce';
 export * from './useForceUpdate';
 export * from './useImageStatus';
@@ -20,4 +21,3 @@ export * from './useUnMount';
 export * from './useVisibilityChange';
 export * from './useWindowScrollTo';
 export * from './useWindowSize';
-export * from './useBlockPromiseMultipleClick';
