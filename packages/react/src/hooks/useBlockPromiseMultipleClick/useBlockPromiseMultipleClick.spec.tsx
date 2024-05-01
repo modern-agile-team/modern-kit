@@ -2,12 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { screen, renderHook } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
 import { useBlockPromiseMultipleClick } from '.';
-
-const delay = (time: number) => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => resolve(), time);
-  });
-};
+import { delay } from '@modern-kit/utils';
 
 beforeEach(() => {
   vi.useFakeTimers();
@@ -29,7 +24,7 @@ describe('useBlockPromiseMultipleClick', () => {
 
     const { user } = renderSetup(
       <button onClick={onClick}>TestButton</button>,
-      { delay: null }
+      { delay: null },
     );
 
     const button = screen.getByRole('button');
