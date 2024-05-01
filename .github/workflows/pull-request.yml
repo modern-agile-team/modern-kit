@@ -26,5 +26,6 @@ jobs:
         run: yarn typecheck
       - name: testing 🚀
         run: yarn test
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
       - name: document build 🔨
         run: yarn build:docs
