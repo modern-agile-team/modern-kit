@@ -3,7 +3,7 @@ import { delay } from '.';
 
 describe('delay', () => {
   it('should delay the promise by the given time', async () => {
-    const time = 1000;
+    const time = 200;
     const start = Date.now();
 
     await delay(time);
