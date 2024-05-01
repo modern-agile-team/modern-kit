@@ -15,12 +15,10 @@ const delay: (time: number) => Promise<void>
 ```ts
 import { delay } from '@modern-kit/utils';
 
-const oneSecondDelay = async (time: number) => await delay(time)
-
 const something = () => Promise.resolve()
 
 const doSomethingAfterDelay = async () => {
-  await oneSecondDelay(1000)
+  await delay(1000)
   await something()
 }
 ```
