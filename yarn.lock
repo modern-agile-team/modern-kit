@@ -6206,8 +6206,8 @@ __metadata:
   linkType: hard
 
 "@vitest/coverage-istanbul@npm:^1.5.2":
-  version: 1.5.2
-  resolution: "@vitest/coverage-istanbul@npm:1.5.2"
+  version: 1.6.0
+  resolution: "@vitest/coverage-istanbul@npm:1.6.0"
   dependencies:
     debug: "npm:^4.3.4"
     istanbul-lib-coverage: "npm:^3.2.2"
@@ -6219,8 +6219,8 @@ __metadata:
     picocolors: "npm:^1.0.0"
     test-exclude: "npm:^6.0.0"
   peerDependencies:
-    vitest: 1.5.2
-  checksum: c4e236dc297a5b2bb5e820e09fbadd22c6283a89fd77e341c551a451c5dd56eb9997a00762f3ffced87b4cf6057bc233739889c965439ab1c9ebbe4156c1da58
+    vitest: 1.6.0
+  checksum: 42524de58d24101b50da048214b8e760c46f32760e371c700704a67ace2828d9d12b6d87720139c8a7e17fbce40dfcaf47296605c85533cc78b9c9f73c50e3d2
   languageName: node
   linkType: hard
 
