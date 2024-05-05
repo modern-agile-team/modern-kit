@@ -1,4 +1,5 @@
 import { Nullable } from '@modern-kit/types';
+import React from 'react';
 
 type Component = Nullable<React.ReactNode>;
 
@@ -14,8 +15,10 @@ export const SwitchCase = <Condition extends string | number>({
   defaultCaseComponent = null,
 }: SwitchCaseProps<Condition>) => {
   if (condition == null) {
-    return defaultCaseComponent;
+    return <React.Fragment>{defaultCaseComponent}</React.Fragment>;
   }
 
-  return cases[condition] ?? defaultCaseComponent;
+  return (
+    <React.Fragment>{cases[condition] ?? defaultCaseComponent}</React.Fragment>
+  );
 };
