@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useBlockPromiseMultipleClick } from '@modern-kit/react';
+import { debounce } from 'lodash-es';
 
 # useBlockPromiseMultipleClick
 
@@ -71,8 +72,11 @@ const Example = () => {
 export const Example = () => {
   const [blockingCount, setBlockingCount] = useState(1);
   const [nonBlockingCount, setNonBlockingCount] = useState(1);
+  const [debouncingCount, setDebouncingCount] = useState(1);
   const [value, setValue] = useState(null);
+  const [isApiLoading, setIsApiLoading] = useState(false)
   const { isLoading, blockMultipleClick } = useBlockPromiseMultipleClick();
+
   const fetchApi = async () => {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
@@ -80,18 +84,34 @@ export const Example = () => {
     setValue(res);
     setBlockingCount(blockingCount + 1);
   };
+
+  const debouncedFetchApi = debounce(async () => {
+    setIsApiLoading(true)
+    setDebouncingCount(debouncingCount + 1);
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
+    ).then((response) => response.json());
+    setValue(res);
+    setIsApiLoading(false);
+  }, 1000);
+
   const handleClick = () => {
     setNonBlockingCount(nonBlockingCount + 1);
     blockMultipleClick(fetchApi);
   };
+
   return (
     <div>
-      <button onClick={handleClick}>버튼 클릭</button>
+      <div style={{ display: "flex" }}>
+        <button onClick={handleClick}>버튼 클릭</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={debouncedFetchApi}>debounce 버튼 클릭</button>
+      </div>
       <div>
         <p>BlockingCount: {blockingCount}</p>
         <p>NonBlockingCount: {nonBlockingCount}</p>
       </div>
-      {isLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
+      {isLoading || isApiLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
     </div>
   );
 };
