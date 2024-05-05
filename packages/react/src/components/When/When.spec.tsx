@@ -49,4 +49,19 @@ describe('When Component', () => {
 
     expect(header).not.toBeInTheDocument();
   });
+
+  it('should render fallback when condition is false and has fallback props', () => {
+    render(
+      <When condition={false} fallback={<p role="paragraph">false</p>}>
+        <button>true</button>
+      </When>
+    );
+
+    const button = screen.queryByRole('button');
+
+    const fallbackParagraph = screen.queryByRole('paragraph');
+
+    expect(button).not.toBeInTheDocument();
+    expect(fallbackParagraph).toBeInTheDocument();
+  });
 });
