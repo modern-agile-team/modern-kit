@@ -1,9 +1,3 @@
-/*
- * Created on Wed Nov 15 2023
- *
- * Copyright (c) 2023 Your Company
- */
-
 type Component = JSX.Element | null;
 
 interface Props<Condition extends string | number> {
@@ -32,18 +26,14 @@ interface Props<Condition extends string | number> {
  * @param props.cases - 조건에 부합하면 렌더링될 컴포넌트
  * @param props.defaultCase - 조건에 부합하는 값이 없으면 렌더링할 컴포넌트
  */
-export default function SwitchCase<Condition extends string | number>({
+export const SwitchCase = <Condition extends string | number>({
   condition,
   cases,
   defaultCase = null,
-}: Props<Condition>) {
-  try {
-    if (condition === null || condition === undefined) {
-      return defaultCase;
-    }
-
-    return cases[condition] ?? defaultCase;
-  } catch {
+}: Props<Condition>) => {
+  if (condition === null || condition === undefined) {
     return defaultCase;
   }
-}
+
+  return cases[condition] ?? defaultCase;
+};
