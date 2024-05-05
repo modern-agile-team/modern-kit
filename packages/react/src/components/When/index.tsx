@@ -5,15 +5,20 @@ type Condition = boolean | ((...args: any[]) => boolean);
 
 interface WhenProps {
   condition: Condition;
+  fallback?: React.ReactNode;
 }
 
 const getConditionResult = (condition: Condition) => {
   return typeof condition === 'function' ? condition() : condition;
 };
 
-export const When = ({ children, condition }: PropsWithChildren<WhenProps>) => {
+export const When = ({
+  children,
+  condition,
+  fallback,
+}: PropsWithChildren<WhenProps>) => {
   const conditionResult = getConditionResult(condition);
 
-  if (!conditionResult) return null;
+  if (!conditionResult) return <React.Fragment>{fallback}</React.Fragment>;
   return <React.Fragment>{children}</React.Fragment>;
 };
