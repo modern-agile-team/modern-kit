@@ -1,3 +1,5 @@
+import { useDebounce } from '@modern-kit/hooks'
+
 # useDebounce
 
 `debounce`를 쉽게 사용할 수 있는 커스텀 훅입니다.
@@ -35,3 +37,34 @@ const Example = () => {
 
   return <button onClick={handle}>button1</button>;
 };
+
+## Example
+
+const Example = () => {
+  const [count, setCount] = useState(1);
+  const [debouncedCount, setDebouncedCount] = useState(1);
+
+  const countUp = () => {
+    setCount(count + 1);
+  };
+
+  const countUpWithDebounce = useDebounce(() => {
+    setDebouncedCount(debouncedCount + 1);
+  }, 1000);
+
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <button onClick={countUp}>버튼 클릭</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={countUpWithDebounce}>debounce 버튼 클릭</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>debouncedCount: {debouncedCount}</p>
+      </div>
+    </div>
+  );
+};
+
+<Example />
