@@ -65,15 +65,12 @@ const Example = () => {
 export const Example = () => {
   const [count, setCount] = useState(1);
   const [debouncedCount, setDebouncedCount] = useState(1);
-
   const countUp = () => {
     setCount(count + 1);
   };
-
   const countUpWithDebounce = useDebounce(() => {
     setDebouncedCount(debouncedCount + 1);
   }, 1000);
-
   return (
     <div>
       <div style={{ display: "flex" }}>
