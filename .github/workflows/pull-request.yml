@@ -28,4 +28,3 @@ jobs:
         run: yarn test
       - name: document build 🔨
         run: yarn build:docs
-        if: github.event.pull_request.user.login == 'dependabot[bot]'
