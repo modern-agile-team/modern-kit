@@ -15,15 +15,17 @@ type Condition = boolean | ((...args: any[]) => boolean);
 
 interface WhenProps {
   condition: Condition;
+  fallback?: React.ReactNode;
 }
 
-const When: ({ children, condition }: PropsWithChildren<WhenProps>) => JSX.Element | null
+const When: ({ children, condition }: PropsWithChildren<WhenProps>) => JSX.Element
 ```
 
 ## Usage
 
 ```tsx
 import { When } from '@modern-kit/react';
+
 const Example = () => {
   const [state, setState] = useState(false);
 
@@ -31,7 +33,7 @@ const Example = () => {
     <>
       <button onClick={() => setState(!state)}>Toggle Button</button>
 
-      <When condition={state}>
+      <When condition={state} fallback={<p>Fallback</p>}>
         <h1>Render</h1>
       </When>
     </>
@@ -44,7 +46,7 @@ export const Example = () => {
     <>
       <button onClick={() => setState(!state)}>Toggle Button</button>
 
-      <When condition={state}>
+      <When condition={state} fallback={<p>Fallback</p>}>
         <h1>Render</h1>
       </When>
     </>
