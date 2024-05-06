@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropsWithChildren } from 'react';
 
-type Condition = boolean | ((...args: any[]) => boolean);
+type Condition = boolean | (() => boolean);
 
 interface WhenProps {
   condition: Condition;
@@ -15,7 +15,7 @@ const getConditionResult = (condition: Condition) => {
 export const When = ({
   children,
   condition,
-  fallback,
+  fallback = null,
 }: PropsWithChildren<WhenProps>) => {
   const conditionResult = getConditionResult(condition);
 
