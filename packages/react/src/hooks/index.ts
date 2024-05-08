@@ -2,6 +2,7 @@ export * from './useAsyncPreservedCallback';
 export * from './useAsyncProcessQueue';
 export * from './useBlockPromiseMultipleClick';
 export * from './useDebounce';
+export * from './useFileReader';
 export * from './useForceUpdate';
 export * from './useImageStatus';
 export * from './useIntersectionObserver';
