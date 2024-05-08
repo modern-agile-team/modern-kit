@@ -59,7 +59,7 @@ pnpm i @modern-kit/utils
 
 ### @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest"></a>
 
-- 유용한 유틸 타입들을 제공하는 라이브러리 입니다.
+- 유용한 `유틸 타입`들을 제공하는 라이브러리 입니다.
 
 ```shell
 npm i @modern-kit/types
@@ -78,7 +78,7 @@ pnpm i @modern-kit/types
 ## Lint & Test & build
 
 - `root` 폴더에서 진행해주세요.
-- node 버전은 `v20+`이여야 합니다.
+- 패키지 매니저는 `yarn berry`, Node 버전은 `v20`을 사용하셔야 합니다.
 
 ```shell
 yarn eslint packages
@@ -103,6 +103,12 @@ yarn build
 ```
 
 - `build` 명령어를 통해 관리하는 모든 패키지들의 build, 상단의 lint, test, typecheck를 모두 진행합니다.
+
+```shell
+yarn build:docs
+```
+
+- `build:docs` 명령어를 통해 관리하는 document의 build를 진행합니다.
 
 <br />
 
@@ -131,13 +137,14 @@ yarn build
 
 ## Tools
 
-- `Yarn Berry`와 `workspaces`를 활용해 Monolithic Repository환경을 구축
-  - packages 내부의 패키지들은 `로컬 패키지`처럼 상호의존성을 갖습니다.
-- `lerna`를 통해 통합 빌드, 테스트, 배포 환경을 구축
-- `github actions`를 활용한 CI/CD 구축
-- `changeset`을 활용해 모노레포 환경에서 package 일관성 유지 및 NPM 배포 진행
-- `dependabot`을 활용한 자동 의존성 관리
-- `docusaurus`를 활용한 문서화
+- `Yarn Berry`와 `workspaces`를 활용해 **Monolithic Repository** 환경을 구축
+  - packages 내부의 패키지들은 **로컬 패키지**처럼 **상호 의존성**을 갖습니다.
+- `lerna`를 활용한 **통합 빌드**, **테스트**, **배포 환경**을 구축
+- `github actions`를 활용한 **CI/CD** 구축
+- `changeset`을 활용한 모노레포 환경에서 **패키지 일관성 유지** 및 **NPM 배포** 진행
+- `dependabot`을 활용한 **자동 의존성** 관리
+- `codecov`를 활용한 **테스트 코드 커버리지 체크** 및 **코드 신뢰도 향상**
+- `docusaurus`를 활용한 **문서화**
 
 <br />
 
