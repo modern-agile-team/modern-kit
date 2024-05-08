@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.1.0
+
+### Minor Changes
+
+- [#94](https://github.com/modern-agile-team/modern-kit/pull/94) [`e4eba36`](https://github.com/modern-agile-team/modern-kit/commit/e4eba3614b0da148cd5f6aa1130e1be5f5cedd58) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): ExtractSetType, ExtractMapType, Promiseable 추가
+
 ## 1.0.2
 
 ### Patch Changes

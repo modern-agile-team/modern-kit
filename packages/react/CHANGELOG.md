@@ -1,5 +1,17 @@
 # @modern-kit/react
 
+## 1.4.0
+
+### Minor Changes
+
+- [#111](https://github.com/modern-agile-team/modern-kit/pull/111) [`75e98e7`](https://github.com/modern-agile-team/modern-kit/commit/75e98e72eb6a3980977bcf2d2fbbace63dafc8e4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useFileReader 훅 추가
+
+- [#102](https://github.com/modern-agile-team/modern-kit/pull/102) [`d6173fb`](https://github.com/modern-agile-team/modern-kit/commit/d6173fbbed943bc84b9baadf20f1345956ff9363) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: SwitchCase Component 추가 및 When fallback props 추가 - #100 61d5df3 @soonki-98
+
+### Patch Changes
+
+- [#106](https://github.com/modern-agile-team/modern-kit/pull/106) [`ef1094d`](https://github.com/modern-agile-team/modern-kit/commit/ef1094d488a7e3dc1efffdc606856909e03aa462) Thanks [@Collection50](https://github.com/Collection50)! - refactor(react): Add fallback default function parammeter and change Condition's type
+
 ## 1.3.0
 
 ### Minor Changes
