@@ -11,14 +11,18 @@ condition prop으로 `boolean을 반환하는 함수`도 허용됩니다.
 
 ## Interface
 ```tsx
-type Condition = boolean | ((...args: any[]) => boolean);
+type Condition = boolean | (() => boolean);
 
 interface WhenProps {
   condition: Condition;
   fallback?: React.ReactNode;
 }
 
-const When: ({ children, condition }: PropsWithChildren<WhenProps>) => JSX.Element
+const When: ({
+  children,
+  condition,
+  fallback,
+}: PropsWithChildren<WhenProps>) => JSX.Element;
 ```
 
 ## Usage
