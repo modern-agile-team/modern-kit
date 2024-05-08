@@ -1,11 +1,10 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+.logoTitle {
+  font-size: 3.5rem;
+  color: #2e8555;
+ }
 
-
- .banner {
-  padding: 5rem 0 5rem 0;
+.banner {
+  padding: 40px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -45,7 +44,7 @@ main {
 }
 
 .mainContentWrapper {
-  width: 1000px;
+  width: 800px;
   padding: 40px 20px;
   margin-top: 30px;
 }
@@ -56,10 +55,15 @@ main {
   align-items: center;
 }
 
+.mainContentHead > p {
+  margin-bottom: 0;
+}
+
 .mainContentHead > a {
   margin-left: 6px;
   width: fit-content;
 }
+
 
 .mainContentParagraph {
   margin-left: 20px;
@@ -69,10 +73,11 @@ main {
 .mainContentTitle {
   margin-left: 0px;
   margin-bottom: 40px;
-  font-size: 21px;
+  font-size: 20px;
   max-width: 600px;
   color: rgb(136, 136, 136);
   padding: 0 20px;
+  white-space: pre-wrap;
 }
 
 .contributors {
@@ -109,4 +114,22 @@ main {
   color: rgb(136, 136, 136);
   padding: 0 20px;
   text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .logoTitle {
+    font-size: 2.5rem;
+  }
+  .mainContentHead {
+    flex-direction: column;
+  }
+
+  .mainContentTitle {
+    font-size: 18px;
+  }
+
+  .contributors h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 }

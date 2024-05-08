@@ -11,14 +11,9 @@ function HomepageHeader() {
   return (
     <header className={styles.banner}>
       <div className={styles.bannerContainer}>
-        <h1
-          className="hero__title"
-          style={{ fontSize: '3.5rem', color: '#2e8555' }}>
-          {siteConfig.title}
-        </h1>
+        <h1 className={styles.logoTitle}>{siteConfig.title}</h1>
         <p className={styles.mainContentTitle}>
-          @modern-kit는 클라이언트 개발에 유용한 리액트 커스텀 훅 및 유틸리티
-          함수를 제공하는 라이브러리 입니다.
+          {`@modern-kit는 클라이언트 개발에 유용한 리액트 컴포넌트, 커스텀 훅 및 유틸리티 함수, 타입을 제공하는 라이브러리입니다. \n\n클라이언트 개발에 필요한 모듈을 제공하는 것 뿐만아니라, 코드적으로 다양한 레퍼런스를 제공하기 위한 목적을 갖고 있습니다.`}
         </p>
         <div className={styles.buttons}>
           <Link
@@ -29,7 +24,8 @@ function HomepageHeader() {
           <a
             className="button button--secondary button--lg"
             href="https://github.com/modern-agile-team/modern-kit"
-            target="_blank">
+            target="_blank"
+            rel="noreferrer">
             Github
           </a>
         </div>
@@ -65,51 +61,63 @@ export default function Home(): JSX.Element {
       <main>
         <div className={styles.mainContentWrapper}>
           <h2 className={styles.mainContentHead}>
-            @modern-kit/react
-            <a
-              href="https://www.npmjs.com/package/@modern-kit/react"
-              target="_blank">
-              <img src="https://img.shields.io/npm/v/@modern-kit/react.svg" />
-            </a>
-            <a
-              href="https://bundlephobia.com/package/@modern-kit/react"
-              target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest" />
-            </a>
+            <p>@modern-kit/react</p>
+            <div>
+              <a
+                href="https://www.npmjs.com/package/@modern-kit/react"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/npm/v/@modern-kit/react.svg" />
+              </a>
+              <a
+                href="https://bundlephobia.com/package/@modern-kit/react"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest" />
+              </a>
+            </div>
           </h2>
           <p className={styles.mainContentParagraph}>
             React와 관련된 유용한 컴포넌트와 커스텀 훅을 제공하는
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            @modern-kit/utils
-            <a
-              href="https://www.npmjs.com/package/@modern-kit/utils"
-              target="_blank">
-              <img src="https://img.shields.io/npm/v/@modern-kit/utils.svg" />
-            </a>
-            <a
-              href="https://bundlephobia.com/package/@modern-kit/utils"
-              target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
-            </a>
+            <p>@modern-kit/utils</p>
+            <div>
+              <a
+                href="https://www.npmjs.com/package/@modern-kit/utils"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/npm/v/@modern-kit/utils.svg" />
+              </a>
+              <a
+                href="https://bundlephobia.com/package/@modern-kit/utils"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
+              </a>
+            </div>
           </h2>
           <p className={styles.mainContentParagraph}>
             클라이언트 개발과 관련된 유용한 유틸리티 함수를 제공하는
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            @modern-kit/types
-            <a
-              href="https://www.npmjs.com/package/@modern-kit/types"
-              target="_blank">
-              <img src="https://img.shields.io/npm/v/@modern-kit/types.svg" />
-            </a>
-            <a
-              href="https://bundlephobia.com/package/@modern-kit/types"
-              target="_blank">
-              <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest" />
-            </a>
+            <p>@modern-kit/types</p>
+            <div>
+              <a
+                href="https://www.npmjs.com/package/@modern-kit/types"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/npm/v/@modern-kit/types.svg" />
+              </a>
+              <a
+                href="https://bundlephobia.com/package/@modern-kit/types"
+                target="_blank"
+                rel="noreferrer">
+                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest" />
+              </a>
+            </div>
           </h2>
           <p className={styles.mainContentParagraph}>
             유용한 유틸 타입들을 제공하는 라이브러리 입니다.

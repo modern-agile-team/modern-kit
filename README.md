@@ -7,9 +7,11 @@
 
 <br />
 
-`@modern-kit`는 클라이언트 개발에 유용한 `리액트 커스텀 훅` 및 `유틸리티 함수`를 제공하는 라이브러리 입니다.
+`@modern-kit`는 클라이언트 개발에 유용한 `리액트 컴포넌트`, `커스텀 훅` 및 `유틸리티 함수`, `타입`을 제공하는 라이브러리입니다. 
 
-`@modern-kit`는 Next.js의 `SSR(Server Side Rendering)`환경에서도 호환되기 위해 `CJS(CommonJs)`와 `ESM(ECMAScript Module)` 두 포맷을 모두 지원합니다.
+클라이언트 개발에 필요한 모듈들을 제공하는 것 뿐만아니라, `다양한 레퍼런스를 제공`하기 위한 목적을 갖고 있습니다.
+
+`@modern-kit`는 Next.js의 `SSR(Server Side Rendering)`환경에서도 호환되는 등 `CJS(CommonJs)`환경에서도 호환되기 위해 `CJS(CommonJs)`와 `ESM(ECMAScript Module)` 두 포맷을 모두 지원합니다.
 
 <br />
 
