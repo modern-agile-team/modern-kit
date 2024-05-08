@@ -9,39 +9,59 @@ interface FileContent {
   originFile: Nullable<File>;
 }
 
+interface ReadFileOptions {
+  file: FileList | File;
+  readType: ReadType;
+  accepts?: string[];
+}
+
+const isFile = (file: FileList | File): file is File => {
+  return file instanceof File;
+};
+
+const isFileList = (file: FileList | File): file is FileList => {
+  return file instanceof FileList;
+};
+
+const inValidFileType = (file: FileList | File) => {
+  return !isFile(file) && !isFileList(file);
+};
+
+const getFiles = (file: File | FileList, accepts: string[]) => {
+  const files = isFile(file) ? [file] : Array.from(file);
+
+  return accepts.length > 0
+    ? files.filter((file) => accepts.includes(file.type))
+    : files;
+};
+
+const getReaderPromise = (reader: FileReader, file: File) => {
+  return new Promise<Nullable<FileContent['readValue']>>((resolve, reject) => {
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = () => {
+      reject(`Failed to read file ${file.name}`);
+    };
+  });
+};
+
 export const useFileReader = () => {
   const [fileContents, setFileContents] = useState<FileContent[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const isFile = (file: FileList | File): file is File => {
-    return file instanceof File;
-  };
+  const readFile = async ({
+    file,
+    readType,
+    accepts = [],
+  }: ReadFileOptions) => {
+    if (inValidFileType(file)) {
+      return [];
+    }
 
-  const isFileList = (file: FileList | File): file is FileList => {
-    return file instanceof FileList;
-  };
+    const files = getFiles(file, accepts);
 
-  const inValidFileType = (file: FileList | File) => {
-    return !isFile(file) && !isFileList(file);
-  };
-
-  const getReaderPromise = (reader: FileReader, file: File) => {
-    return new Promise((resolve, reject) => {
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = () => {
-        reject(`Failed to read file ${file.name}`);
-      };
-    });
-  };
-
-  const readFile = async (file: FileList | File, readType: ReadType) => {
-    if (inValidFileType(file)) return;
-
-    const files = isFile(file) ? [file] : Array.from(file);
-
-    setLoading(true);
+    setIsLoading(true);
     setFileContents([]);
 
     const readerPromises = files.map((file) => {
@@ -68,8 +88,10 @@ export const useFileReader = () => {
     });
 
     setFileContents(contents);
-    setLoading(false);
+    setIsLoading(false);
+
+    return contents;
   };
 
-  return { readFile, fileContents, loading };
+  return { readFile, fileContents, isLoading };
 };

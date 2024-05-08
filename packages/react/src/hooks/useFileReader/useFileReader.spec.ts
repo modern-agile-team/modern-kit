@@ -1,145 +1,168 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { useFileReader } from '.';
-import { mockFileList } from '../../utils/test/mockFileList';
-
-// wip
-class MockFileReader {
-  error: any;
-  result: any;
-  onerror: (...args: any[]) => any;
-
-  constructor() {
-    this.error = null;
-    this.result = null;
-    this.onerror = () => {};
-  }
-
-  readAsText(file: File) {
-    // onerror를 강제로 호출하여 에러를 시뮬레이션
-    setTimeout(() => {
-      if (this.onerror) {
-        this.onerror(
-          new ProgressEvent('error', { loaded: 0, total: file.size })
-        );
-      }
-    }, 0);
-  }
-}
-
-const originReadAsText = FileReader.prototype.readAsText;
+import {
+  MockFileReaderForcedCallOnError,
+  MockFileReaderThrowError,
+  mockFileList,
+} from '../../utils/test/mockFile';
 
 afterEach(() => {
-  FileReader.prototype.readAsText = originReadAsText;
   vi.clearAllMocks();
 });
 
+const getSuccessFileContent = (file: File) => {
+  return {
+    status: 'fulfilled',
+    readValue: 'file',
+    originFile: file,
+  };
+};
+
+const testFile1 = new File(['file'], 'test1.txt', {
+  type: 'text/plain',
+});
+const testFile2 = new File(['file'], 'test2.csv', {
+  type: 'text/csv',
+});
+
+const testFileList = mockFileList([testFile1, testFile2]);
+const errorTestFile = '' as any;
+
+const errorFileContent = {
+  status: 'rejected',
+  readValue: 'Failed to read file test1.txt',
+  originFile: null,
+};
+
 describe('useFileReader', () => {
-  const testFile1 = new File(['file'], 'test.txt', {
-    type: 'text/plain',
-  });
-  const testFile2 = new File(['file'], 'test.txt', {
-    type: 'text/plain',
-  });
-  const errorTestFile = '' as any;
+  describe('Success Case', () => {
+    it('should return the normal file contents in "fileContents" when a value of type "File" is passed as an argument to "readFile"', async () => {
+      const { result } = renderHook(() => useFileReader());
+      const expectedSuccessFileContents = [getSuccessFileContent(testFile1)];
 
-  it('', async () => {
-    const { result } = renderHook(() => useFileReader());
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: testFile1,
+          readType: 'readAsText',
+        });
 
-    await waitFor(async () => {
-      await result.current.readFile(testFile1, 'readAsText');
-      expect(result.current.loading).toBeTruthy();
+        expect(result.current.isLoading).toBeTruthy();
+        expect(fileContents).toEqual(expectedSuccessFileContents);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isLoading).toBeFalsy();
+        expect(result.current.fileContents).toEqual(
+          expectedSuccessFileContents
+        );
+      });
     });
 
-    expect(result.current.loading).toBeFalsy();
-    expect(result.current.fileContents.length).toBe(1);
-    expect(result.current.fileContents).toEqual([
-      {
-        status: 'fulfilled',
-        readValue: 'file',
-        originFile: testFile1,
-      },
-    ]);
+    it('should return the normal file contents in "fileContents" when a value of type "FileList" is passed as an argument to "readFile"', async () => {
+      const { result } = renderHook(() => useFileReader());
+      const expectedSuccessFileContents = [
+        getSuccessFileContent(testFile1),
+        getSuccessFileContent(testFile2),
+      ];
+
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: testFileList,
+          readType: 'readAsText',
+        });
+
+        expect(result.current.isLoading).toBeTruthy();
+        expect(fileContents).toEqual(expectedSuccessFileContents);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isLoading).toBeFalsy();
+        expect(result.current.fileContents).toEqual(
+          expectedSuccessFileContents
+        );
+      });
+    });
+
+    it('should only read files of types specified in the "accepts" attribute', async () => {
+      const { result } = renderHook(() => useFileReader());
+      const expectedSuccessFileContents = [getSuccessFileContent(testFile2)];
+
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: testFileList,
+          readType: 'readAsText',
+          accepts: ['text/csv'],
+        });
+        expect(result.current.isLoading).toBeTruthy();
+        expect(fileContents).toEqual(expectedSuccessFileContents);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isLoading).toBeFalsy();
+        expect(result.current.fileContents).toEqual(
+          expectedSuccessFileContents
+        );
+      });
+    });
   });
 
-  it('', async () => {
-    const { result } = renderHook(() => useFileReader());
+  describe('Error Case', () => {
+    // Line: getReaderPromise - reader.onerror
+    it('should return the error contents in "fileContents" when "reader.onerror" is called', async () => {
+      const { result } = renderHook(() => useFileReader());
+      const failedExpectedFileContents = [errorFileContent];
 
-    const fileList = mockFileList([testFile1, testFile2]);
+      vi.stubGlobal('FileReader', MockFileReaderForcedCallOnError);
 
-    await waitFor(async () => {
-      await result.current.readFile(fileList, 'readAsText');
-      expect(result.current.loading).toBeTruthy();
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: testFile1,
+          readType: 'readAsText',
+        });
+        expect(fileContents).toEqual(failedExpectedFileContents);
+      });
+
+      await waitFor(() => {
+        expect(result.current.fileContents).toEqual(failedExpectedFileContents);
+      });
     });
 
-    expect(result.current.loading).toBeFalsy();
-    expect(result.current.fileContents.length).toBe(2);
-    expect(result.current.fileContents).toEqual([
-      {
-        status: 'fulfilled',
-        readValue: 'file',
-        originFile: testFile1,
-      },
-      {
-        status: 'fulfilled',
-        readValue: 'file',
-        originFile: testFile2,
-      },
-    ]);
-  });
+    // Line: readerPromises - catch
+    it('should return the error contents in "fileContents" if an error occurs during the call to "reader[readType]"', async () => {
+      const { result } = renderHook(() => useFileReader());
+      const failedExpectedFileContents = [errorFileContent];
 
-  it('', async () => {
-    const { result } = renderHook(() => useFileReader());
+      vi.stubGlobal('FileReader', MockFileReaderThrowError);
 
-    const readAsFunction = vi.fn().mockImplementation(() => {
-      throw new Error('Failed to read file');
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: testFile1,
+          readType: 'readAsText',
+        });
+
+        expect(fileContents).toEqual(failedExpectedFileContents);
+      });
+
+      await waitFor(() => {
+        expect(result.current.fileContents).toEqual(failedExpectedFileContents);
+      });
     });
 
-    FileReader.prototype.readAsText = readAsFunction;
+    // Line: inValidFileType
+    it('should return an empty array for "fileContents" if the argument to "readFile" is neither of type "File" nor "FileList"', async () => {
+      const { result } = renderHook(() => useFileReader());
 
-    await waitFor(async () => {
-      await result.current.readFile(testFile1, 'readAsText');
+      await waitFor(async () => {
+        const fileContents = await result.current.readFile({
+          file: errorTestFile,
+          readType: 'readAsText',
+        });
+        expect(fileContents).toEqual([]);
+      });
+
+      await waitFor(() => {
+        expect(result.current.fileContents).toEqual([]);
+      });
     });
-
-    expect(result.current.loading).toBeFalsy();
-    expect(result.current.fileContents.length).toBe(1);
-    expect(result.current.fileContents).toEqual([
-      {
-        status: 'rejected',
-        readValue: 'Failed to read file test.txt',
-        originFile: null,
-      },
-    ]);
-  });
-
-  it('', async () => {
-    const { result } = renderHook(() => useFileReader());
-
-    vi.stubGlobal('FileReader', MockFileReader);
-
-    await waitFor(async () => {
-      await result.current.readFile(testFile1, 'readAsText');
-    });
-
-    expect(result.current.loading).toBeFalsy();
-    expect(result.current.fileContents.length).toBe(1);
-    expect(result.current.fileContents).toEqual([
-      {
-        status: 'rejected',
-        readValue: 'Failed to read file test.txt',
-        originFile: null,
-      },
-    ]);
-  });
-
-  it('', async () => {
-    const { result } = renderHook(() => useFileReader());
-
-    await waitFor(async () => {
-      await result.current.readFile(errorTestFile, 'readAsText');
-    });
-
-    expect(result.current.loading).toBeFalsy();
-    expect(result.current.fileContents.length).toBe(0);
-    expect(result.current.fileContents).toEqual([]);
   });
 });

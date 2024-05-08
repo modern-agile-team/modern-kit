@@ -1,0 +1,66 @@
+import React, { useState } from 'react';
+import { useFileReader } from '@modern-kit/react';
+
+# useFileReader
+
+`File` 객체를 원하는 읽기 메서드(`readAsText`,`readAsDataURL`,`readAsArrayBuffer`)로 읽고, 읽은 파일 컨텐츠를 반환하는 커스텀 훅입니다.
+
+<br />
+
+## Interface
+```tsx
+type ReadType = 'readAsText' | 'readAsDataURL' | 'readAsArrayBuffer';
+
+interface FileContent {
+  status: 'fulfilled' | 'rejected';
+  readValue: string | ArrayBuffer;
+  originFile: Nullable<File>;
+}
+
+interface ReadFileOptions {
+  file: FileList | File;
+  readType: ReadType;
+  accepts?: string[];
+}
+
+const useFileReader: () => {
+  readFile: ({
+    file,
+    readType,
+    accepts,
+  }: ReadFileOptions) => Promise<FileContent[]>;
+  fileContents: FileContent[];
+  isLoading: boolean;
+};
+```
+
+## Usage
+
+```tsx
+import React, { useState } from 'react';
+import { useFileReader } from '@modern-kit/react';
+
+const Example = () => {
+  const { readFile, fileContents, loading } = useFileReader()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!e.target.files) return;
+
+    readFile({ file: e.target.files, readType: 'readAsText' }); 
+    /*
+     * 1. readFile은 Promise<FileContent[]> 반환합니다. 해당 값은 fileContents와 동일합니다.
+     * ex) const data = await readFile(e.target.files, 'readAsDataURL'); 
+     * 
+     * 2. accepts로 원하는 파일 타입만 읽어올 수 있습니다.
+     * accepts옵션을 넘겨주지 않으면 모든 파일 타입을 허용합니다.
+     * ex) readFile({ file: e.target.files, readType: 'readAsText', accepts: ['text/plain'] }); 
+     */
+  }
+
+  return (
+    <div>
+      <input multiple type="file" onChange={handleChange} />
+    </div>
+  );
+};
+```
