@@ -16,6 +16,7 @@ export default defineConfig({
         'src/global.d.ts',
         'src/components/index.ts',
         'src/hooks/index.ts',
+        'src/utils/test/**',
       ],
     },
   },
