@@ -1,40 +1,25 @@
-import { screen, waitFor } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useToggle } from '.';
-import { renderSetup } from '../../utils/test/renderSetup';
-
-const TestComponent = () => {
-  const [bool, toggle] = useToggle(false);
-
-  return (
-    <div>
-      <p role={'paragraph'}>{`${bool}`}</p>
-      <button onClick={toggle}>button</button>
-    </div>
-  );
-};
 
 describe('useToggle', () => {
-  it('When toggle is executed, the value of bool changes from true to false, or from false to true.', async () => {
-    const { user } = renderSetup(<TestComponent />);
+  it('should default to false if no arguments are passed.', async () => {
+    const { result } = renderHook(() => useToggle());
 
-    const button = screen.getByRole('button');
-    const paragraph = screen.getByRole('paragraph');
+    expect(result.current[0]).toBeFalsy();
+  });
 
-    expect(paragraph).toHaveTextContent('false');
+  it('should toggle the boolean value from true to false or from false to true when executed.', async () => {
+    const { result } = renderHook(() => useToggle(false));
+    const toggle = result.current[1];
 
-    await waitFor(() => {
-      user.click(button);
-      expect(paragraph).toHaveTextContent('true');
-    });
+    expect(result.current[0]).toBeFalsy();
 
-    await waitFor(() => {
-      user.click(button);
-      expect(paragraph).toHaveTextContent('false');
-    });
+    await waitFor(() => toggle());
 
-    await waitFor(() => {
-      user.click(button);
-      expect(paragraph).toHaveTextContent('true');
-    });
+    expect(result.current[0]).toBeTruthy();
+
+    await waitFor(() => toggle());
+
+    expect(result.current[0]).toBeFalsy();
   });
 });

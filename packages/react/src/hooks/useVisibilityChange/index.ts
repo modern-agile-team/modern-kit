@@ -15,7 +15,7 @@ interface UseVisibilityChangeProps {
 export const useVisibilityChange = ({
   onShow = noop,
   onHide = noop,
-}: UseVisibilityChangeProps) => {
+}: UseVisibilityChangeProps = {}) => {
   const handleVisibilityChange = usePreservedCallback((event: Event) => {
     const isVisible = document.visibilityState === 'visible';
     const callbackAction = isVisible ? onShow : onHide;

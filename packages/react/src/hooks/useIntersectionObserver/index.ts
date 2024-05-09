@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { noop } from '@modern-kit/utils';
 import { Nullable } from '@modern-kit/types';
+import { noop } from '@modern-kit/utils';
 
 export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   action: (entry: IntersectionObserverEntry) => void;
@@ -24,9 +24,7 @@ export const useIntersectionObserver = <T extends HTMLElement>({
       if (entry && entry.isIntersecting) {
         const targetElement = entry.target as T;
 
-        if (callbackAction) {
-          callbackAction(entry);
-        }
+        callbackAction(entry);
 
         if (calledOnce) {
           observer.unobserve(targetElement);
