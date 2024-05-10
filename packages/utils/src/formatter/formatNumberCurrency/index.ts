@@ -1,17 +1,17 @@
 import {
   formatNumberByUnits,
-  formatNumberByUnitsOption,
+  FormatNumberByUnitsOption,
 } from '../formatNumberByUnits';
 
-interface currencyOption {
+interface CurrencyOption {
   currency: string;
   currencyPosition: 'prefix' | 'suffix';
 }
 
-type formatNumberCurrencyOptions = formatNumberByUnitsOption &
-  Partial<currencyOption>;
+type FormatNumberCurrencyOptions = FormatNumberByUnitsOption &
+  Partial<CurrencyOption>;
 
-const addCurrency = (value: string, currencyOption: currencyOption) => {
+const addCurrency = (value: string, currencyOption: CurrencyOption) => {
   const { currency, currencyPosition } = currencyOption;
 
   if (currencyPosition === 'prefix') {
@@ -22,7 +22,7 @@ const addCurrency = (value: string, currencyOption: currencyOption) => {
 
 export const formatNumberCurrency = (
   value: number,
-  options: formatNumberCurrencyOptions = {}
+  options: FormatNumberCurrencyOptions = {}
 ) => {
   const {
     currency = '',

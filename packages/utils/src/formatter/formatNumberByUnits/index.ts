@@ -16,11 +16,11 @@ type FloorUnit =
   | 10000000
   | 100000000;
 
-export interface formatNumberByUnitsOption {
-  floorUnit?: FloorUnit;
-  withCommas?: boolean;
-  insertSpace?: boolean;
+export interface FormatNumberByUnitsOption {
   units?: Unit[];
+  withCommas?: boolean;
+  floorUnit?: FloorUnit;
+  insertSpace?: boolean;
 }
 
 const getNumberWithConditionalCommas = (value: number, withCommas: boolean) => {
@@ -29,7 +29,7 @@ const getNumberWithConditionalCommas = (value: number, withCommas: boolean) => {
 
 export const formatNumberByUnits = (
   value: number,
-  options: formatNumberByUnitsOption = {}
+  options: FormatNumberByUnitsOption = {}
 ) => {
   const {
     units = [],
