@@ -1,4 +1,4 @@
-import { extractNumber } from '../extractNumber';
+import { extractNumber } from '../../string/extractNumber';
 
 export const formatPhoneNumber = (value: string) => {
   const cleanedValue = extractNumber(value);
