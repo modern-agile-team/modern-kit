@@ -15,9 +15,9 @@ import { parseJson } from '@modern-kit/utils';
 
 type NormalObject = { a: 1, b: 2 }
 
-const normalObject = parseJSON<NormalObject>(`{ "a": 1, "b": 2 }`); // { a: 1, b: 2 }
-const emptyString = parseJSON<''>(''); // null
+const normalObject = parseJSON<NormalObject>(`{ "a": 1, "b": 2 }`); // { a: 1, b: 2 } | null
+const emptyString = parseJSON<''>(''); // '' | null
 const nullValue = parseJSON<null>(null); // null
-const undefinedValue = parseJSON<undefined>(undefined); // undefined
-const NaNValue = parseJSON<typeof NaN>(NaN); // null
+const undefinedValue = parseJSON<undefined>(undefined); // undefined | null
+const NaNValue = parseJSON<typeof NaN>(NaN); // number | null
 ```
