@@ -6,13 +6,17 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/wrapInArray/index.ts)
+
+
 ## Interface
-```tsx
+```ts title="typescript"
 const wrapInArray: <T>(value: T | T[]) => T[]
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { wrapInArray } from '@modern-kit/utils';
 
 const wrappedInArray1 = wrapInArray('ModernKit'); // ['ModernKit']

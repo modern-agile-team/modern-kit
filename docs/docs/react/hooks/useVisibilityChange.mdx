@@ -4,8 +4,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useVisibilityChange/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type VisibilityChangeCallbackAction = (
   event: Event,
   visibilityState: DocumentVisibilityState
@@ -20,7 +23,7 @@ const useVisibilityChange: ({ onShow, onHide, }: useVisibilityChangeProps) => vo
 ```
 
 ## Usage
-```tsx
+```tsx title="typescript"
 import { useVisibilityChange } from '@modern-kit/react';
 
 const Example = () => {

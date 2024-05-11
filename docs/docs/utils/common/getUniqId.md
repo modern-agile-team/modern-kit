@@ -2,16 +2,18 @@
 
 `유니크한 아이디`를 반환하는 함수입니다.
 
-
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/getUniqId/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const getUniqId: () => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { getUniqId } from '@modern-kit/utils';
 
 const uniqId = getUniqId();

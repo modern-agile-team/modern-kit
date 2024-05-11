@@ -9,8 +9,11 @@ comparator를 넘기지 않는다면 `@modern-kit/utils`의 `deepEqual` 함수�
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreservedState/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const usePreservedState: <T>(
   value: T,
   comparator?: ((source: T, target: T) => boolean) | undefined
@@ -19,7 +22,7 @@ const usePreservedState: <T>(
 
 ## Usage
 ### Default Comparator
-```tsx
+```tsx title="typescript"
 import React, { useEffect, useState } from "react";
 import { usePreservedState } from "@modern-kit/react";
 
@@ -33,7 +36,7 @@ const Example = () => {
 <br />
 
 ### Custom Comparator
-```tsx
+```tsx title="typescript"
 import React, { useEffect, useState } from 'react';
 import { usePreservedState } from '@modern-kit/react';
 
@@ -47,5 +50,4 @@ const Example = () => {
 
   return <>{/* ... */}</>;
 };
-
 ```

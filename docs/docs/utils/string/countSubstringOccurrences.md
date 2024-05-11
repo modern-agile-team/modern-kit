@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/countSubstringOccurrences/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const countSubstringOccurrences: (source: string, target: string) => number
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { countSubstringOccurrences } from '@modern-kit/utils';
 
 const str = 'apple banana apple grapes apple';

@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/deepEqual/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const deepEqual: (source: any, target: any) => boolean
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { deepEqual } from '@modern-kit/utils';
 
 const isEqual1 = deepEqual(1, 1); // true

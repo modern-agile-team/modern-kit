@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/removeSpecialCharacters/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const removeSpecialCharacters: (value: string) => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { removeSpecialCharacters } from '@modern-kit/utils';
 
 const str = removeSpecialCharacters('H@#!ello, @Wo!@!&@rld!'); // Hello World

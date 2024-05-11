@@ -6,8 +6,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreservedCallback/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const usePreservedCallback: <T extends (...args: any[]) => any>(
   callback: T
 ) => (...args: any[]) => any;
@@ -15,7 +18,7 @@ const usePreservedCallback: <T extends (...args: any[]) => any>(
 
 ## Usage
 ### as-is
-```tsx
+```tsx title="typescript"
 import React, { useEffect, useState } from "react";
 
 const Example = () => {
@@ -36,7 +39,7 @@ const Example = () => {
 ```
 
 ### to-be (usePreservedCallback)
-```tsx
+```tsx title="typescript"
 import React, { useEffect, useState } from "react";
 import { usePreservedCallback } from '@modern-kit/react';
 

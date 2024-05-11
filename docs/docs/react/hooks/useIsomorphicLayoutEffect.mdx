@@ -6,8 +6,11 @@ client환경에서는 `useLayoutEffect`를 사용하고, server환경에서는 `
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsomorphicLayoutEffect/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const useIsomorphicLayoutEffect: (
   effect: React.EffectCallback, 
   deps?: React.DependencyList | undefined
@@ -15,8 +18,7 @@ const useIsomorphicLayoutEffect: (
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useIsomorphicLayoutEffect } from '@modern-kit/react';
 
 const Example = () => {

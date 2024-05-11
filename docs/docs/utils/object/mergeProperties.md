@@ -6,8 +6,11 @@ Key가 동일할 때 값이 원시 타입의 경우 source의 값으로 덮어�
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/mergeProperties/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const mergeProperties: <
   T extends Record<PropertyKey, any>,
   K extends Record<PropertyKey, any>
@@ -18,7 +21,7 @@ const mergeProperties: <
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { mergeProperties } from '@modern-kit/utils';
 
   const target = {

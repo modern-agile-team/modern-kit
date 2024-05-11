@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatNumberWithCommas/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const formatNumberWithCommas: (value: string | number) => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { formatNumberWithCommas } from '@modern-kit/utils';
 
 const numberWithComma1 = formatNumberWithCommas(200); // '200'

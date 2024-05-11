@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/extractNumber/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const extractNumber: (value: string) => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { extractNumber } from '@modern-kit/utils';
 
 const str1 = extractNumber('abc123sd45'); // '12345'

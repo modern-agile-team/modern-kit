@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isFunction/index.ts)
+
 ## Interface
-```tsx title="typescript"
+```ts title="typescript"
 const isFunction: (arg: unknown) => arg is Function
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isFunction } from '@modern-kit/utils';
 
 function example() {}

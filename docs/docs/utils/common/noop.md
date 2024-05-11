@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/noop/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const noop: () => void
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { noop } from '@modern-kit/utils';
 
 const handleClick = (callback = noop) => {

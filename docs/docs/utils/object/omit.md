@@ -6,8 +6,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/omit/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
   keyof T,
   symbol
@@ -23,7 +26,7 @@ const omit: <
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { omit } from '@modern-kit/utils';
 
 const symbol = Symbol('d');

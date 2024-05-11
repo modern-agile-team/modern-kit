@@ -8,13 +8,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isValidEmail/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const isValidEmail: (email: string) => boolean
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isValidEmail } from '@modern-kit/utils';
 
 const isEmail1 = isValidEmail('example@email.com'); // true
