@@ -9,3 +9,4 @@ export * from './getViewportSize';
 export * from './hexToRgba';
 export * from './noop';
 export * from './wrapInArray';
+export * from './parseJson';
