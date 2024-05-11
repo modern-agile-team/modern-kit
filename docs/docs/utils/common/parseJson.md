@@ -6,16 +6,18 @@
 
 ## Interface
 ```tsx
-const parseJson: <T>(value: T) => any
+const parseJson: <T>(value: any) => T | null
 ```
 
 ## Usage
 ```ts
 import { parseJson } from '@modern-kit/utils';
 
-const result = parseJSON(`{ "a": 1, "b": 2 }`); // { a: 1, b: 2 }
-const emptyString = parseJSON(''); // null
-const nullValue = parseJSON(null); // null
-const undefinedValue = parseJSON(undefined); // undefined
-const NaNValue = parseJSON(NaN); // null
+type NormalObject = { a: 1, b: 2 }
+
+const normalObject = parseJSON<NormalObject>(`{ "a": 1, "b": 2 }`); // { a: 1, b: 2 }
+const emptyString = parseJSON<''>(''); // null
+const nullValue = parseJSON<null>(null); // null
+const undefinedValue = parseJSON<undefined>(undefined); // undefined
+const NaNValue = parseJSON<typeof NaN>(NaN); // null
 ```
