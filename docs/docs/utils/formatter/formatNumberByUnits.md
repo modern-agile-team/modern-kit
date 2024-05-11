@@ -39,6 +39,9 @@ const formatNumberByUnits: (
 ```ts
 import { formatNumberByUnits } from '@modern-kit/utils';
 
+const ONE_HUNDRED_MILLION = 100000000;
+const TEN_THOUSAND = 10000;
+
 const units = [
   { unit: '억', value: ONE_HUNDRED_MILLION },
   { unit: '만', value: TEN_THOUSAND },

@@ -64,7 +64,7 @@ describe('formatNumberByUnits', () => {
       withCommas: false,
       units: testUnits,
     });
-    expect(testValue4).toBe('');
+    expect(testValue4).toBe('0');
   });
 
   it('should format using default values if no options are provided', () => {

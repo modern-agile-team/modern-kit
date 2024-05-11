@@ -83,7 +83,7 @@ describe('formatNumberCurrency', () => {
       units: testUnits,
       currency: '원',
     });
-    expect(testValue4).toBe('원');
+    expect(testValue4).toBe('0원');
   });
 
   it('should format using default values if no options are provided', () => {

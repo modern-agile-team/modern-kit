@@ -38,14 +38,19 @@ export const formatNumberByUnits = (
     floorUnit = 1,
   } = options;
 
+  if (value < floorUnit) {
+    return String(0);
+  }
+
   if (units.length === 0) {
     return getNumberWithConditionalCommas(value, withCommas);
   }
 
+  const sortedUnits = [...units].sort((a, b) => b.value - a.value);
   let result = '';
   let remainder = Math.floor(value / floorUnit) * floorUnit;
 
-  units.forEach(({ unit, value: unitValue }) => {
+  sortedUnits.forEach(({ unit, value: unitValue }) => {
     const quotient = Math.floor(remainder / unitValue);
 
     if (quotient > 0) {

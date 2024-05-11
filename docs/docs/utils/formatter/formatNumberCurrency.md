@@ -29,8 +29,13 @@ const formatNumberCurrency: (
 ```
 
 ## Usage
+### Basic
+기본적인 사용법은 아래와 같습니다.
 ```ts
 import { formatNumberCurrency } from '@modern-kit/utils';
+
+const ONE_HUNDRED_MILLION = 100000000;
+const TEN_THOUSAND = 10000;
 
 const units = [
   { unit: '억', value: ONE_HUNDRED_MILLION },
@@ -44,7 +49,6 @@ const value1 = formatNumberCurrency(450000000, {
 }); // '4억5000만원'
 
 const value2 = formatNumberCurrency(4500, {
-  units: units,
   currency: '$',
   currencyPosition: 'prefix',
 }); // '$4500'
@@ -73,4 +77,30 @@ const value4 = formatNumberCurrency(459325300, {
   currencyPosition: 'suffix',
   floorUnit: 10000000,
 }); // '4억5000만원'
+```
+
+<br />
+
+### ⭐️Abstraction 
+아래와 같이 필요에 맞게 `추상화`해서 사용하는 것을 추천드립니다.
+
+```ts
+const ONE_HUNDRED_MILLION = 100000000;
+const TEN_THOUSAND = 10000;
+
+const units = [
+  { unit: '억', value: ONE_HUNDRED_MILLION },
+  { unit: '만', value: TEN_THOUSAND },
+];
+
+const formatToKRW = (value: number) => {
+  return formatNumberCurrency(value, {
+    units: units,
+    currency: '원',
+    currencyPosition: 'suffix',
+  });
+}
+
+const value1 = formatToKRW(42000000); // 4200만원
+const value2 = formatToKRW(425000000); // 4억2500만원
 ```
