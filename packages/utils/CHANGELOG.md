@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 1.3.0
+
+### Minor Changes
+
+- [#114](https://github.com/modern-agile-team/modern-kit/pull/114) [`bf9bcc2`](https://github.com/modern-agile-team/modern-kit/commit/bf9bcc284a3542cb292696b979092cd97cc18f33) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatNumberByUnits, formatNumberCurrency 추가
+
+- [#116](https://github.com/modern-agile-team/modern-kit/pull/116) [`1e51a93`](https://github.com/modern-agile-team/modern-kit/commit/1e51a93d63732f9fe449b0e520995f2625e7643f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): parseJson 함수 추가 완료 - @Sangminnn
+
 ## 1.2.5
 
 ### Patch Changes
