@@ -1,6 +1,7 @@
 import { ObjectKeys } from '@modern-kit/types';
 import { deepCopy } from '../../common/deepCopy';
 import { wrapInArray } from '../../common/wrapInArray';
+import { hasProperty } from '../../validator';
 
 export const pick = <
   T extends Record<PropertyKey, T[keyof T]>,
@@ -14,7 +15,7 @@ export const pick = <
   const wrappedInArrayKeys = wrapInArray(keys);
 
   wrappedInArrayKeys.forEach((key) => {
-    if (key in deepCopiedObj) {
+    if (hasProperty(deepCopiedObj, key)) {
       result[key] = deepCopiedObj[key];
     }
   });

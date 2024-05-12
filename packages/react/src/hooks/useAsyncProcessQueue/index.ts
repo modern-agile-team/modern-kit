@@ -1,7 +1,7 @@
 import { Nullable } from '@modern-kit/types';
 import { useCallback, useState, useRef } from 'react';
 
-type RequestFunction<T> = (requestData?: any) => Promise<T>;
+type RequestFunction<T> = (...args: any[]) => Promise<T>;
 
 interface UseAsyncProcessQueueOptions {
   keepPreviousData?: boolean;
@@ -22,12 +22,12 @@ export const useAsyncProcessQueue = <T = unknown, E = unknown>({
     }
 
     const requestFunc = requestQueue.current[0];
+    setIsLoading(true);
 
     try {
-      setIsLoading(true);
       const res = await requestFunc();
 
-      setData(res);
+      setData(res as T);
       setError(null);
     } catch (err) {
       setData(null);

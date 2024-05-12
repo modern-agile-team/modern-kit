@@ -1,6 +1,7 @@
 import { ObjectKeys } from '@modern-kit/types';
 import { deepCopy } from '../../common/deepCopy';
 import { wrapInArray } from '../../common/wrapInArray';
+import { hasProperty } from '../../validator';
 
 export const omit = <
   T extends Record<PropertyKey, T[keyof T]>,
@@ -13,7 +14,7 @@ export const omit = <
   const wrappedInArrayKeys = wrapInArray(keys);
 
   wrappedInArrayKeys.forEach((key) => {
-    if (key in result) {
+    if (hasProperty(result, key)) {
       delete result[key];
     }
   });
