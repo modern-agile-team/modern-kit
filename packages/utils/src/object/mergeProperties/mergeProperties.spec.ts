@@ -20,6 +20,13 @@ describe('mergeProperties', () => {
     expect(mergeProperties(target, source)).toEqual(expectedObj);
   });
 
+  it('should return the target if either the target or source argument is a primitive value', () => {
+    const target = 1 as any;
+    const source = 1 as any;
+
+    expect(mergeProperties(target, source)).toBe(1);
+  });
+
   it('merges properties and combines nested objects and arrays from source into target', () => {
     const target = {
       a: 1,
