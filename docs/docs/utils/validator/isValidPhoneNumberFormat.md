@@ -12,13 +12,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isValidPhoneNumberFormat/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const isValidPhoneNumberFormat: (value: string) => boolean
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isValidPhoneNumberFormat, formatPhoneNumber } from '@modern-kit/utils';
 
 const isPhoneNumberFormat1 = isValidPhoneNumberFormat('010-1234-1234'); // true

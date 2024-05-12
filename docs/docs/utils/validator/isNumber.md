@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isNumber/index.ts)
+
 ## Interface
-```tsx title="typescript"
+```ts title="typescript"
 const isNumber: (arg: unknown) => arg is number
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isNumber } from '@modern-kit/utils';
 
 

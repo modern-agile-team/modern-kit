@@ -10,13 +10,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/device/getOS/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const getOS: () => "server" | "ios" | "android" | "otherMobile" | "web"
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { getOS } from '@modern-kit/utils';
 
 const os = getOS();

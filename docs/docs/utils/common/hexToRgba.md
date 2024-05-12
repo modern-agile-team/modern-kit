@@ -6,8 +6,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/hexToRgba/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const hexToRgba: (hex: string, alpha?: number) => {
   readonly r: number;
   readonly g: number;
@@ -18,7 +21,7 @@ const hexToRgba: (hex: string, alpha?: number) => {
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { hexToRgba } from '@modern-kit/utils';
 
 const hex1 = '#1A2B3C';

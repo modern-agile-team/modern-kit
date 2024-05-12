@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatPhoneNumber/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const formatPhoneNumber: (value: string) => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { formatPhoneNumber } from '@modern-kit/utils';
 
 const phoneNumber0 = formatPhoneNumber('03112345678'); // '031-1234-5678'

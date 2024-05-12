@@ -4,8 +4,12 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOnClickOutside/index.ts)
+
 ## Interface
-```tsx
+
+```ts title="typescript"
 const useOnClickOutside: <T extends HTMLElement>(
   action: (targetElement: T) => void
 ) => {
@@ -14,8 +18,7 @@ const useOnClickOutside: <T extends HTMLElement>(
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useMemo } from 'react';
 import { useOnClickOutside } from '@modern-kit/react';
 

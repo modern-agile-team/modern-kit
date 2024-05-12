@@ -11,8 +11,11 @@ import { useBlockPromiseMultipleClick } from '@modern-kit/react';
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBlockPromiseMultipleClick/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const useBlockPromiseMultipleClick: () => {
   isLoading: boolean;
   blockMultipleClick: (callback: () => Promise<unknown>) => Promise<void>;
@@ -21,7 +24,7 @@ const useBlockPromiseMultipleClick: () => {
 
 ## Usage
 
-```tsx
+```tsx title="typescript"
 import React, { useState } from 'react';
 import { useBlockPromiseMultipleClick } from '@modern-kit/react';
 

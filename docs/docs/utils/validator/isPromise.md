@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isPromise/index.ts)
+
 ## Interface
-```tsx title="typescript"
+```ts title="typescript"
 const isPromise: <T = any>(value: any) => value is Promise<T>
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isPromise } from '@modern-kit/utils';
 
 isPromise(Promise.resolve()); // true

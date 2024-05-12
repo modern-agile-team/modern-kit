@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isNullish/index.ts)
+
 ## Interface
-```tsx title="typescript"
+```ts title="typescript"
 const isNullish: <T>(val: T | null | undefined) => val is null | undefined
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isNullish } from '@modern-kit/utils';
 
 isNullish(undefined); // true

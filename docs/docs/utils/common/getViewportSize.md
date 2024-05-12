@@ -5,8 +5,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/getViewportSize/index.tsx)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const getViewportSize: () => {
   readonly width: number;
   readonly height: number;
@@ -14,7 +17,7 @@ const getViewportSize: () => {
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { getViewportSize } from '@modern-kit/utils';
 
 const { width, height } = getViewportSize();

@@ -9,8 +9,11 @@ condition prop으로 `boolean을 반환하는 함수`도 허용됩니다.
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/When/index.tsx)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type Condition = boolean | (() => boolean);
 
 interface WhenProps {
@@ -26,8 +29,7 @@ const When: ({
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { When } from '@modern-kit/react';
 
 const Example = () => {

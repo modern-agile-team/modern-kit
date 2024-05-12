@@ -4,14 +4,16 @@ boolean 타입의 state를 Toggle로 쉽게 사용할 수 있는 커스텀 훅 �
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useToggle/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const useToggle: (defaultValue?: boolean) => readonly [boolean, () => void]
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useToggle } from '@modern-kit/react';
 
 const Example = () => {

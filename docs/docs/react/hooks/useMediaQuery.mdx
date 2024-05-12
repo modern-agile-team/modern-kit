@@ -6,16 +6,18 @@ Resize 시에도 동작하며, 미디어 쿼리 문자열의 분석 결과를 �
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMediaQuery/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const useMediaQuery: (query: string) => {
-    isMatch: boolean;
+  isMatch: boolean;
 }
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useMediaQuery } from '@modern-kit/react';
 
 const Example = () => {
@@ -31,7 +33,6 @@ const Example = () => {
     </div>
   );
 };
-
 ```
 
 export const Example = () => {

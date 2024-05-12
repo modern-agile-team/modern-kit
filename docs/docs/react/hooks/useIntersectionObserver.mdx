@@ -6,8 +6,11 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIntersectionObserver/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 interface UseIntersectionObserverProps extends IntersectionObserverInit {
   action: (entry: IntersectionObserverEntry) => void;
   calledOnce?: boolean;
@@ -23,8 +26,7 @@ const useIntersectionObserver: <T extends HTMLElement>({
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useIntersectionObserver } from '@modern-kit/react';
 
 const Example = () => {

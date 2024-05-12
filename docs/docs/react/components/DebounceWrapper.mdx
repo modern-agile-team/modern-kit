@@ -7,8 +7,11 @@ import { DebounceWrapper } from '@modern-kit/react';
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/DebounceWrapper/index.tsx)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type DebounceParameters = Parameters<typeof debounce>;
 
 interface DebounceWrapperProps {
@@ -28,7 +31,7 @@ const DebounceWrapper: ({
 
 ## Usage
 ### Button Click Case
-```tsx
+```tsx title="typescript"
 import { DebounceWrapper } from '@modern-kit/react'
 
 const Example = () => {
@@ -45,7 +48,7 @@ const Example = () => {
 ```
 
 ### Input Change Case
-```tsx
+```tsx title="typescript"
 const Input = ({ onChange }: { onChange: (value: string) => void }) => {
   const [value, setValue] = useState('');
 

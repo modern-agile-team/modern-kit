@@ -6,13 +6,16 @@ setTimeout을 사용하여 특정 시간 뒤의 동작을 정의할 경우, 해�
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/delay/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const delay: (time: number) => Promise<void>
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { delay } from '@modern-kit/utils';
 
 const something = () => Promise.resolve()

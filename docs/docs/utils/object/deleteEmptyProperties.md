@@ -6,13 +6,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/deleteFalsyProperties/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const deleteEmptyProperties: <T extends Record<PropertyKey, any>>(obj: T) => T
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { deleteEmptyProperties } from '@modern-kit/utils';
 
 const obj = deleteEmptyProperties({

@@ -4,8 +4,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useImageStatus/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type ImageStatus = 'pending' | 'loading' | 'complete' | 'error';
 
 const useImageStatus: () => {
@@ -15,8 +18,7 @@ const useImageStatus: () => {
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useImageStatus } from '@modern-kit/react';
 import img1 from '../assets/img1.png';
 

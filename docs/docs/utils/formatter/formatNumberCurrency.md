@@ -4,8 +4,11 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatNumberCurrency/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 interface CurrencyOption {
   currency: string;
   currencyPosition: 'prefix' | 'suffix';
@@ -31,7 +34,7 @@ const formatNumberCurrency: (
 ## Usage
 ### Basic
 기본적인 사용법은 아래와 같습니다.
-```ts
+```ts title="typescript"
 import { formatNumberCurrency } from '@modern-kit/utils';
 
 const ONE_HUNDRED_MILLION = 100000000;
@@ -84,7 +87,7 @@ const value4 = formatNumberCurrency(459325300, {
 ### ⭐️Abstraction 
 아래와 같이 필요에 맞게 `추상화`해서 사용하는 것을 추천드립니다.
 
-```ts
+```ts title="typescript"
 const ONE_HUNDRED_MILLION = 100000000;
 const TEN_THOUSAND = 10000;
 

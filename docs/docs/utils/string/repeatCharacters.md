@@ -4,13 +4,16 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/repeatCharacters/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const repeatCharacters: (value: string, repeatCount: number) => string
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { repeatCharacters } from '@modern-kit/utils';
 
 const str1 = 'A!B@C';

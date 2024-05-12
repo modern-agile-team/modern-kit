@@ -8,16 +8,18 @@
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useInterval/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 type SetIntervalParameters = Parameters<typeof setInterval>;
 
 const useInterval: (callback: SetIntervalParameters[0], delay?: SetIntervalParameters[1]) => void
 ```
 
 ## Usage
-
-```tsx
+```tsx title="typescript"
 import { useInterval } from '@modern-kit/react';
 
 const Example = () => {

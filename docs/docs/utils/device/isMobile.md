@@ -2,16 +2,18 @@
 
 `모바일 환경`인지 확인하는 함수입니다.
 
-
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/device/isMobile/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 const isMobile: () => boolean
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { isMobile } from '@modern-kit/utils';
 
 if (isMobile()) {

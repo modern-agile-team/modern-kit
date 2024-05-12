@@ -7,8 +7,11 @@ import { useMemo } from 'react';
 
 <br />
 
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useWindowSize/index.ts)
+
 ## Interface
-```tsx
+```ts title="typescript"
 interface Size {
   width: number | null;
   height: number | null;
@@ -24,7 +27,7 @@ const useWindowSize: (options?: useWindowSizeProps) => Size
 
 ## Usage
 ### Default
-```tsx
+```tsx title="typescript"
 import { useWindowSize } from '@modern-kit/react';
 
 const Example = () => {
@@ -72,7 +75,7 @@ export const DefaultExample = () => {
 <br />
 
 ### Debounce
-```tsx
+```tsx title="typescript"
 import { useWindowSize } from '@modern-kit/react';
 
 const DebounceExample = () => {
