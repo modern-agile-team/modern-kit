@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 1.4.1
+
+### Patch Changes
+
+- [#112](https://github.com/modern-agile-team/modern-kit/pull/112) [`ef5707f`](https://github.com/modern-agile-team/modern-kit/commit/ef5707f6a96b75bf29a04fdc4eadea34a7d3276e) Thanks [@ssi02014](https://github.com/ssi02014)! - refac: modern-kit refactoring & test coverage 증가
+
+- [#114](https://github.com/modern-agile-team/modern-kit/pull/114) [`bf9bcc2`](https://github.com/modern-agile-team/modern-kit/commit/bf9bcc284a3542cb292696b979092cd97cc18f33) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatNumberByUnits, formatNumberCurrency 추가
+
 ## 1.4.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # docs
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`ef5707f`](https://github.com/modern-agile-team/modern-kit/commit/ef5707f6a96b75bf29a04fdc4eadea34a7d3276e), [`bf9bcc2`](https://github.com/modern-agile-team/modern-kit/commit/bf9bcc284a3542cb292696b979092cd97cc18f33)]:
+  - @modern-kit/react@1.4.1
+
 ## 0.0.12
 
 ### Patch Changes
