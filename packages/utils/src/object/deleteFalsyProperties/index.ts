@@ -1,7 +1,9 @@
-import { hasProperty } from '../../validator';
+import { hasProperty, isArray } from '../../validator';
 
-export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
-  source: T
+export const deleteFalsyProperties = <
+  T extends Record<PropertyKey, any> = Record<PropertyKey, any>
+>(
+  source: Record<PropertyKey, any>
 ): T => {
   const copiedObj: Record<PropertyKey, any> = {};
 
@@ -9,16 +11,18 @@ export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
     if (hasProperty(source, key)) {
       const value = source[key];
 
-      if (value !== null && typeof value === 'object') {
+      if (value != null && typeof value === 'object') {
         // object
-        if (!Array.isArray(value)) {
+        if (!isArray(value)) {
           const newObj = deleteFalsyProperties(value);
+          const isNonEmptyObj = !!Object.keys(newObj).length;
 
-          if (Object.keys(newObj).length) {
+          if (isNonEmptyObj) {
             copiedObj[key] = newObj;
           }
           continue;
         }
+
         // array
         const newArray = value.reduce((acc: any[], cur: any) => {
           if (typeof cur !== 'object') {
@@ -36,14 +40,14 @@ export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
           copiedObj[key] = newArray;
         }
       } else if (
+        value ||
         typeof value === 'number' ||
-        typeof value === 'boolean' ||
-        value
+        typeof value === 'boolean'
       ) {
         copiedObj[key] = value;
       }
     }
   }
 
-  return copiedObj;
+  return copiedObj as T;
 };

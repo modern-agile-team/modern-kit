@@ -1,4 +1,5 @@
 export * from './hasProperty';
+export * from './isArray';
 export * from './isFunction';
 export * from './isNotNullish';
 export * from './isNullish';

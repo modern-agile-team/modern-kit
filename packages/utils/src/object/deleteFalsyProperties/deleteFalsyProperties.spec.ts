@@ -53,6 +53,7 @@ describe('deleteFalsyProperties', () => {
           ],
         },
       },
+      prop3: [1, 2, null],
     };
     const expectedObj = {
       prop1: [
@@ -73,6 +74,7 @@ describe('deleteFalsyProperties', () => {
           prop2_1_6: [{ prop2_1_6_1: 1 }],
         },
       },
+      prop3: [1, 2],
     };
 
     expect(deleteFalsyProperties(originObj)).toEqual(expectedObj);
@@ -117,5 +119,31 @@ describe('deleteFalsyProperties', () => {
       prop9: [],
       prop10: {},
     });
+  });
+
+  it('should allow specifying desired types through generics', () => {
+    const originObj = {
+      prop1: 1,
+      prop2: 0,
+      prop3: '',
+      prop4: '1',
+      prop5: true,
+      prop6: false,
+      prop7: null,
+      prop8: undefined,
+      prop9: [],
+      prop10: {},
+    };
+    const expectedObj = {
+      prop1: 1,
+      prop2: 0,
+      prop4: '1',
+      prop5: true,
+      prop6: false,
+    };
+
+    const result = deleteFalsyProperties<typeof expectedObj>(originObj);
+
+    expectTypeOf(result).toEqualTypeOf<typeof expectedObj>();
   });
 });
