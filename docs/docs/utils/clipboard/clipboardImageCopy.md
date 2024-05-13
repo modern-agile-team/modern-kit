@@ -4,6 +4,8 @@
 
 `navigator.clipboard.write`는 일부 브라우저에서 지원하지 않습니다. `write`가 지원하지 않을 경우 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출 됩니다.
 
+추가적으로 `Blob`객체 타입이 `image/svg+xml`의 경우에는 `소스 코드`를 복사 활용을 위해 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출됩니다. 
+
 <br />
 
 ## Code
@@ -15,10 +17,56 @@ const clipboardImageCopy: (imgSrc: string) => Promise<void>
 ```
 
 ## Usage
+### Default
 ```ts title="typescript"
 import { clipboardImageCopy } from '@modern-kit/utils';
 
 clipboardImageCopy("복사 할 이미지 src");
+```
+
+<br />
+
+### image/svg+xml (1)
+```ts title="typescript"
+import { clipboardImageCopy } from '@modern-kit/utils';
+
+clipboardImageCopy(
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
+);
+
+/* Clipboard 복사 결과: text()
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
+    <title>React Logo</title>
+    <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
+    <g stroke="#61dafb" stroke-width="1" fill="none">
+      <ellipse rx="11" ry="4.2"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+    </g>
+  </svg>
+*/
+```
+
+<br />
+
+### image/svg+xml (2)
+```ts title="React(typescript)"
+import { clipboardImageCopy } from '@modern-kit/utils';
+import svg from "./assets/react.svg";
+
+clipboardImageCopy(svg);
+
+/* Clipboard 복사 결과: text()
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
+    <title>React Logo</title>
+    <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
+    <g stroke="#61dafb" stroke-width="1" fill="none">
+      <ellipse rx="11" ry="4.2"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+    </g>
+  </svg>
+*/
 ```
 
 ## Note
