@@ -40,27 +40,31 @@ describe('useAsyncProcessQueue', () => {
 
     act(() => {
       addToProcessQueue(testPromise1);
-    });
-    act(() => {
       addToProcessQueue(testPromise2);
     });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(mockFn1).toBeCalledTimes(1);
-    expect(mockFn2).toBeCalledTimes(0);
-    expect(result.current.isLoading).toBeTruthy();
-    expect(result.current.data).toBeNull();
+      expect(mockFn1).toBeCalledTimes(1);
+      expect(mockFn2).toBeCalledTimes(0);
+      expect(result.current.isLoading).toBeTruthy();
+      expect(result.current.data).toBeNull();
+    });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(result.current.data).toBe('foo');
-    expect(mockFn2).toBeCalledTimes(1);
+      expect(result.current.data).toBe('foo');
+      expect(mockFn2).toBeCalledTimes(1);
+    });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(result.current.data).toBe('bar');
-    expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.data).toBe('bar');
+      expect(result.current.isLoading).toBeFalsy();
+    });
 
     // Initialize data if keepPreviousData is false
     act(() => {
@@ -82,17 +86,23 @@ describe('useAsyncProcessQueue', () => {
       addToProcessQueue(testPromise1);
     });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(result.current.data).toBeNull();
+      expect(result.current.data).toBeNull();
+    });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(result.current.data).toBe('foo');
+      expect(result.current.data).toBe('foo');
+    });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.isLoading).toBeFalsy();
+    });
 
     // Keep data if keepPreviousData is true
     act(() => {
@@ -113,12 +123,17 @@ describe('useAsyncProcessQueue', () => {
       addToProcessQueue(testPromise);
     });
 
-    await vi.advanceTimersByTimeAsync(200);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
 
-    expect(mockFn1).toBeCalledTimes(1);
+      expect(mockFn1).toBeCalledTimes(1);
+    });
 
-    await vi.advanceTimersByTimeAsync(200);
-    expect(result.current.error).toBe('bar');
-    expect(result.current.data).toBeNull();
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(200);
+
+      expect(result.current.error).toBe('bar');
+      expect(result.current.data).toBeNull();
+    });
   });
 });
