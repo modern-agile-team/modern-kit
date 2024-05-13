@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-const clipboardImageCopy: (value: string) => Promise<void>
+const clipboardImageCopy: (imgSrc: string) => Promise<void>
 ```
 
 ## Usage

@@ -13,7 +13,7 @@
 
 ## Interface
 ```ts title="typescript"
-const clipboardFallbackTextCopy: (value: string) => Promise<void>
+const clipboardFallbackTextCopy: (value: string) => void
 ```
 
 ## Usage
