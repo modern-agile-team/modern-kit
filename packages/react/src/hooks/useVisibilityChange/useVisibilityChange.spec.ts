@@ -12,10 +12,6 @@ vi.mock('@modern-kit/utils', () => {
 const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
 const event = new Event('visibilitychange');
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe('useVisibilityChange', () => {
   it('should call the onShow callback when the page becomes visible', () => {
     const { noop } = ModernKitUtils;

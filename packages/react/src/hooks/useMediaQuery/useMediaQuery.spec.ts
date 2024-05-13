@@ -17,10 +17,6 @@ beforeEach(() => {
   });
 });
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe('useMediaQuery', () => {
   it('should return true for matches when query matches', () => {
     const { result } = renderHook(() => useMediaQuery('(min-width: 600px)'));

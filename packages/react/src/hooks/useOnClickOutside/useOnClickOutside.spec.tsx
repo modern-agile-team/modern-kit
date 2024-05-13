@@ -2,10 +2,6 @@ import { screen } from '@testing-library/react';
 import { useOnClickOutside } from '.';
 import { renderSetup } from '../../utils/test/renderSetup';
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 const TestComponent = ({ onAction }: { onAction: () => void }) => {
   const { ref } = useOnClickOutside<HTMLDivElement>(onAction);
 

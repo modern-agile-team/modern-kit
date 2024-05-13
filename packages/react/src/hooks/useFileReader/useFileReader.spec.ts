@@ -6,10 +6,6 @@ import {
   mockFileList,
 } from '../../utils/test/mockFile';
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 const getSuccessFileContent = (file: File) => {
   return {
     status: 'fulfilled',
