@@ -11,8 +11,7 @@ export const clipboardTextCopy = async (value: string) => {
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
 
     if (!hasNavigatorClipboard) {
-      clipboardFallbackTextCopy(value);
-      return;
+      return clipboardFallbackTextCopy(value);
     }
 
     await navigator.clipboard.writeText(value);
