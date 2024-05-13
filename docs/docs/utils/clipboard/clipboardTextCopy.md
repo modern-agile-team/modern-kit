@@ -20,6 +20,7 @@ clipboardTextCopy("복사 할 텍스트");
 ```
 
 ## Note
+- [Clipboard API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 - [Clipboard API Browser Compatibility - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard#browser_compatibility)
 - [How to Copy Text(en) - web.dev](https://web.dev/patterns/clipboard/copy-text)
 - [How to Copy Text(ko) - web.dev](https://web.dev/patterns/clipboard/copy-text?hl=ko)

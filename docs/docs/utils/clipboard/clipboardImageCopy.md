@@ -22,6 +22,7 @@ clipboardImageCopy("복사 할 이미지 src");
 ```
 
 ## Note
+- [Clipboard API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
 - [Clipboard API Browser Compatibility - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard#browser_compatibility)
 - [How to copy images(en) - web.dev](https://web.dev/patterns/clipboard/copy-images)
 - [How to copy images(ko) - web.dev](https://web.dev/patterns/clipboard/copy-images?hl=ko)
