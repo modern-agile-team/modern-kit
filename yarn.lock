@@ -4532,6 +4532,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@modern-kit/docs@workspace:docs":
+  version: 0.0.0-use.local
+  resolution: "@modern-kit/docs@workspace:docs"
+  dependencies:
+    "@docusaurus/core": "npm:^3.3.2"
+    "@docusaurus/module-type-aliases": "npm:^3.3.2"
+    "@docusaurus/preset-classic": "npm:^3.3.2"
+    "@docusaurus/theme-classic": "npm:^3.3.2"
+    "@docusaurus/types": "npm:^3.3.2"
+    "@mdx-js/react": "npm:^3.0.0"
+    "@modern-kit/react": "workspace:*"
+    "@tsconfig/docusaurus": "npm:^2.0.0"
+    "@types/node": "npm:^20.5.1"
+    "@types/react": "npm:^18.2.20"
+    "@types/react-dom": "npm:^18.2.7"
+    clsx: "npm:^2.1.1"
+    gh-pages: "npm:^6.0.0"
+    prism-react-renderer: "npm:^2.3.1"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    typescript: "npm:^5.1.6"
+  languageName: unknown
+  linkType: soft
+
 "@modern-kit/react@workspace:*, @modern-kit/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@modern-kit/react@workspace:packages/react"
@@ -9428,30 +9452,6 @@ __metadata:
   checksum: 8948d3d03063fb68e04a1e386875f8c3bcc398fc375f535f2b438fad8f41bf1afa6f5e70893ba44f4ae884c089247e0a31045722fa6ff0f01d228da103f1811d
   languageName: node
   linkType: hard
-
-"docs@workspace:docs":
-  version: 0.0.0-use.local
-  resolution: "docs@workspace:docs"
-  dependencies:
-    "@docusaurus/core": "npm:^3.3.2"
-    "@docusaurus/module-type-aliases": "npm:^3.3.2"
-    "@docusaurus/preset-classic": "npm:^3.3.2"
-    "@docusaurus/theme-classic": "npm:^3.3.2"
-    "@docusaurus/types": "npm:^3.3.2"
-    "@mdx-js/react": "npm:^3.0.0"
-    "@modern-kit/react": "workspace:*"
-    "@tsconfig/docusaurus": "npm:^2.0.0"
-    "@types/node": "npm:^20.5.1"
-    "@types/react": "npm:^18.2.20"
-    "@types/react-dom": "npm:^18.2.7"
-    clsx: "npm:^2.1.1"
-    gh-pages: "npm:^6.0.0"
-    prism-react-renderer: "npm:^2.3.1"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    typescript: "npm:^5.1.6"
-  languageName: unknown
-  linkType: soft
 
 "doctrine@npm:^2.1.0":
   version: 2.1.0
