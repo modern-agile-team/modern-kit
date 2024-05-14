@@ -1,3 +1,5 @@
+// ignore test
+
 export * from './clearStorage';
 export * from './getStorageItem';
 export * from './removeStorageItem';
