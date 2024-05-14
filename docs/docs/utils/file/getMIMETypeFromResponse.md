@@ -11,7 +11,7 @@ MIME 타입 종류는 하단 `Note`를 확인해주세요.
 
 ## Interface
 ```ts title="typescript"
-const getMIMETypeFromResponse: (response: Response) => Promise<string | null>
+const getMIMETypeFromResponse: (response: Response) => Promise<string | undefined>
 ```
 
 ## Usage

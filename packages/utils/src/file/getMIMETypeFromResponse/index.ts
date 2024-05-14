@@ -6,6 +6,5 @@ export const getMIMETypeFromResponse = async (response: Response) => {
     console.error(
       `Failed to get the MIME type from Response. message: ${err.message}`
     );
-    return null;
   }
 };

@@ -8,6 +8,5 @@ export const getMIMETypeFromUrl = async (url: string) => {
     console.error(
       `Failed to get the MIME type from the URL. message: ${err.message}`
     );
-    return null;
   }
 };
