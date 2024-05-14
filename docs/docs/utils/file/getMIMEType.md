@@ -18,7 +18,9 @@ const getMIMEType: (data: string | File | Response) => Promise<string | undefine
 ```ts title="typescript"
 import { getMIMEType } from '@modern-kit/utils';
 
-getMIMEType(response);
+getMIMEType(response); // getMIMETypeFromResponse를 통해 MIME Type을 얻음
+getMIMEType(url); // getMIMETypeFromUrl 통해 MIME Type을 얻음
+getMIMEType(file); // getMIMETypeFromFile 통해 MIME Type을 얻음
 ```
 
 ## Note
