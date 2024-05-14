@@ -4,7 +4,11 @@
 
 `navigator.clipboard.write`는 일부 브라우저에서 지원하지 않습니다. `write`가 지원하지 않을 경우 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출 됩니다.
 
-추가적으로 `Blob`객체 타입이 `image/svg+xml`의 경우에는 `소스 코드`를 복사 활용을 위해 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출됩니다. 
+Chrome 환경에서 Clipboard API의 `write()`는 `text/plain`, `text/html`, `image/png` 포맷만을 지원합니다. 따라서, `jp(e)g`, `webp`와 같은 이미지 포맷은 클립보드에 복사할 수 없습니다. 원활한 클립보드 복사를 위해서는 `png` 포맷의 이미지 사용을 권장합니다.
+- [Chromium - ClipboardWriter::IsValidType](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/clipboard/clipboard_writer.cc;l=304;drc=e882b8e4a8272f65cb14c608d3d2bc4f0512aa20)
+- 💡 **타 이미지 포맷을 png 포맷으로 변환하는 옵션을 추가 할 예정입니다.**
+
+이미지 타입이 `image/svg+xml`의 경우에는 `소스 코드`를 복사해서 활용 할 수 있게 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출됩니다. 
 
 <br />
 

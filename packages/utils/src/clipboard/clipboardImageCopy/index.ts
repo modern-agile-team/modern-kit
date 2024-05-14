@@ -17,20 +17,23 @@ export const clipboardImageCopy = async (imgSrc: string) => {
     const response = await fetch(imgSrc);
 
     if (!hasNavigatorClipboard) {
-      return await fallbackImageCopy(response);
+      await fallbackImageCopy(response);
+      return;
     }
 
     const hasNavigatorClipboardWrite = 'write' in window.navigator.clipboard;
 
     if (!hasNavigatorClipboardWrite) {
-      return await fallbackImageCopy(response);
+      await fallbackImageCopy(response);
+      return;
     }
 
     const cloneResponse = response.clone();
     const blobData = await cloneResponse.blob();
 
     if (blobData.type === 'image/svg+xml') {
-      return await fallbackImageCopy(response);
+      await fallbackImageCopy(response);
+      return;
     }
 
     await navigator.clipboard.write([
