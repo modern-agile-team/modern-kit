@@ -15,5 +15,6 @@ export const getMIMEType = async (data: string | File | Response) => {
     return await getMIMETypeFromUrl(data);
   } catch (err: any) {
     console.error(`Failed to get the MIME type. message: ${err.message}`);
+    return '';
   }
 };
