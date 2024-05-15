@@ -44,7 +44,7 @@ export const MIME_TYPES = [
 export type MIMEType = (typeof MIME_TYPES)[number];
 
 
-const isMIMEType: (type: string) => type is MIMEType
+const isMIMEType: (arg: unknown) => arg is MIMEType
 ```
 
 ## Usage
@@ -56,6 +56,8 @@ isMIMEType('application/json'); // true
 
 isMIMEType(''); // false
 isMIMEType('abc'); // false
+isMIMEType([]); // false
+isMIMEType({}); // false
 ```
 
 ## Note

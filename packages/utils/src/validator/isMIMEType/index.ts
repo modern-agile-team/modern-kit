@@ -1,5 +1,6 @@
+import { isString } from '../isString';
 import { MIMEType, MIME_TYPES } from '../../file/constants';
 
-export const isMIMEType = (type: string): type is MIMEType => {
-  return MIME_TYPES.some((value) => value === type);
+export const isMIMEType = (arg: unknown): arg is MIMEType => {
+  return isString(arg) ? MIME_TYPES.some((value) => value === arg) : false;
 };
