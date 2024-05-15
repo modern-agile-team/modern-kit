@@ -20,7 +20,7 @@ Chrome 환경에서 Clipboard API의 `write()`는 `text/plain`, `text/html`, `im
 ```ts title="typescript"
 interface ClipboardImageCopyProps {
   src: string;
-  toPng?: boolean;
+  toPng?: boolean; // default: false
 }
 
 const clipboardImageCopy: ({

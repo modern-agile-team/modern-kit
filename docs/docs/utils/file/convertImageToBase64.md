@@ -15,7 +15,7 @@ type ImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
 
 const convertImageToBase64: (
   url: string,
-  imageType?: ImageType // default: png
+  imageType?: ImageType // default: 'png'
 ) => Promise<string>;
 ```
 
