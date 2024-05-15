@@ -1,10 +1,10 @@
 # convertImageToBase64
 
-이미지를 `Base64` 형태로 변환해주는 함수입니다.
+이미지를 `canvas`를 활용해 `Base64` 형태로 변환해주는 함수입니다.
 
-💡 canvas.toDataURL()함수가 허용하는 이미지 타입은 `image/png`, `image/jpeg`, `image/png` 입니다. `jpg`의 경우 내부적으로 `jpeg`로 변경합니다.
+💡 `canvas.toDataURL()`함수가 허용하는 이미지 타입은 `image/png`, `image/jpeg`, `image/png` 입니다. `jpg`의 경우 내부적으로 `jpeg`로 변경합니다.
 
-- [HTMLCanvasElement: toDataURL() - MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)
+- **[HTMLCanvasElement: toDataURL() - MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)**
 
 > Browsers are required to support `image/png`; many will support additional formats including `image/jpeg` and `image/webp`.
 
