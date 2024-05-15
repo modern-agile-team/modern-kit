@@ -11,7 +11,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'istanbul',
-      exclude: ['src/storage', 'src/clipboard'],
+      exclude: ['src/storage', 'src/clipboard', 'src/file'],
     },
   },
 });
