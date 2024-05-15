@@ -18,4 +18,9 @@ describe('getMIMETypeFromFile', () => {
     const result = getMIMETypeFromFile(file);
     expect(result).toBe('');
   });
+
+  it('should return an empty string if the argument is invalid', () => {
+    const result = getMIMETypeFromFile(NaN as any);
+    expect(result).toBe('');
+  });
 });
