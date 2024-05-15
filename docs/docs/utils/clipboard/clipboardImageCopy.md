@@ -5,10 +5,11 @@
 `navigator.clipboard.write`는 일부 브라우저에서 지원하지 않습니다. `write`가 지원하지 않을 경우 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출 됩니다.
 
 Chrome 환경에서 Clipboard API의 `write()`는 `text/plain`, `text/html`, `image/png` 포맷만을 지원합니다. 따라서, `jp(e)g`, `webp`와 같은 이미지 포맷은 클립보드에 복사할 수 없습니다. 원활한 클립보드 복사를 위해서는 `png` 포맷의 이미지 사용을 권장합니다.
-- [Chromium - ClipboardWriter::IsValidType](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/clipboard/clipboard_writer.cc;l=304;drc=e882b8e4a8272f65cb14c608d3d2bc4f0512aa20)
-- 💡 **타 이미지 포맷을 png 포맷으로 변환하는 옵션을 추가 할 예정입니다.**
+- **[Chromium - ClipboardWriter::IsValidType](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/clipboard/clipboard_writer.cc;l=304;drc=e882b8e4a8272f65cb14c608d3d2bc4f0512aa20)**
 
-이미지 타입이 `image/svg+xml`의 경우에는 `소스 코드`를 복사해서 활용 할 수 있게 [clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)가 호출됩니다. 
+💡 만약, `jp(e)g`와 `webp`를 클립보드에 저장을 원한다면 `png`로 변환해서 저장해야 됩니다. 이를 위해 `toPng` 옵션을 `true`로 설정해주시길 바랍니다.
+
+💡 이미지 타입이 `image/svg+xml`의 경우에는 `소스 코드`를 복사해서 활용 할 수 있게 **[clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/clipboard/clipboardTextCopy)**가 호출됩니다. 
 
 <br />
 
@@ -17,7 +18,15 @@ Chrome 환경에서 Clipboard API의 `write()`는 `text/plain`, `text/html`, `im
 
 ## Interface
 ```ts title="typescript"
-const clipboardImageCopy: (imgSrc: string) => Promise<void>
+interface ClipboardImageCopyProps {
+  src: string;
+  toPng?: boolean;
+}
+
+const clipboardImageCopy: ({
+  src,
+  toPng,
+}: ClipboardImageCopyProps) => Promise<void>;
 ```
 
 ## Usage
@@ -25,7 +34,12 @@ const clipboardImageCopy: (imgSrc: string) => Promise<void>
 ```ts title="typescript"
 import { clipboardImageCopy } from '@modern-kit/utils';
 
-clipboardImageCopy("복사 할 이미지 src");
+clipboardImageCopy({ src: "복사 할 이미지 src(png)" });
+
+clipboardImageCopy({ 
+  src: "복사 할 이미지 src(jp(e) or Webp)", 
+  toPng: true 
+});
 ```
 
 <br />
@@ -34,9 +48,9 @@ clipboardImageCopy("복사 할 이미지 src");
 ```ts title="typescript"
 import { clipboardImageCopy } from '@modern-kit/utils';
 
-clipboardImageCopy(
-  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
-);
+clipboardImageCopy({
+  src: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
+});
 
 /* Clipboard 복사 결과: text()
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
@@ -58,7 +72,9 @@ clipboardImageCopy(
 import { clipboardImageCopy } from '@modern-kit/utils';
 import svg from "./assets/react.svg";
 
-clipboardImageCopy(svg);
+clipboardImageCopy({
+  src: svg,
+});
 
 /* Clipboard 복사 결과: text()
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">

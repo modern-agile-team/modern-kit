@@ -1,12 +1,21 @@
+import { convertImageToBase64 } from '../../file';
 import { isClient } from '../../device';
 import { clipboardTextCopy } from '../clipboardTextCopy';
+
+interface ClipboardImageCopyProps {
+  src: string;
+  toPng?: boolean;
+}
 
 const fallbackImageCopy = async (res: Response) => {
   const textData = await res.text();
   await clipboardTextCopy(textData);
 };
 
-export const clipboardImageCopy = async (imgSrc: string) => {
+export const clipboardImageCopy = async ({
+  src,
+  toPng = false,
+}: ClipboardImageCopyProps) => {
   if (!isClient()) {
     console.error('Cannot be executed unless it is a browser environment.');
     return;
@@ -14,7 +23,10 @@ export const clipboardImageCopy = async (imgSrc: string) => {
 
   try {
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
-    const response = await fetch(imgSrc);
+    const convertedImgSrc = toPng
+      ? await convertImageToBase64(src, 'png')
+      : src;
+    const response = await fetch(convertedImgSrc);
 
     if (!hasNavigatorClipboard) {
       await fallbackImageCopy(response);
