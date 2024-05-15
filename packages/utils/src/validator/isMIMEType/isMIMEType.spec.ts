@@ -8,6 +8,9 @@ describe('isMIMEType', () => {
 
     expect(isMIMEType('')).toBeFalsy();
     expect(isMIMEType('abc')).toBeFalsy();
+    expect(isMIMEType([])).toBeFalsy();
+    expect(isMIMEType({})).toBeFalsy();
+    expect(isMIMEType(123)).toBeFalsy();
   });
 
   it('should narrow the type to MIMEType if isMIMEType returns true', () => {

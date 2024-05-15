@@ -1,6 +1,6 @@
 # getMIMETypeFromFile
 
-`File` 객체를 인자로받아, 해당 `File` 객체로부터 `MIME 타입`을 추출하는 함수입니다. 
+`File` 객체를 인자로받아, 해당 `File` 객체로부터 `MIME 타입`을 추출하는 함수입니다. `MIME 타입`을 가져오는데 실패하면 `빈 문자열('')`을 반환합니다.
 
 💡 **[isMIMEType](https://modern-agile-team.github.io/modern-kit/docs/utils/validator/isMIMEType)** 함수를 통해 타입을 `MIMEType`으로 좁힐 수 있습니다. 
 
