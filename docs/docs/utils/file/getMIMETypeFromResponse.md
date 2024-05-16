@@ -13,7 +13,7 @@
 
 ## Interface
 ```ts title="typescript"
-const getMIMETypeFromResponse: (response: Response) => Promise<string>
+const getMIMETypeFromResponse: (response: Response) => string
 ```
 
 ## Usage

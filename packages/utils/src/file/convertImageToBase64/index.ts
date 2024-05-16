@@ -1,13 +1,13 @@
-type ImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
+type ImageType = 'image/png' | 'image/jpeg' | 'image/jpg' | 'image/webp';
 
-const getAvailableToDataUrlImageType = (imageType: string) => {
-  if (imageType === 'jpg') return 'jpeg';
+const getAvailableToDataUrlImageType = (imageType: ImageType) => {
+  if (imageType === 'image/jpg') return 'image/jpeg';
   return imageType;
 };
 
 export const convertImageToBase64 = async (
   url: string,
-  imageType: ImageType = 'png'
+  imageType: ImageType = 'image/png'
 ) => {
   const img = new Image();
   img.src = url;
@@ -18,15 +18,24 @@ export const convertImageToBase64 = async (
       canvas.width = img.width;
       canvas.height = img.height;
 
-      const ctx = canvas.getContext('2d');
+      try {
+        const ctx = canvas.getContext('2d');
 
-      ctx?.drawImage(img, 0, 0);
+        if (!ctx) {
+          throw new Error('Failed to get 2d context');
+        }
 
-      const dataUrl = canvas.toDataURL(
-        `image/${getAvailableToDataUrlImageType(imageType)}`
-      );
+        ctx?.drawImage(img, 0, 0);
 
-      resolve(dataUrl);
+        const dataUrl = canvas.toDataURL(
+          getAvailableToDataUrlImageType(imageType)
+        );
+        resolve(dataUrl);
+      } catch (error: any) {
+        reject(
+          `Failed to convert the image to base64. message: ${error.message}`
+        );
+      }
     };
     img.onerror = () => reject('Failed to convert the image to base64.');
   });

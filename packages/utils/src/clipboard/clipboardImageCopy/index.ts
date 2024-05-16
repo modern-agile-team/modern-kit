@@ -1,4 +1,4 @@
-import { convertImageToBase64 } from '../../file';
+import { convertImageToBase64, getMIMETypeFromResponse } from '../../file';
 import { isClient } from '../../device';
 import { clipboardTextCopy } from '../clipboardTextCopy';
 
@@ -12,6 +12,10 @@ const fallbackImageCopy = async (res: Response) => {
   await clipboardTextCopy(textData);
 };
 
+const getImageSource = async (src: string, toPng: boolean) => {
+  return toPng ? await convertImageToBase64(src, 'image/png') : src;
+};
+
 export const clipboardImageCopy = async ({
   src,
   toPng = false,
@@ -23,10 +27,10 @@ export const clipboardImageCopy = async ({
 
   try {
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
-    const convertedImgSrc = toPng
-      ? await convertImageToBase64(src, 'png')
-      : src;
-    const response = await fetch(convertedImgSrc);
+    const imgSrc = await getImageSource(src, toPng);
+
+    const response = await fetch(imgSrc);
+    const mimeType = getMIMETypeFromResponse(response);
 
     if (!hasNavigatorClipboard) {
       await fallbackImageCopy(response);
@@ -40,16 +44,15 @@ export const clipboardImageCopy = async ({
       return;
     }
 
-    const cloneResponse = response.clone();
-    const blobData = await cloneResponse.blob();
-
-    if (blobData.type === 'image/svg+xml') {
+    if (mimeType === 'image/svg+xml') {
       await fallbackImageCopy(response);
       return;
     }
 
+    const blobData = await response.blob();
+
     await navigator.clipboard.write([
-      new ClipboardItem({ [blobData.type]: blobData }),
+      new ClipboardItem({ [mimeType]: blobData }),
     ]);
   } catch (err: any) {
     console.error(`Copying to the clipboard failed. message: ${err.message}`);
