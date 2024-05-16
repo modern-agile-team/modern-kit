@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { useDebounce } from '../useDebounce';
 import { Nullable } from '@modern-kit/types';
+import { usePreservedCallback } from '../usePreservedCallback';
 
 interface WindowSize {
   width: Nullable<number>;
@@ -27,11 +28,12 @@ export const useWindowSize = (options: useWindowSizeProps = {}) => {
     });
   }, []);
 
-  const debouncedResize = useDebounce(onResize, wait);
+  const debounceResize = useDebounce(onResize, wait);
+  const preservedDebounceResize = usePreservedCallback(debounceResize);
 
   const handleResize = useMemo(() => {
-    return isDebounce ? debouncedResize : onResize;
-  }, [onResize, isDebounce, debouncedResize]);
+    return isDebounce ? preservedDebounceResize : onResize;
+  }, [onResize, isDebounce, preservedDebounceResize]);
 
   useIsomorphicLayoutEffect(() => {
     onResize();
@@ -40,7 +42,7 @@ export const useWindowSize = (options: useWindowSizeProps = {}) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [onResize, handleResize]);
 
   return windowSize;
 };
