@@ -21,8 +21,7 @@ export const clipboardImageCopy = async ({
   toPng = false,
 }: ClipboardImageCopyProps) => {
   if (!isClient()) {
-    console.error('Cannot be executed unless it is a browser environment.');
-    return;
+    throw new Error('Cannot be executed unless it is a browser environment.');
   }
 
   try {
@@ -54,6 +53,6 @@ export const clipboardImageCopy = async ({
 
     return blobData;
   } catch (err: any) {
-    console.error(`Copying to the clipboard failed. message: ${err.message}`);
+    throw new Error(`Copying to the clipboard failed. message: ${err.message}`);
   }
 };

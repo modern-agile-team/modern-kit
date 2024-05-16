@@ -25,7 +25,7 @@ interface ClipboardImageCopyProps {
 const clipboardImageCopy: ({
   src,
   toPng,
-}: ClipboardImageCopyProps) => Promise<string | Blob | undefined>;
+}: ClipboardImageCopyProps) => Promise<string | Blob>;
 ```
 
 ## Usage

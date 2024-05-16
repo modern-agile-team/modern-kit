@@ -1,6 +1,7 @@
 export * from './useAsyncPreservedCallback';
 export * from './useAsyncProcessQueue';
 export * from './useBlockPromiseMultipleClick';
+export * from './useClipboard';
 export * from './useDebounce';
 export * from './useFileReader';
 export * from './useForceUpdate';
