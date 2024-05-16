@@ -53,6 +53,7 @@ export const clipboardImageCopy = async ({
 
     return blobData;
   } catch (err: any) {
-    throw new Error(`Copying to the clipboard failed. message: ${err.message}`);
+    console.error(`Copying to the clipboard failed. message: ${err.message}`);
+    throw err;
   }
 };
