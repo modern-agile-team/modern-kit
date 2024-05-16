@@ -12,9 +12,11 @@ import { useMemo } from 'react';
 
 ## Interface
 ```ts title="typescript"
-interface Size {
-  width: number | null;
-  height: number | null;
+type Nullable<T> = T | null;
+
+interface WindowSize {
+  width: Nullable<number>;
+  height: Nullable<number>;
 }
 
 interface useWindowSizeProps {
@@ -22,7 +24,7 @@ interface useWindowSizeProps {
   wait?: number; // debounce delay time, default: 300
 }
 
-const useWindowSize: (options?: useWindowSizeProps) => Size
+const useWindowSize: (options?: useWindowSizeProps) => WindowSize
 ```
 
 ## Usage

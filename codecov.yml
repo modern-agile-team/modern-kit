@@ -4,7 +4,7 @@ coverage:
     project:
       default:
         target: 100%
-        threshold: 30%
+        threshold: 20%
 
 comment:
   layout: 'header, reach, diff, flags, components'

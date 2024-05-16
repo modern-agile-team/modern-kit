@@ -14,6 +14,7 @@ describe('useImageStatus', () => {
 
     await waitFor(() => {
       result.current.ref(img);
+
       expect(result.current.imageStatus).toBe('loading');
     });
   });
@@ -28,9 +29,9 @@ describe('useImageStatus', () => {
     await waitFor(() => {
       result.current.ref(img);
       img.dispatchEvent(loadEvent);
-    });
 
-    expect(result.current.imageStatus).toBe('complete');
+      expect(result.current.imageStatus).toBe('complete');
+    });
   });
 
   it('should change status to "error" when an image fails to load', async () => {
@@ -43,9 +44,9 @@ describe('useImageStatus', () => {
     await waitFor(() => {
       result.current.ref(img);
       img.dispatchEvent(errorEvent);
-    });
 
-    expect(result.current.imageStatus).toBe('error');
+      expect(result.current.imageStatus).toBe('error');
+    });
   });
 
   it('should not change state if a nullish value is passed to ref', async () => {
@@ -53,8 +54,8 @@ describe('useImageStatus', () => {
 
     await waitFor(() => {
       result.current.ref(null as any);
-    });
 
-    expect(result.current.imageStatus).toBe('pending');
+      expect(result.current.imageStatus).toBe('pending');
+    });
   });
 });
