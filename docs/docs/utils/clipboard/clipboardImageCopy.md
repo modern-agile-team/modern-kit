@@ -22,11 +22,10 @@ interface ClipboardImageCopyProps {
   src: string;
   toPng?: boolean; // default: false
 }
-
 const clipboardImageCopy: ({
   src,
   toPng,
-}: ClipboardImageCopyProps) => Promise<void>;
+}: ClipboardImageCopyProps) => Promise<string | Blob | undefined>;
 ```
 
 ## Usage

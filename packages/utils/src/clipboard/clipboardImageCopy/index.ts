@@ -9,7 +9,7 @@ interface ClipboardImageCopyProps {
 
 const fallbackImageCopy = async (res: Response) => {
   const textData = await res.text();
-  await clipboardTextCopy(textData);
+  return await clipboardTextCopy(textData);
 };
 
 const getImageSource = async (src: string, toPng: boolean) => {
@@ -33,20 +33,17 @@ export const clipboardImageCopy = async ({
     const mimeType = getMIMETypeFromResponse(response);
 
     if (!hasNavigatorClipboard) {
-      await fallbackImageCopy(response);
-      return;
+      return await fallbackImageCopy(response);
     }
 
     const hasNavigatorClipboardWrite = 'write' in window.navigator.clipboard;
 
     if (!hasNavigatorClipboardWrite) {
-      await fallbackImageCopy(response);
-      return;
+      return await fallbackImageCopy(response);
     }
 
     if (mimeType === 'image/svg+xml') {
-      await fallbackImageCopy(response);
-      return;
+      return await fallbackImageCopy(response);
     }
 
     const blobData = await response.blob();
@@ -54,6 +51,8 @@ export const clipboardImageCopy = async ({
     await navigator.clipboard.write([
       new ClipboardItem({ [mimeType]: blobData }),
     ]);
+
+    return blobData;
   } catch (err: any) {
     console.error(`Copying to the clipboard failed. message: ${err.message}`);
   }
