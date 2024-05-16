@@ -9,7 +9,7 @@ export const getMIMEType = async (data: string | File | Response) => {
     }
 
     if (data instanceof Response) {
-      return await getMIMETypeFromResponse(data);
+      return getMIMETypeFromResponse(data);
     }
 
     return await getMIMETypeFromUrl(data);
