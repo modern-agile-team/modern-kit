@@ -48,5 +48,3 @@ assignees: ''
 // code
 ```
 - 
-
-<br />
