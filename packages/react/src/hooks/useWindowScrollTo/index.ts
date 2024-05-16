@@ -8,7 +8,7 @@ interface UseScrollToProps {
   dependencies?: DependencyList;
 }
 
-const useWindowScrollTo = ({
+export const useWindowScrollTo = ({
   left = 0,
   top = 0,
   behavior = 'auto',
@@ -24,5 +24,3 @@ const useWindowScrollTo = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [left, top, behavior, ...dependencies]);
 };
-
-export default useWindowScrollTo;
