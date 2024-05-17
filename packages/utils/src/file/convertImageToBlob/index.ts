@@ -1,9 +1,4 @@
-const TYPE_TO_FORMAT_MAPPER = {
-  png: 'image/png',
-  jpg: 'image/jpg',
-  jpeg: 'image/jpeg',
-  webp: 'image/webp',
-} as const;
+import { TYPE_TO_FORMAT_MAPPER } from 'file/constants';
 
 const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
   return new Promise((resolve, reject) => {
@@ -40,13 +35,14 @@ export const convertImageToBlob = (
           TYPE_TO_FORMAT_MAPPER[imageType],
         );
         resolve(result);
-      } catch (error) {
+      } catch (error: any) {
+        console.error(`Failed to load image. message: ${error.mesaage}`);
         reject(error);
       }
     };
 
-    img.onerror = (error) => {
-      reject(new Error(`Failed to load image: ${error}`));
+    img.onerror = () => {
+      reject(new Error('Failed to load image'));
     };
 
     img.src = url;

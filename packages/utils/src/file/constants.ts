@@ -31,3 +31,10 @@ export const MIME_TYPES = [
 ] as const;
 
 export type MIMEType = (typeof MIME_TYPES)[number];
+
+export const TYPE_TO_FORMAT_MAPPER = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+} as const;
