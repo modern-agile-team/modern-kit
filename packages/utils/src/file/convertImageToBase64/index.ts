@@ -12,7 +12,7 @@ export const convertImageToBase64 = async (
   const img = new Image();
   img.src = url;
 
-  return new Promise<string>((resolve) => {
+  return new Promise<string>((resolve, reject) => {
     img.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = img.width;
@@ -35,11 +35,10 @@ export const convertImageToBase64 = async (
         console.error(
           `Failed to convert the image to base64. message: ${err.message}`
         );
-        throw err;
+        reject(err);
       }
     };
-    img.onerror = () => {
-      throw new Error('Failed to convert the image to base64');
-    };
+    img.onerror = () =>
+      reject(new Error('Failed to convert the image to base64'));
   });
 };
