@@ -21,7 +21,7 @@ export const clipboardImageCopy = async ({
   toPng = false,
 }: ClipboardImageCopyProps) => {
   if (!isClient()) {
-    throw new Error('Cannot be executed unless it is a browser environment.');
+    throw new Error('Cannot be executed unless it is a client environment.');
   }
 
   try {

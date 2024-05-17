@@ -9,10 +9,10 @@ export const convertImageToBase64 = async (
   url: string,
   imageType: ImageType = 'image/png'
 ) => {
-  const img = new Image();
-  img.src = url;
-
   return new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    img.src = url;
+
     img.onload = () => {
       const canvas = document.createElement('canvas');
       canvas.width = img.width;
@@ -25,7 +25,7 @@ export const convertImageToBase64 = async (
           throw new Error('Failed to get 2d context');
         }
 
-        ctx?.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0);
 
         const dataUrl = canvas.toDataURL(
           getAvailableToDataUrlImageType(imageType)
