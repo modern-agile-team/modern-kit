@@ -1,4 +1,4 @@
-import { TYPE_TO_FORMAT_MAPPER } from 'file/constants';
+import { TYPE_TO_FORMAT_MAPPER } from '../constants';
 
 const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
   return new Promise((resolve, reject) => {
