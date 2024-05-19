@@ -3,17 +3,24 @@ import { useEffect, useRef } from 'react';
 
 interface UseKeyDownProps {
   autoFocus?: boolean;
-  keyDownCallbackMap: Record<string, (event: KeyboardEvent) => void>;
+  keyDownCallbackMap?: Record<string, (event: KeyboardEvent) => void>;
+  allKeyDownCallback?: (event: KeyboardEvent) => void;
 }
 
 export const useKeyDown = <T extends HTMLElement>({
   autoFocus = false,
-  keyDownCallbackMap,
+  keyDownCallbackMap = {},
+  allKeyDownCallback,
 }: UseKeyDownProps) => {
   const ref = useRef<T>(null);
 
   const onKeyDown = usePreservedCallback((event: KeyboardEvent) => {
     try {
+      if (allKeyDownCallback) {
+        allKeyDownCallback(event);
+        return;
+      }
+
       const callback = keyDownCallbackMap[event.key];
       callback(event);
       event.stopPropagation();
@@ -27,11 +34,15 @@ export const useKeyDown = <T extends HTMLElement>({
   useEffect(() => {
     if (!ref.current) return;
 
+    const element = ref.current;
+
     if (autoFocus) {
-      ref.current.focus();
+      element.focus();
     }
 
-    ref.current.addEventListener('keydown', onKeyDown);
+    element.addEventListener('keydown', onKeyDown);
+
+    return () => element.addEventListener('keydown', onKeyDown);
   }, [autoFocus, onKeyDown]);
 
   return { ref };

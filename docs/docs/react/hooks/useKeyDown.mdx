@@ -1,12 +1,14 @@
-import { useKeyDown } from '@modern-kit/react';
-
 # useKeyDown
 
-ref를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 이벤트를 발생시킵니다.
+`ref`를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 `key`에 트리거되어 콜백 함수를 호출합니다.
 
 `keyDownCallbackMap`의 key는 `KeyboardEvent.key`가 반환하는 값이 들어가야 합니다.
 
-`autoFocus` 옵션을 `true`로 제공한다면 마운트 시 `focus()` 함수가 호출되서 자동 포커싱 됩니다.
+만약 `모든 KeyboardEvent.key`에 대해 콜백 함수를 호출하고 싶다면 `allKeyDownCallback` props를 이용 할 수 있습니다.
+  - 💡 **allKeyDownCallback이 존재 할 경우 keyDownCallbackMap으로 지정한 콜백 함수는 무시합니다.**
+
+`autoFocus` 옵션을 `true`로 제공한다면 마운트 시 ref를 제공한 요소의 `focus()` 함수가 호출되서 자동 포커싱 됩니다.
+
 
 <br />
 
@@ -17,18 +19,35 @@ ref를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 
 ```ts title="typescript"
 interface UseKeyDownProps {
   autoFocus?: boolean;
-  keyDownCallbackMap: Record<string, (event: KeyboardEvent) => void>;
+  keyDownCallbackMap?: Record<string, (event: KeyboardEvent) => void>;
+  allKeyDownCallback?: (event: KeyboardEvent) => void;
 }
 
 const useKeyDown: <T extends HTMLElement>({
-  autoFocus, // default: false,
+  autoFocus,
   keyDownCallbackMap,
+  allKeyDownCallback,
 }: UseKeyDownProps) => {
   ref: React.RefObject<T>;
 };
 ```
 
 ## Usage
+### AllKeyDownCallback
+```tsx title="typescript"
+import { useKeyDown } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref } = useKeyDown<HTMLButtonElement>({
+    autoFocus: false,
+    allKeyDownCallback: (event) => console.log('All Key', event.key)
+  });
+
+  return <button ref={ref}>버튼</button>;
+};
+```
+
+### KeyDownCallbackMap
 ```tsx title="typescript"
 import { useKeyDown } from '@modern-kit/react';
 
@@ -36,8 +55,8 @@ const Example = () => {
   const { ref } = useKeyDown<HTMLButtonElement>({
     autoFocus: false,
     keyDownCallbackMap: {
-      Enter: (event) => console.log('Enter Click', event.key), 
-      Shift: (event) => console.log('Shift Click', event.key) 
+      Enter: (event) => console.log('Enter', event.key), 
+      Shift: (event) => console.log('Shift', event.key) 
     }
   });
 
