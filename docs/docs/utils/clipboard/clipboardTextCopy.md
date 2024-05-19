@@ -16,7 +16,7 @@ const clipboardTextCopy: (value: string) => Promise<string>
 ```ts title="typescript"
 import { clipboardTextCopy } from '@modern-kit/utils';
 
-clipboardTextCopy("복사 할 텍스트");
+const result = await clipboardTextCopy("복사 할 텍스트");
 ```
 
 ## Note

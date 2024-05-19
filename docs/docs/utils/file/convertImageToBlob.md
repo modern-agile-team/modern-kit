@@ -19,7 +19,7 @@ type CanvasImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
 
 const convertImageToBlob: (
   url: string,
-  imageType?: CanvasImageType
+  imageType?: CanvasImageType // default: 'png'
 ) => Promise<Blob>;
 ```
 
