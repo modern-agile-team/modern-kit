@@ -1,0 +1,50 @@
+import { useKeyDown } from '@modern-kit/react';
+
+# useKeyDown
+
+ref를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 이벤트를 발생시킵니다.
+
+`keyDownCallbackMap`의 key는 `KeyboardEvent.key`가 반환하는 값이 들어가야 합니다.
+
+`autoFocus` 옵션을 `true`로 제공한다면 마운트 시 `focus()` 함수가 호출되서 자동 포커싱 됩니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseKeyDownProps {
+  autoFocus?: boolean;
+  keyDownCallbackMap: Record<string, (event: KeyboardEvent) => void>;
+}
+
+const useKeyDown: <T extends HTMLElement>({
+  autoFocus, // default: false,
+  keyDownCallbackMap,
+}: UseKeyDownProps) => {
+  ref: React.RefObject<T>;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useKeyDown } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref } = useKeyDown<HTMLButtonElement>({
+    autoFocus: false,
+    keyDownCallbackMap: {
+      Enter: (event) => console.log('Enter Click', event.key), 
+      Shift: (event) => console.log('Shift Click', event.key) 
+    }
+  });
+
+  return <button ref={ref}>버튼</button>;
+};
+```
+
+## Note
+[KeyboardEvent.key(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
+[KeyboardEvent.key(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key)

@@ -10,6 +10,7 @@ export * from './useIntersectionObserver';
 export * from './useInterval';
 export * from './useIsMounted';
 export * from './useIsomorphicLayoutEffect';
+export * from './useKeydown';
 export * from './useMediaQuery';
 export * from './useMergeRefs';
 export * from './useOnClickOutside';
