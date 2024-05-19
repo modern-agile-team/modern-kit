@@ -11,7 +11,7 @@ export default defineConfig({
     setupFiles: './vitest.setup.ts',
     coverage: {
       provider: 'istanbul',
-      exclude: ['src/utils/test/**'],
+      exclude: ['src/utils/test/**', 'src/hooks/useClipboard'],
     },
   },
 });

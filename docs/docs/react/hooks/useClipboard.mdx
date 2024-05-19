@@ -1,0 +1,114 @@
+import { useClipboard } from '@modern-kit/react';
+import { useState, useEffect } from 'react';
+import img from '../../../assets/react.png';
+
+# useClipboard
+
+`텍스트`, `이미지`를 클립보드로 복사하는 함수를 제공하는 커스텀 훅입니다. 
+
+복사된 데이터는 `copiedData` 상태에 저장됩니다. `copyText`와 `copyImage`는 `성공 여부(Boolean)`를 반환합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useClipboard/index.ts)
+
+## Interface
+```ts title="typescript"
+type CopiedData = string | Blob | null;
+
+// Parameters<typeof clipboardImageCopy>[0]
+interface ClipboardImageCopyProps {
+  src: string;
+  toPng?: boolean;
+} 
+
+const useClipboard: () => {
+  copiedData: CopiedData;
+  copyText: (value: string) => Promise<boolean>;
+  copyImage: ({
+    src,
+    toPng,
+  }: Parameters<typeof clipboardImageCopy>[0]) => Promise<boolean>;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useClipboard } from '@modern-kit/react';
+import img from '../../assets/img.png';
+
+const Example = () => {
+  const { copiedData, copyText, copyImage } = useClipboard();
+  const [text, setText] = useState('');
+
+  const handleCopyText = async () => {
+    await copyText(text);
+    alert("클립보드에 복사됐습니다.");
+  };
+
+  const handleCopyImage = async () => {
+    await copyImage({ src: img });
+    alert("클립보드에 복사됐습니다.");
+  };
+
+  useEffect(() => {
+    console.log(copiedData);
+  }, [copiedData]);
+
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button onClick={handleCopyText}>텍스트 클립보드 복사</button>
+      </div>
+      <br />
+      <div>
+        <img src={img} alt="이미지" width={120} height={120} />
+        <button onClick={handleCopyImage}>이미지 클립보드 복사</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { copiedData, copyText, copyImage } = useClipboard();
+  const [text, setText] = useState('');
+  const handleCopyText = async () => {
+    await copyText(text);
+    alert("클립보드에 복사됐습니다.");
+  };
+  const handleCopyImage = async () => {
+    await copyImage({ src: img });
+    alert("클립보드에 복사됐습니다.");
+  };
+  useEffect(() => {
+    console.log(copiedData)
+  }, [copiedData]);
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button onClick={handleCopyText}>텍스트 클립보드 복사</button>
+      </div>
+      <br />
+      <div>
+        <img src={img} alt="이미지" width={120} height={120} />
+        <button onClick={handleCopyImage}>이미지 클립보드 복사</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

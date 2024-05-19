@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const clipboardTextCopy: (value: string) => Promise<string | undefined>
+const clipboardTextCopy: (value: string) => Promise<string>
 ```
 
 ## Usage

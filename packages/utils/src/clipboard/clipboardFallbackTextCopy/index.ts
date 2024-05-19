@@ -10,9 +10,11 @@ export const clipboardFallbackTextCopy = (value: string) => {
 
   try {
     document.execCommand('copy');
+    return value;
   } catch (err: any) {
     console.error(`Copying to the clipboard failed. message: ${err.message}`);
+    throw err;
+  } finally {
+    document.body.removeChild(textArea);
   }
-  document.body.removeChild(textArea);
-  return value;
 };

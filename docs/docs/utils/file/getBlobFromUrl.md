@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const getBlobFromUrl: (url: string) => Promise<Blob | undefined>
+const getBlobFromUrl: (url: string) => Promise<Blob>
 ```
 
 ## Usage

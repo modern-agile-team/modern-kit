@@ -3,8 +3,7 @@ import { clipboardFallbackTextCopy } from '../clipboardFallbackTextCopy';
 
 export const clipboardTextCopy = async (value: string) => {
   if (!isClient()) {
-    console.error('Cannot be executed unless it is a client environment.');
-    return;
+    throw new Error('Cannot be executed unless it is a client environment.');
   }
 
   try {
@@ -19,5 +18,6 @@ export const clipboardTextCopy = async (value: string) => {
     return value;
   } catch (err: any) {
     console.error(`Copying to the clipboard failed. message: ${err.message}`);
+    throw err;
   }
 };
