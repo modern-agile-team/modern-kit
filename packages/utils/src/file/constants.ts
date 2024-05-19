@@ -32,9 +32,11 @@ export const MIME_TYPES = [
 
 export type MIMEType = (typeof MIME_TYPES)[number];
 
-export const TYPE_TO_FORMAT_MAPPER = {
+export const CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER = {
   png: 'image/png',
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg',
   webp: 'image/webp',
 } as const;
+
+export type CanvasImageType = keyof typeof CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER;

@@ -7,6 +7,7 @@
 - **[HTMLCanvasElement: toBlob() - MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)**
 
 > Browsers are required to support `image/png`; many will support additional formats including `image/jpeg` and `image/webp`.
+
 <br />
 
 ## Code
@@ -14,12 +15,12 @@
 
 ## Interface
 ```ts title="typescript"
-type ImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
+type CanvasImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
 
 const convertImageToBlob: (
   url: string,
-  imageType?: ImageType // default: 'png'
-) => Promise<string>;
+  imageType?: CanvasImageType // default: 'png'
+) => Promise<Blob>;
 ```
 
 ## Usage

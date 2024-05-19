@@ -15,11 +15,11 @@
 
 ## Interface
 ```ts title="typescript"
-type ImageType = 'image/png' | 'image/jpeg' | 'image/jpg' | 'image/webp';
+type CanvasImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
 
 const convertImageToBase64: (
   url: string,
-  imageType?: ImageType // default: 'image/png'
+  imageType?: CanvasImageType // default: 'png'
 ) => Promise<string>;
 ```
 

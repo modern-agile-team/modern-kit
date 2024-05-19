@@ -21,10 +21,10 @@ export const useClipboard = () => {
   const copyImage = useCallback(
     async ({
       src,
-      toPng = false,
+      toText = false,
     }: Parameters<typeof clipboardImageCopy>[0]) => {
       try {
-        const result = await clipboardImageCopy({ src, toPng });
+        const result = await clipboardImageCopy({ src, toText });
         setCopiedData(result);
         return true;
       } catch (err: any) {

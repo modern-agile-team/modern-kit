@@ -20,7 +20,7 @@ const clipboardFallbackTextCopy: (value: string) => string
 ```ts title="typescript"
 import { clipboardFallbackTextCopy } from '@modern-kit/utils';
 
-clipboardFallbackTextCopy("복사 할 텍스트");
+const result = clipboardFallbackTextCopy("복사 할 텍스트");
 ```
 
 ## Note
