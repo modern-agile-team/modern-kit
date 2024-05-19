@@ -1,0 +1,31 @@
+# useClientEffect
+
+클라이언트 환경에서만 실행되는 useEffect 훅
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useClientEffect/index.ts)
+
+## Interface
+```ts title="typescript"
+const useClientEffect: (callback: React.EffectCallback, deps?: React.DependencyList) => void;
+```
+
+## Usage
+```tsx title="typescript"
+import { useClientEffect } from '@modern-kit/react';
+
+const Example = () => {
+  useClientEffect(() => {
+    console.log("클라이언트 환경")
+  }, []);
+
+  return (
+    <div>
+      {bool && <p>render</p>}
+      <button onClick={toggle}>Toggle Button</button>
+    </div>
+  );
+}
+```
