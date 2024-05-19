@@ -1,13 +1,11 @@
-type ImageType = 'image/png' | 'image/jpeg' | 'image/jpg' | 'image/webp';
-
-const getAvailableToDataUrlImageType = (imageType: ImageType) => {
-  if (imageType === 'image/jpg') return 'image/jpeg';
-  return imageType;
-};
+import {
+  CanvasImageType,
+  CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER,
+} from '../constants';
 
 export const convertImageToBase64 = async (
   url: string,
-  imageType: ImageType = 'image/png'
+  imageType: CanvasImageType = 'png'
 ) => {
   return new Promise<string>((resolve, reject) => {
     const img = new Image();
@@ -28,7 +26,7 @@ export const convertImageToBase64 = async (
         ctx.drawImage(img, 0, 0);
 
         const dataUrl = canvas.toDataURL(
-          getAvailableToDataUrlImageType(imageType)
+          CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER[imageType]
         );
         resolve(dataUrl);
       } catch (err: any) {

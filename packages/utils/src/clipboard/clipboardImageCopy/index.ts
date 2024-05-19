@@ -1,24 +1,22 @@
-import { convertImageToBase64, getMIMETypeFromResponse } from '../../file';
+import { convertImageToBlob } from '../../file';
 import { isClient } from '../../device';
 import { clipboardTextCopy } from '../clipboardTextCopy';
 
 interface ClipboardImageCopyProps {
   src: string;
-  toPng?: boolean;
+  toText?: boolean;
 }
 
-const fallbackImageCopy = async (res: Response) => {
-  const textData = await res.text();
-  return await clipboardTextCopy(textData);
-};
+const fallbackImageCopy = async (src: string) => {
+  const response = await fetch(src);
+  const textData = await response.text();
 
-const getImageSource = async (src: string, toPng: boolean) => {
-  return toPng ? await convertImageToBase64(src, 'image/png') : src;
+  return await clipboardTextCopy(textData);
 };
 
 export const clipboardImageCopy = async ({
   src,
-  toPng = false,
+  toText = false,
 }: ClipboardImageCopyProps) => {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
@@ -26,29 +24,25 @@ export const clipboardImageCopy = async ({
 
   try {
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
-    const imgSrc = await getImageSource(src, toPng);
-
-    const response = await fetch(imgSrc);
-    const mimeType = getMIMETypeFromResponse(response);
 
     if (!hasNavigatorClipboard) {
-      return await fallbackImageCopy(response);
+      return await fallbackImageCopy(src);
     }
 
     const hasNavigatorClipboardWrite = 'write' in window.navigator.clipboard;
 
     if (!hasNavigatorClipboardWrite) {
-      return await fallbackImageCopy(response);
+      return await fallbackImageCopy(src);
     }
 
-    if (mimeType === 'image/svg+xml') {
-      return await fallbackImageCopy(response);
+    if (toText) {
+      return await fallbackImageCopy(src);
     }
 
-    const blobData = await response.blob();
+    const blobData = await convertImageToBlob(src, 'png');
 
     await navigator.clipboard.write([
-      new ClipboardItem({ [mimeType]: blobData }),
+      new ClipboardItem({ [blobData.type]: blobData }),
     ]);
 
     return blobData;

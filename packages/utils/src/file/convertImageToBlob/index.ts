@@ -1,7 +1,10 @@
-import { TYPE_TO_FORMAT_MAPPER } from '../constants';
+import {
+  CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER,
+  CanvasImageType,
+} from '../constants';
 
 const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (blob) {
         resolve(blob);
@@ -14,9 +17,9 @@ const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
 
 export const convertImageToBlob = (
   url: string,
-  imageType: keyof typeof TYPE_TO_FORMAT_MAPPER = 'png',
+  imageType: CanvasImageType = 'png'
 ) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<Blob>((resolve, reject) => {
     const img = new Image();
 
     img.onload = async () => {
@@ -32,7 +35,7 @@ export const convertImageToBlob = (
 
         const result = await createBlobFromCanvas(
           canvas,
-          TYPE_TO_FORMAT_MAPPER[imageType],
+          CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER[imageType]
         );
         resolve(result);
       } catch (error: any) {
