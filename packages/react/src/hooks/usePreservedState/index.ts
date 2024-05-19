@@ -4,7 +4,7 @@ import { deepEqual } from '@modern-kit/utils';
 
 export const usePreservedState = <T>(
   value: T,
-  comparator?: (source: T, target: T) => boolean
+  comparator?: (source: any, target: any) => boolean
 ) => {
   const [preservedState, setPreservedState] = useState(value);
   const callbackComparator = usePreservedCallback(comparator ?? deepEqual);
