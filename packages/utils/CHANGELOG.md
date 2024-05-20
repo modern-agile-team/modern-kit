@@ -1,5 +1,23 @@
 # @modern-kit/utils
 
+## 1.4.0
+
+### Minor Changes
+
+- [#127](https://github.com/modern-agile-team/modern-kit/pull/127) [`54d89df`](https://github.com/modern-agile-team/modern-kit/commit/54d89dfd47e4b68d25b4982441a2c76182d5ca6e) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): MIME 관련 유틸 함수 추가(getMIMEType\*) - @ssi02014
+
+- [#135](https://github.com/modern-agile-team/modern-kit/pull/135) [`d1a29b7`](https://github.com/modern-agile-team/modern-kit/commit/d1a29b735465c73c77d687e4270fd497f32afe39) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): convertImageToBlob 함수 추가 완료
+
+- [#129](https://github.com/modern-agile-team/modern-kit/pull/129) [`75e45fc`](https://github.com/modern-agile-team/modern-kit/commit/75e45fc2f83406f45acac2c638e07fcfca66362f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): converImageToBase64 함수 추가 - @ssi02014
+
+- [#121](https://github.com/modern-agile-team/modern-kit/pull/121) [`65c6667`](https://github.com/modern-agile-team/modern-kit/commit/65c6667e0b4946ab4c233eaaca9f525f3f9b6a84) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): Add Clipboard 유틸 함수 추가 (clipboardFallbackTextCopy, clipboardTextCopy, clipboardImageCopy) - @ssi02014
+
+### Patch Changes
+
+- [#120](https://github.com/modern-agile-team/modern-kit/pull/120) [`76cb6b5`](https://github.com/modern-agile-team/modern-kit/commit/76cb6b5d1cf88f7c50bda81eb948fc0b051edc5a) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: utils의 hasOwnProperty 함수 재활용 및 useAsyncProcessQueue 타입 개선
+
+- [#118](https://github.com/modern-agile-team/modern-kit/pull/118) [`c8bdbbe`](https://github.com/modern-agile-team/modern-kit/commit/c8bdbbe6de50a517eb25b5c8f3306b1c1c192184) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: deleteFalsyProperties 개선
+
 ## 1.3.0
 
 ### Minor Changes
