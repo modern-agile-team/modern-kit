@@ -72,4 +72,39 @@ describe('useKeyDown', () => {
 
     expect(enterMockFn).not.toBeCalled();
   });
+
+  it('should not execute if a function is not assigned to the key', async () => {
+    const { user } = renderSetup(<TestComponent autoFocus />);
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).not.toBeCalled();
+  });
+
+  it('should call console.error if an error occurs in the callback function', async () => {
+    const consoleErrorMock = vi.spyOn(console, 'error');
+
+    const { user } = renderSetup(
+      <TestComponent
+        autoFocus
+        keyDownCallbackMap={{
+          Enter: () => {
+            throw new Error('error');
+          },
+        }}
+      />
+    );
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(consoleErrorMock).toBeCalled();
+  });
 });
