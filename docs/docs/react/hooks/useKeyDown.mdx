@@ -3,7 +3,7 @@
 `ref`를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 `key`에 트리거되어 콜백 함수를 호출합니다.
 
 `keyDownCallbackMap`의 key는 `KeyboardEvent.key`가 반환하는 값이 들어가야 합니다.
-  - 💡 [Key values for keyboard events](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
+  - 💡 [Key values for keyboard events](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) 을 기반으로 자주 사용되는 `KeyboardEvent.key`들은 `타입 추론`을 지원합니다. 타입 추론되지 않은 `KeyboardEvent.key`는 직접 입력하셔야 됩니다.
 
 만약 `모든 KeyboardEvent.key`에 대해 콜백 함수를 호출하고 싶다면 `allKeyDownCallback` props를 이용 할 수 있습니다.
   - 💡 **allKeyDownCallback이 존재 할 경우 keyDownCallbackMap으로 지정한 콜백 함수는 무시합니다.**

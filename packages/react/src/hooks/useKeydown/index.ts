@@ -1,10 +1,12 @@
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { useRef } from 'react';
+import { KeyDownCallbackMap } from './keyDownCallbackMap';
+import { isFunction } from '@modern-kit/utils';
 
 interface UseKeyDownProps {
   autoFocus?: boolean;
-  keyDownCallbackMap?: Record<string, (event: KeyboardEvent) => void>;
+  keyDownCallbackMap?: Partial<KeyDownCallbackMap>;
   allKeyDownCallback?: (event: KeyboardEvent) => void;
 }
 
@@ -23,7 +25,10 @@ export const useKeyDown = <T extends HTMLElement>({
       }
 
       const callback = keyDownCallbackMap[event.key];
-      callback(event);
+
+      if (isFunction(callback)) {
+        callback(event);
+      }
       event.stopPropagation();
     } catch (err: any) {
       console.error(
