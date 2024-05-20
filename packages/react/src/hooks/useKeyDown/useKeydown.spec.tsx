@@ -54,6 +54,38 @@ describe('useKeyDown', () => {
     expect(allKeyMockFn).toBeCalledTimes(2);
   });
 
+  it('should bind the event if enabled is true', async () => {
+    // enabled false setting
+    const { user, rerender } = renderSetup(
+      <TestComponent
+        enabled={false}
+        keyDownCallbackMap={{ Enter: enterMockFn }}
+      />
+    );
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).not.toBeCalled();
+
+    // enabled true setting
+    rerender(
+      <TestComponent
+        enabled={true}
+        keyDownCallbackMap={{ Enter: enterMockFn }}
+      />
+    );
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).toBeCalled();
+  });
+
   it('should automatically focus when autoFocus is true', async () => {
     renderSetup(<TestComponent autoFocus />);
 
@@ -61,10 +93,43 @@ describe('useKeyDown', () => {
     expect(button).toHaveFocus();
   });
 
-  it('should call a console error if there is no function for the specified key', async () => {
+  it('should not execute if a function is not assigned to the key', async () => {
+    const { user } = renderSetup(<TestComponent autoFocus />);
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).not.toBeCalled();
+  });
+
+  it('should not execute if a function is not assigned to the key', async () => {
+    const { user } = renderSetup(<TestComponent autoFocus />);
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).not.toBeCalled();
+  });
+
+  it('should call console.error if an error occurs in the callback function', async () => {
     const consoleErrorMock = vi.spyOn(console, 'error');
 
-    const { user } = renderSetup(<TestComponent autoFocus />);
+    const { user } = renderSetup(
+      <TestComponent
+        autoFocus
+        keyDownCallbackMap={{
+          Enter: () => {
+            throw new Error('error');
+          },
+        }}
+      />
+    );
 
     const button = screen.getByRole('button');
 
