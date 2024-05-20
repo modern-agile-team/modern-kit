@@ -1,5 +1,6 @@
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 interface UseKeyDownProps {
   autoFocus?: boolean;
@@ -31,7 +32,7 @@ export const useKeyDown = <T extends HTMLElement>({
     }
   });
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!ref.current) return;
 
     const element = ref.current;
