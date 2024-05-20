@@ -18,23 +18,17 @@ export const useKeyDown = <T extends HTMLElement>({
   const ref = useRef<T>(null);
 
   const onKeyDown = usePreservedCallback((event: KeyboardEvent) => {
-    try {
-      if (allKeyDownCallback) {
-        allKeyDownCallback(event);
-        return;
-      }
-
-      const callback = keyDownCallbackMap[event.key];
-
-      if (isFunction(callback)) {
-        callback(event);
-      }
-      event.stopPropagation();
-    } catch (err: any) {
-      console.error(
-        `Failed to call the onKeyDown function. message: ${err.message}`
-      );
+    if (allKeyDownCallback) {
+      allKeyDownCallback(event);
+      return;
     }
+
+    const callback = keyDownCallbackMap[event.key];
+
+    if (isFunction(callback)) {
+      callback(event);
+    }
+    event.stopPropagation();
   });
 
   useIsomorphicLayoutEffect(() => {

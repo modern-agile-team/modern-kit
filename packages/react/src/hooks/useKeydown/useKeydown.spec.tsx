@@ -61,9 +61,7 @@ describe('useKeyDown', () => {
     expect(button).toHaveFocus();
   });
 
-  it('should call a console error if there is no function for the specified key', async () => {
-    const consoleErrorMock = vi.spyOn(console, 'error');
-
+  it('should not execute if a function is not assigned to the key', async () => {
     const { user } = renderSetup(<TestComponent autoFocus />);
 
     const button = screen.getByRole('button');
@@ -72,6 +70,6 @@ describe('useKeyDown', () => {
 
     await user.keyboard('{Enter}');
 
-    expect(consoleErrorMock).toBeCalled();
+    expect(enterMockFn).not.toBeCalled();
   });
 });
