@@ -39,4 +39,4 @@ const values = objectValues(obj);
 ```
 
 ## Note
-[Object.values()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
+- [Object.values() - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/values)

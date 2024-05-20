@@ -40,4 +40,4 @@ const keys = objectKeys(obj);
 ```
 
 ## Note
-[Object.keys()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+- [Object.keys() - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)

@@ -45,4 +45,4 @@ const entries = objectEntries(obj);
 ```
 
 ## Note
-[Object.entries()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
+- [Object.entries() - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)

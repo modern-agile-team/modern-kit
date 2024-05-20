@@ -15,7 +15,7 @@
 
 <br />
 
-## Documentation
+## Official Documentation
 `@modern-kit`의 공식 문서는 아래 웹사이트에서 확인하실 수 있습니다
 - <a href="https://modern-agile-team.github.io/modern-kit" target="_blank">https://modern-agile-team.github.io/modern-kit</a>
 
@@ -111,6 +111,23 @@ yarn build:docs
 ```
 
 - `build:docs` 명령어를 통해 관리하는 document의 build를 진행합니다.
+
+<br />
+
+## Documentation
+- @modern-kit은 [docusaurus](https://docusaurus.io/)를 기반으로 문서화 작업을 진행합니다.
+```shell
+yarn start:docs
+```
+
+- `start:docs` 명령어를 통해 개발 서버를 실행해 문서 작업을 미리 확인 할 수 있습니다.
+
+```shell
+yarn build:docs
+```
+
+- `build:docs` 명령어를 통해 document build를 진행합니다. 
+- 신규 문서 작업 후 해당 build 작업이 정상적으로 진행되어야 합니다.
 
 <br />
 
