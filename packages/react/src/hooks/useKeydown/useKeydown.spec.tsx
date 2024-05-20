@@ -54,6 +54,38 @@ describe('useKeyDown', () => {
     expect(allKeyMockFn).toBeCalledTimes(2);
   });
 
+  it('should bind the event if enabled is true', async () => {
+    // enabled false setting
+    const { user, rerender } = renderSetup(
+      <TestComponent
+        enabled={false}
+        keyDownCallbackMap={{ Enter: enterMockFn }}
+      />
+    );
+
+    const button = screen.getByRole('button');
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).not.toBeCalled();
+
+    // enabled true setting
+    rerender(
+      <TestComponent
+        enabled={true}
+        keyDownCallbackMap={{ Enter: enterMockFn }}
+      />
+    );
+
+    button.focus();
+
+    await user.keyboard('{Enter}');
+
+    expect(enterMockFn).toBeCalled();
+  });
+
   it('should automatically focus when autoFocus is true', async () => {
     renderSetup(<TestComponent autoFocus />);
 
