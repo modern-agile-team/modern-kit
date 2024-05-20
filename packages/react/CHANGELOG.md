@@ -1,5 +1,19 @@
 # @modern-kit/react
 
+## 1.5.0
+
+### Minor Changes
+
+- [#134](https://github.com/modern-agile-team/modern-kit/pull/134) [`20e4a45`](https://github.com/modern-agile-team/modern-kit/commit/20e4a45e18d0413db3f01b1ad52ce8b094baae08) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useClipboard 커스텀 훅 추가 - @ssi02014
+
+- [#142](https://github.com/modern-agile-team/modern-kit/pull/142) [`795257d`](https://github.com/modern-agile-team/modern-kit/commit/795257d6c90141aa2c4b48da3f4ce542098701c4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useKeyDown 커스텀 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [#133](https://github.com/modern-agile-team/modern-kit/pull/133) [`85aa78d`](https://github.com/modern-agile-team/modern-kit/commit/85aa78d568a87ab0461903a59b9b6c5374266984) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useWindowScroll named export로 변경
+
+- [#120](https://github.com/modern-agile-team/modern-kit/pull/120) [`76cb6b5`](https://github.com/modern-agile-team/modern-kit/commit/76cb6b5d1cf88f7c50bda81eb948fc0b051edc5a) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: utils의 hasOwnProperty 함수 재활용 및 useAsyncProcessQueue 타입 개선
+
 ## 1.4.1
 
 ### Patch Changes
