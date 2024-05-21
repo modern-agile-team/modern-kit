@@ -8,7 +8,7 @@ export const setStorageItem = <T>(
   value: T | (() => T)
 ) => {
   if (!isClient()) {
-    console.warn('Not running in a client environment.');
+    console.error('Cannot be executed unless it is a client environment.');
     return;
   }
 
@@ -18,6 +18,6 @@ export const setStorageItem = <T>(
 
     storage.setItem(key, JSON.stringify(newValue));
   } catch (error) {
-    console.warn(`Error setting ${type} key "${key}"`);
+    console.error(`Error setting ${type} key "${key}"`);
   }
 };

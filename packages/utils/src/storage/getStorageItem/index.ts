@@ -13,7 +13,7 @@ export const getStorageItem = <T>(
     : initialValue;
 
   if (!isClient()) {
-    console.warn('Not running in a client environment.');
+    console.error('Cannot be executed unless it is a client environment.');
     return initialValueToUse;
   }
 
@@ -23,7 +23,7 @@ export const getStorageItem = <T>(
 
     return storedValue ? JSON.parse(storedValue) : initialValueToUse;
   } catch (error) {
-    console.warn(`Error reading ${type} key "${key}"`);
+    console.error(`Error reading ${type} key "${key}"`);
     return initialValueToUse;
   }
 };

@@ -3,7 +3,7 @@ import { isClient } from '../../device';
 
 export const removeStorageItem = (type: StorageType, key: string) => {
   if (!isClient()) {
-    console.warn('Not running in a client environment.');
+    console.error('Cannot be executed unless it is a client environment.');
     return;
   }
 
@@ -11,6 +11,6 @@ export const removeStorageItem = (type: StorageType, key: string) => {
     const storage = window[type];
     storage.removeItem(key);
   } catch (error) {
-    console.warn(`Error removing ${type} key "${key}"`);
+    console.error(`Error removing ${type} key "${key}"`);
   }
 };
