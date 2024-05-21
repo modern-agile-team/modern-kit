@@ -106,12 +106,6 @@ yarn build
 
 - `build` 명령어를 통해 관리하는 모든 패키지들의 build, 상단의 lint, test, typecheck를 모두 진행합니다.
 
-```shell
-yarn build:docs
-```
-
-- `build:docs` 명령어를 통해 관리하는 document의 build를 진행합니다.
-
 <br />
 
 ## Documentation
