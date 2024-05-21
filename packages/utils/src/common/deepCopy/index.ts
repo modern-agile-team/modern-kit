@@ -57,7 +57,7 @@ export const deepCopy = <T>(source: T, map = new WeakMap()): T => {
   clone = Object.create(Object.getPrototypeOf(source));
   map.set(source, clone);
   for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
+    if (hasProperty(source, key)) {
       clone[key] = deepCopy((source as Record<string, any>)[key], map);
     }
   }
