@@ -1,48 +1,65 @@
 import { hasProperty } from '../../validator';
 
-export const deepCopy = <T>(source: T): T => {
+export const deepCopy = <T>(source: T, map = new WeakMap()): T => {
   // Primitive Type
   if (typeof source !== 'object' || source === null) {
     return source;
   }
 
+  // Handling circular references
+  if (map.has(source)) {
+    return map.get(source);
+  }
+
+  let clone: any;
+
   // Array
   if (Array.isArray(source)) {
-    const newArray: any[] = [];
-
+    clone = [];
+    map.set(source, clone);
     for (const item of source) {
-      newArray.push(deepCopy(item));
+      clone.push(deepCopy(item, map));
     }
-    return newArray as T;
+    return clone as T;
   }
 
   // Set
   if (source instanceof Set) {
-    const newSet: Set<any> = new Set();
-
+    clone = new Set();
+    map.set(source, clone);
     for (const item of source) {
-      newSet.add(deepCopy(item));
+      clone.add(deepCopy(item, map));
     }
-    return newSet as T;
+    return clone as T;
   }
 
   // Map
   if (source instanceof Map) {
-    const newMap: Map<any, any> = new Map();
-
+    clone = new Map();
+    map.set(source, clone);
     for (const [key, value] of source) {
-      newMap.set(deepCopy(key), deepCopy(value));
+      clone.set(deepCopy(key, map), deepCopy(value, map));
     }
-    return newMap as T;
+    return clone as T;
+  }
+
+  // Date
+  if (source instanceof Date) {
+    return new Date(source.getTime()) as T;
+  }
+
+  // RegExp
+  if (source instanceof RegExp) {
+    return new RegExp(source.source, source.flags) as T;
   }
 
   // Object
-  const newObject: Record<string, any> = {};
-
+  clone = Object.create(Object.getPrototypeOf(source));
+  map.set(source, clone);
   for (const key in source) {
-    if (hasProperty(source, key)) {
-      newObject[key] = deepCopy(source[key]);
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      clone[key] = deepCopy((source as Record<string, any>)[key], map);
     }
   }
-  return newObject as T;
+  return clone as T;
 };
