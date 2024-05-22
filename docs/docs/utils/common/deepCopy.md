@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const deepCopy: <T>(source: T) => T
+const deepCopy: <T>(value: T) => T
 ```
 
 ## Usage

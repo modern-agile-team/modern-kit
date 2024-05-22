@@ -71,7 +71,7 @@ export const deepCopy = <T>(value: T) => {
       }
     }
 
-    return copyWthRecursion(target) as T;
+    return newObject as T;
   };
 
   return copyWthRecursion(value);
