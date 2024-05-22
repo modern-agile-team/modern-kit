@@ -3,7 +3,7 @@ import { hasProperty } from '../../validator';
 export const deepCopy = <T>(value: T) => {
   const referenceMap = new WeakMap();
 
-  const deepClone = (target: T): T => {
+  const copyWthRecursion = (target: T): T => {
     // Primitive Type
     if (typeof target !== 'object' || target === null) {
       return target;
@@ -20,7 +20,7 @@ export const deepCopy = <T>(value: T) => {
 
       referenceMap.set(target, newArray);
       for (const item of target) {
-        newArray.push(deepClone(item));
+        newArray.push(copyWthRecursion(item));
       }
       return newArray as T;
     }
@@ -31,7 +31,7 @@ export const deepCopy = <T>(value: T) => {
 
       referenceMap.set(target, newSet);
       for (const item of target) {
-        newSet.add(deepClone(item));
+        newSet.add(copyWthRecursion(item));
       }
       return newSet as T;
     }
@@ -42,7 +42,7 @@ export const deepCopy = <T>(value: T) => {
 
       referenceMap.set(target, newMap);
       for (const [key, value] of target) {
-        newMap.set(deepClone(key), deepClone(value));
+        newMap.set(copyWthRecursion(key), copyWthRecursion(value));
       }
       return newMap as T;
     }
@@ -65,12 +65,14 @@ export const deepCopy = <T>(value: T) => {
     referenceMap.set(target, newObject);
     for (const key in target) {
       if (hasProperty(target, key)) {
-        newObject[key] = deepClone((target as Record<PropertyKey, any>)[key]);
+        newObject[key] = copyWthRecursion(
+          (target as Record<PropertyKey, any>)[key]
+        );
       }
     }
 
-    return deepClone(target) as T;
+    return copyWthRecursion(target) as T;
   };
 
-  return deepClone(value);
+  return copyWthRecursion(value);
 };
