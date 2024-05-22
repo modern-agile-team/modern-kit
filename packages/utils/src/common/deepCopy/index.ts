@@ -1,48 +1,78 @@
 import { hasProperty } from '../../validator';
 
-export const deepCopy = <T>(source: T): T => {
-  // Primitive Type
-  if (typeof source !== 'object' || source === null) {
-    return source;
-  }
+export const deepCopy = <T>(value: T) => {
+  const referenceMap = new WeakMap();
 
-  // Array
-  if (Array.isArray(source)) {
-    const newArray: any[] = [];
-
-    for (const item of source) {
-      newArray.push(deepCopy(item));
+  const copyWthRecursion = (target: T): T => {
+    // Primitive Type
+    if (typeof target !== 'object' || target === null) {
+      return target;
     }
-    return newArray as T;
-  }
 
-  // Set
-  if (source instanceof Set) {
-    const newSet: Set<any> = new Set();
-
-    for (const item of source) {
-      newSet.add(deepCopy(item));
+    // Handling circular references
+    if (referenceMap.has(target)) {
+      return referenceMap.get(target);
     }
-    return newSet as T;
-  }
 
-  // Map
-  if (source instanceof Map) {
-    const newMap: Map<any, any> = new Map();
+    // Array
+    if (Array.isArray(target)) {
+      const newArray: any[] = [];
 
-    for (const [key, value] of source) {
-      newMap.set(deepCopy(key), deepCopy(value));
+      referenceMap.set(target, newArray);
+      for (const item of target) {
+        newArray.push(copyWthRecursion(item));
+      }
+      return newArray as T;
     }
-    return newMap as T;
-  }
 
-  // Object
-  const newObject: Record<string, any> = {};
+    // Set
+    if (target instanceof Set) {
+      const newSet = new Set();
 
-  for (const key in source) {
-    if (hasProperty(source, key)) {
-      newObject[key] = deepCopy(source[key]);
+      referenceMap.set(target, newSet);
+      for (const item of target) {
+        newSet.add(copyWthRecursion(item));
+      }
+      return newSet as T;
     }
-  }
-  return newObject as T;
+
+    // Map
+    if (target instanceof Map) {
+      const newMap = new Map();
+
+      referenceMap.set(target, newMap);
+      for (const [key, value] of target) {
+        newMap.set(copyWthRecursion(key), copyWthRecursion(value));
+      }
+      return newMap as T;
+    }
+
+    // Date
+    if (target instanceof Date) {
+      return new Date(target.getTime()) as T;
+    }
+
+    // RegExp
+    if (target instanceof RegExp) {
+      return new RegExp(target.source, target.flags) as T;
+    }
+
+    // Object
+    const newObject: Record<PropertyKey, any> = Object.create(
+      Object.getPrototypeOf(target)
+    );
+
+    referenceMap.set(target, newObject);
+    for (const key in target) {
+      if (hasProperty(target, key)) {
+        newObject[key] = copyWthRecursion(
+          (target as Record<PropertyKey, any>)[key]
+        );
+      }
+    }
+
+    return newObject as T;
+  };
+
+  return copyWthRecursion(value);
 };
