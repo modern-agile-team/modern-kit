@@ -9,12 +9,18 @@ describe('isArray', () => {
   });
 
   it('should narrow the type through if statements', () => {
-    const testValue = ['foo'] as string | string[];
+    const defaultTestArray = ['foo'] as string | string[];
 
-    if (isArray<string>(testValue)) {
-      expectTypeOf(testValue).toEqualTypeOf<string[]>();
+    if (isArray(defaultTestArray)) {
+      expectTypeOf(defaultTestArray).toEqualTypeOf<string[]>();
     } else {
-      expectTypeOf(testValue).toEqualTypeOf<string>();
+      expectTypeOf(defaultTestArray).toEqualTypeOf<string>();
+    }
+
+    const readonlyTestArray = ['foo'] as const;
+
+    if (isArray(readonlyTestArray)) {
+      expectTypeOf(readonlyTestArray).toEqualTypeOf<readonly ['foo']>();
     }
   });
 });

@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isArray: <T>(value: unknown) => value is T[]
+const isArray: <T extends readonly any[]>(value: unknown) => value is T
 ```
 
 ## Usage
@@ -17,7 +17,6 @@ const isArray: <T>(value: unknown) => value is T[]
 import { isArray } from '@modern-kit/utils';
 
 isArray([]); // true
-
 isArray(() => {}); // false
 isArray('123'); // false
 isArray(123); // false

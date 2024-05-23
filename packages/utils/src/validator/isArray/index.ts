@@ -1,3 +1,5 @@
-export const isArray = <T>(value: unknown): value is Array<T> => {
+export const isArray = <T extends readonly any[]>(
+  value: unknown
+): value is T => {
   return Array.isArray(value);
 };
