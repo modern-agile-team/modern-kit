@@ -1,3 +1,4 @@
+export * from './array';
 export * from './clipboard';
 export * from './common';
 export * from './device';
