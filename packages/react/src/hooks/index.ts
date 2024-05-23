@@ -3,6 +3,7 @@ export * from './useAsyncProcessQueue';
 export * from './useBlockPromiseMultipleClick';
 export * from './useClipboard';
 export * from './useDebounce';
+export * from './useDocumentTitle';
 export * from './useFileReader';
 export * from './useForceUpdate';
 export * from './useImageStatus';

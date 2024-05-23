@@ -1,0 +1,82 @@
+import { useDocumentTitle } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useDocumentTitle
+
+`SEO`와는 관계 없이 `document.title`을 동적으로 변경시켜주는 커스텀 훅입니다.
+
+`preserveTitleOnUnmount` 옵션을 `true`로 준다면 `unmount` 시에 변경 된 타이틀로 유지할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDocumentTitle/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseDocumentTitleOption {
+  preserveTitleOnUnmount?: boolean; // default: false
+}
+
+const useDocumentTitle: (
+  title: string,
+  { preserveTitleOnUnmount }?: UseDocumentTitleOption
+) => void;
+```
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDocumentTitle } from '@modern-kit/react';
+
+const Example = () => {
+  const [title, setTitle] = useState('useDocumentTitle');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChangeTitle = () => {
+    setTitle(inputValue);
+    alert('타이틀이 변경됐습니다.');
+  };
+
+  useDocumentTitle(title, {
+    preserveTitleOnUnmount: false, // default: false
+  });
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button onClick={handleChangeTitle}>타이틀 변경</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [title, setTitle] = useState('useDocumentTitle');
+  const [inputValue, setInputValue] = useState('');
+  const handleChangeTitle = () => {
+    setTitle(inputValue);
+    alert('타이틀이 변경됐습니다.');
+  };
+  useDocumentTitle(title, {
+    preserveTitleOnUnmount: false, // default: false
+  });
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button onClick={handleChangeTitle}>타이틀 변경</button>
+    </div>
+  );
+};
+
+<Example />
