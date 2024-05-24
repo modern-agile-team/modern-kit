@@ -1,5 +1,5 @@
 // ignore test
 
-export * from './clipboardFallbackTextCopy';
-export * from './clipboardImageCopy';
-export * from './clipboardTextCopy';
+export * from './copyFallbackClipboardText';
+export * from './copyClipboardImage';
+export * from './copyClipboardText';

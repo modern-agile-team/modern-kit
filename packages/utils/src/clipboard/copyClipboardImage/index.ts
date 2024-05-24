@@ -1,20 +1,20 @@
 import { convertImageToBlob } from '../../file';
 import { isClient } from '../../device';
-import { clipboardTextCopy } from '../clipboardTextCopy';
+import { copyClipboardText } from '../copyClipboardText';
 
 interface ClipboardImageCopyProps {
   src: string;
   toText?: boolean;
 }
 
-const fallbackImageCopy = async (src: string) => {
+const copyFallbackImage = async (src: string) => {
   const response = await fetch(src);
   const textData = await response.text();
 
-  return await clipboardTextCopy(textData);
+  return await copyClipboardText(textData);
 };
 
-export const clipboardImageCopy = async ({
+export const copyClipboardImage = async ({
   src,
   toText = false,
 }: ClipboardImageCopyProps) => {
@@ -26,17 +26,17 @@ export const clipboardImageCopy = async ({
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
 
     if (!hasNavigatorClipboard) {
-      return await fallbackImageCopy(src);
+      return await copyFallbackImage(src);
     }
 
     const hasNavigatorClipboardWrite = 'write' in window.navigator.clipboard;
 
     if (!hasNavigatorClipboardWrite) {
-      return await fallbackImageCopy(src);
+      return await copyFallbackImage(src);
     }
 
     if (toText) {
-      return await fallbackImageCopy(src);
+      return await copyFallbackImage(src);
     }
 
     const blobData = await convertImageToBlob(src, 'png');

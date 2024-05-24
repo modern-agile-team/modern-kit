@@ -1,4 +1,4 @@
-export const clipboardFallbackTextCopy = (value: string) => {
+export const copyFallbackClipboardText = (value: string) => {
   const textArea = document.createElement('textarea');
 
   textArea.value = value;
