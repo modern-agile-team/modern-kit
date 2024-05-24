@@ -21,6 +21,16 @@ export const deepEqual = (source: any, target: any) => {
     return true;
   }
 
+  // NaN
+  if (
+    typeof source === 'number' &&
+    typeof target === 'number' &&
+    isNaN(source) &&
+    isNaN(target)
+  ) {
+    return true;
+  }
+
   // Returns false if either is not an object
   if (
     typeof source !== 'object' ||

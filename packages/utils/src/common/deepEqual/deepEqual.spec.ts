@@ -100,4 +100,22 @@ describe('deepEqual', () => {
     ).toBeFalsy();
     expect(deepEqual(map3, map4)).toBeFalsy();
   });
+
+  it('should return true for identical arrays with different element order', () => {
+    const arr1 = [1, 2, 3];
+    const arr2 = [3, 2, 1];
+    expect(deepEqual(new Set(arr1), new Set(arr2))).toBe(false);
+  });
+
+  it('should return true for NaN values', () => {
+    expect(deepEqual(NaN, NaN)).toBe(true);
+  });
+
+  it('should return false for NaN and a number', () => {
+    expect(deepEqual(NaN, 1)).toBe(false);
+  });
+
+  it('should return false for NaN and undefined', () => {
+    expect(deepEqual(NaN, undefined)).toBe(false);
+  });
 });
