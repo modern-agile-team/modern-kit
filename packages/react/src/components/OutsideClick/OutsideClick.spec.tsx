@@ -16,10 +16,10 @@ describe('OutsideClick', () => {
       </>
     );
 
-    await user.click(screen.getByRole('inside'));
+    await user.click(screen.getByRole('inside-element'));
     expect(onEffect).not.toHaveBeenCalled();
 
-    await user.click(screen.getByRole('outside'));
+    await user.click(screen.getByRole('outside-element'));
 
     await waitFor(() => {
       expect(onEffect).toHaveBeenCalledTimes(1);
@@ -41,7 +41,7 @@ describe('OutsideClick', () => {
       </OutsideClick>
     );
 
-    await user.click(screen.getByRole('inside'));
+    await user.click(screen.getByRole('inside-element'));
     expect(onEffect).not.toHaveBeenCalled();
   });
 });
