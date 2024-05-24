@@ -11,10 +11,10 @@ export const useOnClickOutside = <T extends HTMLElement>(
   useEffect(() => {
     const eventType = isMobile() ? 'touchstart' : 'mousedown';
 
-    const listener = (e: MouseEvent | TouchEvent) => {
+    const listener = ({ target }: MouseEvent | TouchEvent) => {
       const targetElement = ref.current;
 
-      if (targetElement && !targetElement.contains(e.target as Node)) {
+      if (targetElement && !targetElement.contains(target as Node)) {
         callbackAction(targetElement);
       }
     };
