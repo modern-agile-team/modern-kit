@@ -1,5 +1,7 @@
-export const delay = (time: number) => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => resolve(), time);
+export const delay = (time: number): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    if (isNaN(time) || time < 0) reject(new Error('Invalid time value'));
+
+    setTimeout(resolve, time);
   });
 };
