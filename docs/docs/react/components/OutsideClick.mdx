@@ -18,12 +18,46 @@ import { OutsideClick } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
-type OutsideClickProp<Tag extends React.ElementType> = React.ComponentProps<Tag> & { children: React.ReactNode } & {
-  as?: Tag;
-  callback: () => void;
-};
+type NonHaveChildElements =
+  | 'input'
+  | 'textarea'
+  | 'img'
+  | 'br'
+  | 'hr'
+  | 'meta'
+  | 'link'
+  | 'base'
+  | 'col'
+  | 'embed'
+  | 'source'
+  | 'track'
+  | 'wbr';
 
-const OutsideClick: <E extends HTMLElement = HTMLDivElement, Tag extends ElementType = 'div'>({
+type NoChildren<Tag extends ElementType> = Tag extends NonHaveChildElements
+  ? { children?: never }
+  : { children: ReactNode };
+
+type AsRequired<Tag extends ElementType> = Tag extends 'div'
+  ? { as?: Tag }
+  : { as: Tag };
+
+type AllowedTagName<Tag extends ElementType> =
+  Tag extends keyof HTMLElementTagNameMap
+    ? HTMLElementTagNameMap[Tag]
+    : HTMLElement;
+
+type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
+  ComponentProps<Tag>
+> &
+  AsRequired<Tag> &
+  NoChildren<Tag> & {
+    callback: () => void;
+  };
+
+const OutsideClick: <
+  Tag extends ElementType = 'div',
+  E extends AllowedTagName<Tag> = AllowedTagName<Tag>
+>({
   as,
   children,
   callback,
@@ -32,11 +66,13 @@ const OutsideClick: <E extends HTMLElement = HTMLDivElement, Tag extends Element
 ```
 
 ## Usage
+
+### Default Usage
+
 ```tsx title="typescript"
 import { OutsideClick } from '@modern-kit/react';
 
-
-const Example = () => {
+const DefaultExample = () => {
   return (
      <>
       <OutsideClick callback={() => alert('Outside Clicked!')}>
@@ -48,18 +84,42 @@ const Example = () => {
 };
 ```
 
-export const Example = () => {
+export const DefaultExample = () => {
   return (
-    <OutsideClick<HTMLInputElement, 'input'>
-      callback={() => {
-        console.log('outside clicked!');
-      }}
-      // input disabled
-      disabled
-    >
-      Inside
-    </OutsideClick>
+     <>
+      <OutsideClick callback={() => alert('Outside Clicked!')}>
+        Inside
+      </OutsideClick>
+      <div>Click me</div>
+    </>
   );
 };
 
 <Example />
+
+### Add Other Tags Attributes Usage (Iput Example)
+
+```tsx title="typescript"
+export const InputExmaple = () {
+  return (
+    <OutsideClick<'input'>
+      callback={() => console.log('outside clicked')}
+      as="input"
+      disabled
+    />
+  );
+}
+```
+
+
+export const InputExmaple = () {
+  return (
+    <OutsideClick<'input'>
+      callback={() => console.log('outside clicked')}
+      as="input"
+      disabled
+    />
+  );
+}
+
+<InputExample />
