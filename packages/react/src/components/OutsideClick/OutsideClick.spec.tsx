@@ -9,17 +9,17 @@ describe('OutsideClick', () => {
     const { user } = renderSetup(
       <>
         <OutsideClick callback={onEffect}>
-          <div data-testid="inside">inside</div>
+          <div role="inside-element">inside</div>
         </OutsideClick>
 
-        <div data-testid="outside">outside</div>
+        <div role="outside-element">outside</div>
       </>
     );
 
-    await user.click(screen.getByTestId('inside'));
+    await user.click(screen.getByRole('inside'));
     expect(onEffect).not.toHaveBeenCalled();
 
-    await user.click(screen.getByTestId('outside'));
+    await user.click(screen.getByRole('outside'));
 
     await waitFor(() => {
       expect(onEffect).toHaveBeenCalledTimes(1);
@@ -37,11 +37,11 @@ describe('OutsideClick', () => {
 
     const { user } = renderSetup(
       <OutsideClick callback={onEffect}>
-        <div data-testid="inside">inside</div>
+        <div role="inside-element">inside</div>
       </OutsideClick>
     );
 
-    await user.click(screen.getByTestId('inside'));
+    await user.click(screen.getByRole('inside'));
     expect(onEffect).not.toHaveBeenCalled();
   });
 });
