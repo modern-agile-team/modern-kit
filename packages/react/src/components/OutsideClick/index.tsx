@@ -2,9 +2,11 @@ import {
   ComponentProps,
   ElementType,
   ReactNode,
-  PropsWithChildren,
+  forwardRef,
+  useImperativeHandle,
 } from 'react';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useMergeRefs } from '../../hooks/useMergeRefs';
 
 type NonHaveChildElements =
   | 'input'
@@ -34,30 +36,31 @@ type AllowedTagName<Tag extends ElementType> =
     ? HTMLElementTagNameMap[Tag]
     : HTMLElement;
 
-type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
-  ComponentProps<Tag>
-> &
+type OutsideClickProps<Tag extends ElementType> = ComponentProps<Tag> &
   AsRequired<Tag> &
   NoChildren<Tag> & {
     callback: () => void;
   };
 
-export const OutsideClick = <
-  Tag extends ElementType = 'div',
-  E extends AllowedTagName<Tag> = AllowedTagName<Tag>
->({
-  as,
-  children,
-  callback,
-  ...props
-}: OutsideClickProp<Tag>) => {
-  const { ref } = useOnClickOutside<E>(callback);
+const OutsideClick = <Tag extends ElementType = 'div'>(
+  { as, children, callback, ...props }: OutsideClickProps<Tag>,
+  ref: React.ForwardedRef<any> = null
+) => {
+  const { ref: outsideRef } = useOnClickOutside<AllowedTagName<Tag>>(callback);
+
+  useImperativeHandle(ref, () => outsideRef.current, [outsideRef]);
 
   const Component = as || 'div';
 
   return (
-    <Component ref={ref} {...props}>
+    <Component ref={useMergeRefs(outsideRef, ref)} {...props}>
       {children}
     </Component>
   );
 };
+
+const OutsideClickWithForwardRef = forwardRef(
+  OutsideClick
+) as typeof OutsideClick;
+
+export { OutsideClickWithForwardRef as OutsideClick };
