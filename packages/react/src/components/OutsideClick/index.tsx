@@ -1,10 +1,4 @@
-import {
-  ComponentProps,
-  ElementType,
-  ReactNode,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import { ComponentProps, ElementType, ReactNode, forwardRef } from 'react';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
@@ -44,11 +38,9 @@ type OutsideClickProps<Tag extends ElementType> = ComponentProps<Tag> &
 
 const OutsideClick = <Tag extends ElementType = 'div'>(
   { as, children, callback, ...props }: OutsideClickProps<Tag>,
-  ref: React.ForwardedRef<any> = null
+  ref: React.ForwardedRef<any>
 ) => {
   const { ref: outsideRef } = useOnClickOutside<AllowedTagName<Tag>>(callback);
-
-  useImperativeHandle(ref, () => outsideRef.current, [outsideRef]);
 
   const Component = as || 'div';
 

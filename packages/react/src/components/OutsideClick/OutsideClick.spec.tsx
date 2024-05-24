@@ -4,11 +4,11 @@ import { OutsideClick } from './index';
 
 describe('OutsideClick', () => {
   it('should call the callback when an event occurs outside the component', async () => {
-    const onEffect = vitest.fn();
+    const callbackMockFn = vi.fn();
 
     const { user } = renderSetup(
       <>
-        <OutsideClick callback={onEffect}>
+        <OutsideClick callback={callbackMockFn}>
           <div role="inside-element">inside</div>
         </OutsideClick>
 
@@ -17,31 +17,31 @@ describe('OutsideClick', () => {
     );
 
     await user.click(screen.getByRole('inside-element'));
-    expect(onEffect).not.toHaveBeenCalled();
+    expect(callbackMockFn).not.toHaveBeenCalled();
 
     await user.click(screen.getByRole('outside-element'));
 
     await waitFor(() => {
-      expect(onEffect).toHaveBeenCalledTimes(1);
+      expect(callbackMockFn).toHaveBeenCalledTimes(1);
     });
 
     await user.click(document.body);
 
     await waitFor(() => {
-      expect(onEffect).toHaveBeenCalledTimes(2);
+      expect(callbackMockFn).toHaveBeenCalledTimes(2);
     });
   });
 
   it('should not call the callback when an event occurs inside the component', async () => {
-    const onEffect = vitest.fn();
+    const callbackMockFn = vi.fn();
 
     const { user } = renderSetup(
-      <OutsideClick callback={onEffect}>
+      <OutsideClick callback={callbackMockFn}>
         <div role="inside-element">inside</div>
       </OutsideClick>
     );
 
     await user.click(screen.getByRole('inside-element'));
-    expect(onEffect).not.toHaveBeenCalled();
+    expect(callbackMockFn).not.toHaveBeenCalled();
   });
 });

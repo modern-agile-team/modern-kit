@@ -7,9 +7,7 @@ import { OutsideClick } from '@modern-kit/react';
 
 `OutsideClick`로 감싸진 컴포넌트 외부를 클릭하는 경우 `callback`이 실행됩니다.
 
-```tsx
-<OutsideClick callback={callback}>{children}</OutsideClick>
-```
+`as` 속성을 통해 OutsideClick 컴포넌트의 원하는 태그로 변경 할 수 있습니다. (아래 예제를 참고해주세요)
 
 <br />
 
@@ -53,42 +51,89 @@ type OutsideClickProp<Tag extends ElementType> =
     callback: () => void;
   };
 
-const OutsideClick: <
-  Tag extends ElementType = 'div',
->({
-  as,
-  children,
-  callback,
-  ...props
-}: OutsideClickProp<Tag>) => JSX.Element;
+const OutsideClick: <Tag extends ElementType = 'div'>(
+  { as, children, callback, ...props }: OutsideClickProps<Tag>,
+  ref: React.ForwardedRef<any>
+) => JSX.Element;
 ```
 
 ## Usage
-
+### Default
 ```tsx title="typescript"
 import { OutsideClick } from '@modern-kit/react';
 
-const Example = () => {
+const DefaultExample = () => {
+  const style = {
+    width: '500px',
+    height: '100px',
+    backgroundColor: 'skyBlue',
+  };
   return (
-     <>
-      <OutsideClick callback={() => alert('Outside Clicked!')}>
-        Inside
-      </OutsideClick>
-      <div>Click me</div>
-    </>
+    <OutsideClick
+      style={style}
+      callback={() => console.log('DefaultExample Outside Clicked!')}>
+      외부 영역 클릭 후 콘솔을 확인해주세요.
+    </OutsideClick>
   );
 };
 ```
 
-export const Example = () => {
+export const DefaultExample = () => {
+  const style = {
+    width: '500px',
+    height: '100px',
+    backgroundColor: 'skyBlue',
+  };
   return (
-     <>
-      <OutsideClick callback={() => alert('Outside Clicked!')}>
-        Inside
-      </OutsideClick>
-      <div>Click me</div>
-    </>
+    <OutsideClick
+      style={style}
+      callback={() => console.log('DefaultExample Outside Clicked!')}>
+      외부 영역 클릭 후 콘솔을 확인해주세요.
+    </OutsideClick>
   );
 };
 
-<Example />
+
+<DefaultExample />
+
+<br />
+
+### As-Example
+```tsx title="typescript"
+import { OutsideClick } from '@modern-kit/react';
+
+const AsExample = () => {
+  const style = {
+    width: "300px",
+    height: "50px",
+  };
+  return (
+    // OutsideClick 컴포넌트의 "제네릭 타입" 지정 후 "as" props를 입력해주세요. 
+    // 원활한 타입 추론이 가능합니다.
+    <OutsideClick<'input'> 
+      as="input"
+      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      callback={() => console.log('As-Example Outslide Clicked!')}
+      style={style}
+    />
+  );
+};
+```
+
+export const AsExample = () => {
+  const style = {
+    width: "300px",
+    height: "50px",
+  };
+  return (
+    <OutsideClick
+      as="input"
+      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      callback={() => console.log('As-Example Outslide Clicked!')}
+      style={style}
+    />
+  );
+};
+
+
+<AsExample />
