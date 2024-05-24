@@ -42,7 +42,7 @@ type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
     callback: () => void;
   };
 
-export default function OutsideClick<
+export function OutsideClick<
   Tag extends ElementType = 'div',
   E extends AllowedTagName<Tag> = AllowedTagName<Tag>
 >({ as, children, callback, ...props }: OutsideClickProp<Tag>) {
