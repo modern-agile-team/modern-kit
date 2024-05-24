@@ -1,0 +1,94 @@
+import { useState } from 'react';
+import { OutsideClick } from '@modern-kit/react';
+
+# OutsideClick
+
+`useOutsideClickEffect`의 기능을 선언적으로 처리하는 컴포넌트입니다.
+
+`OutsideClick`로 감싸진 컴포넌트 외부를 클릭하는 경우 `callback`이 실행됩니다.
+
+```tsx
+<OutsideClick callback={callback}>{children}</OutsideClick>
+```
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsideClick/index.tsx)
+
+## Interface
+```ts title="typescript"
+type NonHaveChildElements =
+  | 'input'
+  | 'textarea'
+  | 'img'
+  | 'br'
+  | 'hr'
+  | 'meta'
+  | 'link'
+  | 'base'
+  | 'col'
+  | 'embed'
+  | 'source'
+  | 'track'
+  | 'wbr';
+
+type NoChildren<Tag extends ElementType> = Tag extends NonHaveChildElements
+  ? { children?: never }
+  : { children: ReactNode };
+
+type AsRequired<Tag extends ElementType> = Tag extends 'div'
+  ? { as?: Tag }
+  : { as: Tag };
+
+type AllowedTagName<Tag extends ElementType> =
+  Tag extends keyof HTMLElementTagNameMap
+    ? HTMLElementTagNameMap[Tag]
+    : HTMLElement;
+
+type OutsideClickProp<Tag extends ElementType> = 
+  ComponentProps<Tag> &
+  AsRequired<Tag> &
+  NoChildren<Tag> & {
+    callback: () => void;
+  };
+
+const OutsideClick: <
+  Tag extends ElementType = 'div',
+>({
+  as,
+  children,
+  callback,
+  ...props
+}: OutsideClickProp<Tag>) => JSX.Element;
+```
+
+## Usage
+
+```tsx title="typescript"
+import { OutsideClick } from '@modern-kit/react';
+
+const Example = () => {
+  return (
+     <>
+      <OutsideClick callback={() => alert('Outside Clicked!')}>
+        Inside
+      </OutsideClick>
+      <div>Click me</div>
+    </>
+  );
+};
+```
+
+export const Example = () => {
+  return (
+     <>
+      <OutsideClick callback={() => alert('Outside Clicked!')}>
+        Inside
+      </OutsideClick>
+      <div>Click me</div>
+    </>
+  );
+};
+
+<Example />

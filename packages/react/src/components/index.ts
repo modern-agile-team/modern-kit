@@ -4,3 +4,4 @@ export * from './LazyImage';
 export * from './Portal';
 export * from './When';
 export * from './SwitchCase';
+export * from './OutsideClick';
