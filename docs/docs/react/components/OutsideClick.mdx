@@ -14,7 +14,7 @@ import { OutsideClick } from '@modern-kit/react';
 <br />
 
 ## Code
-추후 작성 예정
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsideClick/index.tsx)
 
 ## Interface
 ```ts title="typescript"
@@ -46,9 +46,8 @@ type AllowedTagName<Tag extends ElementType> =
     ? HTMLElementTagNameMap[Tag]
     : HTMLElement;
 
-type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
-  ComponentProps<Tag>
-> &
+type OutsideClickProp<Tag extends ElementType> = 
+  ComponentProps<Tag> &
   AsRequired<Tag> &
   NoChildren<Tag> & {
     callback: () => void;
@@ -56,7 +55,6 @@ type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
 
 const OutsideClick: <
   Tag extends ElementType = 'div',
-  E extends AllowedTagName<Tag> = AllowedTagName<Tag>
 >({
   as,
   children,
