@@ -96,30 +96,3 @@ export const DefaultExample = () => {
 };
 
 <Example />
-
-### Add Other Tags Attributes Usage (Iput Example)
-
-```tsx title="typescript"
-export const InputExmaple = () {
-  return (
-    <OutsideClick<'input'>
-      callback={() => console.log('outside clicked')}
-      as="input"
-      disabled
-    />
-  );
-}
-```
-
-
-export const InputExmaple = () {
-  return (
-    <OutsideClick<'input'>
-      callback={() => console.log('outside clicked')}
-      as="input"
-      disabled
-    />
-  );
-}
-
-<InputExample />
