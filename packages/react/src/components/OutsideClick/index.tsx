@@ -23,7 +23,7 @@ type NonHaveChildElements =
 
 type NoChildren<Tag extends ElementType> = Tag extends NonHaveChildElements
   ? { children?: never }
-  : { children?: ReactNode };
+  : { children: ReactNode };
 
 type AsRequired<Tag extends ElementType> = Tag extends 'div'
   ? { as?: Tag }
@@ -42,10 +42,15 @@ type OutsideClickProp<Tag extends ElementType> = PropsWithChildren<
     callback: () => void;
   };
 
-export function OutsideClick<
+export const OutsideClick = <
   Tag extends ElementType = 'div',
   E extends AllowedTagName<Tag> = AllowedTagName<Tag>
->({ as, children, callback, ...props }: OutsideClickProp<Tag>) {
+>({
+  as,
+  children,
+  callback,
+  ...props
+}: OutsideClickProp<Tag>) => {
   const { ref } = useOnClickOutside<E>(callback);
 
   const Component = as || 'div';
@@ -55,4 +60,4 @@ export function OutsideClick<
       {children}
     </Component>
   );
-}
+};
