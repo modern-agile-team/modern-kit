@@ -1,7 +1,7 @@
 import { isClient } from '../../device';
-import { clipboardFallbackTextCopy } from '../clipboardFallbackTextCopy';
+import { copyFallbackClipboardText } from '../copyFallbackClipboardText';
 
-export const clipboardTextCopy = async (value: string) => {
+export const copyClipboardText = async (value: string) => {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -10,7 +10,7 @@ export const clipboardTextCopy = async (value: string) => {
     const hasNavigatorClipboard = 'clipboard' in window.navigator;
 
     if (!hasNavigatorClipboard) {
-      return clipboardFallbackTextCopy(value);
+      return copyFallbackClipboardText(value);
     }
 
     await navigator.clipboard.writeText(value);

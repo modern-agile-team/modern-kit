@@ -1,4 +1,4 @@
-# clipboardFallbackTextCopy
+# copyFallbackClipboardText
 
 인자로 넘겨준 문자열을 `Clipboard`에 저장하는 함수입니다. 
 
@@ -9,18 +9,18 @@
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/clipboard/clipboardFallbackTextCopy/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/clipboard/copyFallbackClipboardText/index.ts)
 
 ## Interface
 ```ts title="typescript"
-const clipboardFallbackTextCopy: (value: string) => string
+const copyFallbackClipboardText: (value: string) => string
 ```
 
 ## Usage
 ```ts title="typescript"
-import { clipboardFallbackTextCopy } from '@modern-kit/utils';
+import { copyFallbackClipboardText } from '@modern-kit/utils';
 
-const result = clipboardFallbackTextCopy("복사 할 텍스트");
+const result = copyFallbackClipboardText("복사 할 텍스트");
 ```
 
 ## Note

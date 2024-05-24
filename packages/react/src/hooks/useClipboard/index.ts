@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { clipboardImageCopy, clipboardTextCopy } from '@modern-kit/utils';
+import { copyClipboardImage, copyClipboardText } from '@modern-kit/utils';
 
 type CopiedData = string | Blob | null;
 
@@ -8,7 +8,7 @@ export const useClipboard = () => {
 
   const copyText = useCallback(async (value: string) => {
     try {
-      const result = await clipboardTextCopy(value);
+      const result = await copyClipboardText(value);
       setCopiedData(result);
       return true;
     } catch (err: any) {
@@ -22,9 +22,9 @@ export const useClipboard = () => {
     async ({
       src,
       toText = false,
-    }: Parameters<typeof clipboardImageCopy>[0]) => {
+    }: Parameters<typeof copyClipboardImage>[0]) => {
       try {
-        const result = await clipboardImageCopy({ src, toText });
+        const result = await copyClipboardImage({ src, toText });
         setCopiedData(result);
         return true;
       } catch (err: any) {
