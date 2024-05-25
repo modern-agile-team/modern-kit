@@ -7,6 +7,8 @@ export const parseJSON = <T>(value: any): T | null => {
     return '' as T;
   }
 
+  console.log(value, typeof value);
+
   try {
     return JSON.parse(value) as T;
   } catch {
