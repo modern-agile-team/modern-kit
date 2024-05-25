@@ -6,6 +6,7 @@ export * from './useDebounce';
 export * from './useDocumentTitle';
 export * from './useFileReader';
 export * from './useForceUpdate';
+export * from './useHover';
 export * from './useImageStatus';
 export * from './useIntersectionObserver';
 export * from './useInterval';
