@@ -12,7 +12,6 @@ assignees: ''
 
 - [ ] 기존 패키지에 기능 추가
 - [ ] 새로운 패키지
-
 - Package name:
 
 <br />
