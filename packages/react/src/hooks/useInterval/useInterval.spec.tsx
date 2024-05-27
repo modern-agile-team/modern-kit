@@ -31,7 +31,7 @@ describe('useInterval', () => {
 
   it('should not run the interval when enabled is false and should run when enabled is true', () => {
     const { rerender } = renderHook(
-      ({ enabled }) => useInterval(mockFn, delayTime, { enabled }),
+      ({ enabled }) => useInterval(mockFn, { delay: delayTime, enabled }),
       {
         initialProps: { enabled: true },
       }
@@ -44,19 +44,16 @@ describe('useInterval', () => {
     rerender({ enabled: false });
 
     vi.advanceTimersByTime(delayTime);
-    expect(mockFn).toBeCalledTimes(1);
-
-    vi.advanceTimersByTime(delayTime);
-    expect(mockFn).toBeCalledTimes(1);
+    expect(mockFn).not.toBeCalled();
 
     rerender({ enabled: true });
 
     vi.advanceTimersByTime(delayTime);
-    expect(mockFn).toBeCalledTimes(2);
+    expect(mockFn).toBeCalledTimes(1);
   });
 
   it('should not run the interval if delay is undefined', () => {
-    renderHook(() => useInterval(mockFn, undefined));
+    renderHook(() => useInterval(mockFn, { delay: undefined }));
 
     expect(mockFn).not.toBeCalled();
 

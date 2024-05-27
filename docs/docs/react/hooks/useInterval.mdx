@@ -7,7 +7,15 @@ import { useState } from 'react';
 
 `window.setInterva`과 `useInterval` 훅의 주요 차이점은 그 인수가 `동적`이라는 것입니다.
 
-3번째 인자 options의 `enabled` 옵션을 통해 interval 동작을 조절 할 수 있습니다.
+2번째 인자 options는 `number` 혹은 `{ delay: SetIntervalParameters[1]; enabled?: boolean }` 타입의 객체를 받아올 수 있습니다.
+
+number타입이면 해당 값은 `setInterval`의 `delay` 값이 되며, 객체 타입일 경우 `delay`와 더불어 `setInterval의 동작 여부`를 결정하는 `enabled` 옵션을 추가로 다룰 수 있습니다. 
+  - 💡 options가 number 타입의 경우 enabled는 기본적으로 `true`입니다.
+
+```ts
+useInterval(callback, 500);
+useInterval(callback, { delay: 500, enabled: true });
+```
 
 <br />
 
@@ -18,14 +26,13 @@ import { useState } from 'react';
 ```ts title="typescript"
 type SetIntervalParameters = Parameters<typeof setInterval>;
 
-interface UseIntervalOptions {
-  enabled?: boolean; // default: true
-}
+type IntervalOptions =
+  | number
+  | { delay: SetIntervalParameters[1]; enabled?: boolean };
 
 const useInterval: (
   callback: SetIntervalParameters[0],
-  delay?: SetIntervalParameters[1],
-  options?: UseIntervalOptions
+  options: IntervalOptions
 ) => void;
 ```
 
@@ -37,27 +44,33 @@ const Example = () => {
   const [number, setNumber] = useState(0);
   const [isToggle, setIsToggle] = useState(true);
 
-  useInterval(() => setNumber(number + 1), 500, { enabled: isToggle });
+  useInterval(() => setNumber(number + 1), { delay: 1000, enabled: isToggle });
 
   return (
     <div>
       <div>{number}</div>
-      <button onClick={() => setIsToggle(!isToggle)}>{isToggle ? "멈추기" : "시작하기"}</button>
+      <button onClick={() => setIsToggle(!isToggle)}>
+        {isToggle ? '멈추기' : '시작하기'}
+      </button>
     </div>
   );
 };
+
 ```
 
 export const Example = () => {
   const [number, setNumber] = useState(0);
   const [isToggle, setIsToggle] = useState(true);
-  useInterval(() => setNumber(number + 1), 1000, { enabled: isToggle });
+  useInterval(() => setNumber(number + 1), { delay: 1000, enabled: isToggle });
   return (
     <div>
       <div>{number}</div>
-      <button onClick={() => setIsToggle(!isToggle)}>{isToggle ? "멈추기" : "시작하기"}</button>
+      <button onClick={() => setIsToggle(!isToggle)}>
+        {isToggle ? '멈추기' : '시작하기'}
+      </button>
     </div>
   );
 };
+
 
 <Example />
