@@ -12,7 +12,7 @@ import { useState } from 'react'
 
 ## Interface
 ```ts title="typescript"
-const useIsMounted: <T extends HTMLElement = HTMLDivElement>({
+const useHover: <T extends HTMLElement>({
   onEnter?: (event: MouseEvent) => void,
   onLeave?: (event: MouseEvent) => void,
 }) => {
