@@ -9,7 +9,15 @@
 
 ## Interface
 ```ts title="typescript"
-const countSubstringOccurrences: (source: string, target: string) => number
+interface Options {
+  overlap?: boolean; // default: false
+}
+
+const countSubstringOccurrences: (
+  source: string,
+  target: string,
+  options?: Options
+) => number;
 ```
 
 ## Usage

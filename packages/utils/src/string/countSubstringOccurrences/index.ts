@@ -1,4 +1,6 @@
-type Options = { overlap: boolean };
+interface Options {
+  overlap?: boolean;
+}
 
 const escapeRegExp = (str: string): string => {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -26,14 +28,16 @@ const countExceptOverlap = (source: string, regex: RegExp) => {
 export const countSubstringOccurrences = (
   source: string,
   target: string,
-  options: Options = { overlap: false }
+  options: Options = {}
 ): number => {
   if (target === '') return 0;
+
+  const { overlap = false } = options;
 
   const escapedTarget = escapeRegExp(target);
   const regex = new RegExp(escapedTarget, 'g');
 
-  return options.overlap
+  return overlap
     ? countAllowOverlap(source, regex)
     : countExceptOverlap(source, regex);
 };
