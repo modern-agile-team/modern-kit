@@ -26,15 +26,22 @@ const useHover: <T extends HTMLElement>({
 import { useHover } from '@modern-kit/react';
 
 const Example = () => {
-  const [counter, setCounter] = useState(0)
-  const { ref, isHovered } = useHover({
+  const [counter, setCounter] = useState(0);
+
+  const { ref, isHovered } = useHover<HTMLDivElement>({
     onEnter: () => setCounter((count) => count + 1),
     onLeave: () => setCounter((count) => count - 1)
   });
 
+  const style = {
+    width: '200px',
+    height: '200px',
+    backgroundColor: 'skyBlue'
+  };
+
   return (
     <>
-      <div ref={ref}>{isHovered ? 'hover' : 'leave'}</div>
+      <div ref={ref} style={style}>{isHovered ? 'hover' : 'leave'}</div>
       <div>{counter}</div>
     </>
   );
@@ -49,9 +56,14 @@ export const Example = () => {
     onEnter: () => setCounter((count) => count + 1),
     onLeave: () => setCounter((count) => count - 1)
   });
+  const style = {
+    width: '200px',
+    height: '200px',
+    backgroundColor: 'skyBlue'
+  }
   return (
     <>
-      <div ref={ref}>{isHovered ? 'hover' : 'leave'}</div>
+      <div ref={ref} style={style}>{isHovered ? 'hover' : 'leave'}</div>
       <div>{counter}</div>
     </>
   );
