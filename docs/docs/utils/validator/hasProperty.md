@@ -16,7 +16,7 @@ const hasProperty: <T extends Record<PropertyKey, any>, K extends PropertyKey>(
 ```
 
 ## Usage
-```ts
+```ts title="typescript"
 import { hasProperty } from '@modern-kit/utils';
 
 const exampleObj = { foo: 'foo', bar: 'bar' } as const;
