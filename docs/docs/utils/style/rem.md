@@ -21,12 +21,12 @@ rem(17, { toFixedDigits: 10 }); // 1.0625
 
 ## Interface
 ```ts title="typescript"
-interface RemOption {
+interface RemOptions {
   suffix?: boolean; // default: false
   toFixedDigits?: number;
 }
 
-const rem: (pixel: number, options?: RemOption) => string | number;
+const rem: (pixel: number, options?: RemOptions) => string | number;
 ```
 
 ## Usage

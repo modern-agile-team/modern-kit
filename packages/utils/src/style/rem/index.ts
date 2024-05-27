@@ -1,7 +1,7 @@
 import { isNumber } from '../../validator';
 import { isClient } from '../../device';
 
-interface RemOption {
+interface RemOptions {
   suffix?: boolean;
   toFixedDigits?: number;
 }
@@ -13,7 +13,7 @@ const getFixedRem = (rem: number, toFixedDigits?: number) => {
   return rem;
 };
 
-export const rem = (pixel: number, options: RemOption = {}) => {
+export const rem = (pixel: number, options: RemOptions = {}) => {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
