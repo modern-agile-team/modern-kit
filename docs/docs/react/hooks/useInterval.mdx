@@ -1,10 +1,13 @@
+import { useInterval } from '@modern-kit/react';
+import { useState } from 'react';
+
 # useInterval
 
 `window.setInterval`을 편리하게 사용할 수 있는 커스텀 훅입니다. 
 
 `window.setInterva`과 `useInterval` 훅의 주요 차이점은 그 인수가 `동적`이라는 것입니다.
 
-`delay`의 값으로 `null`을 넣으면 타이머를 중지할 수 있습니다.
+3번째 인자 options의 `enabled` 옵션을 통해 interval 동작을 조절 할 수 있습니다.
 
 <br />
 
@@ -15,7 +18,15 @@
 ```ts title="typescript"
 type SetIntervalParameters = Parameters<typeof setInterval>;
 
-const useInterval: (callback: SetIntervalParameters[0], delay?: SetIntervalParameters[1]) => void
+interface UseIntervalOptions {
+  enabled?: boolean; // default: true
+}
+
+const useInterval: (
+  callback: SetIntervalParameters[0],
+  delay?: SetIntervalParameters[1],
+  options?: UseIntervalOptions
+) => void;
 ```
 
 ## Usage
@@ -24,15 +35,29 @@ import { useInterval } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isToggle, setIsToggle] = useState(true);
 
-  useInterval(() => setNumber(number + 1), 1000);
+  useInterval(() => setNumber(number + 1), 500, { enabled: isToggle });
 
   return (
     <div>
       <div>{number}</div>
-      <button onClick={() => setIsPlaying(false)}>button</button>
+      <button onClick={() => setIsToggle(!isToggle)}>{isToggle ? "멈추기" : "시작하기"}</button>
     </div>
   );
 };
 ```
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [isToggle, setIsToggle] = useState(true);
+  useInterval(() => setNumber(number + 1), 1000, { enabled: isToggle });
+  return (
+    <div>
+      <div>{number}</div>
+      <button onClick={() => setIsToggle(!isToggle)}>{isToggle ? "멈추기" : "시작하기"}</button>
+    </div>
+  );
+};
+
+<Example />
