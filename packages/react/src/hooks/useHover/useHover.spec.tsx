@@ -1,6 +1,6 @@
 import { useHover } from '.';
 import { renderSetup } from '../../utils/test/renderSetup';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { Mock } from 'vitest';
 
 describe('useHover', () => {
@@ -31,7 +31,7 @@ describe('useHover', () => {
     const leaveMockFn = vi.fn();
 
     const { user } = renderSetup(
-      <TestComponent enterMockFn={enterMockFn} leaveMockFn={leaveMockFn} />,
+      <TestComponent enterMockFn={enterMockFn} leaveMockFn={leaveMockFn} />
     );
 
     const hoverTarget = screen.getByRole('hover-target');
@@ -51,17 +51,21 @@ describe('useHover', () => {
     const hoverTarget = screen.getByRole('hover-target');
 
     expect(
-      screen.queryByRole('conditional-render-text'),
+      screen.queryByRole('conditional-render-text')
     ).not.toBeInTheDocument();
 
     await user.hover(hoverTarget);
 
-    expect(screen.queryByRole('conditional-render-text')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByRole('conditional-render-text')).toBeInTheDocument();
+    });
 
     await user.unhover(hoverTarget);
 
-    expect(
-      screen.queryByRole('conditional-render-text'),
-    ).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByRole('conditional-render-text')
+      ).not.toBeInTheDocument();
+    });
   });
 });
