@@ -1,0 +1,60 @@
+import { useHover } from '@modern-kit/react';
+import { useState } from 'react'
+
+# useHover
+
+대상 컴포넌트를 기준으로 마우스가 올라가거나 내려갔을 때의 상태를 반환하고, 마우스가 올라가거나 내려갔을 때의 액션을 정의할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHover/index.ts)
+
+## Interface
+```ts title="typescript"
+const useHover: <T extends HTMLElement>({
+  onEnter?: (event: MouseEvent) => void,
+  onLeave?: (event: MouseEvent) => void,
+}) => {
+  ref: T,
+  isHovered: boolean
+}
+```
+
+## Usage
+```tsx title="typescript"
+import { useHover } from '@modern-kit/react';
+
+const Example = () => {
+  const [counter, setCounter] = useState(0)
+  const { ref, isHovered } = useHover({
+    onEnter: () => setCounter((count) => count + 1),
+    onLeave: () => setCounter((count) => count - 1)
+  });
+
+  return (
+    <>
+      <div ref={ref}>{isHovered ? 'hover' : 'leave'}</div>
+      <div>{counter}</div>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [counter, setCounter] = useState(0)
+  const { ref, isHovered } = useHover({
+    onEnter: () => setCounter((count) => count + 1),
+    onLeave: () => setCounter((count) => count - 1)
+  });
+  return (
+    <>
+      <div ref={ref}>{isHovered ? 'hover' : 'leave'}</div>
+      <div>{counter}</div>
+    </>
+  );
+};
+
+<Example />
