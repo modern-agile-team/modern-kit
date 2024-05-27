@@ -7,4 +7,5 @@ export * from './file';
 export * from './object';
 export * from './storage';
 export * from './string';
+export * from './style';
 export * from './validator';
