@@ -16,4 +16,20 @@ describe('countSubstringOccurrences', () => {
     expect(countSubstringOccurrences(str2, '테스트')).toBe(4);
     expect(countSubstringOccurrences(str2, '테스트용 문자열')).toBe(2);
   });
+
+  it('should return 0 when either source or target is an empty string', () => {
+    expect(countSubstringOccurrences('', 'abc')).toBe(0);
+    expect(countSubstringOccurrences('abc', '')).toBe(0);
+  });
+
+  it('should return the correct count of occurrences', () => {
+    expect(countSubstringOccurrences('abc', 'abc')).toBe(1);
+    expect(countSubstringOccurrences('aaaa', 'aa', { overlap: true })).toBe(3);
+    expect(countSubstringOccurrences('banana', 'na')).toBe(2);
+  });
+
+  it('should handle special characters in the target string', () => {
+    expect(countSubstringOccurrences('a.b.c', '.')).toBe(2);
+    expect(countSubstringOccurrences('a(b)c(d)e', '(')).toBe(2);
+  });
 });
