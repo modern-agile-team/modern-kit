@@ -6,6 +6,8 @@ interface RemOptions {
   toFixedDigits?: number;
 }
 
+const cacheMap = new Map<string, string | number>();
+
 const getFixedRem = (rem: number, toFixedDigits?: number) => {
   if (isNumber(toFixedDigits)) {
     return Number(rem.toFixed(toFixedDigits));
@@ -13,19 +15,27 @@ const getFixedRem = (rem: number, toFixedDigits?: number) => {
   return rem;
 };
 
+const getElementFontSize = (element: HTMLElement) => {
+  return getComputedStyle(element).fontSize;
+};
+
 export const rem = (pixel: number, options: RemOptions = {}) => {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
-  const { suffix = false, toFixedDigits } = options;
 
-  const rootElement = document.documentElement;
-  const rootFontSize = parseFloat(getComputedStyle(rootElement).fontSize); // "16px" -> 16
+  const { suffix = true, toFixedDigits } = options;
+  const cacheKey = `${pixel}-${suffix}-${toFixedDigits}`;
 
-  const fixedRem = getFixedRem(pixel / rootFontSize, toFixedDigits);
-
-  if (suffix) {
-    return `${fixedRem}rem`;
+  if (cacheMap.has(cacheKey)) {
+    return cacheMap.get(cacheKey) as string | number;
   }
-  return fixedRem;
+
+  const rootFontSize = getElementFontSize(document.documentElement);
+
+  const fixedRem = getFixedRem(pixel / parseFloat(rootFontSize), toFixedDigits);
+  const result = suffix ? `${fixedRem}rem` : fixedRem;
+
+  cacheMap.set(cacheKey, result);
+  return result;
 };
