@@ -31,7 +31,11 @@ type IntervalOptions =
 const useInterval: (
   callback: SetIntervalParameters[0],
   options: IntervalOptions
-) => void;
+) => {
+  isActing: boolean;
+  startInterval: () => void;
+  stopInterval: () => void;
+};
 ```
 
 ## Usage
@@ -40,16 +44,18 @@ import { useInterval } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0);
-  const [isToggle, setIsToggle] = useState(true);
 
-  useInterval(() => setNumber(number + 1), { delay: 1000, enabled: isToggle });
+  const { isActing, stopInterval, startInterval } = useInterval(
+    () => setNumber(number + 1),
+    { delay: 1000, enabled: false } // 자동 실행 X
+  );
 
   return (
     <div>
-      <div>{number}</div>
-      <button onClick={() => setIsToggle(!isToggle)}>
-        {isToggle ? '멈추기' : '시작하기'}
-      </button>
+      <p>{number}</p>
+      <p>{`isActing: ${isActing}`}</p>
+      <button onClick={startInterval}>시작하기</button>
+      <button onClick={stopInterval}>멈추기</button>
     </div>
   );
 };
@@ -58,13 +64,19 @@ const Example = () => {
 
 export const Example = () => {
   const [number, setNumber] = useState(0);
-  const [isToggle, setIsToggle] = useState(true);
-  useInterval(() => setNumber(number + 1), { delay: 1000, enabled: isToggle });
+    const { isActing, stopInterval, startInterval } = useInterval(
+    () => setNumber(number + 1),
+    { delay: 1000, enabled: false }
+  );
   return (
     <div>
-      <div>{number}</div>
-      <button onClick={() => setIsToggle(!isToggle)}>
-        {isToggle ? '멈추기' : '시작하기'}
+      <p>{number}</p>
+      <p>{`isActing: ${isActing}`}</p>
+      <button onClick={startInterval}>
+        시작하기
+      </button>
+      <button onClick={stopInterval}>
+        멈추기
       </button>
     </div>
   );

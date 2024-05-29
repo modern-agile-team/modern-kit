@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { useInterval } from '.';
 
 const delayTime = 300;
@@ -59,5 +59,29 @@ describe('useInterval', () => {
 
     vi.advanceTimersByTime(delayTime);
     expect(mockFn).not.toBeCalled();
+  });
+
+  it('should correctly start and stop the interval, calling the callback at the correct times', async () => {
+    const { result } = renderHook(() =>
+      useInterval(mockFn, { delay: delayTime, enabled: false })
+    );
+
+    const startInterval = result.current.start;
+    const stopInterval = result.current.stop;
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).not.toBeCalled();
+
+    act(() => startInterval());
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(1);
+    expect(result.current.isActing).toBeTruthy();
+
+    act(() => stopInterval());
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(1);
+    expect(result.current.isActing).toBeFalsy();
   });
 });

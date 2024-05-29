@@ -1,6 +1,7 @@
+import { useCallback, useEffect, useState } from 'react';
 import { isNumber } from '@modern-kit/utils';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { useEffect } from 'react';
+import { usePreservedState } from '../usePreservedState';
 
 type SetIntervalParameters = Parameters<typeof setInterval>;
 
@@ -12,10 +13,29 @@ export const useInterval = (
   callback: SetIntervalParameters[0],
   options: IntervalOptions
 ) => {
-  const delay = isNumber(options) ? options : options.delay;
-  const enabled = isNumber(options) ? true : options?.enabled ?? true;
-
+  const preservedOptions = usePreservedState(options);
   const callbackAction = usePreservedCallback(callback);
+
+  const isNumberOptions = isNumber(preservedOptions);
+  const delay = isNumberOptions ? preservedOptions : preservedOptions.delay;
+
+  const [enabled, setEnabled] = useState(() =>
+    isNumberOptions ? true : preservedOptions?.enabled ?? true
+  );
+
+  const startInterval = useCallback(() => {
+    setEnabled(true);
+  }, []);
+
+  const stopInterval = useCallback(() => {
+    setEnabled(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isNumberOptions) {
+      setEnabled(preservedOptions?.enabled ?? true);
+    }
+  }, [isNumberOptions, preservedOptions]);
 
   useEffect(() => {
     if (delay == null) return;
@@ -30,4 +50,6 @@ export const useInterval = (
 
     return () => clearInterval(intervalId);
   }, [callbackAction, enabled, delay]);
+
+  return { isActing: enabled, start: startInterval, stop: stopInterval };
 };
