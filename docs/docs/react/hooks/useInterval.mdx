@@ -33,8 +33,8 @@ const useInterval: (
   options: IntervalOptions
 ) => {
   isActing: boolean;
-  startInterval: () => void;
-  stopInterval: () => void;
+  start: () => void;
+  stop: () => void;
 };
 ```
 
@@ -45,7 +45,7 @@ import { useInterval } from '@modern-kit/react';
 const Example = () => {
   const [number, setNumber] = useState(0);
 
-  const { isActing, stopInterval, startInterval } = useInterval(
+  const { isActing, stop, start } = useInterval(
     () => setNumber(number + 1),
     { delay: 1000, enabled: false } // 자동 실행 X
   );
@@ -54,8 +54,8 @@ const Example = () => {
     <div>
       <p>{number}</p>
       <p>{`isActing: ${isActing}`}</p>
-      <button onClick={startInterval}>시작하기</button>
-      <button onClick={stopInterval}>멈추기</button>
+      <button onClick={start}>시작하기</button>
+      <button onClick={stop}>멈추기</button>
     </div>
   );
 };
@@ -64,7 +64,7 @@ const Example = () => {
 
 export const Example = () => {
   const [number, setNumber] = useState(0);
-    const { isActing, stopInterval, startInterval } = useInterval(
+    const { isActing, stop, start } = useInterval(
     () => setNumber(number + 1),
     { delay: 1000, enabled: false }
   );
@@ -72,10 +72,10 @@ export const Example = () => {
     <div>
       <p>{number}</p>
       <p>{`isActing: ${isActing}`}</p>
-      <button onClick={startInterval}>
+      <button onClick={start}>
         시작하기
       </button>
-      <button onClick={stopInterval}>
+      <button onClick={stop}>
         멈추기
       </button>
     </div>
