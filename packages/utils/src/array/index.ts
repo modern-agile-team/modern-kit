@@ -1,2 +1,2 @@
 export * from './countOccurrencesInArray';
-export * from './exclude';
+export * from './excludeElements';
