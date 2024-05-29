@@ -17,7 +17,7 @@ afterEach(() => {
 describe('rem', () => {
   it('should convert pixels to rem without any options. (Root FontSize: 16px)', () => {
     expect(rem(16)).toBe('1rem');
-    expect(rem(24)).toBe('1.5rem');
+    expect(rem(20)).toBe('1.25rem');
     expect(rem(32)).toBe('2rem');
     expect(rem(32)).toBe('2rem'); // cached
   });
