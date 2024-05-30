@@ -1,5 +1,27 @@
 # @modern-kit/utils
 
+## 1.5.0
+
+### Minor Changes
+
+- [#159](https://github.com/modern-agile-team/modern-kit/pull/159) [`7842e3e`](https://github.com/modern-agile-team/modern-kit/commit/7842e3ea3eedee41605d41de5f105b5c772f5963) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): countOccurrencesInArray 유틸 함수 추가 - @ssi02014
+
+- [`6a51b64`](https://github.com/modern-agile-team/modern-kit/commit/6a51b64c23d647cc1c8f6db391dcfcbd07ce4d1d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): excludeElements 신규 유틸 함수 추가 - @Collection50
+
+- [#172](https://github.com/modern-agile-team/modern-kit/pull/172) [`6930cc7`](https://github.com/modern-agile-team/modern-kit/commit/6930cc72ab764f10eafd71510f0149b216b31c89) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): rem 신규 유틸 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [`82d84ca`](https://github.com/modern-agile-team/modern-kit/commit/82d84ca47b232e7aee5960bb1f7bac229f75dc80) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): 특수 문자에 대한 개수와 공백에 대한 처리 추가 - @hoonloper
+
+- [#161](https://github.com/modern-agile-team/modern-kit/pull/161) [`fdb918e`](https://github.com/modern-agile-team/modern-kit/commit/fdb918ef3e846d731979687323207e20b03f181a) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): clipboard 관련 함수 네이밍 변경 - @ssi02014
+
+- [#151](https://github.com/modern-agile-team/modern-kit/pull/151) [`16d958f`](https://github.com/modern-agile-team/modern-kit/commit/16d958f415072d8b05c0bd680a19175c3308488d) Thanks [@hoonloper](https://github.com/hoonloper)! - fix(utils): deepCopy 순환참조 이슈 수정 및 Date, Regex 테스트 코드 추가 - @hoonloper
+
+- [`d4930d1`](https://github.com/modern-agile-team/modern-kit/commit/d4930d1e3e7d298d14dda54531812b669101eae5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): deepEqual, delay 함수 개선 - @hoonloper
+
+- [#165](https://github.com/modern-agile-team/modern-kit/pull/165) [`b0e872d`](https://github.com/modern-agile-team/modern-kit/commit/b0e872d556403e9787b7b8b69200a78248df1828) Thanks [@hoonloper](https://github.com/hoonloper)! - feat(utils): delay 인자 음수, NaN 검증 추가 - @hoonloper
+
 ## 1.4.0
 
 ### Minor Changes
