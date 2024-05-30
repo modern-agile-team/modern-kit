@@ -1,5 +1,23 @@
 # @modern-kit/react
 
+## 1.6.0
+
+### Minor Changes
+
+- [#167](https://github.com/modern-agile-team/modern-kit/pull/167) [`e00b236`](https://github.com/modern-agile-team/modern-kit/commit/e00b2361cdefab3365f82c827869ca40fbfca7f7) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): useHover 신규 훅 추가 - @Sangminnn
+
+- [#163](https://github.com/modern-agile-team/modern-kit/pull/163) [`28f9877`](https://github.com/modern-agile-team/modern-kit/commit/28f9877a40ae0a18faeb24eebaac69365d1e8863) Thanks [@Collection50](https://github.com/Collection50)! - feat(react): OutsideClick 컴포넌트 구현 - @Collection50
+
+- [#154](https://github.com/modern-agile-team/modern-kit/pull/154) [`589dd5b`](https://github.com/modern-agile-team/modern-kit/commit/589dd5b8dcb30019fcdacbecd7d44ad230fba1e4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useDocumentTitle 커스텀 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [#161](https://github.com/modern-agile-team/modern-kit/pull/161) [`fdb918e`](https://github.com/modern-agile-team/modern-kit/commit/fdb918ef3e846d731979687323207e20b03f181a) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): clipboard 관련 함수 네이밍 변경 - @ssi02014
+
+- [#173](https://github.com/modern-agile-team/modern-kit/pull/173) [`04ab39e`](https://github.com/modern-agile-team/modern-kit/commit/04ab39e13be9e19f63d9fe4a277034fa40ba9004) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useInterval enabled 속성 추가 - @ssi02014
+
+- [#178](https://github.com/modern-agile-team/modern-kit/pull/178) [`9958080`](https://github.com/modern-agile-team/modern-kit/commit/995808023df257ca9d9cefbc2f34bd2b465c7377) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useInterval startInterval/stopInterval 함수 추가 - @ssi02014
+
 ## 1.5.0
 
 ### Minor Changes
