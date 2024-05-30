@@ -26,13 +26,13 @@ describe('excludeElements', () => {
   });
 
   it('should filter object.', () => {
-    const person = { name: 'kim', address: { city: 'seoul' } };
-    const array = [person];
-    const excludePerson = person;
-    const notExcludePerson = { name: 'kim' };
+    const excludePerson = { name: 'kim', address: { city: 'Seoul' } };
+    const notExcludePerson = { name: 'lee', address: { city: 'NewYork' } };
 
-    expect(excludeElements(array, excludePerson)).toEqual([]);
-    expect(excludeElements(array, notExcludePerson)).toEqual([person]);
+    const people = [excludePerson];
+
+    expect(excludeElements(people, excludePerson)).toEqual([]);
+    expect(excludeElements(people, notExcludePerson)).toEqual(people);
   });
 
   it('should filter tuple.', () => {
