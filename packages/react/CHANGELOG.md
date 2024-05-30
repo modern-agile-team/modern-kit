@@ -4,9 +4,9 @@
 
 ### Minor Changes
 
-- [`3bf54d0`](https://github.com/modern-agile-team/modern-kit/commit/3bf54d0f5a0764872c3821d583045e77420c534e) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useHover 신규 훅 추가 - @Sangminnn
+- [#167](https://github.com/modern-agile-team/modern-kit/pull/167) [`e00b236`](https://github.com/modern-agile-team/modern-kit/commit/e00b2361cdefab3365f82c827869ca40fbfca7f7) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): useHover 신규 훅 추가 - @Sangminnn
 
-- [`d4930d1`](https://github.com/modern-agile-team/modern-kit/commit/d4930d1e3e7d298d14dda54531812b669101eae5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): OutsideClick 컴포넌트 구현 - @Collection50
+- [#163](https://github.com/modern-agile-team/modern-kit/pull/163) [`28f9877`](https://github.com/modern-agile-team/modern-kit/commit/28f9877a40ae0a18faeb24eebaac69365d1e8863) Thanks [@Collection50](https://github.com/Collection50)! - feat(react): OutsideClick 컴포넌트 구현 - @Collection50
 
 - [#154](https://github.com/modern-agile-team/modern-kit/pull/154) [`589dd5b`](https://github.com/modern-agile-team/modern-kit/commit/589dd5b8dcb30019fcdacbecd7d44ad230fba1e4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useDocumentTitle 커스텀 훅 추가 - @ssi02014
 
