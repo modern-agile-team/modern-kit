@@ -8,3 +8,5 @@ export * from './Nullable';
 export * from './ObjectEntries';
 export * from './ObjectKeys';
 export * from './Promiseable';
+export * from './Integer';
+export * from './NaturalNumber';
