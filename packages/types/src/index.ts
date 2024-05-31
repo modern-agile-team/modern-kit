@@ -10,3 +10,4 @@ export * from './ObjectKeys';
 export * from './Promiseable';
 export * from './Integer';
 export * from './NaturalNumber';
+export * from './WholeNumber';
