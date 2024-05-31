@@ -36,4 +36,9 @@ describe('chunk', () => {
     const arr = [1, 2];
     expect(chunk(arr, 0 as number)).toEqual([]);
   });
+
+  it('returns an empty array if the second parameter is NaN', () => {
+    const arr = [1, 2];
+    expect(chunk(arr, NaN)).toEqual([]);
+  });
 });

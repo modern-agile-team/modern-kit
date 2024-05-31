@@ -4,11 +4,7 @@ export const chunk = <T, U extends number>(
   array: T[],
   size: NaturalNumber<U>
 ): T[][] => {
-  if (Number.isNaN(size)) {
-    return [array];
-  }
-
-  if (array.length === 0 || size === 0) {
+  if (array.length === 0 || Number.isNaN(size) || size === 0) {
     return [];
   }
 
