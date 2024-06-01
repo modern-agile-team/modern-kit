@@ -7,6 +7,8 @@ import { useMouse } from '@modern-kit/react';
 
 현재 스크린에서의 위치, 스크린 영역 내의 위치, 전체 문서에서의 위치, 대상 엘리먼트 기준 위치를 제공합니다.
 
+대상 엘리먼트가 없는 경우 상대적인 위치는 제공되지 않습니다.
+
 <br />
 
 ## Code
@@ -16,14 +18,14 @@ import { useMouse } from '@modern-kit/react';
 ```ts title="typescript"
 
 interface CursorPosition {
-  screenX: number;
-  screenY: number;
-  clientX: number;
-  clientY: number;
-  pageX: number;
-  pageY: number;
-  relativeX: number;
-  relativeY: number;
+  screenX?: number;
+  screenY?: number;
+  clientX?: number;
+  clientY?: number;
+  pageX?: number;
+  pageY?: number;
+  relativeX?: number;
+  relativeY?: number;
 }
 
 const useMouse: <T extends HTMLElement>() => {

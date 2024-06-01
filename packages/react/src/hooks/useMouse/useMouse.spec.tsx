@@ -6,9 +6,9 @@ import { fireEvent, screen } from '@testing-library/react';
 import { useMouse } from '.';
 import { useMemo } from 'react';
 
-describe('useMouse', () => {
-  const TestComponent = () => {
-    const { targetRef, position } = useMouse<HTMLDivElement>();
+describe('useMouse with connected ref', () => {
+  const RefConnectedComponent = () => {
+    const { ref, position } = useMouse<HTMLDivElement>();
 
     const style = useMemo(() => {
       return {
@@ -21,34 +21,34 @@ describe('useMouse', () => {
 
     return (
       <>
-        <div ref={targetRef} role="box" style={style} />
-        <p>clientX: {position.clientX}</p>
-        <p>clientY: {position.clientY}</p>
-        <p>screenX: {position.screenX}</p>
-        <p>screenY: {position.screenY}</p>
-        <p>pageX: {position.pageX}</p>
-        <p>pageY: {position.pageY}</p>
-        <p>relativeX: {position.relativeX}</p>
-        <p>relativeY: {position.relativeY}</p>
+        <div ref={ref} style={style} role="box" />
+        <p>clientX: {position.clientX ?? 'undefined'}</p>
+        <p>clientY: {position.clientY ?? 'undefined'}</p>
+        <p>screenX: {position.screenX ?? 'undefined'}</p>
+        <p>screenY: {position.screenY ?? 'undefined'}</p>
+        <p>pageX: {position.pageX ?? 'undefined'}</p>
+        <p>pageY: {position.pageY ?? 'undefined'}</p>
+        <p>relativeX: {position.relativeX ?? 'undefined'}</p>
+        <p>relativeY: {position.relativeY ?? 'undefined'}</p>
       </>
     );
   };
 
-  it('should return initial position when first render', async () => {
-    renderSetup(<TestComponent />);
+  it('should return undefined position when first render', async () => {
+    renderSetup(<RefConnectedComponent />);
 
-    expect(screen.getByText('clientX: NaN')).toBeInTheDocument();
-    expect(screen.getByText('clientY: NaN')).toBeInTheDocument();
-    expect(screen.getByText('screenX: NaN')).toBeInTheDocument();
-    expect(screen.getByText('screenY: NaN')).toBeInTheDocument();
-    expect(screen.getByText('pageX: NaN')).toBeInTheDocument();
-    expect(screen.getByText('pageY: NaN')).toBeInTheDocument();
-    expect(screen.getByText('relativeX: NaN')).toBeInTheDocument();
-    expect(screen.getByText('relativeY: NaN')).toBeInTheDocument();
+    expect(screen.getByText('clientX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('clientY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('screenX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('screenY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('pageX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('pageY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('relativeX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('relativeY: undefined')).toBeInTheDocument();
   });
 
-  it('should return correct position when mouse move', async () => {
-    renderSetup(<TestComponent />);
+  it('should return correct position and correct relative position when mouse move', async () => {
+    renderSetup(<RefConnectedComponent />);
 
     const box = screen.getByRole('box');
 
@@ -66,25 +66,30 @@ describe('useMouse', () => {
     expect(screen.getByText('pageX: 150')).toBeInTheDocument();
     expect(screen.getByText('pageY: 150')).toBeInTheDocument();
   });
+});
 
-  it('should return correct relative position when mouse move', async () => {
-    renderSetup(<TestComponent />);
+describe('useMouse without connected ref', () => {
+  const RefNonConnectedComponent = () => {
+    const { position } = useMouse<HTMLDivElement>();
 
-    const box = screen.getByRole('box');
+    return (
+      <>
+        <p>clientX: {position.clientX ?? 'undefined'}</p>
+        <p>clientY: {position.clientY ?? 'undefined'}</p>
+        <p>screenX: {position.screenX ?? 'undefined'}</p>
+        <p>screenY: {position.screenY ?? 'undefined'}</p>
+        <p>pageX: {position.pageX ?? 'undefined'}</p>
+        <p>pageY: {position.pageY ?? 'undefined'}</p>
+        <p>relativeX: {position.relativeX ?? 'undefined'}</p>
+        <p>relativeY: {position.relativeY ?? 'undefined'}</p>
+      </>
+    );
+  };
 
-    vi.spyOn(box, 'getBoundingClientRect').mockReturnValue({
-      x: 30,
-      y: 30,
-      width: 200,
-      height: 200,
-      top: 30,
-      left: 30,
-      right: 230,
-      bottom: 230,
-      toJSON: () => {}, // 타입에러를 해결하기 위해 추가합니다.
-    });
+  it('should return undefined position when first render', async () => {
+    renderSetup(<RefNonConnectedComponent />);
 
-    fireEvent.mouseMove(box, {
+    fireEvent.mouseMove(document, {
       clientX: 150,
       clientY: 150,
       screenX: 150,
@@ -97,7 +102,27 @@ describe('useMouse', () => {
     expect(screen.getByText('screenY: 150')).toBeInTheDocument();
     expect(screen.getByText('pageX: 150')).toBeInTheDocument();
     expect(screen.getByText('pageY: 150')).toBeInTheDocument();
-    expect(screen.getByText('relativeX: 120')).toBeInTheDocument();
-    expect(screen.getByText('relativeY: 120')).toBeInTheDocument();
+    expect(screen.getByText('relativeX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('relativeY: undefined')).toBeInTheDocument();
+  });
+
+  it('should return correct position and undefined relative position when mouse move', async () => {
+    renderSetup(<RefNonConnectedComponent />);
+
+    fireEvent.mouseMove(document, {
+      clientX: 150,
+      clientY: 150,
+      screenX: 150,
+      screenY: 150,
+    });
+
+    expect(screen.getByText('clientX: 150')).toBeInTheDocument();
+    expect(screen.getByText('clientY: 150')).toBeInTheDocument();
+    expect(screen.getByText('screenX: 150')).toBeInTheDocument();
+    expect(screen.getByText('screenY: 150')).toBeInTheDocument();
+    expect(screen.getByText('pageX: 150')).toBeInTheDocument();
+    expect(screen.getByText('pageY: 150')).toBeInTheDocument();
+    expect(screen.getByText('relativeX: undefined')).toBeInTheDocument();
+    expect(screen.getByText('relativeY: undefined')).toBeInTheDocument();
   });
 });
