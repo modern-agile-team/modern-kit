@@ -8,9 +8,20 @@ interface CursorPosition {
   clientY?: number;
   pageX?: number;
   pageY?: number;
-  relativeX?: number;
-  relativeY?: number;
+  elementRelativeX?: number;
+  elementRelativeY?: number;
+  elementPositionX?: number;
+  elementPositionY?: number;
 }
+
+type RelativePosition = Pick<
+  CursorPosition,
+  'elementRelativeX' | 'elementRelativeY'
+>;
+type ElementPosition = Pick<
+  CursorPosition,
+  'elementPositionX' | 'elementPositionY'
+>;
 
 export const useMouse = <T extends HTMLElement>() => {
   const targetRef = useRef<T>(null);
@@ -21,24 +32,32 @@ export const useMouse = <T extends HTMLElement>() => {
     clientY: undefined,
     pageX: undefined,
     pageY: undefined,
-    relativeX: undefined,
-    relativeY: undefined,
+    elementRelativeX: undefined,
+    elementRelativeY: undefined,
+    elementPositionX: undefined,
+    elementPositionY: undefined,
   });
 
   useIsomorphicLayoutEffect(() => {
     const onMouseMove = (event: MouseEvent) => {
       const { screenX, screenY, clientX, clientY, pageX, pageY } = event;
 
-      const relativePosition: Pick<CursorPosition, 'relativeX' | 'relativeY'> =
-        {};
+      const relativePosition: RelativePosition = {};
+      const elementPosition: ElementPosition = {};
 
       if (targetRef.current) {
         const rect = targetRef.current.getBoundingClientRect();
-        const relativeX = clientX - rect.left;
-        const relativeY = clientY - rect.top;
+        const elementRelativeX = clientX - rect.left;
+        const elementRelativeY = clientY - rect.top;
 
-        relativePosition.relativeX = relativeX;
-        relativePosition.relativeY = relativeY;
+        const elementPositionX = rect.left + window.scrollX;
+        const elementPositionY = rect.top + window.scrollY;
+
+        relativePosition.elementRelativeX = elementRelativeX;
+        relativePosition.elementRelativeY = elementRelativeY;
+
+        elementPosition.elementPositionX = elementPositionX;
+        elementPosition.elementPositionY = elementPositionY;
       }
 
       setCursorPosition({
@@ -49,6 +68,7 @@ export const useMouse = <T extends HTMLElement>() => {
         pageX,
         pageY,
         ...relativePosition,
+        ...elementPosition,
       });
     };
 

@@ -5,9 +5,9 @@ import { useMouse } from '@modern-kit/react';
 
 대상 엘리먼트를 기준으로 마우스의 위치를 추적하는 Hook입니다.
 
-현재 스크린에서의 위치, 스크린 영역 내의 위치, 전체 문서에서의 위치, 대상 엘리먼트 기준 위치를 제공합니다.
+현재 스크린에서의 위치, 스크린 영역 내의 위치, 전체 문서에서의 위치, 대상 엘리먼트 기준 위치, 해당 엘리먼트의 위치를 제공합니다.
 
-대상 엘리먼트가 없는 경우 상대적인 위치는 제공되지 않습니다.
+대상 엘리먼트가 없는 경우 상대적인 위치와 해당 엘리먼트의 위치는 제공되지 않습니다.
 
 <br />
 
@@ -24,8 +24,10 @@ interface CursorPosition {
   clientY?: number;
   pageX?: number;
   pageY?: number;
-  relativeX?: number;
-  relativeY?: number;
+  elementRelativeX?: number;
+  elementRelativeY?: number;
+  elementPositionX?: number;
+  elementPositionY?: number;
 }
 
 const useMouse: <T extends HTMLElement>() => {
@@ -64,9 +66,11 @@ const Example = () => {
       <p>스크린 영역 내 Y좌표: {position.clientY}</p>
       <p>전체 문서 기준 X좌표: {position.pageX}</p>
       <p>전체 문서 기준 Y좌표: {position.pageY}</p>
-      <p>대상 엘리먼트 기준 X좌표: {position.relativeX}</p>
-      <p>대상 엘리먼트 기준 Y좌표: {position.relativeY}</p>
-    </>
+      <p>대상 엘리먼트 기준 X좌표: {position.elementRelativeX}</p>
+      <p>대상 엘리먼트 기준 Y좌표: {position.elementRelativeY}</p>
+      <p>대상 엘리먼트의 X좌표 : {position.elementPositionX}</p>
+      <p>대상 엘리먼트의 Y좌표 : {position.elementPositionY}</p>
+    </p>
   );
 };
 ```
@@ -97,8 +101,10 @@ export const Example = () => {
       <p>스크린 영역 내 Y좌표: {position.clientY}</p>
       <p>전체 문서 기준 X좌표: {position.pageX}</p>
       <p>전체 문서 기준 Y좌표: {position.pageY}</p>
-      <p>대상 엘리먼트 기준 X좌표: {position.relativeX}</p>
-      <p>대상 엘리먼트 기준 Y좌표: {position.relativeY}</p>
+      <p>대상 엘리먼트 기준 X좌표: {position.elementRelativeX}</p>
+      <p>대상 엘리먼트 기준 Y좌표: {position.elementRelativeY}</p>
+      <p>대상 엘리먼트의 X좌표 : {position.elementPositionX}</p>
+      <p>대상 엘리먼트의 Y좌표 : {position.elementPositionY}</p>
     </>
   );
 };
