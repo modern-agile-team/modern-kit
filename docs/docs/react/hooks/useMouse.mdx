@@ -41,7 +41,7 @@ const useMouse: <T extends HTMLElement>() => {
 import { useMouse } from '@modern-kit/react';
 
 const Example = () => {
-  const { targetRef, position } = useMouse<HTMLDivElement>();
+  const { ref, position } = useMouse<HTMLDivElement>();
   const boxStyle = useMemo(() => {
     return {
       display: 'flex',
@@ -57,7 +57,7 @@ const Example = () => {
 
   return (
     <>
-      <div ref={targetRef} style={boxStyle}>
+      <div ref={ref} style={boxStyle}>
         박스 안에서 마우스를 움직여보세요.
       </div>
       <p>사용자 모니터 내 X좌표: {position.screenX}</p>
@@ -77,7 +77,7 @@ const Example = () => {
 
 ## Example
 export const Example = () => {
-  const { targetRef, position } = useMouse();
+  const { ref, position } = useMouse();
   const boxStyle = useMemo(() => {
     return {
       display: 'flex',
@@ -92,7 +92,7 @@ export const Example = () => {
   }, []);
   return (
     <>
-      <div ref={targetRef} style={boxStyle}>
+      <div ref={ref} style={boxStyle}>
         박스 안에서 마우스를 움직여보세요.
       </div>
       <p>사용자 모니터 내 X좌표: {position.screenX}</p>
