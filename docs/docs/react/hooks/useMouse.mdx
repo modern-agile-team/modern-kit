@@ -1,0 +1,112 @@
+import { useMemo } from 'react';
+import { useMouse } from '@modern-kit/react';
+
+# useMouse
+
+대상 엘리먼트를 기준으로 마우스의 위치를 추적하는 Hook입니다.
+
+현재 스크린에서의 위치, 스크린 영역 내의 위치, 전체 문서에서의 위치, 대상 엘리먼트 기준 위치, 해당 엘리먼트의 위치를 제공합니다.
+
+대상 엘리먼트가 없는 경우 상대적인 위치와 해당 엘리먼트의 위치는 제공되지 않습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMouse/index.ts)
+
+## Interface
+```ts title="typescript"
+
+interface CursorPosition {
+  screenX?: number;
+  screenY?: number;
+  clientX?: number;
+  clientY?: number;
+  pageX?: number;
+  pageY?: number;
+  elementRelativeX?: number;
+  elementRelativeY?: number;
+  elementPositionX?: number;
+  elementPositionY?: number;
+}
+
+const useMouse: <T extends HTMLElement>() => {
+  targetRef: T,
+  position: CursorPosition:
+}
+```
+
+## Usage
+```tsx title="typescript"
+import { useMouse } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, position } = useMouse<HTMLDivElement>();
+  const boxStyle = useMemo(() => {
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '500px', 
+      height: '500px',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <>
+      <div ref={ref} style={boxStyle}>
+        박스 안에서 마우스를 움직여보세요.
+      </div>
+      <p>사용자 모니터 내 X좌표: {position.screenX}</p>
+      <p>사용자 모니터 내 Y좌표: {position.screenY}</p>
+      <p>스크린 영역 내 X좌표: {position.clientX}</p>
+      <p>스크린 영역 내 Y좌표: {position.clientY}</p>
+      <p>전체 문서 기준 X좌표: {position.pageX}</p>
+      <p>전체 문서 기준 Y좌표: {position.pageY}</p>
+      <p>대상 엘리먼트 기준 X좌표: {position.elementRelativeX}</p>
+      <p>대상 엘리먼트 기준 Y좌표: {position.elementRelativeY}</p>
+      <p>대상 엘리먼트의 X좌표 : {position.elementPositionX}</p>
+      <p>대상 엘리먼트의 Y좌표 : {position.elementPositionY}</p>
+    </p>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  const { ref, position } = useMouse();
+  const boxStyle = useMemo(() => {
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '500px', 
+      height: '500px',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <>
+      <div ref={ref} style={boxStyle}>
+        박스 안에서 마우스를 움직여보세요.
+      </div>
+      <p>사용자 모니터 내 X좌표: {position.screenX}</p>
+      <p>사용자 모니터 내 Y좌표: {position.screenY}</p>
+      <p>스크린 영역 내 X좌표: {position.clientX}</p>
+      <p>스크린 영역 내 Y좌표: {position.clientY}</p>
+      <p>전체 문서 기준 X좌표: {position.pageX}</p>
+      <p>전체 문서 기준 Y좌표: {position.pageY}</p>
+      <p>대상 엘리먼트 기준 X좌표: {position.elementRelativeX}</p>
+      <p>대상 엘리먼트 기준 Y좌표: {position.elementRelativeY}</p>
+      <p>대상 엘리먼트의 X좌표 : {position.elementPositionX}</p>
+      <p>대상 엘리먼트의 Y좌표 : {position.elementPositionY}</p>
+    </>
+  );
+};
+
+<Example />

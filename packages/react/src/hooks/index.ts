@@ -15,6 +15,7 @@ export * from './useIsomorphicLayoutEffect';
 export * from './useKeyDown';
 export * from './useMediaQuery';
 export * from './useMergeRefs';
+export * from './useMouse';
 export * from './useOnClickOutside';
 export * from './usePreservedState';
 export * from './usePreservedCallback';
