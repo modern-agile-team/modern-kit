@@ -1,0 +1,75 @@
+import { useNetwork } from '@modern-kit/react';
+
+# useNetwork
+
+`useSyncExternalStore`을 사용해 브라우저 네트워크 연결 상태를 구독 후 online 상태 여부를 반환하는 커스텀 훅입니다.
+
+`onlineCallback`, `offlineCallback`을 통해 네트워크 상태가 변경 될 때 원하는 함수를 호출 할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useNetwork/index.ts)
+
+## Interface
+
+```ts title="typescript"
+interface UseNetworkProps {
+  onlineCallback?: (event: Event) => void;
+  offlineCallback?: (event: Event) => void;
+}
+
+const useNetwork: ({ onlineCallback, offlineCallback }?: UseNetworkProps) => {
+  isOnline: boolean;
+};
+```
+
+## Usage
+
+```tsx title="typescript"
+import { useNetwork } from '@modern-kit/react';
+
+const Example = () => {
+  const { isOnline } = useNetwork({
+    onlineCallback: () => {
+      alert('online');
+    },
+    offlineCallback: () => {
+      alert('offline');
+    },
+  });
+
+  return (
+    <div>
+      <p>개발자 도구의 네트워크 탭에서 디바이스 연결을 끊어보세요.</p>
+      <p>{isOnline ? '🟢 online' : '❌ offline'}</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { isOnline } = useNetwork({
+    onlineCallback: () => {
+      alert('online');
+    },
+    offlineCallback: () => {
+      alert('offline');
+    },
+  });
+
+  return (
+    <div>
+      <p>개발자 도구의 네트워크 탭에서 디바이스 연결을 끊어보세요.</p>
+      <p>{isOnline ? '🟢 Online' : '❌ Offline'}</p>
+    </div>
+  );
+};
+
+<Example />
+
+## Note
+- [useSyncExternalStore(en) - react.dev](https://react.dev/reference/react/useSyncExternalStore)
+- [useSyncExternalStore(ko) - react.dev](https://ko.react.dev/reference/react/useSyncExternalStore)
