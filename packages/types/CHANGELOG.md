@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.2.0
+
+### Minor Changes
+
+- [#184](https://github.com/modern-agile-team/modern-kit/pull/184) [`ac3725a`](https://github.com/modern-agile-team/modern-kit/commit/ac3725a0fe2f1263b7e13590be2d0e4f81f223e9) Thanks [@Collection50](https://github.com/Collection50)! - feat(utils): chunk 유틸 함수 추가 및 Interger, NaturalNumber WholeNumber 유틸 타입 추가
+
 ## 1.1.0
 
 ### Minor Changes
