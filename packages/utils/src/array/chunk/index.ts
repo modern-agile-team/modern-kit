@@ -4,7 +4,10 @@ export const chunk = <T, U extends number>(
   array: T[],
   size: NaturalNumber<U>
 ): T[][] => {
-  if (array.length === 0 || Number.isNaN(size) || size === 0) {
+  const isExceptionCase =
+    array.length < 1 || !Number.isInteger(size) || size < 1;
+
+  if (isExceptionCase) {
     return [];
   }
 
