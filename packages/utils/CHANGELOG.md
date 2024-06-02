@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 1.6.0
+
+### Minor Changes
+
+- [#184](https://github.com/modern-agile-team/modern-kit/pull/184) [`ac3725a`](https://github.com/modern-agile-team/modern-kit/commit/ac3725a0fe2f1263b7e13590be2d0e4f81f223e9) Thanks [@Collection50](https://github.com/Collection50)! - feat(utils): chunk 유틸 함수 추가 및 Interger, NaturalNumber WholeNumber 유틸 타입 추가
+
+### Patch Changes
+
+- [#195](https://github.com/modern-agile-team/modern-kit/pull/195) [`8119e35`](https://github.com/modern-agile-team/modern-kit/commit/8119e35c4f3bb2aae721406f7d0f55b8ccc973a6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): chunk exceptionCase 변수 추가 - @ssi02014
+
 ## 1.5.0
 
 ### Minor Changes

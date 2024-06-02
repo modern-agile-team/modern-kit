@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 1.7.0
+
+### Minor Changes
+
+- [#186](https://github.com/modern-agile-team/modern-kit/pull/186) [`af930a0`](https://github.com/modern-agile-team/modern-kit/commit/af930a08e104aaed16a38550021ef90ccd010a75) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): useMouse 신규 훅 추가 - @Sangminnn
+
+- [#194](https://github.com/modern-agile-team/modern-kit/pull/194) [`e12da88`](https://github.com/modern-agile-team/modern-kit/commit/e12da882a0bd76ba80aaee7ba7c61bbb43a82c3d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useNetwork 신규 훅 추가 - @ssi02014
+
 ## 1.6.0
 
 ### Minor Changes
