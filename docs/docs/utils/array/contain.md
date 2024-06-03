@@ -2,7 +2,7 @@
 
 첫 번째 인자로 넘긴 배열에 특정 요소가 포함되어 있는지 판단하는 유틸 함수입니다.
 
-includes의 `as const`를 활용 했을 때, 타입이 호환되지 않은 요소가 포함되어 있는지 확인 할 때 타입 에러가 발생하는 문제점을 `some` 메서드를 활용해 개선하기 위한 함수입니다.
+includes는 `as const`를 활용 했을 때, 타입이 호환되지 않은 요소가 포함되어 있는지 확인 할 때 타입 에러가 발생하는 문제점을 `some` 메서드를 활용해 개선한 함수입니다.
 
 ```ts title="typescript"
 const arr = [1, 2, 3] as const
@@ -11,6 +11,17 @@ arr.includes(4); // '4' 형식의 인수는 '1 | 2 | 3' 형식의 매개 변수�
 ```
 
 `some` 메서드를 통해 요소가 포함되어 있는지 판단 할 때 기본적으로 `Object.is` 메서드를 활용합니다. 단, 필요 시에 3번째 인자로 `comparator` 함수를 활용 할 수 있습니다.
+
+[Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)를 활용한 이유는 `==` 보다는 엄격하게 관리되며, `===`보다 조금 더 개발자가 기대하는 결과를 가져옵니다. 예를 들어 `===`과 비교했을 때, `NaN`은 같다고 판단하며, `-0과 +0`은 서로 다르다고 판단합니다. 
+
+```ts title="typescript"
+-0 === +0 // true
+Object.is(-0, +0); // false
+
+NaN === NaN; // false;
+Object.is(NaN, NaN); // true
+Object.is(NaN, 0 / 0); // true
+```
 
 
 ## Code
