@@ -1,0 +1,74 @@
+# contain
+
+첫 번째 인자로 넘긴 배열에 특정 요소가 포함되어 있는지 판단하는 유틸 함수입니다.
+
+includes의 `as const`를 활용 했을 때, 타입이 호환되지 않은 요소가 포함되어 있는지 확인 할 때 타입 에러가 발생하는 문제점을 `some` 메서드를 활용해 개선하기 위한 함수입니다.
+
+```ts title="typescript"
+const arr = [1, 2, 3] as const
+
+arr.includes(4); // '4' 형식의 인수는 '1 | 2 | 3' 형식의 매개 변수에 할당될 수 없습니다.
+```
+
+`some` 메서드를 통해 요소가 포함되어 있는지 판단 할 때 기본적으로 `Object.is` 메서드를 활용합니다. 단, 필요 시에 3번째 인자로 `comparator` 함수를 활용 할 수 있습니다.
+
+
+## Code
+
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/contain/index.ts)
+
+## Interface
+
+```ts title="typescript"
+const contain: <T>(
+  arr: readonly T[] | T[],
+  value: unknown,
+  comparator?: (x: any, y: any) => boolean // default: Object.is
+) => value is T;
+```
+
+## Usage
+### Default
+```ts title="typescript"
+import { contain } from '@modern-kit/utils';
+
+const arr = [0, 1, 2, 3, NaN, {}];
+
+contain(arr, 1); // true
+contain(arr, NaN); // true
+
+contain(arr, -0); // false
+contain(arr, 4); // false
+contain(arr, "3"); // false
+contain(arr, {}); // false
+```
+
+### Comparator
+```ts title="typescript"
+const arr = [{ a: 1, b: 2 }];
+
+contain(arr, { a: 1, c: 2 }, (x, y) => x.a === y.a); // true
+contain(
+  arr,
+  { a: 1, b: 2 },
+  (x, y) => JSON.stringify(x) === JSON.stringify(y)
+); // true
+```
+
+### Narrowing types
+```ts title="typescript"
+const arr = [2, 3, 'foo'] as const;
+const value = 'foo' as unknown;
+
+if (contain(arr, value)) {
+  value; // 2 | 3 | 'foo'
+} else {
+  value; // unknown
+}
+```
+
+## Note
+- [Object.is(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+- [Object.is(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+- [동등 비교 및 동일성(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)
+- [동등 비교 및 동일성(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Equality_comparisons_and_sameness#%EB%8F%99%EC%9D%BC_%EA%B0%92_%EC%A0%9C%EB%A1%9C_%EB%8F%99%EB%93%B1)
