@@ -5,9 +5,10 @@
 includes는 `as const`를 활용 했을 때, 타입이 호환되지 않은 요소가 포함되어 있는지 확인 할 때 타입 에러가 발생하는 문제점을 `some` 메서드를 활용해 개선한 함수입니다.
 
 ```ts title="typescript"
-const arr = [1, 2, 3] as const
-
-arr.includes(4); // '4' 형식의 인수는 '1 | 2 | 3' 형식의 매개 변수에 할당될 수 없습니다.
+const test = (value: number) => {
+  const arr = [1, 2, 3, 4] as const;
+  arr.includes(value); // 'number' 형식의 인수는 '1 | 2 | 3 | 4' 형식의 매개 변수에 할당될 수 없습니다.
+};
 ```
 
 `some` 메서드를 통해 요소가 포함되어 있는지 판단 할 때 기본적으로 `Object.is` 메서드를 활용합니다. 단, 필요 시에 3번째 인자로 `comparator` 함수를 활용 할 수 있습니다.
