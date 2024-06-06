@@ -15,7 +15,7 @@ delay 함수를 사용한다면 이러한 문제를 해결할 수 있습니다.
 
 ## Interface
 ```ts title="typescript"
-const delay: (time: number, callback?: () => void) => Promise<void>;
+const delay: (time: number) => Promise<void>;
 ```
 
 ## Usage
@@ -27,11 +27,5 @@ const something = () => Promise.resolve()
 const doSomethingAfterDelay = async () => {
   await delay(1000)
   await something()
-};
-
-const callFuncAfterDelay = async () => {
-  await delay(1000, () => {
-    console.log("test");
-  })
 };
 ```
