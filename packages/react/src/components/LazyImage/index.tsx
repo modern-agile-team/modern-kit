@@ -13,12 +13,12 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
     { src, style, threshold, root, rootMargin, ...restProps }: LazyImageProps,
     ref
   ) => {
-    const imgRef = useIntersectionObserver<HTMLImageElement>({
-      action: (entry) => {
+    const { ref: imgRef } = useIntersectionObserver<HTMLImageElement>({
+      onIntersectStart: (entry) => {
         const targetImgElement = entry.target as HTMLImageElement;
         targetImgElement.src = src;
       },
-      calledOnce: true,
+      calledOnceVisible: true,
       threshold,
       root,
       rootMargin,

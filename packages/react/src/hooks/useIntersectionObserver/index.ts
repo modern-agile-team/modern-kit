@@ -4,50 +4,57 @@ import { Nullable } from '@modern-kit/types';
 import { noop } from '@modern-kit/utils';
 
 export interface UseIntersectionObserverProps extends IntersectionObserverInit {
-  action: (entry: IntersectionObserverEntry) => void;
-  calledOnce?: boolean;
+  onIntersectStart?: (entry: IntersectionObserverEntry) => void;
+  onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
+  calledOnceVisible?: boolean;
 }
 
 export const useIntersectionObserver = <T extends HTMLElement>({
-  action,
-  calledOnce = false,
+  onIntersectStart = noop,
+  onIntersectEnd = noop,
+  calledOnceVisible = false,
   root = null,
-  threshold = [0],
+  threshold = 0,
   rootMargin = '0px 0px 0px 0px',
 }: UseIntersectionObserverProps) => {
   const intersectionObserverRef = useRef<Nullable<IntersectionObserver>>(null);
 
-  const callbackAction = usePreservedCallback(action ?? noop);
-
-  const observerAction = usePreservedCallback(
+  const intersectionObserverCallback = usePreservedCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      if (entry && entry.isIntersecting) {
+      if (!entry) return;
+
+      if (entry.isIntersecting) {
         const targetElement = entry.target as T;
 
-        callbackAction(entry);
+        onIntersectStart(entry);
 
-        if (calledOnce) {
+        if (calledOnceVisible) {
           observer.unobserve(targetElement);
         }
+      } else {
+        onIntersectEnd(entry);
       }
     }
   );
 
-  const targetRef = usePreservedCallback((node: T) => {
+  const targetRef = (node: T) => {
     if (intersectionObserverRef.current) {
       intersectionObserverRef.current.disconnect();
     }
 
-    intersectionObserverRef.current = new IntersectionObserver(observerAction, {
-      root,
-      threshold,
-      rootMargin,
-    });
+    intersectionObserverRef.current = new IntersectionObserver(
+      intersectionObserverCallback,
+      {
+        threshold,
+        root,
+        rootMargin,
+      }
+    );
 
     if (node) {
       intersectionObserverRef.current.observe(node);
     }
-  });
+  };
 
-  return targetRef;
+  return { ref: targetRef };
 };

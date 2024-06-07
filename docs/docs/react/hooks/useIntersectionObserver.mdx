@@ -1,6 +1,10 @@
+import { useIntersectionObserver } from '@modern-kit/react';
+
 # useIntersectionObserver
 
-`ref`를 할당한 타겟 엘리먼트가 `Viewport`에 노출되는 시점에 `action` 콜백 함수를 호출시키는 커스텀 훅입니다.
+`ref`를 할당한 타겟 엘리먼트가 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
+
+`calledOnceVisible`을 활용해 타겟 엘리먼트가 `viewport에 노출 될 때 한번 onIntersectStart을 호출` 할 수 있습니다.
 
 Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
@@ -11,18 +15,28 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 
 ## Interface
 ```ts title="typescript"
+interface IntersectionObserverInit {
+    root?: Element | Document | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+}
+
 interface UseIntersectionObserverProps extends IntersectionObserverInit {
-  action: (entry: IntersectionObserverEntry) => void;
-  calledOnce?: boolean;
+  onIntersectStart?: (entry: IntersectionObserverEntry) => void;
+  onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
+  calledOnceVisible?: boolean;
 }
 
 const useIntersectionObserver: <T extends HTMLElement>({
-  action,
-  calledOnce,
-  root,
-  threshold,
-  rootMargin,
-}: UseIntersectionObserverProps) => (node: T) => void;
+  onIntersectStart,
+  onIntersectEnd,
+  calledOnceVisible, // default: false
+  root, // default: null
+  threshold, // default: 0
+  rootMargin, // default: '0px 0px 0px 0px'
+}: UseIntersectionObserverProps) => {
+  ref: (node: T) => void;
+};
 ```
 
 ## Usage
@@ -30,22 +44,63 @@ const useIntersectionObserver: <T extends HTMLElement>({
 import { useIntersectionObserver } from '@modern-kit/react';
 
 const Example = () => {
-  const divRef = useIntersectionObserver<HTMLDivElement>({
-    action: () => { /* action */},
+  const { ref: targetRef } = useIntersectionObserver({
+    onIntersectStart: (entry) => {
+      console.log("onIntersectStart: ", entry);
+    },
+    onIntersectEnd: (entry) => {
+      console.log("onIntersectEnd: ", entry);
+    },
+    calledOnceVisible: false
   });
-  const imgRef = useIntersectionObserver<HTMLImageElement>({
-    action: (entry) => { /* 필요하다면 IntersectionObserverEntry 를 사용할 수 있습니다. */},
-  });
+  
+  const boxStyle = {
+    height: "800px", 
+    backgroundColor: "teal"
+  }
 
   return (
     <div>
-      {/* ... */}
-      <div ref={divRef}>Box</div>
-      <img ref={imgRef} src="url" alt="img" />
+      <div style={boxStyle} />
+      <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
+        타겟 요소<br />
+        개발자 도구 콘솔을 확인해주세요.
+      </div>
+      <div style={boxStyle} />
     </div>
   );
 };
 ```
+
+## Exmaple
+
+export const Example = () => {
+  const { ref: targetRef } = useIntersectionObserver({
+    onIntersectStart: (entry) => {
+      console.log("onIntersectStart: ", entry);
+    },
+    onIntersectEnd: (entry) => {
+      console.log("onIntersectEnd: ", entry);
+    },
+    calledOnceVisible: false
+  });
+  const boxStyle = {
+    height: "800px", 
+    backgroundColor: "teal"
+  }
+  return (
+    <div>
+      <div style={boxStyle} />
+      <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
+        타겟 요소<br />
+        개발자 도구 콘솔을 확인해주세요.
+      </div>
+      <div style={boxStyle} />
+    </div>
+  );
+};
+
+<Example />
 
 ## Note
 - [Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)

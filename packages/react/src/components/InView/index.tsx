@@ -11,16 +11,25 @@ export const InView = forwardRef<
   HTMLDivElement,
   PropsWithChildren<InViewProps>
 >((props, ref) => {
-  const { action, calledOnce, threshold, root, rootMargin, ...restProps } =
-    props;
-
-  const intersectionObserverRef = useIntersectionObserver<HTMLDivElement>({
-    action,
-    calledOnce,
+  const {
+    onIntersectStart,
+    onIntersectEnd,
+    calledOnceVisible,
     threshold,
     root,
     rootMargin,
-  });
+    ...restProps
+  } = props;
+
+  const { ref: intersectionObserverRef } =
+    useIntersectionObserver<HTMLDivElement>({
+      onIntersectStart,
+      onIntersectEnd,
+      calledOnceVisible,
+      threshold,
+      root,
+      rootMargin,
+    });
 
   return (
     <div ref={useMergeRefs(ref, intersectionObserverRef)} {...restProps}>
