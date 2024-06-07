@@ -17,6 +17,7 @@ export const useIntersectionObserver = <T extends HTMLElement>({
   threshold = 0,
   rootMargin = '0px 0px 0px 0px',
 }: UseIntersectionObserverProps) => {
+  const isVisible = useRef(false);
   const intersectionObserverRef = useRef<Nullable<IntersectionObserver>>(null);
 
   const intersectionObserverCallback = usePreservedCallback(
@@ -26,12 +27,15 @@ export const useIntersectionObserver = <T extends HTMLElement>({
       if (entry.isIntersecting) {
         const targetElement = entry.target as T;
 
+        isVisible.current = true;
         onIntersectStart(entry);
 
         if (calledOnceVisible) {
           observer.unobserve(targetElement);
         }
-      } else {
+      } else if (isVisible.current) {
+        // 최초 mount 시에 호출을 방지하고, 타겟 요소가 viewport에서 나갈 때만 호출
+        isVisible.current = false;
         onIntersectEnd(entry);
       }
     }
