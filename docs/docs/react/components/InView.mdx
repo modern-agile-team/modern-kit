@@ -2,7 +2,13 @@ import { InView } from '@modern-kit/react';
 
 # InView
 
-`Viewport`에 노출될 때 props로 넘겨주는 `action` 콜백 함수를 호출하는 컴포넌트입니다.
+`InView`는 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)**를 선언적으로 활용 할 수 있는 컴포넌트입니다.
+
+`Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
+
+`calledOnce`를 활용하면 `onIntersectStart`와 `onIntersectEnd`를 각각 한번씩 호출 할 수 있습니다.
+
+Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
 <br />
 
@@ -11,6 +17,18 @@ import { InView } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
+interface IntersectionObserverInit {
+    root?: Element | Document | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+}
+
+interface UseIntersectionObserverProps extends IntersectionObserverInit {
+  onIntersectStart?: (entry: IntersectionObserverEntry) => void;
+  onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
+  calledOnce?: boolean;
+}
+
 type InViewProps = React.ComponentProps<'div'> & UseIntersectionObserverProps;
 
 const InView: React.ForwardRefExoticComponent<
@@ -24,46 +42,86 @@ const InView: React.ForwardRefExoticComponent<
 import { InView } from '@modern-kit/react';
 
 const Example = () => {
-  const onAction = () => {
+  const handleIntersectStart = () => {
+    /* action */
+  }
+
+  const handleIntersectEnd = () => {
     /* action */
   }
 
   return (
     <div>
       {/* ... */}
-      <InView action={onAction} calledOnce>Box1</InView>
-    </div>
+      <InView
+        onIntersectStart={handleIntersectStart}
+        onIntersectStart={handleIntersectEnd}
+        calledOnce>
+        Box1
+      </InView>
+    </div>;
   );
 }; 
 ```
 
 ## Example
 
-<div style={{ maxWidth: "500px", height: "500px", overflow: "scroll", background: "#f1f3f5" }}>
-  <div style={{ width: "100%", height: "600px", textAlign: 'center', fontSize: '2rem' }}>스크롤 해주세요.</div>
-  <InView
-    style={{ width: "100%", height: "300px", background: "#c0392B", color: "white", textAlign: 'center', fontSize: "21px" }}
-    action={() => console.log("action callback(1)")}
-    calledOnce
-  >
+export const Example = () => {
+  const inViewStyle = {
+    width: '100%',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: '21px',
+    padding: '0 20px',
+  }
+  return (
     <div>
-      <p>Box1</p>
-      <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
-      <p>action 콜백 함수가 최초 1회만 호출됩니다.</p>
-      <p>calledOnce: true</p>
+      <div
+        style={{
+          height: '500px',
+          textAlign: 'center',
+          fontSize: '2rem',
+        }}>
+        스크롤 해주세요.
+      </div>
+      <InView
+        style={{
+          ...inViewStyle,
+          background: '#c0392B',
+        }}
+        onIntersectStart={() => console.log('action onIntersectStart(1)')}
+        onIntersectEnd={() => console.log('action onIntersectEnd(1)')}
+        calledOnce
+      >
+        <div>
+          <p>Box1</p>
+          <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
+          <p>onIntersectStart가 최초 1회만 호출됩니다.</p>
+          <p>calledOnce: true</p>
+        </div>
+      </InView>
+      <div style={{ height: '300px' }} />
+      <InView
+        style={{
+          ...inViewStyle,
+          background: '#89a5ea',
+        }}
+        onIntersectStart={() => console.log('action onIntersectStart(2)')}
+        onIntersectEnd={() => console.log('action onIntersectEnd(2)')}
+      >
+        <div>
+          <p>Box2</p>
+          <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
+          <p>onIntersectStart, onIntersectEnd 함수가 여러 번 호출됩니다.</p>
+          <p>calledOnce: false</p>
+        </div>
+      </InView>
+      <div style={{ width: '100%', height: '900px', textAlign: 'center' }} />
     </div>
-  </InView>
-  <div style={{ width: "100%", height: "100px" }} />
-  <InView
-    style={{ width: "100%", height: "300px", background: "#89a5ea", color: "white", textAlign: 'center', fontSize: "21px" }}
-    action={() => console.log("action callback(2)")}
-  >
-    <div>
-      <p>Box2</p>
-      <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
-      <p>action 콜백 함수가 여러 번 호출됩니다.</p>
-      <p>calledOnce: false</p>
-    </div>
-  </InView>
-  <div style={{ width: "100%", height: "600px", textAlign: 'center' }} />
-</div>
+  );
+};
+
+<Example />
+
+## Note
+- [Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)
