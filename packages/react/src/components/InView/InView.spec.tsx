@@ -18,19 +18,19 @@ afterEach(() => {
 interface TestComponentProps {
   onIntersectStart: () => void;
   onIntersectEnd: () => void;
-  calledOnceVisible?: boolean;
+  calledOnce?: boolean;
 }
 
 const TestComponent = ({
   onIntersectStart,
   onIntersectEnd,
-  calledOnceVisible,
+  calledOnce,
 }: TestComponentProps) => {
   return (
     <InView
       onIntersectStart={onIntersectStart}
       onIntersectEnd={onIntersectEnd}
-      calledOnceVisible={calledOnceVisible}>
+      calledOnce={calledOnce}>
       box
     </InView>
   );
@@ -65,22 +65,23 @@ describe('InView Component', () => {
       <TestComponent
         onIntersectStart={intersectStartMock}
         onIntersectEnd={intersectEndMock}
-        calledOnceVisible={true}
+        calledOnce={true}
       />
     );
 
     const box = screen.getByText('box');
 
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
-
     expect(intersectStartMock).toBeCalledTimes(1);
 
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
+    expect(intersectEndMock).toBeCalledTimes(1);
+
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
 
     expect(intersectStartMock).toBeCalledTimes(1);
-    expect(intersectEndMock).toBeCalledTimes(0);
+    expect(intersectEndMock).toBeCalledTimes(1);
   });
 });

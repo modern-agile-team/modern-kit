@@ -14,7 +14,7 @@ export const InView = forwardRef<
   const {
     onIntersectStart,
     onIntersectEnd,
-    calledOnceVisible,
+    calledOnce,
     threshold,
     root,
     rootMargin,
@@ -25,7 +25,7 @@ export const InView = forwardRef<
     useIntersectionObserver<HTMLDivElement>({
       onIntersectStart,
       onIntersectEnd,
-      calledOnceVisible,
+      calledOnce,
       threshold,
       root,
       rootMargin,

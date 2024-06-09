@@ -6,17 +6,18 @@ import { noop } from '@modern-kit/utils';
 export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   onIntersectStart?: (entry: IntersectionObserverEntry) => void;
   onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
-  calledOnceVisible?: boolean;
+  calledOnce?: boolean;
 }
 
 export const useIntersectionObserver = <T extends HTMLElement>({
   onIntersectStart = noop,
   onIntersectEnd = noop,
-  calledOnceVisible = false,
+  calledOnce = false,
   root = null,
   threshold = 0,
   rootMargin = '0px 0px 0px 0px',
 }: UseIntersectionObserverProps) => {
+  const calledCount = useRef(0);
   const isVisible = useRef(false);
   const intersectionObserverRef = useRef<Nullable<IntersectionObserver>>(null);
 
@@ -24,19 +25,23 @@ export const useIntersectionObserver = <T extends HTMLElement>({
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (!entry) return;
 
+      const targetElement = entry.target as T;
+
       if (entry.isIntersecting) {
-        const targetElement = entry.target as T;
-
         isVisible.current = true;
-        onIntersectStart(entry);
+        calledCount.current += 1;
 
-        if (calledOnceVisible) {
-          observer.unobserve(targetElement);
-        }
+        onIntersectStart(entry);
       } else if (isVisible.current) {
         // 최초 mount 시에 호출을 방지하고, 타겟 요소가 viewport에서 나갈 때만 호출
         isVisible.current = false;
+        calledCount.current += 1;
+
         onIntersectEnd(entry);
+      }
+
+      if (calledOnce && calledCount.current > 1) {
+        observer.unobserve(targetElement);
       }
     }
   );

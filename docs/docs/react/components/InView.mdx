@@ -6,7 +6,7 @@ import { InView } from '@modern-kit/react';
 
 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
 
-`calledOnceVisible`을 활용해 컴포넌트가 `viewport에 노출 될 때 한번 onIntersectStart을 호출` 할 수 있습니다.
+`calledOnce`를 활용하면 `onIntersectStart`와 `onIntersectEnd`를 각각 한번씩 호출 할 수 있습니다.
 
 Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
@@ -26,7 +26,7 @@ interface IntersectionObserverInit {
 interface UseIntersectionObserverProps extends IntersectionObserverInit {
   onIntersectStart?: (entry: IntersectionObserverEntry) => void;
   onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
-  calledOnceVisible?: boolean;
+  calledOnce?: boolean;
 }
 
 type InViewProps = React.ComponentProps<'div'> & UseIntersectionObserverProps;
@@ -56,7 +56,7 @@ const Example = () => {
       <InView
         onIntersectStart={handleIntersectStart}
         onIntersectStart={handleIntersectEnd}
-        calledOnceVisible>
+        calledOnce>
         Box1
       </InView>
     </div>;
@@ -91,13 +91,13 @@ export const Example = () => {
         }}
         onIntersectStart={() => console.log('action onIntersectStart(1)')}
         onIntersectEnd={() => console.log('action onIntersectEnd(1)')}
-        calledOnceVisible
+        calledOnce
       >
         <div>
           <p>Box1</p>
           <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
           <p>onIntersectStart가 최초 1회만 호출됩니다.</p>
-          <p>calledOnceVisible: true</p>
+          <p>calledOnce: true</p>
         </div>
       </InView>
       <div style={{ height: '300px' }} />
@@ -113,7 +113,7 @@ export const Example = () => {
           <p>Box2</p>
           <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
           <p>onIntersectStart, onIntersectEnd 함수가 여러 번 호출됩니다.</p>
-          <p>calledOnceVisible: false</p>
+          <p>calledOnce: false</p>
         </div>
       </InView>
       <div style={{ width: '100%', height: '900px', textAlign: 'center' }} />

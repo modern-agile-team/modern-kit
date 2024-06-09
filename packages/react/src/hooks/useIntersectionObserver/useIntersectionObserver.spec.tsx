@@ -18,18 +18,18 @@ afterEach(() => {
 interface TestComponentProps {
   onIntersectStart: () => void;
   onIntersectEnd: () => void;
-  calledOnceVisible?: boolean;
+  calledOnce?: boolean;
 }
 
 const TestComponent = ({
   onIntersectStart,
   onIntersectEnd,
-  calledOnceVisible,
+  calledOnce,
 }: TestComponentProps) => {
   const { ref: boxRef } = useIntersectionObserver<HTMLDivElement>({
     onIntersectStart,
     onIntersectEnd,
-    calledOnceVisible,
+    calledOnce,
   });
 
   return <div ref={boxRef}>box</div>;
@@ -59,12 +59,12 @@ describe('useIntersectionObserver', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('should call the action callback function only once when the calledOnceVisible option is true', async () => {
+  it('should call the action callback function only once when the calledOnce option is true', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
         onIntersectEnd={intersectEndMock}
-        calledOnceVisible={true}
+        calledOnce={true}
       />
     );
 
@@ -74,11 +74,13 @@ describe('useIntersectionObserver', () => {
     expect(intersectStartMock).toBeCalledTimes(1);
 
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
+    expect(intersectEndMock).toBeCalledTimes(1);
+
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
 
     expect(intersectStartMock).toBeCalledTimes(1);
-    expect(intersectEndMock).toBeCalledTimes(0);
+    expect(intersectEndMock).toBeCalledTimes(1);
   });
 });

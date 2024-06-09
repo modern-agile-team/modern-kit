@@ -4,7 +4,7 @@ import { useIntersectionObserver } from '@modern-kit/react';
 
 `ref`를 할당한 타겟 엘리먼트가 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
 
-`calledOnceVisible`을 활용해 타겟 엘리먼트가 `viewport에 노출 될 때 한번 onIntersectStart을 호출` 할 수 있습니다.
+`calledOnce`옵션을 `true`로 설정하면 `onIntersectStart`와 `onIntersectEnd`를 각각 한번씩 호출 할 수 있습니다.
 
 Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
@@ -24,13 +24,13 @@ interface IntersectionObserverInit {
 interface UseIntersectionObserverProps extends IntersectionObserverInit {
   onIntersectStart?: (entry: IntersectionObserverEntry) => void;
   onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
-  calledOnceVisible?: boolean;
+  calledOnce?: boolean;
 }
 
 const useIntersectionObserver: <T extends HTMLElement>({
   onIntersectStart,
   onIntersectEnd,
-  calledOnceVisible, // default: false
+  calledOnce, // default: false
   root, // default: null
   threshold, // default: 0
   rootMargin, // default: '0px 0px 0px 0px'
@@ -51,7 +51,7 @@ const Example = () => {
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
     },
-    calledOnceVisible: false
+    calledOnce: false
   });
   
   const boxStyle = {
@@ -82,7 +82,7 @@ export const Example = () => {
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
     },
-    calledOnceVisible: false
+    calledOnce: false
   });
   const boxStyle = {
     height: "800px", 

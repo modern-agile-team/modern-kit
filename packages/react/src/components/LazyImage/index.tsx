@@ -18,7 +18,7 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
         const targetImgElement = entry.target as HTMLImageElement;
         targetImgElement.src = src;
       },
-      calledOnceVisible: true,
+      calledOnce: true,
       threshold,
       root,
       rootMargin,
