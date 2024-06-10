@@ -22,21 +22,18 @@ const invert: (
 ```ts title="typescript"
 import { invert } from '@modern-kit/utils';
 
-const obj1 = { a: 1, b: 2, c: 3 };
-invert(obj1); // { 1: 'a', 2: 'b', 3: 'c' };
+const obj = { a: 1, b: 2, c: 3 };
 
-const obj2 = { a: 1, b: [1, 2, 3] };
-invert(obj2, (value) => {
-  return JSON.stringify(value);
-}); // { '1': 'a', '[1,2,3]': 'b' }
+invert(obj); // { 1: 'a', 2: 'b', 3: 'c' };
 ```
 
 ### KeyTransformer
 ```ts title="typescript"
 import { invert } from '@modern-kit/utils';
 
-const obj2 = { a: 1, b: [1, 2, 3] };
-invert(obj2, (value) => {
+const obj = { a: [1, 2, 3], b: [4, 5, 6] };
+
+invert(obj, (value) => {
   return JSON.stringify(value);
-}); // { '1': 'a', '[1,2,3]': 'b' }
+}); // { '[1,2,3]': 'a', '[4,5,6]': 'b' }
 ```
