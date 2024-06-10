@@ -13,6 +13,7 @@ export * from './useInterval';
 export * from './useIsMounted';
 export * from './useIsomorphicLayoutEffect';
 export * from './useKeyDown';
+export * from './useLockScroll';
 export * from './useMediaQuery';
 export * from './useMergeRefs';
 export * from './useMouse';
