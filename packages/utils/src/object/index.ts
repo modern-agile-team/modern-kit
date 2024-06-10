@@ -1,4 +1,5 @@
 export * from './deleteFalsyProperties';
+export * from './invert';
 export * from './mergeProperties';
 export * from './objectEntries';
 export * from './objectKeys';
