@@ -19,5 +19,6 @@ module.exports = {
     'import/no-anonymous-default-export': 'off',
     'no-useless-escape': 'off',
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/ban-types': 'warn',
   },
 };
