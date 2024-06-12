@@ -39,6 +39,16 @@ describe('invert', () => {
     expectTypeOf(result).toEqualTypeOf<Record<'foo' | 'bar', 'a' | 'b'>>();
   });
 
+  it('should exclude keys that contain symbols.', () => {
+    const symbol = Symbol(1);
+
+    const obj = { [symbol]: 1, foo: 2 } as const;
+    const result = invert(obj);
+
+    expect(result).toEqual({ 2: 'foo' });
+    expectTypeOf(result).toEqualTypeOf<Record<1 | 2, 'foo'>>();
+  });
+
   it('should handle an empty object', () => {
     const obj = {};
     const result = invert(obj);

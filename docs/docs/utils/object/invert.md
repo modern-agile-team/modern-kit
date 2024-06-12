@@ -18,7 +18,7 @@ const invert: <
 >(
   obj: Record<K, V>,
   keyTransformer?: (value: V) => TK
-) => Record<K, V>;
+) => Record<TK, Exclude<K, symbol>>;
 ```
 
 ## Usage
