@@ -15,16 +15,14 @@ describe('isPassword', () => {
   it('should check password length against custom minLength and maxLength', () => {
     // truthy case
     expect(
-      isPassword('Password@1234', { minLength: 12, maxLength: 24 })
+      isPassword('Password@1234', { minLength: 8, maxLength: 16 })
     ).toBeTruthy();
 
     // falsy case
+    expect(isPassword('pass', { minLength: 8, maxLength: 16 })).toBeFalsy();
     expect(
-      isPassword('password123', { minLength: 12, maxLength: 24 })
-    ).toBeFalsy(); // minLength 미만
-    expect(
-      isPassword('password1234password12345', { minLength: 12, maxLength: 24 })
-    ).toBeFalsy(); // maxLength 초과
+      isPassword('password123456789', { minLength: 8, maxLength: 16 })
+    ).toBeFalsy();
   });
 
   it('should validate the password based on the specified level', () => {
@@ -60,9 +58,9 @@ describe('isPassword', () => {
   it('should return false for passwords in the forbidden list', () => {
     const forbiddenPasswords = ['12345678', 'admin', 'password'] as const;
 
-    expect(isPassword('12345678', { forbiddenPasswords })).toBeFalsy();
-    expect(isPassword('admin', { forbiddenPasswords })).toBeFalsy();
-    expect(isPassword('password', { forbiddenPasswords })).toBeFalsy();
+    forbiddenPasswords.forEach((password) => {
+      expect(isPassword(password, { forbiddenPasswords })).toBeFalsy();
+    });
   });
 
   it('should return false for a password with repeated characters exceeding the limit', () => {

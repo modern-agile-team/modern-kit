@@ -64,7 +64,8 @@ const checkNumber = (password: string) => {
 };
 
 const checkSpecialCharacter = (password: string) => {
-  return /[^a-zA-Z0-9]/.test(password);
+  const specialCharRegex = /[~!@#$%^&*_\-+=\\|(){}[\]:;"'<>,.?/]/;
+  return specialCharRegex.test(password);
 };
 
 const checkUpperCase = (password: string) => {
