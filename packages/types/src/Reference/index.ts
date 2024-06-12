@@ -1,7 +1,7 @@
 export type Reference =
   | object
   | any[]
-  | ((...args: any[]) => any)
+  | Function
   | Set<any>
   | Map<any, any>
   | WeakMap<object, any>

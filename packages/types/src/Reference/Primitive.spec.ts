@@ -13,7 +13,7 @@ describe('Reference', () => {
     }
 
     if (typeof value === 'function') {
-      expectTypeOf(value).toEqualTypeOf<Function | ((...args: any[]) => any)>();
+      expectTypeOf(value).toEqualTypeOf<Function>();
     }
 
     if (value instanceof Set) {
