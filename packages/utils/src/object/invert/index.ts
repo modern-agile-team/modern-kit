@@ -1,15 +1,27 @@
-import { identity } from '../../common';
+import { hasProperty } from '../../validator';
 
-export const invert = (
-  obj: Record<PropertyKey, any>,
-  keyTransformer: (value: any) => PropertyKey = identity
+const defaultKeyTransformer = <V, TK extends PropertyKey>(value: V) => {
+  return value as unknown as TK;
+};
+
+export const invert = <
+  K extends PropertyKey,
+  V,
+  TK extends PropertyKey = V extends PropertyKey ? V : PropertyKey
+>(
+  obj: Record<K, V>,
+  keyTransformer: (value: V) => TK = defaultKeyTransformer<V, TK>
 ) => {
-  const invertedObj: Record<PropertyKey, any> = {};
+  const invertedObj = {} as Record<TK, K>;
 
-  Object.keys(obj).forEach((key) => {
-    const value = obj[key];
-    invertedObj[keyTransformer(value)] = key;
-  });
+  for (const key in obj) {
+    if (hasProperty(obj, key)) {
+      const value = obj[key];
+      const transformedKey = keyTransformer(value);
+
+      invertedObj[transformedKey] = key;
+    }
+  }
 
   return invertedObj;
 };
