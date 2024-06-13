@@ -1,3 +1,12 @@
+import {
+  containsConsecutiveCharacters,
+  containsHangul,
+  containsLowerCase,
+  containsNumber,
+  containsSpecialCharacter,
+  containsUpperCase,
+  containsWhitespace,
+} from '../../regex';
 import { contain } from '../../array';
 
 interface Options {
@@ -9,27 +18,14 @@ interface Options {
   forbiddenPasswords: string[] | ReadonlyArray<string>;
 }
 
-function checkConsecutiveChars(
-  password: string,
-  maxRepeatChars: Options['maxRepeatChars']
-): boolean {
-  const regex = new RegExp(`(.)\\1{${maxRepeatChars - 1}}`);
-  return regex.test(password);
-}
-
-const checkInValidOptions = (
+const checkInValidLengthOptions = (
   minLength: Options['minLength'],
-  maxLength: Options['maxLength'],
-  maxRepeatChars: Options['maxRepeatChars']
+  maxLength: Options['maxLength']
 ) => {
-  if (maxRepeatChars < 1 || minLength < 1 || minLength > maxLength) {
+  if (minLength < 1 || maxLength < 1 || minLength > maxLength) {
     return true;
   }
-  return (
-    !Number.isInteger(minLength) ||
-    !Number.isInteger(maxLength) ||
-    !Number.isInteger(maxRepeatChars)
-  );
+  return !Number.isInteger(minLength) || !Number.isInteger(maxLength);
 };
 
 const checkForbiddenPasswords = (
@@ -39,37 +35,12 @@ const checkForbiddenPasswords = (
   return contain(forbiddenPasswords, password);
 };
 
-const checkWhitespace = (password: string) => {
-  return /\s/.test(password);
-};
-
-const checkHangul = (password: string) => {
-  return /[가-힣]/.test(password);
-};
-
 const checkLength = (
   password: string,
   minLength: Options['minLength'],
   maxLength: Options['maxLength']
 ) => {
   return password.length >= minLength && password.length <= maxLength;
-};
-
-const checkLowerCase = (password: string) => {
-  return /[a-z]/.test(password);
-};
-
-const checkNumber = (password: string) => {
-  return /\d/.test(password);
-};
-
-const checkSpecialCharacter = (password: string) => {
-  const specialCharRegex = /[~!@#$%^&*_\-+=\\|(){}[\]:;"'<>,.?/]/;
-  return specialCharRegex.test(password);
-};
-
-const checkUpperCase = (password: string) => {
-  return /[A-Z]/.test(password);
 };
 
 export const isPassword = (
@@ -85,9 +56,9 @@ export const isPassword = (
     forbiddenPasswords = [],
   } = options;
 
-  // Check invalid options
-  if (checkInValidOptions(minLength, maxLength, maxRepeatChars)) {
-    throw new Error('Invalid option value');
+  // Check invalid length options
+  if (checkInValidLengthOptions(minLength, maxLength)) {
+    throw new Error('Invalid length option value');
   }
 
   // Check Include forbidden password list
@@ -96,17 +67,17 @@ export const isPassword = (
   }
 
   // Check for whitespace
-  if (checkWhitespace(password)) {
+  if (containsWhitespace(password)) {
     return false;
   }
 
   // Check for consecutive characters
-  if (checkConsecutiveChars(password, maxRepeatChars)) {
+  if (containsConsecutiveCharacters(password, maxRepeatChars)) {
     return false;
   }
 
   // Check for Korean language inclusions
-  if (!isContainHangul && checkHangul(password)) {
+  if (!isContainHangul && containsHangul(password)) {
     return false;
   }
 
@@ -115,23 +86,23 @@ export const isPassword = (
     return false;
   }
 
-  // level2: Check for inclusion of lowercase letter
-  if (level >= 2 && !checkLowerCase(password)) {
+  // level2: Check for inclusion of lowercase
+  if (level >= 2 && !containsLowerCase(password)) {
     return false;
   }
 
-  // level3: Check for inclusion of lowercase letter + numbers
-  if (level >= 3 && !checkNumber(password)) {
+  // level3: Check for inclusion of lowercase + numbers
+  if (level >= 3 && !containsNumber(password)) {
     return false;
   }
 
-  // level4: Check for inclusion of lowercase letter + numbers + special characters
-  if (level >= 4 && !checkSpecialCharacter(password)) {
+  // level4: Check for inclusion of lowercase + numbers + special characters
+  if (level >= 4 && !containsSpecialCharacter(password)) {
     return false;
   }
 
-  // level5: Check for inclusion of lowercase letter + numbers + special characters + uppercase letter
-  if (level >= 5 && !checkUpperCase(password)) {
+  // level5: Check for inclusion of lowercase + numbers + special characters + uppercase
+  if (level >= 5 && !containsUpperCase(password)) {
     return false;
   }
 
