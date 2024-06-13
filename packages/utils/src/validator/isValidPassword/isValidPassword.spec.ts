@@ -28,6 +28,10 @@ describe('isValidPassword', () => {
   });
 
   it('should validate the password based on the validator array', () => {
+    // Check password minimum/maximum length
+    expect(isValidPassword('12345678')).toBeTruthy();
+    expect(isValidPassword('1234')).toBeFalsy();
+
     // Check for inclusion of lowercase letter
     expect(
       isValidPassword('password', { validator: ['lowerCase'] })
