@@ -4,6 +4,6 @@ export * from './containsHangulConsonantsAndVowel';
 export * from './containsHangulSyllables';
 export * from './containsLowerCase';
 export * from './containsNumber';
-export * from './containsSpecialCharacter';
+export * from './containsSpecialCharacters';
 export * from './containsUpperCase';
 export * from './containsWhitespace';
