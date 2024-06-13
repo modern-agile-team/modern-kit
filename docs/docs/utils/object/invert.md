@@ -11,10 +11,14 @@
 
 ## Interface
 ```ts title="typescript"
-const invert: (
-  obj: Record<PropertyKey, any>,
-  keyTransformer?: (value: any) => PropertyKey
-) => Record<PropertyKey, any>;
+const invert: <
+  K extends PropertyKey,
+  V,
+  TK extends PropertyKey = V extends PropertyKey ? V : PropertyKey
+>(
+  obj: Record<K, V>,
+  keyTransformer?: (value: V) => TK
+) => Record<TK, Exclude<K, symbol>>;
 ```
 
 ## Usage
@@ -24,7 +28,9 @@ import { invert } from '@modern-kit/utils';
 
 const obj = { a: 1, b: 2, c: 3 };
 
-invert(obj); // { 1: 'a', 2: 'b', 3: 'c' };
+invert(obj);
+// value: { 1: 'a', 2: 'b', 3: 'c' };
+// type: Record<number, "a" | "b" | "c">
 ```
 
 ### KeyTransformer
@@ -35,5 +41,21 @@ const obj = { a: [1, 2, 3], b: [4, 5, 6] };
 
 invert(obj, (value) => {
   return JSON.stringify(value);
-}); // { '[1,2,3]': 'a', '[4,5,6]': 'b' }
+}); 
+// value: { '[1,2,3]': 'a', '[4,5,6]': 'b' }
+// type: Record<string, "a" | "b">
+```
+
+### const assertion
+```ts title="typescript"
+import { invert } from '@modern-kit/utils';
+
+const obj = {
+  a: { name: 'foo' },
+  b: { name: 'bar' },
+} as const;
+
+invert(obj, (value) => value.name);
+// value: { foo: 'a', bar: 'b' }
+// type: Record<"foo" | "bar", "a" | "b">
 ```
