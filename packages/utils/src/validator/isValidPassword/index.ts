@@ -9,8 +9,10 @@ import {
 } from '../../regex';
 import { contain } from '../../array';
 
+type Validator = 'lowerCase' | 'number' | 'specialCharacter' | 'upperCase';
+
 interface Options {
-  level: 0 | 1 | 2 | 3 | 4 | 5;
+  validator: Validator[];
   minLength: number;
   maxLength: number;
   maxRepeatChars: number;
@@ -28,13 +30,6 @@ const checkInValidLengthOptions = (
   return !Number.isInteger(minLength) || !Number.isInteger(maxLength);
 };
 
-const checkForbiddenPasswords = (
-  password: string,
-  forbiddenPasswords: Options['forbiddenPasswords']
-) => {
-  return contain(forbiddenPasswords, password);
-};
-
 const checkLength = (
   password: string,
   minLength: Options['minLength'],
@@ -43,17 +38,17 @@ const checkLength = (
   return password.length >= minLength && password.length <= maxLength;
 };
 
-export const isPassword = (
+export const isValidPassword = (
   password: string,
   options: Partial<Options> = {}
 ) => {
   const {
-    level = 5,
     minLength = 8,
-    maxLength = 24,
+    maxLength = 16,
     maxRepeatChars = maxLength + 1,
     isContainHangul = false,
     forbiddenPasswords = [],
+    validator = [],
   } = options;
 
   // Check invalid length options
@@ -62,7 +57,7 @@ export const isPassword = (
   }
 
   // Check Include forbidden password list
-  if (checkForbiddenPasswords(password, forbiddenPasswords)) {
+  if (contain(forbiddenPasswords, password)) {
     return false;
   }
 
@@ -81,28 +76,31 @@ export const isPassword = (
     return false;
   }
 
-  // level1: Check password minimum/maximum length
-  if (level >= 1 && !checkLength(password, minLength, maxLength)) {
+  // Check password minimum/maximum length
+  if (!checkLength(password, minLength, maxLength)) {
     return false;
   }
 
-  // level2: Check for inclusion of lowercase
-  if (level >= 2 && !containsLowerCase(password)) {
+  // Check for inclusion of lowerCase
+  if (contain(validator, 'lowerCase') && !containsLowerCase(password)) {
     return false;
   }
 
-  // level3: Check for inclusion of lowercase + numbers
-  if (level >= 3 && !containsNumber(password)) {
+  // Check for inclusion of numbers
+  if (contain(validator, 'number') && !containsNumber(password)) {
     return false;
   }
 
-  // level4: Check for inclusion of lowercase + numbers + special characters
-  if (level >= 4 && !containsSpecialCharacter(password)) {
+  // Check for inclusion of special character
+  if (
+    contain(validator, 'specialCharacter') &&
+    !containsSpecialCharacter(password)
+  ) {
     return false;
   }
 
-  // level5: Check for inclusion of lowercase + numbers + special characters + uppercase
-  if (level >= 5 && !containsUpperCase(password)) {
+  // Check for inclusion of upperCase
+  if (contain(validator, 'upperCase') && !containsUpperCase(password)) {
     return false;
   }
 
