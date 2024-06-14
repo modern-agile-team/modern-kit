@@ -22,6 +22,7 @@ export * from './usePreservedState';
 export * from './usePreservedCallback';
 export * from './usePrevious';
 export * from './useResizeObserver';
+export * from './useScrollLock';
 export * from './useTimeout';
 export * from './useToggle';
 export * from './useUnMount';

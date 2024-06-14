@@ -1,0 +1,104 @@
+import { useScrollLock } from '@modern-kit/react';
+
+# useScrollLock
+
+특정 요소의 스크롤을 `lock`, `unlock` 할 수 있는 커스텀 훅입니다. 
+
+`Modal`과 같은 컴포넌트가 렌더링 됐을 때, 배경 요소(`ex. document.body`)의 스크롤을 잠글 때 활용될 수 있습니다.
+
+기본적으로 `document.body`을 대상으로 mount 시에 자동으로 스크롤을 잠급니다.
+
+`unmount` 시에는 타겟 요소의 원래 `overflow` 값으로 다시 돌려놓습니다.
+
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollLock/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseScrollLockProps {
+  autoLock?: boolean;
+}
+
+const useScrollLock: <T extends HTMLElement>({
+  autoLock,
+}?: UseScrollLockProps) => {
+  ref: React.MutableRefObject<Nullable<T>>;
+  lock: () => void;
+  unlock: () => void;
+};
+```
+
+## Usage
+### document.body
+```tsx title="typescript"
+import { useScrollLock } from '@modern-kit/react';
+
+const Example = () => {
+  useScrollLock(); // 자동으로 잠그지 않으려면 { authLock: false }로 셋팅하세요.
+
+  return <div>{/* ... */}</div>;
+};
+```
+
+<br />
+
+### Specific element
+```tsx title="typescript"
+import { useScrollLock } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, lock, unlock } = useScrollLock<HTMLDivElement>({ autoLock: false });
+
+  const wrapperStyle = {
+    width: '400px',
+    maxHeight: '600px',
+    overflowY: 'scroll',
+  };
+  const boxStyle = {
+    width: '100%',
+    maxHeight: '500px',
+  };
+  return (
+    <div>
+      <button onClick={lock}>스크롤 잠금</button>
+      <button onClick={unlock}>스크롤 잠금 해제</button>
+      <div ref={ref} style={wrapperStyle}>
+        <div style={{ ...boxStyle, backgroundColor: 'red' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'green' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'blue' }} />
+      </div>
+    </div>
+  );
+};
+```
+
+### Example
+
+export const Example = () => {
+  const { ref, lock, unlock } = useScrollLock({ autoLock: true });
+  const wrapperStyle = {
+    width: '400px',
+    maxHeight: '600px',
+    overflowY: 'scroll',
+  };
+  const boxStyle = {
+    width: '100%',
+    height: '500px',
+  };
+  return (
+    <div>
+      <button onClick={lock}>스크롤 잠금</button>
+      <button onClick={unlock}>스크롤 잠금 해제</button>
+      <div ref={ref} style={wrapperStyle}>
+        <div style={{ ...boxStyle, backgroundColor: 'red' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'green' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'blue' }} />
+      </div>
+    </div>
+  );
+};
+
+<Example />
