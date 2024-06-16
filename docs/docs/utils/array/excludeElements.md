@@ -13,10 +13,12 @@
 
 ## Interface
 ```ts title="typescript"
-const excludeElements = <E, U extends E>(
-  array: ReadonlyArray<E> | Array<E>,
-  ...args: ReadonlyArray<U> | Array<U>
-) => Array<E>
+type ArrayWithReadonly<T> = T[] | readonly T[]
+
+const excludeElements: <T, U extends T>(
+  array: ArrayWithReadonly<T>,
+  ...args: ArrayWithReadonly<U>
+) => T[];
 ```
 
 ## Usage

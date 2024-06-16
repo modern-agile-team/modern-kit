@@ -9,6 +9,7 @@ export * from './ObjectEntries';
 export * from './ObjectKeys';
 export * from './Primitive';
 export * from './Promiseable';
+export * from './ArrayWithReadonly';
 export * from './Integer';
 export * from './Reference';
 export * from './NaturalNumber';
