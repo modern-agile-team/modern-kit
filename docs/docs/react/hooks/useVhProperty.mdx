@@ -7,7 +7,7 @@ iOS 웹 환경에서는 주소표시줄의 높이로 인해 100vh가 실제 보�
 
 이를 해결하기 위해 `useVhProperty` 훅을 사용하면 `100vh`를 실제 화면의 높이로 계산할 수 있도록 css변수를 설정할 수 있습니다.
 
-일반적으로 iOS 환경에서 resize는 가로/세로 전환시에만 발생하지만, 두번째 인자의 calculateAtResize를 옵션을 사용하면 iOS 환경에서도 resize 이벤트가 발생할 때마다 css변수를 다시 계산할 수 있습니다.
+일반적으로 iOS 환경에서 resize는 가로/세로 전환시에만 발생하지만, 두번째 인자의 enableResize를 옵션을 사용하면 iOS 환경에서도 resize 이벤트가 발생할 때마다 css변수를 다시 계산할 수 있습니다.
 
 <br />
 
@@ -18,7 +18,7 @@ iOS 웹 환경에서는 주소표시줄의 높이로 인해 100vh가 실제 보�
 ```ts title="typescript"
 
 interface Options {
-  calculateAtResize?: boolean;
+  enableResize?: boolean;
 }
 
 const useVhProperty: (name?: string, options?: Options) => void

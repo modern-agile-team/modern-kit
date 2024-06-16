@@ -1,16 +1,14 @@
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
-import { usePrevious } from '../usePrevious';
 
 interface Options {
-  calculateAtResize?: boolean;
+  enableResize?: boolean;
 }
 
 export const useVhProperty = (
   name: string = 'vh',
-  options: Options = { calculateAtResize: false },
+  options: Options = { enableResize: false },
 ) => {
-  const previousName = usePrevious(name);
-  const { calculateAtResize } = options;
+  const { enableResize } = options;
 
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {
@@ -18,20 +16,16 @@ export const useVhProperty = (
       document.documentElement.style.setProperty(`--${name}`, `${vh}px`);
     };
 
-    if (previousName !== name) {
-      document.documentElement.style.removeProperty(`--${previousName}`);
-    }
-
     handleResize();
 
-    if (calculateAtResize) {
+    if (enableResize) {
       window.addEventListener('resize', handleResize);
     }
 
     return () => {
-      if (calculateAtResize) {
+      if (enableResize) {
         window.removeEventListener('resize', handleResize);
       }
     };
-  }, [name, calculateAtResize]);
+  }, [name, enableResize]);
 };

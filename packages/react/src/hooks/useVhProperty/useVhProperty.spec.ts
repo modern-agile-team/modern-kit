@@ -16,31 +16,11 @@ describe('useVhProperty', () => {
     );
   });
 
-  it('should remove previous property when variable name is changed', () => {
-    window.innerHeight = 800;
-    let variable = 'vh';
-
-    const { rerender } = renderHook(() =>
-      useVhProperty(variable, {
-        calculateAtResize: true,
-      }),
-    );
-    expect(document.documentElement.style.getPropertyValue('--vh')).toBe('8px');
-
-    variable = 'custom';
-    rerender();
-
-    expect(document.documentElement.style.getPropertyValue('--vh')).toBe('');
-    expect(document.documentElement.style.getPropertyValue('--custom')).toBe(
-      '8px',
-    );
-  });
-
   it('should set --vh property on documentElement and update on resize', () => {
     window.innerHeight = 800;
     renderHook(() =>
       useVhProperty('vh', {
-        calculateAtResize: true,
+        enableResize: true,
       }),
     );
     expect(document.documentElement.style.getPropertyValue('--vh')).toBe('8px');
