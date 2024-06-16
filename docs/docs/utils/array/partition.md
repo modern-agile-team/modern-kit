@@ -10,7 +10,7 @@
 ## Interface
 ```ts title="typescript"
 const partition: <T>(
-  arr: readonly T[] | T[],
+  arr: T[] | readonly T[],
   predicate: (item: T) => boolean
 ) => [truthyArray: T[], falsyArray: T[]];
 ```
