@@ -34,13 +34,16 @@ const testArr = [
   { id: 1, name: 'John' },
   { id: 2, name: 'Jane' },
   { id: 1, name: 'John' },
+  { id: 3, name: 'gromit' },
+  { id: 3, name: 'gromit' },
 ];
 
-uniq(testArr, (item) => item.id === 1);
+uniq(testArr, (item) => item.id);
 /*
   [
     { id: 1, name: 'John' },
     { id: 2, name: 'Jane' },
+    { id: 3, name: 'gromit' }
   ];
 */
 

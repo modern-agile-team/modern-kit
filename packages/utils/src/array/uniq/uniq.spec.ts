@@ -41,13 +41,16 @@ describe('uniq', () => {
       { id: 1, name: 'John' },
       { id: 2, name: 'Jane' },
       { id: 1, name: 'John' },
+      { id: 3, name: 'gromit' },
+      { id: 3, name: 'gromit' },
     ];
     const expectedArray = [
       { id: 1, name: 'John' },
       { id: 2, name: 'Jane' },
+      { id: 3, name: 'gromit' },
     ];
 
     expect(uniq(testArr)).toEqual(testArr); // no iteratee
-    expect(uniq(testArr, (item) => item.id === 1)).toEqual(expectedArray);
+    expect(uniq(testArr, (item) => item.id)).toEqual(expectedArray);
   });
 });
