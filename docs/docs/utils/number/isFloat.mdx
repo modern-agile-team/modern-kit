@@ -1,0 +1,32 @@
+# isFloat
+
+주어진 인자가 실수인지 확인합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/number/isFloat/index.ts)
+
+## Interface
+```ts title="typescript"
+const isFloat = (value: unknown) => boolean
+```
+
+## Usage
+```ts title="typescript"
+import { isFloat } from '@modern-kit/utils';
+
+isFloat(100) // true
+isFloat(-100) // true
+isFloat(0) // true
+isFloat(175.5119687) // true
+isFloat(-15.1175688775) // true
+isFloat(1e3) //true
+isFloat(2.5e-3) // true
+
+isFloat(NaN) // false
+isFloat(Infinity) // false
+isFloat(-Infinity) // false
+isFloat([]) // false
+isFloat({}) // false
+```
