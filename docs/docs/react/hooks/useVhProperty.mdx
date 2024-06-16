@@ -1,0 +1,78 @@
+import { useMemo } from 'react';
+import { useVhProperty } from '@modern-kit/react';
+
+# useVhProperty
+
+iOS 웹 환경에서는 주소표시줄의 높이로 인해 100vh가 실제 보이는 화면의 높이보다 크게 측정됩니다.
+
+이를 해결하기 위해 `useVhProperty` 훅을 사용하면 `100vh`를 실제 화면의 높이로 계산할 수 있도록 css변수를 설정할 수 있습니다.
+
+일반적으로 iOS 환경에서 resize는 가로/세로 전환시에만 발생하지만, 두번째 인자의 enableResize를 옵션을 사용하면 iOS 환경에서도 resize 이벤트가 발생할 때마다 css변수를 다시 계산할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useVhProperty/index.ts)
+
+## Interface
+```ts title="typescript"
+
+interface Options {
+  enableResize?: boolean;
+}
+
+const useVhProperty: (name?: string, options?: Options) => void
+
+```
+
+## Usage
+```tsx title="typescript"
+import { useVhProperty } from '@modern-kit/react';
+
+const Example = () => {
+  useVhProperty()
+
+  const style = useMemo(() => {
+    return {
+      height: 'calc(var(--vh, 1vh) * 100)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'purple',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={style}>
+      100vh를 실제 화면의 높이로 계산할 수 있도록 설정해줍니다.
+    </div>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  useVhProperty()
+
+  const style = useMemo(() => {
+    return {
+      height: 'calc(var(--vh, 1vh) * 100)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'purple',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={style}>
+      100vh를 실제 화면의 높이로 계산할 수 있도록 설정해줍니다.
+    </div>
+  );
+};
+
+<Example />
