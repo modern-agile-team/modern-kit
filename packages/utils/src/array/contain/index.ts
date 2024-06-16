@@ -1,5 +1,5 @@
 export const contain = <T>(
-  arr: T[] | ReadonlyArray<T>,
+  arr: T[] | readonly T[],
   value: unknown,
   comparator: (x: any, y: any) => boolean = Object.is
 ): value is T => {

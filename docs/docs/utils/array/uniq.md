@@ -1,6 +1,6 @@
 # uniq
 
-`중복 요소를 제외한 배열`을 반환하는 함수입니다.
+`중복 요소를 제외해 고유한 값만을 갖는` 새로운 배열을 반환하는 함수입니다.
 
 기본적으로 `원시 값`에 대해서만 중복 요소를 판단하며, 필요 시 2번째 인자인 `iteratee` 함수 결과로 중복 요소임을 판단 할 수 있습니다.
 
@@ -34,13 +34,16 @@ const testArr = [
   { id: 1, name: 'John' },
   { id: 2, name: 'Jane' },
   { id: 1, name: 'John' },
+  { id: 3, name: 'gromit' },
+  { id: 3, name: 'gromit' },
 ];
 
-uniq(testArr, (item) => item.id === 1);
+uniq(testArr, (item) => item.id);
 /*
   [
     { id: 1, name: 'John' },
     { id: 2, name: 'Jane' },
+    { id: 3, name: 'gromit' }
   ];
 */
 

@@ -1,5 +1,5 @@
 export const partition = <T>(
-  arr: T[] | ReadonlyArray<T>,
+  arr: T[] | readonly T[],
   predicate: (item: T) => boolean
 ): [truthyArray: T[], falsyArray: T[]] => {
   const truthyArray: T[] = [];

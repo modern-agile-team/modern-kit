@@ -33,9 +33,9 @@ Object.is(NaN, 0 / 0); // true
 
 ```ts title="typescript"
 const contain: <T>(
-  arr: readonly T[] | T[],
+  arr: T[] | readonly T[],
   value: unknown,
-  comparator?: (x: any, y: any) => boolean // default: Object.is
+  comparator?: (x: any, y: any) => boolean
 ) => value is T;
 ```
 
