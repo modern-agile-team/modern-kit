@@ -26,6 +26,7 @@ export * from './useScrollLock';
 export * from './useTimeout';
 export * from './useToggle';
 export * from './useUnMount';
+export * from './useVhProperty';
 export * from './useVisibilityChange';
 export * from './useWindowScrollTo';
 export * from './useWindowSize';
