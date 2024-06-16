@@ -13,11 +13,9 @@
 
 ## Interface
 ```ts title="typescript"
-type ArrayWithReadonly<T> = T[] | readonly T[]
-
 const excludeElements: <T, U extends T>(
-  array: ArrayWithReadonly<T>,
-  ...args: ArrayWithReadonly<U>
+  array: T[] | readonly T[],
+  ...args: U[] | readonly U[]
 ) => T[];
 ```
 

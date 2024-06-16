@@ -32,10 +32,8 @@ Object.is(NaN, 0 / 0); // true
 ## Interface
 
 ```ts title="typescript"
-type ArrayWithReadonly<T> = T[] | readonly T[]
-
 const contain: <T>(
-  arr: ArrayWithReadonly<T>,
+  arr: T[] | readonly T[],
   value: unknown,
   comparator?: (x: any, y: any) => boolean
 ) => value is T;

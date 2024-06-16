@@ -1,7 +1,5 @@
-import { ArrayWithReadonly } from '@modern-kit/types';
-
 export const contain = <T>(
-  arr: ArrayWithReadonly<T>,
+  arr: T[] | readonly T[],
   value: unknown,
   comparator: (x: any, y: any) => boolean = Object.is
 ): value is T => {

@@ -1,7 +1,5 @@
-import { ArrayWithReadonly } from '@modern-kit/types';
-
 export const uniq = <T, U = T>(
-  arr: ArrayWithReadonly<T>,
+  arr: T[] | readonly T[],
   iteratee?: (item: T) => U
 ) => {
   if (!iteratee) {

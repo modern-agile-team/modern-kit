@@ -11,10 +11,8 @@
 
 ## Interface
 ```ts title="typescript"
-type ArrayWithReadonly<T> = T[] | readonly T[]
-
 const uniq: <T, U = T>(
-  arr: ArrayWithReadonly<T>,
+  arr: T[] | readonly T[],
   iteratee?: ((item: T) => U) | undefined
 ) => T[];
 ```
