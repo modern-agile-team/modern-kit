@@ -38,35 +38,35 @@ describe('isValidPassword', () => {
     ).toEqual(falsyResult('length'));
   });
 
-  it('should validate the password based on the validator array', () => {
+  it('should validate the password based on the containsOptions', () => {
     // Check password minimum/maximum length
     expect(isValidPassword('12345678')).toEqual(truthyResult);
     expect(isValidPassword('1234')).toEqual(falsyResult('length'));
 
     // Check for inclusion of lowercase letter
     expect(
-      isValidPassword('password', { validationOptions: { lowerCase: true } })
+      isValidPassword('password', { containsOptions: { lowerCase: true } })
     ).toEqual(truthyResult);
     expect(
-      isValidPassword('12345678', { validationOptions: { lowerCase: true } })
+      isValidPassword('12345678', { containsOptions: { lowerCase: true } })
     ).toEqual(falsyResult('lowerCase'));
 
     // Check for inclusion of lowercase letter + numbers
     expect(
       isValidPassword('password1', {
-        validationOptions: { lowerCase: true, number: true },
+        containsOptions: { lowerCase: true, number: true },
       })
     ).toEqual(truthyResult);
     expect(
       isValidPassword('password', {
-        validationOptions: { lowerCase: true, number: true },
+        containsOptions: { lowerCase: true, number: true },
       })
     ).toEqual(falsyResult('number'));
 
     // Check for inclusion of lowercase letter + numbers + special characters
     expect(
       isValidPassword('password@1', {
-        validationOptions: {
+        containsOptions: {
           lowerCase: true,
           number: true,
           specialCharacters: true,
@@ -75,7 +75,7 @@ describe('isValidPassword', () => {
     ).toEqual(truthyResult);
     expect(
       isValidPassword('password1', {
-        validationOptions: {
+        containsOptions: {
           lowerCase: true,
           number: true,
           specialCharacters: true,
@@ -86,7 +86,7 @@ describe('isValidPassword', () => {
     // Check for inclusion of lowercase letter + numbers + special characters + uppercase letter
     expect(
       isValidPassword('Password@1', {
-        validationOptions: {
+        containsOptions: {
           lowerCase: true,
           number: true,
           specialCharacters: true,
@@ -96,7 +96,7 @@ describe('isValidPassword', () => {
     ).toEqual(truthyResult);
     expect(
       isValidPassword('password@1', {
-        validationOptions: {
+        containsOptions: {
           lowerCase: true,
           number: true,
           specialCharacters: true,
@@ -109,7 +109,7 @@ describe('isValidPassword', () => {
   it('should allow Korean characters in the password if specified', () => {
     expect(
       isValidPassword('password안ㅇㄱㅎ', {
-        validationOptions: { hangul: false },
+        containsOptions: { hangul: false },
       })
     ).toEqual(truthyResult);
   });

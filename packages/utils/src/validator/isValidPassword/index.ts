@@ -7,9 +7,9 @@ import {
   containsUpperCase,
   containsWhiteSpace,
 } from '../../regex';
-import { contain } from '../../array';
+import { contains } from '../../array';
 
-interface ValidationOption {
+interface ContainsOption {
   lowerCase?: boolean;
   number?: boolean;
   specialCharacters?: boolean;
@@ -17,29 +17,22 @@ interface ValidationOption {
   hangul?: boolean;
 }
 
-type Validator =
-  | 'hangul'
-  | 'lowerCase'
-  | 'number'
-  | 'specialCharacters'
-  | 'upperCase';
-
 type ErrorReason =
-  | Validator
+  | keyof ContainsOption
   | 'forbidden'
   | 'whiteSpace'
   | 'consecutiveCharacters'
   | 'length';
 
 interface Options {
-  validationOptions: ValidationOption;
+  containsOptions: ContainsOption;
   minLength: number;
   maxLength: number;
   maxRepeatChars: number;
   forbiddenPasswords: string[] | ReadonlyArray<string>;
 }
 
-interface PasswordValidationReturnType {
+interface IsValidPasswordReturnType {
   isValid: boolean;
   errorReason: ErrorReason | null;
 }
@@ -65,13 +58,13 @@ const checkLength = (
 export const isValidPassword = (
   password: string,
   options: Partial<Options> = {}
-): PasswordValidationReturnType => {
+): IsValidPasswordReturnType => {
   const {
+    containsOptions = {},
     minLength = 8,
     maxLength = 16,
     maxRepeatChars = maxLength + 1,
     forbiddenPasswords = [],
-    validationOptions = {},
   } = options;
 
   const {
@@ -80,7 +73,7 @@ export const isValidPassword = (
     specialCharacters = false,
     upperCase = false,
     hangul = true,
-  } = validationOptions;
+  } = containsOptions;
 
   // Check invalid length options
   if (checkInValidLengthOptions(minLength, maxLength)) {
@@ -88,7 +81,7 @@ export const isValidPassword = (
   }
 
   // Check Include forbidden password list
-  if (contain(forbiddenPasswords, password)) {
+  if (contains(forbiddenPasswords, password)) {
     return { isValid: false, errorReason: 'forbidden' };
   }
 
