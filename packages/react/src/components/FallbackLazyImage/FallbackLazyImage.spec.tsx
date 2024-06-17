@@ -29,7 +29,7 @@ const TestComponent = ({ mockFn }: { mockFn?: Mock<any, any> }) => {
   );
 };
 
-describe('LazyImage Component', () => {
+describe('FallbackLazyImage', () => {
   const onLoadMockFn = vi.fn();
 
   it('should not load the image before it is exposed to the viewport and render the fallback', () => {

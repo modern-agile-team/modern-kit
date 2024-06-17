@@ -24,7 +24,7 @@ const TestComponent = () => {
   );
 };
 
-describe('LazyImage Component', () => {
+describe('LazyImage', () => {
   it('should not load the image before it is exposed to the viewport', () => {
     renderSetup(<TestComponent />);
 
