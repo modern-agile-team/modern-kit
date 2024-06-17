@@ -35,6 +35,8 @@ export const FallbackLazyImage = forwardRef<
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const isRenderFallback = isLoading || !isLoaded;
+
     const wrapperStyle: CSSProperties = useMemo(
       () => ({
         position: 'relative',
@@ -49,11 +51,11 @@ export const FallbackLazyImage = forwardRef<
         position: 'absolute',
         top: 0,
         left: 0,
-        opacity: !isLoading && isLoaded ? 1 : 0,
+        opacity: !isRenderFallback ? 1 : 0,
         transition: `opacity ${duration}`,
         ...style,
       }),
-      [isLoading, isLoaded, duration, style]
+      [isRenderFallback, duration, style]
     );
 
     const handleLoad = useCallback(
@@ -66,7 +68,7 @@ export const FallbackLazyImage = forwardRef<
 
     return (
       <div style={wrapperStyle}>
-        {isLoading && !isLoaded && fallback}
+        {isRenderFallback && fallback}
         <LazyImage
           ref={ref}
           width={width}

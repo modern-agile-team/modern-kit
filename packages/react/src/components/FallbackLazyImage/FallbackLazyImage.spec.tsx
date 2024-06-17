@@ -32,12 +32,16 @@ const TestComponent = ({ mockFn }: { mockFn?: Mock<any, any> }) => {
 describe('LazyImage Component', () => {
   const onLoadMockFn = vi.fn();
 
-  it('should not load the image before it is exposed to the viewport', () => {
+  it('should not load the image before it is exposed to the viewport and render the fallback', () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');
+    const fallback = screen.queryByText('Fallback');
 
+    expect(fallback).toBeInTheDocument();
     expect(img1).not.toHaveAttribute('src', 'img1');
+
+    // style
     expect(img1).toHaveStyle('width: 400');
     expect(img1).toHaveStyle('height: 400');
     expect(img1).toHaveStyle('transition: opacity 0.2s');
