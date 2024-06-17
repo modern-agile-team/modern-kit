@@ -2,9 +2,7 @@ import { LazyImage } from '@modern-kit/react';
 
 # LazyImage
 
-**[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)**를 활용해 `Viewport`에 노출될 때 할당된 이미지를 `Lazy Loading` 하는 이미지 컴포넌트입니다.
-
-`width`, `height` 값을 입력해 이미지의 크기를 조절 할 수 있으며, 동시에 `Layout Shift`를 개선할 수 있습니다.
+**[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 를 활용해 `Viewport`에 노출될 때 할당된 이미지를 `Lazy Loading` 하는 이미지 컴포넌트입니다.
 
 Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
@@ -102,7 +100,7 @@ const Example = () => {
 
 export const Example = () => {
   return (
-    <div style={{ background: '#f8f8f8' }}>
+    <div style={{ background: '#f8f8f8', width: '500px' }}>
       <div
         style={{
           height: '500px',
@@ -112,36 +110,33 @@ export const Example = () => {
         스크롤 해주세요.
       </div>
       <LazyImage
-        width={'100%'}
-        height={400}
         src={
           'https://github.com/Team-Grace/devgrace/assets/64779472/b5640bec-2abc-4205-afbf-ccfd9876a90b'
         }
         alt="img1"
+        height={400}
         onClick={() => console.log('img click1')}
       />
 
       <div style={{ width: '100%', height: '150px' }} />
 
       <LazyImage
-        width={'100%'}
-        height={400}
         src={
           'https://github.com/Team-Grace/devgrace/assets/64779472/207743a7-b29f-4826-bc08-8df0d67e568b'
         }
         alt="img2"
+        height={400}
         onClick={() => console.log('img click2')}
       />
 
       <div style={{ width: '100%', height: '150px' }} />
 
       <LazyImage
-        width={'100%'}
-        height={400}
         src={
           'https://github.com/Team-Grace/devgrace/assets/64779472/d1957ec8-fe87-406e-bfda-fb4ee505b152'
         }
         alt="img3"
+        height={400}
         onClick={() => console.log('img click3')}
       />
     </div>
