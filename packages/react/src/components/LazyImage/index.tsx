@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
@@ -24,20 +24,7 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       rootMargin,
     });
 
-    const lazyImageStyle: CSSProperties = useMemo(() => {
-      return {
-        display: 'inline-block',
-        ...style,
-      };
-    }, [style]);
-
-    return (
-      <img
-        {...restProps}
-        ref={useMergeRefs(ref, imgRef)}
-        style={lazyImageStyle}
-      />
-    );
+    return <img ref={useMergeRefs(ref, imgRef)} style={style} {...restProps} />;
   }
 );
 
