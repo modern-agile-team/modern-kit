@@ -62,7 +62,7 @@ export const isValidPassword = (
   const {
     containsOptions = {},
     minLength = 8,
-    maxLength = 16,
+    maxLength = 24,
     maxRepeatChars = maxLength + 1,
     forbiddenPasswords = [],
   } = options;

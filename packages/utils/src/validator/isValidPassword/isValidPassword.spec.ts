@@ -17,7 +17,9 @@ describe('isValidPassword', () => {
 
     // falsy case
     expect(isValidPassword('passwo')).toEqual(falsyResult('length'));
-    expect(isValidPassword('password123456789')).toEqual(falsyResult('length'));
+    expect(isValidPassword('passwordpassword123456789')).toEqual(
+      falsyResult('length')
+    );
 
     expect(isValidPassword('password한글')).toEqual(falsyResult('hangul'));
     expect(isValidPassword(' password ')).toEqual(falsyResult('whiteSpace'));

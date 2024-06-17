@@ -50,7 +50,7 @@ const isValidPassword: (
 ## Usage
 ### Default
 패스워드의 `최대/최소 길이`, `한글 포함 여부`, `공백 포함 여부`, `한글 포함 여부`의 기본적인 유효성 검사를 진행합니다.
-- 기본적으로 패스워드의 최소 길이는 `8`, 최대 길이는 `16`이며, `공백`과 `한글` 포함을 금지합니다.
+- 기본 값으로 패스워드의 최소 길이는 `8`, 최대 길이는 `24`을 갖으며, `공백`과 `한글` 포함을 금지합니다.
 ```ts title="typescript"
 import { isValidPassword } from '@modern-kit/utils';
 
@@ -58,7 +58,7 @@ isValidPassword('12345678');
 // { isValid: true, errorReason: null }
 isValidPassword('1234');
 // { isValid: false, errorReason: 'length' }
-isValidPassword('password123456789');
+isValidPassword('passwordpassword123456789');
 // { isValid: false, errorReason: 'length' }
 isValidPassword('    password    ');
 // { isValid: false, errorReason: 'whiteSpace' }
@@ -68,7 +68,7 @@ isValidPassword('password한글');
 
 ### maxRepeatChars
 `특정 문자가 연속으로 등장 최대 횟수`를 검증합니다.
-- 기본적으로 `maxLength + 1`을 갖습니다.
+- 기본 값으로 `maxLength + 1`을 갖습니다. 즉, 직접 설정하지 않으면 제한이 없습니다.
 ```ts title="typescript"
 isValidPassword('PPPassword', { maxRepeatChars: 3 });
 // { isValid: false, errorReason: 'consecutiveCharacters' }
