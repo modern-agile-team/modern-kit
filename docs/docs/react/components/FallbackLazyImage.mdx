@@ -8,6 +8,8 @@ import { FallbackLazyImage } from '@modern-kit/react';
 
   - `width`, `height`, `fallback`를 적절하게 넘겨준다면 `Layout Shift` 현상도 방지 할 수 있습니다.
 
+`duration` props는 실제 이미지가 load 된 후, fallback 컴포넌트에서 실제 이미지로 전환 될 때 사용하는 **[transition-duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)** 값입니다. 
+
 이미지 `load 여부`와 함께 `API 요청` 등과 같은 `외부 Loading 상태`에 의존해 `Fallback 컴포넌트`를 노출하기 위해서는 `isLoading` props를 활용 할 수 있습니다.
 
 <br />
@@ -34,8 +36,8 @@ interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
   width: string | number;
   height: string | number;
-  isLoading?: boolean;
-  duration?: CSSProperties['transitionDuration'];
+  isLoading?: boolean; // default: false
+  duration?: CSSProperties['transitionDuration']; // default: 0.2s
 }
 
 const FallbackLazyImage: React.ForwardRefExoticComponent<
