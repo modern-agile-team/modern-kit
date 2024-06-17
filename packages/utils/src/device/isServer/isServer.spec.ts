@@ -18,7 +18,7 @@ describe('isServer', () => {
     expect(isServer()).toBe(false);
   });
 
-  it('should return "true" in client environment', () => {
+  it('should return "true" in server environment', () => {
     windowSpy.mockImplementation(() => undefined);
 
     expect(isServer()).toBe(true);
