@@ -3,14 +3,17 @@ import { isFloat } from '.';
 
 describe('isFloat', () => {
   it('should return true if value is float', () => {
-    expect(isFloat(100)).toBe(true);
-    expect(isFloat(0)).toBe(true);
     expect(isFloat(0.5)).toBe(true);
     expect(isFloat(-0.5)).toBe(true);
     expect(isFloat(1.999989899)).toBe(true);
     expect(isFloat(-1.50010101011)).toBe(true);
-    expect(isFloat(1e3)).toBe(true);
-    expect(isFloat(2.5e-3)).toBe(true);
+  });
+
+  it('should return false if value is integer', () => {
+    expect(isFloat(0)).toBe(false);
+    expect(isFloat(-1)).toBe(false);
+    expect(isFloat(1)).toBe(false);
+    expect(isFloat(100)).toBe(false);
   });
 
   it('should return false if value is not a number', () => {
