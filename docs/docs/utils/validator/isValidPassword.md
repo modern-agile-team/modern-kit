@@ -23,7 +23,7 @@ interface ContainsOptions {
 interface IsValidPasswordOptions {
   containsOptions: ContainsOptions;
   minLength: number; // default: 8
-  maxLength: number; // default: 16
+  maxLength: number; // default: 24
   maxRepeatChars: number; // default: maxLength + 1
   forbiddenPasswords: string[] | readonly string[]; // default: []
 }
