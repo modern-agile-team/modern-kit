@@ -1,0 +1,125 @@
+import { FallbackLazyImage } from '@modern-kit/react';
+
+# FallbackLazyImage
+
+**[LazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/LazyImage)** 를 확장해 이미지 `load 여부`에 따른 `Fallback 컴포넌트`를 렌더링 하는 컴포넌트 입니다.
+
+이미지 `load 여부`와 함께 `API 요청` 등과 같은 `외부 Loading 상태`에 의존해 `Fallback 컴포넌트`를 노출하기 위해서는 `isLoading` props를 활용 할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/FallbackLazyImage/index.tsx)
+
+## Interface
+```ts title="typescript"
+interface IntersectionObserverInit {
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+
+interface LazyImageProps
+  extends React.ComponentProps<'img'>,
+    IntersectionObserverInit {
+  src: string;
+}
+```
+```ts title="typescrpt"
+interface FallbackLazyImageProps extends LazyImageProps {
+  fallback: JSX.Element;
+  width: LazyImageProps['width'];
+  height: LazyImageProps['height'];
+  isLoading?: boolean; // default: false
+  duration?: CSSProperties['transitionDuration']; // default: 0.2s
+}
+
+const FallbackLazyImage: React.ForwardRefExoticComponent<
+  Omit<FallbackLazyImageProps, 'ref'> & React.RefAttributes<HTMLImageElement>
+>;
+```
+
+## Usage
+```tsx title="typescript"
+import { FallbackLazyImage } from '@modern-kit/react';
+import img1 from '../assets/img1.png';
+
+const Example = () => {
+  const skeletonStyle = useMemo(
+    () => ({
+      width: '400px', // img 크기와 동일하게 맞춰주세요.
+      height: '400px', // img 크기와 동일하게 맞춰주세요.
+      backgroundColor: 'green',
+    }),
+    []
+  );
+  return (
+    <div>
+      <FallbackLazyImage
+        fallback={<div style={skeletonStyle} />}
+        width={400}
+        height={400}
+        src={img1}
+        alt="img1"
+      />
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const skeletonStyle = {
+    width: '500px',
+    height: '500px',
+    backgroundColor: 'green',
+  };
+  return (
+    <div style={{ background: '#f8f8f8', width: '500px' }}>
+      <div
+        style={{
+          height: '500px',
+          textAlign: 'center',
+          fontSize: '2rem',
+        }}>
+        스크롤 해주세요.
+      </div>
+      <FallbackLazyImage
+        fallback={<div style={skeletonStyle} />}
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/b5640bec-2abc-4205-afbf-ccfd9876a90b'
+        }
+        alt="img1"
+        width={500}
+        height={500}
+      />
+
+      <div style={{ width: '100%', height: '150px' }} />
+
+      <FallbackLazyImage
+        fallback={<div style={skeletonStyle} />}
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/207743a7-b29f-4826-bc08-8df0d67e568b'
+        }
+        alt="img2"
+        width={500}
+        height={500}
+      />
+
+      <div style={{ width: '100%', height: '150px' }} />
+
+      <FallbackLazyImage
+        fallback={<div style={skeletonStyle} />}
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/d1957ec8-fe87-406e-bfda-fb4ee505b152'
+        }
+        alt="img3"
+        width={500}
+        height={500}
+      />
+    </div>
+  );
+};
+
+<Example />useEffect, 

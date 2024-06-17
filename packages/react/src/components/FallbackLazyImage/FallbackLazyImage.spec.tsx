@@ -18,16 +18,14 @@ afterEach(() => {
 
 const TestComponent = ({ mockFn }: { mockFn?: Mock<any, any> }) => {
   return (
-    <div>
-      <FallbackLazyImage
-        fallback={<div>Fallback</div>}
-        src="img1"
-        width={400}
-        height={400}
-        alt="img1"
-        onLoad={mockFn}
-      />
-    </div>
+    <FallbackLazyImage
+      fallback={<div>Fallback</div>}
+      src="img1"
+      width={400}
+      height={400}
+      alt="img1"
+      onLoad={mockFn}
+    />
   );
 };
 
@@ -45,7 +43,7 @@ describe('LazyImage Component', () => {
     expect(img1).toHaveStyle('transition: opacity 0.2s');
   });
 
-  it('should load the image when it is exposed to the viewport', async () => {
+  it('should load the image when it is exposed in the viewport and remove the fallback', async () => {
     renderSetup(<TestComponent mockFn={onLoadMockFn} />);
 
     const img1 = screen.getByAltText('img1');

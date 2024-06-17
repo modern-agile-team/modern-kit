@@ -1,4 +1,5 @@
 export * from './DebounceWrapper';
+export * from './FallbackLazyImage';
 export * from './InView';
 export * from './LazyImage';
 export * from './OutsideClick';

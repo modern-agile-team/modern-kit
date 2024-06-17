@@ -12,6 +12,7 @@ interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
   width: LazyImageProps['width'];
   height: LazyImageProps['height'];
+  isLoading?: boolean;
   duration?: CSSProperties['transitionDuration'];
 }
 
@@ -20,7 +21,16 @@ export const FallbackLazyImage = forwardRef<
   PropsWithoutRef<FallbackLazyImageProps>
 >(
   (
-    { width, height, fallback, duration = '0.2s', style, onLoad, ...restProps },
+    {
+      width,
+      height,
+      fallback,
+      style,
+      duration = '0.2s',
+      isLoading = false,
+      onLoad,
+      ...restProps
+    },
     ref
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -39,11 +49,11 @@ export const FallbackLazyImage = forwardRef<
         position: 'absolute',
         top: 0,
         left: 0,
-        opacity: isLoaded ? 1 : 0,
+        opacity: !isLoading && isLoaded ? 1 : 0,
         transition: `opacity ${duration}`,
         ...style,
       }),
-      [isLoaded, duration, style]
+      [isLoading, isLoaded, duration, style]
     );
 
     const handleLoad = useCallback(
@@ -56,7 +66,7 @@ export const FallbackLazyImage = forwardRef<
 
     return (
       <div style={wrapperStyle}>
-        {!isLoaded && fallback}
+        {isLoading && !isLoaded && fallback}
         <LazyImage
           ref={ref}
           width={width}
