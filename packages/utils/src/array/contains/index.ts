@@ -1,4 +1,4 @@
-export const contain = <T>(
+export const contains = <T>(
   arr: T[] | readonly T[],
   value: unknown,
   comparator: (x: any, y: any) => boolean = Object.is

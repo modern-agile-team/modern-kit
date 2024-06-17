@@ -8,4 +8,5 @@ export * from './isPrimitive';
 export * from './isPromise';
 export * from './isString';
 export * from './isValidEmail';
+export * from './isValidPassword';
 export * from './isValidPhoneNumberFormat';

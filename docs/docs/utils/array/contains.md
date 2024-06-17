@@ -1,4 +1,4 @@
-# contain
+# contains
 
 첫 번째 인자로 넘긴 배열에 특정 요소가 포함되어 있는지 판단하는 유틸 함수입니다.
 
@@ -27,12 +27,12 @@ Object.is(NaN, 0 / 0); // true
 
 ## Code
 
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/contain/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/contains/index.ts)
 
 ## Interface
 
 ```ts title="typescript"
-const contain: <T>(
+const contains: <T>(
   arr: T[] | readonly T[],
   value: unknown,
   comparator?: (x: any, y: any) => boolean
@@ -42,25 +42,25 @@ const contain: <T>(
 ## Usage
 ### Default
 ```ts title="typescript"
-import { contain } from '@modern-kit/utils';
+import { contains } from '@modern-kit/utils';
 
 const arr = [0, 1, 2, 3, NaN, {}];
 
-contain(arr, 1); // true
-contain(arr, NaN); // true
+contains(arr, 1); // true
+contains(arr, NaN); // true
 
-contain(arr, -0); // false
-contain(arr, 4); // false
-contain(arr, "3"); // false
-contain(arr, {}); // false
+contains(arr, -0); // false
+contains(arr, 4); // false
+contains(arr, "3"); // false
+contains(arr, {}); // false
 ```
 
 ### Comparator
 ```ts title="typescript"
 const arr = [{ a: 1, b: 2 }];
 
-contain(arr, { a: 1, c: 2 }, (x, y) => x.a === y.a); // true
-contain(
+contains(arr, { a: 1, c: 2 }, (x, y) => x.a === y.a); // true
+contains(
   arr,
   { a: 1, b: 2 },
   (x, y) => JSON.stringify(x) === JSON.stringify(y)
@@ -72,7 +72,7 @@ contain(
 const arr = [2, 3, 'foo'] as const;
 const value = 'foo' as unknown;
 
-if (contain(arr, value)) {
+if (contains(arr, value)) {
   value; // 2 | 3 | 'foo'
 } else {
   value; // unknown
