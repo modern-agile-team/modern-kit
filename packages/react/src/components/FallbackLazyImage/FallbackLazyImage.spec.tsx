@@ -51,9 +51,8 @@ describe('FallbackLazyImage', () => {
     renderSetup(<TestComponent mockFn={onLoadMockFn} />);
 
     const img1 = screen.getByAltText('img1');
-    const fallback = screen.queryByText('Fallback');
 
-    expect(fallback).toBeInTheDocument();
+    expect(screen.queryByText('Fallback')).toBeInTheDocument();
 
     await waitFor(() => {
       mockIntersecting({
@@ -68,7 +67,7 @@ describe('FallbackLazyImage', () => {
       img1.dispatchEvent(new Event('load'));
     });
 
-    expect(fallback).not.toBeInTheDocument();
+    expect(screen.queryByText('Fallback')).not.toBeInTheDocument();
     expect(onLoadMockFn).toBeCalled();
   });
 });
