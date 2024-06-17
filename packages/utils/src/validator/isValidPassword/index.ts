@@ -5,26 +5,37 @@ import {
   containsNumber,
   containsSpecialCharacters,
   containsUpperCase,
-  containsWhitespace,
+  containsWhiteSpace,
 } from '../../regex';
 import { contain } from '../../array';
 
-type Validator = 'lowerCase' | 'number' | 'specialCharacters' | 'upperCase';
+interface ValidationOption {
+  lowerCase?: boolean;
+  number?: boolean;
+  specialCharacters?: boolean;
+  upperCase?: boolean;
+  hangul?: boolean;
+}
+
+type Validator =
+  | 'hangul'
+  | 'lowerCase'
+  | 'number'
+  | 'specialCharacters'
+  | 'upperCase';
 
 type ErrorReason =
   | Validator
   | 'forbidden'
   | 'whiteSpace'
   | 'consecutiveCharacters'
-  | 'hangul'
   | 'length';
 
 interface Options {
-  validator: Validator[];
+  validationOptions: ValidationOption;
   minLength: number;
   maxLength: number;
   maxRepeatChars: number;
-  isContainHangul: boolean;
   forbiddenPasswords: string[] | ReadonlyArray<string>;
 }
 
@@ -59,10 +70,17 @@ export const isValidPassword = (
     minLength = 8,
     maxLength = 16,
     maxRepeatChars = maxLength + 1,
-    isContainHangul = false,
     forbiddenPasswords = [],
-    validator = [],
+    validationOptions = {},
   } = options;
+
+  const {
+    lowerCase = false,
+    number = false,
+    specialCharacters = false,
+    upperCase = false,
+    hangul = true,
+  } = validationOptions;
 
   // Check invalid length options
   if (checkInValidLengthOptions(minLength, maxLength)) {
@@ -75,7 +93,7 @@ export const isValidPassword = (
   }
 
   // Check for whitespace
-  if (containsWhitespace(password)) {
+  if (containsWhiteSpace(password)) {
     return { isValid: false, errorReason: 'whiteSpace' };
   }
 
@@ -85,7 +103,7 @@ export const isValidPassword = (
   }
 
   // Check for Korean language inclusions
-  if (!isContainHangul && containsHangul(password)) {
+  if (hangul && containsHangul(password)) {
     return { isValid: false, errorReason: 'hangul' };
   }
 
@@ -95,25 +113,22 @@ export const isValidPassword = (
   }
 
   // Check for inclusion of lowerCase
-  if (contain(validator, 'lowerCase') && !containsLowerCase(password)) {
+  if (lowerCase && !containsLowerCase(password)) {
     return { isValid: false, errorReason: 'lowerCase' };
   }
 
   // Check for inclusion of numbers
-  if (contain(validator, 'number') && !containsNumber(password)) {
+  if (number && !containsNumber(password)) {
     return { isValid: false, errorReason: 'number' };
   }
 
   // Check for inclusion of special character
-  if (
-    contain(validator, 'specialCharacters') &&
-    !containsSpecialCharacters(password)
-  ) {
+  if (specialCharacters && !containsSpecialCharacters(password)) {
     return { isValid: false, errorReason: 'specialCharacters' };
   }
 
   // Check for inclusion of upperCase
-  if (contain(validator, 'upperCase') && !containsUpperCase(password)) {
+  if (upperCase && !containsUpperCase(password)) {
     return { isValid: false, errorReason: 'upperCase' };
   }
 

@@ -6,4 +6,4 @@ export * from './containsLowerCase';
 export * from './containsNumber';
 export * from './containsSpecialCharacters';
 export * from './containsUpperCase';
-export * from './containsWhitespace';
+export * from './containsWhiteSpace';
