@@ -7428,7 +7428,6 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["rollup", "npm:4.18.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.1.1"],\
-          ["rollup-plugin-import-css", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:3.5.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["tslib", "npm:2.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
@@ -7467,7 +7466,6 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["rollup", "npm:4.18.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.1.1"],\
-          ["rollup-plugin-import-css", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:3.5.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["tslib", "npm:2.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
@@ -24384,29 +24382,6 @@ const RAW_RUNTIME_STATE =
           "@types/esbuild",\
           "@types/rollup",\
           "esbuild",\
-          "rollup"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["rollup-plugin-import-css", [\
-      ["npm:3.5.0", {\
-        "packageLocation": "./.yarn/cache/rollup-plugin-import-css-npm-3.5.0-d31a8bbd7e-9d442f5788.zip/node_modules/rollup-plugin-import-css/",\
-        "packageDependencies": [\
-          ["rollup-plugin-import-css", "npm:3.5.0"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:3.5.0", {\
-        "packageLocation": "./.yarn/__virtual__/rollup-plugin-import-css-virtual-249e76ca7a/0/cache/rollup-plugin-import-css-npm-3.5.0-d31a8bbd7e-9d442f5788.zip/node_modules/rollup-plugin-import-css/",\
-        "packageDependencies": [\
-          ["rollup-plugin-import-css", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:3.5.0"],\
-          ["@rollup/pluginutils", "virtual:69e31d09b0cd23a26b1aeafc537af194f88bd96cfe63eefe7e758e2d69e9fa2320bb82d5ad4ecf3a3a65d3c6c71a2d2b7a290906811f79c8b07f898e6a1d75a8#npm:5.1.0"],\
-          ["@types/rollup", null],\
-          ["rollup", "npm:4.18.0"]\
-        ],\
-        "packagePeers": [\
-          "@types/rollup",\
           "rollup"\
         ],\
         "linkType": "HARD"\
