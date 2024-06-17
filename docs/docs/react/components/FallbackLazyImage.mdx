@@ -4,7 +4,9 @@ import { FallbackLazyImage } from '@modern-kit/react';
 
 **[LazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/LazyImage)** 를 확장해 이미지 `load 여부`에 따른 `Fallback 컴포넌트`를 렌더링 하는 컴포넌트 입니다.
 
-`width`, `height`, `fallback` props를 필수로 넘겨줘야 하며, fallback의 크기는 해당 width, height와 동일하게 맞춰야합니다.
+`src`를 더불어 `width`, `height`, `fallback` props를 필수로 넘겨줘야 하며, fallback의 크기는 해당 width, height와 동일하게 맞춰야합니다.
+
+  - `width`, `height`, `fallback`를 적절하게 넘겨준다면 `Layout Shift` 현상도 방지 할 수 있습니다.
 
 이미지 `load 여부`와 함께 `API 요청` 등과 같은 `외부 Loading 상태`에 의존해 `Fallback 컴포넌트`를 노출하기 위해서는 `isLoading` props를 활용 할 수 있습니다.
 
