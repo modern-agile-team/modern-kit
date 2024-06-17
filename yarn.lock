@@ -4584,6 +4584,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     rollup: "npm:^4.14.3"
     rollup-plugin-esbuild: "npm:^6.1.1"
+    rollup-plugin-import-css: "npm:^3.5.0"
     rollup-plugin-peer-deps-external: "npm:^2.2.4"
     tslib: "npm:^2.6.1"
     typescript: "npm:^5.1.6"
@@ -5134,7 +5135,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^5.0.5, @rollup/pluginutils@npm:^5.1.0":
+"@rollup/pluginutils@npm:^5.0.4, @rollup/pluginutils@npm:^5.0.5, @rollup/pluginutils@npm:^5.1.0":
   version: 5.1.0
   resolution: "@rollup/pluginutils@npm:5.1.0"
   dependencies:
@@ -18485,6 +18486,17 @@ __metadata:
     esbuild: ">=0.18.0"
     rollup: ^1.20.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
   checksum: 1d5610a54ea4ffc4721d4f6beed8931cb2188313ab464480605b8bc7eb24be63eadf5eb706c8af2ed930f93c210b66190f482311642f5f3c5ad801c63d80f755
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-import-css@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "rollup-plugin-import-css@npm:3.5.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.0.4"
+  peerDependencies:
+    rollup: ^2.x.x || ^3.x.x || ^4.x.x
+  checksum: 9d442f578845ec637fdf287e1b4e94ec243e0fcbeb34a624c8d793ece2385747f03828141aa4a1f8db7951a240d502c8025b4f313efc36bcc6b6de0ec49e3655
   languageName: node
   linkType: hard
 
