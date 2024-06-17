@@ -10,8 +10,8 @@ import { LazyImage, LazyImageProps } from '../LazyImage';
 
 interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
-  width: LazyImageProps['width'];
-  height: LazyImageProps['height'];
+  width: string | number;
+  height: string | number;
   isLoading?: boolean;
   duration?: CSSProperties['transitionDuration'];
 }

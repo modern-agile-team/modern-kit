@@ -32,10 +32,10 @@ interface LazyImageProps
 ```ts title="typescrpt"
 interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
-  width: LazyImageProps['width'];
-  height: LazyImageProps['height'];
-  isLoading?: boolean; // default: false
-  duration?: CSSProperties['transitionDuration']; // default: 0.2s
+  width: Exclude<CSSProperties['width'], undefined>;
+  height: Exclude<CSSProperties['height'], undefined>;
+  isLoading?: boolean;
+  duration?: CSSProperties['transitionDuration'];
 }
 
 const FallbackLazyImage: React.ForwardRefExoticComponent<
