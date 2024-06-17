@@ -1,5 +1,17 @@
 # @modern-kit/react
 
+## 1.8.0
+
+### Minor Changes
+
+- [#212](https://github.com/modern-agile-team/modern-kit/pull/212) [`b0a08c9`](https://github.com/modern-agile-team/modern-kit/commit/b0a08c9192484dd83e2c4f99d515fdb7212a5ef1) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useScrollLock 신규 컴포넌트 추가 - @ssi02014
+
+- [#225](https://github.com/modern-agile-team/modern-kit/pull/225) [`b680413`](https://github.com/modern-agile-team/modern-kit/commit/b68041325d32aac5e28eaa5d1b20cd873d746ec4) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): useVhProperty 훅 추가 완료 - @sangminnn
+
+### Patch Changes
+
+- [#208](https://github.com/modern-agile-team/modern-kit/pull/208) [`822e21c`](https://github.com/modern-agile-team/modern-kit/commit/822e21c4ffa8f95da0b000468d8c056078035220) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useIntersectionObserver 개선 및 InView, LazyImage 수정 - @ssi02014
+
 ## 1.7.0
 
 ### Minor Changes
