@@ -1,6 +1,7 @@
 export * from './hasProperty';
 export * from './isArray';
 export * from './isFunction';
+export * from './isMIMEType';
 export * from './isNotNullish';
 export * from './isNullish';
 export * from './isNumber';
