@@ -32,8 +32,8 @@ interface LazyImageProps
 ```ts title="typescrpt"
 interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
-  width: Exclude<CSSProperties['width'], undefined>;
-  height: Exclude<CSSProperties['height'], undefined>;
+  width: string | number;
+  height: string | number;
   isLoading?: boolean;
   duration?: CSSProperties['transitionDuration'];
 }
