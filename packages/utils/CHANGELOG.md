@@ -1,5 +1,31 @@
 # @modern-kit/utils
 
+## 1.7.0
+
+### Minor Changes
+
+- [`c21a97c`](https://github.com/modern-agile-team/modern-kit/commit/c21a97c2a2a85b38141a2c45b2d4db985d4a01cb) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: 누락된 isMIMEType export 추가 - @ssi02014
+
+- [#209](https://github.com/modern-agile-team/modern-kit/pull/209) [`b226599`](https://github.com/modern-agile-team/modern-kit/commit/b226599ddd978bdca778101115dddac543de1879) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): invert, identity 유틸 함수 추가 - @ssi02014
+
+- [#217](https://github.com/modern-agile-team/modern-kit/pull/217) [`b239f85`](https://github.com/modern-agile-team/modern-kit/commit/b239f85ab91f78b5e032390ecc74feb2e430b6bc) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isPrimitive 함수 추가 및 Primitive, Reference 유틸 타입 추가 - @ssi02014
+
+- [#229](https://github.com/modern-agile-team/modern-kit/pull/229) [`00d17f5`](https://github.com/modern-agile-team/modern-kit/commit/00d17f50ed612363097ab985ec029078fd4eb1b9) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): union 유틸 함수 추가 및 ArrayWithReadonly 유틸 타입 추가 - @ssi02014
+
+- [#221](https://github.com/modern-agile-team/modern-kit/pull/221) [`a633ff0`](https://github.com/modern-agile-team/modern-kit/commit/a633ff0c21d719fa4fe5eb77f1c5d4f84725d511) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isValidPassword 유틸 함수 추가 - @ssi02014
+
+- [#221](https://github.com/modern-agile-team/modern-kit/pull/221) [`a633ff0`](https://github.com/modern-agile-team/modern-kit/commit/a633ff0c21d719fa4fe5eb77f1c5d4f84725d511) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): regex 관련 유틸 함수 추가(containsConsecutiveCharacters, containsHangul, containsLowerCase 등) - @ssi02014
+
+- [#223](https://github.com/modern-agile-team/modern-kit/pull/223) [`b4b1578`](https://github.com/modern-agile-team/modern-kit/commit/b4b1578730c0511cee9c03b42b75f1db17ce5d49) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): uniq 신규 유틸 함수 추가 - @ssi02014
+
+- [#198](https://github.com/modern-agile-team/modern-kit/pull/198) [`8c1b5fa`](https://github.com/modern-agile-team/modern-kit/commit/8c1b5fa929347ee90f8fce150e7541454eaafde8) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): contain 신규 유틸 함수 추가 - @ssi02014
+
+- [#216](https://github.com/modern-agile-team/modern-kit/pull/216) [`fc43010`](https://github.com/modern-agile-team/modern-kit/commit/fc4301098ad2e7d9ae90b64272ef39eee91aef7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): partition 유틸 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [#205](https://github.com/modern-agile-team/modern-kit/pull/205) [`a21eaa7`](https://github.com/modern-agile-team/modern-kit/commit/a21eaa717095ba6d9affbfde2514ae5b4d07c8a2) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): delay 유틸 함수 개선 - @ssi02014
+
 ## 1.6.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @modern-kit/types
 
+## 1.3.0
+
+### Minor Changes
+
+- [#217](https://github.com/modern-agile-team/modern-kit/pull/217) [`b239f85`](https://github.com/modern-agile-team/modern-kit/commit/b239f85ab91f78b5e032390ecc74feb2e430b6bc) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isPrimitive 함수 추가 및 Primitive, Reference 유틸 타입 추가 - @ssi02014
+
+- [#229](https://github.com/modern-agile-team/modern-kit/pull/229) [`00d17f5`](https://github.com/modern-agile-team/modern-kit/commit/00d17f50ed612363097ab985ec029078fd4eb1b9) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): union 유틸 함수 추가 및 ArrayWithReadonly 유틸 타입 추가 - @ssi02014
+
 ## 1.2.0
 
 ### Minor Changes
