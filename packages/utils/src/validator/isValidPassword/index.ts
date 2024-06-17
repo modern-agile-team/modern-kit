@@ -9,27 +9,27 @@ import {
 } from '../../regex';
 import { contains } from '../../array';
 
-interface ContainsOption {
+interface ContainsOptions {
   lowerCase?: boolean;
   number?: boolean;
   specialCharacters?: boolean;
   upperCase?: boolean;
-  hangul?: boolean;
 }
 
 type ErrorReason =
-  | keyof ContainsOption
+  | keyof ContainsOptions
+  | 'hangul'
   | 'forbidden'
   | 'whiteSpace'
   | 'consecutiveCharacters'
   | 'length';
 
-interface Options {
-  containsOptions: ContainsOption;
+interface IsValidPasswordOptions {
+  containsOptions: ContainsOptions;
   minLength: number;
   maxLength: number;
   maxRepeatChars: number;
-  forbiddenPasswords: string[] | ReadonlyArray<string>;
+  forbiddenPasswords: string[] | readonly string[];
 }
 
 interface IsValidPasswordReturnType {
@@ -38,8 +38,8 @@ interface IsValidPasswordReturnType {
 }
 
 const checkInValidLengthOptions = (
-  minLength: Options['minLength'],
-  maxLength: Options['maxLength']
+  minLength: IsValidPasswordOptions['minLength'],
+  maxLength: IsValidPasswordOptions['maxLength']
 ) => {
   if (minLength < 1 || maxLength < 1 || minLength > maxLength) {
     return true;
@@ -49,15 +49,15 @@ const checkInValidLengthOptions = (
 
 const checkLength = (
   password: string,
-  minLength: Options['minLength'],
-  maxLength: Options['maxLength']
+  minLength: IsValidPasswordOptions['minLength'],
+  maxLength: IsValidPasswordOptions['maxLength']
 ) => {
   return password.length >= minLength && password.length <= maxLength;
 };
 
 export const isValidPassword = (
   password: string,
-  options: Partial<Options> = {}
+  options: Partial<IsValidPasswordOptions> = {}
 ): IsValidPasswordReturnType => {
   const {
     containsOptions = {},
@@ -72,7 +72,6 @@ export const isValidPassword = (
     number = false,
     specialCharacters = false,
     upperCase = false,
-    hangul = true,
   } = containsOptions;
 
   // Check invalid length options
@@ -96,7 +95,7 @@ export const isValidPassword = (
   }
 
   // Check for Korean language inclusions
-  if (hangul && containsHangul(password)) {
+  if (containsHangul(password)) {
     return { isValid: false, errorReason: 'hangul' };
   }
 

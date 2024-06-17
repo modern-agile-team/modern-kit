@@ -106,14 +106,6 @@ describe('isValidPassword', () => {
     ).toEqual(falsyResult('upperCase'));
   });
 
-  it('should allow Korean characters in the password if specified', () => {
-    expect(
-      isValidPassword('password안ㅇㄱㅎ', {
-        containsOptions: { hangul: false },
-      })
-    ).toEqual(truthyResult);
-  });
-
   it('should return false for passwords in the forbidden list', () => {
     const forbiddenPasswords = ['12345678', 'admin', 'password'] as const;
 

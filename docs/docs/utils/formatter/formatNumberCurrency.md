@@ -84,7 +84,7 @@ const value4 = formatNumberCurrency(459325300, {
 
 <br />
 
-### ⭐️Abstraction 
+### ⭐️ Best Practice
 아래와 같이 필요에 맞게 `추상화`해서 사용하는 것을 추천드립니다.
 
 ```ts title="typescript"
