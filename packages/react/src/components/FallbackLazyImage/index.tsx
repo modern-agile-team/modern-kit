@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { LazyImage, LazyImageProps } from '../LazyImage';
 
-interface FallbackLazyImageProps extends Omit<LazyImageProps, 'style'> {
+interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
   width: string | number;
   height: string | number;
@@ -25,6 +25,7 @@ export const FallbackLazyImage = forwardRef<
       height,
       fallback,
       className,
+      style,
       duration = '0.2s',
       onLoad,
       ...restProps
@@ -51,8 +52,9 @@ export const FallbackLazyImage = forwardRef<
         left: 0,
         opacity: !isRenderFallback ? 1 : 0,
         transition: `opacity ${duration}`,
+        ...style,
       }),
-      [isRenderFallback, duration]
+      [isRenderFallback, duration, style]
     );
 
     const handleLoad = useCallback(
@@ -63,8 +65,12 @@ export const FallbackLazyImage = forwardRef<
       [onLoad]
     );
 
+    const customClassName = className
+      ? `lazy-image-wrapper ${className}`
+      : 'lazy-image-wrapper';
+
     return (
-      <div className={`lazy-image-wrapper ${className}`} style={wrapperStyle}>
+      <div className={customClassName} style={wrapperStyle}>
         {isRenderFallback && fallback}
         <LazyImage
           ref={ref}

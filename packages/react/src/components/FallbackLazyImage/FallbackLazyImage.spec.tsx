@@ -19,6 +19,7 @@ afterEach(() => {
 const TestComponent = ({ mockFn }: { mockFn?: Mock<any, any> }) => {
   return (
     <FallbackLazyImage
+      className="img1"
       fallback={<div>Fallback</div>}
       src="img1"
       width={400}
