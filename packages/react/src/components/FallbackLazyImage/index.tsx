@@ -1,6 +1,5 @@
 import React, {
   CSSProperties,
-  PropsWithoutRef,
   forwardRef,
   useCallback,
   useMemo,
@@ -17,7 +16,7 @@ interface FallbackLazyImageProps extends LazyImageProps {
 
 export const FallbackLazyImage = forwardRef<
   HTMLImageElement,
-  PropsWithoutRef<FallbackLazyImageProps>
+  FallbackLazyImageProps
 >(
   (
     {
