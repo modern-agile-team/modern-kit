@@ -4,13 +4,13 @@ import { FallbackLazyImage } from '@modern-kit/react';
 
 **[LazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/LazyImage)** 를 확장해 이미지 `load 여부`에 따른 `Fallback 컴포넌트`를 렌더링 하는 컴포넌트 입니다.
 
-`src`를 더불어 `width`, `height`, `fallback` props를 필수로 넘겨줘야 하며, fallback의 크기는 해당 width, height와 동일하게 맞춰야합니다.
+`src`와 더불어 `width`, `height`, `fallback` props를 필수로 넘겨줘야 하며, fallback의 크기는 해당 width, height와 동일하게 맞추는 것을 권장합니다.
 
-  - `width`, `height`, `fallback`를 적절하게 넘겨준다면 `Layout Shift` 현상도 방지 할 수 있습니다.
+  - 💡 `width`, `height`, `fallback`를 적절하게 넘겨준다면 `Layout Shift` 현상도 방지 할 수 있습니다.
 
 `duration` props는 실제 이미지가 load 된 후, fallback 컴포넌트에서 실제 이미지로 전환 될 때 사용하는 **[transition-duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)** 값입니다. 
 
-이미지 `load 여부`와 함께 `API 요청` 등과 같은 `외부 Loading 상태`에 의존해 `Fallback 컴포넌트`를 노출하기 위해서는 `isLoading` props를 활용 할 수 있습니다.
+참고로, style props을 허용하지 않습니다. `css-in-js 상속` 또는 `외부 css을 통해 스타일을 제어`해주세요.
 
 <br />
 
@@ -32,11 +32,10 @@ interface LazyImageProps
 }
 ```
 ```ts title="typescrpt"
-interface FallbackLazyImageProps extends LazyImageProps {
+interface FallbackLazyImageProps extends Omit<LazyImageProps, 'style'> {
   fallback: JSX.Element;
   width: string | number;
   height: string | number;
-  isLoading?: boolean; // default: false
   duration?: CSSProperties['transitionDuration']; // default: 0.2s
 }
 
@@ -46,6 +45,7 @@ const FallbackLazyImage: React.ForwardRefExoticComponent<
 ```
 
 ## Usage
+### Default
 ```tsx title="typescript"
 import { FallbackLazyImage } from '@modern-kit/react';
 import img1 from '../assets/img1.png';
@@ -53,8 +53,8 @@ import img1 from '../assets/img1.png';
 const Example = () => {
   const skeletonStyle = useMemo(
     () => ({
-      width: '400px', // img 크기와 동일하게 맞춰주세요.
-      height: '400px', // img 크기와 동일하게 맞춰주세요.
+      width: '400px', // 실제 img 크기와 동일하게 맞춰주세요.
+      height: '400px', // 실제 img 크기와 동일하게 맞춰주세요.
       backgroundColor: 'green',
     }),
     []
@@ -71,6 +71,32 @@ const Example = () => {
     </div>
   );
 };
+```
+
+### Styling: css
+- FallbackLazyImage 컴포넌트 내 Image Wrapper는 기본적으로 `lazy-image-wrapper` 클래스를 갖습니다. 해당 클래스를 활용하여 스타일을 제어 할 수 있습니다.
+  - 물론, 직접 클래스를 넘겨 줄 수도 있습니다.
+```css
+/* 기본 클래스 */
+.lazy-image-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+}
+```
+```tsx
+<FallbackLazyImage {/* ... */} />
+```
+
+### Styling: css-in-js
+- `css-in-js`의 `상속`기능을 활용하여 새로운 컴포넌트를 작성 할 수 있습니다.
+```tsx
+const Image = styled(FallbackLazyImage)`
+  border-radius: 12px;
+  overflow: hidden;
+`;
+```
+```tsx
+<Image {/* ... */} />
 ```
 
 ## Example

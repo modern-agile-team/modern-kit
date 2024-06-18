@@ -8,11 +8,10 @@ import React, {
 } from 'react';
 import { LazyImage, LazyImageProps } from '../LazyImage';
 
-interface FallbackLazyImageProps extends LazyImageProps {
+interface FallbackLazyImageProps extends Omit<LazyImageProps, 'style'> {
   fallback: JSX.Element;
   width: string | number;
   height: string | number;
-  isLoading?: boolean;
   duration?: CSSProperties['transitionDuration'];
 }
 
@@ -25,9 +24,8 @@ export const FallbackLazyImage = forwardRef<
       width,
       height,
       fallback,
-      style,
+      className,
       duration = '0.2s',
-      isLoading = false,
       onLoad,
       ...restProps
     },
@@ -35,7 +33,7 @@ export const FallbackLazyImage = forwardRef<
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const isRenderFallback = isLoading || !isLoaded;
+    const isRenderFallback = !isLoaded;
 
     const wrapperStyle: CSSProperties = useMemo(
       () => ({
@@ -46,16 +44,15 @@ export const FallbackLazyImage = forwardRef<
       [width, height]
     );
 
-    const imgStyle: CSSProperties = useMemo(
+    const imageStyle: CSSProperties = useMemo(
       () => ({
         position: 'absolute',
         top: 0,
         left: 0,
         opacity: !isRenderFallback ? 1 : 0,
         transition: `opacity ${duration}`,
-        ...style,
       }),
-      [isRenderFallback, duration, style]
+      [isRenderFallback, duration]
     );
 
     const handleLoad = useCallback(
@@ -67,13 +64,13 @@ export const FallbackLazyImage = forwardRef<
     );
 
     return (
-      <div style={wrapperStyle}>
+      <div className={`lazy-image-wrapper ${className}`} style={wrapperStyle}>
         {isRenderFallback && fallback}
         <LazyImage
           ref={ref}
           width={width}
           height={height}
-          style={imgStyle}
+          style={imageStyle}
           onLoad={handleLoad}
           {...restProps}
         />
