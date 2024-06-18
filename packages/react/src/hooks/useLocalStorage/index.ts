@@ -1,5 +1,4 @@
 import { isFunction } from '@modern-kit/utils';
-import { usePreservedState } from '../usePreservedState';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 
 interface UseLocalStorageProps<T> {
@@ -27,9 +26,9 @@ export const useLocalStorage = <T>({
   key,
   initialValue = null,
 }: UseLocalStorageProps<T>) => {
-  const initialValueToUse = usePreservedState(
-    isFunction(initialValue) ? initialValue() : initialValue
-  );
+  const initialValueToUse = useMemo(() => {
+    return isFunction(initialValue) ? initialValue() : initialValue;
+  }, [initialValue]);
 
   const externalStoreState = useSyncExternalStore(
     subscribe,
