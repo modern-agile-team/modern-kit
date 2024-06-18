@@ -80,12 +80,12 @@ const Example = () => {
   overflow: hidden;
 }
 
-.lazy-image-wrapper img {
-  /* ... */
+.lazy-image-wrapper > img {
+  /* image styling */
 }
 ```
 ```tsx
-<FallbackLazyImage {/* ... */} />
+<FallbackLazyImage {/* ...props */} />
 ```
 
 ### Wrapper Styling: css-in-js
@@ -94,10 +94,14 @@ const Example = () => {
 const Image = styled(FallbackLazyImage)`
   border-radius: 12px;
   overflow: hidden;
+
+  & > img {
+    /* image styling */
+  }
 `;
 ```
 ```tsx
-<Image {/* ... */} />
+<Image {/* ...props */} />
 ```
 
 ## Example
