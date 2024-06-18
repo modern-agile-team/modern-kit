@@ -28,7 +28,7 @@ interface LazyImageProps
 }
 ```
 ```ts title="typescrpt"
-interface FallbackLazyImageProps extends Omit<LazyImageProps, 'style'> {
+interface FallbackLazyImageProps extends LazyImageProps {
   fallback: JSX.Element;
   width: string | number;
   height: string | number;
