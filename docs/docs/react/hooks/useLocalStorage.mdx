@@ -61,12 +61,14 @@ interface UseLocalStorageRequiredInitialValueProps<T> {
   key: string;
   initialValue: T | (() => T);
 }
-
+```
+```ts
+// 함수 오버로딩
 // initialValue 존재하면 state 타입에 null 제외
 function useLocalStorage<T>({
   key,
   initialValue,
-}: UseLocalStorageRequiredInitialValue<T>): {
+}: UseLocalStorageRequiredInitialValueProps<T>): {
   readonly state: T;
   readonly setState: (value: T | ((state: T) => T)) => void;
   readonly removeState: () => void;
@@ -76,7 +78,7 @@ function useLocalStorage<T>({
 function useLocalStorage<T>({
   key,
   initialValue,
-}: UseLocalStorageOptionalInitialValue<T>): {
+}: UseLocalStorageOptionalInitialValueProps<T>): {
   readonly state: T | null;
   readonly setState: (value: T | ((state: T | null) => T)) => void;
   readonly removeState: () => void;
