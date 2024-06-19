@@ -73,9 +73,9 @@ describe('useLocalStorage', () => {
   it('should throw an error when localStorage contains invalid JSON', async () => {
     localStorage.setItem('test', "{key: 'value'}");
 
-    expect(() =>
-      renderHook(() => useLocalStorage({ key: 'test' }))
-    ).toThrowError();
+    expect(() => {
+      return renderHook(() => useLocalStorage({ key: 'test' }));
+    }).toThrowError();
   });
 
   it('should throw an error when setting an item in localStorage fails', async () => {

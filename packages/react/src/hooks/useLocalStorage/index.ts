@@ -6,10 +6,25 @@ interface UseLocalStorageProps<T> {
   initialValue?: T | (() => T) | null;
 }
 
+const LOCAL_STORAGE_CUSTOM_EVENT_KEY = 'local-storage';
+
+const localStorageEventHandler = {
+  key: LOCAL_STORAGE_CUSTOM_EVENT_KEY,
+  subscribe: (callback: () => void) => {
+    window.addEventListener(LOCAL_STORAGE_CUSTOM_EVENT_KEY, callback);
+  },
+  unsubscribe: (callback: () => void) => {
+    window.removeEventListener(LOCAL_STORAGE_CUSTOM_EVENT_KEY, callback);
+  },
+  dispatchEvent: () => {
+    window.dispatchEvent(new StorageEvent(LOCAL_STORAGE_CUSTOM_EVENT_KEY));
+  },
+};
+
 const subscribe = (callback: () => void) => {
-  window.addEventListener('storage', callback);
+  localStorageEventHandler.subscribe(callback);
   return () => {
-    window.removeEventListener('storage', callback);
+    localStorageEventHandler.unsubscribe(callback);
   };
 };
 
@@ -52,7 +67,7 @@ export const useLocalStorage = <T>({
     (value: T) => {
       try {
         window.localStorage.setItem(key, JSON.stringify(value));
-        window.dispatchEvent(new Event('storage'));
+        localStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
           `Failed to store data for key "${key}" in localStorage: ${err}`
@@ -65,7 +80,7 @@ export const useLocalStorage = <T>({
   const removeState = useCallback(() => {
     try {
       window.localStorage.removeItem(key);
-      window.dispatchEvent(new Event('storage'));
+      localStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
         `Failed to remove key "${key}" from localStorage: ${err}`
