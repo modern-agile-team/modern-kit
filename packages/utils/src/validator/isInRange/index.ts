@@ -12,21 +12,20 @@ export const isInRange = ({
   value,
   min,
   max,
-  equalOptions,
+  equalOptions = {},
 }: IsInRangeProps) => {
-  if (min == null) throw new Error('min값은 필수입니다.');
-  if (max == null) throw new Error('max값은 필수입니다.');
-  if (min > max) throw new Error('min은 max보다 작아야합니다.');
+  if (min == null || max == null) {
+    throw new Error('min and max values are invalid.');
+  }
 
-  const defaultEqualOptions = {
-    min: true,
-    max: false,
-  };
+  if (min > max) {
+    throw new Error('min value cannot be greater than the max value.');
+  }
 
-  const mergedEqualOptions = { ...defaultEqualOptions, ...equalOptions };
+  const { min: minEqual = true, max: maxEqual = false } = equalOptions;
 
-  const minCheck = mergedEqualOptions.min ? value >= min : value > min;
-  const maxCheck = mergedEqualOptions.max ? value <= max : value < max;
+  const isWithinMin = minEqual ? value >= min : value > min;
+  const isWithinMax = maxEqual ? value <= max : value < max;
 
-  return minCheck && maxCheck;
+  return isWithinMin && isWithinMax;
 };

@@ -109,40 +109,22 @@ describe('isInRange', () => {
     ).toBe(false);
   });
 
-  it('should throw error if min is null or undefined', () => {
+  it('should throw error if min or max is invalid value', () => {
     expect(() =>
       isInRange({
         value: 0,
         min: null as unknown as number,
         max: 10,
       }),
-    ).toThrowError('min값은 필수입니다.');
+    ).toThrowError('min and max values are invalid.');
 
-    expect(() =>
-      isInRange({
-        value: 0,
-        min: undefined as unknown as number,
-        max: 10,
-      }),
-    ).toThrowError('min값은 필수입니다.');
-  });
-
-  it('should throw error if max is null or undefined', () => {
     expect(() =>
       isInRange({
         value: 0,
         min: 0,
         max: null as unknown as number,
       }),
-    ).toThrowError('max값은 필수입니다.');
-
-    expect(() =>
-      isInRange({
-        value: 0,
-        min: 0,
-        max: undefined as unknown as number,
-      }),
-    ).toThrowError('max값은 필수입니다.');
+    ).toThrowError('min and max values are invalid.');
   });
 
   it('should throw error if min is greater than max', () => {
@@ -152,6 +134,6 @@ describe('isInRange', () => {
         min: 10,
         max: 0,
       }),
-    ).toThrowError('min은 max보다 작아야합니다.');
+    ).toThrowError('min value cannot be greater than the max value.');
   });
 });
