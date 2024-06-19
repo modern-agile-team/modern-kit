@@ -33,7 +33,7 @@ describe('useLocalStorage', () => {
     expect(result.current.state).toBe('storedValue');
   });
 
-  it('should update localStorage when state changes', async () => {
+  it('should update localStorage when state changes(1)', async () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key: 'test', initialValue: 'default' })
     );
@@ -44,6 +44,21 @@ describe('useLocalStorage', () => {
 
     expect(result.current.state).toBe('newValue');
     expect(localStorage.getItem('test')).toBe(JSON.stringify('newValue'));
+  });
+
+  it('should update localStorage when state changes(2)', async () => {
+    localStorage.setItem('test', JSON.stringify([1, 2, 3]));
+
+    const { result } = renderHook(() =>
+      useLocalStorage({ key: 'test', initialValue: [1, 2, 3] })
+    );
+
+    await waitFor(() => {
+      result.current.setState((state) => [...(state || []), 4]);
+    });
+
+    expect(result.current.state).toEqual([1, 2, 3, 4]);
+    expect(localStorage.getItem('test')).toBe(JSON.stringify([1, 2, 3, 4]));
   });
 
   it('should remove the value from localStorage', async () => {

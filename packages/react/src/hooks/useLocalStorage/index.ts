@@ -1,23 +1,23 @@
 import { isFunction } from '@modern-kit/utils';
-import { useCallback, useMemo, useSyncExternalStore } from 'react';
+import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
 
 interface UseLocalStorageProps<T> {
   key: string;
   initialValue?: T | (() => T) | null;
 }
 
-const LOCAL_STORAGE_CUSTOM_EVENT_KEY = 'local-storage';
+const LOCAL_STORAGE_EVENT_KEY = 'local-storage';
 
 const localStorageEventHandler = {
-  key: LOCAL_STORAGE_CUSTOM_EVENT_KEY,
+  key: LOCAL_STORAGE_EVENT_KEY,
   subscribe: (callback: () => void) => {
-    window.addEventListener(LOCAL_STORAGE_CUSTOM_EVENT_KEY, callback);
+    window.addEventListener(LOCAL_STORAGE_EVENT_KEY, callback);
   },
   unsubscribe: (callback: () => void) => {
-    window.removeEventListener(LOCAL_STORAGE_CUSTOM_EVENT_KEY, callback);
+    window.removeEventListener(LOCAL_STORAGE_EVENT_KEY, callback);
   },
   dispatchEvent: () => {
-    window.dispatchEvent(new StorageEvent(LOCAL_STORAGE_CUSTOM_EVENT_KEY));
+    window.dispatchEvent(new StorageEvent(LOCAL_STORAGE_EVENT_KEY));
   },
 };
 
@@ -36,11 +36,11 @@ const getSnapshot = (key: string) => {
 const getServerSnapshot = <T>(initialValue: T | null) => {
   return JSON.stringify(initialValue);
 };
-
 export const useLocalStorage = <T>({
   key,
   initialValue = null,
 }: UseLocalStorageProps<T>) => {
+  useState;
   const initialValueToUse = useMemo(() => {
     return isFunction(initialValue) ? initialValue() : initialValue;
   }, [initialValue]);
@@ -64,9 +64,11 @@ export const useLocalStorage = <T>({
   }, [key, externalStoreState, initialValueToUse]);
 
   const setState = useCallback(
-    (value: T) => {
+    (value: T | ((state: T | null) => T)) => {
       try {
-        window.localStorage.setItem(key, JSON.stringify(value));
+        const valueToUse = isFunction(value) ? value(state) : value;
+
+        window.localStorage.setItem(key, JSON.stringify(valueToUse));
         localStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
@@ -74,7 +76,7 @@ export const useLocalStorage = <T>({
         );
       }
     },
-    [key]
+    [key, state]
   );
 
   const removeState = useCallback(() => {
