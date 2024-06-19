@@ -5,19 +5,23 @@ interface Options {
   whiteSpace?: boolean;
 }
 
+const regexps = {
+  letters: '\\p{L}',
+  numbers: '\\p{N}',
+  specialCharacters: '\\p{S}\\p{P}',
+  whiteSpace: '\\s',
+} as const;
+
 const createRegex = (options: Options) => {
-  const { letters, numbers, specialCharacters, whiteSpace } = options;
+  let pattern = '';
 
-  let pattern = '[^';
+  for (const key in options) {
+    if (options[key as keyof Options]) {
+      pattern += regexps[key as keyof Options];
+    }
+  }
 
-  if (letters) pattern += '\\p{L}';
-  if (numbers) pattern += '\\p{N}';
-  if (specialCharacters) pattern += '\\p{S}\\p{P}';
-  if (whiteSpace) pattern += `\\s`;
-
-  pattern += `]`;
-
-  return new RegExp(pattern, 'gu');
+  return new RegExp(`[^${pattern}]`, 'gu');
 };
 
 export const extractLetters = (
