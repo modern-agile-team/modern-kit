@@ -1,0 +1,142 @@
+import { useLocalStorage } from '@modern-kit/react';
+
+# useLocalStorage
+
+`React v18`부터 지원하는 **[useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore)** 을 활용해 로컬 스토리지 내의 특정 `key` 데이터를 구독하고, 구독 중인 데이터에 변화가 있을 시 이를 동기화해주는 커스텀 훅입니다.
+
+로컬스토리지에 구독하고자 하는 `key`가 없을 경우 반환할 `initialValue`로 초기값을 설정할 수 있습니다. 또한, `서버 사이드 렌더링(SSR)`의 경우 로컬스토리지가 동작하지 않기 때문에 `initialValue`가 반환됩니다.
+
+`setState`는 값 자체를 넘길 수 있으며, 함수도 넘길 수 있습니다. 함수로 활용 시에 인자로 state 값을 가져올 수 있습니다.
+
+```ts
+const { state, setState, removeState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [1, 2],
+});
+
+setState([1, 2, 3]);
+setState(state => [...state, 3]);
+```
+
+<br />
+
+initialValue를 넘겨주면 더욱 `명확한 타입 추론`이 가능합니다.
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+});
+
+state; // number[] | null
+setState(state => {
+  state; // number[] | null
+});
+```
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+});
+
+state; // number[]
+setState(state => {
+  state; // number[]
+});
+```
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useLocalStorage/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseLocalStorageOptionalInitialValueProps<T> {
+  key: string;
+  initialValue?: T | (() => T) | null;
+}
+
+interface UseLocalStorageRequiredInitialValueProps<T> {
+  key: string;
+  initialValue: T | (() => T);
+}
+```
+```ts
+// 함수 오버로딩
+// initialValue 존재하면 state 타입에 null 제외
+function useLocalStorage<T>({
+  key,
+  initialValue,
+}: UseLocalStorageRequiredInitialValueProps<T>): {
+  readonly state: T;
+  readonly setState: (value: T | ((state: T) => T)) => void;
+  readonly removeState: () => void;
+};
+
+// initialValue 존재하지 않으면 state 타입에 null 포함
+function useLocalStorage<T>({
+  key,
+  initialValue,
+}: UseLocalStorageOptionalInitialValueProps<T>): {
+  readonly state: T | null;
+  readonly setState: (value: T | ((state: T | null) => T)) => void;
+  readonly removeState: () => void;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useLocalStorage } from '@modern-kit/react';
+
+const Example = () => {
+  const { state, setState, removeState } = useLocalStorage<string>({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div>
+      <p>개발자 도구에서 로컬 스토리지를 확인해보세요!</p>
+      <p>state: {state}</p>
+      <button onClick={() => setState('foo')}>
+        {`로컬스토리지 "test"key에 "foo"데이터 저장`}
+      </button>
+      <button onClick={() => setState('bar')}>
+        {`로컬스토리지 "test"key에 "bar"데이터 저장`}
+      </button>
+      <button onClick={() => removeState()}>
+        {`로컬스토리지 "test"key 제거`}
+      </button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { state, setState, removeState } = useLocalStorage({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div>
+      <p>개발자 도구에서 로컬 스토리지를 확인해보세요!</p>
+      <p>state: {state}</p>
+      <button onClick={() => setState('foo')}>
+        {`로컬스토리지 "test"key에 "foo"데이터 저장`}
+      </button>
+      <button onClick={() => setState('bar')}>
+        {`로컬스토리지 "test"key에 "bar"데이터 저장`}
+      </button>
+      <button onClick={() => removeState()}>
+        {`로컬스토리지 "test"key 제거`}
+      </button>
+    </div>
+  );
+};
+
+
+<Example />
