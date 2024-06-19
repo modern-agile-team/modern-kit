@@ -54,7 +54,7 @@ describe('useLocalStorage', () => {
     );
 
     await waitFor(() => {
-      result.current.setState((state) => [...(state || []), 4]);
+      result.current.setState((state) => [...state, 4]);
     });
 
     expect(result.current.state).toEqual([1, 2, 3, 4]);
@@ -64,7 +64,9 @@ describe('useLocalStorage', () => {
   it('should remove the value from localStorage', async () => {
     localStorage.setItem('test', JSON.stringify('storedValue'));
 
-    const { result } = renderHook(() => useLocalStorage({ key: 'test' }));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>({ key: 'test' })
+    );
 
     await waitFor(() => {
       result.current.removeState();
@@ -83,6 +85,18 @@ describe('useLocalStorage', () => {
     const html = renderToString(<TestComponent />); // server side rendering
 
     expect(html).toContain('ssr');
+  });
+
+  it('should infer the type based on the presence of initialValue', () => {
+    const { result: result1 } = renderHook(() =>
+      useLocalStorage<string>({ key: 'test' })
+    );
+    expectTypeOf(result1.current.state).toEqualTypeOf<string | null>();
+
+    const { result: result2 } = renderHook(() =>
+      useLocalStorage<string>({ key: 'test', initialValue: 'default' })
+    );
+    expectTypeOf(result2.current.state).toEqualTypeOf<string>();
   });
 
   it('should throw an error when localStorage contains invalid JSON', async () => {

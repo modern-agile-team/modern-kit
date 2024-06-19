@@ -1,10 +1,19 @@
 import { isFunction } from '@modern-kit/utils';
 import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
 
-interface UseLocalStorageProps<T> {
+interface UseLocalStorageOptionalInitialValueProps<T> {
   key: string;
   initialValue?: T | (() => T) | null;
 }
+
+interface UseLocalStorageRequiredInitialValueProps<T> {
+  key: string;
+  initialValue: T | (() => T);
+}
+
+type UseLocalStorageProps<T> =
+  | UseLocalStorageOptionalInitialValueProps<T>
+  | UseLocalStorageRequiredInitialValueProps<T>;
 
 const LOCAL_STORAGE_EVENT_KEY = 'local-storage';
 
@@ -36,10 +45,32 @@ const getSnapshot = (key: string) => {
 const getServerSnapshot = <T>(initialValue: T | null) => {
   return JSON.stringify(initialValue);
 };
-export const useLocalStorage = <T>({
+
+// 함수 오버로딩
+// initialValue 존재하면 null 타입 제외
+export function useLocalStorage<T>({
+  key,
+  initialValue,
+}: UseLocalStorageRequiredInitialValueProps<T>): {
+  readonly state: T;
+  readonly setState: (value: T | ((state: T) => T)) => void;
+  readonly removeState: () => void;
+};
+
+// initialValue 존재하지 않으면 null 타입 포함
+export function useLocalStorage<T>({
+  key,
+  initialValue,
+}: UseLocalStorageOptionalInitialValueProps<T>): {
+  readonly state: T | null;
+  readonly setState: (value: T | ((state: T | null) => T)) => void;
+  readonly removeState: () => void;
+};
+
+export function useLocalStorage<T>({
   key,
   initialValue = null,
-}: UseLocalStorageProps<T>) => {
+}: UseLocalStorageProps<T>) {
   useState;
   const initialValueToUse = useMemo(() => {
     return isFunction(initialValue) ? initialValue() : initialValue;
@@ -91,4 +122,4 @@ export const useLocalStorage = <T>({
   }, [key]);
 
   return { state, setState, removeState } as const;
-};
+}
