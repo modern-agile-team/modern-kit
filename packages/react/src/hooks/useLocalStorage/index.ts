@@ -1,5 +1,6 @@
 import { isFunction } from '@modern-kit/utils';
 import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
+import { getCustomEventHandler } from '../../utils/customEventHandler';
 
 interface UseLocalStorageOptionalInitialValueProps<T> {
   key: string;
@@ -15,20 +16,7 @@ type UseLocalStorageProps<T> =
   | UseLocalStorageOptionalInitialValueProps<T>
   | UseLocalStorageRequiredInitialValueProps<T>;
 
-const LOCAL_STORAGE_EVENT_KEY = 'local-storage';
-
-const localStorageEventHandler = {
-  key: LOCAL_STORAGE_EVENT_KEY,
-  subscribe: (callback: () => void) => {
-    window.addEventListener(LOCAL_STORAGE_EVENT_KEY, callback);
-  },
-  unsubscribe: (callback: () => void) => {
-    window.removeEventListener(LOCAL_STORAGE_EVENT_KEY, callback);
-  },
-  dispatchEvent: () => {
-    window.dispatchEvent(new StorageEvent(LOCAL_STORAGE_EVENT_KEY));
-  },
-};
+const localStorageEventHandler = getCustomEventHandler('localStorage');
 
 const subscribe = (callback: () => void) => {
   localStorageEventHandler.subscribe(callback);
