@@ -1,20 +1,19 @@
-import { isFunction } from '@modern-kit/utils';
-import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
+import { isFunction, parseJSON } from '@modern-kit/utils';
+import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { getCustomEventHandler } from '../../utils/customEventHandler';
 
-interface UseLocalStorageOptionalInitialValueProps<T> {
+interface UseLocalStorageWithoutInitialValueProps {
   key: string;
-  initialValue?: T | (() => T) | null;
 }
 
-interface UseLocalStorageRequiredInitialValueProps<T> {
+interface UseLocalStorageWithInitialValueProps<T> {
   key: string;
   initialValue: T | (() => T);
 }
 
 type UseLocalStorageProps<T> =
-  | UseLocalStorageOptionalInitialValueProps<T>
-  | UseLocalStorageRequiredInitialValueProps<T>;
+  | UseLocalStorageWithoutInitialValueProps
+  | UseLocalStorageWithInitialValueProps<T>;
 
 const localStorageEventHandler = getCustomEventHandler('localStorage');
 
@@ -35,31 +34,27 @@ const getServerSnapshot = <T>(initialValue: T | null) => {
 };
 
 // 함수 오버로딩
-// initialValue 존재하면 null 타입 제외
 export function useLocalStorage<T>({
   key,
   initialValue,
-}: UseLocalStorageRequiredInitialValueProps<T>): {
+}: UseLocalStorageWithInitialValueProps<T>): {
   readonly state: T;
   readonly setState: (value: T | ((state: T) => T)) => void;
   readonly removeState: () => void;
 };
 
-// initialValue 존재하지 않으면 null 타입 포함
-export function useLocalStorage<T>({
+export function useLocalStorage<T = unknown>({
   key,
-  initialValue,
-}: UseLocalStorageOptionalInitialValueProps<T>): {
+}: UseLocalStorageWithoutInitialValueProps): {
   readonly state: T | null;
   readonly setState: (value: T | ((state: T | null) => T)) => void;
   readonly removeState: () => void;
 };
 
-export function useLocalStorage<T>({
-  key,
-  initialValue = null,
-}: UseLocalStorageProps<T>) {
-  useState;
+export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
+  const { key } = props;
+  const initialValue = 'initialValue' in props ? props.initialValue : null;
+
   const initialValueToUse = useMemo(() => {
     return isFunction(initialValue) ? initialValue() : initialValue;
   }, [initialValue]);
@@ -70,22 +65,20 @@ export function useLocalStorage<T>({
     () => getServerSnapshot(initialValueToUse)
   );
 
-  const state = useMemo((): T | null => {
-    try {
-      return externalStoreState
-        ? JSON.parse(externalStoreState)
-        : initialValueToUse;
-    } catch (err: any) {
-      throw new Error(
-        `Failed to parse localStorage data for key "${key}": ${err}`
-      );
-    }
-  }, [key, externalStoreState, initialValueToUse]);
+  const state = useMemo(() => {
+    return externalStoreState
+      ? parseJSON<T>(externalStoreState)
+      : initialValueToUse;
+  }, [externalStoreState, initialValueToUse]);
 
   const setState = useCallback(
     (value: T | ((state: T | null) => T)) => {
       try {
-        const valueToUse = isFunction(value) ? value(state) : value;
+        const prevStateString = getSnapshot(key);
+        const prevState = prevStateString
+          ? parseJSON<T>(prevStateString)
+          : initialValueToUse;
+        const valueToUse = isFunction(value) ? value(prevState) : value;
 
         window.localStorage.setItem(key, JSON.stringify(valueToUse));
         localStorageEventHandler.dispatchEvent();
@@ -95,7 +88,7 @@ export function useLocalStorage<T>({
         );
       }
     },
-    [key, state]
+    [key, initialValueToUse]
   );
 
   const removeState = useCallback(() => {

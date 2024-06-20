@@ -52,33 +52,33 @@ setState(state => {
 
 ## Interface
 ```ts title="typescript"
-interface UseLocalStorageOptionalInitialValueProps<T> {
+interface UseLocalStorageWithoutInitialValueProps {
   key: string;
-  initialValue?: T | (() => T) | null;
 }
 
-interface UseLocalStorageRequiredInitialValueProps<T> {
+interface UseLocalStorageWithInitialValueProps<T> {
   key: string;
   initialValue: T | (() => T);
 }
+
+type UseLocalStorageProps<T> =
+  | UseLocalStorageWithoutInitialValueProps
+  | UseLocalStorageWithInitialValueProps<T>;
 ```
 ```ts
 // 함수 오버로딩
-// initialValue 존재하면 state 타입에 null 제외
-function useLocalStorage<T>({
+export function useLocalStorage<T>({
   key,
   initialValue,
-}: UseLocalStorageRequiredInitialValueProps<T>): {
+}: UseLocalStorageWithInitialValueProps<T>): {
   readonly state: T;
   readonly setState: (value: T | ((state: T) => T)) => void;
   readonly removeState: () => void;
 };
 
-// initialValue 존재하지 않으면 state 타입에 null 포함
-function useLocalStorage<T>({
+export function useLocalStorage<T = unknown>({
   key,
-  initialValue,
-}: UseLocalStorageOptionalInitialValueProps<T>): {
+}: UseLocalStorageWithoutInitialValueProps): {
   readonly state: T | null;
   readonly setState: (value: T | ((state: T | null) => T)) => void;
   readonly removeState: () => void;
