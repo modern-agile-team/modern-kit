@@ -18,13 +18,13 @@ afterEach(() => {
 const TestComponent = () => {
   return (
     <div>
-      <LazyImage src="img1" alt="img1" />
-      <LazyImage src="img2" alt="img2" />
+      <LazyImage className="img1" src="img1" alt="img1" />
+      <LazyImage className="img2" src="img2" alt="img2" />
     </div>
   );
 };
 
-describe('LazyImage Component', () => {
+describe('LazyImage', () => {
   it('should not load the image before it is exposed to the viewport', () => {
     renderSetup(<TestComponent />);
 
@@ -33,6 +33,8 @@ describe('LazyImage Component', () => {
 
     expect(img1).not.toHaveAttribute('src', 'img1');
     expect(img2).not.toHaveAttribute('src', 'img2');
+    expect(img1).toHaveAttribute('class', 'lazy-image img1');
+    expect(img2).toHaveAttribute('class', 'lazy-image img2');
   });
 
   it('should load the image when it is exposed to the viewport', async () => {

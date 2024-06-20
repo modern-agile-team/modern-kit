@@ -2,17 +2,14 @@ import React, { forwardRef } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
-interface LazyImageProps
+export interface LazyImageProps
   extends React.ComponentProps<'img'>,
     IntersectionObserverInit {
   src: string;
 }
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
-  (
-    { src, style, threshold, root, rootMargin, ...restProps }: LazyImageProps,
-    ref
-  ) => {
+  ({ src, threshold, root, rootMargin, alt, className, ...restProps }, ref) => {
     const { ref: imgRef } = useIntersectionObserver<HTMLImageElement>({
       onIntersectStart: (entry) => {
         const targetImgElement = entry.target as HTMLImageElement;
@@ -24,7 +21,18 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       rootMargin,
     });
 
-    return <img ref={useMergeRefs(ref, imgRef)} style={style} {...restProps} />;
+    const customClassName = className
+      ? `lazy-image ${className}`
+      : 'lazy-image';
+
+    return (
+      <img
+        className={customClassName}
+        ref={useMergeRefs(ref, imgRef)}
+        alt={alt}
+        {...restProps}
+      />
+    );
   }
 );
 

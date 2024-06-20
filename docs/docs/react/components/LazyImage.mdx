@@ -6,6 +6,8 @@ import { LazyImage } from '@modern-kit/react';
 
 Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
+만약, 이미지 `load` 중에 `특정 Fallback 컴포넌트`를 노출하고 싶다면, 이를 선언적으로 활용하기 위해 `LazyImage를 확장`해서 만든 **[FallbackLazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/FallbackLazyImage)** 가 있습니다.
+
 <br />
 
 ## Code
@@ -18,7 +20,8 @@ interface IntersectionObserverInit {
   rootMargin?: string;
   threshold?: number | number[];
 }
-
+```
+```tsx title="typescript"
 interface LazyImageProps
   extends React.ComponentProps<'img'>,
     IntersectionObserverInit {
@@ -31,7 +34,6 @@ const LazyImage: React.ForwardRefExoticComponent<
 ```
 
 ## Usage
-### Default
 ```tsx title="typescript"
 import { LazyImage } from '@modern-kit/react';
 import img1 from '../assets/img1.png';
@@ -52,50 +54,6 @@ const Example = () => {
 
 <br />
 
-### Fallback
-```tsx title="typescript"
-import { LazyImage } from '@modern-kit/react';
-import img1 from '../assets/img1.png';
-
-const Example = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const wrapperStyle: CSSProperties = {
-    position: 'relative',
-    width: '400px',
-    height: '400px',
-  };
-
-  const imgStyle: CSSProperties = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    opacity: isLoaded ? 1 : 0,
-    transition: 'opacity 0.2s',
-  };
-
-  const skeletonStyle: CSSProperties = {
-    width: '400px',
-    height: '400px',
-    backgroundColor: '#cdcbcb',
-  };
-
-  return (
-    <div style={wrapperStyle}>
-      {!isLoaded && <div style={skeletonStyle} />}
-      <LazyImage
-        style={imgStyle}
-        width={400}
-        height={400}
-        src={img1}
-        alt="img1"
-        onLoad={() => setIsLoaded(true)}
-      />
-    </div>
-  );
-};
-```
-
 ## Example
 
 export const Example = () => {
@@ -114,8 +72,8 @@ export const Example = () => {
           'https://github.com/Team-Grace/devgrace/assets/64779472/b5640bec-2abc-4205-afbf-ccfd9876a90b'
         }
         alt="img1"
-        height={400}
-        onClick={() => console.log('img click1')}
+        width={500}
+        height={500}
       />
 
       <div style={{ width: '100%', height: '150px' }} />
@@ -125,8 +83,8 @@ export const Example = () => {
           'https://github.com/Team-Grace/devgrace/assets/64779472/207743a7-b29f-4826-bc08-8df0d67e568b'
         }
         alt="img2"
-        height={400}
-        onClick={() => console.log('img click2')}
+        width={500}
+        height={500}
       />
 
       <div style={{ width: '100%', height: '150px' }} />
@@ -136,8 +94,8 @@ export const Example = () => {
           'https://github.com/Team-Grace/devgrace/assets/64779472/d1957ec8-fe87-406e-bfda-fb4ee505b152'
         }
         alt="img3"
-        height={400}
-        onClick={() => console.log('img click3')}
+        width={500}
+        height={500}
       />
     </div>
   );
