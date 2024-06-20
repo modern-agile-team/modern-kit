@@ -1,16 +1,12 @@
-export const parseJSON = <T>(value: any): T | null => {
+export function parseJSON<T = unknown>(value: string): T;
+export function parseJSON<T>(value: T): T;
+export function parseJSON<T>(value: string): T {
   if (typeof value !== 'string') {
     return value as T;
   }
-
-  if (value === '') {
-    return '' as T;
-  }
-
   try {
     return JSON.parse(value) as T;
-  } catch {
-    console.error(`데이터를 파싱하는 데에 실패했습니다. 원본: ${value}`);
-    return null;
+  } catch (err) {
+    throw new Error(`Failed to parse data: ${err}`);
   }
-};
+}
