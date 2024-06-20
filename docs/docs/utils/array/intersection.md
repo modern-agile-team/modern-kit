@@ -6,6 +6,8 @@
 
 `comparator`의 기본값은 `Object.is` 입니다.
 
+위 함수는 첫번째 배열을 기준으로 중복된 값을 제거합니다.
+
 <br />
 
 ## Code
@@ -13,10 +15,10 @@
 
 ## Interface
 ```ts title="typescript"
-const intersection: <T>(
-  arr1: T[] | readonly T[],
-  arr2: T[] | readonly T[],
-  comparator: (x: T, y: T) => boolean = Object.is
+const intersection: <T, U = T>(
+  firstArr: T[] | readonly T[],
+  secondArr: T[] | readonly T[],
+  iteratee?: ((item: T) => U) | undefined
 ) => T[];
 ```
 
@@ -28,7 +30,7 @@ import { intersection } from '@modern-kit/utils';
 intersection([1, 2, 3, 5, 7], [1, 2, 4, 5, 8]); // [1, 2, 5] 
 ```
 
-### Comparator
+### Iteratee
 ```ts title="typescript"
 import { intersection } from '@modern-kit/utils';
 
@@ -42,7 +44,7 @@ const testArr2 = [
   { id: 3, name: 'dylan' },
 ];
 
-intersection(testArr1, testArr2, (x, y) => JSON.stringify(x) === JSON.stringify(y));
+intersection(testArr1, testArr2, (item) => item.id);
 /*
   [{ id: 1, name: 'John' }];
 */

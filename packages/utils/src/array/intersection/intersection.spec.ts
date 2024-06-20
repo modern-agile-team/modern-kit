@@ -25,12 +25,8 @@ describe('intersection', () => {
       { id: 3, name: 'dylan' },
     ];
 
-    expect(
-      intersection(
-        arr1,
-        arr2,
-        (x, y) => JSON.stringify(x) === JSON.stringify(y),
-      ),
-    ).toEqual([{ id: 1, name: 'john' }]);
+    expect(intersection(arr1, arr2, (item) => item.id)).toEqual([
+      { id: 1, name: 'john' },
+    ]);
   });
 });
