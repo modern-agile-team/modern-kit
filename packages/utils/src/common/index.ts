@@ -9,5 +9,5 @@ export * from './getViewportSize';
 export * from './hexToRgba';
 export * from './identity';
 export * from './noop';
-export * from './parseJson';
+export * from './parseJSON';
 export * from './wrapInArray';

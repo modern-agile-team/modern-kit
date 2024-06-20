@@ -10,16 +10,14 @@ type Test3 = ['foo', { bar: 'baz' }];
 
 describe('parseJSON', () => {
   it('should return original value for falsy value', () => {
-    const falseValue = parseJSON<false>(false);
-    const zeroNumberValue = parseJSON<0>(0);
-    const emptyStringValue = parseJSON<''>('');
-    const nullValue = parseJSON<null>(null);
-    const undefinedValue = parseJSON<undefined>(undefined);
-    const NaNValue = parseJSON<typeof NaN>(NaN);
+    const falseValue = parseJSON(false);
+    const zeroNumberValue = parseJSON(0);
+    const nullValue = parseJSON(null);
+    const undefinedValue = parseJSON(undefined);
+    const NaNValue = parseJSON(NaN);
 
     expect(falseValue).toBe(false);
     expect(zeroNumberValue).toBe(0);
-    expect(emptyStringValue).toBe('');
     expect(nullValue).toBeNull();
     expect(undefinedValue).toBeUndefined();
     expect(NaNValue).toBeNaN();
@@ -54,9 +52,7 @@ describe('parseJSON', () => {
   });
 
   it('should return null for incorrect JSON format', () => {
-    const incorrectJson = `{a: 1, b: 2}`;
-    const result = parseJSON<null>(incorrectJson);
-
-    expect(result).toBeNull();
+    expect(() => parseJSON('')).toThrowError();
+    expect(() => parseJSON(`{a: 1, b: 2}`)).toThrowError();
   });
 });
