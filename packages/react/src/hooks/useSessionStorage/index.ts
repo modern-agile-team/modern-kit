@@ -33,7 +33,6 @@ const getServerSnapshot = <T>(initialValue: T | null) => {
   return JSON.stringify(initialValue);
 };
 
-// 함수 오버로딩
 export function useSessionStorage<T>({
   key,
   initialValue,
