@@ -1,5 +1,19 @@
 # @modern-kit/react
 
+## 1.9.0
+
+### Minor Changes
+
+- [#239](https://github.com/modern-agile-team/modern-kit/pull/239) [`16e27d1`](https://github.com/modern-agile-team/modern-kit/commit/16e27d1de225e42ec2a4882cfe7a13c881a53128) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useLocalStorage 신규 훅 추가 - @ssi02014
+
+- [#236](https://github.com/modern-agile-team/modern-kit/pull/236) [`7d875e1`](https://github.com/modern-agile-team/modern-kit/commit/7d875e178d0aae7db2a34feb1d18fa3aeb5b7ff9) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): FallbackLazyImage 신규 컴포넌트 추가 - @ssi02014
+
+- [#246](https://github.com/modern-agile-team/modern-kit/pull/246) [`3992c9b`](https://github.com/modern-agile-team/modern-kit/commit/3992c9b5d628ab93a2e097f941a2ab733861411a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useSessionStorage 신규 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [#232](https://github.com/modern-agile-team/modern-kit/pull/232) [`c00d281`](https://github.com/modern-agile-team/modern-kit/commit/c00d2811f8d1058e27ad1d660b4c13f7953d6c26) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): LazyImage 내부 스타일 제거 - @ssi02014
+
 ## 1.8.0
 
 ### Minor Changes

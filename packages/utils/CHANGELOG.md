@@ -1,5 +1,23 @@
 # @modern-kit/utils
 
+## 1.8.0
+
+### Minor Changes
+
+- [#230](https://github.com/modern-agile-team/modern-kit/pull/230) [`21c6398`](https://github.com/modern-agile-team/modern-kit/commit/21c639880f267394f3a17339f0c484fe21055508) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): isFloat 함수 추가 완료 - @Sangminnn
+
+- [#243](https://github.com/modern-agile-team/modern-kit/pull/243) [`2a7853b`](https://github.com/modern-agile-team/modern-kit/commit/2a7853b) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): intersection 함수 작업 - @Sangminnn
+
+- [#241](https://github.com/modern-agile-team/modern-kit/pull/241) [`ffd22b1`](https://github.com/modern-agile-team/modern-kit/commit/ffd22b1992d7ce8ba588748923b2e6f3018f8ba1) Thanks [@beberiche](https://github.com/beberiche)! - feat(utils): extractletters 신규 유틸 함수 추가 - @beberiche
+
+- [#244](https://github.com/modern-agile-team/modern-kit/pull/244) [`be8965a`](https://github.com/modern-agile-team/modern-kit/commit/be8965a77a542766ba650cc87136129de6a3697b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): parseJSON 개선 - @ssi02014
+
+- [#242](https://github.com/modern-agile-team/modern-kit/pull/242) [`b9277f0`](https://github.com/modern-agile-team/modern-kit/commit/b9277f0b99f9a04bc7bcd7ee243ad459c36a5eb6) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): isInRange 함수 작업 완료 - @Sangminnn
+
+### Patch Changes
+
+- [`03a6ada`](https://github.com/modern-agile-team/modern-kit/commit/03a6adae84f32851be2082b91f6a3a1d6e8c7619) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): isFunction 개선 - @ssi02014
+
 ## 1.7.0
 
 ### Minor Changes
