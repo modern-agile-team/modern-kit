@@ -3,7 +3,7 @@ export * from './contains';
 export * from './countOccurrencesInArray';
 export * from './excludeElements';
 export * from './intersection';
-export * from './intersectionWithDuplicate';
+export * from './intersectionWithDuplicates';
 export * from './partition';
 export * from './union';
 export * from './uniq';

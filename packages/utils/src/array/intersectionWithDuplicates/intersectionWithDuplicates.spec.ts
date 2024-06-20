@@ -1,6 +1,6 @@
 import { intersectionWithDuplicates } from '.';
 
-describe('intersection', () => {
+describe('intersectionWithDuplicates', () => {
   it('should find the intersection of two arrays without duplicates', () => {
     const arr1 = [1, 2, 3, 4];
     const arr2 = [1, 2, 4, 5];
