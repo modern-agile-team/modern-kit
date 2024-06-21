@@ -19,17 +19,20 @@ interface TestComponentProps {
   onIntersectStart: () => void;
   onIntersectEnd: () => void;
   calledOnce?: boolean;
+  enabled?: boolean;
 }
 
 const TestComponent = ({
   onIntersectStart,
   onIntersectEnd,
   calledOnce,
+  enabled,
 }: TestComponentProps) => {
   const { ref: boxRef } = useIntersectionObserver<HTMLDivElement>({
     onIntersectStart,
     onIntersectEnd,
     calledOnce,
+    enabled,
   });
 
   return <div ref={boxRef}>box</div>;
@@ -81,6 +84,41 @@ describe('useIntersectionObserver', () => {
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
 
     expect(intersectStartMock).toBeCalledTimes(1);
+    expect(intersectEndMock).toBeCalledTimes(1);
+  });
+
+  it('should not call the action callback functions when the enabled option is false', async () => {
+    const { rerender } = renderSetup(
+      <TestComponent
+        onIntersectStart={intersectStartMock}
+        onIntersectEnd={intersectEndMock}
+        enabled={false}
+      />
+    );
+
+    const box = screen.getByText('box');
+
+    expect(intersectStartMock).toBeCalledTimes(0);
+    expect(intersectEndMock).toBeCalledTimes(0);
+
+    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
+    expect(intersectStartMock).toBeCalledTimes(0);
+
+    await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
+    expect(intersectEndMock).toBeCalledTimes(0);
+
+    rerender(
+      <TestComponent
+        onIntersectStart={intersectStartMock}
+        onIntersectEnd={intersectEndMock}
+        enabled={true}
+      />
+    );
+
+    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
+    expect(intersectStartMock).toBeCalledTimes(1);
+
+    await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 });

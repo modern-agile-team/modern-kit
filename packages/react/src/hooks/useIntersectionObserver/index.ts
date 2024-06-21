@@ -7,11 +7,13 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   onIntersectStart?: (entry: IntersectionObserverEntry) => void;
   onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
   calledOnce?: boolean;
+  enabled?: boolean;
 }
 
 export const useIntersectionObserver = <T extends HTMLElement>({
   onIntersectStart = noop,
   onIntersectEnd = noop,
+  enabled = true,
   calledOnce = false,
   root = null,
   threshold = 0,
@@ -23,7 +25,7 @@ export const useIntersectionObserver = <T extends HTMLElement>({
 
   const intersectionObserverCallback = usePreservedCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      if (!entry) return;
+      if (!enabled || !entry) return;
 
       const targetElement = entry.target as T;
 
