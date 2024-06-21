@@ -1,6 +1,7 @@
 export * from './chunk';
 export * from './contains';
 export * from './countOccurrencesInArray';
+export * from './difference';
 export * from './excludeElements';
 export * from './intersection';
 export * from './intersectionWithDuplicates';
