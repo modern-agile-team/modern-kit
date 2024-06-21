@@ -10,17 +10,6 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   enabled?: boolean;
 }
 
-const useIntersectionObserver: <T extends HTMLElement>({
-  onIntersectStart,
-  onIntersectEnd,
-  enabled,
-  calledOnce,
-  root,
-  threshold,
-  rootMargin,
-}: UseIntersectionObserverProps) => {
-  ref: (node: T) => void;
-};
 export const useIntersectionObserver = <T extends HTMLElement>({
   onIntersectStart = noop,
   onIntersectEnd = noop,
