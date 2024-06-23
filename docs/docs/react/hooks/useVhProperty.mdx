@@ -33,14 +33,12 @@ const Example = () => {
   useVhProperty(); 
   // Resize: useVhProperty({ enableResize: true });
 
-
-  const style = useMemo(() => {
+  const style: CSSProperties = useMemo(() => {
     return {
       height: 'calc(var(--vh, 1vh) * 100)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      flexDirection: 'column',
       background: 'purple',
       fontSize: '2rem',
       color: '#fff',
@@ -50,7 +48,6 @@ const Example = () => {
   return (
     <div style={style}>
       <p>100vh를 실제 화면의 높이로 계산할 수 있도록 설정해줍니다.</p>
-      <p>--vh: {`${document.documentElement.style.getPropertyValue('--vh')}`}</p>
     </div>
   );
 };
@@ -66,7 +63,6 @@ export const Example = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      flexDirection: 'column',
       background: 'purple',
       fontSize: '2rem',
       color: '#fff',
@@ -76,7 +72,6 @@ export const Example = () => {
   return (
     <div style={style}>
       <p>100vh를 실제 화면의 높이로 계산할 수 있도록 설정해줍니다.</p>
-      <p>--vh: {`${document.documentElement.style.getPropertyValue('--vh')}`}</p>
     </div>
   );
 };
