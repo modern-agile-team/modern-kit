@@ -25,6 +25,7 @@ export * from './usePrevious';
 export * from './useResizeObserver';
 export * from './useScrollLock';
 export * from './useSessionStorage';
+export * from './useStep';
 export * from './useTimeout';
 export * from './useToggle';
 export * from './useUnMount';
