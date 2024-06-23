@@ -3,7 +3,6 @@ export * from './clipboard';
 export * from './common';
 export * from './device';
 export * from './formatter';
-export * from './number';
 export * from './file';
 export * from './object';
 export * from './regex';
