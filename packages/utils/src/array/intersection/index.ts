@@ -5,19 +5,19 @@ export const intersection = <T, U = T>(
   secondArr: T[] | readonly T[],
   iteratee: (item: T) => T | U = identity,
 ) => {
-  const secondArrSetAppliedIteratee = new Set(secondArr.map(iteratee));
+  const appliedIterateeSecondSet = new Set(secondArr.map(iteratee));
 
   const intersection = [];
   const checkedSet = new Set();
 
   for (const item of firstArr) {
-    const appliedIterateeItem = iteratee(item);
+    const appliedIterateeFirstArrItem = iteratee(item);
 
-    if (checkedSet.has(appliedIterateeItem)) continue;
+    if (checkedSet.has(appliedIterateeFirstArrItem)) continue;
 
-    if (secondArrSetAppliedIteratee.has(appliedIterateeItem)) {
+    if (appliedIterateeSecondSet.has(appliedIterateeFirstArrItem)) {
       intersection.push(item);
-      checkedSet.add(appliedIterateeItem);
+      checkedSet.add(appliedIterateeFirstArrItem);
     }
   }
 
