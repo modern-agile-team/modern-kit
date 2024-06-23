@@ -1,5 +1,6 @@
 export * from './hasProperty';
 export * from './isArray';
+export * from './isFloat';
 export * from './isFunction';
 export * from './isInRange';
 export * from './isMIMEType';
