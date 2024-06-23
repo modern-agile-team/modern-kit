@@ -1,4 +1,5 @@
 import { useStep } from '@modern-kit/react';
+import { useState } from 'react';
 
 # useStep
 
@@ -45,6 +46,7 @@ const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
 import { useStep } from '@modern-kit/react';
 
 export const Example = () => {
+  const [infinite, setInfinite] = useState(true);
   const {
     currentStep,
     hasNextStep,
@@ -53,7 +55,7 @@ export const Example = () => {
     nextStep,
     prevStep,
     resetStep,
-  } = useStep({ maxStep: 4 });
+  } = useStep({ maxStep: 4, infinite: infinite });
 
   const handleNextStep = () => {
     nextStep(({ prevStep, nextStep }) => {
@@ -92,11 +94,13 @@ export const Example = () => {
         <button onClick={handleNextStep}>다음 스탭</button>
         <button onClick={handleSetStep}>3스탭으로 이동</button>
         <button onClick={handleresetStep}>초기화 스탭</button>
+        <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
       <div>
         <p>currentStep: {currentStep}</p>
         <p>hasNextStep: {`${hasNextStep}`}</p>
         <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
       </div>
       <div>
         {currentStep === 1 && (
@@ -128,6 +132,7 @@ export const Example = () => {
 ## Example
 
 export const Example = () => {
+  const [infinite, setInfinite] = useState(false);
   const {
     currentStep,
     hasNextStep,
@@ -136,7 +141,7 @@ export const Example = () => {
     nextStep,
     prevStep,
     resetStep,
-  } = useStep({ maxStep: 4 });
+  } = useStep({ maxStep: 4, infinite: infinite });
 
   const handleNextStep = () => {
     nextStep(({ prevStep, nextStep }) => {
@@ -175,11 +180,13 @@ export const Example = () => {
         <button onClick={handleNextStep}>다음 스탭</button>
         <button onClick={handleSetStep}>3스탭으로 이동</button>
         <button onClick={handleresetStep}>초기화 스탭</button>
+        <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
       <div>
         <p>currentStep: {currentStep}</p>
         <p>hasNextStep: {`${hasNextStep}`}</p>
         <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
       </div>
       <div>
         {currentStep === 1 && (
