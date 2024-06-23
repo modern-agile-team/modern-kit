@@ -5,11 +5,11 @@ export const difference = <T, U = T>(
   secondArr: T[] | readonly T[],
   iteratee: (item: T) => T | U = identity,
 ) => {
-  const secondArrSetAppliedIteratee = new Set(secondArr.map(iteratee));
+  const appliedIterateeSecondSet = new Set(secondArr.map(iteratee));
 
   return firstArr.filter((firstArrItem) => {
-    const firstArrItemAppliedIteratee = iteratee(firstArrItem);
+    const appliedIterateeFirstArrItem = iteratee(firstArrItem);
 
-    return !secondArrSetAppliedIteratee.has(firstArrItemAppliedIteratee);
+    return !appliedIterateeSecondSet.has(appliedIterateeFirstArrItem);
   });
 };
