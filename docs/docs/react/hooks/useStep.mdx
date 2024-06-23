@@ -2,7 +2,7 @@ import { useStep } from '@modern-kit/react';
 
 # useStep
 
-mult-step process의 step을 관리하고 추적해주는 커스텀 훅입니다.
+`mult-step process`의 `step`을 관리하고 추적해주는 커스텀 훅입니다.
 
 <br />
 
@@ -14,6 +14,7 @@ mult-step process의 step을 관리하고 추적해주는 커스텀 훅입니다
 interface UseStepProps {
   maxStep: number;
   initialStep?: number; // default: 1
+  infinite?: boolean; // default: false
 }
 
 type StepAction = ({
@@ -25,15 +26,18 @@ type StepAction = ({
 }) => void;
 ```
 ```ts title="typescript"
-const useStep: ({ maxStep, initialStep }: UseStepProps) => {
+const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
   readonly currentStep: number; // 현재 Step
   readonly hasNextStep: boolean; // 다음 Step 이동 가능 여부
   readonly hasPrevStep: boolean; // 이전 Step 이동 가능 여부
-  readonly setStep: (step: number | ((step: number) => number), action?: StepAction) => void; // 특정 Step 이동 함수
+  readonly setStep: (
+    step: number | ((step: number) => number),
+    action?: StepAction
+  ) => void; // 특정 Step 이동 함수
   readonly nextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
   readonly prevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
   readonly resetStep: (action?: StepAction) => void; // initialValue 이동 함수
-}
+};
 ```
 
 ## Usage

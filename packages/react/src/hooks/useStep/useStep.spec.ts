@@ -17,7 +17,7 @@ describe('useStep', () => {
     expect(result.current.hasPrevStep).toBe(true);
   });
 
-  it('should go to the next step and update state correctly', async () => {
+  it('should go to the next step', async () => {
     const { result } = renderHook(() => useStep({ maxStep: 3 }));
 
     await waitFor(() => {
@@ -53,7 +53,7 @@ describe('useStep', () => {
     expect(nextStepActionMockFn).toBeCalled();
   });
 
-  it('should go to the previous step and update state correctly', async () => {
+  it('should go to the previous step', async () => {
     const { result } = renderHook(() =>
       useStep({ maxStep: 4, initialStep: 3 })
     );
@@ -93,6 +93,44 @@ describe('useStep', () => {
     expect(prevStepActionMockFn).toBeCalled();
   });
 
+  it('should handle infinite steps', async () => {
+    const { result } = renderHook(() =>
+      useStep({ maxStep: 3, infinite: true })
+    );
+
+    await waitFor(() => {
+      result.current.prevStep();
+    });
+
+    expect(result.current.currentStep).toBe(3);
+
+    await waitFor(() => {
+      result.current.nextStep();
+    });
+
+    expect(result.current.currentStep).toBe(1);
+  });
+
+  it('should handle infinite steps and call the provided action', async () => {
+    const { result } = renderHook(() =>
+      useStep({ maxStep: 3, infinite: true })
+    );
+
+    await waitFor(() => {
+      result.current.prevStep(prevStepActionMockFn);
+    });
+
+    expect(result.current.currentStep).toBe(3);
+    expect(prevStepActionMockFn).toBeCalledTimes(1);
+
+    await waitFor(() => {
+      result.current.nextStep(nextStepActionMockFn);
+    });
+
+    expect(result.current.currentStep).toBe(1);
+    expect(nextStepActionMockFn).toBeCalledTimes(1);
+  });
+
   it('should set the step correctly when a number is provided', async () => {
     const { result } = renderHook(() => useStep({ maxStep: 3 }));
 
@@ -126,7 +164,7 @@ describe('useStep', () => {
     expect(setStepActionMockFn).toBeCalledTimes(1);
   });
 
-  it('should reset to the initial step and update state correctly', async () => {
+  it('should reset to the initial step', async () => {
     const { result } = renderHook(() =>
       useStep({ maxStep: 3, initialStep: 2 })
     );
