@@ -1,13 +1,14 @@
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 
-interface Options {
+interface UseVhPropertyProps {
   name?: string;
   enableResize?: boolean;
 }
 
-export const useVhProperty = (options: Options = {}) => {
-  const { name = 'vh', enableResize = false } = options;
-
+export const useVhProperty = ({
+  name = 'vh',
+  enableResize = false,
+}: UseVhPropertyProps = {}) => {
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {
       const vh = window.innerHeight * 0.01;

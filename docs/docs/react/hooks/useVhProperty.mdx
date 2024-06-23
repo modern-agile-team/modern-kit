@@ -17,12 +17,12 @@ iOS 웹 환경에서는 주소표시줄의 높이로 인해 100vh가 실제 보�
 ## Interface
 ```ts title="typescript"
 
-interface Options {
+interface UseVhPropertyProps {
+  name?: string;
   enableResize?: boolean;
 }
 
-const useVhProperty: (name?: string, options?: Options) => void
-
+const useVhProperty: ({ name, enableResize }?: UseVhPropertyProps) => void;
 ```
 
 ## Usage
