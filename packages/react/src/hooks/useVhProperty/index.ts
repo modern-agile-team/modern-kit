@@ -1,14 +1,12 @@
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 
 interface Options {
+  name?: string;
   enableResize?: boolean;
 }
 
-export const useVhProperty = (
-  name: string = 'vh',
-  options: Options = { enableResize: false },
-) => {
-  const { enableResize } = options;
+export const useVhProperty = (options: Options = {}) => {
+  const { name = 'vh', enableResize = false } = options;
 
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {

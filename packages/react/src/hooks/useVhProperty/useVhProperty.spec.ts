@@ -10,18 +10,18 @@ describe('useVhProperty', () => {
 
   it('should set --custom property on documentElement', () => {
     window.innerHeight = 800;
-    renderHook(() => useVhProperty('custom'));
+    renderHook(() => useVhProperty({ name: 'custom' }));
     expect(document.documentElement.style.getPropertyValue('--custom')).toBe(
-      '8px',
+      '8px'
     );
   });
 
   it('should set --vh property on documentElement and update on resize', () => {
     window.innerHeight = 800;
     renderHook(() =>
-      useVhProperty('vh', {
+      useVhProperty({
         enableResize: true,
-      }),
+      })
     );
     expect(document.documentElement.style.getPropertyValue('--vh')).toBe('8px');
 
