@@ -2,12 +2,12 @@ import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 
 interface UseVhPropertyProps {
   name?: string;
-  enableResize?: boolean;
+  enabledResize?: boolean;
 }
 
 export const useVhProperty = ({
   name = 'vh',
-  enableResize = false,
+  enabledResize = false,
 }: UseVhPropertyProps = {}) => {
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {
@@ -17,14 +17,14 @@ export const useVhProperty = ({
 
     handleResize();
 
-    if (enableResize) {
+    if (enabledResize) {
       window.addEventListener('resize', handleResize);
     }
 
     return () => {
-      if (enableResize) {
+      if (enabledResize) {
         window.removeEventListener('resize', handleResize);
       }
     };
-  }, [name, enableResize]);
+  }, [name, enabledResize]);
 };

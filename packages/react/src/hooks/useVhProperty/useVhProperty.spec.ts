@@ -20,7 +20,7 @@ describe('useVhProperty', () => {
     window.innerHeight = 800;
     renderHook(() =>
       useVhProperty({
-        enableResize: true,
+        enabledResize: true,
       })
     );
     expect(document.documentElement.style.getPropertyValue('--vh')).toBe('8px');
