@@ -2,8 +2,8 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useStep } from '.';
 
 describe('useStep', () => {
-  const nextStepActionMockFn = vi.fn();
-  const prevStepActionMockFn = vi.fn();
+  const goToNextStepActionMockFn = vi.fn();
+  const goToPrevStepActionMockFn = vi.fn();
   const setStepActionMockFn = vi.fn();
   const resetStepActionMockFn = vi.fn();
 
@@ -17,98 +17,58 @@ describe('useStep', () => {
     expect(result.current.hasPrevStep).toBe(true);
   });
 
-  it('should go to the next step', async () => {
+  it('should go to the next step and call the provided action', async () => {
     const { result } = renderHook(() => useStep({ maxStep: 3 }));
 
     await waitFor(() => {
-      result.current.nextStep();
+      result.current.goToNextStep();
     });
 
     expect(result.current.currentStep).toBe(2);
     expect(result.current.hasNextStep).toBe(true);
 
     await waitFor(() => {
-      result.current.nextStep();
+      result.current.goToNextStep(goToNextStepActionMockFn);
     });
 
     expect(result.current.currentStep).toBe(3);
     expect(result.current.hasNextStep).toBe(false);
+    expect(goToNextStepActionMockFn).toBeCalledTimes(1);
 
     await waitFor(() => {
-      result.current.nextStep();
+      result.current.goToNextStep();
     });
 
     expect(result.current.currentStep).toBe(3);
     expect(result.current.hasNextStep).toBe(false);
   });
 
-  it('should go to the next step and call the provided action', async () => {
-    const { result } = renderHook(() => useStep({ maxStep: 3 }));
-
-    await waitFor(() => {
-      result.current.nextStep(nextStepActionMockFn);
-    });
-
-    expect(result.current.currentStep).toBe(2);
-    expect(nextStepActionMockFn).toBeCalled();
-  });
-
-  it('should go to the previous step', async () => {
+  it('should go to the previous step and call the provided action', async () => {
     const { result } = renderHook(() =>
       useStep({ maxStep: 4, initialStep: 3 })
     );
 
     await waitFor(() => {
-      result.current.prevStep();
+      result.current.goToPrevStep();
     });
 
     expect(result.current.currentStep).toBe(2);
     expect(result.current.hasPrevStep).toBe(true);
 
     await waitFor(() => {
-      result.current.prevStep();
+      result.current.goToPrevStep(goToPrevStepActionMockFn);
     });
 
     expect(result.current.currentStep).toBe(1);
     expect(result.current.hasPrevStep).toBe(false);
+    expect(goToPrevStepActionMockFn).toBeCalledTimes(1);
 
     await waitFor(() => {
-      result.current.prevStep();
+      result.current.goToPrevStep();
     });
 
     expect(result.current.currentStep).toBe(1);
     expect(result.current.hasPrevStep).toBe(false);
-  });
-
-  it('should go to the previous step and call the provided action', async () => {
-    const { result } = renderHook(() =>
-      useStep({ maxStep: 3, initialStep: 2 })
-    );
-
-    await waitFor(() => {
-      result.current.prevStep(prevStepActionMockFn);
-    });
-
-    expect(result.current.currentStep).toBe(1);
-    expect(prevStepActionMockFn).toBeCalled();
-  });
-
-  it('should handle infinite steps', async () => {
-    const { result } = renderHook(() =>
-      useStep({ maxStep: 3, infinite: true })
-    );
-
-    await waitFor(() => {
-      result.current.prevStep();
-    });
-
-    expect(result.current.currentStep).toBe(3);
-
-    await waitFor(() => {
-      result.current.nextStep();
-    });
-
-    expect(result.current.currentStep).toBe(1);
   });
 
   it('should handle infinite steps and call the provided action', async () => {
@@ -117,18 +77,17 @@ describe('useStep', () => {
     );
 
     await waitFor(() => {
-      result.current.prevStep(prevStepActionMockFn);
+      result.current.goToPrevStep();
     });
 
     expect(result.current.currentStep).toBe(3);
-    expect(prevStepActionMockFn).toBeCalledTimes(1);
 
     await waitFor(() => {
-      result.current.nextStep(nextStepActionMockFn);
+      result.current.goToNextStep(goToPrevStepActionMockFn);
     });
 
     expect(result.current.currentStep).toBe(1);
-    expect(nextStepActionMockFn).toBeCalledTimes(1);
+    expect(goToPrevStepActionMockFn).toBeCalledTimes(1);
   });
 
   it('should set the step correctly when a number is provided', async () => {

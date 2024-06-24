@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 # useStep
 
-`mult-step process`의 `step`을 관리하고 추적해주는 커스텀 훅입니다.
+`multi-step process`의 `step`을 관리하고 추적해주는 커스텀 훅입니다.
 
 <br />
 
@@ -35,8 +35,8 @@ const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
     step: number | ((step: number) => number),
     action?: StepAction
   ) => void; // 특정 Step 이동 함수
-  readonly nextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
-  readonly prevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
+  readonly goToNextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
+  readonly goToPrevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
   readonly resetStep: (action?: StepAction) => void; // initialValue 이동 함수
 };
 ```
@@ -57,14 +57,14 @@ export const Example = () => {
     resetStep,
   } = useStep({ maxStep: 4, infinite: infinite });
 
-  const handleNextStep = () => {
-    nextStep(({ prevStep, nextStep }) => {
+  const handleGoToNextStep = () => {
+    goToNextStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
 
-  const handlePrevStep = () => {
-    prevStep(({ prevStep, nextStep }) => {
+  const handleGoToPrevStep = () => {
+    goToPrevStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
@@ -75,7 +75,7 @@ export const Example = () => {
     });
   };
 
-  const handleresetStep = () => {
+  const handleResetStep = () => {
     resetStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
@@ -90,10 +90,10 @@ export const Example = () => {
   return (
     <div>
       <div>
-        <button onClick={handlePrevStep}>이전 스탭</button>
-        <button onClick={handleNextStep}>다음 스탭</button>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
         <button onClick={handleSetStep}>3스탭으로 이동</button>
-        <button onClick={handleresetStep}>초기화 스탭</button>
+        <button onClick={handleResetStep}>초기화 스탭</button>
         <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
       <div>
@@ -143,13 +143,13 @@ export const Example = () => {
     resetStep,
   } = useStep({ maxStep: 4, infinite: infinite });
 
-  const handleNextStep = () => {
+  const handleGoToNextStep = () => {
     nextStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
 
-  const handlePrevStep = () => {
+  const handleGoToPrevStep = () => {
     prevStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
@@ -161,7 +161,7 @@ export const Example = () => {
     });
   };
 
-  const handleresetStep = () => {
+  const handleResetStep = () => {
     resetStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
@@ -176,10 +176,10 @@ export const Example = () => {
   return (
     <div>
       <div>
-        <button onClick={handlePrevStep}>이전 스탭</button>
-        <button onClick={handleNextStep}>다음 스탭</button>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
         <button onClick={handleSetStep}>3스탭으로 이동</button>
-        <button onClick={handleresetStep}>초기화 스탭</button>
+        <button onClick={handleResetStep}>초기화 스탭</button>
         <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
       <div>

@@ -81,7 +81,7 @@ export const useStep = ({
     [currentStep, getNextStep]
   );
 
-  const nextStep = useCallback(
+  const goToNextStep = useCallback(
     (action?: StepAction) => {
       if (!hasNextStep) {
         handleStepOverflow('nextStep', action);
@@ -92,7 +92,7 @@ export const useStep = ({
     [hasNextStep, handleStepWithinBounds, handleStepOverflow]
   );
 
-  const prevStep = useCallback(
+  const goToPrevStep = useCallback(
     (action?: StepAction) => {
       if (!hasPrevStep) {
         handleStepOverflow('prevStep', action);
@@ -118,8 +118,8 @@ export const useStep = ({
     hasNextStep,
     hasPrevStep,
     setStep,
-    nextStep,
-    prevStep,
+    goToNextStep,
+    goToPrevStep,
     resetStep,
   } as const;
 };
