@@ -24,15 +24,15 @@ function min<T>(
 ```ts title="typescript"
 import { min } from '@modern-kit/utils';
 
-const arr1 = [5, 2, 9, 1, 5, 6];
-const result1 = min(arr1); // 1
+const arr = [5, 2, 9, 1, 5, 6];
+const result1 = min(arr); // 1
 ```
 
 ### Iteratee
 ```ts title="typescript"
 import { min } from '@modern-kit/utils';
 
-const arr2 = [
+const arr = [
   { value: 5 },
   { value: 2 },
   { value: 9 },

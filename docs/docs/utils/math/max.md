@@ -24,15 +24,15 @@ function max<T>(
 ```ts title="typescript"
 import { max } from '@modern-kit/utils';
 
-const arr1 = [5, 2, 9, 1, 5, 6];
-const result1 = max(arr1); // 9
+const arr = [5, 2, 9, 1, 5, 6];
+const result = max(arr); // 9
 ```
 
 ### Iteratee
 ```ts title="typescript"
 import { max } from '@modern-kit/utils';
 
-const arr2 = [
+const arr = [
   { value: 5 },
   { value: 2 },
   { value: 9 },
