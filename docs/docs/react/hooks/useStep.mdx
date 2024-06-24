@@ -1,0 +1,218 @@
+import { useStep } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useStep
+
+`multi-step process`의 `step`을 관리하고 추적해주는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useStep/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseStepProps {
+  maxStep: number;
+  initialStep?: number; // default: 1
+  infinite?: boolean; // default: false
+}
+
+type StepAction = ({
+  prevStep,
+  nextStep,
+}: {
+  prevStep: number;
+  nextStep: number;
+}) => void;
+```
+```ts title="typescript"
+const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
+  readonly currentStep: number; // 현재 Step
+  readonly hasNextStep: boolean; // 다음 Step 이동 가능 여부
+  readonly hasPrevStep: boolean; // 이전 Step 이동 가능 여부
+  readonly setStep: (
+    step: number | ((step: number) => number),
+    action?: StepAction
+  ) => void; // 특정 Step 이동 함수
+  readonly goToNextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
+  readonly goToPrevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
+  readonly resetStep: (action?: StepAction) => void; // initialValue 이동 함수
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useStep } from '@modern-kit/react';
+
+export const Example = () => {
+  const [infinite, setInfinite] = useState(true);
+  const {
+    currentStep,
+    hasNextStep,
+    hasPrevStep,
+    setStep,
+    nextStep,
+    prevStep,
+    resetStep,
+  } = useStep({ maxStep: 4, infinite: infinite });
+
+  const handleGoToNextStep = () => {
+    goToNextStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    goToPrevStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleSetStep = () => {
+    setStep(3, ({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleResetStep = () => {
+    resetStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
+        <button onClick={handleSetStep}>3스탭으로 이동</button>
+        <button onClick={handleResetStep}>초기화 스탭</button>
+        <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>hasNextStep: {`${hasNextStep}`}</p>
+        <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
+      </div>
+      <div>
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            1번 Step Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            2번 Step Box
+          </div>
+        )}
+        {currentStep === 3 && (
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
+            3번 Step Box
+          </div>
+        )}
+        {currentStep === 4 && (
+          <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
+            4번 Step Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [infinite, setInfinite] = useState(false);
+  const {
+    currentStep,
+    hasNextStep,
+    hasPrevStep,
+    setStep,
+    nextStep,
+    prevStep,
+    resetStep,
+  } = useStep({ maxStep: 4, infinite: infinite });
+
+  const handleGoToNextStep = () => {
+    nextStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    prevStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleSetStep = () => {
+    setStep(3, ({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleResetStep = () => {
+    resetStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
+        <button onClick={handleSetStep}>3스탭으로 이동</button>
+        <button onClick={handleResetStep}>초기화 스탭</button>
+        <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>hasNextStep: {`${hasNextStep}`}</p>
+        <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
+      </div>
+      <div>
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            1번 Step Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            2번 Step Box
+          </div>
+        )}
+        {currentStep === 3 && (
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
+            3번 Step Box
+          </div>
+        )}
+        {currentStep === 4 && (
+          <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
+            4번 Step Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+
+<Example />
