@@ -29,6 +29,7 @@ export * from './useStep';
 export * from './useTimeout';
 export * from './useToggle';
 export * from './useUnMount';
+export * from './useUserAgent';
 export * from './useVhProperty';
 export * from './useVisibilityChange';
 export * from './useWindowScrollTo';

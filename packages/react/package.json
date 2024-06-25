@@ -39,6 +39,7 @@
     "@types/lodash-es": "^4",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "@types/ua-parser-js": "^0.7.39",
     "@vitest/coverage-istanbul": "^1.5.2",
     "esbuild": "^0.21.1",
     "jsdom": "^24.0.0",
@@ -50,6 +51,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6",
+    "ua-parser-js": "^1.0.38",
     "vitest": "^1.5.0"
   },
   "peerDependencies": {
