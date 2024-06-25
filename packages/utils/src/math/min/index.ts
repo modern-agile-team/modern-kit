@@ -10,17 +10,17 @@ export function min<T>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => number = identity as (item: T) => number
 ) {
-  let minValue = Number.MAX_SAFE_INTEGER;
+  let minValue = iteratee(arr[0]);
   let minItem = arr[0];
 
-  arr.forEach((item) => {
-    const value = iteratee(item);
+  for (let i = 1; i < arr.length; i++) {
+    const value = iteratee(arr[i]);
 
     if (value < minValue) {
-      minItem = item;
+      minItem = arr[i];
       minValue = value;
     }
-  });
+  }
 
   return minItem;
 }
