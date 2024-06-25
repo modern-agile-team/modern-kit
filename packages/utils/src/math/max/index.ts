@@ -10,17 +10,17 @@ export function max<T>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => number = identity as (item: T) => number
 ) {
-  let maxValue = iteratee(arr[0]);
+  let maxValue = Number.MIN_SAFE_INTEGER;
   let maxItem = arr[0];
 
-  for (let i = 1; i < arr.length; i++) {
-    const value = iteratee(arr[i]);
+  arr.forEach((item) => {
+    const value = iteratee(item);
 
     if (value > maxValue) {
-      maxItem = arr[i];
+      maxItem = item;
       maxValue = value;
     }
-  }
+  });
 
   return maxItem;
 }

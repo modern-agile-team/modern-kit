@@ -29,9 +29,18 @@ describe('max', () => {
     expect(result).toBe('banana');
   });
 
-  it('should handle empty array', () => {
+  it('should handle empty array(default)', () => {
     const arr: number[] = [];
     const result = max(arr);
+
+    expect(result).toBeUndefined();
+  });
+
+  it('should handle empty array(iteratee)', () => {
+    const arr: {
+      value: number;
+    }[] = [];
+    const result = max(arr, (item) => item.value);
 
     expect(result).toBeUndefined();
   });

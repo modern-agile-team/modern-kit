@@ -35,4 +35,13 @@ describe('min', () => {
 
     expect(result).toBeUndefined();
   });
+
+  it('should handle empty array(iteratee)', () => {
+    const arr: {
+      value: number;
+    }[] = [];
+    const result = min(arr, (item) => item.value);
+
+    expect(result).toBeUndefined();
+  });
 });
