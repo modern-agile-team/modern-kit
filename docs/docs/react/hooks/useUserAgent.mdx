@@ -1,0 +1,100 @@
+import { useUserAgent } from '@modern-kit/react';
+
+# useUserAgent
+
+**[ua-parser-js](https://github.com/faisalman/ua-parser-js)** 를 활용해서 `window.navigator.userAgent` 문자열을 파싱한 데이터를 반환하는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useUserAgent/index.ts)
+
+## Interface
+```ts title="typescript"
+const useUserAgent: () => UAParser.IResult | null
+```
+
+## Usage
+```tsx title="typescript"
+import { useUserAgent } from '@modern-kit/react';
+
+const Example = () => {
+  const userAgent = useUserAgent();
+
+  return (
+    <div>
+      <div>
+        <h3>UserAgent String</h3>
+        <p>ua: {`${userAgent?.ua}`}</p>
+      </div>
+      <div>
+        <h3>Browser</h3>
+        <p>name: {`${userAgent?.browser.name}`}</p>
+        <p>version: {`${userAgent?.browser.version}`}</p>
+        <p>major: {`${userAgent?.browser.major}`}</p>
+      </div>
+      <div>
+        <h3>Engine</h3>
+        <p>name: {`${userAgent?.engine.name}`}</p>
+        <p>version: {`${userAgent?.engine.version}`}</p>
+      </div>
+      <div>
+        <h3>OS</h3>
+        <p>name: {`${userAgent?.os.name}`}</p>
+        <p>version: {`${userAgent?.os.version}`}</p>
+      </div>
+      <div>
+        <h3>Device</h3>
+        <p>vendor: {`${userAgent?.device.vendor}`}</p>
+        <p>model: {`${userAgent?.device.model}`}</p>
+        <p>type: {`${userAgent?.device.type}`}</p>
+      </div>
+      <div>
+        <h3>CPU</h3>
+        <p>architecture: {`${userAgent?.cpu.architecture}`}</p>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const userAgent = useUserAgent();
+
+  return (
+    <div>
+      <div>
+        <h3>UserAgent String</h3>
+        <p>{`${userAgent?.ua}`}</p>
+      </div>
+      <div>
+        <h3>Browser</h3>
+        <p>name: {`${userAgent?.browser.name}`}</p>
+        <p>version: {`${userAgent?.browser.version}`}</p>
+        <p>major: {`${userAgent?.browser.major}`}</p>
+      </div>
+      <div>
+        <h3>Engine</h3>
+        <p>name: {`${userAgent?.engine.name}`}</p>
+        <p>version: {`${userAgent?.engine.version}`}</p>
+      </div>
+      <div>
+        <h3>OS</h3>
+        <p>name: {`${userAgent?.os.name}`}</p>
+        <p>version: {`${userAgent?.os.version}`}</p>
+      </div>
+      <div>
+        <h3>Device</h3>
+        <p>vendor: {`${userAgent?.device.vendor}`}</p>
+        <p>model: {`${userAgent?.device.model}`}</p>
+        <p>type: {`${userAgent?.device.type}`}</p>
+      </div>
+      <div>
+        <h3>CPU</h3>
+        <p>architecture: {`${userAgent?.cpu.architecture}`}</p>
+      </div>
+    </div>
+  );
+};

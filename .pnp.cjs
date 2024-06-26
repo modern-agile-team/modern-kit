@@ -7420,6 +7420,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
+          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.6.0"],\
           ["esbuild", "npm:0.21.1"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.1.0"],\
@@ -7431,6 +7432,7 @@ const RAW_RUNTIME_STATE =
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["tslib", "npm:2.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+          ["ua-parser-js", "npm:1.0.38"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.6.0"]\
         ],\
         "packagePeers": [\
@@ -7458,6 +7460,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
+          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.6.0"],\
           ["esbuild", "npm:0.21.1"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.1.0"],\
@@ -7469,6 +7472,7 @@ const RAW_RUNTIME_STATE =
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["tslib", "npm:2.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+          ["ua-parser-js", "npm:1.0.38"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.6.0"]\
         ],\
         "linkType": "SOFT"\
@@ -9582,6 +9586,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/sockjs", "npm:0.3.36"],\
           ["@types/node", "npm:20.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/ua-parser-js", [\
+      ["npm:0.7.39", {\
+        "packageLocation": "./.yarn/cache/@types-ua-parser-js-npm-0.7.39-23053990d8-fea522f42d.zip/node_modules/@types/ua-parser-js/",\
+        "packageDependencies": [\
+          ["@types/ua-parser-js", "npm:0.7.39"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -26348,6 +26361,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/typescript-patch-97a611e52a-c2bded58ab.zip/node_modules/typescript/",\
         "packageDependencies": [\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["ua-parser-js", [\
+      ["npm:1.0.38", {\
+        "packageLocation": "./.yarn/cache/ua-parser-js-npm-1.0.38-63d05d91e2-b1dd11b87e.zip/node_modules/ua-parser-js/",\
+        "packageDependencies": [\
+          ["ua-parser-js", "npm:1.0.38"]\
         ],\
         "linkType": "HARD"\
       }]\
