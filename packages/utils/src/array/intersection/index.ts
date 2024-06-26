@@ -1,7 +1,6 @@
 import { identity } from '../../common';
 
-import { intersectionWithDuplicates } from '../intersectionWithDuplicates';
-import { uniq } from '../uniq';
+import { intersectionWithDuplicates, uniq } from '..';
 
 export const intersection = <T, U = T>(
   firstArr: T[] | readonly T[],
