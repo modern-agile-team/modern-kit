@@ -1,7 +1,7 @@
 import { getUniqId } from '@modern-kit/utils';
 import React from 'react';
 
-interface IterateProps<T> {
+export interface IterateProps<T> {
   items: T[];
   renderItem: (item: T, index: number) => JSX.Element;
 }
