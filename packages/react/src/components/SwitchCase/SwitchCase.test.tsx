@@ -1,16 +1,11 @@
 import { screen } from '@testing-library/react';
-
 import { renderSetup } from '../../utils/test/renderSetup';
-
 import { SwitchCase } from '.';
 
 describe('SwitchCase', () => {
   it('should SwitchCase component receive condition.', () => {
     renderSetup(
-      <SwitchCase
-        condition={0 as number}
-        cases={{ 0: <button>case no.1</button> }}
-      />
+      <SwitchCase condition={0} cases={{ 0: <button>case no.1</button> }} />
     );
     const CaseOneComponent = screen.queryByRole('button', {
       name: 'case no.1',
