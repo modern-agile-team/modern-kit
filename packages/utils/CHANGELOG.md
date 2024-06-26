@@ -1,5 +1,17 @@
 # @modern-kit/utils
 
+## 1.9.0
+
+### Minor Changes
+
+- [#255](https://github.com/modern-agile-team/modern-kit/pull/255) [`e18b27d`](https://github.com/modern-agile-team/modern-kit/commit/e18b27d34be1b84d8cfb0f33cda199155d70a687) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): min, max 함수 추가 - @ssi02014
+
+- [#250](https://github.com/modern-agile-team/modern-kit/pull/250) [`26343a2`](https://github.com/modern-agile-team/modern-kit/commit/26343a24fbdd24cc5e983bab4fe3f5a2af5cb894) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): difference 함수 추가 완료 - @Sangminnn
+
+### Patch Changes
+
+- [#266](https://github.com/modern-agile-team/modern-kit/pull/266) [`4ac36fa`](https://github.com/modern-agile-team/modern-kit/commit/4ac36faa9b56362dfe9c644982dd9c17810f24b9) Thanks [@Sangminnn](https://github.com/Sangminnn)! - chore(utils): intersection 내부구현 수정 완료
+
 ## 1.8.0
 
 ### Minor Changes

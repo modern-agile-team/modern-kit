@@ -1,5 +1,19 @@
 # @modern-kit/react
 
+## 1.10.0
+
+### Minor Changes
+
+- [#253](https://github.com/modern-agile-team/modern-kit/pull/253) [`dcd89c8`](https://github.com/modern-agile-team/modern-kit/commit/dcd89c8fd67dcfee59d484eea26baa7cc4e0a9f4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useStep 훅 추가 - @ssi02014
+
+- [#264](https://github.com/modern-agile-team/modern-kit/pull/264) [`3557c49`](https://github.com/modern-agile-team/modern-kit/commit/3557c49a161fd4729812801e7196b0dc18249015) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useUserAgent 신규 커스텀 훅 추가 - @ssi0214
+
+### Patch Changes
+
+- [#254](https://github.com/modern-agile-team/modern-kit/pull/254) [`6f8844f`](https://github.com/modern-agile-team/modern-kit/commit/6f8844f2a88893a35b0d986f116cfd70a3496499) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useVhProperty 옵션 및 문서 수정 - @ssi02014
+
+- [#248](https://github.com/modern-agile-team/modern-kit/pull/248) [`3f209e0`](https://github.com/modern-agile-team/modern-kit/commit/3f209e01be9139db20c4d0f362c20512b9c3e4e1) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useIntersectionObserver enabled 옵션 추가 - @ssi02014
+
 ## 1.9.0
 
 ### Minor Changes
