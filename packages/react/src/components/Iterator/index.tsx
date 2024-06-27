@@ -13,7 +13,7 @@ export const Iterator = <T extends unknown>({
   return (
     <>
       {items.map((item, index) => (
-        <React.Fragment key={`${index}-${getUniqId()}`}>
+        <React.Fragment key={getUniqId()}>
           {renderItem(item, index)}
         </React.Fragment>
       ))}
