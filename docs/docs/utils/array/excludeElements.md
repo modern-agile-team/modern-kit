@@ -1,10 +1,9 @@
 # excludeElements
 
-1번째 매개변수로 전달된 배열에서, 2번째 이후의 값을 제외하여 반환하는 유틸 함수입니다.
+1번째 매개변수로 전달된 배열을 기준으로 2번째 배열의 요소들을 제외하는 유틸 함수입니다.
 
 원시값의 경우 명확한 타입체크를 위해 `as const` 사용을 권장드립니다.  
-원시값이 아닌 `object` 타입인 경우 `JSON.stringify`를 통해 동등성을 비교합니다.
-
+기본적으로 원시값에 대한 비교를 진행하며, 참조형의 경우 3번째 `iteratee` 함수 결과를 통해 제외 할 요소를 결정 할 수 있습니다.
 
 <br />
 
@@ -13,9 +12,10 @@
 
 ## Interface
 ```ts title="typescript"
-const excludeElements: <T, U extends T>(
+const excludeElements: <T, U = T>(
   array: T[] | readonly T[],
-  ...args: U[] | readonly U[]
+  args: T[] | readonly T[],
+  iteratee?: (item: T) => U
 ) => T[];
 ```
 
@@ -26,7 +26,7 @@ import { excludeElements } from '@modern-kit/utils';
 const array = [1, 2, 3, 4];
 const excluded = [3, 4]
 
-excludeElements(array, ...excluded); // [1, 2]
+excludeElements(array, excluded); // [1, 2]
 ```
 
 ```ts title="typescript"
@@ -35,7 +35,7 @@ import { excludeElements } from '@modern-kit/utils';
 const array = ['a', 'b', 'c', 'd'];
 const excluded = ['a']
 
-excludeElements(array, ...excluded); // ['b', 'c', 'd']
+excludeElements(array, excluded); // ['b', 'c', 'd']
 ```
 
 ```ts title="typescript"
@@ -44,7 +44,7 @@ import { excludeElements } from '@modern-kit/utils';
 const array = [[3, 'a'], [4, 'b']];
 const excluded = [[3, 'a']]
 
-excludeElements(array, ...excluded); // [4, 'b']
+excludeElements(array, excluded, (item) => JSON.stringify(item)); // [4, 'b']
 ```
 
 ```ts title="typescript"
@@ -56,9 +56,5 @@ const array = [
 ];
 const excluded = [{ name: 'kim', address: { city: 'Seoul' } }];
 
-excludeElements(array, ...excluded); // { name: 'lee', address: { city: 'NewYork' } }
+excludeElements(array, excluded, (item) => item.name); // { name: 'lee', address: { city: 'NewYork' } }
 ```
-
-## Caveats
-
-- 2번째 이후의 매개변수의 형태는 `이터러블` 혹은 `리스트(1, 2, 3..)` 형태입니다.
