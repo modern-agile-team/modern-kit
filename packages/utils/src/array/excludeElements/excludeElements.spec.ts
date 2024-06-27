@@ -2,8 +2,8 @@ import { excludeElements } from '.';
 
 describe('excludeElements', () => {
   it('filter after second parameter values from first parameter.', () => {
-    const array = [1, 2, 3, 4, 5, 6] as const;
-    const excludedElements = [1, 3] as const;
+    const array = [1, 2, 3, 4, 5, 6];
+    const excludedElements = [1, 3];
 
     expect(excludeElements(array, excludedElements)).toEqual([2, 4, 5, 6]);
   });
@@ -39,11 +39,15 @@ describe('excludeElements', () => {
   });
 
   it('should filter tuple.', () => {
-    const array = [[3, 'a']];
+    const array = [
+      [3, 'a'],
+      [4, 'b'],
+      [3, 'a'],
+    ];
     const excludedElements = [3, 'a'];
 
     expect(
       excludeElements(array, [excludedElements], (item) => JSON.stringify(item))
-    ).toEqual([]);
+    ).toEqual([[4, 'b']]);
   });
 });
