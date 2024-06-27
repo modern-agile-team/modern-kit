@@ -1,8 +1,11 @@
-export const excludeElements = <T, U extends T>(
-  array: T[] | readonly T[],
-  ...args: T[] | readonly U[]
-) => {
-  const excludeSet = new Set(args.map((arg) => JSON.stringify(arg)));
+import { identity } from '../../common';
 
-  return array.filter((element) => !excludeSet.has(JSON.stringify(element)));
+export const excludeElements = <T, U = T>(
+  array: T[] | readonly T[],
+  excludeArray: T[] | readonly T[],
+  iteratee: (item: T) => U = identity as (item: T) => U
+) => {
+  const excludeSet = new Set(excludeArray.map(iteratee));
+
+  return array.filter((element) => !excludeSet.has(iteratee(element)));
 };
