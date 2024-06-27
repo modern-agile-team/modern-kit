@@ -1,15 +1,15 @@
 import { getUniqId } from '@modern-kit/utils';
 import React from 'react';
 
-export interface IterateProps<T> {
+export interface IteratorProps<T> {
   items: T[];
   renderItem: (item: T, index: number) => JSX.Element;
 }
 
-export const Iterate = <T extends unknown>({
+export const Iterator = <T extends unknown>({
   items,
   renderItem,
-}: IterateProps<T>) => {
+}: IteratorProps<T>) => {
   return (
     <>
       {items.map((item, index) => (

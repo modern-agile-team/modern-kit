@@ -1,6 +1,6 @@
 import { renderSetup } from '../../utils/test/renderSetup';
 import { screen } from '@testing-library/react';
-import { Iterate } from '.';
+import { Iterator } from '.';
 
 interface TestItem {
   id: number;
@@ -17,10 +17,10 @@ const TestComponent = ({ name }: TestItem) => {
   return <div>{name}</div>;
 };
 
-describe('Iterate', () => {
+describe('Iterator', () => {
   it('should render the correct number of items as div elements', () => {
     renderSetup(
-      <Iterate
+      <Iterator
         items={testItems}
         renderItem={(item) => <div>{item.name}</div>}
       />
@@ -33,7 +33,7 @@ describe('Iterate', () => {
 
   it('should render the correct number of items as TestComponent elements', () => {
     renderSetup(
-      <Iterate
+      <Iterator
         items={testItems}
         renderItem={(item) => <TestComponent {...item} />}
       />
