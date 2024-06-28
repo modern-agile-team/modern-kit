@@ -5,5 +5,6 @@ export * from './Iterator';
 export * from './LazyImage';
 export * from './OutsideClick';
 export * from './Portal';
+export * from './SeparatedIterator';
 export * from './When';
 export * from './SwitchCase';
