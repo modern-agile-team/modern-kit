@@ -2,7 +2,7 @@ import { getUniqId } from '@modern-kit/utils';
 import React from 'react';
 
 export interface IteratorProps<T> {
-  items: T[];
+  items: T[] | readonly T[];
   renderItem: (item: T, index: number) => JSX.Element;
 }
 
