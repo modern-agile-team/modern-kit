@@ -1,0 +1,49 @@
+import { useState } from 'react';
+import { ClientOnly } from '@modern-kit/react';
+
+# ClientOnly
+
+컴포넌트가 브라우저에 mount 되었을 때 children이 나타나게 해주는 컴포넌트입니다. 즉, children을 렌더링하는 환경이 클라이언트 환경임을 보장할 수 있습니다. mount 전에는 fallback으로 넣어준 컴포넌트를 보여줍니다.
+
+`SSR` 환경에서 컴포넌트가 브라우저에 마운트되기 전과 후의 컴포넌트를 다루기 위해 사용할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/ClientOnly/index.tsx)
+
+## Interface
+```ts title="typescript"
+
+interface ClientOnlyProps {
+  fallback?: JSX.Element;
+}
+
+const ClientOnly: ({
+  fallback = <></>
+}: PropsWithChildren<ClientOnlyProps>) => JSX.Element;
+```
+
+## Usage
+```tsx title="typescript"
+import { ClientOnly } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <ClientOnly fallback={<div>mount가 완료되기 전입니다.</div>}>
+      <div>mount가 완료되었습니다.</div>
+    </ClientOnly>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  return (
+    <ClientOnly fallback={<div>mount가 완료되기 전입니다.</div>}>
+      <div>mount가 완료되었습니다.</div>
+    </ClientOnly>
+  );
+};
+
+<Example />
