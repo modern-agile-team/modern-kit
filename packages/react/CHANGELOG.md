@@ -1,5 +1,21 @@
 # @modern-kit/react
 
+## 1.11.0
+
+### Minor Changes
+
+- [#268](https://github.com/modern-agile-team/modern-kit/pull/268) [`58d7750`](https://github.com/modern-agile-team/modern-kit/commit/58d7750822359b0d4b9a5f52e2e023296ecbb3d7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): Iterator 유틸 컴포넌트 추가 - @ssi02014
+
+- [#276](https://github.com/modern-agile-team/modern-kit/pull/276) [`dbbaac5`](https://github.com/modern-agile-team/modern-kit/commit/dbbaac51a662dc943b438a9ccc7a8d960c7b203f) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): ClientOnly 컴포넌트 작업 완료 - @Sangminnn
+
+- [#274](https://github.com/modern-agile-team/modern-kit/pull/274) [`08e4eaf`](https://github.com/modern-agile-team/modern-kit/commit/08e4eafa1f3520a16f3c998f4f414cda371dca1b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): SeparatedIterator 신규 컴포넌트 추가 - @ssi02014
+
+### Patch Changes
+
+- [#275](https://github.com/modern-agile-team/modern-kit/pull/275) [`0873718`](https://github.com/modern-agile-team/modern-kit/commit/0873718e6c29d22da30974ae7df2747955b5b676) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useMergeRefs 개선 - @ssi02014
+
+- [`2689590`](https://github.com/modern-agile-team/modern-kit/commit/2689590d1e23256c4d491e095634292a51a88bb0) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): SwitchCase props 좁은 타입으로 변경 - @ssi02014
+
 ## 1.10.0
 
 ### Minor Changes

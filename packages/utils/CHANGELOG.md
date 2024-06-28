@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.9.1
+
+### Patch Changes
+
+- [#273](https://github.com/modern-agile-team/modern-kit/pull/273) [`37dcb88`](https://github.com/modern-agile-team/modern-kit/commit/37dcb88f1b6bdeddee4df9d67c331f22f097839c) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): excludeElements 성능 개선을 위해 인터페이스 변경 - @ssi02014
+
 ## 1.9.0
 
 ### Minor Changes
