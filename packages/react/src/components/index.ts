@@ -1,6 +1,7 @@
 export * from './DebounceWrapper';
 export * from './FallbackLazyImage';
 export * from './InView';
+export * from './Iterator';
 export * from './LazyImage';
 export * from './OutsideClick';
 export * from './Portal';

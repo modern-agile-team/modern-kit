@@ -1,0 +1,75 @@
+import { Iterator } from '@modern-kit/react';
+
+# Iterator
+
+`items props`로 주어진 배열을 반복하면서 각 항목에 대해 `특정 요소 및 컴포넌트`를 선언적으로 렌더링할 수 있는 컴포넌트입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Iterator/index.tsx)
+
+## Interface
+```ts title="typescript"
+interface IteratorProps<T> {
+  items: T[];
+  renderItem: (item: T, index: number) => JSX.Element;
+}
+
+const Iterator: <T extends unknown>({
+  items,
+  renderItem,
+}: IteratorProps<T>) => JSX.Element;
+```
+
+## Usage
+```tsx title="typescript"
+import { Iterator } from '@modern-kit/react';
+
+interface Item {
+  id: number;
+  name: string;
+}
+
+const Example = () => {
+  const items: Item[] = [
+    { id: 1, name: 'Gromit' },
+    { id: 2, name: 'Dylan' },
+    { id: 3, name: 'Minjae' },
+  ];
+
+  return (
+    <Iterator
+      items={items}
+      renderItem={(item) => (
+        <h3>
+          id: {item.id}, name:{item.name}
+        </h3>
+      )}
+    />
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const items = [
+    { id: 1, name: 'Gromit' },
+    { id: 2, name: 'Dylan' },
+    { id: 3, name: 'Minjae' },
+  ];
+
+  return (
+    <Iterator
+      items={items}
+      renderItem={(item) => (
+        <h3>
+          id: {item.id}, name:{item.name}
+        </h3>
+      )}
+    />
+  );
+};
+
+<Example />
