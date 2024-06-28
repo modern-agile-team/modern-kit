@@ -1,19 +1,19 @@
 import React, { useCallback } from 'react';
 
-export const useMergeRefs = <T = any>(
-  ...refs: (React.MutableRefObject<T> | React.LegacyRef<T>)[]
+const mergeRefs = <T = unknown>(...refs: React.Ref<T>[]) => {
+  return (node: T) =>
+    refs.forEach((ref) => {
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref != null) {
+        const refToUse = ref as React.MutableRefObject<T>;
+        refToUse.current = node;
+      }
+    });
+};
+export const useMergeRefs = <T = unknown>(
+  ...refs: React.Ref<T>[]
 ): React.RefCallback<T> => {
-  return useCallback(
-    (value: T) => {
-      refs.forEach((ref) => {
-        if (typeof ref === 'function') {
-          ref(value);
-        } else if (ref != null) {
-          (ref as React.MutableRefObject<T>).current = value;
-        }
-      });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [...refs]
-  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useCallback(mergeRefs(...refs), refs);
 };

@@ -10,9 +10,7 @@
 ## Interface
 
 ```ts title="typescript"
-const useMergeRefs: <T = any>(
-  ...refs: (React.MutableRefObject<T> | React.LegacyRef<T>)[]
-) => (instance: T | null) => void;
+const useMergeRefs: <T = unknown>(...refs: React.Ref<T>[]) => (instance: T | null) => void
 ```
 
 ## Usage

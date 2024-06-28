@@ -18,6 +18,7 @@ export const InView = forwardRef<
     threshold,
     root,
     rootMargin,
+    enabled,
     ...restProps
   } = props;
 
@@ -29,6 +30,7 @@ export const InView = forwardRef<
       threshold,
       root,
       rootMargin,
+      enabled,
     });
 
   return (
