@@ -1,30 +1,76 @@
+import {
+  isFunction,
+  removeStorageItem,
+  setStorageItem,
+} from '@modern-kit/utils';
 import { UseStepProps, useStep } from '../useStep';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { SetStateAction, useCallback, useState } from 'react';
+import { usePreservedState } from '../usePreservedState';
+
+interface StorageOptions {
+  key: string;
+  type: 'localStorage' | 'sessionStorage';
+}
 
 interface UseStepWithInitialState<T> extends UseStepProps {
   initialState: T;
+  storageOptions?: StorageOptions;
 }
 
-type UseStepStateProps<T> = UseStepWithInitialState<T> | UseStepProps;
+interface UseStepWithoutInitialState extends UseStepProps {
+  storageOptions?: StorageOptions;
+}
+
+type UseStepStateProps<T> =
+  | UseStepWithInitialState<T>
+  | UseStepWithoutInitialState;
 
 export function useStepState<T>({
   initialState,
-  ...useStepProps
+  ...props
 }: UseStepWithInitialState<T>): ReturnType<typeof useStep> & {
-  state: T;
-  setState: Dispatch<SetStateAction<T>>;
+  readonly state: T;
+  readonly setState: (newState: SetStateAction<T>) => void;
+  readonly clearState: () => void;
 };
 
-export function useStepState<T>(useStepProps: UseStepStateProps<T>): ReturnType<
+export function useStepState<T>(props: UseStepWithoutInitialState): ReturnType<
   typeof useStep
 > & {
-  state: T | null;
-  setState: Dispatch<SetStateAction<T | null>>;
+  readonly state: T | null;
+  readonly setState: (newState: SetStateAction<T | null>) => void;
+  readonly clearState: () => void;
 };
 
 export function useStepState<T>(props: UseStepStateProps<T>) {
   const initialState = 'initialState' in props ? props.initialState : null;
-  const [state, setState] = useState<T | null>(initialState);
+  const preservedStorageOptions = usePreservedState(props.storageOptions);
+  const preservedInitialState = usePreservedState(initialState);
 
-  return { state, setState, ...useStep(props) };
+  const [_state, _setState] = useState<T | null>(preservedInitialState);
+
+  const setState = useCallback(
+    (newState: SetStateAction<T | null>) => {
+      _setState((prev) => {
+        const newStateToUse = isFunction(newState) ? newState(prev) : newState;
+
+        if (preservedStorageOptions) {
+          const { type, key } = preservedStorageOptions;
+          setStorageItem(type, key, newStateToUse);
+        }
+        return newStateToUse;
+      });
+    },
+    [preservedStorageOptions]
+  );
+
+  const clearState = useCallback(() => {
+    if (preservedStorageOptions) {
+      const { type, key } = preservedStorageOptions;
+      removeStorageItem(type, key);
+    }
+    _setState(null);
+  }, [preservedStorageOptions]);
+
+  return { state: _state, setState, clearState, ...useStep(props) } as const;
 }

@@ -5,6 +5,10 @@ import { useState } from 'react';
 
 **[useStep](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useStep)** 을 확장해 `multi-step process`의 `step`을 관리 및 추적하며 동시에 `내부 상태`를 관리 할 수 있는 커스텀 훅입니다.
 
+`storageOptions`를 활용해 `setState` 시에 브라우저 스토리지(`sessionStorage`, `localStorage`)에 상태를 저장 할 수 있습니다.
+
+`clearState`는 state를 `null`로 초기화합니다. `storageOptions`가 있을 경우 해당 `options`에 대응하는 스토리지 데이터를 제거합니다.
+
 <br />
 
 ## Code
@@ -12,33 +16,37 @@ import { useState } from 'react';
 
 ## Interface
 ```ts title="typescript"
-interface UseStepProps {
-  maxStep: number;
-  initialStep?: number; // default: 1
-  infinite?: boolean; // default: false
+interface StorageOptions {
+  key: string;
+  type: 'localStorage' | 'sessionStorage';
 }
 
 interface UseStepWithInitialState<T> extends UseStepProps {
   initialState: T;
+  storageOptions?: StorageOptions;
 }
 
-type UseStepStateProps<T> = UseStepWithInitialState<T> | UseStepProps;
+interface UseStepWithoutInitialState extends UseStepProps {
+  storageOptions?: StorageOptions;
+}
 ```
 ```ts title="typescript"
 // 함수 오버로딩
 export function useStepState<T>({
   initialState,
-  ...useStepProps
+  ...props
 }: UseStepWithInitialState<T>): ReturnType<typeof useStep> & {
-  state: T;
-  setState: Dispatch<SetStateAction<T>>;
+  readonly state: T;
+  readonly setState: (newState: SetStateAction<T>) => void;
+  readonly clearState: () => void;
 };
 
-export function useStepState<T>(useStepProps: UseStepStateProps<T>): ReturnType<
+export function useStepState<T>(props: UseStepWithoutInitialState): ReturnType<
   typeof useStep
 > & {
-  state: T | null;
-  setState: Dispatch<SetStateAction<T | null>>;
+  readonly state: T | null;
+  readonly setState: (newState: SetStateAction<T | null>) => void;
+  readonly clearState: () => void;
 };
 ```
 
@@ -47,25 +55,24 @@ export function useStepState<T>(useStepProps: UseStepStateProps<T>): ReturnType<
 import { useStepState } from '@modern-kit/react';
 
 export const Example = () => {
-  const {
-    state,
-    setState,
-    currentStep,
-    goToNextStep,
-    goToPrevStep,
-  } = useStepState({ maxStep: 2, initialState: { name: 'foo' } });
+  const { state, setState, clearState, currentStep, goToNextStep, goToPrevStep } =
+    useStepState({
+      maxStep: 2,
+      initialState: { name: '' },
+      storageOptions: { key: 'stepState', type: 'sessionStorage' },
+    });
 
   const handleGoToNextStep = () => {
-    setState({ name: 'bar' })
     goToNextStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
+      setState({ name: 'bar' });
     });
   };
 
   const handleGoToPrevStep = () => {
-    setState({ name: 'foo' })
     goToPrevStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
+      setState({ name: 'foo' });
     });
   };
 
@@ -80,6 +87,7 @@ export const Example = () => {
       <div>
         <button onClick={handleGoToPrevStep}>이전 스탭</button>
         <button onClick={handleGoToNextStep}>다음 스탭</button>
+        <button onClick={clearState}>상태 초기화</button>
       </div>
       <div>
         <p>currentStep: {currentStep}</p>
@@ -87,7 +95,7 @@ export const Example = () => {
       </div>
       <div>
         {currentStep === 1 && (
-          <div style={{ ...boxStyle, backgroundColor: 'red' }} >
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
             1번 Step Box
           </div>
         )}
@@ -105,25 +113,24 @@ export const Example = () => {
 ## Example
 
 export const Example = () => {
-  const {
-    state,
-    setState,
-    currentStep,
-    goToNextStep,
-    goToPrevStep,
-  } = useStepState({ maxStep: 2, initialState: { name: 'foo' } });
+  const { state, setState, clearState, currentStep, goToNextStep, goToPrevStep } =
+    useStepState({
+      maxStep: 2,
+      initialState: { name: '' },
+      storageOptions: { key: 'stepState', type: 'sessionStorage' },
+    });
 
   const handleGoToNextStep = () => {
-    setState({ name: 'bar' })
     goToNextStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
+      setState({ name: 'bar' });
     });
   };
 
   const handleGoToPrevStep = () => {
-    setState({ name: 'foo' })
     goToPrevStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
+      setState({ name: 'foo' });
     });
   };
 
@@ -138,6 +145,7 @@ export const Example = () => {
       <div>
         <button onClick={handleGoToPrevStep}>이전 스탭</button>
         <button onClick={handleGoToNextStep}>다음 스탭</button>
+        <button onClick={clearState}>상태 초기화</button>
       </div>
       <div>
         <p>currentStep: {currentStep}</p>
@@ -145,7 +153,7 @@ export const Example = () => {
       </div>
       <div>
         {currentStep === 1 && (
-          <div style={{ ...boxStyle, backgroundColor: 'red' }} >
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
             1번 Step Box
           </div>
         )}
@@ -159,6 +167,52 @@ export const Example = () => {
   );
 };
 
-
 <Example />
 
+<br />
+
+## Best Practice
+- 브라우저 새로고침 시 상태를 적절하게 유지하고 싶다면 `queryString`과 `react-router-dom`을 함께 사용하는 것을 권장합니다.
+
+```tsx
+import { useStepState } from '@modern-kit/react';
+import { useNavigate } from 'react-router-dom'
+import qs from 'query-string'
+
+const Example = () => {
+  const parsedStorage = JSON.parse(sessionStorage.getItem('stepState'));
+  const parsedQuery = qs.parse(location.search);
+
+  const navigate = useNavigate();
+
+  const { state, setState, goToNextStep, goToPrevStep } = useStepState({
+    maxStep: 5,
+    initialState: parsedStorage,
+    initialStep: parsedQuery.step,
+    storageOptions: { key: 'stepState', type: 'sessionStorage' },
+  });
+
+  const handleGoToNextStep = () => {
+    goToNextStep(({ nextStep }) => {
+      setState({
+        /* ... */
+      });
+      navigate(`/test?step=${nextStep}`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    goToNextStep(({ nextStep }) => {
+      setState({
+        /* ... */
+      });
+      navigate(`/test?step=${nextStep}`);
+    });
+  };
+
+  // ...
+  return (
+    // ...
+  );
+};
+```
