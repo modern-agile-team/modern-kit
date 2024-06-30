@@ -9,6 +9,7 @@ export * from './isNullish';
 export * from './isNumber';
 export * from './isPrimitive';
 export * from './isPromise';
+export * from './isReference';
 export * from './isString';
 export * from './isValidEmail';
 export * from './isValidPassword';
