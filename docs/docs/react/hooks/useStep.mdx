@@ -52,8 +52,8 @@ export const Example = () => {
     hasNextStep,
     hasPrevStep,
     setStep,
-    nextStep,
-    prevStep,
+    goToNextStep,
+    goToPrevStep,
     resetStep,
   } = useStep({ maxStep: 4, infinite: infinite });
 
@@ -138,19 +138,19 @@ export const Example = () => {
     hasNextStep,
     hasPrevStep,
     setStep,
-    nextStep,
-    prevStep,
+    goToNextStep,
+    goToPrevStep,
     resetStep,
   } = useStep({ maxStep: 4, infinite: infinite });
 
   const handleGoToNextStep = () => {
-    nextStep(({ prevStep, nextStep }) => {
+    goToNextStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
 
   const handleGoToPrevStep = () => {
-    prevStep(({ prevStep, nextStep }) => {
+    goToPrevStep(({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
