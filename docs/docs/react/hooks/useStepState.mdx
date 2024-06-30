@@ -1,0 +1,164 @@
+import { useStepState } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useStepState
+
+**[useStep](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useStep)** 을 확장해 `multi-step process`의 `step`을 관리 및 추적하며 동시에 `내부 상태`를 관리 할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useStepState/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseStepProps {
+  maxStep: number;
+  initialStep?: number; // default: 1
+  infinite?: boolean; // default: false
+}
+
+interface UseStepWithInitialState<T> extends UseStepProps {
+  initialState: T;
+}
+
+type UseStepStateProps<T> = UseStepWithInitialState<T> | UseStepProps;
+```
+```ts title="typescript"
+// 함수 오버로딩
+export function useStepState<T>({
+  initialState,
+  ...useStepProps
+}: UseStepWithInitialState<T>): ReturnType<typeof useStep> & {
+  state: T;
+  setState: Dispatch<SetStateAction<T>>;
+};
+
+export function useStepState<T>(useStepProps: UseStepStateProps<T>): ReturnType<
+  typeof useStep
+> & {
+  state: T | null;
+  setState: Dispatch<SetStateAction<T | null>>;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useStepState } from '@modern-kit/react';
+
+export const Example = () => {
+  const {
+    state,
+    setState,
+    currentStep,
+    goToNextStep,
+    goToPrevStep,
+  } = useStepState({ maxStep: 2, initialState: { name: 'foo' } });
+
+  const handleGoToNextStep = () => {
+    setState({ name: 'bar' })
+    goToNextStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    setState({ name: 'foo' })
+    goToPrevStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>state: {JSON.stringify(state)}</p>
+      </div>
+      <div>
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }} >
+            1번 Step Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            2번 Step Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const {
+    state,
+    setState,
+    currentStep,
+    goToNextStep,
+    goToPrevStep,
+  } = useStepState({ maxStep: 2, initialState: { name: 'foo' } });
+
+  const handleGoToNextStep = () => {
+    setState({ name: 'bar' })
+    goToNextStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    setState({ name: 'foo' })
+    goToPrevStep(({ prevStep, nextStep }) => {
+      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleGoToPrevStep}>이전 스탭</button>
+        <button onClick={handleGoToNextStep}>다음 스탭</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>state: {JSON.stringify(state)}</p>
+      </div>
+      <div>
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }} >
+            1번 Step Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            2번 Step Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+
+<Example />
+
