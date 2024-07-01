@@ -21,8 +21,10 @@ export function useScrollTo<T extends HTMLElement>(
   const ref = useRef<T | Window | null>(null);
 
   const scrollTo = useCallback((scrollToOptions: ScrollToOptions = {}) => {
+    if (!ref.current) return;
+
     const { left = 0, top = 0, behavior = 'auto' } = scrollToOptions;
-    const targetElement = ref.current as T | Window;
+    const targetElement = ref.current;
 
     targetElement.scrollTo({
       left,
@@ -37,12 +39,7 @@ export function useScrollTo<T extends HTMLElement>(
     }
 
     if (preservedAutoScrollOptions) {
-      const {
-        left = 0,
-        top = 0,
-        behavior = 'auto',
-      } = preservedAutoScrollOptions;
-      scrollTo({ left, top, behavior });
+      scrollTo(preservedAutoScrollOptions);
     }
   }, [preservedAutoScrollOptions, scrollTo]);
 
