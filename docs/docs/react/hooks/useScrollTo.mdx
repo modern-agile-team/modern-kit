@@ -2,22 +2,44 @@ import { useScrollTo } from '@modern-kit/react';
 
 # useScrollTo
 
-훅이 반환하는 `ref`를 특정 엘리먼트에 할당 후 함께 반환하는 `scrollTo`를 통해 해당 엘리먼트를 대상으로 `scrollTo`를 호출하는 커스텀 훅입니다. 
+useScrollTo 훅이 반환하는 `ref`를 특정 엘리먼트에 할당 후 함께 반환하는 `scrollTo`를 통해 해당 엘리먼트를 대상으로 `scrollTo`를 호출하는 커스텀 훅입니다. 
+`ref`를 할당하지 않으면 기본적으로 `window`를 대상으로 동작합니다.
 
-- `ref`를 할당하지 않으면 기본적으로 `window`에서 동작합니다.
-
-`useScrollTo` 인자인 `autoScrollOptions`를 할당하면 마운트 시 자동으로 `scrollTo`가 호출됩니다.
-
-```ts
-const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
-// 컴포넌트 마운트 시 scrollTo 동작하지 않음
+```tsx
+const { ref, scrollTo } = useScrollTo();
+// ref: Window
 ```
-```ts
+```tsx
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
+// ref: HTMLDivElement
+
+<div ref={ref} />
+```
+
+<br />
+
+`autoScrollOptions` 인자를 할당하면 컴포넌트가 마운트 시 자동으로 타겟 엘리먼트를 대상으로 `scrollTo`가 호출됩니다.
+
+```tsx
+// 컴포넌트 마운트 시 scrollTo 동작하지 않음
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
+```
+```tsx
+// 컴포넌트 마운트 시 자동으로 scrollTo 동작
 const { ref, scrollTo } = useScrollTo<HTMLDivElement>({
   behavior: 'smooth',
   left: 0,
   top: 400,
-}); // 컴포넌트 마운트 시 자동으로 scrollTo 동작
+});
+
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>({});
+/**
+ * Default Values
+ * 
+ * 1. behavior: 'auto'
+ * 2. left: 0 
+ * 3. top: 0
+*/
 ```
 
 <br />
