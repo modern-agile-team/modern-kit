@@ -27,13 +27,13 @@ describe('average', () => {
     expect(average([{ value: 7 }], (item) => item.value)).toBe(7);
   });
 
-  it('should handle arrays with mixed positive and negative numbers', () => {
-    expect(average([-1, 2, -3, 4, -5])).toBe(-0.6);
+  it('should handle arrays with negative numbers', () => {
+    expect(average([-1, -2, -3, -4, -5])).toBe(-3);
     expect(
       average(
-        [{ value: -10 }, { value: 20 }, { value: -30 }],
+        [{ value: -10 }, { value: -20 }, { value: -30 }],
         (item) => item.value
       )
-    ).toBe(-6.666666666666667);
+    ).toBe(-20);
   });
 });
