@@ -54,6 +54,7 @@ type ScrollBehavior = "auto" | "instant" | "smooth";
 interface ScrollOptions {
   behavior?: ScrollBehavior; // default: 'auto'
 }
+
 interface ScrollToOptions extends ScrollOptions {
   left?: number; // default: 0
   top?: number; // default : 0
@@ -83,7 +84,7 @@ const Example = () => {
     behavior: 'smooth',
     left: 0,
     top: 400,
-  }); // autoScrollOptions을 인자로 넘겨야 마운트 시 자동으로 scrollTo가 동작합니다.
+  });
 
   const handleScroll = () => {
     scrollTo({
