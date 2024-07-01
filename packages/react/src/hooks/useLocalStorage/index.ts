@@ -1,6 +1,7 @@
 import { isFunction, parseJSON } from '@modern-kit/utils';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { getCustomEventHandler } from '../../utils/customEventHandler';
+import { usePreservedState } from '../usePreservedState';
 
 interface UseLocalStorageWithoutInitialValueProps {
   key: string;
@@ -55,9 +56,9 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
   const { key } = props;
   const initialValue = 'initialValue' in props ? props.initialValue : null;
 
-  const initialValueToUse = useMemo(() => {
-    return isFunction(initialValue) ? initialValue() : initialValue;
-  }, [initialValue]);
+  const initialValueToUse = usePreservedState(
+    isFunction(initialValue) ? initialValue() : initialValue
+  );
 
   const externalStoreState = useSyncExternalStore(
     subscribe,
