@@ -1,6 +1,6 @@
 import { sum } from '.';
 
-describe('sum function tests', () => {
+describe('sum', () => {
   it('should sum an array of numbers', () => {
     const result = sum([1, 2, 3, 4, 5]);
 
