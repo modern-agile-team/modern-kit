@@ -8,8 +8,7 @@ export const setStorageItem = <T>(
   value: T | (() => T)
 ) => {
   if (!isClient()) {
-    console.error('Cannot be executed unless it is a client environment.');
-    return;
+    throw new Error('Cannot be executed unless it is a client environment.');
   }
 
   try {
@@ -17,7 +16,7 @@ export const setStorageItem = <T>(
     const newValue = isFunction(value) ? value() : value;
 
     storage.setItem(key, JSON.stringify(newValue));
-  } catch (error) {
-    console.error(`Error setting ${type} key "${key}"`);
+  } catch (err) {
+    throw new Error(`Failed to store data for key "${key}" in ${type}: ${err}`);
   }
 };

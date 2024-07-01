@@ -3,12 +3,6 @@ import { isFunction } from '@modern-kit/utils';
 
 type StepType = 'nextStep' | 'prevStep';
 
-interface UseStepProps {
-  maxStep: number;
-  initialStep?: number;
-  infinite?: boolean;
-}
-
 type StepAction = ({
   prevStep,
   nextStep,
@@ -16,6 +10,12 @@ type StepAction = ({
   prevStep: number;
   nextStep: number;
 }) => void;
+
+export interface UseStepProps {
+  maxStep: number;
+  initialStep?: number;
+  infinite?: boolean;
+}
 
 export const useStep = ({
   maxStep,
