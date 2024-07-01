@@ -7,11 +7,11 @@ useScrollTo 훅이 반환하는 `ref`를 특정 엘리먼트에 할당 후 함�
 
 ```tsx
 const { ref, scrollTo } = useScrollTo();
-// ref: Window
+// ref: Window | null
 ```
 ```tsx
 const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
-// ref: HTMLDivElement
+// ref: HTMLDivElement | null
 
 <div ref={ref} />
 ```

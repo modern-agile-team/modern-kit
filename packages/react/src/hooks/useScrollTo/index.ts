@@ -1,22 +1,24 @@
+import { usePreservedState } from 'hooks/usePreservedState';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { useCallback, useRef } from 'react';
 
 export function useScrollTo(autoScrollOptions?: ScrollToOptions): {
-  ref: React.MutableRefObject<Window>;
+  ref: React.MutableRefObject<Window | null>;
   scrollTo: (scrollToOptions?: ScrollToOptions) => void;
 };
 
 export function useScrollTo<T extends HTMLElement>(
   autoScrollOptions?: ScrollToOptions
 ): {
-  ref: React.MutableRefObject<T>;
+  ref: React.MutableRefObject<T | null>;
   scrollTo: (scrollToOptions?: ScrollToOptions) => void;
 };
 
 export function useScrollTo<T extends HTMLElement>(
   autoScrollOptions?: ScrollToOptions
 ) {
-  const ref = useRef<T | Window>(window);
+  const preservedAutoScrollOptions = usePreservedState(autoScrollOptions);
+  const ref = useRef<T | Window | null>(null);
 
   const scrollTo = useCallback((scrollToOptions: ScrollToOptions = {}) => {
     const { left = 0, top = 0, behavior = 'auto' } = scrollToOptions;
@@ -30,11 +32,19 @@ export function useScrollTo<T extends HTMLElement>(
   }, []);
 
   useIsomorphicLayoutEffect(() => {
-    if (autoScrollOptions) {
-      const { left = 0, top = 0, behavior = 'auto' } = autoScrollOptions;
+    if (!ref.current) {
+      ref.current = window;
+    }
+
+    if (preservedAutoScrollOptions) {
+      const {
+        left = 0,
+        top = 0,
+        behavior = 'auto',
+      } = preservedAutoScrollOptions;
       scrollTo({ left, top, behavior });
     }
-  }, []);
+  }, [preservedAutoScrollOptions, scrollTo]);
 
   return { ref, scrollTo };
 }
