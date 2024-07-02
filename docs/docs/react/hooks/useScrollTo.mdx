@@ -1,0 +1,137 @@
+import { useScrollTo } from '@modern-kit/react';
+
+# useScrollTo
+
+useScrollTo 훅이 반환하는 `ref`를 특정 엘리먼트에 할당 후 함께 반환하는 `scrollTo`를 통해 해당 엘리먼트를 대상으로 `scrollTo`를 호출하는 커스텀 훅입니다. 
+
+`ref`를 할당하지 않으면 기본적으로 `window`를 대상으로 동작합니다.
+
+```tsx
+const { ref, scrollTo } = useScrollTo();
+// ref: Window | null
+```
+```tsx
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
+// ref: HTMLDivElement | null
+
+<div ref={ref} />
+```
+
+<br />
+
+`autoScrollOptions` 인자를 할당하면 컴포넌트가 마운트 시 자동으로 타겟 엘리먼트를 대상으로 `scrollTo`가 호출됩니다.
+
+```tsx
+// 컴포넌트 마운트 시 scrollTo 동작하지 않음
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
+```
+```tsx
+// 컴포넌트 마운트 시 자동으로 scrollTo 동작
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>({
+  behavior: 'smooth',
+  left: 0,
+  top: 400,
+});
+
+const { ref, scrollTo } = useScrollTo<HTMLDivElement>({});
+/**
+ * Default Values
+ * 
+ * 1. behavior: 'auto'
+ * 2. left: 0 
+ * 3. top: 0
+*/
+```
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollTo/index.ts)
+
+## Interface
+```ts title="typescript"
+type ScrollBehavior = "auto" | "instant" | "smooth";
+
+interface ScrollOptions {
+  behavior?: ScrollBehavior; // default: 'auto'
+}
+
+interface ScrollToOptions extends ScrollOptions {
+  left?: number; // default: 0
+  top?: number; // default : 0
+}
+```
+```ts title="typescript"
+// 함수 오버로딩
+export function useScrollTo(autoScrollOptions?: ScrollToOptions): {
+  ref: React.MutableRefObject<Window | null>;
+  scrollTo: (scrollToOptions?: ScrollToOptions) => void;
+};
+
+export function useScrollTo<T extends HTMLElement>(
+  autoScrollOptions?: ScrollToOptions
+): {
+  ref: React.RefObject<T>;
+  scrollTo: (scrollToOptions?: ScrollToOptions) => void;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useScrollTo } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, scrollTo } = useScrollTo<HTMLDivElement>({
+    behavior: 'smooth',
+    left: 0,
+    top: 400,
+  });
+
+  const handleScroll = () => {
+    scrollTo({
+      behavior: 'smooth',
+      left: 0,
+      top: 800,
+    })
+  }
+  return (
+    <>
+      <button onClick={handleScroll}>스크롤</button>
+      <div ref={ref} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
+        <div style={{ height: '400px', background: 'green' }}>InnerBox1</dix>
+        <div style={{ height: '400px', background: 'red' }}>InnerBox2</dix>
+        <div style={{ height: '400px', background: 'blue' }}>InnerBox3</dix>
+      </div>
+    </>
+  );
+};
+```
+
+### Example
+
+export const Example = () => {
+  const { ref, scrollTo } = useScrollTo({
+    behavior: 'smooth',
+    left: 0,
+    top: 400,
+  }); // autoScrollOptions
+  const handleScroll = () => {
+    scrollTo({
+      behavior: 'smooth',
+      left: 0,
+      top: 800,
+    });
+  };
+  return (
+    <>
+      <button onClick={handleScroll}>스크롤</button>
+      <div ref={ref} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
+        <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
+        <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
+        <div style={{ height: '400px', background: 'blue' }}>InnerBox3</div>
+      </div>
+    </>
+  );
+};
+
+<Example />
