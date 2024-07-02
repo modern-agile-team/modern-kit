@@ -6,7 +6,37 @@ js에서 제공하는 [flatMap](https://developer.mozilla.org/en-US/docs/Web/Jav
 
 flatMapDeep은 `flat`과 동일하게 depth(default: `1`)만큼 배열을 평탄화하면서, `iteratee` 함수의 결과를 토대로 배열을 구성하는 함수입니다.
 
-lodash의 같은 flatMapDeep, flatMapDepth와 다르게 `depth`에 따른 타입을 정확하게 추론합니다.
+lodash의 `flatMapDeep`, `flatMapDepth`와 다르게 `depth`에 따른 타입을 정확하게 추론합니다.
+
+```ts title="typescript"
+const arr = [1, 2, [3, 4, [5, 6]]];
+
+const flattenArray1 = flatMapDeep(arr);
+// const flattenArray1: (number | (number | number[])[])[]
+// depth default: 1
+
+const flattenArray2 = flatMapDeep(arr, 1);
+// const flattenArray2: (number | (number | number[])[])[]
+
+const flattenArray3 = flatMapDeep(arr, 2);
+// const flattenArray3: (number | number[])[]
+```
+```ts title="typescript"
+const arr = [1, 2, [3, 4, [5, 6]]];
+
+const flattenArray1 = flatMapDeep(arr, 0, (item) => ({ id: item }));
+// const flattenArray1: (number | (number | number[])[])[]
+// depth가 자연수(1, 2, 3, ...)가 아니면 FlatArray가 적용됩니다.
+
+const flattenArray2 = flatMapDeep(arr, 1, (item) => ({ id: item }));
+// const flattenArray2: (number[] | { id: number })[];
+
+const flattenArray3 = flatMapDeep(arr, 2, (item) => ({ id: item }));
+// const flattenArray3: { id: number }[];
+
+const flattenArray4 = flatMapDeep(arr, Infinity, (item) => ({ id: item }));
+// const flattenArray4: { id: number }[];
+```
 
 ## Code
 
@@ -37,13 +67,17 @@ export function flatMapDeep<T, D extends number>(
 ): FlatArray<T[], D>[];
 
 /**
- * @example flatMapDeep([1, 2, [3, 4, [5, 6]]], 2, (item) => item * 2)
+ * @example
+ * flatMapDeep([1, 2, [3, 4, [5, 6]]], 0, (item) => item * 2): FlatArray<T[], D>[]
+ * flatMapDeep([1, 2, [3, 4, [5, 6]]], 1, (item) => item * 2): FlatArrayWithIteratee<T[], D, U>[]
  */
 export function flatMapDeep<T, D extends number, U>(
   arr: T[] | readonly T[],
   depth: D,
   iteratee: (item: ExtractNestedArrayType<T[]>) => U
-): FlatArrayWithIteratee<T[], D, U>[];
+): NaturalNumber<D> extends never
+  ? FlatArray<T[], D>[]
+  : FlatArrayWithIteratee<T[], D, U>[];
 ```
 
 ## Usage

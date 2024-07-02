@@ -1,4 +1,4 @@
-import { ExtractNestedArrayType } from '@modern-kit/types';
+import { ExtractNestedArrayType, NaturalNumber } from '@modern-kit/types';
 import { FlatArrayWithIteratee } from './flatMapDeep.interface';
 import { isArray } from '../../validator';
 
@@ -16,13 +16,17 @@ export function flatMapDeep<T, D extends number>(
 ): FlatArray<T[], D>[];
 
 /**
- * @example flatMapDeep([1, 2, [3, 4, [5, 6]]], 2, (item) => item * 2)
+ * @example
+ * flatMapDeep([1, 2, [3, 4, [5, 6]]], 0, (item) => item * 2): FlatArray<T[], D>[]
+ * flatMapDeep([1, 2, [3, 4, [5, 6]]], 1, (item) => item * 2): FlatArrayWithIteratee<T[], D, U>[]
  */
 export function flatMapDeep<T, D extends number, U>(
   arr: T[] | readonly T[],
   depth: D,
   iteratee: (item: ExtractNestedArrayType<T[]>) => U
-): FlatArrayWithIteratee<T[], D, U>[];
+): NaturalNumber<D> extends never
+  ? FlatArray<T[], D>[]
+  : FlatArrayWithIteratee<T[], D, U>[];
 
 export function flatMapDeep<T, D extends number, U>(
   arr: T[] | readonly T[],

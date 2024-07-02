@@ -28,8 +28,14 @@ describe('flatMapDeep', () => {
   });
 
   it('should apply the iteratee function to each element and flatten the array to the specified depth', () => {
+    const flattenArray0 = flatMapDeep(arr, 0, (item) => ({ id: item }));
     const flattenArray1 = flatMapDeep(arr, 1, (item) => ({ id: item }));
     const flattenArray2 = flatMapDeep(arr, 2, (item) => ({ id: item }));
+
+    expect(flattenArray0).toEqual(arr);
+    expectTypeOf(flattenArray0).toEqualTypeOf<
+      (number | (number | number[])[])[]
+    >();
 
     expect(flattenArray1).toEqual([
       { id: 1 },
