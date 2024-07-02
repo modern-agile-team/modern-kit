@@ -4,6 +4,7 @@ export * from './countOccurrencesInArray';
 export * from './difference';
 export * from './excludeElements';
 export * from './flatten';
+export * from './flatMapDeep';
 export * from './intersection';
 export * from './intersectionWithDuplicates';
 export * from './partition';
