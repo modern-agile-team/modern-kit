@@ -33,11 +33,9 @@ export function flatMapDeep<T, D extends number, U>(
   depth = 1 as D,
   iteratee?: (item: ExtractNestedArrayType<T[]>) => U
 ) {
-  if (depth < 1 || !arr.length) {
-    return arr;
-  }
+  const shouldUseFlat = !arr.length || depth < 1 || !iteratee;
 
-  if (!iteratee) {
+  if (shouldUseFlat) {
     return arr.flat(depth);
   }
 
