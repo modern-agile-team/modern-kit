@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 1.10.0
+
+### Minor Changes
+
+- [#283](https://github.com/modern-agile-team/modern-kit/pull/283) [`e2cc663`](https://github.com/modern-agile-team/modern-kit/commit/e2cc6633f85877ae566ec7869285792315ce9f34) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): isReference 유틸 함수 추가 - @Gaic4o
+
+- [#287](https://github.com/modern-agile-team/modern-kit/pull/287) [`ae52b01`](https://github.com/modern-agile-team/modern-kit/commit/ae52b0152bfd828474c8207c242a8b9e323fb9b6) Thanks [@Collection50](https://github.com/Collection50)! - feat(util): average 함수 구현
+
+- [`b377000`](https://github.com/modern-agile-team/modern-kit/commit/b3770009adfeb50590811913568a2cecb10d967a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): sum 함수 추가 - @Collection50
+
 ## 1.9.1
 
 ### Patch Changes

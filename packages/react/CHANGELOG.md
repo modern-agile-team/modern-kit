@@ -1,5 +1,15 @@
 # @modern-kit/react
 
+## 1.12.0
+
+### Minor Changes
+
+- [#281](https://github.com/modern-agile-team/modern-kit/pull/281) [`0954125`](https://github.com/modern-agile-team/modern-kit/commit/0954125e60516b83c1a538745b94e42bb08f0293) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useStepState 신규 커스텀 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [`d668f7f`](https://github.com/modern-agile-team/modern-kit/commit/d668f7fc37a33afd14d9865dc0d574c50684d9c3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): storage hook initialValue에 usePreservedState 적용 - @ssi02014
+
 ## 1.11.0
 
 ### Minor Changes
