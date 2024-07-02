@@ -32,7 +32,7 @@ describe('useScrollTo', () => {
     const div = document.createElement('div');
     div.scrollTo = vi.fn() as any;
 
-    result.current.ref.current = div;
+    (result.current.ref.current as any) = div;
 
     result.current.scrollTo(SCROLL_OPTIONS);
 

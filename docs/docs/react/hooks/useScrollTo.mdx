@@ -64,14 +64,14 @@ interface ScrollToOptions extends ScrollOptions {
 ```ts title="typescript"
 // 함수 오버로딩
 export function useScrollTo(autoScrollOptions?: ScrollToOptions): {
-  ref: React.MutableRefObject<Window>;
+  ref: React.MutableRefObject<Window | null>;
   scrollTo: (scrollToOptions?: ScrollToOptions) => void;
 };
 
 export function useScrollTo<T extends HTMLElement>(
   autoScrollOptions?: ScrollToOptions
 ): {
-  ref: React.MutableRefObject<T>;
+  ref: React.RefObject<T | null>;
   scrollTo: (scrollToOptions?: ScrollToOptions) => void;
 };
 ```

@@ -10,7 +10,7 @@ export function useScrollTo(autoScrollOptions?: ScrollToOptions): {
 export function useScrollTo<T extends HTMLElement>(
   autoScrollOptions?: ScrollToOptions
 ): {
-  ref: React.MutableRefObject<T | null>;
+  ref: React.RefObject<T | null>;
   scrollTo: (scrollToOptions?: ScrollToOptions) => void;
 };
 
