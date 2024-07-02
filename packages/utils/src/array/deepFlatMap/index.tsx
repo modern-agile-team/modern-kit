@@ -25,11 +25,11 @@ export function deepFlatMap<T, D extends number, U>(
   iteratee?: (item: ExtractNestedArrayType<T[]>) => U
 ) {
   if (depth < 1 || !arr.length) {
-    return arr as FlatArray<T[], D>;
+    return arr;
   }
 
   if (!iteratee) {
-    return arr.flat(depth) as FlatArray<T[], D>;
+    return arr.flat(depth);
   }
 
   const recursiveFlat = (
