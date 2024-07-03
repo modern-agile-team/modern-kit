@@ -63,7 +63,9 @@ export const deepCopy = <T>(value: T) => {
     );
 
     referenceMap.set(target, newObject);
-    for (const key in target) {
+    const keys = Reflect.ownKeys(target); // symbol 유지
+
+    for (const key of keys) {
       if (hasProperty(target, key)) {
         newObject[key] = copyWthRecursion(
           (target as Record<PropertyKey, any>)[key]
