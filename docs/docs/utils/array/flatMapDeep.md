@@ -25,14 +25,14 @@ type ExtractNestedArrayType<T> = T extends readonly (infer U)[]
  */
 export function flatMapDeep<T>(
   arr: T[] | readonly T[]
-): ExtractNestedArrayType<T[]>[];
+): ExtractNestedArrayType<T>[];
 
 /**
  * @example flatMapDeep([1, 2, [3, 4, [5, 6]]], (item) => ({ id: item }))
  */
 export function flatMapDeep<T, U>(
   arr: T[] | readonly T[],
-  iteratee: (item: ExtractNestedArrayType<T[]>) => U
+  iteratee: (item: ExtractNestedArrayType<T>) => U
 ): U[];
 ```
 
