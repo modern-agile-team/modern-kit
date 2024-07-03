@@ -7,6 +7,7 @@ export * from './isMIMEType';
 export * from './isNotNullish';
 export * from './isNullish';
 export * from './isNumber';
+export * from './isPlainObject';
 export * from './isPrimitive';
 export * from './isPromise';
 export * from './isReference';
