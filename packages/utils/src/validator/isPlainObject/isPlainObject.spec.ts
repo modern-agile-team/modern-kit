@@ -1,12 +1,12 @@
 import { isPlainObject } from '.';
 
 describe('isPlainObject', () => {
-  it('should return true for the object.', () => {
+  it('should return true for the plain object.', () => {
     expect(isPlainObject({})).toBe(true);
     expect(isPlainObject(new Object())).toBe(true);
   });
 
-  it('should return false for non objects', () => {
+  it('should return false for non plain object', () => {
     expect(isPlainObject(function () {})).toBe(false);
     expect(isPlainObject(() => {})).toBe(false);
     expect(isPlainObject([])).toBe(false);
