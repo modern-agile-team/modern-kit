@@ -1,5 +1,3 @@
-import { hasProperty } from '../../validator';
-
 export const deepCopy = <T>(value: T) => {
   const referenceMap = new WeakMap();
 
@@ -66,11 +64,9 @@ export const deepCopy = <T>(value: T) => {
     const keys = Reflect.ownKeys(target); // symbol 유지
 
     for (const key of keys) {
-      if (hasProperty(target, key)) {
-        newObject[key] = copyWthRecursion(
-          (target as Record<PropertyKey, any>)[key]
-        );
-      }
+      newObject[key] = copyWthRecursion(
+        (target as Record<PropertyKey, any>)[key]
+      );
     }
 
     return newObject as T;
