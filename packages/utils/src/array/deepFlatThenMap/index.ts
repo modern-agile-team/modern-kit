@@ -25,5 +25,5 @@ export function deepFlatThenMap<T, U>(
     return flattenList;
   }
 
-  return flattenList.map((item) => iteratee(item));
+  return flattenList.map(iteratee);
 }
