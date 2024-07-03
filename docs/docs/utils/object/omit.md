@@ -1,8 +1,8 @@
 # omit
 
-인자로 넣은 `keys`를 생략한 객체를 반환하는 함수입니다. 반환된 객체는 `깊은 복사된 새로운 객체`입니다.
+첫 번째 인자로 넣은 `객체`를 기준으로 두 번째 인자로 넣은 `keys` 요소에 대응하는 프로퍼티를 생략한 객체를 반환하는 함수입니다.
 
-`symbol`은 제외됩니다.
+반환된 객체는 `깊은 복사된 새로운 객체`입니다.
 
 <br />
 
@@ -11,25 +11,15 @@
 
 ## Interface
 ```ts title="typescript"
-type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
-  keyof T,
-  symbol
->;
-
-const omit: <
-  T extends Record<PropertyKey, T[keyof T]>,
-  K extends ObjectKeys<T>
->(
+const omit: <T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
-  keys: K | K[]
-) => Omit<Record<ObjectKeys<T>, T[ObjectKeys<T>]>, K>;
+  keys: K[]
+) => Omit<T, K>;
 ```
 
 ## Usage
 ```ts title="typescript"
 import { omit } from '@modern-kit/utils';
 
-const symbol = Symbol('d');
-const omittedObj1 = omit({ a: 1, b: 2, c: 3, [symbol]: 4 }, 'b'); // { a: 1, c: 3 }
-const omittedObj1 = omit({ a: 1, b: 2, c: 3, d: 4, [symbol]: 4 }, ['a', 'd']); // { b: 2, c: 3 }
+omit({ a: 1, b: 2, c: 3, d: 4 }, ['a', 'd']); // { b: 2, c: 3 }
 ```

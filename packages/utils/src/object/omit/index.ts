@@ -1,23 +1,14 @@
-import { ObjectKeys } from '@modern-kit/types';
-import { deepCopy } from '../../common/deepCopy';
-import { wrapInArray } from '../../common/wrapInArray';
-import { hasProperty } from '../../validator';
+import { deepCopy } from '../../common';
 
-export const omit = <
-  T extends Record<PropertyKey, T[keyof T]>,
-  K extends ObjectKeys<T>
->(
+export const omit = <T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
-  keys: K | K[]
-): Omit<Record<ObjectKeys<T>, T[ObjectKeys<T>]>, K> => {
+  keys: K[]
+): Omit<T, K> => {
   const result = deepCopy(obj);
-  const wrappedInArrayKeys = wrapInArray(keys);
 
-  wrappedInArrayKeys.forEach((key) => {
-    if (hasProperty(result, key)) {
-      delete result[key];
-    }
-  });
+  for (const key of keys) {
+    delete result[key];
+  }
 
   return result;
 };
