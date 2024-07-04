@@ -1,4 +1,5 @@
 import { ExtractNestedArrayType } from '@modern-kit/types';
+import { flatten } from '../../array';
 
 /**
  * @example deepFlatThenMap([1, 2, [3, 4, [5, 6]]])
@@ -19,7 +20,7 @@ export function deepFlatThenMap<T, U>(
   arr: T[] | readonly T[],
   iteratee?: (item: ExtractNestedArrayType<T>) => U
 ) {
-  const flattenList = arr.flat(Infinity) as ExtractNestedArrayType<T>[];
+  const flattenList = flatten(arr, Infinity) as ExtractNestedArrayType<T>[];
 
   if (!iteratee) {
     return flattenList;
