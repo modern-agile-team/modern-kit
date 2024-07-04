@@ -2,9 +2,9 @@
 
 중첩 배열을 `평탄화`해주는 함수입니다. `depth` 옵션으로 평탄화 깊이를 직접 지정 할 수 있습니다.
 
-JS에서 기본적으로 제공하는 [flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)은 기본적으로 성능이 안좋습니다.
+JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)은 성능이 좋지 않습니다.
 
-해당 flatten 함수는 `js의 flat`과 `lodash의 flattenDepth`보다 성능적으로 우수합니다.
+제공하는 flatten 함수는 `JS의 flat`과 `lodash의 flattenDepth`보다 성능적으로 우수합니다.
 
 ![스크린샷 2024-07-05 오전 12 52 52](https://github.com/modern-agile-team/modern-kit/assets/64779472/ec47c879-6346-4f47-8ad1-006c00ce3d71)
 
