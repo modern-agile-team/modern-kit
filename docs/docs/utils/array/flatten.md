@@ -1,6 +1,6 @@
 # flatten
 
-중첩 배열을 평탄화해주는 함수입니다.
+중첩 배열을 `평탄화`해주는 함수입니다. `depth` 옵션으로 평탄화 깊이를 직접 지정 할 수 있습니다.
 
 JS에서 기본적으로 제공하는 [flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)은 기본적으로 성능이 안좋습니다.
 
@@ -24,8 +24,8 @@ type FlatArray<Arr, Depth extends number> = {
 ```
 ```ts title="typescript"
 const flatten: <T, D extends number>(
-  arr: readonly T[],
-  depth?: D
+  arr: T[] | readonly T[],
+  depth?: D // default: 1
 ) => FlatArray<T[], D>[];
 ```
 
