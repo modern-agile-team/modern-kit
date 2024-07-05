@@ -1,11 +1,16 @@
-import { identity } from '../../common';
-
-export const excludeElements = <T, U = T>(
+export const excludeElements = <T, U>(
   array: T[] | readonly T[],
   excludeArray: T[] | readonly T[],
-  iteratee: (item: T) => U = identity as (item: T) => U
+  iteratee?: (item: T) => U
 ) => {
-  const excludeSet = new Set(excludeArray.map(iteratee));
+  const excludeArrayToUse = iteratee
+    ? excludeArray.map(iteratee)
+    : excludeArray;
 
-  return array.filter((element) => !excludeSet.has(iteratee(element)));
+  const exclusionSet = new Set<T | U>(excludeArrayToUse);
+
+  if (iteratee) {
+    return array.filter((element) => !exclusionSet.has(iteratee(element)));
+  }
+  return array.filter((element) => !exclusionSet.has(element));
 };

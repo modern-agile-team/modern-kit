@@ -12,10 +12,10 @@
 
 ## Interface
 ```ts title="typescript"
-const excludeElements: <T, U = T>(
+const excludeElements: <T, U>(
   array: T[] | readonly T[],
   excludeArray: T[] | readonly T[],
-  iteratee?: (item: T) => U
+  iteratee?: ((item: T) => U) | undefined
 ) => T[];
 ```
 
