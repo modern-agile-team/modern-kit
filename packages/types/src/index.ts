@@ -3,6 +3,7 @@ export * from './ArrayWithReadonly';
 export * from './ExcludeNullish';
 export * from './ExtendOmittedProperties';
 export * from './ExtractMapType';
+export * from './ExtractNestedArrayType';
 export * from './ExtractSetType';
 export * from './IndexSignature';
 export * from './Integer';
