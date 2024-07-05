@@ -1,4 +1,4 @@
-export const flatten = <T, D extends number>(
+export const flatten = <T, D extends number = 1>(
   arr: T[] | readonly T[],
   depth = 1 as D
 ) => {

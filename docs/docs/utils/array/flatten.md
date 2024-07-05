@@ -23,7 +23,7 @@ type FlatArray<Arr, Depth extends number> = {
 }[Depth extends -1 ? "done" : "recur"];
 ```
 ```ts title="typescript"
-const flatten: <T, D extends number>(
+const flatten: <T, D extends number = 1>(
   arr: T[] | readonly T[],
   depth?: D // default: 1
 ) => FlatArray<T[], D>[];
