@@ -12,7 +12,7 @@ Plain Object란, 기본적으로 `객체 리터럴({})` 혹은 `new Object()`로
 
 ## Interface 
 ```ts title="typescript"
-export const isPlainObject: (value: unknown) => value is object;
+const isPlainObject: (value: unknown) => value is Record<PropertyKey, any>
 ```
 
 ## Usage
