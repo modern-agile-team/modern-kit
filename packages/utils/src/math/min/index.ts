@@ -13,14 +13,14 @@ export function min<T>(
   let minValue = Number.MAX_SAFE_INTEGER;
   let minItem = arr[0];
 
-  arr.forEach((item) => {
+  for (const item of arr) {
     const value = iteratee(item);
 
     if (value < minValue) {
       minItem = item;
       minValue = value;
     }
-  });
+  }
 
   return minItem;
 }

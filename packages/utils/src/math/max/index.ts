@@ -13,14 +13,14 @@ export function max<T>(
   let maxValue = Number.MIN_SAFE_INTEGER;
   let maxItem = arr[0];
 
-  arr.forEach((item) => {
+  for (const item of arr) {
     const value = iteratee(item);
 
     if (value > maxValue) {
       maxItem = item;
       maxValue = value;
     }
-  });
+  }
 
   return maxItem;
 }
