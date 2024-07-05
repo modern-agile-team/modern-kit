@@ -1,5 +1,5 @@
 export type Reference =
-  | object
+  | Record<PropertyKey, any>
   | any[]
   | Function
   | Set<any>
