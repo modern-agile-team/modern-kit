@@ -4,8 +4,8 @@ const goDeepEqual = <T, U>(
   baseArray: readonly T[] | U[],
   cmpArray: readonly T[] | U[]
 ) => {
-  return (cmpArray as any).every((cObj) =>
-    baseArray.some((bObj) => deepEqual(bObj, cObj))
+  return (cmpArray as any).every((cObj: T | U) =>
+    baseArray.some((bObj: T | U) => deepEqual(bObj, cObj))
   );
 };
 
@@ -25,5 +25,5 @@ export const isSubset = <T, U>(
   // 배열 요소가 원시값인 경우 (Set 적용)
   const baseSet = new Set<T | U>(baseArray);
 
-  return (cmpArray as any).every((el) => baseSet.has(el));
+  return (cmpArray as any).every((el: T | U) => baseSet.has(el));
 };
