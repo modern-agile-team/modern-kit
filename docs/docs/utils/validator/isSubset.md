@@ -44,84 +44,47 @@ console.log(isSubset(parentArray, childArray2)); // false
 ```
 
 ```ts title="typescript"
-// 깊이가 2 이상의 배열
+// 요소 타입이 배열인 경우
 import { isSubset } from '@modern-kit/utils';
 
-const parentArray = [[0, 1, 2, 3, 4], [2, 3, 4, 5, 6]];
+const parentArray = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9]];
 const childArray1 = [[0, 1, 2, 3, 4]];
-const childArray2 = [[2, 3, 4, 5]];
+const childArray2 = [[0, 1, 7, 4, 9]];
 
-console.log(isSubset(parentArray, childArray1)); // true
-console.log(isSubset(parentArray, childArray2)); // false
+isSubset(parentArray, childArray1); // false, 요소가 참조형(배열)이므로, 주소값이 달라 false를 반환한다.
+isSubset(parentArray, childArray2, (obj) => obj[2]); // true  ([2,7], [7])
+isSubset(parentArray, childArray2, (obj) => obj[3]); // false ([3,8], [4])
 ```
 
 ```ts title="typescript
 // 깊이가 2 이상의 오브젝트
 import { isSubset } from '@modern-kit/utils';
-type user = {
-  name: string;
-  age: number;
-  bestFriend: {
-    name: string;
-    age: number;
-  };
-  friends: string[];
-};
-
-const parentArray: user[] = [
+const parentArray = [
   {
     name: 'Peter',
     age: 13,
-    bestFriend: {
-      name: 'Aimee',
-      age: 25,
-    },
-    friends: ['Charlie', 'Chuck', 'Catherine'],
   },
   {
     name: 'Aimee',
     age: 25,
-    bestFriend: {
-      name: 'Charlie',
-      age: 19,
-    },
-    friends: ['Peter', 'Chuck', 'Catherine'],
   },
 ];
 
-// parentArray[1] 과 동일 요소를 가짐.
-const childArray1: user[] = [
+const childArray1 = [
   {
     name: 'Aimee',
     age: 25,
-    bestFriend: {
-      name: 'Charlie',
-      age: 19,
-    },
-    friends: ['Peter', 'Chuck', 'Catherine'],
   },
 ];
 
-// parentArray[0]의 friends의 마지막 요소가 다름.
-const childArray2: user[] = [
+const childArray2 = [
   {
     name: 'Peter',
-    age: 13,
-    bestFriend: {
-      name: 'Aimee',
-      age: 25,
-    },
-    friends: ['Charlie', 'Chuck', 'bell'],
+    age: 15,
   },
 ];
 
-console.log(isSubset(parentArray, childArray1)); // true
-console.log(isSubset(parentArray, childArray2)); // false
-console.log(
-  isSubset(parentArray, childArray2, (obj: user) => {
-    return {
-      name: obj.name,
-      bestFriend: obj.bestFriend,
-    };
-  })
-); // true, parentArray[0]와 childArray2[0]는 friends 항목만 다르므로, iteratee 적용시 부분집합 관계가 성립할 수 있다.
+isSubset(parentArray, childArray1); // false, 요소가 참조형(객체)이므로, 주소값이 달라 false를 반환한다
+isSubset(parentArray, childArray1, (obj) => JSON.stringify(obj)); // true
+isSubset(parentArray, childArray2, (obj) => JSON.stringify(obj)); // false
+isSubset(parentArray, childArray2, (obj) => obj.name); // true
