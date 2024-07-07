@@ -17,89 +17,56 @@ describe('isSubset', () => {
 
     expect(isSubset(parentArray, childArray1)).toBeTruthy();
     expect(isSubset(parentArray, childArray2)).toBeFalsy();
+    expect(
+      isSubset(parentArray, childArray2, (el) => new Number(el))
+    ).toBeTruthy();
   });
 
   it('if elements type is array', () => {
     const parentArray = [
       [0, 1, 2, 3, 4],
-      [2, 3, 4, 5, 6],
+      [5, 6, 7, 8, 9],
     ];
-    const childArray1 = [[0, 1, 2, 3, 4]];
-    const childArray2 = [[2, 3, 4, 5]];
+    const childArray = [[0, 1, 7, 4, 9]];
 
-    expect(isSubset(parentArray, childArray1)).toBeTruthy();
-    expect(isSubset(parentArray, childArray2)).toBeFalsy();
-    expect(isSubset(parentArray, childArray1, (obj) => obj[0])).toBeTruthy();
-    expect(isSubset(parentArray, childArray2, (obj) => obj[0])).toBeTruthy();
+    expect(isSubset(parentArray, childArray)).toBeFalsy();
+    expect(isSubset(parentArray, childArray, (obj) => obj[2])).toBeTruthy(); // [2,7], [7];
+    expect(isSubset(parentArray, childArray, (obj) => obj[3])).toBeFalsy(); // [3,8], [4]
   });
 
   it('if elements type is reference', () => {
-    type user = {
-      name: string;
-      age: number;
-      bestFriend: {
-        name: string;
-        age: number;
-      };
-      friends: string[];
-    };
-
-    const parentArray: user[] = [
+    const parentArray = [
       {
         name: 'Peter',
         age: 13,
-        bestFriend: {
-          name: 'Aimee',
-          age: 25,
-        },
-        friends: ['Charlie', 'Chuck', 'Catherine'],
       },
       {
         name: 'Aimee',
         age: 25,
-        bestFriend: {
-          name: 'Charlie',
-          age: 19,
-        },
-        friends: ['Peter', 'Chuck', 'Catherine'],
       },
     ];
 
-    // parentArray[1] 과 동일 요소를 가짐.
-    const childArray1: user[] = [
+    const childArray1 = [
       {
         name: 'Aimee',
         age: 25,
-        bestFriend: {
-          name: 'Charlie',
-          age: 19,
-        },
-        friends: ['Peter', 'Chuck', 'Catherine'],
       },
     ];
 
-    // parentArray[0]의 friends의 마지막 요소가 다름.
-    const childArray2: user[] = [
+    const childArray2 = [
       {
         name: 'Peter',
-        age: 13,
-        bestFriend: {
-          name: 'Aimee',
-          age: 25,
-        },
-        friends: ['Charlie', 'Chuck', 'bell'],
+        age: 15,
       },
     ];
 
-    expect(isSubset(parentArray, childArray1)).toBeTruthy();
-    expect(isSubset(parentArray, childArray2)).toBeFalsy();
+    expect(isSubset(parentArray, childArray1)).toBeFalsy();
     expect(
-      isSubset(parentArray, childArray2, (obj: user) => {
-        return {
-          name: obj.name,
-          bestFriend: obj.bestFriend,
-        };
-      })
+      isSubset(parentArray, childArray1, (obj) => JSON.stringify(obj))
     ).toBeTruthy();
+    expect(
+      isSubset(parentArray, childArray2, (obj) => JSON.stringify(obj))
+    ).toBeFalsy();
+    expect(isSubset(parentArray, childArray2, (obj) => obj.name)).toBeTruthy();
   });
 });
