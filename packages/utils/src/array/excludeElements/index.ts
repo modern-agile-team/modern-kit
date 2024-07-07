@@ -3,14 +3,13 @@ export const excludeElements = <T, U>(
   excludeArray: T[] | readonly T[],
   iteratee?: (item: T) => U
 ) => {
-  const excludeArrayToUse = iteratee
-    ? excludeArray.map(iteratee)
-    : excludeArray;
+  const exclusionSet = new Set<U | T>(
+    iteratee ? excludeArray.map(iteratee) : excludeArray
+  );
 
-  const exclusionSet = new Set<T | U>(excludeArrayToUse);
+  const filterFn = iteratee
+    ? (element: T) => !exclusionSet.has(iteratee(element))
+    : (element: T) => !exclusionSet.has(element);
 
-  if (iteratee) {
-    return array.filter((element) => !exclusionSet.has(iteratee(element)));
-  }
-  return array.filter((element) => !exclusionSet.has(element));
+  return array.filter(filterFn);
 };
