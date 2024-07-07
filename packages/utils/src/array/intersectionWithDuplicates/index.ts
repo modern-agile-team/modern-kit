@@ -1,13 +1,15 @@
-import { identity } from '../../common';
-
-export const intersectionWithDuplicates = <T, U = T>(
+export const intersectionWithDuplicates = <T, U>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
-  iteratee: (item: T) => T | U = identity,
+  iteratee?: (item: T) => U
 ) => {
-  const secondArrSetAppliedIteratee = new Set(secondArr.map(iteratee));
-
-  return firstArr.filter((item) =>
-    secondArrSetAppliedIteratee.has(iteratee(item)),
+  const secondArrToSet = new Set<T | U>(
+    iteratee ? secondArr.map(iteratee) : secondArr
   );
+
+  const filterFn = iteratee
+    ? (element: T) => secondArrToSet.has(iteratee(element))
+    : (element: T) => secondArrToSet.has(element);
+
+  return firstArr.filter(filterFn);
 };

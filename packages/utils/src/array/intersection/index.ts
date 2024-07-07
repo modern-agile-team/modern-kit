@@ -1,16 +1,14 @@
-import { identity } from '../../common';
-
 import { intersectionWithDuplicates, uniq } from '..';
 
-export const intersection = <T, U = T>(
+export const intersection = <T, U>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
-  iteratee: (item: T) => T | U = identity,
+  iteratee?: (item: T) => U
 ) => {
   const intersection = intersectionWithDuplicates(
     firstArr,
     secondArr,
-    iteratee,
+    iteratee
   );
 
   return uniq(intersection, iteratee);
