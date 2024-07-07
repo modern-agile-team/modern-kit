@@ -17,11 +17,11 @@
 
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/intersection|349,708.54|0.0002|`fastest`|
-|lodash/intersectionBy|163,209.81|0.0002|`slowest`|
+|modern-kit/intersection|338,190.49|0.0030|`fastest`|
+|lodash/intersectionBy|159,624.82|0.0063|`slowest`|
 
 - **modern-kit/intersection**
-  - `2.14x` faster than lodash/intersectionBy
+  - `2.12x` faster than lodash/intersectionBy
 
 ## Interface
 ```ts title="typescript"
