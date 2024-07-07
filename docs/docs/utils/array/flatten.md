@@ -11,7 +11,7 @@ JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.m
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/flatten/index.ts)
 
-## benchmark
+## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
