@@ -17,9 +17,7 @@ describe('isSubset', () => {
 
     expect(isSubset(parentArray, childArray1)).toBeTruthy();
     expect(isSubset(parentArray, childArray2)).toBeFalsy();
-    expect(
-      isSubset(parentArray, childArray2, (el) => new Number(el))
-    ).toBeTruthy();
+    expect(isSubset(parentArray, childArray2, (el) => Number(el))).toBeTruthy();
   });
 
   it('if elements type is array', () => {
