@@ -20,6 +20,7 @@
   "scripts": {
     "test": "vitest --typecheck",
     "test:run": "vitest run --coverage --typecheck",
+    "test:bench": "vitest bench",
     "build": "rm -rf dist && rollup -c",
     "typecheck": "tsc --noEmit"
   },
@@ -34,9 +35,11 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.2",
+    "@types/lodash-es": "^4",
     "@vitest/coverage-istanbul": "^1.5.2",
     "esbuild": "^0.23.0",
     "jsdom": "^24.0.0",
+    "lodash-es": "^4.17.21",
     "rollup": "^4.14.3",
     "rollup-plugin-esbuild": "^6.1.1",
     "tslib": "^2.6.2",

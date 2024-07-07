@@ -6,12 +6,24 @@ JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.m
 
 제공하는 flatten 함수는 `JS의 flat`과 `lodash의 flattenDepth`보다 성능적으로 우수합니다.
 
-![스크린샷 2024-07-05 오전 12 52 52](https://github.com/modern-agile-team/modern-kit/assets/64779472/ec47c879-6346-4f47-8ad1-006c00ce3d71)
-
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/flatten/index.ts)
+
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/flatten|5,819,693.59|0.0002|`fastest`|
+|lodash/flattenDepth|4,023,776.90|0.0002|-|
+|js built-in/flat|831,811.86|0.0012|`slowest`|
+
+- **modern-kit/flatten**
+  - `1.34x` faster than lodash/flattenDepth
+  - `6.50x` faster than js built-in/flat
 
 ## Interface
 ```ts title="typescript"
