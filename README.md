@@ -136,27 +136,18 @@ yarn build:docs
 
 <br />
 
-## Stack
-- Node v20
-- React, TypeScript
-- Vitest, React-Testing-Library
-- Rollup, ESBuild
-- Yarn Berry(v4) & Workspaces
-- Lerna (for Versioning & Publishing)
-- docusaurus (documentation)
-
-<br />
-
 ## Tools
 
-- `Yarn Berry`와 `workspaces`를 활용해 **Monolithic Repository** 환경을 구축
+- `Yarn Berry(v4)`와 `workspaces`를 활용해 **Monolithic Repository** 환경을 구축
   - packages 내부의 패키지들은 **로컬 패키지**처럼 **상호 의존성**을 갖습니다.
 - `lerna`를 활용한 **통합 빌드**, **통합 테스트**, **통합 배포** 환경 구축
 - `github actions`를 활용한 **CI/CD** 구축
 - `changeset`을 활용한 모노레포 환경에서 **패키지 일관성 유지** 및 **NPM 배포** 진행
 - `dependabot`을 활용한 **자동 의존성** 관리
-- `codecov`를 활용한 **테스트 코드 커버리지 체크** 및 **신뢰성 있는 코드** 제공
-- `docusaurus`를 활용한 **문서화**
+- `codecov`를 활용한 **테스트 코드 커버리지 리포트** 및 **신뢰성 있는 코드** 제공
+- `docusaurus`를 활용한 **공식 문서 제공**
+- `vitest`를 활용한 **테스트 코드 작성 및 테스트** 진행
+  - @modern-kit/utils의 경우 `Benchmark` 테스트 포함
 
 <br />
 
