@@ -1,15 +1,20 @@
-import { identity } from '../../common';
-
 export const difference = <T, U = T>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
-  iteratee: (item: T) => T | U = identity,
+  iteratee?: (item: T) => U
 ) => {
-  const appliedIterateeSecondSet = new Set(secondArr.map(iteratee));
+  const result = [];
+  const secondSet = new Set<T | U>(
+    iteratee ? secondArr.map(iteratee) : secondArr
+  );
 
-  return firstArr.filter((firstArrItem) => {
-    const appliedIterateeFirstArrItem = iteratee(firstArrItem);
+  for (const item of firstArr) {
+    const mappedItem = iteratee ? iteratee(item) : item;
 
-    return !appliedIterateeSecondSet.has(appliedIterateeFirstArrItem);
-  });
+    if (!secondSet.has(mappedItem)) {
+      result.push(item);
+    }
+  }
+
+  return result;
 };
