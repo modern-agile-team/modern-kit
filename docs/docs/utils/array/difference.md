@@ -9,6 +9,18 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/difference/index.ts)
 
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/difference|2,768,995.87|0.0004|`fastest`|
+|lodash/differenceBy|1,538,329.26|0.0007|`slowest`|
+
+- **modern-kit/difference**
+  - `1.80x` faster than lodash/differenceBy
+
 ## Interface
 ```ts title="typescript"
 const difference: <T, U = T>(
