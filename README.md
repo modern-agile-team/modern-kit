@@ -108,6 +108,21 @@ yarn build
 
 <br />
 
+## Benchmark
+- @modern-kit/utils의 경우 `benchmark` 테스트를 진행 할 수 있습니다.
+- `packages/utils` 폴더에서 아래 명령어를 실행하면 `전체 benchmark 테스트 코드`를 실행 할 수 있습니다.
+
+```shell
+yarn test:bench
+```
+
+- `개별 benchmark 테스트 코드`를 실행하려면 아래와 같이 실행 할 수 있습니다.
+```shell
+yarn test:bench flatten.bench.ts
+```
+
+<br />
+
 ## Documentation
 - @modern-kit은 [docusaurus](https://docusaurus.io/)를 기반으로 문서화 작업을 진행합니다.
 ```shell
@@ -135,6 +150,7 @@ yarn build:docs
 </a>
 
 <br />
+<br />
 
 ## Tools
 
@@ -153,5 +169,3 @@ yarn build:docs
 
 ## License
 MIT © Modern Agile. See [LICENSE](./LICENSE) for details.
-
-<br />
