@@ -7509,9 +7509,11 @@ const RAW_RUNTIME_STATE =
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:15.2.3"],\
           ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4"],\
           ["@rollup/plugin-typescript", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:11.1.6"],\
+          ["@types/lodash-es", "npm:4.17.12"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:1.6.0"],\
           ["esbuild", "npm:0.23.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:24.1.0"],\
+          ["lodash-es", "npm:4.17.21"],\
           ["rollup", "npm:4.18.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.1.1"],\
           ["tslib", "npm:2.6.2"],\
