@@ -1,39 +1,39 @@
 import { isSubset } from '.';
 
 describe('isSubset', () => {
-  it('if the childArray is a subset of the parentArray', () => {
-    const parentArray = [1, 2, 3, 4];
-    const childArray1 = [1, 3];
-    const childArray2 = [1, 5];
+  it('should correctly determine if the subset arrays are subsets of the superset array', () => {
+    const superset = [1, 2, 3, 4];
+    const subset1 = [1, 3];
+    const subset2 = [1, 5];
 
-    expect(isSubset(parentArray, childArray1)).toBeTruthy();
-    expect(isSubset(parentArray, childArray2)).toBeFalsy();
+    expect(isSubset(superset, subset1)).toBeTruthy();
+    expect(isSubset(superset, subset2)).toBeFalsy();
   });
 
-  it('if the type is dfferent between comparison elements', () => {
-    const parentArray = ['1', 2, 3, 4];
-    const childArray1 = ['1', 2, 3];
-    const childArray2 = [1, '2', 3];
+  it('should return the correct result if the types are different between comparison elements', () => {
+    const superset = ['1', 2, 3, 4];
+    const subset1 = ['1', 2, 3];
+    const subset2 = [1, '2', 3];
 
-    expect(isSubset(parentArray, childArray1)).toBeTruthy();
-    expect(isSubset(parentArray, childArray2)).toBeFalsy();
-    expect(isSubset(parentArray, childArray2, (el) => Number(el))).toBeTruthy();
+    expect(isSubset(superset, subset1)).toBeTruthy();
+    expect(isSubset(superset, subset2)).toBeFalsy();
+    expect(isSubset(superset, subset2, (el) => Number(el))).toBeTruthy();
   });
 
-  it('if elements type is array', () => {
-    const parentArray = [
+  it('should handle elements of type array correctly', () => {
+    const superset = [
       [0, 1, 2, 3, 4],
       [5, 6, 7, 8, 9],
     ];
-    const childArray = [[0, 1, 7, 4, 9]];
+    const subset = [[0, 1, 7, 4, 9]];
 
-    expect(isSubset(parentArray, childArray)).toBeFalsy();
-    expect(isSubset(parentArray, childArray, (obj) => obj[2])).toBeTruthy(); // [2,7], [7];
-    expect(isSubset(parentArray, childArray, (obj) => obj[3])).toBeFalsy(); // [3,8], [4]
+    expect(isSubset(superset, subset)).toBeFalsy();
+    expect(isSubset(superset, subset, (arr) => arr[2])).toBeTruthy(); // [2,7], [7];
+    expect(isSubset(superset, subset, (arr) => arr[3])).toBeFalsy(); // [3,8], [4]
   });
 
-  it('if elements type is reference', () => {
-    const parentArray = [
+  it('should handle elements of type reference correctly', () => {
+    const superset = [
       {
         name: 'Peter',
         age: 13,
@@ -44,27 +44,27 @@ describe('isSubset', () => {
       },
     ];
 
-    const childArray1 = [
+    const subset1 = [
       {
         name: 'Aimee',
         age: 25,
       },
     ];
 
-    const childArray2 = [
+    const subset2 = [
       {
         name: 'Peter',
         age: 15,
       },
     ];
 
-    expect(isSubset(parentArray, childArray1)).toBeFalsy();
+    expect(isSubset(superset, subset1)).toBeFalsy();
     expect(
-      isSubset(parentArray, childArray1, (obj) => JSON.stringify(obj))
+      isSubset(superset, subset1, (obj) => JSON.stringify(obj))
     ).toBeTruthy();
     expect(
-      isSubset(parentArray, childArray2, (obj) => JSON.stringify(obj))
+      isSubset(superset, subset2, (obj) => JSON.stringify(obj))
     ).toBeFalsy();
-    expect(isSubset(parentArray, childArray2, (obj) => obj.name)).toBeTruthy();
+    expect(isSubset(superset, subset2, (obj) => obj.name)).toBeTruthy();
   });
 });
