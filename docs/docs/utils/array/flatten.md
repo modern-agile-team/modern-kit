@@ -17,13 +17,13 @@ JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.m
 
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/flatten|5,819,693.59|0.0002|`fastest`|
-|lodash/flattenDepth|4,023,776.90|0.0002|-|
-|js built-in/flat|831,811.86|0.0012|`slowest`|
+|modern-kit/flatten|2,303,725.15|0.0004|`fastest`|
+|lodash/flattenDepth|1,546,277.36|0.0006|-|
+|js built-in/flat|346,378.13|0.0029|`slowest`|
 
 - **modern-kit/flatten**
-  - `1.34x` faster than lodash/flattenDepth
-  - `6.50x` faster than js built-in/flat
+  - `1.49x` faster than lodash/flattenDepth
+  - `6.65x` faster than js built-in/flat
 
 ## Interface
 ```ts title="typescript"
