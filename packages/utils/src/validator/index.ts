@@ -12,7 +12,7 @@ export * from './isPrimitive';
 export * from './isPromise';
 export * from './isReference';
 export * from './isString';
+export * from './isSubset';
 export * from './isValidEmail';
 export * from './isValidPassword';
 export * from './isValidPhoneNumberFormat';
-export * from './isSubset';

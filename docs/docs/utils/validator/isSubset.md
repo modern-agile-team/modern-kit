@@ -87,4 +87,5 @@ const subset2 = [
 isSubset(superset, subset1); // false, 요소가 참조형(객체)이므로, 주소값이 달라 false를 반환한다
 isSubset(superset, subset1, (obj) => JSON.stringify(obj)); // true
 isSubset(superset, subset2, (obj) => JSON.stringify(obj)); // false
-isSubset(superset, subset2, (obj) => obj.name); // true
+isSubset(superset, subset2, (obj) => obj.name); // true, name으로 판단
+```
