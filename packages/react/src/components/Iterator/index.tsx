@@ -3,18 +3,20 @@ import React, { useCallback } from 'react';
 
 export interface IteratorProps<T> {
   items: T[] | readonly T[] | undefined;
-  itemKey?: string;
+  itemKey?: T extends Record<PropertyKey, any> ? keyof T : string;
   renderItem: (item: T, index: number) => JSX.Element;
 }
 
 export const Iterator = <T,>({
   items = [],
-  itemKey = '',
+  itemKey,
   renderItem,
 }: IteratorProps<T>) => {
   const getKey = useCallback(
     (item: T, index: number) => {
-      return isPlainObject(item) ? item?.[itemKey] || index : index;
+      return isPlainObject(item)
+        ? item?.[itemKey as keyof T] || index
+        : `${index}_${item}`;
     },
     [itemKey]
   );
