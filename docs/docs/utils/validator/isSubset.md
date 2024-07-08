@@ -14,8 +14,8 @@
 ## Interface
 ```ts title="typescript"
 const isSubset = <T, U>(
-  superset: readonly T[],
-  subset: readonly T[],
+  superset: T[] | readonly T[],
+  subset: T[] | readonly T[],
   iteratee?: (item: T) => U
 ) => boolean;
 ```
