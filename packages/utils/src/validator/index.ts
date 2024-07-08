@@ -15,3 +15,4 @@ export * from './isString';
 export * from './isValidEmail';
 export * from './isValidPassword';
 export * from './isValidPhoneNumberFormat';
+export * from './isSubset';
