@@ -39,8 +39,8 @@ const superset = ['1', 2, 3, 4];
 const subset1 = ['1', 2, 3];
 const subset2 = [1, '2', 3];
 
-console.log(isSubset(superset, subset1)); // true
-console.log(isSubset(superset, subset2)); // false
+isSubset(superset, subset1); // true
+isSubset(superset, subset2); // false
 ```
 
 ```ts title="typescript"
