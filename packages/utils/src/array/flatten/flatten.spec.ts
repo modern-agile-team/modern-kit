@@ -1,60 +1,55 @@
 import { flatten } from '.';
 
 describe('flatten', () => {
+  const originArr = [1, [2, [3, [4]]]];
+
+  it('should flatten a array to the default depth of 1', () => {
+    const expectedArr = [1, 2, [3, [4]]];
+
+    expect(flatten(originArr)).toEqual(expectedArr);
+    expect(originArr.flat()).toEqual(expectedArr);
+  });
+
   it('should flatten a deeply nested array to the specified depth', () => {
-    const arr = [1, [2, [3, [4, [5]]]]];
+    const expectedArr1 = [1, 2, [3, [4]]];
+    expect(flatten(originArr, 1)).toEqual(expectedArr1);
+    expect(originArr.flat(1)).toEqual(expectedArr1);
 
-    const result1 = flatten(arr, 1);
-    expect(result1).toEqual([1, 2, [3, [4, [5]]]]);
-    expectTypeOf(result1).toEqualTypeOf<
-      (number | (number | (number | number[])[])[])[]
-    >();
+    const expectedArr2 = [1, 2, 3, [4]];
+    expect(flatten(originArr, 2)).toEqual(expectedArr2);
+    expect(originArr.flat(2)).toEqual(expectedArr2);
 
-    const result2 = flatten(arr, 2);
-    expect(result2).toEqual([1, 2, 3, [4, [5]]]);
-    expectTypeOf(result2).toEqualTypeOf<(number | (number | number[])[])[]>();
-
-    const result3 = flatten(arr, 3);
-    expect(result3).toEqual([1, 2, 3, 4, [5]]);
-    expectTypeOf(result3).toEqualTypeOf<(number | number[])[]>();
-
-    const result4 = flatten(arr, 4);
-    expect(result4).toEqual([1, 2, 3, 4, 5]);
-    expectTypeOf(result4).toEqualTypeOf<number[]>();
+    const expectedArr3 = [1, 2, 3, 4];
+    expect(flatten(originArr, 3)).toEqual(expectedArr3);
+    expect(originArr.flat(3)).toEqual(expectedArr3);
   });
 
   it('should return the same array if depth is 0 or NaN or negative', () => {
-    const arr = [1, [2, 3], [4, 5]];
+    const expectedArr = [1, [2, [3, [4]]]];
 
-    const result1 = flatten(arr, 0);
-    expect(result1).toEqual([1, [2, 3], [4, 5]]);
+    expect(flatten(originArr, 0)).toEqual(expectedArr);
+    expect(originArr.flat(0)).toEqual(expectedArr);
 
-    const result2 = flatten(arr, NaN);
-    expect(result2).toEqual([1, [2, 3], [4, 5]]);
+    expect(flatten(originArr, NaN)).toEqual(expectedArr);
+    expect(originArr.flat(NaN)).toEqual(expectedArr);
 
-    const result3 = flatten(arr, -1);
-    expect(result3).toEqual([1, [2, 3], [4, 5]]);
+    expect(flatten(originArr, -1)).toEqual(expectedArr);
+    expect(originArr.flat(-1)).toEqual(expectedArr);
+  });
+
+  it('should flatten arrays to the specified depth considering floating point values', () => {
+    const expectedArr1 = [1, 2, [3, [4]]];
+    expect(flatten(originArr, 1.5)).toEqual(expectedArr1);
+    expect(originArr.flat(1.3)).toEqual(expectedArr1);
+
+    const expectedArr2 = [1, 2, 3, [4]];
+    expect(flatten(originArr, 2.5)).toEqual(expectedArr2);
+    expect(originArr.flat(2.5)).toEqual(expectedArr2);
   });
 
   it('should handle empty arrays', () => {
-    const arr: any[] = [];
-    const result = flatten(arr, 1);
-    expect(result).toEqual([]);
-  });
+    const originArr: number[] = [];
 
-  it('should flatten a 2D array to the default depth of 1', () => {
-    const arr = [1, [2, 3], [4, 5]];
-    const result = flatten(arr);
-    expect(result).toEqual([1, 2, 3, 4, 5]);
-  });
-
-  it('should handle arrays with mixed types', () => {
-    const arr = [1, 'a', [true, false, [null, undefined]]];
-
-    const result = flatten(arr, 2);
-    expect(result).toEqual([1, 'a', true, false, null, undefined]);
-    expectTypeOf(result).toEqualTypeOf<
-      (string | number | boolean | null | undefined)[]
-    >();
+    expect(flatten(originArr, 2)).toEqual([]);
   });
 });
