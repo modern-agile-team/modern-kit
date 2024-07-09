@@ -1,17 +1,15 @@
-import { hasProperty, isArray } from '../../validator';
+import { hasProperty, isArray, isReference } from '../../validator';
 
-export const deleteFalsyProperties = <
-  T extends Record<PropertyKey, any> = Record<PropertyKey, any>
->(
-  source: Record<PropertyKey, any>
+export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
+  source: T
 ): T => {
-  const copiedObj: Record<PropertyKey, any> = {};
+  const copiedObj = {} as T;
 
   for (const key in source) {
     if (hasProperty(source, key)) {
       const value = source[key];
 
-      if (value != null && typeof value === 'object') {
+      if (isReference(value)) {
         // object
         if (!isArray(value)) {
           const newObj = deleteFalsyProperties(value);
@@ -49,5 +47,5 @@ export const deleteFalsyProperties = <
     }
   }
 
-  return copiedObj as T;
+  return copiedObj;
 };

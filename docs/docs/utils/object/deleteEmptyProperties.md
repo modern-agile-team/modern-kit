@@ -11,11 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-const deleteFalsyProperties: <
-  T extends Record<PropertyKey, any> = Record<PropertyKey, any>
->(
-  source: Record<PropertyKey, any>
-) => T;
+const deleteFalsyProperties: <T extends Record<PropertyKey, any>>(source: T) => T
 ```
 
 ## Usage
