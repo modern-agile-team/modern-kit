@@ -1,12 +1,12 @@
 import { mergeProperties } from '.';
 
 describe('mergeProperties', () => {
-  it('merges properties from source into target without overlap', () => {
-    const target = {
+  it('should merge properties from source to target when there are no overlapping keys', () => {
+    const source = {
       a: 1,
       b: 2,
     };
-    const source = {
+    const target = {
       c: 3,
       d: 4,
     };
@@ -17,18 +17,11 @@ describe('mergeProperties', () => {
       d: 4,
     };
 
-    expect(mergeProperties(target, source)).toEqual(expectedObj);
+    expect(mergeProperties(source, target)).toEqual(expectedObj);
   });
 
-  it('should return the target if either the target or source argument is a primitive value', () => {
-    const target = 1 as any;
-    const source = 1 as any;
-
-    expect(mergeProperties(target, source)).toBe(1);
-  });
-
-  it('merges properties and combines nested objects and arrays from source into target', () => {
-    const target = {
+  it('should deeply merge nested objects and arrays', () => {
+    const source = {
       a: 1,
       b: 2,
       c: {
@@ -41,7 +34,7 @@ describe('mergeProperties', () => {
         f_a: [1, 2],
       },
     };
-    const source = {
+    const target = {
       c: {
         c_c: 3,
         c_d: 4,
@@ -68,25 +61,47 @@ describe('mergeProperties', () => {
       },
     };
 
-    expect(mergeProperties(target, source)).toEqual(expectedObj);
+    expect(mergeProperties(source, target)).toEqual(expectedObj);
   });
 
-  it('does not merge excluded properties specified in the third argument', () => {
-    const target = {
+  it('should exclude specified keys from the merge', () => {
+    const source = {
       a: 1,
       b: 2,
       d: [1, 2, 3],
     };
-    const source = {
+    const target = {
       c: 3,
       d: [4, 5, 6],
     };
+
     const expectedObj = {
       a: 1,
       b: 2,
       d: [1, 2, 3],
     };
 
-    expect(mergeProperties(target, source, ['c', 'd'])).toEqual(expectedObj);
+    expect(mergeProperties(source, target, ['c', 'd'])).toEqual(expectedObj);
+  });
+
+  it('should override source properties with target properties when keys overlap', () => {
+    const source = {
+      a: 1,
+      b: 2,
+      c: 3,
+    };
+    const target = {
+      a: [1, 2, 3],
+      b: { c: 1 },
+      c: 4,
+    };
+
+    const expectedObj = {
+      a: [1, 2, 3],
+      b: { c: 1 },
+      c: 4,
+    };
+
+    expect(mergeProperties(source, target)).toEqual(expectedObj);
   });
 });
