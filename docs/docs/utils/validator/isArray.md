@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isArray: <T extends readonly any[]>(value: unknown) => value is T
+const isArray: <T>(value: unknown) => value is T[] | readonly T[]
 ```
 
 ## Usage

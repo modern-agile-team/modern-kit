@@ -15,48 +15,45 @@ const mergeProperties: <
   T extends Record<PropertyKey, any>,
   K extends Record<PropertyKey, any>
 >(
-  target: T,
-  source: K
+  source: T,
+  target: K,
+  excludedKeys?: (keyof K)[] | undefined
 ) => T & K;
 ```
 
 ## Usage
+### Default
 ```ts title="typescript"
 import { mergeProperties } from '@modern-kit/utils';
 
-  const target = {
-    a: 1,
-    b: 2,
-    c: {
-      c_a: 1,
-      c_b: 2,
-    },
-    d: 4,
-    e: [1, 2],
-  };
-  const source = {
-    c: {
-      c_c: 3,
-      c_d: 4,
-    },
-    d: 5,
-    e: [3, 4],
-  };
+const target = {
+  a: 1,
+  c: [1],
+  d: { foo: 1 },
+};
+const source = {
+  b: 2,
+  c: [2],
+  d: { bar: 2 }
+};
 
-  const obj = mergeProperties(target, source);
+const obj = mergeProperties(target, source);
+// { a: 1, b: 2, c: [1, 2 ], d: { foo: 1, bar: 2 }}
+```
 
-  /**
-   *  obj = {
-      a: 1,
-      b: 2,
-      c: {
-        c_a: 1,
-        c_b: 2,
-        c_c: 3,
-        c_d: 4,
-      },
-      d: 5,
-      e: [1, 2, 3, 4],
-    };
-   */
+### ExcludedKeys
+```ts title="typescript"
+import { mergeProperties } from '@modern-kit/utils';
+
+const target = {
+  a: 1,
+  b: 2,
+};
+const source = {
+  c: 3,
+  d: 4,
+};
+
+const obj = mergeProperties(target, source, ['c']);
+// { a: 1, b: 2, d: 4 }
 ```
