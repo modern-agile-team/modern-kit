@@ -2,11 +2,11 @@ import { usePreferredColorScheme } from '@modern-kit/react';
 
 # usePreferredColorScheme
 
-사용자의 색상 스킴 선호도([prefers-coloc-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)) 에 따라 `dark`, `light`, 또는 `no-preference`를 반환합니다.
+사용자의 색상 스킴 선호도(**[prefers-coloc-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)**) 에 따라 `dark`, `light`, 또는 `no-preference`를 반환합니다.
 
 - ligth: 사용자가 시스템에 `ligth` 테마를 사용하는 것을 선호하거나 선호하는 테마를 알리지 않았을 때 반환합니다.
-- dark: 사용자가 시스템에 `dark` 테마를 사용하는 것을 선호한다고 알렸음을 나타냅니다.
-- no-preference: 과거 브라우저를 대응하기 위해 light와 dark가 둘 다 탐지가 안될 때 해당 값이 반환됩니다.
+- dark: 사용자가 시스템에 `dark` 테마를 사용하는 것을 선호한다고 알렸을 때 반환합니다.
+- no-preference: `light`와 `dark`가 둘 다 탐지가 안될 때 해당 값을 반환합니다.
 
 사용자는 `운영체제 설정`이나 `사용자 에이전트 설정`에서 선호하는 테마를 지정 할 수 있습니다.
 
@@ -28,7 +28,12 @@ import { usePreferredColorScheme } from '@modern-kit/react';
 const Example = () => {
   const colorScheme = usePreferredColorScheme();
 
-  return <p>ColorScheme: {colorScheme}</p>;
+  return (
+    <div>
+      <p>OS 시스템 설정에서 테마를 변경해보세요.</p>
+      <p>ColorScheme: <b>{colorScheme}</b></p>
+    </div>
+  );
 };
 ```
 
@@ -37,7 +42,24 @@ const Example = () => {
 export const Example = () => {
   const colorScheme = usePreferredColorScheme();
 
-  return <p>ColorScheme: {colorScheme}</p>;
+  return (
+    <div>
+      <p>OS 시스템 설정에서 테마를 변경해보세요.</p>
+      <p>ColorScheme: <b>{colorScheme}</b></p>
+    </div>
+  );
 };
 
 <Example />
+
+<br />
+
+## Image
+### 1. Light Theme
+![스크린샷 2024-07-10 오후 8 09 33](https://github.com/modern-agile-team/modern-kit/assets/64779472/79c6298b-72f1-4f50-b644-93762d4d59e1)
+
+<br />
+
+### 2. Dark Theme
+![스크린샷 2024-07-10 오후 8 09 39](https://github.com/modern-agile-team/modern-kit/assets/64779472/ab735906-9f8c-4e8e-9688-f6cde1786ec9)
+
