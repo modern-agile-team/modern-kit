@@ -2,7 +2,7 @@ import { useMediaQuery } from '@modern-kit/react';
 
 # useMediaQuery
 
-Resize 시에도 동작하며, 미디어 쿼리 문자열의 분석 결과를 쉽게 확인 할 수 있는 커스텀 훅입니다. 
+미디어 쿼리 문자열의 분석 결과를 쉽게 확인 할 수 있는 커스텀 훅입니다. 
 
 <br />
 
@@ -11,9 +11,7 @@ Resize 시에도 동작하며, 미디어 쿼리 문자열의 분석 결과를 �
 
 ## Interface
 ```ts title="typescript"
-const useMediaQuery: (query: string) => {
-  isMatch: boolean;
-}
+const useMediaQuery: (query: string, defaultValue?: boolean) => boolean
 ```
 
 ## Usage
@@ -21,7 +19,7 @@ const useMediaQuery: (query: string) => {
 import { useMediaQuery } from '@modern-kit/react';
 
 const Example = () => {
-  const { isMatch } = useMediaQuery('(min-width: 768px)');
+  const isMatch = useMediaQuery('(min-width: 768px)');
 
   return (
     <div>
@@ -36,7 +34,7 @@ const Example = () => {
 ```
 
 export const Example = () => {
-  const { isMatch } = useMediaQuery('(min-width: 768px)');
+  const isMatch = useMediaQuery('(min-width: 768px)');
   return (
     <div>
       <p>브라우저 너비를 수정해보세요!</p>

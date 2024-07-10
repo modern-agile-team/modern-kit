@@ -1,15 +1,17 @@
 import { isClient } from '@modern-kit/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-const getMatchMedia = (query: string) => {
+const getMatchMedia = (query: string, defaultValue?: boolean) => {
+  if (defaultValue != null) return defaultValue;
+
   if (isClient()) {
     return window.matchMedia(query).matches;
   }
   return false;
 };
 
-export const useMediaQuery = (query: string) => {
-  const [isMatch, setIsMatch] = useState(getMatchMedia(query));
+export const useMediaQuery = (query: string, defaultValue?: boolean) => {
+  const [isMatch, setIsMatch] = useState(getMatchMedia(query, defaultValue));
 
   const handleChange = useCallback(() => {
     setIsMatch(getMatchMedia(query));
@@ -23,5 +25,5 @@ export const useMediaQuery = (query: string) => {
     return () => matchMedia.removeEventListener('change', handleChange);
   }, [query, handleChange]);
 
-  return { isMatch };
+  return isMatch;
 };
