@@ -52,7 +52,7 @@
     "tslib": "^2.6.1",
     "typescript": "^5.1.6",
     "ua-parser-js": "^1.0.38",
-    "vitest": "^1.5.0"
+    "vitest": "^2.0.2"
   },
   "peerDependencies": {
     "react": "^18.0.0",
