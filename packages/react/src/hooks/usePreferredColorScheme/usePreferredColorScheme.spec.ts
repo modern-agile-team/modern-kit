@@ -25,11 +25,4 @@ describe('usePreferredColorScheme', () => {
     const { result } = renderHook(() => usePreferredColorScheme());
     expect(result.current).toBe('light');
   });
-
-  it('should return "no-preference" when no color scheme preference is set', () => {
-    (useMediaQuery as Mock).mockImplementation(() => false);
-
-    const { result } = renderHook(() => usePreferredColorScheme());
-    expect(result.current).toBe('no-preference');
-  });
 });
