@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.11.0
+
+### Minor Changes
+
+- [#326](https://github.com/modern-agile-team/modern-kit/pull/326) [`6c19c79`](https://github.com/modern-agile-team/modern-kit/commit/6c19c790cb7df32d4138b7faa92792e5e2b7f7f5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): deepFlatThenMap -> flattenDeepThenMap 네이밍 변경 및 flattenDeep 추가 - @ssi02014
+
 ## 1.10.0
 
 ### Minor Changes
