@@ -1,10 +1,10 @@
 # flatten
 
-중첩 배열을 `평탄화`해주는 함수입니다. `depth` 옵션으로 평탄화 깊이를 직접 지정 할 수 있습니다.
+중첩 배열을 지정된 깊이까지 `평탄화` 합니다.
 
-JS에서 기본적으로 제공하는 [Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)은 성능이 좋지 않습니다.
+JavaScript에서 기본적으로 제공하는 **[Array.prototype.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)** 은 성능이 좋지 않습니다.
 
-제공하는 flatten 함수는 `JS의 flat`과 `lodash의 flattenDepth`보다 성능적으로 우수합니다.
+제공하는 flatten 함수는 `JavaScrip의 Array.prototype.flat`과 `lodash의 flattenDepth`보다 성능적으로 더 우수합니다.
 
 <br />
 
@@ -35,10 +35,10 @@ type FlatArray<Arr, Depth extends number> = {
 }[Depth extends -1 ? "done" : "recur"];
 ```
 ```ts title="typescript"
-const flatten: <T, D extends number = 1>(
+function flatten<T, D extends number = 1>(
   arr: T[] | readonly T[],
   depth?: D // default: 1
-) => FlatArray<T[], D>[];
+): FlatArray<T[], D>[];
 ```
 
 ## Usage
@@ -47,6 +47,7 @@ import { flatten } from '@modern-kit/utils';
 
 const arr = [1, [2, [3, [4, [5]]]]];
 
+flatten(arr); // [1, 2, [3, [4, [5]]]]
 flatten(arr, 1); // [1, 2, [3, [4, [5]]]]
 flatten(arr, 2); // [1, 2, 3, [4, [5]]]
 flatten(arr, 3); // [1, 2, 3, 4, [5]]
