@@ -2,7 +2,7 @@
 
 **[flatten](https://modern-agile-team.github.io/modern-kit/docs/utils/array/flatten)** 을 기반으로 `모든 깊이의 중첩 배열`을 `평탄화`해주는 함수입니다.
 
-JS의 **[Array.prototype.flat(Infinity)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)** 와 비교했을 때 `성능면에서 우수`하며, 더욱 `정확한 타입 추론`을 할 수 있습니다.
+JavaScript에서 기본적으로 제공하는 **[Array.prototype.flat(Infinity)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)** 와 비교했을 때 `성능면에서 더 우수`하며, 더욱 `정확한 타입 추론`을 할 수 있습니다.
 
 ```ts title="typescript"
 // as-is 
@@ -20,7 +20,6 @@ const arr = flattenDeep([1, [2, [3]]]);
  * const arr: number[]
  */
 ```
-
 
 <br />
 
@@ -43,12 +42,13 @@ const arr = flattenDeep([1, [2, [3]]]);
 
 ## Interface
 ```ts title="typescript"
-// 중첩된 배열 타입을 재귀적으로 풀어내어 가장 내부의 요소 타입을 추출하는 유틸리티 타입
-// type Example = ExtractNestedArrayType<(number | (number | number[])[])[]> // Example: number
+/**
+ * @description 중첩된 배열 타입을 재귀적으로 풀어내어 가장 내부의 요소 타입을 추출하는 유틸리티 타입
+ */
 type ExtractNestedArrayType<T> = T extends readonly (infer U)[] ? ExtractNestedArrayType<U> : T;
 ```
 ```ts title="typescript"
-const flattenDeep: <T>(arr: T[] | readonly T[]) => ExtractNestedArrayType<T>[]
+function flattenDeep<T>(arr: T[] | readonly T[]): ExtractNestedArrayType<T>[]
 ```
 
 ## Usage
