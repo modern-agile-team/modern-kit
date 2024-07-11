@@ -1,5 +1,21 @@
 # @modern-kit/react
 
+## 1.12.0
+
+### Minor Changes
+
+- [#285](https://github.com/modern-agile-team/modern-kit/pull/285) [`d003f21`](https://github.com/modern-agile-team/modern-kit/commit/d003f2147bead771e418ea951c7ab4db4ccf4389) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useWindowScrollTo를 useScrollTo로 개선 - @ssi02014
+
+- [#281](https://github.com/modern-agile-team/modern-kit/pull/281) [`0954125`](https://github.com/modern-agile-team/modern-kit/commit/0954125e60516b83c1a538745b94e42bb08f0293) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useStepState 신규 커스텀 훅 추가 - @ssi02014
+
+- [#322](https://github.com/modern-agile-team/modern-kit/pull/322) [`1559db7`](https://github.com/modern-agile-team/modern-kit/commit/1559db7917215887314b8f0180b3c83ece32e344) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): usePreferredColocScheme 신규 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [`d668f7f`](https://github.com/modern-agile-team/modern-kit/commit/d668f7fc37a33afd14d9865dc0d574c50684d9c3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): storage hook initialValue에 usePreservedState 적용 - @ssi02014
+
+- [#305](https://github.com/modern-agile-team/modern-kit/pull/305) [`19f99e4`](https://github.com/modern-agile-team/modern-kit/commit/19f99e49ff80814d6131e279bb80b94d39f0a51b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): 컴포넌트 개선 Iterator, SeparatedIterator - @ssi02014
+
 ## 1.11.0
 
 ### Minor Changes
