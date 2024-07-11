@@ -19,6 +19,7 @@ export * from './useMergeRefs';
 export * from './useMouse';
 export * from './useNetwork';
 export * from './useOnClickOutside';
+export * from './usePreferredColorScheme';
 export * from './usePreservedCallback';
 export * from './usePreservedState';
 export * from './usePrevious';

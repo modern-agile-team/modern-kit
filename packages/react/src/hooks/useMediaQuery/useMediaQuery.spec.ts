@@ -21,13 +21,13 @@ describe('useMediaQuery', () => {
   it('should return true for matches when query matches', () => {
     const { result } = renderHook(() => useMediaQuery('(min-width: 600px)'));
 
-    expect(result.current.isMatch).toBe(true);
+    expect(result.current).toBe(true);
   });
 
   it('should return false when query does not match', () => {
     const { result } = renderHook(() => useMediaQuery('(min-width: 599px)'));
 
-    expect(result.current.isMatch).toBe(false);
+    expect(result.current).toBe(false);
   });
 
   it('should return false for isMatch when not in a client environment', () => {
@@ -35,6 +35,6 @@ describe('useMediaQuery', () => {
 
     const { result } = renderHook(() => useMediaQuery('(min-width: 600px)'));
 
-    expect(result.current.isMatch).toBe(false);
+    expect(result.current).toBe(false);
   });
 });
