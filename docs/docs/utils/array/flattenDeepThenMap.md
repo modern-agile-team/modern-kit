@@ -17,7 +17,7 @@
 |lodash/flattenDeep.map|1,222,383.95|0.0006|-|
 |js built-in/flat(Infinity).map|330,750.78|0.0029|`slowest`|
 
-- **modern-kit/flatten**
+- **modern-kit/flattenDeepThenMap**
   - `1.30x` faster than lodash/flattenDeep.map
   - `4.80x` faster than js built-in/flat(Infinity).map
 
