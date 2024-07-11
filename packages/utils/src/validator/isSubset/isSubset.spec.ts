@@ -1,6 +1,6 @@
 import { isSubset } from '.';
 
-describe('isSubset', () => {
+describe.concurrent('isSubset', () => {
   it('should correctly determine if the subset arrays are subsets of the superset array', () => {
     const superset = [1, 2, 3, 4];
     const subset1 = [1, 3];

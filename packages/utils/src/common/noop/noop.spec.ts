@@ -1,6 +1,6 @@
 import { noop } from '.';
 
-describe('noop', () => {
+describe.concurrent('noop', () => {
   it('should return undefined', () => {
     const result = noop();
 

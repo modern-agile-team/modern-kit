@@ -1,6 +1,6 @@
 import { hexToRgba } from '.';
 
-describe('hexToRgba', () => {
+describe.concurrent('hexToRgba', () => {
   it('should convert valid hex color to RGB', () => {
     const upperCaseValidHexColor1 = '#1A2B3C';
     const lowerCaseValidHexColor2 = '#1a2b3c';

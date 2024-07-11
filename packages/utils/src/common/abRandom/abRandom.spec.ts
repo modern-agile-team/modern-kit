@@ -1,6 +1,6 @@
 import { abRandom } from '.';
 
-describe('abRandom', () => {
+describe.concurrent('abRandom', () => {
   it('should return 0 if Math.random() is less than 0.5', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.3);
     expect(abRandom()).toBe(0);

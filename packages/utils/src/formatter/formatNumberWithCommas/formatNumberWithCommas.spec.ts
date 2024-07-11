@@ -1,6 +1,6 @@
 import { formatNumberWithCommas } from '.';
 
-describe('formatNumberWithCommas', () => {
+describe.concurrent('formatNumberWithCommas', () => {
   it('should return a string with a comma after every thousand digits when entering a number', () => {
     expect(formatNumberWithCommas(200)).toBe('200');
     expect(formatNumberWithCommas(3000)).toBe('3,000');

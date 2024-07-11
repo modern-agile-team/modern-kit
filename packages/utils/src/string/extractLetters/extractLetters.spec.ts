@@ -1,6 +1,6 @@
 import { extractLetters } from '.';
 
-describe('extractLetters', () => {
+describe.concurrent('extractLetters', () => {
   it('should return a string with only letters if options argument is not defined.', () => {
     const input = 'Hello, 世界! 안녕하세요 123 こんにちは $100 + 200 = 300!';
 

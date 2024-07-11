@@ -1,6 +1,6 @@
 import { invert } from '.';
 
-describe('invert', () => {
+describe.concurrent('invert', () => {
   it('should invert the keys and values of an object', () => {
     const obj = { a: 1, b: 2, c: 3 };
     const result = invert(obj);

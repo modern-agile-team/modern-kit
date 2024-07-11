@@ -1,6 +1,6 @@
 import { isNotNullish } from '.';
 
-describe('isNotNullish', () => {
+describe.concurrent('isNotNullish', () => {
   it('should return true for non-nullish values', () => {
     for (const el of [1, 'dasdsa', { foo: 'bar' }, () => {}, Symbol()]) {
       expect(isNotNullish(el)).toBe(true);

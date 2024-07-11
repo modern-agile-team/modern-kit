@@ -1,6 +1,6 @@
 import { isString } from '.';
 
-describe('isString', () => {
+describe.concurrent('isString', () => {
   it('should return true if the argument is a string and false otherwise', () => {
     expect(isString('123')).toBeTruthy();
 

@@ -1,6 +1,6 @@
 import { union } from '.';
 
-describe('union', () => {
+describe.concurrent('union', () => {
   it('should combine two arrays and remove duplicates', () => {
     const arr1 = [1, 2, 3, 4];
     const arr2 = [1, 2, 4, 5];

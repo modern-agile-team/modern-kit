@@ -1,6 +1,6 @@
 import { max } from '.';
 
-describe('max', () => {
+describe.concurrent('max', () => {
   it('should return the maximum number from an array of numbers', () => {
     const arr = [5, 2, 9, 1, 5, 6];
     const result = max(arr);

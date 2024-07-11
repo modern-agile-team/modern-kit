@@ -1,6 +1,6 @@
 import { containsHangul } from '.';
 
-describe('containsHangul', () => {
+describe.concurrent('containsHangul', () => {
   it('should return true for a string containing Hangul characters', () => {
     expect(containsHangul('안녕하세요')).toBeTruthy();
     expect(containsHangul('hello안!@#')).toBeTruthy();

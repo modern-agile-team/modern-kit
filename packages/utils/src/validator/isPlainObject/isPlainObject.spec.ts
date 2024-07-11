@@ -1,6 +1,6 @@
 import { isPlainObject } from '.';
 
-describe('isPlainObject', () => {
+describe.concurrent('isPlainObject', () => {
   it('should return true for the plain object.', () => {
     expect(isPlainObject({})).toBe(true);
     expect(isPlainObject(new Object())).toBe(true);

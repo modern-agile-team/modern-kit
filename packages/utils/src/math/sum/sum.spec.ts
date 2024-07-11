@@ -1,6 +1,6 @@
 import { sum } from '.';
 
-describe('sum', () => {
+describe.concurrent('sum', () => {
   it('should sum an array of numbers', () => {
     const result = sum([1, 2, 3, 4, 5]);
 

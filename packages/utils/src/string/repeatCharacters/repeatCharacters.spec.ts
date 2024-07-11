@@ -1,6 +1,6 @@
 import { repeatCharacters } from '.';
 
-describe('repeatCharacters', () => {
+describe.concurrent('repeatCharacters', () => {
   it('should return a new string with each character repeated the repetition count times', () => {
     const str1 = 'A!B@C';
     const repeatedStr1 = repeatCharacters(str1, 2);

@@ -1,6 +1,6 @@
 import { containsNumber } from '.';
 
-describe('containsNumber', () => {
+describe.concurrent('containsNumber', () => {
   it('should return true for a string containing numbers', () => {
     expect(containsNumber('123')).toBeTruthy();
     expect(containsNumber('abc123')).toBeTruthy();

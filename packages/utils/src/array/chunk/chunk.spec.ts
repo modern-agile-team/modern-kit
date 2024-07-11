@@ -1,6 +1,6 @@
 import { chunk } from '../chunk';
 
-describe('chunk', () => {
+describe.concurrent('chunk', () => {
   it('splits the array according to the second parameter', () => {
     const arr1 = [1, 2, 3, 4, 5, 6];
     expect(chunk(arr1, 1)).toEqual([[1], [2], [3], [4], [5], [6]]);

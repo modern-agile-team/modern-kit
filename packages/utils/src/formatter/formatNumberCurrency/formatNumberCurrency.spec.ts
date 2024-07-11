@@ -8,7 +8,7 @@ const testUnits = [
   { unit: '만', value: TEN_THOUSAND },
 ];
 
-describe('formatNumberCurrency', () => {
+describe.concurrent('formatNumberCurrency', () => {
   it('should format numbers based on the provided options', () => {
     const testValue1 = formatNumberCurrency(4500000, {
       withCommas: false,

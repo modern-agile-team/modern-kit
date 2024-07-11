@@ -1,6 +1,6 @@
 import { reverseString } from '.';
 
-describe('reverseString', () => {
+describe.concurrent('reverseString', () => {
   it('should return the empty string for a invalid value', () => {
     const reversedString = reverseString(undefined as unknown as string);
 

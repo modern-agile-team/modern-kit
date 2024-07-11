@@ -1,6 +1,6 @@
 import { isFunction } from '.';
 
-describe('isFunction', () => {
+describe.concurrent('isFunction', () => {
   it('should return true for arrow function', () => {
     expect(isFunction(() => {})).toBe(true);
   });

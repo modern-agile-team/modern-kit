@@ -1,6 +1,6 @@
 import { contains } from '.';
 
-describe('contains', () => {
+describe.concurrent('contains', () => {
   it('should return true if the array contains the element, otherwise return false.', () => {
     const arr = [0, 1, 2, 'foo', NaN, {}];
 

@@ -1,6 +1,6 @@
 import { deepCopy } from '.';
 
-describe('deepCopy', () => {
+describe.concurrent('deepCopy', () => {
   it('should deeply copy a primitive value', () => {
     const originNum = 42;
     const copiedNum = deepCopy(originNum);

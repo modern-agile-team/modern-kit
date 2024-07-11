@@ -1,6 +1,6 @@
 import { pick } from '.';
 
-describe('pick', () => {
+describe.concurrent('pick', () => {
   it('should return a new object with a single key extracted from an object', () => {
     const symbol = Symbol('d');
     const inputObj = { a: 1, b: 2, c: 3, [symbol]: 4 } as const;

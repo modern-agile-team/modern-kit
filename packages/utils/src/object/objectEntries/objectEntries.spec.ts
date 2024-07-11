@@ -1,6 +1,6 @@
 import { objectEntries } from '.';
 
-describe('objectEntries', () => {
+describe.concurrent('objectEntries', () => {
   it('should behave identical to Object.entries()', () => {
     const symbol = Symbol('d');
     const obj = {

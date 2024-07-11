@@ -1,7 +1,7 @@
 import { isMIMEType } from '.';
 import { MIMEType } from '../../file/constants';
 
-describe('isMIMEType', () => {
+describe.concurrent('isMIMEType', () => {
   it('should return true if the argument is a MIMEType and false otherwise', () => {
     expect(isMIMEType('image/png')).toBeTruthy();
     expect(isMIMEType('application/json')).toBeTruthy();

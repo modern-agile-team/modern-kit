@@ -10,7 +10,7 @@ const falsyResult = (errorReason: string) => ({
   errorReason,
 });
 
-describe('isValidPassword', () => {
+describe.concurrent('isValidPassword', () => {
   it('should return true for a valid password with default options', () => {
     // truthy case
     expect(isValidPassword('password')).toEqual(truthyResult);

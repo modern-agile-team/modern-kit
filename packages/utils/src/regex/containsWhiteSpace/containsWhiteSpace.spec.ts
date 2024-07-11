@@ -1,6 +1,6 @@
 import { containsWhiteSpace } from '.';
 
-describe('containsWhiteSpace', () => {
+describe.concurrent('containsWhiteSpace', () => {
   it('should return true for a string containing whitespace characters', () => {
     expect(containsWhiteSpace('hello world')).toBe(true);
     expect(containsWhiteSpace(' leading')).toBe(true);

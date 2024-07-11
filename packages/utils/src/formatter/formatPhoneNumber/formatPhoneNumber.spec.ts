@@ -1,6 +1,6 @@
 import { formatPhoneNumber } from '.';
 
-describe('formatPhoneNumber', () => {
+describe.concurrent('formatPhoneNumber', () => {
   it('should return a phone number format', () => {
     const cellPhoneNumber = '01012341234';
     const localPhoneNumber1 = '0311231234';

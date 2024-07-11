@@ -1,6 +1,6 @@
 import { isValidPhoneNumberFormat } from '.';
 
-describe('isValidPhoneNumberFormat', () => {
+describe.concurrent('isValidPhoneNumberFormat', () => {
   it('should return "true" when the phone number format is valid with hyphens', () => {
     expect(isValidPhoneNumberFormat('010-1234-1234')).toBeTruthy();
     expect(isValidPhoneNumberFormat('031-123-1234')).toBeTruthy();

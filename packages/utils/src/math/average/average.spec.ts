@@ -1,6 +1,6 @@
 import { average } from '.';
 
-describe('average', () => {
+describe.concurrent('average', () => {
   it('should return 0 for an empty array', () => {
     expect(average([])).toBe(0);
   });

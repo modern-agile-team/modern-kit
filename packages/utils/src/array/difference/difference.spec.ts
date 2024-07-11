@@ -1,6 +1,6 @@
 import { difference } from '.';
 
-describe('difference', () => {
+describe.concurrent('difference', () => {
   it('should return an array with the difference between two arrays', () => {
     const arr1 = [1, 2, 3, 4];
     const arr2 = [1, 2, 4, 5];

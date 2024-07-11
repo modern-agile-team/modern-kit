@@ -3,11 +3,23 @@ import { delay } from '.';
 
 const time = 200;
 
-describe('delay', () => {
+beforeEach(() => {
+  vi.useFakeTimers();
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
+
+describe.concurrent('delay', () => {
   it('should delay the promise by the given time', async () => {
     const start = Date.now();
 
-    await delay(time);
+    const delayPromise = delay(time);
+
+    vi.advanceTimersByTime(time); // 타이머를 time 만큼 진행시킴
+
+    await delayPromise;
 
     const end = Date.now();
 

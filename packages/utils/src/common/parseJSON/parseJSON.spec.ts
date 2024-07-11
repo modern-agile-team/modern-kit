@@ -8,7 +8,7 @@ type Test2 = {
 };
 type Test3 = ['foo', { bar: 'baz' }];
 
-describe('parseJSON', () => {
+describe.concurrent('parseJSON', () => {
   it('should return original value for falsy value', () => {
     const falseValue = parseJSON(false);
     const zeroNumberValue = parseJSON(0);

@@ -1,6 +1,6 @@
 import { excludeElements } from '.';
 
-describe('excludeElements', () => {
+describe.concurrent('excludeElements', () => {
   it('filter after second parameter values from first parameter.', () => {
     const array = [1, 2, 3, 4, 5, 6];
     const excludedElements = [1, 3];

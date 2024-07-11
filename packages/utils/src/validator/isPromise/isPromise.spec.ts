@@ -1,6 +1,6 @@
 import { isPromise } from '.';
 
-describe('isPromise', () => {
+describe.concurrent('isPromise', () => {
   it('should return true if the given value is a Promise', () => {
     expect(isPromise(Promise.resolve())).toBeTruthy();
 

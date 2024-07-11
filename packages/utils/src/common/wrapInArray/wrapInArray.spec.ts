@@ -1,6 +1,6 @@
 import { wrapInArray } from '.';
 
-describe('wrapInArray', () => {
+describe.concurrent('wrapInArray', () => {
   it('should wrap a non-array value in an array', () => {
     const strValue = 'ModernAgile';
     const wrappedInArray = wrapInArray('ModernAgile');

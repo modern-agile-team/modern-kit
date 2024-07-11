@@ -1,6 +1,6 @@
 import { containsHangulConsonantsAndVowel } from '.';
 
-describe('containsHangulConsonantsAndVowel', () => {
+describe.concurrent('containsHangulConsonantsAndVowel', () => {
   it('should return true for a string containing Hangul consonants and vowels', () => {
     expect(containsHangulConsonantsAndVowel('ㄱ')).toBe(true);
     expect(containsHangulConsonantsAndVowel('ㅏ')).toBe(true);

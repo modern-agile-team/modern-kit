@@ -1,6 +1,6 @@
 import { containsUpperCase } from '.';
 
-describe('containsUpperCase', () => {
+describe.concurrent('containsUpperCase', () => {
   it('should return true for a string containing upper case letters', () => {
     expect(containsUpperCase('HELLO')).toBeTruthy();
     expect(containsUpperCase('Hello')).toBeTruthy();

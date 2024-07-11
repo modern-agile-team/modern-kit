@@ -1,6 +1,6 @@
 import { min } from '.';
 
-describe('min', () => {
+describe.concurrent('min', () => {
   it('should return the minimum number from an array of numbers', () => {
     const arr = [5, 2, 9, 1, 5, 6];
     const result = min(arr);

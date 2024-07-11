@@ -1,6 +1,6 @@
 import { flatten } from '.';
 
-describe('flatten', () => {
+describe.concurrent('flatten', () => {
   const originArr = [1, [2, [3, [4]]]];
 
   it('should flatten a array to the default depth of 1', () => {

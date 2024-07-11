@@ -1,7 +1,7 @@
 import { describe } from 'vitest';
 import { isFloat } from '.';
 
-describe('isFloat', () => {
+describe.concurrent('isFloat', () => {
   it('should return true if value is float', () => {
     expect(isFloat(0.5)).toBe(true);
     expect(isFloat(-0.5)).toBe(true);

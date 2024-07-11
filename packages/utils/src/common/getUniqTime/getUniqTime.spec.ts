@@ -9,7 +9,7 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('getUniqTime', () => {
+describe.concurrent('getUniqTime', () => {
   it('should return a unique time when called multiple times at the same time', () => {
     vi.setSystemTime(new Date('2023-08-07T09:00:00Z'));
 

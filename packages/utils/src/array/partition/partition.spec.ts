@@ -1,6 +1,6 @@
 import { partition } from '.';
 
-describe('partition', () => {
+describe.concurrent('partition', () => {
   it('should partition an array of numbers based on a predicate', () => {
     const arr = [1, 2, 3, 4, 5];
     const [evens, odds] = partition(arr, (num) => num % 2 === 0);

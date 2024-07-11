@@ -1,6 +1,6 @@
 import { identity } from '.';
 
-describe('identity', () => {
+describe.concurrent('identity', () => {
   it('should return the same string value', () => {
     const value = 'test';
     const result = identity(value);

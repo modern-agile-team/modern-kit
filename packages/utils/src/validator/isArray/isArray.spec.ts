@@ -1,6 +1,6 @@
 import { isArray } from '.';
 
-describe('isArray', () => {
+describe.concurrent('isArray', () => {
   it('should return true if the argument is an array, and false if it is not', () => {
     expect(isArray([])).toBeTruthy();
     expect(isArray(1)).toBeFalsy();

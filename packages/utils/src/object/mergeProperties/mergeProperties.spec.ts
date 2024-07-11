@@ -1,6 +1,6 @@
 import { mergeProperties } from '.';
 
-describe('mergeProperties', () => {
+describe.concurrent('mergeProperties', () => {
   it('should merge properties from source to target when there are no overlapping keys', () => {
     const source = {
       a: 1,

@@ -1,6 +1,6 @@
 import { isReference } from '.';
 
-describe('isReference', () => {
+describe.concurrent('isReference', () => {
   it('should return true for reference types', () => {
     expect(isReference({})).toBe(true);
     expect(isReference([])).toBe(true);

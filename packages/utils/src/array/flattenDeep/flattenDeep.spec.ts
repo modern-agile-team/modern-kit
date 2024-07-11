@@ -1,6 +1,6 @@
 import { flattenDeep } from '.';
 
-describe('flatten', () => {
+describe.concurrent('flatten', () => {
   it('should flatten a deeply nested array of numbers', () => {
     const arr = [1, [2, [3, [4, [5]]]]];
     const flattenedArray = flattenDeep(arr);

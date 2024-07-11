@@ -1,6 +1,6 @@
 import { containsLowerCase } from '.';
 
-describe('containsLowerCase', () => {
+describe.concurrent('containsLowerCase', () => {
   it('should return true for a string containing lower case letters', () => {
     expect(containsLowerCase('hello')).toBeTruthy();
     expect(containsLowerCase('Hello')).toBeTruthy();

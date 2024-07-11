@@ -10,7 +10,7 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('getUniqId', () => {
+describe.concurrent('getUniqId', () => {
   it('should return a unique ID value based on the time', () => {
     vi.setSystemTime(new Date('2023-08-07T09:00:00Z'));
 

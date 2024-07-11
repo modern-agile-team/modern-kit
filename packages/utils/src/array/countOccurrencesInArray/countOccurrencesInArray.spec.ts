@@ -1,6 +1,6 @@
 import { countOccurrencesInArray } from '.';
 
-describe('countOccurrencesInArray', () => {
+describe.concurrent('countOccurrencesInArray', () => {
   it('should count occurrences of each value correctly', () => {
     const testArray1 = [
       'foo',

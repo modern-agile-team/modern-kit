@@ -1,6 +1,6 @@
 import { countSubstringOccurrences } from '.';
 
-describe('countSubstringOccurrences', () => {
+describe.concurrent('countSubstringOccurrences', () => {
   it('should return 0 if the target word passed in as an argument does not occur', () => {
     const str1 = 'apple banana apple grapes apple';
     expect(countSubstringOccurrences(str1, 'orange')).toBe(0);

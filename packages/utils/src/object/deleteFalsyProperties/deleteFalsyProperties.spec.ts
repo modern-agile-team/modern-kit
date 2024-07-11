@@ -1,6 +1,6 @@
 import { deleteFalsyProperties } from '.';
 
-describe('deleteFalsyProperties', () => {
+describe.concurrent('deleteFalsyProperties', () => {
   it('should remove object properties with falsy values other than boolean', () => {
     const originObj = {
       prop1: 1,

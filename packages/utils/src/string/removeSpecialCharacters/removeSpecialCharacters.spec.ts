@@ -1,6 +1,6 @@
 import { removeSpecialCharacters } from '.';
 
-describe('removeSpecialCharacters', () => {
+describe.concurrent('removeSpecialCharacters', () => {
   it('should return the input string as is if there are no special characters', () => {
     const str = 'Hello World';
     expect(removeSpecialCharacters(str)).toBe('Hello World');

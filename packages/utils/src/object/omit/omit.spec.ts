@@ -1,6 +1,6 @@
 import { omit } from '.';
 
-describe('omit function', () => {
+describe.concurrent('omit function', () => {
   it('should return a new object omitting a single key from an object', () => {
     const inputObj = { a: 1, b: 2, c: 3 } as const;
     const omittedObj = omit(inputObj, ['b']);

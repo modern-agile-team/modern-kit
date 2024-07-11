@@ -1,6 +1,6 @@
 import { containsSpecialCharacters } from '.';
 
-describe('containsSpecialCharacter', () => {
+describe.concurrent('containsSpecialCharacter', () => {
   it('should return true for a string containing special characters', () => {
     expect(containsSpecialCharacters('hello!')).toBeTruthy();
     expect(containsSpecialCharacters('@home')).toBeTruthy();

@@ -1,13 +1,13 @@
 import { isInRange } from '.';
 
-describe('isInRange', () => {
+describe.concurrent('isInRange', () => {
   it('should return true if value is in range', () => {
     expect(
       isInRange({
         value: 5,
         min: 0,
         max: 10,
-      }),
+      })
     ).toBe(true);
   });
 
@@ -17,14 +17,14 @@ describe('isInRange', () => {
         value: 0,
         min: 0,
         max: 10,
-      }),
+      })
     ).toBe(true);
     expect(
       isInRange({
         value: 10,
         min: 0,
         max: 10,
-      }),
+      })
     ).toBe(false);
   });
 
@@ -38,7 +38,7 @@ describe('isInRange', () => {
           min: false,
           max: true,
         },
-      }),
+      })
     ).toBe(false);
     expect(
       isInRange({
@@ -49,7 +49,7 @@ describe('isInRange', () => {
           min: false,
           max: true,
         },
-      }),
+      })
     ).toBe(true);
   });
 
@@ -62,7 +62,7 @@ describe('isInRange', () => {
         equalOptions: {
           min: false,
         },
-      }),
+      })
     ).toBe(false);
     expect(
       isInRange({
@@ -72,7 +72,7 @@ describe('isInRange', () => {
         equalOptions: {
           min: false,
         },
-      }),
+      })
     ).toBe(false);
   });
 
@@ -85,7 +85,7 @@ describe('isInRange', () => {
         equalOptions: {
           max: true,
         },
-      }),
+      })
     ).toBe(true);
     expect(
       isInRange({
@@ -95,7 +95,7 @@ describe('isInRange', () => {
         equalOptions: {
           max: true,
         },
-      }),
+      })
     ).toBe(true);
   });
 
@@ -105,7 +105,7 @@ describe('isInRange', () => {
         value: 15,
         min: 0,
         max: 10,
-      }),
+      })
     ).toBe(false);
   });
 
@@ -115,7 +115,7 @@ describe('isInRange', () => {
         value: 0,
         min: null as unknown as number,
         max: 10,
-      }),
+      })
     ).toThrowError('min and max values are invalid.');
 
     expect(() =>
@@ -123,7 +123,7 @@ describe('isInRange', () => {
         value: 0,
         min: 0,
         max: null as unknown as number,
-      }),
+      })
     ).toThrowError('min and max values are invalid.');
   });
 
@@ -133,7 +133,7 @@ describe('isInRange', () => {
         value: 5,
         min: 10,
         max: 0,
-      }),
+      })
     ).toThrowError('min value cannot be greater than the max value.');
   });
 });

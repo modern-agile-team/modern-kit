@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { deepEqual } from '.';
 
-describe('deepEqual', () => {
+describe.concurrent('deepEqual', () => {
   it('should return true if primitive types are deeply equal', () => {
     expect(deepEqual(1, 1)).toBeTruthy();
     expect(deepEqual('a', 'a')).toBeTruthy();

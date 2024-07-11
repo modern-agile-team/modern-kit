@@ -1,6 +1,6 @@
 import { flattenDeepThenMap } from '.';
 
-describe('flattenDeepThenMap', () => {
+describe.concurrent('flattenDeepThenMap', () => {
   const arr = [1, 2, [3, 4, [5, 6]]];
 
   it('should apply the iteratee function to each element and flatten', () => {

@@ -1,6 +1,6 @@
 import { isValidEmail } from '.';
 
-describe('isValidEmail', () => {
+describe.concurrent('isValidEmail', () => {
   it('should return true if email is in an valid format', () => {
     expect(isValidEmail('user123@gmail.com')).toBeTruthy();
     expect(isValidEmail('user.jeon@yahoo.co.kr')).toBeTruthy();

@@ -3,7 +3,7 @@ import { isPrimitive } from '.';
 import { isNumber } from '../isNumber';
 import { isString } from '../isString';
 
-describe('isPrimitive', () => {
+describe.concurrent('isPrimitive', () => {
   it('should return true if the value is a primitive type, and false if it is a reference type', () => {
     expect(isPrimitive(null)).toBeTruthy();
     expect(isPrimitive(undefined)).toBeTruthy();

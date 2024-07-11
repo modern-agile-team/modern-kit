@@ -1,6 +1,6 @@
 import { uniq } from '.';
 
-describe('uniq', () => {
+describe.concurrent('uniq', () => {
   it('should return the same array if there are no duplicates', () => {
     const testArr = [1, 2, 3];
     const expectedArray = [1, 2, 3];

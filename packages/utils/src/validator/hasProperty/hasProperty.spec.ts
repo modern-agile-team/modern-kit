@@ -1,6 +1,6 @@
 import { hasProperty } from '.';
 
-describe('hasProperty', () => {
+describe.concurrent('hasProperty', () => {
   const testObj = { foo: 'foo', bar: 'bar' } as const;
 
   it('should return true if a property exists in a object', () => {
