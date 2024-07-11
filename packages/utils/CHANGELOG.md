@@ -1,5 +1,39 @@
 # @modern-kit/utils
 
+## 1.10.0
+
+### Minor Changes
+
+- [#283](https://github.com/modern-agile-team/modern-kit/pull/283) [`e2cc663`](https://github.com/modern-agile-team/modern-kit/commit/e2cc6633f85877ae566ec7869285792315ce9f34) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): isReference 유틸 함수 추가 - @Gaic4o
+
+- [#294](https://github.com/modern-agile-team/modern-kit/pull/294) [`fc6eb4d`](https://github.com/modern-agile-team/modern-kit/commit/fc6eb4df8c818fe5e9ae23158887bd9506459998) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flatMapDeep 신규 유틸 함수 추가 - @ssi02014
+
+- [#287](https://github.com/modern-agile-team/modern-kit/pull/287) [`ae52b01`](https://github.com/modern-agile-team/modern-kit/commit/ae52b0152bfd828474c8207c242a8b9e323fb9b6) Thanks [@Collection50](https://github.com/Collection50)! - feat(util): average 함수 구현
+
+- [#323](https://github.com/modern-agile-team/modern-kit/pull/323) [`e6ed357`](https://github.com/modern-agile-team/modern-kit/commit/e6ed3572a91e939728983565ca277195e16834d0) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat: reverseString 함수 추가 완료 - @Sangminnn
+
+- [`b377000`](https://github.com/modern-agile-team/modern-kit/commit/b3770009adfeb50590811913568a2cecb10d967a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): sum 함수 추가 - @Collection50
+
+- [#303](https://github.com/modern-agile-team/modern-kit/pull/303) [`cf117da`](https://github.com/modern-agile-team/modern-kit/commit/cf117da02d93eeeda6413ddc72a15830f77c3487) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flatten 신규 유틸 함수 추가 - @ssi02014
+
+- [#300](https://github.com/modern-agile-team/modern-kit/pull/300) [`c85b3f4`](https://github.com/modern-agile-team/modern-kit/commit/c85b3f42570f79e6095ad295109b1c72a9ece49a) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): isPlainObject 유틸 함수 추가 - @Gaic4o
+
+- [#309](https://github.com/modern-agile-team/modern-kit/pull/309) [`7a94508`](https://github.com/modern-agile-team/modern-kit/commit/7a94508a9388f3df699625ca7454dc021a97103c) Thanks [@beberiche](https://github.com/beberiche)! - Feat(utils): isSubset 신규 유틸 함수 추가 - @beberiche
+
+- [#314](https://github.com/modern-agile-team/modern-kit/pull/314) [`30d4546`](https://github.com/modern-agile-team/modern-kit/commit/30d454673160730071d5127c68e0816a5c0b030f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flattenDeep 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [#297](https://github.com/modern-agile-team/modern-kit/pull/297) [`1192591`](https://github.com/modern-agile-team/modern-kit/commit/11925919a0a18f59b09ed4704fba60263a9f40b9) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): omit 타입 변경 및 deepCopy 개선 - @ssi02014
+
+- [`a64b991`](https://github.com/modern-agile-team/modern-kit/commit/a64b991cb9e83a57bb0c51021ac2b924bebf6ab3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): deleteFalsyProperties 타입 수정 - @ssi02014
+
+- [#304](https://github.com/modern-agile-team/modern-kit/pull/304) [`eba8634`](https://github.com/modern-agile-team/modern-kit/commit/eba8634038f503c5cd4c1207c8a720eebbc097ed) Thanks [@Collection50](https://github.com/Collection50)! - fix(util): math util 함수의 반복문을 for...of 문으로 수정 - @Collection50
+
+- [#319](https://github.com/modern-agile-team/modern-kit/pull/319) [`dc17782`](https://github.com/modern-agile-team/modern-kit/commit/dc177820173c067bcbb7626c4df3463229b0d282) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): mergeProperties 및 isArray 개선 - @ssi02014
+
+- [#305](https://github.com/modern-agile-team/modern-kit/pull/305) [`19f99e4`](https://github.com/modern-agile-team/modern-kit/commit/19f99e49ff80814d6131e279bb80b94d39f0a51b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): 컴포넌트 개선 Iterator, SeparatedIterator - @ssi02014
+
 ## 1.9.1
 
 ### Patch Changes

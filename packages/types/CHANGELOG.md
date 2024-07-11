@@ -1,5 +1,15 @@
 # @modern-kit/types
 
+## 1.4.0
+
+### Minor Changes
+
+- [#294](https://github.com/modern-agile-team/modern-kit/pull/294) [`fc6eb4d`](https://github.com/modern-agile-team/modern-kit/commit/fc6eb4df8c818fe5e9ae23158887bd9506459998) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): ExtractNestedArrayType 유틸 타입 추가 - @ssi02014
+
+### Patch Changes
+
+- [#305](https://github.com/modern-agile-team/modern-kit/pull/305) [`19f99e4`](https://github.com/modern-agile-team/modern-kit/commit/19f99e49ff80814d6131e279bb80b94d39f0a51b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): 컴포넌트 개선 Iterator, SeparatedIterator - @ssi02014
+
 ## 1.3.0
 
 ### Minor Changes
