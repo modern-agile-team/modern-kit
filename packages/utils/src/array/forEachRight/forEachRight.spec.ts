@@ -9,6 +9,7 @@ type CallbackResult = {
 describe('forEachRight', () => {
   it('should call the callback for each element from right to left', () => {
     const callbackResults: CallbackResult[] = [];
+
     forEachRight([1, 2, 3], (value, index, array) => {
       callbackResults.push({ value, index, array });
     });
@@ -31,6 +32,7 @@ describe('forEachRight', () => {
   it('should handle empty arrays without producing results and not modify the original array', () => {
     const emptyArray: number[] = [];
     const callbackResults: CallbackResult[] = [];
+
     forEachRight(emptyArray, (value, index, array) => {
       callbackResults.push({ value, index, array });
     });
