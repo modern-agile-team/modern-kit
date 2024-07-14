@@ -3,7 +3,7 @@ import { forEachRight } from '.';
 type CallbackResult = {
   value: number;
   index: number;
-  array: number[];
+  array: number[] | readonly number[];
 };
 
 describe('forEachRight', () => {
