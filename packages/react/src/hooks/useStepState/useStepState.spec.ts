@@ -64,14 +64,16 @@ describe('useStepState', () => {
       });
     });
 
-    expect(result.current.state).toEqual({
-      name: 'foo',
-    });
-    expect(sessionStorage.getItem('stepState')).toBe(
-      JSON.stringify({
+    await waitFor(() => {
+      expect(result.current.state).toEqual({
         name: 'foo',
-      })
-    );
+      });
+      expect(sessionStorage.getItem('stepState')).toBe(
+        JSON.stringify({
+          name: 'foo',
+        })
+      );
+    });
 
     rerender({
       storageOptions: {
@@ -86,14 +88,16 @@ describe('useStepState', () => {
       }));
     });
 
-    expect(result.current.state).toEqual({
-      name: 'bar',
-    });
-    expect(localStorage.getItem('test')).toBe(
-      JSON.stringify({
+    await waitFor(() => {
+      expect(result.current.state).toEqual({
         name: 'bar',
-      })
-    );
+      });
+      expect(localStorage.getItem('test')).toBe(
+        JSON.stringify({
+          name: 'bar',
+        })
+      );
+    });
   });
 
   it('should save state to sessionStorage, clear state, and restore initial state on command', async () => {
