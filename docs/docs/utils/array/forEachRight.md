@@ -12,8 +12,8 @@
 
 ```ts title="typescript"
 export const forEachRight: <T>(
-  array: T[],
-  callback: (currentValue: T, index: number, array: T[]) => void
+  array: T[] | readonly T[],
+  callback: (currentValue: T, index: number, array: T[] | readonly T[]) => void
 ) => void;
 ```
 
