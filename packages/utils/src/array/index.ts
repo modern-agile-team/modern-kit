@@ -6,6 +6,7 @@ export * from './excludeElements';
 export * from './flatten';
 export * from './flattenDeep';
 export * from './flattenDeepThenMap';
+export * from './forEachRight';
 export * from './intersection';
 export * from './intersectionWithDuplicates';
 export * from './partition';
