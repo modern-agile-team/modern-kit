@@ -1,6 +1,6 @@
 # flattenDeep
 
-**[flatten](https://modern-agile-team.github.io/modern-kit/docs/utils/array/flatten)** 을 기반으로 `모든 깊이의 중첩 배열`을 `평탄화`해주는 함수입니다.
+**[flatten](https://modern-agile-team.github.io/modern-kit/docs/utils/array/flatten)** 을 기반으로 주어진 중첩 배열의 `모든 깊이`를 `평탄화`해주는 함수입니다.
 
 JavaScript에서 기본적으로 제공하는 **[Array.prototype.flat(Infinity)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)** 와 비교했을 때 `성능면에서 더 우수`하며, 더욱 `정확한 타입 추론`을 할 수 있습니다.
 
