@@ -6,8 +6,10 @@ import { flattenDeep } from '..';
  *
  * arr.flat(Infinity).map(iteratee)와 동일하게 동작하며, 타입 문제를 개선합니다.
  *
- * @param arr - 평탄화할 중첩 배열입니다.
- * @param iteratee - 평탄화 후 각 요소에 적용 할 함수입니다.
+ * @template T - 배열 요소의 유형입니다.
+ * @template U - 매핑 함수에 의해 반환되는 새로운 요소의 유형입니다.
+ * @param {T[] | readonly T[]}arr - 평탄화할 중첩 배열입니다.
+ * @param {(item: ExtractNestedArrayType<T>) => U} iteratee - 평탄화 후 각 요소에 적용 할 함수입니다.
  * @returns 평탄화 후 각 요소가 iteratee 함수로 매핑된 새로운 배열입니다.
  *
  * @example

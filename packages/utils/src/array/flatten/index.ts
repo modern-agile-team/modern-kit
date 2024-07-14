@@ -3,9 +3,11 @@
  *
  * Array.prototype.flat과 동일하게 동작합니다. 하지만 성능이 더 우수합니다.(약 6~7배)
  *
- * @param arr - 평탄화할 중첩 배열입니다.
- * @param depth - 평탄화할 깊이입니다. 기본값은 1.
- * @returns 평탄화가 적용된 새로운 배열입니다.
+ * @template T - 배열 요소의 유형입니다.
+ * @template D - 평탄화 깊이의 유형입니다.
+ * @param {T[] | readonly T[]} arr - 평탄화할 중첩 배열입니다.
+ * @param {D} [depth=1] - 평탄화할 깊이입니다. 기본값은 1입니다.
+ * @returns {FlatArray<T[], D>[]} 평탄화된 새로운 배열을 반환합니다.
  *
  * @example
  * const arr = [1, [2, 3], [4, [5, 6]]];
