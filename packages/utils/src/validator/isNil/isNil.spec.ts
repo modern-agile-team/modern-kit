@@ -1,15 +1,15 @@
-import { isNullish } from '.';
+import { isNil } from '.';
 
-describe('isNotNullish', () => {
+describe('isNil', () => {
   it('should return false for non-nullish values', () => {
     for (const el of [1, 'dasdsa', { foo: 'bar' }, () => {}, Symbol()]) {
-      expect(isNullish(el)).toBe(false);
+      expect(isNil(el)).toBe(false);
     }
   });
 
   it('should return true for nullish values', () => {
     for (const el of [null, undefined]) {
-      expect(isNullish(el)).toBe(true);
+      expect(isNil(el)).toBe(true);
     }
   });
 });
