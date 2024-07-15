@@ -10,5 +10,6 @@ export * from './forEachRight';
 export * from './intersection';
 export * from './intersectionWithDuplicates';
 export * from './partition';
+export * from './shuffle';
 export * from './union';
 export * from './uniq';
