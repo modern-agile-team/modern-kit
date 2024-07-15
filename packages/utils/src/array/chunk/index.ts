@@ -14,8 +14,12 @@
  * // [['a', 'b', 'c'], ['d']]
  */
 export function chunk<T>(arr: T[] | readonly T[], size: number) {
+  if (!Number.isInteger(size) || size < 1) {
+    throw new Error('Invalid size Value');
+  }
+
   const chunkLength = Math.ceil(arr.length / size);
-  const result: T[][] = Array(chunkLength);
+  const result: T[][] = new Array(chunkLength);
 
   for (let i = 0; i < chunkLength; i++) {
     const start = i * size;
