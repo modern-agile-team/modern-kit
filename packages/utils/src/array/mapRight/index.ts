@@ -8,7 +8,6 @@
  * - `currentValue` - 현재 처리 중인 배열 요소입니다.
  * - `index` - 현재 요소의 인덱스입니다.
  * - `array` - 순회 중인 배열 자체입니다.
- * @param {any} [thisArg] - `callback`을 호출할 때 `this`로 사용할 값입니다.
  * @returns {U[]} 새로운 배열을 반환합니다. 각 요소는 `callback`의 반환 값입니다.
  */
 export function mapRight<T, U>(
