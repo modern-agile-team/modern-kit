@@ -14,7 +14,6 @@
 function mapRight<T, U>(
   array: T[] | readonly T[],
   callback: (currentValue: T, index: number, array: T[] | readonly T[]) => U,
-  thisArg?: any
 ): U[];
 ```
 
