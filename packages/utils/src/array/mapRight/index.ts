@@ -11,14 +11,13 @@
  * @param {any} [thisArg] - `callback`을 호출할 때 `this`로 사용할 값입니다.
  * @returns {U[]} 새로운 배열을 반환합니다. 각 요소는 `callback`의 반환 값입니다.
  */
-export const mapRight = <T, U>(
+export function mapRight<T, U>(
   array: T[] | readonly T[],
-  callback: (currentValue: T, index: number, array: T[] | readonly T[]) => U,
-  thisArg?: any
-): U[] => {
+  callback: (currentValue: T, index: number, array: T[] | readonly T[]) => U
+): U[] {
   const result: U[] = [];
   for (let i = array.length - 1; i >= 0; i--) {
-    result.push(callback.call(thisArg, array[i], i, array));
+    result.push(callback(array[i], i, array));
   }
   return result;
-};
+}
