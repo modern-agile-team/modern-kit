@@ -42,4 +42,5 @@ const result1 = range(5); // [0, 1, 2, 3, 4]
 const result2 = range(1, 6); // [1, 2, 3, 4, 5]
 const result3 = range(1, 6, 2); // [1, 3, 5]
 const result4 = range(-10, -5, 1); // [-10, -9, -8, -7, -6]
+const result5 = range(10, 5, -1); // [10, 9, 8, 7, 6]
 ```
