@@ -5,6 +5,8 @@ import { useState } from 'react';
 
 `multi-step process`의 `step`을 관리하고 추적해주는 커스텀 훅입니다.
 
+배열의 인덱스와 호환될 수 있게 `0번` step부터 시작합니다.
+
 <br />
 
 ## Code
@@ -14,7 +16,7 @@ import { useState } from 'react';
 ```ts title="typescript"
 interface UseStepProps {
   maxStep: number;
-  initialStep?: number; // default: 1
+  initialStep?: number; // default: 0
   infinite?: boolean; // default: false
 }
 
@@ -55,7 +57,7 @@ export const Example = () => {
     goToNextStep,
     goToPrevStep,
     resetStep,
-  } = useStep({ maxStep: 4, infinite: infinite });
+  } = useStep({ maxStep: 3, infinite: infinite });
 
   const handleGoToNextStep = () => {
     goToNextStep(({ prevStep, nextStep }) => {
@@ -70,7 +72,7 @@ export const Example = () => {
   };
 
   const handleSetStep = () => {
-    setStep(3, ({ prevStep, nextStep }) => {
+    setStep(2, ({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
@@ -92,7 +94,7 @@ export const Example = () => {
       <div>
         <button onClick={handleGoToPrevStep}>이전 스탭</button>
         <button onClick={handleGoToNextStep}>다음 스탭</button>
-        <button onClick={handleSetStep}>3스탭으로 이동</button>
+        <button onClick={handleSetStep}>2스탭으로 이동</button>
         <button onClick={handleResetStep}>초기화 스탭</button>
         <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
@@ -103,24 +105,24 @@ export const Example = () => {
         <p>infinite: {`${infinite}`}</p>
       </div>
       <div>
-        {currentStep === 1 && (
+        {currentStep === 0 && (
           <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            0번 Step Box
+          </div>
+        )}
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
             1번 Step Box
           </div>
         )}
         {currentStep === 2 && (
-          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
             2번 Step Box
           </div>
         )}
         {currentStep === 3 && (
-          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
-            3번 Step Box
-          </div>
-        )}
-        {currentStep === 4 && (
           <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
-            4번 Step Box
+            3번 Step Box
           </div>
         )}
       </div>
@@ -132,7 +134,7 @@ export const Example = () => {
 ## Example
 
 export const Example = () => {
-  const [infinite, setInfinite] = useState(false);
+  const [infinite, setInfinite] = useState(true);
   const {
     currentStep,
     hasNextStep,
@@ -141,7 +143,7 @@ export const Example = () => {
     goToNextStep,
     goToPrevStep,
     resetStep,
-  } = useStep({ maxStep: 4, infinite: infinite });
+  } = useStep({ maxStep: 3, infinite: infinite });
 
   const handleGoToNextStep = () => {
     goToNextStep(({ prevStep, nextStep }) => {
@@ -156,7 +158,7 @@ export const Example = () => {
   };
 
   const handleSetStep = () => {
-    setStep(3, ({ prevStep, nextStep }) => {
+    setStep(2, ({ prevStep, nextStep }) => {
       console.log(`${prevStep}에서 ${nextStep}로 이동`);
     });
   };
@@ -178,7 +180,7 @@ export const Example = () => {
       <div>
         <button onClick={handleGoToPrevStep}>이전 스탭</button>
         <button onClick={handleGoToNextStep}>다음 스탭</button>
-        <button onClick={handleSetStep}>3스탭으로 이동</button>
+        <button onClick={handleSetStep}>2스탭으로 이동</button>
         <button onClick={handleResetStep}>초기화 스탭</button>
         <button onClick={() => setInfinite(!infinite)}>infinite 토글</button>
       </div>
@@ -189,24 +191,24 @@ export const Example = () => {
         <p>infinite: {`${infinite}`}</p>
       </div>
       <div>
-        {currentStep === 1 && (
+        {currentStep === 0 && (
           <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            0번 Step Box
+          </div>
+        )}
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
             1번 Step Box
           </div>
         )}
         {currentStep === 2 && (
-          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
             2번 Step Box
           </div>
         )}
         {currentStep === 3 && (
-          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
-            3번 Step Box
-          </div>
-        )}
-        {currentStep === 4 && (
           <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
-            4번 Step Box
+            3번 Step Box
           </div>
         )}
       </div>

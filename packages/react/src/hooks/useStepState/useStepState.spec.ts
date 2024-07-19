@@ -133,7 +133,7 @@ describe('useStepState', () => {
       result.current.goToNextStep();
     });
 
-    expect(result.current.currentStep).toBe(2);
+    expect(result.current.currentStep).toBe(1);
     expect(result.current.hasNextStep).toBe(true);
   });
 
@@ -167,6 +167,6 @@ describe('useStepState', () => {
       result.current.resetStep();
     });
 
-    expect(result.current.currentStep).toBe(1);
+    expect(result.current.currentStep).toBe(0);
   });
 });

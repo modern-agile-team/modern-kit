@@ -18,20 +18,20 @@ describe('useStep', () => {
   });
 
   it('should go to the next step and call the provided action', async () => {
-    const { result } = renderHook(() => useStep({ maxStep: 3 }));
+    const { result } = renderHook(() => useStep({ maxStep: 2 }));
 
     await waitFor(() => {
       result.current.goToNextStep();
     });
 
-    expect(result.current.currentStep).toBe(2);
+    expect(result.current.currentStep).toBe(1);
     expect(result.current.hasNextStep).toBe(true);
 
     await waitFor(() => {
       result.current.goToNextStep(goToNextStepActionMockFn);
     });
 
-    expect(result.current.currentStep).toBe(3);
+    expect(result.current.currentStep).toBe(2);
     expect(result.current.hasNextStep).toBe(false);
     expect(goToNextStepActionMockFn).toBeCalledTimes(1);
 
@@ -39,27 +39,27 @@ describe('useStep', () => {
       result.current.goToNextStep();
     });
 
-    expect(result.current.currentStep).toBe(3);
+    expect(result.current.currentStep).toBe(2);
     expect(result.current.hasNextStep).toBe(false);
   });
 
   it('should go to the previous step and call the provided action', async () => {
     const { result } = renderHook(() =>
-      useStep({ maxStep: 4, initialStep: 3 })
+      useStep({ maxStep: 3, initialStep: 2 })
     );
 
     await waitFor(() => {
       result.current.goToPrevStep();
     });
 
-    expect(result.current.currentStep).toBe(2);
+    expect(result.current.currentStep).toBe(1);
     expect(result.current.hasPrevStep).toBe(true);
 
     await waitFor(() => {
       result.current.goToPrevStep(goToPrevStepActionMockFn);
     });
 
-    expect(result.current.currentStep).toBe(1);
+    expect(result.current.currentStep).toBe(0);
     expect(result.current.hasPrevStep).toBe(false);
     expect(goToPrevStepActionMockFn).toBeCalledTimes(1);
 
@@ -67,7 +67,7 @@ describe('useStep', () => {
       result.current.goToPrevStep();
     });
 
-    expect(result.current.currentStep).toBe(1);
+    expect(result.current.currentStep).toBe(0);
     expect(result.current.hasPrevStep).toBe(false);
   });
 
@@ -86,7 +86,7 @@ describe('useStep', () => {
       result.current.goToNextStep(goToPrevStepActionMockFn);
     });
 
-    expect(result.current.currentStep).toBe(1);
+    expect(result.current.currentStep).toBe(0);
     expect(goToPrevStepActionMockFn).toBeCalledTimes(1);
   });
 
@@ -144,7 +144,7 @@ describe('useStep', () => {
       result.current.resetStep(resetStepActionMockFn);
     });
 
-    expect(result.current.currentStep).toBe(1);
+    expect(result.current.currentStep).toBe(0);
     expect(resetStepActionMockFn).toBeCalledTimes(1);
   });
 

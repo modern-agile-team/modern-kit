@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { isFunction } from '@modern-kit/utils';
 
 type StepType = 'nextStep' | 'prevStep';
@@ -19,17 +19,20 @@ export interface UseStepProps {
 
 export const useStep = ({
   maxStep,
-  initialStep = 1,
+  initialStep = 0,
   infinite = false,
 }: UseStepProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
-  const hasNextStep = currentStep < maxStep;
-  const hasPrevStep = currentStep > 1;
+  const hasNextStep = useMemo(
+    () => currentStep < maxStep,
+    [currentStep, maxStep]
+  );
+  const hasPrevStep = useMemo(() => currentStep > 0, [currentStep]);
 
   const setStep = useCallback(
     (step: number | ((step: number) => number), action?: StepAction) => {
       const nextStep = isFunction(step) ? step(currentStep) : step;
-      const isValidNextStep = nextStep >= 1 && nextStep <= maxStep;
+      const isValidNextStep = nextStep >= 0 && nextStep <= maxStep;
 
       if (isValidNextStep) {
         if (action) {
@@ -48,7 +51,7 @@ export const useStep = ({
       const isNextStepType = type === 'nextStep';
 
       if (isOverflow) {
-        return isNextStepType ? 1 : maxStep;
+        return isNextStepType ? 0 : maxStep;
       }
       return isNextStepType ? currentStep + 1 : currentStep - 1;
     },
