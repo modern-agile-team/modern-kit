@@ -20,13 +20,7 @@ interface UseStepProps {
   infinite?: boolean; // default: false
 }
 
-type StepAction = ({
-  prevStep,
-  nextStep,
-}: {
-  prevStep: number;
-  nextStep: number;
-}) => void;
+type Action = ({ prev, next }: { prev: number; next: number }) => void;
 ```
 ```ts title="typescript"
 const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
@@ -35,11 +29,11 @@ const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
   readonly hasPrevStep: boolean; // 이전 Step 이동 가능 여부
   readonly setStep: (
     step: number | ((step: number) => number),
-    action?: StepAction
+    action?: Action
   ) => void; // 특정 Step 이동 함수
-  readonly goToNextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
-  readonly goToPrevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
-  readonly resetStep: (action?: StepAction) => void; // initialValue 이동 함수
+  readonly goToNextStep: (action?: Action) => void; // 다음 Step 이동 함수
+  readonly goToPrevStep: (action?: Action) => void; // 이전 Step 이동 함수
+  readonly resetStep: (action?: Action) => void; // initialValue 이동 함수
 };
 ```
 
@@ -60,26 +54,26 @@ export const Example = () => {
   } = useStep({ maxStep: 3, infinite: infinite });
 
   const handleGoToNextStep = () => {
-    goToNextStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    goToNextStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleGoToPrevStep = () => {
-    goToPrevStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    goToPrevStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleSetStep = () => {
-    setStep(2, ({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    setStep(2, ({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleResetStep = () => {
-    resetStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    resetStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
@@ -146,26 +140,26 @@ export const Example = () => {
   } = useStep({ maxStep: 3, infinite: infinite });
 
   const handleGoToNextStep = () => {
-    goToNextStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    goToNextStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleGoToPrevStep = () => {
-    goToPrevStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    goToPrevStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleSetStep = () => {
-    setStep(2, ({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    setStep(2, ({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
   const handleResetStep = () => {
-    resetStep(({ prevStep, nextStep }) => {
-      console.log(`${prevStep}에서 ${nextStep}로 이동`);
+    resetStep(({ prev, next }) => {
+      console.log(`${prev}에서 ${next}로 이동`);
     });
   };
 
