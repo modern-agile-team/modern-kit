@@ -30,8 +30,7 @@
 // 함수 오버로딩
 function range(end: number): number[];
 function range(start: number, end: number): number[];
-function range(start: number, end: number, step?: number): number[];
-function range(start: number, end?: number, step?: number): number[]
+function range(start: number, end: number, step: number): number[];
 ```
 
 ## Usage
