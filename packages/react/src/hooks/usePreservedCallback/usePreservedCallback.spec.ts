@@ -1,30 +1,62 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { usePreservedCallback } from '.';
 
 describe('usePreservedCallback', () => {
-  it('should preserve and execute the callback', async () => {
-    const Increment = (data: number) => {
-      return data + 1;
-    };
+  it('should preserve the callback function', () => {
+    let counter = 0;
 
-    const newIncrement = (data: number) => {
-      return data + 10;
-    };
+    const { result, rerender } = renderHook(
+      ({ callback }) => usePreservedCallback(callback),
+      {
+        initialProps: {
+          callback: () => counter,
+        },
+      }
+    );
 
-    const { result } = renderHook(() => usePreservedCallback(Increment));
+    expect(result.current()).toBe(0);
 
-    const data1 = result.current(0);
-    expect(data1).toBe(1);
+    counter = 1;
+    rerender({ callback: () => counter });
 
-    const data2 = result.current(10);
-    expect(data2).toBe(11);
+    expect(result.current()).toBe(1);
+  });
 
-    result.current = newIncrement; // change
+  it('should not recreate the callback on each render', () => {
+    const callback = vi.fn();
+    const { result, rerender } = renderHook(() =>
+      usePreservedCallback(callback)
+    );
 
-    const data3 = result.current(0);
-    expect(data3).toBe(10);
+    const preservedCallback = result.current;
 
-    const data4 = result.current(10);
-    expect(data4).toBe(20);
+    rerender();
+    expect(result.current).toBe(preservedCallback);
+  });
+
+  it('should call the latest callback', async () => {
+    const callback1 = vi.fn();
+    const callback2 = vi.fn();
+
+    const { result, rerender } = renderHook(
+      ({ callback }) => usePreservedCallback(callback),
+      {
+        initialProps: { callback: callback1 },
+      }
+    );
+
+    await waitFor(() => {
+      result.current();
+    });
+    expect(callback1).toHaveBeenCalledTimes(1);
+
+    rerender({ callback: callback2 });
+
+    await waitFor(() => {
+      result.current();
+    });
+
+    expect(callback2).toHaveBeenCalledTimes(1);
+    expect(callback1).toHaveBeenCalledTimes(1);
   });
 });
