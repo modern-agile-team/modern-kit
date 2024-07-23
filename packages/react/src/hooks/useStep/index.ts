@@ -1,15 +1,9 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { isFunction } from '@modern-kit/utils';
 
 type StepType = 'nextStep' | 'prevStep';
 
-type StepAction = ({
-  prevStep,
-  nextStep,
-}: {
-  prevStep: number;
-  nextStep: number;
-}) => void;
+type Action = ({ prev, next }: { prev: number; next: number }) => void;
 
 export interface UseStepProps {
   maxStep: number;
@@ -19,21 +13,24 @@ export interface UseStepProps {
 
 export const useStep = ({
   maxStep,
-  initialStep = 1,
+  initialStep = 0,
   infinite = false,
 }: UseStepProps) => {
   const [currentStep, setCurrentStep] = useState(initialStep);
-  const hasNextStep = currentStep < maxStep;
-  const hasPrevStep = currentStep > 1;
+  const hasNextStep = useMemo(
+    () => currentStep < maxStep,
+    [currentStep, maxStep]
+  );
+  const hasPrevStep = useMemo(() => currentStep > 0, [currentStep]);
 
   const setStep = useCallback(
-    (step: number | ((step: number) => number), action?: StepAction) => {
+    (step: number | ((step: number) => number), action?: Action) => {
       const nextStep = isFunction(step) ? step(currentStep) : step;
-      const isValidNextStep = nextStep >= 1 && nextStep <= maxStep;
+      const isValidNextStep = nextStep >= 0 && nextStep <= maxStep;
 
       if (isValidNextStep) {
         if (action) {
-          action({ prevStep: currentStep, nextStep });
+          action({ prev: currentStep, next: nextStep });
         }
         setCurrentStep(step);
         return;
@@ -48,7 +45,7 @@ export const useStep = ({
       const isNextStepType = type === 'nextStep';
 
       if (isOverflow) {
-        return isNextStepType ? 1 : maxStep;
+        return isNextStepType ? 0 : maxStep;
       }
       return isNextStepType ? currentStep + 1 : currentStep - 1;
     },
@@ -56,13 +53,13 @@ export const useStep = ({
   );
 
   const handleStepOverflow = useCallback(
-    (type: StepType, action?: StepAction) => {
+    (type: StepType, action?: Action) => {
       if (!infinite) return;
 
       const nextStep = getNextStep(type, true);
 
       if (action) {
-        action({ prevStep: currentStep, nextStep });
+        action({ prev: currentStep, next: nextStep });
       }
       setCurrentStep(nextStep);
     },
@@ -70,11 +67,11 @@ export const useStep = ({
   );
 
   const handleStepWithinBounds = useCallback(
-    (type: StepType, action?: StepAction) => {
+    (type: StepType, action?: Action) => {
       const nextStep = getNextStep(type, false);
 
       if (action) {
-        action({ prevStep: currentStep, nextStep });
+        action({ prev: currentStep, next: nextStep });
       }
       setCurrentStep(nextStep);
     },
@@ -82,7 +79,7 @@ export const useStep = ({
   );
 
   const goToNextStep = useCallback(
-    (action?: StepAction) => {
+    (action?: Action) => {
       if (!hasNextStep) {
         handleStepOverflow('nextStep', action);
         return;
@@ -93,7 +90,7 @@ export const useStep = ({
   );
 
   const goToPrevStep = useCallback(
-    (action?: StepAction) => {
+    (action?: Action) => {
       if (!hasPrevStep) {
         handleStepOverflow('prevStep', action);
         return;
@@ -104,9 +101,9 @@ export const useStep = ({
   );
 
   const resetStep = useCallback(
-    (action?: StepAction) => {
+    (action?: Action) => {
       if (action) {
-        action({ prevStep: currentStep, nextStep: initialStep });
+        action({ prev: currentStep, next: initialStep });
       }
       setCurrentStep(initialStep);
     },
