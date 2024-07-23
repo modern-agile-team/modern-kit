@@ -46,11 +46,11 @@ const Example = () => {
 
   const { set, reset, clear } = useTimeout(() => {
     setNumber(number + 1);
-  }, 2000);
+  }, 1000);
   /*
    * useTimeout(() => {
    *   setNumber(number + 1);
-   * }, { delay: 2000, enabled: true });
+   * }, { delay: 1000, enabled: true });
   */
 
   return (
@@ -74,11 +74,6 @@ export const Example = () => {
   const { set, reset, clear } = useTimeout(() => {
     setNumber(number + 1);
   }, 1000);
-  /*
-   * useTimeout(() => {
-   *   setNumber(number + 1);
-   * }, { delay: 2000, enabled: true });
-  */
 
   return (
     <div>
