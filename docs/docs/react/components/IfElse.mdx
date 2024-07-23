@@ -33,17 +33,17 @@ const IfElse = ({ condition, trueComponent, falseComponent }: IfElseProps) => JS
 import { IfElse } from '@modern-kit/react';
 
 const Example = () => {
-    const [state, setState] = useState<boolean>(false);
-    return (
-        <>
-            <button onClick={() => setState(!state)}>Toggle Button</button>
-            <IfElse 
-                condition={state}
-                trueComponent={<h1>true component</h1>}
-                falseComponent={<h1>false component</h1>}
-            />
-        </>
-    )
+  const [state, setState] = useState<boolean>(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+      <IfElse 
+        condition={state}
+        trueComponent={<h1>true component</h1>}
+        falseComponent={<h1>false component</h1>}
+      />
+    </>
+  );
 }
 ```
 
