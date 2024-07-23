@@ -49,17 +49,17 @@ const Example = () => {
 
 ## Example
 export const Example = () => {
-    const [state, setState] = useState(false);
-    return (
-        <>
-            <button onClick={() => setState(!state)}>Toggle Button</button>
-            <IfElse 
-                condition={state}
-                trueComponent={<h1>true component</h1>}
-                falseComponent={<h1>false component</h1>}
-            />
-        </>
-    );
+  const [state, setState] = useState(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+      <IfElse 
+        condition={state}
+        trueComponent={<h1>true component</h1>}
+        falseComponent={<h1>false component</h1>}
+      />
+    </>
+  );
 }
 
 <Example />
