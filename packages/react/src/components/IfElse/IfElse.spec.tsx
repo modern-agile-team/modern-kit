@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { IfElse } from '.';
 
-describe('IfElse Component', () => {
+describe('IfElse', () => {
   const TrueComponent = () => {
     return <p role="document">true</p>;
   };
