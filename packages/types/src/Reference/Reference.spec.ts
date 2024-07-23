@@ -5,6 +5,7 @@ describe('Reference', () => {
     const value = {} as Reference;
 
     if (typeof value === 'object') {
+      // eslint-disable-next-line @typescript-eslint/ban-types
       expectTypeOf(value).toEqualTypeOf<Exclude<Reference, Function>>();
     }
 
@@ -13,6 +14,7 @@ describe('Reference', () => {
     }
 
     if (typeof value === 'function') {
+      // eslint-disable-next-line @typescript-eslint/ban-types
       expectTypeOf(value).toEqualTypeOf<Function>();
     }
 
