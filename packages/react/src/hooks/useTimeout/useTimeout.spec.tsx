@@ -28,10 +28,10 @@ const TestComponent = () => {
 };
 
 describe('useTimeout', () => {
-  it('mockFn is executed after a given time', () => {
+  it('should call the function after the specified delay', () => {
     const mockFn = vi.fn();
 
-    renderHook(() => useTimeout(mockFn, delayTime));
+    renderHook(() => useTimeout(mockFn, { delay: delayTime }));
 
     expect(mockFn).not.toBeCalled();
 
@@ -39,18 +39,70 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('delay is undefined, timeout is disabled', () => {
+  it('should call the function only when enabled', () => {
     const mockFn = vi.fn();
 
-    renderHook(() => useTimeout(mockFn, undefined));
+    const { rerender } = renderHook(
+      ({ enabled }) => useTimeout(mockFn, { delay: delayTime, enabled }),
+      {
+        initialProps: { enabled: false },
+      }
+    );
 
     expect(mockFn).not.toBeCalled();
 
     vi.advanceTimersByTime(delayTime);
+
     expect(mockFn).not.toBeCalled();
+
+    rerender({ enabled: true });
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalled();
   });
 
-  it('callback function always guarantees the latest state', () => {
+  it('should call the function after being set and reset', () => {
+    const mockFn = vi.fn();
+
+    const { result } = renderHook(
+      ({ enabled }) => useTimeout(mockFn, { delay: delayTime, enabled }),
+      {
+        initialProps: { enabled: false },
+      }
+    );
+
+    expect(mockFn).not.toBeCalled();
+
+    vi.advanceTimersByTime(delayTime);
+
+    expect(mockFn).not.toBeCalled();
+
+    result.current.set();
+
+    vi.advanceTimersByTime(delayTime);
+
+    expect(mockFn).toBeCalledTimes(1);
+
+    result.current.reset();
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(2);
+  });
+
+  it('should disable the timeout when delay is undefined', () => {
+    const mockFn = vi.fn();
+
+    renderHook(() =>
+      useTimeout(mockFn, { delay: undefined as unknown as number })
+    );
+
+    expect(mockFn).not.toBeCalled();
+
+    vi.advanceTimersByTime(0);
+    expect(mockFn).toBeCalled();
+  });
+
+  it('should ensure the callback function always has the latest state', () => {
     renderSetup(<TestComponent />);
 
     expect(screen.getByText('0')).toBeInTheDocument();

@@ -1,8 +1,13 @@
+import { useTimeout } from '@modern-kit/react';
+import { useState } from 'react';
+
 # useTimeout
 
 `window.setTimeout`을 편리하게 사용할 수 있는 커스텀 훅 입니다. 
 
-`delay`의 값으로 `null`을 넣으면 타이머를 중지할 수 있습니다.
+option 값으로 숫자를 받을 수 있고, 객체로 받을 수 있습니다. 객체로 받을 경우 `delay`와 `enabled` 속성을 넘겨줄 수 있습니다.
+
+타임아웃을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 반환합니다.
 
 <br />
 
@@ -12,8 +17,24 @@
 ## Interface
 ```ts title="typescript"
 type SetTimeoutParameters = Parameters<typeof setTimeout>;
+```
+```ts title="typescript"
+interface UseTimeoutReturnType {
+  set: () => void;
+  reset: () => void;
+  clear: () => void;
+}
 
-const useTimeout: (callback: SetTimeoutParameters[0], delay?: SetTimeoutParameters[1]) => void
+// 함수 오버로딩
+function useTimeout(
+  callback: SetTimeoutParameters[0],
+  options: number
+): UseTimeoutReturnType;
+
+function useTimeout(
+  callback: SetTimeoutParameters[0],
+  options: TimeoutOptions
+): UseTimeoutReturnType;
 ```
 
 ## Usage
@@ -23,14 +44,47 @@ import { useTimeout } from '@modern-kit/react';
 const Example = () => {
   const [number, setNumber] = useState(0);
 
-  useTimeout(() => {
+  const { set, reset, clear } = useTimeout(() => {
+    setNumber(number + 1);
+  }, 1000);
+  /*
+   * useTimeout(() => {
+   *   setNumber(number + 1);
+   * }, { delay: 1000, enabled: true });
+  */
+
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set, reset, clear } = useTimeout(() => {
     setNumber(number + 1);
   }, 1000);
 
-  useTimeout(() => {
-    setNumber(number + 1);
-  }, 2000);
-
-  return <div>{number}</div>;
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
 };
-```
+
+<Example />
