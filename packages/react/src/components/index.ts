@@ -1,6 +1,7 @@
 export * from './ClientOnly';
 export * from './DebounceWrapper';
 export * from './FallbackLazyImage';
+export * from './IfElse';
 export * from './InView';
 export * from './Iterator';
 export * from './LazyImage';
