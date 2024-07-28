@@ -1,5 +1,29 @@
 # @modern-kit/utils
 
+## 1.12.0
+
+### Minor Changes
+
+- [#375](https://github.com/modern-agile-team/modern-kit/pull/375) [`185e22b`](https://github.com/modern-agile-team/modern-kit/commit/185e22bb34d1517ebd14c838b18e515850453869) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): serialize 유틸함수 추가 완료 - @Sangminnn
+
+- [#333](https://github.com/modern-agile-team/modern-kit/pull/333) [`9dcb2b4`](https://github.com/modern-agile-team/modern-kit/commit/9dcb2b4857a7ac42f4adee2acb06e0a6dc6a69a6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): isNullish, isNotNullish -> isNill, isNotNill 로 네이밍 변경 (breaking changes) - @ssi0214
+
+- [#336](https://github.com/modern-agile-team/modern-kit/pull/336) [`da23fa8`](https://github.com/modern-agile-team/modern-kit/commit/da23fa8a78a826cab4378da2f2442e3fe6242da5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): size 신규 유틸 함수 추가 - @ssi02014
+
+- [#342](https://github.com/modern-agile-team/modern-kit/pull/342) [`03ddbc9`](https://github.com/modern-agile-team/modern-kit/commit/03ddbc9024e8f0d4084ed9edf647adf64ee9eeb4) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): mapRight 유틸 함수 추가 - @Gaic4o
+
+- [#376](https://github.com/modern-agile-team/modern-kit/pull/376) [`f805877`](https://github.com/modern-agile-team/modern-kit/commit/f8058778b65525ebc4d6cc15395ca0abb5fe3727) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isWindow 신규 함수 추가 - @ssi02014
+
+- [#339](https://github.com/modern-agile-team/modern-kit/pull/339) [`14791a5`](https://github.com/modern-agile-team/modern-kit/commit/14791a573135ca9f1bc4d9a36bc907fe5f0521e8) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): shuffle 신규 함수 추가 - @ssi02014
+
+- [#344](https://github.com/modern-agile-team/modern-kit/pull/344) [`929c3ec`](https://github.com/modern-agile-team/modern-kit/commit/929c3ec90d8044783261be541973596b3b4856f4) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): range 함수 추가 완료 - @Sangminnn
+
+- [#329](https://github.com/modern-agile-team/modern-kit/pull/329) [`b63bcea`](https://github.com/modern-agile-team/modern-kit/commit/b63bceafc525a70c1c94be3f0e0fa926c9c03c2e) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): forEachRight 유틸 함수 추가 - @Gaic4o
+
+### Patch Changes
+
+- [#338](https://github.com/modern-agile-team/modern-kit/pull/338) [`3fa199e`](https://github.com/modern-agile-team/modern-kit/commit/3fa199eb6d3d71802bf584de4464685c503c98ed) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): chunk 기능 개선 - @ssi02014
+
 ## 1.11.0
 
 ### Minor Changes
