@@ -16,3 +16,4 @@ export * from './isSubset';
 export * from './isValidEmail';
 export * from './isValidPassword';
 export * from './isValidPhoneNumberFormat';
+export * from './isWindow';

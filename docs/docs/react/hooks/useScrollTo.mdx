@@ -1,46 +1,26 @@
 import { useScrollTo } from '@modern-kit/react';
+import { useRef } from 'react';
 
 # useScrollTo
 
-useScrollTo 훅이 반환하는 `ref`를 특정 엘리먼트에 할당 후 함께 반환하는 `scrollTo`를 통해 해당 엘리먼트를 대상으로 `scrollTo`를 호출하는 커스텀 훅입니다. 
+`스크롤` 기능을 제공하는 커스텀 훅입니다.
 
-`ref`를 할당하지 않으면 기본적으로 `window`를 대상으로 동작합니다.
+useScrollTo 훅이 반환하는 `containerRef`를 특정 엘리먼트에 할당하면 해당 요소를 스크롤 합니다.
+`containerRef`를 할당하지 않으면 `window`를 스크롤합니다.
+
+`scrollToPosition` 함수는 top, left와 같은 `position`을 기준으로 스크롤합니다.
+
+`scrollToElement` 함수는 인자로 넣은 `타겟 요소`를 기준으로 스크롤 합니다. `offsetY/X` 값을 옵션으로 받아올 수 있습니다.
 
 ```tsx
-const { ref, scrollTo } = useScrollTo();
-// ref: Window | null
+const { containerRef } = useScrollTo();
+// containerRef: Window | null
 ```
 ```tsx
-const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
-// ref: HTMLDivElement | null
+const { containerRef } = useScrollTo<HTMLDivElement>();
+// containerRef: HTMLDivElement | null
 
-<div ref={ref} />
-```
-
-<br />
-
-`autoScrollOptions` 인자를 할당하면 컴포넌트가 마운트 시 자동으로 타겟 엘리먼트를 대상으로 `scrollTo`가 호출됩니다.
-
-```tsx
-// 컴포넌트 마운트 시 scrollTo 동작하지 않음
-const { ref, scrollTo } = useScrollTo<HTMLDivElement>();
-```
-```tsx
-// 컴포넌트 마운트 시 자동으로 scrollTo 동작
-const { ref, scrollTo } = useScrollTo<HTMLDivElement>({
-  behavior: 'smooth',
-  left: 0,
-  top: 400,
-});
-
-const { ref, scrollTo } = useScrollTo<HTMLDivElement>({});
-/**
- * Default Values
- * 
- * 1. behavior: 'auto'
- * 2. left: 0 
- * 3. top: 0
-*/
+<div ref={containerRef} />
 ```
 
 <br />
@@ -58,21 +38,33 @@ interface ScrollOptions {
 
 interface ScrollToOptions extends ScrollOptions {
   left?: number; // default: 0
-  top?: number; // default : 0
+  top?: number; // default: 0
+}
+
+interface ScrollToElementOptions {
+  offsetX?: number; // default: 0
+  offsetY?: number; // default: 0
+  behavior?: ScrollBehavior; // default: 'auto'
 }
 ```
 ```ts title="typescript"
 // 함수 오버로딩
-export function useScrollTo(autoScrollOptions?: ScrollToOptions): {
-  ref: React.MutableRefObject<Window | null>;
-  scrollTo: (scrollToOptions?: ScrollToOptions) => void;
+function useScrollTo(): {
+  containerRef: React.MutableRefObject<Window | null>;
+  scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
+  scrollToElement: <E extends HTMLElement>(
+    target: E,
+    scrollToElementOptions?: ScrollToElementOptions
+  ) => void;
 };
 
-export function useScrollTo<T extends HTMLElement>(
-  autoScrollOptions?: ScrollToOptions
-): {
-  ref: React.RefObject<T>;
-  scrollTo: (scrollToOptions?: ScrollToOptions) => void;
+function useScrollTo<T extends HTMLElement>(): {
+  containerRef: React.RefObject<T>;
+  scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
+  scrollToElement: <E extends HTMLElement>(
+    target: E,
+    scrollToElementOptions?: ScrollToElementOptions
+  ) => void;
 };
 ```
 
@@ -81,54 +73,78 @@ export function useScrollTo<T extends HTMLElement>(
 import { useScrollTo } from '@modern-kit/react';
 
 const Example = () => {
-  const { ref, scrollTo } = useScrollTo<HTMLDivElement>({
-    behavior: 'smooth',
-    left: 0,
-    top: 400,
-  });
+  const { containerRef, scrollToPosition, scrollToElement } = useScrollTo<HTMLDivElement>();
+  const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const handleScroll = () => {
-    scrollTo({
+  const handleScrollToPosition = () => {
+    scrollToPosition({
       behavior: 'smooth',
-      left: 0,
-      top: 800,
+      top: 400,
     })
   }
+  
+  const handleScrollToElement = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+    });
+  };
+
+  const handleScrollToElementOffset = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      offsetY: 200,
+    });
+  };
   return (
     <>
-      <button onClick={handleScroll}>스크롤</button>
-      <div ref={ref} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
+      <button onClick={handleScrollToPosition}>포지션 스크롤</button>
+      <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
+      <button onClick={handleScrollToElementOffset}>타겟 요소 스크롤 offset200</button>
+
+      <div ref={containerRef} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
         <div style={{ height: '400px', background: 'green' }}>InnerBox1</dix>
         <div style={{ height: '400px', background: 'red' }}>InnerBox2</dix>
-        <div style={{ height: '400px', background: 'blue' }}>InnerBox3</dix>
+
+        <div ref={targetRef} style={{ height: '400px', background: 'blue' }}>InnerBox3</dix>
+        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
       </div>
     </>
   );
 };
 ```
 
-### Example
-
+## Example
 export const Example = () => {
-  const { ref, scrollTo } = useScrollTo({
-    behavior: 'smooth',
-    left: 0,
-    top: 400,
-  }); // autoScrollOptions
-  const handleScroll = () => {
-    scrollTo({
+  const { containerRef, scrollToPosition, scrollToElement } = useScrollTo();
+  const targetRef = useRef(null);
+  const handleScrollToPosition = () => {
+    scrollToPosition({
       behavior: 'smooth',
-      left: 0,
-      top: 800,
+      top: 400,
+    });
+  };
+  const handleScrollToElement = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+    });
+  };
+  const handleScrollToElementOffset = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      offsetY: 200,
     });
   };
   return (
-    <>
-      <button onClick={handleScroll}>스크롤</button>
-      <div ref={ref} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
+    <>  
+      <button onClick={handleScrollToPosition}>포지션 스크롤</button>
+      <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
+      <button onClick={handleScrollToElementOffset}>타겟 요소 스크롤 offset200</button>
+
+      <div ref={containerRef} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
         <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
         <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
-        <div style={{ height: '400px', background: 'blue' }}>InnerBox3</div>
+        <div ref={targetRef} style={{ height: '400px', background: 'blue' }}>InnerBox3</div>
+        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
       </div>
     </>
   );
