@@ -24,7 +24,7 @@ describe('serialize', () => {
     const value = {
       str: 123,
       foo: 'boo',
-      bar: [null, undefined, ''],
+      bar: [null, '', undefined],
     };
 
     expect(serialize(value)).toBe('str=123&foo=boo');
@@ -33,21 +33,16 @@ describe('serialize', () => {
   it('should return the correct string for a input with options', () => {
     const value = {
       str: null,
-      foo: undefined,
       bar: '',
+      foo: undefined,
     };
 
-    const option1 = {
-      skipNull: false,
-      skipEmptyString: true,
-    };
-
-    const option2 = {
-      skipNull: true,
-      skipEmptyString: false,
-    };
+    const option1 = { skipNull: false };
+    const option2 = { skipEmptyString: false };
+    const option3 = { skipUndefined: false };
 
     expect(serialize(value, option1)).toBe('str=null');
     expect(serialize(value, option2)).toBe('bar=');
+    expect(serialize(value, option3)).toBe('foo=undefined');
   });
 });
