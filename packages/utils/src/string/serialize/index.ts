@@ -21,13 +21,12 @@ import { type SerializeOptions, serializeByType } from './internal';
  * // 'str=foo&num=1&a=null&b=&c=undefined'
  */
 
-export function serialize(
-  obj: Record<PropertyKey, any>,
-  options: SerializeOptions = {},
+export function serialize<T extends Record<PropertyKey, any>>(
+  obj: T,
+  options: SerializeOptions = {}
 ) {
-  let result = '';
-
   const keys = Object.keys(obj);
+  let result = '';
 
   for (const key of keys) {
     const target = obj[key];
