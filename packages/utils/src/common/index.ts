@@ -10,4 +10,5 @@ export * from './hexToRgba';
 export * from './identity';
 export * from './noop';
 export * from './parseJSON';
+export * from './pickFalsy';
 export * from './wrapInArray';
