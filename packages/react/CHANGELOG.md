@@ -1,5 +1,23 @@
 # @modern-kit/react
 
+## 1.13.0
+
+### Minor Changes
+
+- [#376](https://github.com/modern-agile-team/modern-kit/pull/376) [`f805877`](https://github.com/modern-agile-team/modern-kit/commit/f8058778b65525ebc4d6cc15395ca0abb5fe3727) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useScrollTo 특정 요소 스크롤 기능 추가 - @ssi02014
+
+- [#351](https://github.com/modern-agile-team/modern-kit/pull/351) [`e9e3bde`](https://github.com/modern-agile-team/modern-kit/commit/e9e3bde01a7437568289ee9e66795fd158728951) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useCycleList 신규 훅 추가 - @ssi02014
+
+- [#355](https://github.com/modern-agile-team/modern-kit/pull/355) [`ec49a21`](https://github.com/modern-agile-team/modern-kit/commit/ec49a21a515b8cebb6709d8e46f4df69f4e7b823) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useTimeout 개선 및 기능 추가 - @ssi02014
+
+- [#364](https://github.com/modern-agile-team/modern-kit/pull/364) [`7d092d6`](https://github.com/modern-agile-team/modern-kit/commit/7d092d68abc97bf9b916c1ef5798d969c97d2f9e) Thanks [@haejunejung](https://github.com/haejunejung)! - feat(react): IfElse 컴포넌트 기능 추가 - @haejunejung
+
+### Patch Changes
+
+- [#349](https://github.com/modern-agile-team/modern-kit/pull/349) [`1c08709`](https://github.com/modern-agile-team/modern-kit/commit/1c087098d8de54caaa1d9a3b16ca35e72809fc82) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useStep의 step의 최소 값과 initialStep의 기본 값을 0으로 수정 - @ssi02014
+
+- [#354](https://github.com/modern-agile-team/modern-kit/pull/354) [`37fa669`](https://github.com/modern-agile-team/modern-kit/commit/37fa669c9515faf3b4e9035aa3d9720c7360dc5b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): usePreservedCallback 최신 함수 보장 이슈 해결 - @ssi02014
+
 ## 1.12.0
 
 ### Minor Changes
