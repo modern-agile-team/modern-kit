@@ -6,31 +6,13 @@
 
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/mapValues/index.ts)
 
-## Benchmark
-
-- `hz`: 초당 작업 수
-- `mean`: 평균 응답 시간(ms)
-
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/mapValues|7,168,899,49|0.0001|`fastest`|
-|lodash/mapValues|3,676,343,30|0.0003|`slowest`|
-
-- **modern-kit/mapValues**
-  - `1.95x` faster than lodash/mapValues
-
-
 ## Interface
 
 ```ts title="typescript"
-const mapValues: <T, R>(
-  object: Record<string | number, T>,
-  iteratee: (iterateData: {
-    key: string | number;
-    value: T;
-    object: Record<string | number, T>;
-  }) => R
-) => Record<string | number, R>
+function mapValues<T extends Record<PropertyKey, any>, V>(
+  object: T,
+  iteratee: (iterateData: { key: keyof T; value: T[keyof T]; object: T }) => V
+): Record<keyof T, V>
 ```
 
 ## Usage
