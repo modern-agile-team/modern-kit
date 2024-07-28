@@ -1,4 +1,4 @@
-# @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
+# @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest"></a>
 
 유용한 타입스크립트 유틸 타입들을 제공합니다.
 
@@ -12,16 +12,16 @@
 
 ## Usage
 ```shell
-npm i @modern-kit/types
+npm i -D @modern-kit/types
 ```
 
 ```shell
-yarn add @modern-kit/types
+yarn add -D @modern-kit/types
 ```
 
 
 ```shell
-pnpm i @modern-kit/types
+pnpm i -D @modern-kit/types
 ```
 
 <br />
