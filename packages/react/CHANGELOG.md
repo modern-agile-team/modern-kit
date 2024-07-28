@@ -10,7 +10,7 @@
 
 - [#355](https://github.com/modern-agile-team/modern-kit/pull/355) [`ec49a21`](https://github.com/modern-agile-team/modern-kit/commit/ec49a21a515b8cebb6709d8e46f4df69f4e7b823) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useTimeout 개선 및 기능 추가 - @ssi02014
 
-- [#364](https://github.com/modern-agile-team/modern-kit/pull/364) [`7d092d6`](https://github.com/modern-agile-team/modern-kit/commit/7d092d68abc97bf9b916c1ef5798d969c97d2f9e) Thanks [@haejunejung](https://github.com/haejunejung)! - feat(react): IfElse 컴포넌트 기능 추가 - @haejungjung
+- [#364](https://github.com/modern-agile-team/modern-kit/pull/364) [`7d092d6`](https://github.com/modern-agile-team/modern-kit/commit/7d092d68abc97bf9b916c1ef5798d969c97d2f9e) Thanks [@haejunejung](https://github.com/haejunejung)! - feat(react): IfElse 컴포넌트 기능 추가 - @haejunejung
 
 ### Patch Changes
 
