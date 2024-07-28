@@ -1,6 +1,7 @@
 import { bench, describe } from 'vitest';
 import { mapValues as mapValuesLodash } from 'lodash-es';
 import { mapValues } from '.';
+
 describe('mapValues', () => {
   const obj = {
     a: 1,
