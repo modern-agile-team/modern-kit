@@ -1,4 +1,5 @@
 import { hasProperty } from '../../validator';
+
 /**
  * @description 주어진 객체의 각 값에 대해 제공된 변환 함수를 호출하여 새 객체를 생성하는 함수입니다.
  *
