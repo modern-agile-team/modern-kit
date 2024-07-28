@@ -19,7 +19,7 @@ describe('mapValues', () => {
     mapValues(obj, iteratee);
   });
 
-  bench('lodash mapValues', () => {
+  bench('lodash/mapValues', () => {
     mapValuesLodash(obj, iteratee);
   });
 });
