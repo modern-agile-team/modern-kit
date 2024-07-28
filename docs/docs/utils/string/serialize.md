@@ -19,10 +19,10 @@ interface SerializeOptions {
   skipUndefined?: boolean;
 }
 
-const serialize: (
-  obj: Record<string, unknown>,
-  options: SerializeOptions = {}
-) => string
+function serialize<T extends Record<PropertyKey, any>>(
+  obj: T,
+  options?: SerializeOptions
+): string;
 ```
 
 ## Usage
