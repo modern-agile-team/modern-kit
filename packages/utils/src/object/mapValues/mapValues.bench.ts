@@ -12,12 +12,8 @@ describe('mapValues', () => {
     g: 7,
   };
 
-  const iteratee = ({
-    value,
-  }: {
-    key: string | number;
-    value: number;
-  }): number => value;
+  const iteratee = ({ value }: { key: PropertyKey; value: number }): number =>
+    value;
 
   bench('modern-kit/mapValues', () => {
     mapValues(obj, iteratee);
