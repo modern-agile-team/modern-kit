@@ -35,7 +35,7 @@ import {
  */
 
 export function pickFalsy(...arr: PickFalsyProps[]) {
-  const defaultCheckList = ['null', 'undefined', 'boolean'];
+  const defaultCheckList = ['nil', 'boolean'];
   return function (value: unknown) {
     const falsyCheckList = [...defaultCheckList, ...arr] as FalsyMapperKeys[];
 
