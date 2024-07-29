@@ -31,6 +31,7 @@ const { containerRef } = useScrollTo<HTMLDivElement>();
 ## Interface
 ```ts title="typescript"
 type ScrollBehavior = "auto" | "instant" | "smooth";
+type Align = 'start' | 'center' | 'end';
 
 interface ScrollOptions {
   behavior?: ScrollBehavior; // default: 'auto'
@@ -45,6 +46,8 @@ interface ScrollToElementOptions {
   offsetX?: number; // default: 0
   offsetY?: number; // default: 0
   behavior?: ScrollBehavior; // default: 'auto'
+  alignY?: Align; // default: 'start'
+  alignX?: Align; // default: 'start'
 }
 ```
 ```ts title="typescript"
@@ -80,40 +83,72 @@ const Example = () => {
     scrollToPosition({
       behavior: 'smooth',
       top: 400,
-    })
-  }
-  
+    });
+  };
+
   const handleScrollToElement = () => {
     scrollToElement(targetRef.current, {
       behavior: 'smooth',
     });
   };
 
-  const handleScrollToElementOffset = () => {
+  const handleScrollToElementOffset = (offset: number) => {
     scrollToElement(targetRef.current, {
       behavior: 'smooth',
-      offsetY: 200,
+      offsetY: offset,
+    });
+  };
+
+  const handleScrollToElementAlign = (type: Align) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      alignY: type,
     });
   };
   return (
-    <>
-      <button onClick={handleScrollToPosition}>포지션 스크롤</button>
-      <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
-      <button onClick={handleScrollToElementOffset}>타겟 요소 스크롤 offset200</button>
-
-      <div ref={containerRef} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
-        <div style={{ height: '400px', background: 'green' }}>InnerBox1</dix>
-        <div style={{ height: '400px', background: 'red' }}>InnerBox2</dix>
-
-        <div ref={targetRef} style={{ height: '400px', background: 'blue' }}>InnerBox3</dix>
-        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
+    <div>
+      <div>
+        <button onClick={handleScrollToPosition}>포지션 스크롤</button>
+        <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
+        <button onClick={() => handleScrollToElementOffset(200)}>
+          타겟 요소 스크롤 offset 200
+        </button>
+        <button onClick={() => handleScrollToElementOffset(-200)}>
+          타겟 요소 스크롤 offset -200
+        </button>
       </div>
-    </>
+
+      <div>
+        <button onClick={() => handleScrollToElementAlign('start')}>
+          타겟 요소 스크롤 align start
+        </button>
+        <button onClick={() => handleScrollToElementAlign('center')}>
+          타겟 요소 스크롤 align center
+        </button>
+        <button onClick={() => handleScrollToElementAlign('end')}>
+          타겟 요소 스크롤 align end
+        </button>
+      </div>
+
+      <div
+        ref={containerRef}
+        style={{ width: '500px', height: '800px', overflow: 'scroll' }}>
+        <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
+        <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
+        <div ref={targetRef} style={{ height: '400px', background: 'coral', fontSize: '24px' }}>
+          target Box
+        </div>
+        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
+        <div style={{ height: '400px', background: 'black' }}>InnerBox4</div>
+      </div>
+    </div>
   );
 };
+
 ```
 
 ## Example
+
 export const Example = () => {
   const { containerRef, scrollToPosition, scrollToElement } = useScrollTo();
   const targetRef = useRef(null);
@@ -128,26 +163,57 @@ export const Example = () => {
       behavior: 'smooth',
     });
   };
-  const handleScrollToElementOffset = () => {
+  const handleScrollToElementOffset = (offset) => {
     scrollToElement(targetRef.current, {
       behavior: 'smooth',
-      offsetY: 200,
+      offsetY: offset,
+    });
+  };
+  const handleScrollToElementAlign = (type) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      alignY: type,
     });
   };
   return (
-    <>  
-      <button onClick={handleScrollToPosition}>포지션 스크롤</button>
-      <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
-      <button onClick={handleScrollToElementOffset}>타겟 요소 스크롤 offset200</button>
+    <div>
+      <div>
+        <button onClick={handleScrollToPosition}>포지션 스크롤</button>
+        <button onClick={handleScrollToElement}>타겟 요소 스크롤</button>
+        <button onClick={() => handleScrollToElementOffset(200)}>
+          타겟 요소 스크롤 offset 200
+        </button>
+        <button onClick={() => handleScrollToElementOffset(-200)}>
+          타겟 요소 스크롤 offset -200
+        </button>
+      </div>
 
-      <div ref={containerRef} style={{ width:'500px', height: '400px', overflow: 'scroll' }}>
+      <div>
+        <button onClick={() => handleScrollToElementAlign('start')}>
+          타겟 요소 스크롤 align start
+        </button>
+        <button onClick={() => handleScrollToElementAlign('center')}>
+          타겟 요소 스크롤 align center
+        </button>
+        <button onClick={() => handleScrollToElementAlign('end')}>
+          타겟 요소 스크롤 align end
+        </button>
+      </div>
+
+      <div
+        ref={containerRef}
+        style={{ width: '500px', height: '800px', overflow: 'scroll' }}>
         <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
         <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
-        <div ref={targetRef} style={{ height: '400px', background: 'blue' }}>InnerBox3</div>
+        <div ref={targetRef} style={{ height: '400px', background: 'coral', fontSize: '24px' }}>
+          target Box
+        </div>
         <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
+        <div style={{ height: '400px', background: 'black' }}>InnerBox4</div>
       </div>
-    </>
+    </div>
   );
 };
+
 
 <Example />

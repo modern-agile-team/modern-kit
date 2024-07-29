@@ -16,7 +16,7 @@ import { ScrollToElementOptions, getRelativePosition } from './internal';
  * @example
  * // scrollToElement를 사용하면 인자로 넣은 엘리먼트를 기준으로 이동합니다.
  * const { containerRef, scrollToElement } = useScrollTo();
- * scrollToElement(target.current, { offsetX, offsetY });
+ * scrollToElement(target.current, { offsetX, offsetY, alignY, alignX, behavior });
  */
 export function useScrollTo(): {
   containerRef: React.MutableRefObject<Window | null>;
@@ -61,7 +61,7 @@ export function useScrollTo<T extends HTMLElement>() {
       target: E,
       scrollToElementOptions: ScrollToElementOptions = {}
     ) => {
-      if (!containerRef.current) return;
+      if (!target || !containerRef.current) return;
 
       const scrollElement = containerRef.current;
       const { behavior = 'auto' } = scrollToElementOptions;
