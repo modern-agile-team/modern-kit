@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.13.0
+
+### Minor Changes
+
+- [#368](https://github.com/modern-agile-team/modern-kit/pull/368) [`c8cbde2`](https://github.com/modern-agile-team/modern-kit/commit/c8cbde2b247d029b3de8febdd2dfde1b7a514309) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): mapValues 유틸 함수 추가 - @Gaic4o
+
 ## 1.12.0
 
 ### Minor Changes
