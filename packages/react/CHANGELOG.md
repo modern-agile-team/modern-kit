@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.13.1
+
+### Patch Changes
+
+- [#381](https://github.com/modern-agile-team/modern-kit/pull/381) [`3c46b27`](https://github.com/modern-agile-team/modern-kit/commit/3c46b2704462e4dab7f41cf18499f57b85bc0cb0) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useScrollTo align 옵션 추가 - @ssi02014
+
 ## 1.13.0
 
 ### Minor Changes
