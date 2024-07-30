@@ -12,9 +12,9 @@ const mergeRefs = <T = unknown>(...refs: React.Ref<T>[]) => {
       }
     });
 };
-export const useMergeRefs = <T = unknown>(
+export function useMergeRefs<T = unknown>(
   ...refs: React.Ref<T>[]
-): React.RefCallback<T> => {
+): React.RefCallback<T> {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(mergeRefs(...refs), refs);
-};
+}

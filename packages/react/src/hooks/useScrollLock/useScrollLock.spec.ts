@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useScrollLock } from '.';
 

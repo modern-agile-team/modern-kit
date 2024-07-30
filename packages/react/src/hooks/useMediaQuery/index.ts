@@ -10,7 +10,7 @@ const getMatchMedia = (query: string, defaultValue?: boolean) => {
   return false;
 };
 
-export const useMediaQuery = (query: string, defaultValue?: boolean) => {
+export function useMediaQuery(query: string, defaultValue?: boolean) {
   const [isMatch, setIsMatch] = useState(getMatchMedia(query, defaultValue));
 
   const handleChange = useCallback(() => {
@@ -26,4 +26,4 @@ export const useMediaQuery = (query: string, defaultValue?: boolean) => {
   }, [query, handleChange]);
 
   return isMatch;
-};
+}

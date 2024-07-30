@@ -8,10 +8,10 @@ interface UseHoverProps {
   onLeave?: (event: MouseEvent) => void;
 }
 
-export const useHover = <T extends HTMLElement>({
+export function useHover<T extends HTMLElement>({
   onEnter = noop,
   onLeave = noop,
-}: UseHoverProps = {}) => {
+}: UseHoverProps = {}) {
   const [isHovered, setIsHovered] = useState(false);
 
   const targetRef = useRef<T>(null);
@@ -40,4 +40,4 @@ export const useHover = <T extends HTMLElement>({
   }, [onMouseEnter, onMouseLeave]);
 
   return { ref: targetRef, isHovered };
-};
+}

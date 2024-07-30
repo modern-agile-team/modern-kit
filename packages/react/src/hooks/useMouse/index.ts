@@ -23,7 +23,7 @@ type ElementPosition = Pick<
   'elementPositionX' | 'elementPositionY'
 >;
 
-export const useMouse = <T extends HTMLElement>() => {
+export function useMouse<T extends HTMLElement>() {
   const targetRef = useRef<T>(null);
   const [cursorPosition, setCursorPosition] = useState<CursorPosition>({
     screenX: undefined,
@@ -80,4 +80,4 @@ export const useMouse = <T extends HTMLElement>() => {
   }, []);
 
   return { ref: targetRef, position: cursorPosition };
-};
+}

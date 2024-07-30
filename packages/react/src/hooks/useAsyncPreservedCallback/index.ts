@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-export const useAsyncPreservedCallback = <
+export function useAsyncPreservedCallback<
   T extends (...args: any[]) => Promise<any>
->(
-  callback: T
-) => {
+>(callback: T) {
   const callbackRef = useRef<T>(callback);
 
   useEffect(() => {
@@ -14,4 +12,4 @@ export const useAsyncPreservedCallback = <
   return useCallback(async (...args: any[]) => {
     return await callbackRef.current(...args);
   }, []) as T;
-};
+}

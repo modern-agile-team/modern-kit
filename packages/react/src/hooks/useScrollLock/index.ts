@@ -6,9 +6,9 @@ interface UseScrollLockProps {
   autoLock?: boolean;
 }
 
-export const useScrollLock = <T extends HTMLElement>({
+export function useScrollLock<T extends HTMLElement>({
   autoLock = true,
-}: UseScrollLockProps = {}) => {
+}: UseScrollLockProps = {}) {
   const ref = useRef<Nullable<T>>(null);
   const originalOverflow =
     useRef<Nullable<CSSStyleDeclaration['overflow']>>(null);
@@ -40,4 +40,4 @@ export const useScrollLock = <T extends HTMLElement>({
   }, [autoLock, lock, unlock]);
 
   return { ref, lock, unlock };
-};
+}

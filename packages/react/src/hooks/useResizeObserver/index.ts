@@ -3,9 +3,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
 
-export const useResizeObserver = <T extends HTMLElement>(
+export function useResizeObserver<T extends HTMLElement>(
   action: (entry: ResizeObserverEntry) => void
-) => {
+) {
   const [contentRect, setContentRect] = useState<ContentRect>({
     bottom: 0,
     height: 0,
@@ -50,4 +50,4 @@ export const useResizeObserver = <T extends HTMLElement>(
   }, [observerCallback]);
 
   return { ref, contentRect };
-};
+}

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { deepEqual } from '@modern-kit/utils';
 
-export const usePreservedState = <T>(
+export function usePreservedState<T>(
   value: T,
   comparator: (source: any, target: any) => boolean = deepEqual
-) => {
+) {
   const [preservedState, setPreservedState] = useState(value);
   const callbackComparator = usePreservedCallback(comparator);
 
@@ -16,4 +16,4 @@ export const usePreservedState = <T>(
   }, [callbackComparator, preservedState, value]);
 
   return preservedState;
-};
+}

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { useRef, useState } from 'react';
 import { useMergeRefs } from '.';
 import { screen, waitFor } from '@testing-library/react';

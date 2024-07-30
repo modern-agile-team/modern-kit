@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach, vi } from 'vitest';
 import { useEffect, useLayoutEffect } from 'react';
 
 describe('useIsomorphicLayoutEffect', () => {

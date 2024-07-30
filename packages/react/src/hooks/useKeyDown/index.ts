@@ -11,12 +11,12 @@ interface UseKeyDownProps {
   allKeyDownCallback?: (event: KeyboardEvent) => void;
 }
 
-export const useKeyDown = <T extends HTMLElement>({
+export function useKeyDown<T extends HTMLElement>({
   enabled = true,
   autoFocus = false,
   keyDownCallbackMap = {},
   allKeyDownCallback,
-}: UseKeyDownProps) => {
+}: UseKeyDownProps) {
   const ref = useRef<T>(null);
 
   const onKeyDown = usePreservedCallback((event: KeyboardEvent) => {
@@ -54,4 +54,4 @@ export const useKeyDown = <T extends HTMLElement>({
   }, [enabled, autoFocus, onKeyDown]);
 
   return { ref };
-};
+}

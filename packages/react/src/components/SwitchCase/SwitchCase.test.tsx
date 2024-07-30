@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
 import { SwitchCase } from '.';

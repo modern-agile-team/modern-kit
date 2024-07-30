@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { UAParser } from 'ua-parser-js';
 
-export const useUserAgent = () => {
+export function useUserAgent() {
   const [userAgent, setUserAgent] = useState<UAParser.IResult | null>(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -12,4 +12,4 @@ export const useUserAgent = () => {
   }, []);
 
   return userAgent;
-};
+}

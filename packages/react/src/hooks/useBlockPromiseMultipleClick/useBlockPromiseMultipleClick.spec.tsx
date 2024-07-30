@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { screen, renderHook, act } from '@testing-library/react';
 import { renderSetup } from '../../utils/test/renderSetup';
 import { useBlockPromiseMultipleClick } from '.';

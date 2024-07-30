@@ -39,10 +39,10 @@ const subscribe = (
   };
 };
 
-export const useNetwork = ({
+export function useNetwork({
   onlineCallback = noop,
   offlineCallback = noop,
-}: UseNetworkProps = {}) => {
+}: UseNetworkProps = {}) {
   const preservedSubscribe = usePreservedCallback((onStoreChange: () => void) =>
     subscribe(onStoreChange, onlineCallback, offlineCallback)
   );
@@ -54,4 +54,4 @@ export const useNetwork = ({
   );
 
   return { isOnline };
-};
+}

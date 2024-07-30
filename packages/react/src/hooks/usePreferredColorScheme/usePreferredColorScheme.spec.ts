@@ -1,7 +1,7 @@
+import { describe, it, expect, vi, Mock } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { usePreferredColorScheme } from '.';
 import { useMediaQuery } from '../useMediaQuery';
-import { Mock } from 'vitest';
 
 vi.mock('../useMediaQuery', () => ({
   useMediaQuery: vi.fn(),
