@@ -4554,7 +4554,7 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.0"
     "@modern-kit/react": "workspace:*"
     "@tsconfig/docusaurus": "npm:^2.0.0"
-    "@types/node": "npm:^20.5.1"
+    "@types/node": "npm:^22.0.0"
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
     clsx: "npm:^2.1.1"
@@ -6032,7 +6032,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.5.0, @types/node@npm:^20.5.1":
+"@types/node@npm:*":
   version: 20.14.1
   resolution: "@types/node@npm:20.14.1"
   dependencies:
@@ -6052,6 +6052,15 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.0.0":
+  version: 22.0.0
+  resolution: "@types/node@npm:22.0.0"
+  dependencies:
+    undici-types: "npm:~6.11.1"
+  checksum: af26a8ec7266c857b0ced75dc3a93c6b65280d1fa40d1b4488c814d30831c5c752489c99ecb5698daec1376145b1a9ddd08350882dc2e07769917a5f22a460bc
   languageName: node
   linkType: hard
 
@@ -15434,7 +15443,7 @@ __metadata:
   dependencies:
     "@changesets/changelog-github": "npm:^0.5.0"
     "@changesets/cli": "npm:^2.27.1"
-    "@types/node": "npm:^20.5.0"
+    "@types/node": "npm:^22.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
     "@typescript-eslint/parser": "npm:^7.7.1"
     eslint: "npm:^8.47.0"
@@ -20386,6 +20395,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.11.1":
+  version: 6.11.1
+  resolution: "undici-types@npm:6.11.1"
+  checksum: d8f5739a8e6c779d72336c82deb49c56d5ac9f9f6e0eb2e8dd4d3f6929ae9db7cde370d2e46516fe6cad04ea53e790c5e16c4c75eed7cd0f9bd31b0763bb2fa3
   languageName: node
   linkType: hard
 
