@@ -1,12 +1,14 @@
-import {
-  type FalsyMapperKeys,
-  type PickFalsyProps,
-  FALSY_MAPPER,
-} from './internal';
+import { FALSY_MAPPER } from './internal';
+
+type FalsyMapperKeys = keyof typeof FALSY_MAPPER;
+type PickFalsyProps = Exclude<
+  FalsyMapperKeys,
+  'null' | 'undefined' | 'boolean'
+>;
 
 /**
  * @description 선택한 타입에 대한 falsy 체크 함수를 반환합니다.
- * 
+ *
  * 필요하다면 `숫자 0`, `빈 문자열("")`, `빈 객체({})`, `빈 배열([])`에 대해 판단할 수 있습니다.
  *
  * 인자가 없다면, 기본적으로 `boolean`, `null`, `undefined`에 대해서만 falsy 값 체크를 수행합니다.
@@ -37,7 +39,7 @@ import {
  */
 
 export function pickFalsy(...arr: PickFalsyProps[]) {
-  const defaultCheckList = ['nil', 'boolean'];
+  const defaultCheckList = ['null', 'undefined', 'boolean'];
   return function (value: unknown) {
     const falsyCheckList = [...defaultCheckList, ...arr] as FalsyMapperKeys[];
 

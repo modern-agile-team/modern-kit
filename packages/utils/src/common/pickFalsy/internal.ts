@@ -18,13 +18,11 @@ const isInvalidObject = (value: unknown) =>
   isPlainObject(value) && Object.keys(value).length === 0;
 
 export const FALSY_MAPPER = {
-  nil: isNil,
+  null: isNil,
+  undefined: isNil,
   boolean: isInvalidBoolean,
   number: isInvalidNumber,
   string: isInvalidString,
   array: isInvalidArray,
   object: isInvalidObject,
 } as const;
-
-export type FalsyMapperKeys = keyof typeof FALSY_MAPPER;
-export type PickFalsyProps = Exclude<FalsyMapperKeys, 'nil' | 'boolean'>;
