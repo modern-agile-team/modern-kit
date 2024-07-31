@@ -24,10 +24,10 @@ const createRegex = (options: Options) => {
   return new RegExp(`[^${pattern}]`, 'gu');
 };
 
-export const extractLetters = (
+export function extractLetters(
   value: string,
   options: Options = { letters: true }
-) => {
+) {
   const regex = createRegex(options);
   return value.replace(regex, '');
-};
+}

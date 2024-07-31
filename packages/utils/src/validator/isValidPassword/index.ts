@@ -55,10 +55,10 @@ const checkLength = (
   return password.length >= minLength && password.length <= maxLength;
 };
 
-export const isValidPassword = (
+export function isValidPassword(
   password: string,
   options: Partial<IsValidPasswordOptions> = {}
-): IsValidPasswordReturnType => {
+): IsValidPasswordReturnType {
   const {
     containsOptions = {},
     minLength = 8,
@@ -125,4 +125,4 @@ export const isValidPassword = (
   }
 
   return { isValid: true, errorReason: null };
-};
+}

@@ -1,4 +1,12 @@
-import { MockInstance } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  MockInstance,
+  beforeEach,
+  afterEach,
+} from 'vitest';
 import { rem } from '.';
 
 const originWindow = globalThis.window;

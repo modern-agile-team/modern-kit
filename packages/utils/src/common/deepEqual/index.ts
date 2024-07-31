@@ -15,7 +15,7 @@ const compareObjectOrArray = (source: any, target: any) => {
   return true;
 };
 
-export const deepEqual = (source: any, target: any) => {
+export function deepEqual(source: any, target: any) {
   // Primitive Type
   if (source === target) {
     return true;
@@ -70,4 +70,4 @@ export const deepEqual = (source: any, target: any) => {
 
   // Object & Array
   return compareObjectOrArray(source, target);
-};
+}

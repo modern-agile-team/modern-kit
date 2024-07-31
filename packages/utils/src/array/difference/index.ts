@@ -1,8 +1,8 @@
-export const difference = <T, U = T>(
+export function difference<T, U = T>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
   iteratee?: (item: T) => U
-) => {
+) {
   const result = [];
   const secondSet = new Set<T | U>(
     iteratee ? secondArr.map(iteratee) : secondArr
@@ -17,4 +17,4 @@ export const difference = <T, U = T>(
   }
 
   return result;
-};
+}

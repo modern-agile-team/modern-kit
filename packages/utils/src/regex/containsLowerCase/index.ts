@@ -1,3 +1,3 @@
-export const containsLowerCase = (string: string) => {
+export function containsLowerCase(string: string) {
   return /[a-z]/.test(string);
-};
+}

@@ -1,8 +1,8 @@
 import { containsHangulSyllables } from '../containsHangulSyllables';
 import { containsHangulConsonantsAndVowel } from '../containsHangulConsonantsAndVowel';
 
-export const containsHangul = (string: string) => {
+export function containsHangul(string: string) {
   return (
     containsHangulConsonantsAndVowel(string) || containsHangulSyllables(string)
   );
-};
+}

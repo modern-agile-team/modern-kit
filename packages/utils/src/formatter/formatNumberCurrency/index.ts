@@ -20,10 +20,10 @@ const addCurrency = (value: string, currencyOption: CurrencyOption) => {
   return value + currency;
 };
 
-export const formatNumberCurrency = (
+export function formatNumberCurrency(
   value: number,
   options: FormatNumberCurrencyOptions = {}
-) => {
+) {
   const {
     currency = '',
     currencyPosition = 'suffix',
@@ -34,4 +34,4 @@ export const formatNumberCurrency = (
     currency,
     currencyPosition,
   });
-};
+}

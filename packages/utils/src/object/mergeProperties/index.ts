@@ -15,14 +15,10 @@ import { isArray, isPlainObject, isReference } from '../../validator';
  * const mergedObj1 = mergeObject(obj1, obj2); // { a: 3, b: [1, 2], c: { d: 1, e: 2}, f: 5 }
  * const mergedObj2 = mergeObject(obj1, obj2, ['b', 'c']); // { a: 3, b: [1], c: { d: 1 }, f: 5 }
  */
-export const mergeProperties = <
+export function mergeProperties<
   T extends Record<PropertyKey, any>,
   K extends Record<PropertyKey, any>
->(
-  source: T,
-  target: K,
-  excludedKeys?: (keyof K)[]
-): T & K => {
+>(source: T, target: K, excludedKeys?: (keyof K)[]): T & K {
   const mergedObj = { ...source };
 
   for (const key in target) {
@@ -45,4 +41,4 @@ export const mergeProperties = <
   }
 
   return mergedObj;
-};
+}

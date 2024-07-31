@@ -27,10 +27,10 @@ const getNumberWithConditionalCommas = (value: number, withCommas: boolean) => {
   return withCommas ? formatNumberWithCommas(value) : String(value);
 };
 
-export const formatNumberByUnits = (
+export function formatNumberByUnits(
   value: number,
   options: FormatNumberByUnitsOption = {}
-) => {
+) {
   const {
     units = [],
     insertSpace = false,
@@ -69,4 +69,4 @@ export const formatNumberByUnits = (
   }
 
   return result.trim();
-};
+}

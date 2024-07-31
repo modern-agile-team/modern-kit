@@ -1,7 +1,7 @@
 let dt = 0;
 let memorizedTime = 0;
 
-export const getUniqTime = () => {
+export function getUniqTime() {
   const currentTime = new Date().getTime();
 
   if (memorizedTime === currentTime) {
@@ -12,4 +12,4 @@ export const getUniqTime = () => {
   }
 
   return (currentTime * 1000 + dt) / 1000;
-};
+}

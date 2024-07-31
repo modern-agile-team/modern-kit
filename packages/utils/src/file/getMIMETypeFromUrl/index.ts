@@ -1,6 +1,6 @@
 import { getBlobFromUrl } from '../getBlobFromUrl';
 
-export const getMIMETypeFromUrl = async (url: string) => {
+export async function getMIMETypeFromUrl(url: string) {
   try {
     const blob = await getBlobFromUrl(url);
     return blob?.type ?? '';
@@ -10,4 +10,4 @@ export const getMIMETypeFromUrl = async (url: string) => {
     );
     return '';
   }
-};
+}

@@ -1,5 +1,5 @@
 import { isServer } from '../isServer';
 
-export const isClient = () => {
+export function isClient() {
   return !isServer();
 }

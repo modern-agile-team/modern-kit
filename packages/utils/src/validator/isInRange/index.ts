@@ -8,12 +8,12 @@ interface IsInRangeProps {
   };
 }
 
-export const isInRange = ({
+export function isInRange({
   value,
   min,
   max,
   equalOptions = {},
-}: IsInRangeProps) => {
+}: IsInRangeProps) {
   if (min == null || max == null) {
     throw new Error('min and max values are invalid.');
   }
@@ -28,4 +28,4 @@ export const isInRange = ({
   const isWithinMax = maxEqual ? value <= max : value < max;
 
   return isWithinMin && isWithinMax;
-};
+}

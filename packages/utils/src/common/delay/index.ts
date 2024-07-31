@@ -1,4 +1,4 @@
-export const delay = (time: number): Promise<void> => {
+export function delay(time: number): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     if (!Number.isInteger(time) || time < 0) {
       reject(new Error('Invalid time value'));
@@ -6,4 +6,4 @@ export const delay = (time: number): Promise<void> => {
 
     setTimeout(resolve, time);
   });
-};
+}

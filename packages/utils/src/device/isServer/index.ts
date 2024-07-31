@@ -1,5 +1,5 @@
 declare const global: unknown;
 
-export const isServer = () => {
+export function isServer() {
   return typeof window === 'undefined' && typeof global !== 'undefined';
 }

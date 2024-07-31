@@ -1,4 +1,12 @@
-import { MockInstance } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  MockInstance,
+  beforeEach,
+  afterEach,
+} from 'vitest';
 import { getViewportSize } from '.';
 
 let windowSpy: MockInstance;

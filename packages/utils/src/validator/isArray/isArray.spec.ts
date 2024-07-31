@@ -1,3 +1,4 @@
+import { describe, it, expect, expectTypeOf } from 'vitest';
 import { isArray } from '.';
 
 describe('isArray', () => {

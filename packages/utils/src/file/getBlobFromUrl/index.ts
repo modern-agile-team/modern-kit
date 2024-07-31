@@ -1,4 +1,4 @@
-export const getBlobFromUrl = async (url: string) => {
+export async function getBlobFromUrl(url: string) {
   try {
     const response = await fetch(url);
 
@@ -13,4 +13,4 @@ export const getBlobFromUrl = async (url: string) => {
     );
     throw err;
   }
-};
+}

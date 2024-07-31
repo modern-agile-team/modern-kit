@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { range } from '.';
 
 describe('range', () => {
@@ -33,13 +34,13 @@ describe('range', () => {
 
   it('should return an error if step is zero', () => {
     expect(() => range(1, 5, 0)).toThrowError(
-      'The step value must be a non-zero integer.',
+      'The step value must be a non-zero integer.'
     );
   });
 
   it('should return an error if step is not integer', () => {
     expect(() => range(1, 5, 1.1)).toThrowError(
-      'The step value must be a non-zero integer.',
+      'The step value must be a non-zero integer.'
     );
   });
 

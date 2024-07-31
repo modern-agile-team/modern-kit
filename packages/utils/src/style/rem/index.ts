@@ -19,7 +19,7 @@ const getElementFontSize = (element: HTMLElement) => {
   return getComputedStyle(element).fontSize;
 };
 
-export const rem = (pixel: number, options: RemOptions = {}) => {
+export function rem(pixel: number, options: RemOptions = {}) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -38,4 +38,4 @@ export const rem = (pixel: number, options: RemOptions = {}) => {
 
   cacheMap.set(cacheKey, result);
   return result;
-};
+}

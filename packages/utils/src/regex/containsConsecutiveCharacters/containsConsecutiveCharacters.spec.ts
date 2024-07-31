@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { containsConsecutiveCharacters } from '.';
 
 const MAX_REPEAT_COUNT = 3;

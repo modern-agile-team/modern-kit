@@ -1,7 +1,7 @@
 import { StorageType } from '../types';
 import { isClient } from '../../device';
 
-export const removeStorageItem = (type: StorageType, key: string) => {
+export function removeStorageItem(type: StorageType, key: string) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -12,4 +12,4 @@ export const removeStorageItem = (type: StorageType, key: string) => {
   } catch (err) {
     throw new Error(`Failed to remove key "${key}" from ${type}: ${err}`);
   }
-};
+}

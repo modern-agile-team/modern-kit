@@ -1,7 +1,7 @@
-export const uniq = <T, U = T>(
+export function uniq<T, U = T>(
   arr: T[] | readonly T[],
   iteratee?: (item: T) => U
-) => {
+) {
   if (!iteratee) {
     return Array.from(new Set(arr));
   }
@@ -19,4 +19,4 @@ export const uniq = <T, U = T>(
   }
 
   return result;
-};
+}

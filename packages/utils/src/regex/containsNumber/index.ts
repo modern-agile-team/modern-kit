@@ -1,3 +1,3 @@
-export const containsNumber = (string: string) => {
+export function containsNumber(string: string) {
   return /\d/.test(string);
-};
+}

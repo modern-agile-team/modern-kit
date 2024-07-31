@@ -1,3 +1,3 @@
-export const extractNumber = (value: string) => {
+export function extractNumber(value: string) {
   return value.replace(/\D/g, '');
-};
+}

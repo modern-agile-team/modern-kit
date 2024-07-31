@@ -1,8 +1,8 @@
-export const intersectionWithDuplicates = <T, U>(
+export function intersectionWithDuplicates<T, U>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
   iteratee?: (item: T) => U
-) => {
+) {
   const secondArrToSet = new Set<T | U>(
     iteratee ? secondArr.map(iteratee) : secondArr
   );
@@ -12,4 +12,4 @@ export const intersectionWithDuplicates = <T, U>(
     : (element: T) => secondArrToSet.has(element);
 
   return firstArr.filter(filterFn);
-};
+}
