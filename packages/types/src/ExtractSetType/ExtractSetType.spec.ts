@@ -1,3 +1,4 @@
+import { describe, it, expectTypeOf } from 'vitest';
 import { ExtractSetType } from '.';
 
 describe('ExtractSetType', () => {
