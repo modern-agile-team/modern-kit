@@ -1,6 +1,6 @@
 import { extractNumber } from '../../string/extractNumber';
 
-export const formatPhoneNumber = (value: string) => {
+export function formatPhoneNumber(value: string) {
   const cleanedValue = extractNumber(value);
   const isSeoul = cleanedValue.startsWith('02');
 
@@ -13,4 +13,4 @@ export const formatPhoneNumber = (value: string) => {
   }
 
   return cleanedValue.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
-};
+}

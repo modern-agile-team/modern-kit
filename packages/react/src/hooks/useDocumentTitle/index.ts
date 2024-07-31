@@ -4,10 +4,10 @@ interface UseDocumentTitleOption {
   preserveTitleOnUnmount?: boolean;
 }
 
-export const useDocumentTitle = (
+export function useDocumentTitle(
   title: string,
   { preserveTitleOnUnmount = false }: UseDocumentTitleOption = {}
-) => {
+) {
   useIsomorphicLayoutEffect(() => {
     const prevTitle = document.title;
     document.title = title;
@@ -18,4 +18,4 @@ export const useDocumentTitle = (
       }
     };
   }, [title, preserveTitleOnUnmount]);
-};
+}

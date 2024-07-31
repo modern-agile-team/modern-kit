@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { parseJSON } from '.';
 
 type Test1 = { a: 1; b: 2 };

@@ -14,7 +14,7 @@ interface useWindowSizeProps {
   wait?: number;
 }
 
-export const useWindowSize = (options: useWindowSizeProps = {}) => {
+export function useWindowSize(options: useWindowSizeProps = {}) {
   const { isDebounce = false, wait = 300 } = options;
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: null,
@@ -45,4 +45,4 @@ export const useWindowSize = (options: useWindowSizeProps = {}) => {
   }, [onResize, handleResize]);
 
   return windowSize;
-};
+}

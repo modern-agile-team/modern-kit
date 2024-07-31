@@ -5,10 +5,10 @@ interface UseVhPropertyProps {
   enabledResize?: boolean;
 }
 
-export const useVhProperty = ({
+export function useVhProperty({
   name = 'vh',
   enabledResize = false,
-}: UseVhPropertyProps = {}) => {
+}: UseVhPropertyProps = {}) {
   useIsomorphicLayoutEffect(() => {
     const handleResize = () => {
       const vh = window.innerHeight * 0.01;
@@ -27,4 +27,4 @@ export const useVhProperty = ({
       }
     };
   }, [name, enabledResize]);
-};
+}

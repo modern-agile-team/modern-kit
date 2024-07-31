@@ -1,1 +1,1 @@
-export const asyncNoop = async () => {};
+export async function asyncNoop() {}

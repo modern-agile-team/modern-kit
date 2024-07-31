@@ -1,4 +1,4 @@
-export const deepCopy = <T>(value: T) => {
+export function deepCopy<T>(value: T) {
   const referenceMap = new WeakMap();
 
   const copyWthRecursion = (target: T): T => {
@@ -73,4 +73,4 @@ export const deepCopy = <T>(value: T) => {
   };
 
   return copyWthRecursion(value);
-};
+}

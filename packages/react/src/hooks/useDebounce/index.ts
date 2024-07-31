@@ -5,11 +5,11 @@ import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 
 export type DebounceParameters = Parameters<typeof debounce>;
 
-export const useDebounce = (
+export function useDebounce(
   callback: DebounceParameters[0],
   wait: DebounceParameters[1],
   options: DebounceParameters[2] = {}
-) => {
+) {
   const callbackAction = usePreservedCallback(callback);
 
   const debounced = useMemo(() => {
@@ -19,4 +19,4 @@ export const useDebounce = (
   useUnmount(() => debounced.cancel());
 
   return debounced;
-};
+}

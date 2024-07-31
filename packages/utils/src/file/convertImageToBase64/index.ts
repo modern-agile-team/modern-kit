@@ -3,10 +3,10 @@ import {
   CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER,
 } from '../constants';
 
-export const convertImageToBase64 = async (
+export async function convertImageToBase64(
   url: string,
   imageType: CanvasImageType = 'png'
-) => {
+) {
   return new Promise<string>((resolve, reject) => {
     const img = new Image();
     img.src = url;
@@ -39,4 +39,4 @@ export const convertImageToBase64 = async (
     img.onerror = () =>
       reject(new Error('Failed to convert the image to base64'));
   });
-};
+}

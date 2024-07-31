@@ -1,4 +1,5 @@
-import { MockInstance } from 'vitest';
+import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest';
+
 import { useMediaQuery } from '.';
 import { renderHook } from '@testing-library/react';
 import * as ModernKitUtils from '@modern-kit/utils';

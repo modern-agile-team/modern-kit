@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { mapRight } from '.';
 
 type CallbackResult<T, U> = {
@@ -6,6 +7,7 @@ type CallbackResult<T, U> = {
   array: T[] | readonly T[];
   result: U;
 };
+
 describe('mapRight', () => {
   it('should map values from right to left in an array', () => {
     const arr = [1, 2, 3];

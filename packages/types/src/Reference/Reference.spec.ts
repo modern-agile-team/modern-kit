@@ -1,3 +1,4 @@
+import { describe, it, expectTypeOf } from 'vitest';
 import { Reference } from '.';
 
 describe('Reference', () => {

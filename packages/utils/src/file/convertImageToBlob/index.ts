@@ -15,10 +15,10 @@ const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
   });
 };
 
-export const convertImageToBlob = (
+export function convertImageToBlob(
   url: string,
   imageType: CanvasImageType = 'png'
-) => {
+) {
   return new Promise<Blob>((resolve, reject) => {
     const img = new Image();
 
@@ -50,4 +50,4 @@ export const convertImageToBlob = (
 
     img.src = url;
   });
-};
+}

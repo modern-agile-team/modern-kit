@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useScrollTo } from '.';
 import { renderHook } from '@testing-library/react';
 

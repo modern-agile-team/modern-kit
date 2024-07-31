@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { isMobile } from '@modern-kit/utils';
 
-export const useOnClickOutside = <T extends HTMLElement>(
+export function useOnClickOutside<T extends HTMLElement>(
   action: (targetElement: T) => void
-) => {
+) {
   const ref = useRef<T>(null);
   const callbackAction = usePreservedCallback(action);
 
@@ -27,4 +27,4 @@ export const useOnClickOutside = <T extends HTMLElement>(
   }, [callbackAction]);
 
   return { ref };
-};
+}

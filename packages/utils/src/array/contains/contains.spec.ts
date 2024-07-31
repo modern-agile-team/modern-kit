@@ -1,3 +1,4 @@
+import { describe, it, expect, expectTypeOf } from 'vitest';
 import { contains } from '.';
 
 describe('contains', () => {

@@ -4,11 +4,11 @@ import { isFunction } from '../../validator/isFunction';
 import { Nullable } from '@modern-kit/types';
 import { parseJSON } from '../../common';
 
-export const getStorageItem = <T>(
+export function getStorageItem<T>(
   type: StorageType,
   key: string,
   initialValue: Nullable<T | (() => T)> = null
-) => {
+) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -25,4 +25,4 @@ export const getStorageItem = <T>(
   } catch (err) {
     throw new Error(`Failed to read data for key "${key}" in ${type}: ${err}`);
   }
-};
+}

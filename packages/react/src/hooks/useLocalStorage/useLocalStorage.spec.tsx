@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach, vi, expectTypeOf } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useLocalStorage } from '.';
 import { renderToString } from 'react-dom/server';

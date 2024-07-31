@@ -1,6 +1,6 @@
 import { isServer } from '../../device/isServer';
 
-export const isMobile = () => {
+export function isMobile() {
   if (isServer()) return false;
 
   const userAgent = window.navigator.userAgent;
@@ -8,4 +8,4 @@ export const isMobile = () => {
     /Android|webOS|iPhone|iPad|iPod|Windows Phone|BlackBerry|IEMobile|Opera Mini/i;
 
   return regex.test(userAgent);
-};
+}

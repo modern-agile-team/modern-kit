@@ -1,4 +1,4 @@
-export const repeatCharacters = (value: string, repeatCount: number) => {
+export function repeatCharacters(value: string, repeatCount: number) {
   let result = '';
 
   if (repeatCount <= 1) return value;
@@ -8,4 +8,4 @@ export const repeatCharacters = (value: string, repeatCount: number) => {
   }
 
   return result;
-};
+}

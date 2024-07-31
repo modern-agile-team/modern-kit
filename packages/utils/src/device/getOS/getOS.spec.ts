@@ -1,4 +1,12 @@
-import { MockInstance } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  MockInstance,
+  beforeEach,
+  afterEach,
+} from 'vitest';
 import { getOS } from '.';
 
 let windowSpy: MockInstance;

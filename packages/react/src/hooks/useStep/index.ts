@@ -11,11 +11,11 @@ export interface UseStepProps {
   infinite?: boolean;
 }
 
-export const useStep = ({
+export function useStep({
   maxStep,
   initialStep = 0,
   infinite = false,
-}: UseStepProps) => {
+}: UseStepProps) {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const hasNextStep = useMemo(
     () => currentStep < maxStep,
@@ -119,4 +119,4 @@ export const useStep = ({
     goToPrevStep,
     resetStep,
   } as const;
-};
+}

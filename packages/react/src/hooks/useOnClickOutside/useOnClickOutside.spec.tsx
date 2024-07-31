@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import { useOnClickOutside } from '.';
 import { renderSetup } from '../../utils/test/renderSetup';

@@ -1,7 +1,7 @@
 import { StorageType } from '../types';
 import { isClient } from '../../device';
 
-export const clearStorage = (type: StorageType) => {
+export function clearStorage(type: StorageType) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -12,4 +12,4 @@ export const clearStorage = (type: StorageType) => {
   } catch (err) {
     throw new Error(`Failed to clear ${type}: ${err}`);
   }
-};
+}

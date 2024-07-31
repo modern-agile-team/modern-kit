@@ -1,4 +1,4 @@
-export const hexToRgba = (hex: string, alpha = 1) => {
+export function hexToRgba(hex: string, alpha = 1) {
   const regex = /^#?[0-9A-Fa-f]{6}$/;
   const HEXADECIMAL = 16;
 
@@ -19,4 +19,4 @@ export const hexToRgba = (hex: string, alpha = 1) => {
     a: alpha,
     stringifiedValue: `rgba(${r},${g},${b},${alpha})`,
   } as const;
-};
+}

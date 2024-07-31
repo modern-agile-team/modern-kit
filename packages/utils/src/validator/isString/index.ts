@@ -1,3 +1,3 @@
-export const isString = (arg: unknown): arg is string => {
+export function isString(arg: unknown): arg is string {
   return typeof arg === 'string';
-};
+}

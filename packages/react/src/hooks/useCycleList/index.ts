@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import { useStep } from '../useStep';
 
-export const useCycleList = <T>(
-  array: T[] | readonly T[],
-  initialIndex = 0
-) => {
+export function useCycleList<T>(array: T[] | readonly T[], initialIndex = 0) {
   const { currentStep, goToNextStep, goToPrevStep, setStep } = useStep({
     maxStep: array.length - 1,
     initialStep: initialIndex,
@@ -27,4 +24,4 @@ export const useCycleList = <T>(
     prevIndex: goToPrevStep,
     setIndex,
   } as const;
-};
+}

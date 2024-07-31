@@ -1,5 +1,5 @@
+import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { MockInstance } from 'vitest';
 import { useNetwork } from '.';
 import { renderToString } from 'react-dom/server';
 

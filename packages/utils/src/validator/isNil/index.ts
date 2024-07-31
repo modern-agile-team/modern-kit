@@ -15,8 +15,8 @@
  * const result = isNil(5);
  * // false
  */
-export const isNil = <T>(
+export function isNil<T>(
   value: T | undefined | null
-): value is undefined | null => {
+): value is undefined | null {
   return value == null;
-};
+}

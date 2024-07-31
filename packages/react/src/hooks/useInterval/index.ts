@@ -9,10 +9,10 @@ type IntervalOptions =
   | number
   | { delay: SetIntervalParameters[1]; enabled?: boolean };
 
-export const useInterval = (
+export function useInterval(
   callback: SetIntervalParameters[0],
   options: IntervalOptions
-) => {
+) {
   const preservedOptions = usePreservedState(options);
   const callbackAction = usePreservedCallback(callback);
 
@@ -52,4 +52,4 @@ export const useInterval = (
   }, [callbackAction, enabled, delay]);
 
   return { isActing: enabled, start: startInterval, stop: stopInterval };
-};
+}

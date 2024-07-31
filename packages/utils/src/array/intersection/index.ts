@@ -1,10 +1,10 @@
 import { intersectionWithDuplicates, uniq } from '..';
 
-export const intersection = <T, U>(
+export function intersection<T, U>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
   iteratee?: (item: T) => U
-) => {
+) {
   const intersection = intersectionWithDuplicates(
     firstArr,
     secondArr,
@@ -12,4 +12,4 @@ export const intersection = <T, U>(
   );
 
   return uniq(intersection, iteratee);
-};
+}

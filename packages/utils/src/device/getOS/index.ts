@@ -1,7 +1,7 @@
 import { isServer } from '../isServer';
 import { isMobile } from '../isMobile';
 
-export const getOS = () => {
+export function getOS() {
   if (isServer()) {
     return 'server';
   }
@@ -21,4 +21,4 @@ export const getOS = () => {
   }
 
   return 'web';
-};
+}

@@ -1,9 +1,9 @@
 import { deepCopy } from '../../common';
 
-export const omit = <T extends Record<PropertyKey, any>, K extends keyof T>(
+export function omit<T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
   keys: K[]
-): Omit<T, K> => {
+): Omit<T, K> {
   const result = deepCopy(obj);
 
   for (const key of keys) {
@@ -11,4 +11,4 @@ export const omit = <T extends Record<PropertyKey, any>, K extends keyof T>(
   }
 
   return result;
-};
+}

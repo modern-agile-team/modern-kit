@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { useRef, useState } from 'react';
 import { Portal } from '.';

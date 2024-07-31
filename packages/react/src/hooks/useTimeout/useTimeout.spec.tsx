@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { act, renderHook, screen } from '@testing-library/react';
 import { useTimeout } from '.';
 import { useState } from 'react';

@@ -7,9 +7,9 @@ interface UseAsyncProcessQueueOptions {
   keepPreviousData?: boolean;
 }
 
-export const useAsyncProcessQueue = <T = unknown, E = unknown>({
+export function useAsyncProcessQueue<T = unknown, E = unknown>({
   keepPreviousData = false,
-}: UseAsyncProcessQueueOptions = {}) => {
+}: UseAsyncProcessQueueOptions = {}) {
   const requestQueue = useRef<RequestFunction<T>[]>([]);
 
   const [data, setData] = useState<Nullable<T>>(null);
@@ -57,4 +57,4 @@ export const useAsyncProcessQueue = <T = unknown, E = unknown>({
   );
 
   return { data, error, isLoading, addToProcessQueue };
-};
+}

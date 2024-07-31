@@ -1,3 +1,3 @@
-export const getMIMETypeFromResponse = (response: Response) => {
+export function getMIMETypeFromResponse(response: Response) {
   return response.headers?.get('Content-Type') ?? '';
-};
+}

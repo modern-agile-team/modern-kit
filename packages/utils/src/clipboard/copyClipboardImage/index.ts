@@ -14,10 +14,10 @@ const copyFallbackImage = async (src: string) => {
   return await copyClipboardText(textData);
 };
 
-export const copyClipboardImage = async ({
+export async function copyClipboardImage({
   src,
   toText = false,
-}: ClipboardImageCopyProps) => {
+}: ClipboardImageCopyProps) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }
@@ -50,4 +50,4 @@ export const copyClipboardImage = async ({
     console.error(`Copying to the clipboard failed. message: ${err.message}`);
     throw err;
   }
-};
+}

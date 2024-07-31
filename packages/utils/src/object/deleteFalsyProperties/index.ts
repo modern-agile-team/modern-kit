@@ -1,8 +1,8 @@
 import { hasProperty, isArray, isReference } from '../../validator';
 
-export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
+export function deleteFalsyProperties<T extends Record<PropertyKey, any>>(
   source: T
-): T => {
+): T {
   const copiedObj = {} as T;
 
   for (const key in source) {
@@ -48,4 +48,4 @@ export const deleteFalsyProperties = <T extends Record<PropertyKey, any>>(
   }
 
   return copiedObj;
-};
+}

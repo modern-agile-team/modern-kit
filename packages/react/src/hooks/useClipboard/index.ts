@@ -3,7 +3,7 @@ import { copyClipboardImage, copyClipboardText } from '@modern-kit/utils';
 
 type CopiedData = string | Blob | null;
 
-export const useClipboard = () => {
+export function useClipboard() {
   const [copiedData, setCopiedData] = useState<CopiedData>(null);
 
   const copyText = useCallback(async (value: string) => {
@@ -37,4 +37,4 @@ export const useClipboard = () => {
   );
 
   return { copiedData, copyText, copyImage };
-};
+}

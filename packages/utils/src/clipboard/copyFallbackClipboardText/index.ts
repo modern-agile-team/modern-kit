@@ -1,4 +1,4 @@
-export const copyFallbackClipboardText = (value: string) => {
+export function copyFallbackClipboardText(value: string) {
   const textArea = document.createElement('textarea');
 
   textArea.value = value;
@@ -17,4 +17,4 @@ export const copyFallbackClipboardText = (value: string) => {
   } finally {
     document.body.removeChild(textArea);
   }
-};
+}

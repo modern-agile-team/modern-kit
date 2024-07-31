@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 type ImageStatus = 'pending' | 'loading' | 'complete' | 'error';
 
-export const useImageStatus = () => {
+export function useImageStatus() {
   const [imageStatus, setImageStatus] = useState<ImageStatus>('pending');
 
   const ref = useCallback((imgElement: HTMLImageElement) => {
@@ -22,4 +22,4 @@ export const useImageStatus = () => {
   }, []);
 
   return { ref, imageStatus };
-};
+}

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { formatNumberCurrency } from '.';
 
 const ONE_HUNDRED_MILLION = 100000000;

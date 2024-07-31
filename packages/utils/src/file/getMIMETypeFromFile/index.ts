@@ -1,3 +1,3 @@
-export const getMIMETypeFromFile = (file: File) => {
+export function getMIMETypeFromFile(file: File) {
   return file.type ?? '';
-};
+}

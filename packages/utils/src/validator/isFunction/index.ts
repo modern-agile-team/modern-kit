@@ -1,5 +1,5 @@
-export const isFunction = <T extends (...args: any[]) => any>(
+export function isFunction<T extends (...args: any[]) => any>(
   arg: unknown
-): arg is T => {
+): arg is T {
   return typeof arg === 'function';
-};
+}
