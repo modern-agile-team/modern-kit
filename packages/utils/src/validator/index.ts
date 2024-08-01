@@ -8,6 +8,7 @@ export * from './isMIMEType';
 export * from './isNil';
 export * from './isNotNil';
 export * from './isNumber';
+export * from './isNumericString';
 export * from './isPlainObject';
 export * from './isPrimitive';
 export * from './isPromise';
