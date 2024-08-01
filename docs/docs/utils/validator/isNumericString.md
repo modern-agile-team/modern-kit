@@ -10,7 +10,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isNumericString: (value: string): boolean
+function isNumericString(value: string): boolean
 ```
 
 ## Usage
