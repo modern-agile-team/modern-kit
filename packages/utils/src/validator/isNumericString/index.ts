@@ -1,3 +1,3 @@
-export const isNumericString = (value: string): boolean => {
+export function isNumericString(value: string): boolean {
   return /^[0-9]+$/.test(value);
 };
