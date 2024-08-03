@@ -9,10 +9,13 @@
 ## Interface
 
 ```ts title="typescript"
-function mapKeys<T extends Record<PropertyKey, any>>(
+function mapKeys<
+  T extends Record<PropertyKey, any>,
+  U extends PropertyKey
+>(
   object: T,
-  iteratee: (iterateData: { key: keyof T; value: T[keyof T]; object: T }) => string
-): Record<string, T[keyof T]>
+  iteratee: (iterateData: { key: keyof T; value: T[keyof T]; object: T }) => U
+): Record<U, T[keyof T]>
 ```
 
 ## Usage
