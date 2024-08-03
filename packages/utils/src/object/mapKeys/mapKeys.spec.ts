@@ -3,17 +3,8 @@ import { mapKeys } from '.';
 describe('mapKeys', () => {
   it('should map object keys by appending values to keys', () => {
     const obj = { a: 1, b: 2 } as const;
-    const iteratee = ({
-      key,
-      value,
-    }: {
-      key: string | number;
-      value: number;
-    }): string => `${key}${value}`;
     const expected = { a1: 1, b2: 2 } as const;
-
-    const result = mapKeys(obj, iteratee);
-
+    const result = mapKeys(obj, ({ key, value }) => `${key}${value}`);
     expect(result).toEqual(expected);
   });
 
