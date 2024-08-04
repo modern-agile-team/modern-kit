@@ -1,4 +1,5 @@
-import { intersectionWithDuplicates, uniq } from '..';
+import { uniq } from '../../array/uniq';
+import { intersectionWithDuplicates } from '../intersectionWithDuplicates';
 
 export function intersection<T, U>(
   firstArr: T[] | readonly T[],
