@@ -2,6 +2,7 @@ export * from './useAsyncPreservedCallback';
 export * from './useAsyncProcessQueue';
 export * from './useBlockPromiseMultipleClick';
 export * from './useClipboard';
+export * from './useCounter';
 export * from './useCycleList';
 export * from './useDebounce';
 export * from './useDocumentTitle';
