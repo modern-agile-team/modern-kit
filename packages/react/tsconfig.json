@@ -1,9 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
+  "include": ["src", "global.d.ts"],
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
 }

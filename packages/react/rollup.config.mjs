@@ -2,6 +2,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import pkg from './package.json' assert { type: 'json' };
 import esbuild from 'rollup-plugin-esbuild';
@@ -33,6 +34,10 @@ export default {
     typescript({
       tsconfig: './tsconfig.json',
       exclude: ['**/*.spec.tsx', '**/*.spec.ts'],
+    }),
+    postcss({
+      extract: true,
+      modules: true,
     }),
     terser(),
   ],

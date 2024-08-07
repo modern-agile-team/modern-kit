@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import { useIsMounted } from '../../hooks/useIsMounted';
 
 interface ClientOnlyProps {
-  fallback?: JSX.Element;
+  fallback?: ReactNode;
 }
 
 export const ClientOnly = ({

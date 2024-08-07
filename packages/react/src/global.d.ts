@@ -7,3 +7,5 @@ declare global {
     interface Assertion<T = any> extends TestingLibraryMatchers<T, void> {}
   }
 }
+
+declare module '*.css';

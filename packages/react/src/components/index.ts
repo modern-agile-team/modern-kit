@@ -1,3 +1,4 @@
+export * from './AspectRatio';
 export * from './ClientOnly';
 export * from './DebounceWrapper';
 export * from './FallbackLazyImage';
