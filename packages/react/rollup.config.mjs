@@ -36,9 +36,19 @@ export default {
       exclude: ['**/*.spec.tsx', '**/*.spec.ts'],
     }),
     postcss({
-      extract: true,
+      extract: false,
       modules: true,
+      minimize: true,
     }),
     terser(),
   ],
+  // css not find module 대응
+  onwarn: (warning, warn) => {
+    // Check if the warning is the one you want to ignore
+    if (warning.code === 'PLUGIN_WARNING' && /TS2307/.test(warning.message)) {
+      return;
+    }
+    // Use default warning handler
+    warn(warning);
+  },
 };
