@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 1.14.0
+
+### Minor Changes
+
+- [#395](https://github.com/modern-agile-team/modern-kit/pull/395) [`aed003f`](https://github.com/modern-agile-team/modern-kit/commit/aed003fa9f323f0bef121593a8092109e407d10c) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): mapKeys 유틸 함수 추가 - @Gaic4o
+
+- [#380](https://github.com/modern-agile-team/modern-kit/pull/380) [`59f4995`](https://github.com/modern-agile-team/modern-kit/commit/59f49955c98a8224b615bf0b14f1802858908eb4) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): pickFalsy 함수 추가 완료 - @Sangminnn
+
 ## 1.13.0
 
 ### Minor Changes

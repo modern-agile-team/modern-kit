@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.14.0
+
+### Minor Changes
+
+- [#404](https://github.com/modern-agile-team/modern-kit/pull/404) [`4c41115`](https://github.com/modern-agile-team/modern-kit/commit/4c41115d1f0aae907d6c4f4be74293278f6d711d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useCounter 함수 추가 - @ssi02014
+
 ## 1.13.1
 
 ### Patch Changes
