@@ -1,5 +1,5 @@
 import { ExtractNestedArrayType } from '@modern-kit/types';
-import { flatten } from '../../array';
+import { flatten } from '../../array/flatten';
 
 /**
  * @description 주어진 중첩 배열의 `모든 깊이`를 `평탄화`해주는 함수입니다.

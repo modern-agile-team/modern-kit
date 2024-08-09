@@ -15,6 +15,7 @@ export default defineConfig({
         'src/storage',
         'src/clipboard',
         'src/file',
+        'src/**/internal.ts',
         'src/**/*.bench.ts',
       ],
     },

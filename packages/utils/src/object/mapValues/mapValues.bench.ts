@@ -2,25 +2,22 @@ import { bench, describe } from 'vitest';
 import { mapValues as mapValuesLodash } from 'lodash-es';
 import { mapValues } from '.';
 
-describe('mapValues', () => {
-  const obj = {
-    a: 1,
-    b: 2,
-    c: 3,
-    d: 4,
-    e: 5,
-    f: 6,
-    g: 7,
-  };
+const createObj = (depth: number) => {
+  const obj = {} as Record<string, string>;
+  for (let i = 0; i < depth; i++) {
+    obj[`key${i}`] = `value${i}`;
+  }
+  return obj;
+};
 
-  const iteratee = ({ value }: { key: PropertyKey; value: number }): number =>
-    value;
+describe('mapValues', () => {
+  const obj = createObj(30);
 
   bench('modern-kit/mapValues', () => {
-    mapValues(obj, iteratee);
+    mapValues(obj, ({ value, key }) => key + value);
   });
 
   bench('lodash/mapValues', () => {
-    mapValuesLodash(obj, iteratee);
+    mapValuesLodash(obj, (value, key) => key + value);
   });
 });

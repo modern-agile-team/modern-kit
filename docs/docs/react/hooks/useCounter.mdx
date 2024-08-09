@@ -1,0 +1,63 @@
+import { useState } from 'react';
+import { useCounter } from '@modern-kit/react'
+
+# useCounter
+
+카운터를 관리하는 커스텀 훅으로, `증가`, `감소` 및 `리셋` 기능 등을 제공합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useCounter/index.ts)
+
+## Interface
+```ts title="typescript"
+function useCounter(initialValue: number = 0): {
+  counter: number;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
+}
+```
+
+## Usage
+```tsx title="typescript"
+import { useCounter } from '@modern-kit/react';
+
+const Example = () => {
+  const { counter, setCounter, increment, decrement, reset } = useCounter(10);
+
+  return (
+    <div>
+      <div>
+        <button onClick={increment}>더하기</button>
+        <button onClick={decrement}>더하기</button>
+        <button onClick={() => setCounter(20)}>20으로 셋팅</button>
+        <button onClick={reset}>10으로 리셋</button>
+      </div>
+      <p>counter: {counter}</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { counter, setCounter, increment, decrement, reset } = useCounter(10);
+
+  return (
+    <div>
+      <div>
+        <button onClick={increment}>증가</button>
+        <button onClick={decrement}>감소</button>
+        <button onClick={() => setCounter(20)}>20으로 셋팅</button>
+        <button onClick={reset}>초기화</button>
+      </div>
+      <p>counter: {counter}</p>
+    </div>
+  );
+};
+
+<Example />

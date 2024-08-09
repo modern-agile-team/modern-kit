@@ -1,5 +1,6 @@
 export * from './deleteFalsyProperties';
 export * from './invert';
+export * from './mapKeys';
 export * from './mapValues';
 export * from './mergeProperties';
 export * from './objectEntries';
