@@ -1,4 +1,5 @@
 export * from './deleteFalsyProperties';
+export * from './groupBy';
 export * from './invert';
 export * from './mapKeys';
 export * from './mapValues';
