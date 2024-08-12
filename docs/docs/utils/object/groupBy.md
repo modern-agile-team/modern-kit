@@ -21,7 +21,7 @@
 ## Interface
 ```ts title="typescript"
 function groupBy<T, K extends PropertyKey>(
-  items: readonly T[],
+  items: T[] | readonly T[],
   callbackFn: (item: T) => K
 ): Record<K, T[]>
 ```
