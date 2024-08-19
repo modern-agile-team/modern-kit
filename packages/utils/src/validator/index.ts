@@ -1,6 +1,7 @@
 export * from './hasProperty';
 export * from './isArray';
 export * from './isBoolean';
+export * from './isEqual';
 export * from './isFloat';
 export * from './isFunction';
 export * from './isInRange';

@@ -1,4 +1,10 @@
-const compareObjectOrArray = (source: any, target: any) => {
+import { isNumber, isFunction } from '../../validator';
+
+const compareObjectOrArray = (
+  source: any,
+  target: any,
+  visited: WeakMap<any, boolean>
+) => {
   const sourceKeys = Object.keys(source);
   const targetKeys = Object.keys(target);
 
@@ -7,7 +13,10 @@ const compareObjectOrArray = (source: any, target: any) => {
   }
 
   for (const key of sourceKeys) {
-    if (!targetKeys.includes(key) || !deepEqual(source[key], target[key])) {
+    if (
+      !targetKeys.includes(key) ||
+      !isEqualInternal(source[key], target[key], visited)
+    ) {
       return false;
     }
   }
@@ -15,20 +24,24 @@ const compareObjectOrArray = (source: any, target: any) => {
   return true;
 };
 
-export function deepEqual(source: any, target: any) {
+export const isEqualInternal = (
+  source: any,
+  target: any,
+  visited: WeakMap<any, boolean>
+) => {
   // Primitive Type
   if (source === target) {
     return true;
   }
 
   // NaN
-  if (
-    typeof source === 'number' &&
-    typeof target === 'number' &&
-    isNaN(source) &&
-    isNaN(target)
-  ) {
+  if (isNumber(source) && isNumber(target) && isNaN(source) && isNaN(target)) {
     return true;
+  }
+
+  // Function
+  if (isFunction(source) && isFunction(target)) {
+    return source.toString() === target.toString();
   }
 
   // Returns false if either is not an object
@@ -40,6 +53,13 @@ export function deepEqual(source: any, target: any) {
   ) {
     return false;
   }
+
+  // Handling Circular References
+  if (visited.has(source) && visited.get(source) === target) {
+    return true;
+  }
+
+  visited.set(source, target);
 
   // Returns false if the constructors are different.
   if (source.constructor !== target.constructor) {
@@ -53,7 +73,7 @@ export function deepEqual(source: any, target: any) {
     const sourceSetToArr = [...source];
     const targetSetToArr = [...target];
 
-    return compareObjectOrArray(sourceSetToArr, targetSetToArr);
+    return compareObjectOrArray(sourceSetToArr, targetSetToArr, visited);
   }
 
   // Map
@@ -61,7 +81,10 @@ export function deepEqual(source: any, target: any) {
     if (source.size !== target.size) return false;
 
     for (const [key, value] of source) {
-      if (!target.has(key) || !deepEqual(value, target.get(key))) {
+      if (
+        !target.has(key) ||
+        !isEqualInternal(value, target.get(key), visited)
+      ) {
         return false;
       }
     }
@@ -69,5 +92,5 @@ export function deepEqual(source: any, target: any) {
   }
 
   // Object & Array
-  return compareObjectOrArray(source, target);
-}
+  return compareObjectOrArray(source, target, visited);
+};
