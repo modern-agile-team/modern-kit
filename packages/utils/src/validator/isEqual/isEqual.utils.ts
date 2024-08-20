@@ -3,7 +3,7 @@ import { isNumber, isFunction } from '../../validator';
 const compareObjectOrArray = (
   source: any,
   target: any,
-  visited: WeakMap<any, boolean>
+  visited: WeakMap<object, any>
 ) => {
   const sourceKeys = Object.keys(source);
   const targetKeys = Object.keys(target);
@@ -27,7 +27,7 @@ const compareObjectOrArray = (
 export const isEqualInternal = (
   source: any,
   target: any,
-  visited: WeakMap<any, boolean>
+  visited: WeakMap<object, any>
 ) => {
   // Primitive Type
   if (source === target) {
