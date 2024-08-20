@@ -1,8 +1,7 @@
 export type Reference =
   | Record<PropertyKey, any>
   | any[]
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  | Function
+  | ((...args: any[]) => any) // Function
   | Set<any>
   | Map<any, any>
   | WeakMap<object, any>
