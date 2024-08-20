@@ -12,6 +12,8 @@ import { flatten } from '../../array/flatten';
  * flattenDeep([1, [2, [3, [4]], 5]]);
  * // [1, 2, 3, 4, 5]
  */
-export function flattenDeep<T>(arr: T[] | readonly T[]) {
+export function flattenDeep<T>(
+  arr: T[] | readonly T[]
+): ExtractNestedArrayType<T>[] {
   return flatten(arr, Infinity) as ExtractNestedArrayType<T>[];
 }

@@ -1,5 +1,12 @@
 import { useCallback, useState } from 'react';
 
+interface UseCounterReturnType {
+  counter: number;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
+}
 /**
  * @description 카운터를 관리하는 커스텀 훅으로, 증가, 감소 및 리셋 기능을 제공합니다.
  *
@@ -19,7 +26,7 @@ import { useCallback, useState } from 'react';
  * setCounter(20); // counter: 20
  * reset(); // counter: 10
  */
-export function useCounter(initialValue: number = 0) {
+export function useCounter(initialValue: number = 0): UseCounterReturnType {
   const [counter, setCounter] = useState(initialValue);
 
   const increment = useCallback(() => {
