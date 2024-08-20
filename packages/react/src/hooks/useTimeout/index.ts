@@ -65,7 +65,9 @@ export function useTimeout(
   }, [callbackAction, delay]);
 
   const clear = useCallback(() => {
-    timeoutRef.current && clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }, []);
 
   const reset = useCallback(() => {

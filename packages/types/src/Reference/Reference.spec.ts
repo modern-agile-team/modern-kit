@@ -6,8 +6,9 @@ describe('Reference', () => {
     const value = {} as Reference;
 
     if (typeof value === 'object') {
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      expectTypeOf(value).toEqualTypeOf<Exclude<Reference, Function>>();
+      expectTypeOf(value).toEqualTypeOf<
+        Exclude<Reference, (...args: any[]) => any>
+      >();
     }
 
     if (Array.isArray(value)) {
@@ -15,8 +16,7 @@ describe('Reference', () => {
     }
 
     if (typeof value === 'function') {
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      expectTypeOf(value).toEqualTypeOf<Function>();
+      expectTypeOf(value).toEqualTypeOf<Function | ((...args: any[]) => any)>();
     }
 
     if (value instanceof Set) {
