@@ -13,7 +13,7 @@
  * chunk(['a', 'b', 'c', 'd'], 3)
  * // [['a', 'b', 'c'], ['d']]
  */
-export function chunk<T>(arr: T[] | readonly T[], size: number) {
+export function chunk<T>(arr: T[] | readonly T[], size: number): T[][] {
   if (!Number.isInteger(size) || size < 1) {
     throw new Error('Invalid size Value');
   }

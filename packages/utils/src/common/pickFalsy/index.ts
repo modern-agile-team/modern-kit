@@ -14,7 +14,7 @@ type PickFalsyProps = Exclude<
  * 인자가 없다면, 기본적으로 `boolean`, `null`, `undefined`에 대해서만 falsy 값 체크를 수행합니다.
  *
  * @param arr - falsy를 체크하고자 하는 타입을 받습니다.
- * @returns - 선택한 타입에 대한 falsy함수를 반환합니다. falsy를 체크하는 함수이기때문에 해당 함수로부터의 반환값이 true라면 falsy, false라면 truthy입니다.
+ * @returns {(value: unknown) => boolean} - 선택한 타입에 대한 falsy함수를 반환합니다. falsy를 체크하는 함수이기때문에 해당 함수로부터의 반환값이 true라면 falsy, false라면 truthy입니다.
  *
  * @example
  * const isInvalidValue = pickFalsy()
@@ -38,7 +38,9 @@ type PickFalsyProps = Exclude<
  * isInvalidValue({}) // true
  */
 
-export function pickFalsy(...arr: PickFalsyProps[]) {
+export function pickFalsy(
+  ...arr: PickFalsyProps[]
+): (value: unknown) => boolean {
   const defaultCheckList = ['null', 'undefined', 'boolean'];
   return function (value: unknown) {
     const falsyCheckList = [...defaultCheckList, ...arr] as FalsyMapperKeys[];
