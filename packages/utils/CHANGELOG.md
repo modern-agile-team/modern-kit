@@ -1,5 +1,19 @@
 # @modern-kit/utils
 
+## 1.14.0
+
+### Minor Changes
+
+- [#411](https://github.com/modern-agile-team/modern-kit/pull/411) [`e031af0`](https://github.com/modern-agile-team/modern-kit/commit/e031af03ed0f34afa7d53ca6aeb5e35025fb9a50) Thanks [@haejunejung](https://github.com/haejunejung)! - feat(groupBy): Add groupBy - @haejunejung
+
+- [#395](https://github.com/modern-agile-team/modern-kit/pull/395) [`aed003f`](https://github.com/modern-agile-team/modern-kit/commit/aed003fa9f323f0bef121593a8092109e407d10c) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): mapKeys 유틸 함수 추가 - @Gaic4o
+
+- [#417](https://github.com/modern-agile-team/modern-kit/pull/417) [`5cfc8dd`](https://github.com/modern-agile-team/modern-kit/commit/5cfc8ddced347e89fcb36d1529838788589011b5) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): deepEqual 제거 및 isEqual 추가 - @ssi02014
+
+- [#380](https://github.com/modern-agile-team/modern-kit/pull/380) [`59f4995`](https://github.com/modern-agile-team/modern-kit/commit/59f49955c98a8224b615bf0b14f1802858908eb4) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): pickFalsy 함수 추가 완료 - @Sangminnn
+
+- [#422](https://github.com/modern-agile-team/modern-kit/pull/422) [`c4fd147`](https://github.com/modern-agile-team/modern-kit/commit/c4fd147c55c0e48cbb89a463f1f19467ee5cc7ec) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flatMap 신규 유틸 함수 추가 - @ssi02014
+
 ## 1.13.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @modern-kit/react
 
+## 1.14.0
+
+### Minor Changes
+
+- [#424](https://github.com/modern-agile-team/modern-kit/pull/424) [`ef34d01`](https://github.com/modern-agile-team/modern-kit/commit/ef34d01fdb694743117df0a39a78980719f63c41) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): AspectRatio 신규 컴포넌트 추가 - @ssi02014
+
+- [#417](https://github.com/modern-agile-team/modern-kit/pull/417) [`5cfc8dd`](https://github.com/modern-agile-team/modern-kit/commit/5cfc8ddced347e89fcb36d1529838788589011b5) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): deepEqual 제거 및 isEqual 추가 - @ssi02014
+
+- [#404](https://github.com/modern-agile-team/modern-kit/pull/404) [`4c41115`](https://github.com/modern-agile-team/modern-kit/commit/4c41115d1f0aae907d6c4f4be74293278f6d711d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useCounter 함수 추가 - @ssi02014
+
 ## 1.13.1
 
 ### Patch Changes
