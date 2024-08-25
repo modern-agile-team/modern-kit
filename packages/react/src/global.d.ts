@@ -7,3 +7,8 @@ declare global {
     type Assertion<T = any> = TestingLibraryMatchers<T, void>;
   }
 }
+
+declare module '*.module.css' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
