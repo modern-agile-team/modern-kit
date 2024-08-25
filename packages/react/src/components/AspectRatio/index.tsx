@@ -31,7 +31,7 @@ export const AspectRatio = forwardRef<
   return (
     <div
       ref={ref}
-      className={classNames(styles['aspect-wrapper'], className)}
+      className={classNames(styles['wrapper'], className)}
       style={customStyle}
       {...props}>
       {Children.only(children)}

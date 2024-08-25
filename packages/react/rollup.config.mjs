@@ -42,12 +42,4 @@ export default {
     }),
     terser(),
   ],
-  // css cannot find module 대응, @rollup/plugin-typescript TS2307
-  onwarn: (warning, warn) => {
-    if (/module.css/.test(warning.message)) {
-      return;
-    }
-    // Use default warning handler
-    warn(warning);
-  },
 };
