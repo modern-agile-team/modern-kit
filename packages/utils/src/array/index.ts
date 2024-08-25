@@ -1,4 +1,5 @@
 export * from './chunk';
+export * from './compact';
 export * from './contains';
 export * from './countOccurrencesInArray';
 export * from './difference';
