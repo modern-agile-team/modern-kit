@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { compact } from '.';
 
-describe('compact function', () => {
+describe('compact', () => {
   it('should remove all falsy values (0, false, null, undefined, NaN, "") from an array', () => {
     const arr = [0, 1, false, 2, '', 3, null, undefined, 4, NaN, 5] as const;
     expect(compact(arr)).toEqual([1, 2, 3, 4, 5]);
