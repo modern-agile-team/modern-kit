@@ -11,7 +11,7 @@
 ```ts title="typescript"
 type Removable = false | 0 | '' | null | undefined;
 type Retained<T> = Exclude<T, Removable>;
-const compact: <T>(arr: readonly T[]) => Retained<T>[];
+const compact: <T>(arr: T[] | readonly T[]) => Retained<T>[];
 ```
 
 ## Usage 
