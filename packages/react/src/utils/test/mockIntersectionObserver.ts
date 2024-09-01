@@ -1,9 +1,6 @@
 import { Nullable } from '@modern-kit/types';
 import { noop } from '@modern-kit/utils';
 
-/**
- * This is the Intersection Observer Setup Code referring to "impression-area" in "@toss/react".
- */
 const defaultIntersectionObserver = window.IntersectionObserver;
 const handlers = new Map<
   HTMLElement,
