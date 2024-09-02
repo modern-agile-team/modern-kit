@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 1.15.0
+
+### Minor Changes
+
+- [#427](https://github.com/modern-agile-team/modern-kit/pull/427) [`0c8897c`](https://github.com/modern-agile-team/modern-kit/commit/0c8897cc96ed890c10ffb1438705fc8b6eb997a0) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): compact 유틸 함수 추가 - @Gaic4o
+
+- [#435](https://github.com/modern-agile-team/modern-kit/pull/435) [`a3f914b`](https://github.com/modern-agile-team/modern-kit/commit/a3f914bee27e93508703829a82eea09768d2e143) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flatMapDeep 신규 함수 추가 - @ssi02014
+
 ## 1.14.0
 
 ### Minor Changes

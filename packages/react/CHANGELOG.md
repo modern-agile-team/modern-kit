@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.15.0
+
+### Minor Changes
+
+- [#440](https://github.com/modern-agile-team/modern-kit/pull/440) [`51e8d74`](https://github.com/modern-agile-team/modern-kit/commit/51e8d74313625ef24cfb02661d24c3637787632c) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useDebouncedInputValue 신규 훅 추가 - @ssi02014
+
 ## 1.14.0
 
 ### Minor Changes
