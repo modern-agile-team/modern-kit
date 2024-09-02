@@ -2,6 +2,8 @@
 
 16진수 색상 코드(Hex)를 RGB형식으로 변경하는 함수입니다. `(HEX -> RGB)`
 
+Hex 값은 `3자리(단축형)` 또는 `6자리`의 16진수 값이어야 합니다. alpha는 투명도를 나타냅니다.
+
 유효한 Hex 코드가 아니라면 `null`을 반환합니다.
 
 <br />
@@ -12,11 +14,11 @@
 ## Interface
 ```ts title="typescript"
 const hexToRgba: (hex: string, alpha?: number) => {
-  readonly r: number;
-  readonly g: number;
-  readonly b: number;
-  readonly a: number;
-  readonly stringifiedValue: `rgba(${number},${number},${number},${number})`;
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+  stringifiedValue: string;
 } | null
 ```
 
