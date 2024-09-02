@@ -8,6 +8,7 @@ export * from './getViewportSize';
 export * from './hexToRgba';
 export * from './identity';
 export * from './noop';
+export * from './once';
 export * from './parseJSON';
 export * from './pickFalsy';
 export * from './wrapInArray';
