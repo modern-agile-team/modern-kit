@@ -1,6 +1,5 @@
-import { repeatCharacters } from '../../string';
+import { getExpandedHex } from './utils';
 
-const FULL_HEX_LENGTH = 6;
 const HEXADECIMAL = 16;
 
 interface HexToRgbaReturnType {
@@ -25,7 +24,7 @@ interface HexToRgbaReturnType {
  * // { r: 255, g: 87, b: 51, a: 0.5, stringifiedValue: 'rgba(255,87,51,0.5)' }
  *
  * @example
- * hexToRgba('#1A2', 0.2);
+ * hexToRgba('#1A2', 0.2); // '#1A2' -> 변환: '#11AA22'
  * // { r: 17, g: 170, b: 34, a: 0.2, stringifiedValue: 'rgba(17,170,34,0.2)' }
  */
 export function hexToRgba(hex: string, alpha = 1): HexToRgbaReturnType | null {
@@ -35,15 +34,11 @@ export function hexToRgba(hex: string, alpha = 1): HexToRgbaReturnType | null {
     return null;
   }
 
-  const replacedHex = hex.replace('#', '');
-  const convertedHex =
-    replacedHex.length === FULL_HEX_LENGTH
-      ? replacedHex
-      : repeatCharacters(replacedHex, 2);
+  const expandedHex = getExpandedHex(hex);
 
-  const r = parseInt(convertedHex.slice(0, 2), HEXADECIMAL);
-  const g = parseInt(convertedHex.slice(2, 4), HEXADECIMAL);
-  const b = parseInt(convertedHex.slice(4, 6), HEXADECIMAL);
+  const [r, g, b] = [0, 2, 4].map((offset) => {
+    return parseInt(expandedHex.slice(offset, offset + 2), HEXADECIMAL);
+  });
 
   return {
     r,
