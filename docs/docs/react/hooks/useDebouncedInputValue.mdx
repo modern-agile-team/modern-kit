@@ -1,0 +1,80 @@
+import { useCallback, useState } from 'react';
+import { useDebouncedInputValue } from '@modern-kit/react'
+
+# useDebouncedInputValue
+
+`input value`를 관리하고, `디바운싱(debouncing)`을 적용하는 커스텀 React 훅입니다
+
+`현재 입력 값`과 `디바운싱된 값`을 제공하며, 값을 업데이트하고 리셋할 수 있는 함수도 함께 제공합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebouncedInputValue/index.ts)
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof debounce>;
+
+function useDebouncedInputValue(
+  wait?: DebounceParameters[1],
+  options?: DebounceParameters[2]
+): {
+  value: string;
+  debouncedValue: string;
+  onChange: (value: string) => void;
+  onReset: () => void;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDebouncedInputValue } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(500);
+
+  const handleChange = (e) => {
+    onChange(e.target.value)
+  }
+
+  return (
+    <div>
+      <p>현재 입력 값: {value}</p>
+      <p>디바운싱 입력 값: {debouncedValue}</p>
+      <div>
+        <input type='text' onChange={handleChange} value={value} />
+      </div>
+      <div>
+        <button onClick={onReset}>Reset 버튼</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(500);
+
+  const handleChange = (e) => {
+    onChange(e.target.value)
+  }
+
+  return (
+    <div>
+      <p>현재 입력 값: {value}</p>
+      <p>디바운싱 입력 값: {debouncedValue}</p>
+      <div>
+        <input type='text' onChange={handleChange} value={value} />
+      </div>
+      <div>
+        <button onClick={onReset}>Reset 버튼</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />
