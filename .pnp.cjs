@@ -6402,7 +6402,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["nprogress", "npm:0.2.0"],\
           ["postcss", "npm:8.4.31"],\
-          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.3.1"],\
+          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.4.0"],\
           ["prismjs", "npm:1.29.0"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
@@ -6444,7 +6444,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-router-config", "npm:5.0.10"],\
           ["clsx", "npm:2.0.0"],\
           ["parse-numeric-range", "npm:1.3.0"],\
-          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.3.1"],\
+          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.4.0"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["tslib", "npm:2.7.0"],\
@@ -7537,7 +7537,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["clsx", "npm:2.1.1"],\
           ["gh-pages", "npm:6.1.1"],\
-          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.3.1"],\
+          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.4.0"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
@@ -24463,17 +24463,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prism-react-renderer", [\
-      ["npm:2.3.1", {\
-        "packageLocation": "./.yarn/cache/prism-react-renderer-npm-2.3.1-79c80bb723-566932127c.zip/node_modules/prism-react-renderer/",\
+      ["npm:2.4.0", {\
+        "packageLocation": "./.yarn/cache/prism-react-renderer-npm-2.4.0-3fab7693fe-3d6969b057.zip/node_modules/prism-react-renderer/",\
         "packageDependencies": [\
-          ["prism-react-renderer", "npm:2.3.1"]\
+          ["prism-react-renderer", "npm:2.4.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.3.1", {\
-        "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-8f7d421e9f/0/cache/prism-react-renderer-npm-2.3.1-79c80bb723-566932127c.zip/node_modules/prism-react-renderer/",\
+      ["virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.4.0", {\
+        "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-bdc32580e0/0/cache/prism-react-renderer-npm-2.4.0-3fab7693fe-3d6969b057.zip/node_modules/prism-react-renderer/",\
         "packageDependencies": [\
-          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.3.1"],\
+          ["prism-react-renderer", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:2.4.0"],\
           ["@types/prismjs", "npm:1.26.3"],\
           ["@types/react", "npm:18.3.1"],\
           ["clsx", "npm:2.0.0"],\
