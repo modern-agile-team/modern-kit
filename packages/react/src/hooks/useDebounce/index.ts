@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { debounce } from 'lodash-es';
-import { useUnmount } from '../useUnMount';
+import { useUnmount } from '../useUnmount';
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 import { usePreservedState } from '../../hooks/usePreservedState';
 
