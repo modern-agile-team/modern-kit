@@ -67,21 +67,21 @@ type UseSessionStorageProps<T> =
 ```
 ```ts
 // 함수 오버로딩
-export function useSessionStorage<T>({
+function useSessionStorage<T>({
   key,
   initialValue,
 }: UseSessionStorageWithInitialValueProps<T>): {
-  readonly state: T;
-  readonly setState: (value: T | ((state: T) => T)) => void;
-  readonly removeState: () => void;
+  state: T;
+  setState: (value: T | ((state: T) => T)) => void;
+  removeState: () => void;
 };
 
-export function useSessionStorage<T = unknown>({
+function useSessionStorage<T = unknown>({
   key,
 }: UseSessionStorageWithoutInitialValueProps): {
-  readonly state: T | null;
-  readonly setState: (value: T | ((state: T | null) => T)) => void;
-  readonly removeState: () => void;
+  state: T | null;
+  setState: (value: T | ((state: T | null) => T)) => void;
+  removeState: () => void;
 };
 ```
 

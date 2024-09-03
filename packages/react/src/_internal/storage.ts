@@ -1,6 +1,6 @@
 const CUSTOM_EVENT_KEYS = {
-  localStorage: 'local-storage',
-  sessionStorage: 'session-storage',
+  localStorage: 'modern-kit-local-storage',
+  sessionStorage: 'modern-kit-session-storage',
 } as const;
 
 const customEventHandler = {
