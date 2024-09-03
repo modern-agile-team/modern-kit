@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.16.0
+
+### Minor Changes
+
+- [#447](https://github.com/modern-agile-team/modern-kit/pull/447) [`1368833`](https://github.com/modern-agile-team/modern-kit/commit/136883321f05746563e6467037a7149e1a17cd2d) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useTimeout, useInterval 개선 - @ssi02014
+
 ## 1.15.0
 
 ### Minor Changes
