@@ -1,7 +1,12 @@
 import { isFunction, parseJSON } from '@modern-kit/utils';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
-import { getCustomEventHandler } from '../../utils/customEventHandler';
 import { usePreservedState } from '../usePreservedState';
+import {
+  getServerSnapshot,
+  getSnapshot,
+  sessionStorageEventHandler,
+  subscribe,
+} from './useSessionStorage.utils';
 
 interface UseSessionStorageWithoutInitialValueProps {
   key: string;
@@ -16,39 +21,21 @@ type UseSessionStorageProps<T> =
   | UseSessionStorageWithoutInitialValueProps
   | UseSessionStorageWithInitialValueProps<T>;
 
-const sessionStorageEventHandler = getCustomEventHandler('sessionStorage');
-
-const subscribe = (callback: () => void) => {
-  sessionStorageEventHandler.subscribe(callback);
-  return () => {
-    sessionStorageEventHandler.unsubscribe(callback);
-  };
-};
-
-const getSnapshot = (key: string) => {
-  return window.sessionStorage.getItem(key);
-};
-
-// SSR 환경에서 initialValue를 반환
-const getServerSnapshot = <T>(initialValue: T | null) => {
-  return JSON.stringify(initialValue);
-};
-
 export function useSessionStorage<T>({
   key,
   initialValue,
 }: UseSessionStorageWithInitialValueProps<T>): {
-  readonly state: T;
-  readonly setState: (value: T | ((state: T) => T)) => void;
-  readonly removeState: () => void;
+  state: T;
+  setState: (value: T | ((state: T) => T)) => void;
+  removeState: () => void;
 };
 
 export function useSessionStorage<T = unknown>({
   key,
 }: UseSessionStorageWithoutInitialValueProps): {
-  readonly state: T | null;
-  readonly setState: (value: T | ((state: T | null) => T)) => void;
-  readonly removeState: () => void;
+  state: T | null;
+  setState: (value: T | ((state: T | null) => T)) => void;
+  removeState: () => void;
 };
 
 export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
@@ -102,5 +89,5 @@ export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
     }
   }, [key]);
 
-  return { state, setState, removeState } as const;
+  return { state, setState, removeState };
 }

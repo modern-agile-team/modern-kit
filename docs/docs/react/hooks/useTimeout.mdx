@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 option 값으로 숫자를 받을 수 있고, 객체로 받을 수 있습니다. 객체로 받을 경우 `delay`와 `enabled` 속성을 넘겨줄 수 있습니다.
 
-타임아웃을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 반환합니다.
+Timeout을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 반환합니다.
 
 <br />
 
@@ -16,25 +16,29 @@ option 값으로 숫자를 받을 수 있고, 객체로 받을 수 있습니다.
 
 ## Interface
 ```ts title="typescript"
-type SetTimeoutParameters = Parameters<typeof setTimeout>;
+interface TimeoutOptions {
+  delay: number;
+  enabled?: boolean;
+}
 ```
 ```ts title="typescript"
-interface UseTimeoutReturnType {
-  set: () => void;
-  reset: () => void;
-  clear: () => void;
-}
-
-// 함수 오버로딩
 function useTimeout(
-  callback: SetTimeoutParameters[0],
+  callback: () => void,
   options: number
-): UseTimeoutReturnType;
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
 
 function useTimeout(
-  callback: SetTimeoutParameters[0],
+  callback: () => void,
   options: TimeoutOptions
-): UseTimeoutReturnType;
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
 ```
 
 ## Usage
@@ -47,11 +51,12 @@ const Example = () => {
   const { set, reset, clear } = useTimeout(() => {
     setNumber(number + 1);
   }, 1000);
+
   /*
    * useTimeout(() => {
    *   setNumber(number + 1);
    * }, { delay: 1000, enabled: true });
-  */
+   */
 
   return (
     <div>

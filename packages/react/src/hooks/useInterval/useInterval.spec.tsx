@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useInterval } from '.';
 
 const delayTime = 300;
@@ -15,13 +15,10 @@ afterEach(() => {
 describe('useInterval', () => {
   const mockFn = vi.fn();
 
-  it('should call the callback function at the correct interval', () => {
+  it('주어진 간격만큼 콜백 함수를 호출해야 합니다.', () => {
     renderHook(() => useInterval(mockFn, delayTime));
 
-    expect(mockFn).not.toBeCalled();
-
-    vi.advanceTimersByTime(delayTime / 2);
-    expect(mockFn).not.toBeCalled();
+    expect(mockFn).toBeCalledTimes(0);
 
     vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(1);
@@ -30,59 +27,75 @@ describe('useInterval', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should not run the interval when enabled is false and should run when enabled is true', () => {
+  it('enabled가 true인 경우에 interval이 활성화되야 합니다.', () => {
     const { rerender } = renderHook(
       ({ enabled }) => useInterval(mockFn, { delay: delayTime, enabled }),
       {
-        initialProps: { enabled: true },
+        initialProps: { enabled: false },
       }
     );
 
-    expect(mockFn).not.toBeCalled();
-
-    vi.advanceTimersByTime(delayTime / 2);
-
-    rerender({ enabled: false });
-
     vi.advanceTimersByTime(delayTime);
-    expect(mockFn).not.toBeCalled();
+    expect(mockFn).toBeCalledTimes(0);
 
-    rerender({ enabled: true });
+    rerender({ enabled: true }); // enabled true 설정
 
     vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(1);
-  });
-
-  it('should not run the interval if delay is undefined', () => {
-    renderHook(() => useInterval(mockFn, { delay: undefined }));
-
-    expect(mockFn).not.toBeCalled();
 
     vi.advanceTimersByTime(delayTime);
-    expect(mockFn).not.toBeCalled();
+    expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should correctly start and stop the interval, calling the callback at the correct times', async () => {
+  it('set 함수를 호출하면 명시적으로 interval이 설정되야 합니다.', async () => {
     const { result } = renderHook(() =>
       useInterval(mockFn, { delay: delayTime, enabled: false })
     );
 
-    const startInterval = result.current.start;
-    const stopInterval = result.current.stop;
-
     vi.advanceTimersByTime(delayTime);
-    expect(mockFn).not.toBeCalled();
+    expect(mockFn).toBeCalledTimes(0);
 
-    act(() => startInterval());
+    result.current.set(); // interval 설정
 
     vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(1);
-    expect(result.current.isActing).toBeTruthy();
 
-    act(() => stopInterval());
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(2);
+  });
+
+  it('clear 함수를 호출하면 명시적으로 interval이 초기화되야 합니다.', async () => {
+    const { result } = renderHook(() =>
+      useInterval(mockFn, { delay: delayTime, enabled: false })
+    );
+
+    result.current.set();
+
+    vi.advanceTimersByTime(delayTime / 2);
+    expect(mockFn).toBeCalledTimes(0);
+
+    result.current.clear(); // interval 초기화
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(0);
+  });
+
+  it('reset 함수를 호출하면 명시적으로 interval이 재설정되야 합니다.', async () => {
+    const { result } = renderHook(() =>
+      useInterval(mockFn, { delay: delayTime, enabled: false })
+    );
+
+    result.current.set();
+
+    vi.advanceTimersByTime(delayTime / 2);
+    expect(mockFn).toBeCalledTimes(0);
+
+    result.current.reset(); // interval 재설정
 
     vi.advanceTimersByTime(delayTime);
     expect(mockFn).toBeCalledTimes(1);
-    expect(result.current.isActing).toBeFalsy();
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalledTimes(2);
   });
 });

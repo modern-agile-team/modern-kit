@@ -1,7 +1,12 @@
 import { isFunction, parseJSON } from '@modern-kit/utils';
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
-import { getCustomEventHandler } from '../../utils/customEventHandler';
 import { usePreservedState } from '../usePreservedState';
+import {
+  getServerSnapshot,
+  getSnapshot,
+  localStorageEventHandler,
+  subscribe,
+} from './useLocalStorage.utils';
 
 interface UseLocalStorageWithoutInitialValueProps {
   key: string;
@@ -16,40 +21,22 @@ type UseLocalStorageProps<T> =
   | UseLocalStorageWithoutInitialValueProps
   | UseLocalStorageWithInitialValueProps<T>;
 
-const localStorageEventHandler = getCustomEventHandler('localStorage');
-
-const subscribe = (callback: () => void) => {
-  localStorageEventHandler.subscribe(callback);
-  return () => {
-    localStorageEventHandler.unsubscribe(callback);
-  };
-};
-
-const getSnapshot = (key: string) => {
-  return window.localStorage.getItem(key);
-};
-
-// SSR 환경에서 initialValue를 반환
-const getServerSnapshot = <T>(initialValue: T | null) => {
-  return JSON.stringify(initialValue);
-};
-
 // 함수 오버로딩
 export function useLocalStorage<T>({
   key,
   initialValue,
 }: UseLocalStorageWithInitialValueProps<T>): {
-  readonly state: T;
-  readonly setState: (value: T | ((state: T) => T)) => void;
-  readonly removeState: () => void;
+  state: T;
+  setState: (value: T | ((state: T) => T)) => void;
+  removeState: () => void;
 };
 
 export function useLocalStorage<T = unknown>({
   key,
 }: UseLocalStorageWithoutInitialValueProps): {
-  readonly state: T | null;
-  readonly setState: (value: T | ((state: T | null) => T)) => void;
-  readonly removeState: () => void;
+  state: T | null;
+  setState: (value: T | ((state: T | null) => T)) => void;
+  removeState: () => void;
 };
 
 export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
@@ -103,5 +90,5 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
     }
   }, [key]);
 
-  return { state, setState, removeState } as const;
+  return { state, setState, removeState };
 }
