@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.16.0
+
+### Minor Changes
+
+- [#442](https://github.com/modern-agile-team/modern-kit/pull/442) [`0c5069b`](https://github.com/modern-agile-team/modern-kit/commit/0c5069b4a3e47a27b032221ec965c8172a3e2bb6) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): once 함수 추가 - @ssi02014
+
 ## 1.15.0
 
 ### Minor Changes
