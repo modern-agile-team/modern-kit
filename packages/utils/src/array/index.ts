@@ -15,5 +15,6 @@ export * from './intersectionWithDuplicates';
 export * from './mapRight';
 export * from './partition';
 export * from './shuffle';
+export * from './swap';
 export * from './union';
 export * from './uniq';

@@ -1,6 +1,4 @@
-const swap = <T>(arr: T[], i: number, j: number) => {
-  [arr[i], arr[j]] = [arr[j], arr[i]];
-};
+import { swap } from '../../array/swap';
 
 /**
  * @description 배열의 요소들의 순서를 무작위로 섞습니다.
