@@ -8,7 +8,7 @@
 ## Interface
 ```ts title="typescript"
 function swap<T>(
-  arr: readonly T[],
+  arr: T[] | readonly T[],
   i: number,
   j: number,
   options?: { immutable?: boolean }
