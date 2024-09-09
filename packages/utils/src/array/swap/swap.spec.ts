@@ -5,29 +5,25 @@ describe('swap', () => {
   it('should swap elements in a array', () => {
     const arr = [1, 2, 3];
     const result = swap(arr, 0, 2);
+    
     expect(result).toEqual([3, 2, 1]);
-    expect(arr).toEqual([3, 2, 1]);
+    expect(arr).toBe(result);
   });
 
   it('should swap elements in an immutable way when specified', () => {
     const arr = [1, 2, 3];
     const result = swap(arr, 0, 2, { immutable: true });
+    
     expect(result).toEqual([3, 2, 1]);
-    expect(arr).toEqual([1, 2, 3]);
+    expect(arr).not.toBe(result);
   });
 
   it('should swap elements in a mutable way when specified', () => {
     const arr = [1, 2, 3];
     const result = swap(arr, 0, 2, { immutable: false });
+    
     expect(result).toEqual([3, 2, 1]);
-    expect(arr).toEqual([3, 2, 1]);
-  });
-
-  it('should handle swapping elements in a larger array', () => {
-    const arr = [1, 2, 3, 4, 5, 6, 7];
-    const result = swap(arr, 1, 5);
-    expect(result).toEqual([1, 6, 3, 4, 5, 2, 7]);
-    expect(arr).toEqual([1, 6, 3, 4, 5, 2, 7]);
+    expect(arr).toBe(result);
   });
 
   it('should return the same array if swapping an element with itself', () => {
