@@ -4,9 +4,10 @@
  * 기본적으로 원본 배열을 직접 수정하지만, immutable 옵션을 통해
  * 새로운 배열을 반환하도록 설정할 수 있습니다.
  *
- * @param arr - 요소를 교환할 대상 배열입니다.
- * @param i - 교환할 첫 번째 요소의 인덱스입니다.
- * @param j - 교환할 두 번째 요소의 인덱스입니다.
+ * @template T - 배열 요소의 유형입니다.
+ * @param {T[] | readonly T[]} arr - 요소를 교환할 대상 배열입니다.
+ * @param {number} i - 교환할 첫 번째 요소의 인덱스입니다.
+ * @param {number} j - 교환할 두 번째 요소의 인덱스입니다.
  * @param options - 추가 옵션을 포함하는 객체입니다.
  * @param {boolean} [options.immutable=false] - true일 경우, 원본 배열을 수정하지 않고 새 배열을 반환합니다.
  * @returns {T[]} 요소가 교환된 배열입니다. immutable이 false면 원본 배열, true면 새로운 배열입니다.
@@ -23,13 +24,14 @@
  * console.log(newArr); // [3, 2, 1] (새로운 배열 반환)
  */
 export function swap<T>(
-  arr: readonly T[],
+  arr: T[] | readonly T[],
   i: number,
   j: number,
   options?: { immutable?: boolean }
 ): T[] {
   const immutable = options?.immutable ?? false;
   const result = immutable ? [...arr] : (arr as T[]);
+  
   [result[i], result[j]] = [result[j], result[i]];
   return result;
 }
