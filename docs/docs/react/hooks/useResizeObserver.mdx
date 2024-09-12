@@ -26,7 +26,7 @@ import { useResizeObserver } from '@modern-kit/react';
 type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
 
 const useResizeObserver: <T extends HTMLElement>(
-  action: (entry: ResizeObserverEntry) => void
+  action?: (entry: ResizeObserverEntry) => void
 ) => {
   ref: React.RefObject<T>;
   contentRect: ContentRect;
@@ -84,3 +84,4 @@ export const ResizeObserver = () => {
 
 ## Note
 - [ResizeObserver API](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+
