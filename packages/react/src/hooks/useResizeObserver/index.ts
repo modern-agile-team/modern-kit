@@ -32,10 +32,6 @@ export function useResizeObserver<T extends HTMLElement>(
   useEffect(() => {
     const targetElement = ref.current;
 
-    if (typeof ResizeObserver === 'undefined') {
-      return;
-    }
-
     if (!targetElement) {
       return;
     }
