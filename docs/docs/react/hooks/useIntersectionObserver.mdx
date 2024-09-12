@@ -18,9 +18,9 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 ## Interface
 ```ts title="typescript"
 interface IntersectionObserverInit {
-    root?: Element | Document | null;
-    rootMargin?: string;
-    threshold?: number | number[];
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
 }
 
 interface UseIntersectionObserverProps extends IntersectionObserverInit {
@@ -39,8 +39,8 @@ const useIntersectionObserver: <T extends HTMLElement>({
   root, // default: null
   threshold, // default: 0
   rootMargin, // default: '0px 0px 0px 0px'
-}: UseIntersectionObserverProps) => {
-  ref: (node: T) => void;
+}: UseIntersectionObserverProps) => { 
+  ref: React.RefCallback<T> 
 };
 ```
 

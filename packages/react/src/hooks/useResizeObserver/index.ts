@@ -1,10 +1,11 @@
+import { noop } from '@modern-kit/utils';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
 
 export function useResizeObserver<T extends HTMLElement>(
-  action: (entry: ResizeObserverEntry) => void
+  action?: (entry: ResizeObserverEntry) => void
 ) {
   const [contentRect, setContentRect] = useState<ContentRect>({
     bottom: 0,
@@ -17,7 +18,7 @@ export function useResizeObserver<T extends HTMLElement>(
     y: 0,
   });
   const ref = useRef<T>(null);
-  const callbackAction = usePreservedCallback(action);
+  const callbackAction = usePreservedCallback(action ?? noop);
 
   const observerCallback = useCallback(
     ([entry]: ResizeObserverEntry[]) => {
@@ -31,10 +32,6 @@ export function useResizeObserver<T extends HTMLElement>(
 
   useEffect(() => {
     const targetElement = ref.current;
-
-    if (typeof ResizeObserver === 'undefined') {
-      return;
-    }
 
     if (!targetElement) {
       return;
