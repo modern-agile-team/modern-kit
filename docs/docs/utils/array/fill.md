@@ -4,6 +4,8 @@
 
 시작점과 끝점에 대한 인자를 받으면 해당하는 범위의 인덱스만 지정한 값으로 변경합니다.
 
+native fill 함수와 다르게 원본 배열을 수정하지 않고 새로운 배열을 반환합니다.
+
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/fill/index.ts)
 
