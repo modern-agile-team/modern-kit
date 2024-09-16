@@ -19,7 +19,7 @@ native fill 함수와 다르게 원본 배열을 수정하지 않고 새로운 �
 |js built-in/fill|7,067,972.90|0.0001|-|
 |lodash/fill|2,568,241.58|0.0004|`slowest`|
 
-- **modern-kit/flattenDeep**
+- **modern-kit/fill**
   - `1.12x` faster than js built-in/fill
   - `3.09x` faster than lodash/fill
 
@@ -27,12 +27,12 @@ native fill 함수와 다르게 원본 배열을 수정하지 않고 새로운 �
 ## Interface
 ```ts title="typescript"
 function fill<T, U>(array: T[] | readonly T[], target: U): U[];
-export function fill<T, U>(
+function fill<T, U>(
   array: T[] | readonly T[],
   target: U,
   start: number,
 ): (T | U)[];
-export function fill<T, U>(
+function fill<T, U>(
   array: T[] | readonly T[],
   target: U,
   start: number,
