@@ -3,6 +3,7 @@ export * from './compact';
 export * from './contains';
 export * from './countOccurrencesInArray';
 export * from './difference';
+export * from './drop';
 export * from './excludeElements';
 export * from './fill';
 export * from './flatMap';
