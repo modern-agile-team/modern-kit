@@ -29,4 +29,11 @@ describe('drop', () => {
 
     expect(result).toEqual(arr);
   });
+
+  it('should return origin array if n is negative number', () => {
+    const arr = [1, 2, 3];
+    const result = drop(arr, -1);
+
+    expect(result).toEqual(arr);
+  });
 });

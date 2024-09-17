@@ -6,6 +6,8 @@
 
 배열의 길이보다 제거하고자 하는 index값이 더 큰 경우 빈 배열을 반환합니다.
 
+제거하고자 하는 index가 음수인 경우에는 기존의 배열을 반환합니다.
+
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/drop/index.ts)
 
@@ -24,7 +26,7 @@
 
 ## Interface
 ```ts title="typescript"
-function drop<T>(target: T[], count: number = 1): T[]
+function drop<T>(arr: T[], count: number = 1): T[]
 ```
 
 ## Usage
