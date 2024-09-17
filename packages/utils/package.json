@@ -36,7 +36,7 @@
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.2",
     "@types/lodash-es": "^4",
-    "@vitest/coverage-istanbul": "^1.5.2",
+    "@vitest/coverage-istanbul": "^2.1.1",
     "esbuild": "^0.23.0",
     "jsdom": "^25.0.0",
     "lodash-es": "^4.17.21",
