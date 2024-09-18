@@ -23,8 +23,8 @@
 ## Interface 
 ```ts title="typescript"
 function forEachRight<T>(
-  array: T[] | readonly T[],
-  callback: (currentValue: T, index: number, array: T[] | readonly T[]) => void
+  arr: T[] | readonly T[],
+  callback: (currentValue: T, index: number, arr: T[] | readonly T[]) => void
 ): void;
 ```
 
@@ -35,7 +35,7 @@ import { forEachRight } from '@modern-kit/utils';
 
 const items = ['apple', 'banana', 'cherry'];
 
-forEachRight(items, (item, index, array) => {
+forEachRight(items, (item, index, arr) => {
   console.log(`Index ${index}: ${item}`);
 });
 /*

@@ -19,24 +19,22 @@ Chrome 환경에서 Clipboard API의 `write()`함수는 `text/plain`, `text/html
 
 ## Interface
 ```ts title="typescript"
-interface ClipboardImageCopyProps {
-  src: string;
-  toText?: boolean; // default: false
-}
-const copyClipboardImage: ({
-  src,
-  toText,
-}: ClipboardImageCopyProps) => Promise<string | Blob>;
+function copyClipboardImage(
+  src: string,
+  options?: {
+    toText: boolean;
+  }
+): Promise<Blob | string>;
 ```
 
 ## Usage
 ### Default
 ```ts title="typescript"
 import { copyClipboardImage } from '@modern-kit/utils';
+import img from "./assets/react.png";
 
-const result = await copyClipboardImage({ 
-  src: "복사 할 이미지 src(png, jp(e)g, webp)", 
-}); // result: Blob
+// 복사 할 이미지 src(png, jp(e)g, webp)
+const result = await copyClipboardImage(img); // result: Blob
 ```
 
 <br />
@@ -46,10 +44,7 @@ const result = await copyClipboardImage({
 import { copyClipboardImage } from '@modern-kit/utils';
 import svg from "./assets/react.svg";
 
-const result = await copyClipboardImage({
-  src: svg,
-  toText: true,
-}); // result type: string
+const result = await copyClipboardImage(svg, { toText: true }); // result type: string
 
 /* Clipboard 복사 결과: text()
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">

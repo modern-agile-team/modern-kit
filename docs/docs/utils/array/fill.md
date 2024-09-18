@@ -26,14 +26,14 @@ native fill 함수와 다르게 원본 배열을 수정하지 않고 새로운 �
 
 ## Interface
 ```ts title="typescript"
-function fill<T, U>(array: T[] | readonly T[], target: U): U[];
+function fill<T, U>(arr: T[] | readonly T[], target: U): U[];
 function fill<T, U>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   target: U,
   start: number,
 ): (T | U)[];
 function fill<T, U>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   target: U,
   start: number,
   end: number,

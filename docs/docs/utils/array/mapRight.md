@@ -12,8 +12,8 @@
 
 ```ts title="typescript"
 function mapRight<T, U>(
-  array: T[] | readonly T[],
-  callback: (currentValue: T, index: number, array: T[] | readonly T[]) => U,
+  arr: T[] | readonly T[],
+  callback: (currentValue: T, index: number, arr: T[] | readonly T[]) => U,
 ): U[];
 ```
 

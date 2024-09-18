@@ -17,7 +17,7 @@ type Action = ({ prev, next }: { prev: number; next: number }) => void;
 ```
 ```ts title="typescript"
 const useCycleList: <T>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   initialIndex?: number
 ) => {
   readonly currentItem: T;
