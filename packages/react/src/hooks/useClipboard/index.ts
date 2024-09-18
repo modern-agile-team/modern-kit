@@ -69,7 +69,7 @@ export function useClipboard(): UseClipboardReturnType {
       const result = await copyClipboardText(value);
       setCopiedData(result);
       return true;
-    } catch (err: any) {
+    } catch {
       setCopiedData(null);
       return false;
     }
@@ -83,7 +83,7 @@ export function useClipboard(): UseClipboardReturnType {
         const result = await copyClipboardImage(src, { toText });
         setCopiedData(result);
         return true;
-      } catch (err: any) {
+      } catch {
         setCopiedData(null);
         return false;
       }
@@ -96,7 +96,7 @@ export function useClipboard(): UseClipboardReturnType {
       const result = await readClipboardText();
       setReadData(result);
       return true;
-    } catch (err: any) {
+    } catch {
       setReadData(null);
       return false;
     }
@@ -107,7 +107,7 @@ export function useClipboard(): UseClipboardReturnType {
       const result = await readClipboardContents();
       setReadData(result);
       return true;
-    } catch (err: any) {
+    } catch {
       setReadData(null);
       return false;
     }
