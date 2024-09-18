@@ -13,8 +13,8 @@
 ## Interface
 ```ts title="typescript"
 const excludeElements: <T, U>(
-  array: T[] | readonly T[],
-  excludeArray: T[] | readonly T[],
+  arr: T[] | readonly T[],
+  excludeArr: T[] | readonly T[],
   iteratee?: ((item: T) => U) | undefined
 ) => T[];
 ```

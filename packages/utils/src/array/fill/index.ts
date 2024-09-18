@@ -7,7 +7,7 @@
  *
  * @template T - 배열 요소의 유형입니다.
  * @template U - 배열 요소를 대체할 값의 유형입니다.
- * @param {T[] | readonly T[]} array - 변경할 대상 배열입니다.
+ * @param {T[] | readonly T[]} arr - 변경할 대상 배열입니다.
  * @param {U} target - 대체할 값입니다.
  * @param {number} [start] - 대체를 시작할 인덱스입니다. 기본값은 0입니다.
  * @param {number} [end] - 대체를 종료할 인덱스입니다. 기본값은 배열의 길이입니다.
@@ -26,28 +26,28 @@
  * // [1, 2, 0, 0, 5]
  */
 
-export function fill<T, U>(array: T[] | readonly T[], target: U): U[];
+export function fill<T, U>(arr: T[] | readonly T[], target: U): U[];
 export function fill<T, U>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   target: U,
-  start: number,
+  start: number
 ): (T | U)[];
 export function fill<T, U>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   target: U,
   start: number,
-  end: number,
+  end: number
 ): (T | U)[];
 export function fill<T, U>(
-  array: T[] | readonly T[],
+  arr: T[] | readonly T[],
   target: U,
   start?: number,
-  end?: number,
+  end?: number
 ) {
-  const result = [...array] as (T | U)[];
+  const result = [...arr] as (T | U)[];
 
   const startIndex = start ?? 0;
-  const endIndex = end ?? array.length;
+  const endIndex = end ?? arr.length;
 
   for (let i = startIndex; i < endIndex; i++) {
     result[i] = target;

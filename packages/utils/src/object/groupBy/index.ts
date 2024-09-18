@@ -4,7 +4,7 @@
  *
  * @template T - 배열 항목의 타입을 나타냅니다.
  * @template K - 그룹화 키의 타입을 나타냅니다. `PropertyKey`로 제한되어 있어, 문자열, 숫자, 심볼 등 가능한 모든 키 타입을 사용할 수 있습니다.
- * @param {T[] | readonly T[]} items - 그룹화를 진행할 항목들의 배열입니다.
+ * @param {T[] | readonly T[]} arr - 그룹화를 진행할 항목들의 배열입니다.
  * @param {(item: T) => K} callbackFn - 각 항목에 대해 그룹화 키를 반환하는 함수입니다.
  * @returns {Record<K, T[]>} - 각 키가 콜백 함수 `callbackFn`의 결과이고, 값이 해당 키에 속하는 항목들의 배열인 객체를 반환합니다.
  *
@@ -32,12 +32,12 @@
  */
 
 export function groupBy<T, K extends PropertyKey>(
-  items: T[] | readonly T[],
+  arr: T[] | readonly T[],
   callbackFn: (item: T) => K
 ): Record<K, T[]> {
   const group = {} as Record<K, T[]>;
 
-  for (const item of items) {
+  for (const item of arr) {
     const key = callbackFn(item);
 
     if (!(key in group)) {

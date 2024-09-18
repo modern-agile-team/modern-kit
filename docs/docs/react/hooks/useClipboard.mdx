@@ -4,11 +4,7 @@ import img from '../../../assets/react.png';
 
 # useClipboard
 
-`텍스트`, `이미지`를 클립보드로 복사하는 함수를 제공하는 커스텀 훅입니다. 
-
-복사된 데이터는 `copiedData` 상태에 저장됩니다. `copyText`와 `copyImage`는 `성공 여부(Boolean)`를 반환합니다.
-
-💡 텍스트의 경우 **[clipboardTextCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/file/clipboardTextCopy)** 함수가 호출되며, 이미지의 경우 **[clipboardImageCopy](https://modern-agile-team.github.io/modern-kit/docs/utils/file/clipboardImageCopy)** 함수가 호출됩니다.
+`클립보드`와 상호작용하는 함수들을 포함한 객체를 반환합니다.
 
 <br />
 
@@ -17,21 +13,13 @@ import img from '../../../assets/react.png';
 
 ## Interface
 ```ts title="typescript"
-type CopiedData = string | Blob | null;
-
-// Parameters<typeof clipboardImageCopy>[0]
-interface ClipboardImageCopyProps {
-  src: string;
-  toText?: boolean;
-} 
-
-const useClipboard: () => {
-  copiedData: CopiedData;
-  copyText: (value: string) => Promise<boolean>;
-  copyImage: ({
-    src,
-    toText, // default: false
-  }: Parameters<typeof clipboardImageCopy>[0]) => Promise<boolean>;
+function useClipboard(): {
+  copiedData: string | Blob | null;
+  readData: string | ClipboardItems | null;
+  readText: () => Promise<string>;
+  readContents: () => Promise<ClipboardItems>;
+  copyText: (value: string) => Promise<string>;
+  copyImage: (src: string, options?: { toText: boolean }) => Promise<string | Blob>;
 };
 ```
 
@@ -41,22 +29,33 @@ import { useClipboard } from '@modern-kit/react';
 import img from '../../assets/img.png';
 
 const Example = () => {
-  const { copiedData, copyText, copyImage } = useClipboard();
+  const { copiedData, readData, copyText, copyImage, readContents, readText } = useClipboard();
   const [text, setText] = useState('');
 
   const handleCopyText = async () => {
     await copyText(text);
-    alert("클립보드에 복사됐습니다.");
+    alert("클립보드에 복사됐습니다. 브라우저 콘솔을 확인해주세요.");
   };
 
   const handleCopyImage = async () => {
-    await copyImage({ src: img });
-    alert("클립보드에 복사됐습니다.");
+    await copyImage(img);
+    alert("클립보드에 복사됐습니다. 브라우저 콘솔을 확인해주세요.");
+  };
+
+  const handleReadText = async () => {
+    await readText(text);
+    alert("클립보드에 데이터를 가져왔습니다. 브라우저 콘솔을 확인해주세요.");
+  };
+
+  const handleReadContents = async () => {
+    await readContents(img);
+    alert("클립보드에 데이터를 가져왔습니다. 브라우저 콘솔을 확인해주세요.");
   };
 
   useEffect(() => {
-    console.log(copiedData);
-  }, [copiedData]);
+    console.log("copiedData: ", copiedData);
+    console.log("readData: ", readData);
+  }, [copiedData, readData])
 
   return (
     <div>
@@ -72,6 +71,11 @@ const Example = () => {
       <div>
         <img src={img} alt="이미지" width={120} height={120} />
         <button onClick={handleCopyImage}>이미지 클립보드 복사</button>
+      </div>
+      <br />
+      <div>
+        <button onClick={handleReadText}>클립보드 텍스트 읽기</button>
+        <button onClick={handleReadContents}>클립보드 컨텐츠 읽기</button>
       </div>
     </div>
   );
@@ -81,19 +85,34 @@ const Example = () => {
 ## Example
 
 export const Example = () => {
-  const { copiedData, copyText, copyImage } = useClipboard();
+  const { copiedData, readData, copyText, copyImage, readContents, readText } = useClipboard();
   const [text, setText] = useState('');
+
   const handleCopyText = async () => {
     await copyText(text);
-    alert("클립보드에 복사됐습니다.");
+    alert("클립보드에 복사됐습니다. 브라우저 콘솔을 확인해주세요.");
   };
+
   const handleCopyImage = async () => {
-    await copyImage({ src: img });
-    alert("클립보드에 복사됐습니다.");
+    await copyImage(img);
+    alert("클립보드에 복사됐습니다. 브라우저 콘솔을 확인해주세요.");
   };
+
+  const handleReadText = async () => {
+    await readText(text);
+    alert("클립보드에 데이터를 가져왔습니다. 브라우저 콘솔을 확인해주세요.");
+  };
+
+  const handleReadContents = async () => {
+    await readContents(img);
+    alert("클립보드에 데이터를 가져왔습니다. 브라우저 콘솔을 확인해주세요.");
+  };
+
   useEffect(() => {
-    console.log(copiedData);
-  }, [copiedData]);
+    console.log("copiedData: ", copiedData);
+    console.log("readData: ", readData);
+  }, [copiedData, readData])
+
   return (
     <div>
       <div>
@@ -108,6 +127,11 @@ export const Example = () => {
       <div>
         <img src={img} alt="이미지" width={120} height={120} />
         <button onClick={handleCopyImage}>이미지 클립보드 복사</button>
+      </div>
+      <br />
+      <div>
+        <button onClick={handleReadText}>클립보드 텍스트 읽기</button>
+        <button onClick={handleReadContents}>클립보드 컨텐츠 읽기</button>
       </div>
     </div>
   );

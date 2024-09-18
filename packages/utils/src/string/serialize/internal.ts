@@ -12,7 +12,7 @@ export const isValidValue = <T>(
     skipNull = true,
     skipEmptyString = true,
     skipUndefined = true,
-  }: SerializeOptions = {},
+  }: SerializeOptions = {}
 ) =>
   !(skipUndefined && value === undefined) &&
   !(skipNull && value === null) &&
@@ -21,19 +21,19 @@ export const isValidValue = <T>(
 export const serializeKeyValue = <T>(
   key: string,
   value: T,
-  options: SerializeOptions,
+  options: SerializeOptions
 ) => {
   return isValidValue(value, options) ? `${key}=${value}` : '';
 };
 
 const serializeArray = <T>(
   key: string,
-  array: T[] | readonly T[],
-  options: SerializeOptions,
+  arr: T[] | readonly T[],
+  options: SerializeOptions
 ) => {
   let result = '';
 
-  for (const value of array) {
+  for (const value of arr) {
     const serializedValue = serializeKeyValue(key, value, options);
     if (serializedValue) {
       result += result ? `&${serializedValue}` : serializedValue;
@@ -46,7 +46,7 @@ const serializeArray = <T>(
 export const serializeByType = <T>(
   key: string,
   value: T,
-  options: SerializeOptions,
+  options: SerializeOptions
 ) => {
   if (isArray(value)) {
     return serializeArray(key, value, options);

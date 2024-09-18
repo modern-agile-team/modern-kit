@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useStep } from '../useStep';
 
-export function useCycleList<T>(array: T[] | readonly T[], initialIndex = 0) {
+export function useCycleList<T>(arr: T[] | readonly T[], initialIndex = 0) {
   const { currentStep, goToNextStep, goToPrevStep, setStep } = useStep({
-    maxStep: array.length - 1,
+    maxStep: arr.length - 1,
     initialStep: initialIndex,
     infinite: true,
   });
@@ -19,7 +19,7 @@ export function useCycleList<T>(array: T[] | readonly T[], initialIndex = 0) {
   );
 
   return {
-    currentItem: array[currentStep],
+    currentItem: arr[currentStep],
     nextIndex: goToNextStep,
     prevIndex: goToPrevStep,
     setIndex,
