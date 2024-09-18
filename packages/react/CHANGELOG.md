@@ -1,5 +1,15 @@
 # @modern-kit/react
 
+## 1.17.0
+
+### Minor Changes
+
+- [#466](https://github.com/modern-agile-team/modern-kit/pull/466) [`c6c2a5f`](https://github.com/modern-agile-team/modern-kit/commit/c6c2a5f116d4594982b60f40323cd8da4b6cb45a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: clipboard read 관련 유틸 함수 추가 및 useClipboard 기능 추가 - @ssi02014
+
+### Patch Changes
+
+- [#458](https://github.com/modern-agile-team/modern-kit/pull/458) [`e2f0dab`](https://github.com/modern-agile-team/modern-kit/commit/e2f0dab7ea5aa17cde5241cbf0b0072774749fd3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useIntersectionObserver 반환 타입 수정 - @ssi02014
+
 ## 1.16.0
 
 ### Minor Changes

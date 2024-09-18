@@ -1,5 +1,17 @@
 # @modern-kit/utils
 
+## 1.17.0
+
+### Minor Changes
+
+- [#466](https://github.com/modern-agile-team/modern-kit/pull/466) [`c6c2a5f`](https://github.com/modern-agile-team/modern-kit/commit/c6c2a5f116d4594982b60f40323cd8da4b6cb45a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: clipboard read 관련 유틸 함수 추가 및 useClipboard 기능 추가 - @ssi02014
+
+- [#451](https://github.com/modern-agile-team/modern-kit/pull/451) [`db46ea3`](https://github.com/modern-agile-team/modern-kit/commit/db46ea3774f24d0946317a66d36d1db3e3a1c300) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils): swap 함수 추가 - @Gaic4o
+
+- [#461](https://github.com/modern-agile-team/modern-kit/pull/461) [`9eda2e6`](https://github.com/modern-agile-team/modern-kit/commit/9eda2e69d12f7e76ec2576e2b6342e4295fa6a15) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat: drop 유틸함수 추가 - @Sangminnn
+
+- [#459](https://github.com/modern-agile-team/modern-kit/pull/459) [`71b2d07`](https://github.com/modern-agile-team/modern-kit/commit/71b2d07704542e4b283734e198bbfe52aaa851c2) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat: fill 함수 작업 완료 - @Sangminnn
+
 ## 1.16.0
 
 ### Minor Changes
