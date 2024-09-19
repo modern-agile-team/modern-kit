@@ -72,7 +72,7 @@ function useSessionStorage<T>({
   initialValue,
 }: UseSessionStorageWithInitialValueProps<T>): {
   state: T;
-  setState: (value: T | ((state: T) => T)) => void;
+  setState: Dispatch<SetStateAction<T>>;
   removeState: () => void;
 };
 
@@ -80,7 +80,7 @@ function useSessionStorage<T = unknown>({
   key,
 }: UseSessionStorageWithoutInitialValueProps): {
   state: T | null;
-  setState: (value: T | ((state: T | null) => T)) => void;
+  setState: Dispatch<SetStateAction<T | null>>;
   removeState: () => void;
 };
 ```

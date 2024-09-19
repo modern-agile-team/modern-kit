@@ -2,11 +2,35 @@ import { useEffect, useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { isMobile } from '@modern-kit/utils';
 
+/**
+ * @description 특정 요소 외부에서 마우스 또는 터치 이벤트가 발생할 때 호출되는 콜백을 등록하는 커스텀 훅입니다.
+ *
+ * `useOnClickOutside` 훅은 지정된 요소(ref로 지정된 요소) 외부에서 사용자가 마우스를 클릭하거나
+ * 터치 이벤트가 발생할 때마다 제공된 `callback` 함수를 호출합니다. 모바일 환경에서는 `touchstart` 이벤트를,
+ * 데스크탑 환경에서는 `mousedown` 이벤트를 감지합니다.
+ *
+ * @template T - HTML 요소의 타입. 기본적으로 `HTMLElement`를 상속합니다.
+ * @param {(targetElement: T) => void} callback - 요소 외부에서 포인터 다운 이벤트가 발생할 때 호출되는 콜백 함수입니다.
+ * 해당 요소의 레퍼런스를 매개변수로 받습니다.
+ *
+ * @returns {{ ref: React.RefObject<T> }} - 외부 클릭 감지를 원하는 DOM 요소에 연결할 ref 객체를 반환합니다.
+ *
+ * @example
+ * ```tsx
+ * const targetRef = useOnClickOutside<HTMLDivElement>((targetElement) => {
+ *   console.log('외부 클릭 감지:', targetElement);
+ * });
+ *
+ * <div className='outside-box'>
+ *   <div ref={targetRef} className='inner-box' />
+ * </div>
+ * ```
+ */
 export function useOnClickOutside<T extends HTMLElement>(
-  action: (targetElement: T) => void
-) {
+  callback: (targetElement: T) => void
+): { ref: React.RefObject<T> } {
   const ref = useRef<T>(null);
-  const callbackAction = usePreservedCallback(action);
+  const callbackAction = usePreservedCallback(callback);
 
   useEffect(() => {
     const eventType = isMobile() ? 'touchstart' : 'mousedown';

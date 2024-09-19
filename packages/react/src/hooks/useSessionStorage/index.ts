@@ -1,5 +1,11 @@
 import { isFunction, parseJSON } from '@modern-kit/utils';
-import { useCallback, useMemo, useSyncExternalStore } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useSyncExternalStore,
+} from 'react';
 import { usePreservedState } from '../usePreservedState';
 import {
   getServerSnapshot,
@@ -26,7 +32,7 @@ export function useSessionStorage<T>({
   initialValue,
 }: UseSessionStorageWithInitialValueProps<T>): {
   state: T;
-  setState: (value: T | ((state: T) => T)) => void;
+  setState: Dispatch<SetStateAction<T>>;
   removeState: () => void;
 };
 
@@ -34,7 +40,7 @@ export function useSessionStorage<T = unknown>({
   key,
 }: UseSessionStorageWithoutInitialValueProps): {
   state: T | null;
-  setState: (value: T | ((state: T | null) => T)) => void;
+  setState: Dispatch<SetStateAction<T | null>>;
   removeState: () => void;
 };
 
@@ -59,7 +65,7 @@ export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
   }, [externalStoreState, initialValueToUse]);
 
   const setState = useCallback(
-    (value: T | ((state: T | null) => T)) => {
+    (value: Dispatch<SetStateAction<T | null>>) => {
       try {
         const prevStateString = getSnapshot(key);
         const prevState = prevStateString
