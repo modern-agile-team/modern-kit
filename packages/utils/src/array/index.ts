@@ -18,5 +18,6 @@ export * from './mapRight';
 export * from './partition';
 export * from './shuffle';
 export * from './swap';
+export * from './take';
 export * from './union';
 export * from './uniq';
