@@ -33,6 +33,7 @@ export * from './useScrollTo';
 export * from './useSessionStorage';
 export * from './useStep';
 export * from './useStepState';
+export * from './useThrottle';
 export * from './useTimeout';
 export * from './useToggle';
 export * from './useUnmount';

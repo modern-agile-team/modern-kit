@@ -5,8 +5,9 @@ import { useToggle } from '.';
 describe('useToggle', () => {
   it('should default to false if no arguments are passed.', async () => {
     const { result } = renderHook(() => useToggle());
+    const [boolean] = result.current;
 
-    expect(result.current[0]).toBeFalsy();
+    expect(boolean).toBeFalsy();
   });
 
   it('should toggle the boolean value from true to false or from false to true when executed.', async () => {
