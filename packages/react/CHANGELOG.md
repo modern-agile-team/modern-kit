@@ -1,5 +1,17 @@
 # @modern-kit/react
 
+## 1.18.0
+
+### Minor Changes
+
+- [#474](https://github.com/modern-agile-team/modern-kit/pull/474) [`894bf95`](https://github.com/modern-agile-team/modern-kit/commit/894bf95b5b9d74fb9d2c00a7df87134c0b5eb134) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useThrottle 훅 추가 - @ssi02014
+
+- [#473](https://github.com/modern-agile-team/modern-kit/pull/473) [`81f69c2`](https://github.com/modern-agile-team/modern-kit/commit/81f69c2b0677381666dcd9745305044fb84aa82e) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useDebouncedState 신규 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [#469](https://github.com/modern-agile-team/modern-kit/pull/469) [`e150f81`](https://github.com/modern-agile-team/modern-kit/commit/e150f81fd23ebe98bee70f78559f0de7c08f72b1) Thanks [@ssi02014](https://github.com/ssi02014)! - refac(react): storage setState 타입 변경 - @ssi02014
+
 ## 1.17.0
 
 ### Minor Changes
