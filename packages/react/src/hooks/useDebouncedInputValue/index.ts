@@ -1,9 +1,5 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import {
-  DebounceParameters,
-  useDebounce,
-  usePreservedCallback,
-} from '../../hooks';
+import { DebounceParameters, useDebounce } from '../../hooks';
 
 interface UseDebouncedInputValueReturnType {
   value: string;
@@ -38,13 +34,7 @@ export function useDebouncedInputValue(
   const [value, setValue] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
 
-  const debounceCallback = useCallback((value: string) => {
-    setDebouncedValue(value);
-  }, []);
-
-  const debouncedChangeValue = usePreservedCallback(
-    useDebounce(debounceCallback, wait, options)
-  );
+  const debouncedChangeValue = useDebounce(setDebouncedValue, wait, options);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +47,8 @@ export function useDebouncedInputValue(
 
   const onReset = useCallback(() => {
     setValue('');
-    setDebouncedValue('');
-  }, []);
+    debouncedChangeValue('');
+  }, [debouncedChangeValue]);
 
   return { value, debouncedValue, onChange, onReset };
 }
