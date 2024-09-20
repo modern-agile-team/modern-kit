@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.18.0
+
+### Minor Changes
+
+- [#471](https://github.com/modern-agile-team/modern-kit/pull/471) [`d172d55`](https://github.com/modern-agile-team/modern-kit/commit/d172d5510968238bc0a7750c40e7805399b9b8f2) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): take 유틸함수 작업 완료 - @Sangminnn
+
 ## 1.17.0
 
 ### Minor Changes
