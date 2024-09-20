@@ -20,20 +20,23 @@ interface UseStepProps {
   infinite?: boolean; // default: false
 }
 
-type Action = ({ prev, next }: { prev: number; next: number }) => void;
+type StepAction = ({ prev, next }: {
+  prev: number;
+  next: number;
+}) => void;
 ```
 ```ts title="typescript"
 const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
-  readonly currentStep: number; // 현재 Step
-  readonly hasNextStep: boolean; // 다음 Step 이동 가능 여부
-  readonly hasPrevStep: boolean; // 이전 Step 이동 가능 여부
-  readonly setStep: (
-    step: number | ((step: number) => number),
-    action?: Action
+  currentStep: number; // 현재 Step
+  hasNextStep: boolean; // 다음 Step 이동 가능 여부
+  hasPrevStep: boolean; // 이전 Step 이동 가능 여부
+  setStep: (
+    step: SetStateAction<number>,
+    action?: StepAction
   ) => void; // 특정 Step 이동 함수
-  readonly goToNextStep: (action?: Action) => void; // 다음 Step 이동 함수
-  readonly goToPrevStep: (action?: Action) => void; // 이전 Step 이동 함수
-  readonly resetStep: (action?: Action) => void; // initialValue 이동 함수
+  goToNextStep: (action?: StepAction) => void; // 다음 Step 이동 함수
+  goToPrevStep: (action?: StepAction) => void; // 이전 Step 이동 함수
+  resetStep: (action?: StepAction) => void; // initialValue 이동 함수
 };
 ```
 

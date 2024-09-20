@@ -1,0 +1,62 @@
+import { useCallback, useState } from 'react';
+import { useDebouncedState } from '@modern-kit/react'
+
+# useDebouncedState
+
+`useState`의 디바운스 버전의 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebouncedState/index.ts)
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof debounce>;
+type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
+  typeof debounce<T>
+>;
+```
+```ts title="typescript"
+function useDebouncedState<T>(
+  initialState: T,
+  wait: DebounceParameters[1],
+  options?: DebounceParameters[2]
+): [T, DebounceReturnType<Dispatch<React.SetStateAction<T>>>];
+```
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDebouncedState } from '@modern-kit/react';
+
+const Example = () => {
+  const [debouncedState, setDebouncedState] = useDebouncedState<string>("", 500);
+
+  return (
+    <div>
+      <p>디바운싱 상태: {debouncedValue}</p>
+      <div>
+        <input type='text' onChange={(e) => setDebouncedState(e.target.value)} />
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [debouncedState, setDebouncedState] = useDebouncedState("", 500);
+
+  return (
+    <div>
+      <p>디바운싱 상태: {debouncedState}</p>
+      <div>
+        <input type='text' onChange={(e) => setDebouncedState(e.target.value)} />
+      </div>
+    </div>
+  );
+};
+
+<Example />

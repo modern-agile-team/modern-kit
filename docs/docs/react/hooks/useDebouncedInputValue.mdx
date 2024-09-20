@@ -15,9 +15,10 @@ import { useDebouncedInputValue } from '@modern-kit/react'
 ## Interface
 ```ts title="typescript"
 type DebounceParameters = Parameters<typeof debounce>;
-
+```
+```ts title="typescript"
 function useDebouncedInputValue(
-  wait?: DebounceParameters[1],
+  wait: DebounceParameters[1],
   options?: DebounceParameters[2]
 ): {
   value: string;
