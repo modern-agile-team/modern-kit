@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import { useThrottle } from '@modern-kit/react'
+
+# useThrottle
+
+`debounce`를 쉽게 사용할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useThrottle/index.ts)
+
+## Interface
+```ts title="typescript"
+interface ThrottleSettings {
+  leading?: boolean | undefined;
+  trailing?: boolean | undefined;
+}
+
+type ThrottleParameters = Parameters<typeof throttle>;
+```
+```ts title="typescript"
+function useThrottle<T extends (...args: any) => any>(
+  callback: T,
+  wait: ThrottleParameters[1],
+  options?: ThrottleParameters[2]
+): ThrottleReturnType<T>;
+```
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useThrottle } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(1);
+  const [throttledCount, setThrottledCount] = useState(1);
+
+  const countUp = () => {
+    setCount(count + 1);
+  };
+
+  const throttledCountUp = useThrottle(() => {
+    setThrottledCount(throttledCount + 1);
+  }, 1000);
+
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <button onClick={countUp}>버튼 클릭</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={throttledCountUp}>debounce 버튼 클릭</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>throttledCount: {throttledCount}</p>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [count, setCount] = useState(1);
+  const [throttledCount, setThrottledCount] = useState(1);
+  const countUp = () => {
+    setCount(count + 1);
+  };
+  const throttledCountUp = useThrottle(() => {
+    setThrottledCount(throttledCount + 1);
+  }, 1000);
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <button onClick={countUp}>버튼 클릭</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={throttledCountUp}>debounce 버튼 클릭</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>throttledCount: {throttledCount}</p>
+      </div>
+    </div>
+  );
+};
+
+<Example />

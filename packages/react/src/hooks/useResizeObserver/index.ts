@@ -1,4 +1,3 @@
-import { noop } from '@modern-kit/utils';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -18,7 +17,7 @@ export function useResizeObserver<T extends HTMLElement>(
     y: 0,
   });
   const ref = useRef<T>(null);
-  const callbackAction = usePreservedCallback(action ?? noop);
+  const callbackAction = usePreservedCallback(action);
 
   const observerCallback = useCallback(
     ([entry]: ResizeObserverEntry[]) => {
