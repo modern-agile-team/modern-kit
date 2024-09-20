@@ -26,7 +26,7 @@
 
 ## Interface
 ```ts title="typescript"
-function take<T>(arr: T[], count: number = 1): T[]
+function take<T>(arr: T[] | readonly T[], count: number = 1): T[]
 ```
 
 ## Usage
