@@ -21,12 +21,16 @@ interface DebounceSettings {
 }
 
 type DebounceParameters = Parameters<typeof debounce>;
-
-const useDebounce: (
-  callback: DebounceParameters[0], //  (...args: any) => any
+type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
+  typeof debounce<T>
+>;
+```
+```ts title="typescript"
+function useDebounce<T extends (...args: any) => any>(
+  callback: T,
   wait: DebounceParameters[1], // number
   options?: DebounceParameters[2] // DebounceSettings
-) => DebouncedFunc<(...args: any) => any>;
+): DebounceReturnType<T>;
 ```
 
 ## Usage

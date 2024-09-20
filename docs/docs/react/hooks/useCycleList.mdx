@@ -13,19 +13,22 @@ nextIndex, prevIndex, setIndex 호출 시 `action` 함수를 인자로 넣어 �
 
 ## Interface
 ```ts title="typescript"
-type Action = ({ prev, next }: { prev: number; next: number }) => void;
+type StepAction = ({ prev, next }: {
+  prev: number;
+  next: number;
+}) => void;
 ```
 ```ts title="typescript"
 const useCycleList: <T>(
   arr: T[] | readonly T[],
   initialIndex?: number
 ) => {
-  readonly currentItem: T;
-  readonly nextIndex: (action?: Action | undefined) => void;
-  readonly prevIndex: (action?: Action | undefined) => void;
-  readonly setIndex: (
-    index: number | ((index: number) => number),
-    action?: Action | undefined
+  currentItem: T;
+  nextIndex: (action?: StepAction) => void;
+  prevIndex: (action?: StepAction) => void;
+  setIndex: (
+    index: SetStateAction<number>,
+    action?: StepAction
   ) => void;
 };
 ```
