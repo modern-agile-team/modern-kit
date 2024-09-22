@@ -2,143 +2,124 @@ import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 import { usePreservedState } from '../../hooks/usePreservedState';
 import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
 
-interface UseEventListenerOptions<
-  T extends
-    | Window
-    | Document
-    | HTMLElement
-    | SVGElement
-    | MediaQueryList = HTMLElement
-> extends AddEventListenerOptions {
-  beforeListenerAction?: (element: T) => void;
-}
-
 /**
  * @description 지정된 요소에 이벤트 리스너를 추가하고, 컴포넌트가 언마운트될 때 자동으로 제거합니다.
  *
- * @template W - Window에서 사용할 수 있는 이벤트 타입 (예: 'resize', 'scroll')
- * @template E - HTMLElement에서 사용할 수 있는 이벤트 타입 (예: 'click', 'keydown')
- * @template M - MediaQueryList에서 사용할 수 있는 이벤트 타입 (예: 'change')
- * @template T - 이벤트 리스너가 등록될 요소 타입 (기본값: HTMLElement)
+ * @template W - Window에서 사용할 수 있는 이벤트 타입
+ * @template D - Document에서 사용할 수 있는 이벤트 타입
+ * @template E - HTMLElement에서 사용할 수 있는 이벤트 타입
+ * @template M - MediaQueryList에서 사용할 수 있는 이벤트 타입
+ * @template T - 이벤트 리스너가 등록될 요소 타입
  *
  * @param {T | null} element - 이벤트 리스너를 등록할 대상 요소입니다.
- * @param {W | E | M} eventName - 등록할 이벤트의 이름입니다. `click`, `resize`, `keydown` 등의 값이 올 수 있습니다.
+ * @param {W | D | M | E} type - 등록할 이벤트 타입입니다. `click`, `resize`, `keydown` 등의 값이 올 수 있습니다.
  * @param {(
  * event:
  *   | WindowEventMap[W]
+ *   | DocumentEventMap[K]
+ *   | MediaQueryListEventMap[M]
  *   | HTMLElementEventMap[E]
  *   | SVGElementEventMap[E]
- *   | MediaQueryListEventMap[M]
  *   | Event
- * ) => void} handler - 이벤트가 발생할 때 호출될 콜백 함수입니다.
- * @param {UseEventListenerOptions} options - 이벤트 리스너를 추가할 때 사용할 옵션입니다. `capture`, `once`, `passive`와 같은 옵션을 포함할 수 있습니다.
- * - 만약 이벤트 리스너를 등록하기 전에 특정 액션을 취하고 싶으면 `beforeListenerAction`를 추가할 수 있습니다.
+ * ) => void} listener - 이벤트가 발생할 때 호출될 콜백 함수입니다.
+ * @param {UseEventListenerOptions<T>} [options={}] 이벤트 리스너에 대한 옵션 객체입니다.
+ * 옵션에는 `once`, `capture`, `passive`와 같은 기본 이벤트 리스너 옵션과 `onBeforeAddListener`과 같은 커스텀 옵션이 포함될 수 있습니다.
+ * - `onBeforeAddListener`: 이벤트 리스너를 등록하기 전에 특정 작업을 수행하고자 할 때 사용됩니다.
+ *
+ * @returns {void}
  *
  * @example
  * // window
- * useEventListener(window, 'click', (event) => {
- *   console.log('Window clicked', event);
- * });
+ * useEventListener(window, 'click', callback);
  *
  * @example
  * // element
- * const buttonRef = useRef<HTMLButtonElement>(null);
+ * const buttonRef = useRef<HTMLButtonElement | null>(null);
+ * useEventListener(buttonRef.current, 'click', callback);
  *
- * useEventListener(buttonRef.current, 'click', (event) => {
- *   console.log('Button clicked', event);
- * });
+ * @example
+ * // onBeforeAddListener
+ * const buttonRef = useRef<HTMLButtonElement | null>(null);
+ * useEventListener(buttonRef.current, 'click', callback, { onBeforeAddListener });
  */
-// MediaQueryList Event based useEventListener interface
-export function useEventListener<K extends keyof MediaQueryListEventMap>(
-  element: MediaQueryList,
-  eventName: K,
-  handler: (event: MediaQueryListEventMap[K]) => void,
-  options?: UseEventListenerOptions<MediaQueryList>
-): void;
-
 // Window Event based useEventListener interface
 export function useEventListener<K extends keyof WindowEventMap>(
   element: Window,
-  eventName: K,
-  handler: (event: WindowEventMap[K]) => void,
-  options?: UseEventListenerOptions<Window>
+  type: K,
+  listener: (event: WindowEventMap[K]) => void,
+  options?: AddEventListenerOptions
 ): void;
 
 // Document Event based useEventListener interface
 export function useEventListener<K extends keyof DocumentEventMap>(
   element: Document,
-  eventName: K,
-  handler: (event: DocumentEventMap[K]) => void,
-  options?: UseEventListenerOptions<Document>
+  type: K,
+  listener: (event: DocumentEventMap[K]) => void,
+  options?: AddEventListenerOptions
+): void;
+
+// MediaQueryList Event based useEventListener interface
+export function useEventListener<K extends keyof MediaQueryListEventMap>(
+  element: MediaQueryList,
+  type: K,
+  listener: (event: MediaQueryListEventMap[K]) => void,
+  options?: AddEventListenerOptions
 ): void;
 
 // Element Event based useEventListener interface
 export function useEventListener<
   K extends keyof HTMLElementEventMap,
-  T extends Element = K extends keyof HTMLElementEventMap
-    ? HTMLElement
-    : SVGElement
+  T extends HTMLElement
 >(
   element: T | null,
-  eventName: K,
-  handler:
-    | ((event: HTMLElementEventMap[K]) => void)
-    | ((event: SVGElementEventMap[K]) => void),
-  options?: UseEventListenerOptions<HTMLElement | SVGElement>
+  type: K,
+  listener: (event: HTMLElementEventMap[K]) => void,
+  options?: AddEventListenerOptions
+): void;
+
+// SVGElement Event based useEventListener interface
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends SVGElement
+>(
+  element: T | null,
+  type: K,
+  listener: (event: SVGElementEventMap[K]) => void,
+  options?: AddEventListenerOptions
 ): void;
 
 export function useEventListener<
   W extends keyof WindowEventMap,
-  E extends keyof HTMLElementEventMap,
+  D extends keyof DocumentEventMap,
   M extends keyof MediaQueryListEventMap,
-  T extends
-    | Window
-    | Document
-    | HTMLElement
-    | SVGElement
-    | MediaQueryList = HTMLElement
+  E extends keyof HTMLElementEventMap,
+  T extends Window | Document | HTMLElement | SVGElement | MediaQueryList
 >(
   element: T | null,
-  eventName: W | E | M,
-  handler: (
+  type: W | D | M | E,
+  listener: (
     event:
       | WindowEventMap[W]
+      | DocumentEventMap[D]
       | HTMLElementEventMap[E]
       | SVGElementEventMap[E]
       | MediaQueryListEventMap[M]
       | Event
   ) => void,
-  options: UseEventListenerOptions<T> = {}
+  options: AddEventListenerOptions = {}
 ): void {
   const preservedOptions = usePreservedState(options);
-  const preservedHandler = usePreservedCallback(handler);
-  const preservedBeforeListenerAction = usePreservedCallback(
-    preservedOptions?.beforeListenerAction
-  );
+  const preservedListener = usePreservedCallback(listener);
 
   useIsomorphicLayoutEffect(() => {
-    const targetElement: T | null = element;
-
-    if (!targetElement || !targetElement.addEventListener) return;
-
-    if (preservedBeforeListenerAction) {
-      preservedBeforeListenerAction(targetElement);
-    }
+    if (!element) return;
 
     // event registration
-    targetElement.addEventListener(
-      eventName,
-      preservedHandler,
-      preservedOptions
-    );
+    element.addEventListener(type, preservedListener, preservedOptions);
 
     // clean up
     return () => {
-      targetElement.removeEventListener(
-        eventName,
-        preservedHandler,
-        preservedOptions
-      );
+      element.removeEventListener(type, preservedListener, preservedOptions);
     };
-  }, [eventName, element, preservedOptions, preservedHandler]);
+  }, [type, element, preservedOptions, preservedListener]);
 }

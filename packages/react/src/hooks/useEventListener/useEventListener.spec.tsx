@@ -117,15 +117,4 @@ describe('useEventListener()', () => {
       options
     );
   });
-
-  it('should not be called if addEventListener is not available', () => {
-    const eventName = 'click';
-    const handler = vi.fn();
-
-    renderHook(() => {
-      useEventListener({} as unknown as Window, eventName, handler);
-    });
-
-    expect(windowAddEventListenerSpy).toHaveBeenCalledTimes(0);
-  });
 });

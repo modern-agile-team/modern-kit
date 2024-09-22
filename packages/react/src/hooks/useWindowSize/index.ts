@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDebounce } from '../useDebounce';
-import { usePreservedCallback } from '../usePreservedCallback';
 import { useEventListener } from '../../hooks/useEventListener';
+import { isServer } from '@modern-kit/utils';
 
 interface WindowSize {
   width: number | null;
@@ -9,33 +9,36 @@ interface WindowSize {
 }
 
 interface useWindowSizeProps {
-  isDebounce?: boolean;
-  wait?: number;
+  debounceWait?: number;
 }
 
-export function useWindowSize(options: useWindowSizeProps = {}) {
-  const { isDebounce = false, wait = 300 } = options;
-  const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: null,
-    height: null,
+const initialSize = {
+  width: null,
+  height: null,
+};
+
+export function useWindowSize({ debounceWait }: useWindowSizeProps = {}) {
+  const [windowSize, setWindowSize] = useState<WindowSize>(() => {
+    if (isServer()) return initialSize;
+
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   });
 
-  const onResize = useCallback(() => {
-    setWindowSize({
+  const debouncedResize = useDebounce(setWindowSize, debounceWait);
+
+  const handleResize = useCallback(() => {
+    const setSize = debounceWait ? debouncedResize : setWindowSize;
+
+    setSize({
       width: window.innerWidth,
       height: window.innerHeight,
     });
-  }, []);
+  }, [debounceWait, debouncedResize]);
 
-  const debouncedResize = useDebounce(onResize, wait);
-
-  const handleResize = useMemo(() => {
-    return isDebounce ? debouncedResize : onResize;
-  }, [onResize, isDebounce, debouncedResize]);
-
-  useEventListener(window, 'resize', handleResize, {
-    beforeListenerAction: onResize,
-  });
+  useEventListener(window, 'resize', handleResize);
 
   return windowSize;
 }
