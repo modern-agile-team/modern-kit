@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 1.19.0
+
+### Minor Changes
+
+- [#476](https://github.com/modern-agile-team/modern-kit/pull/476) [`b0f3cbc`](https://github.com/modern-agile-team/modern-kit/commit/b0f3cbcb9a2a2e805480ddc96186d480dc8c888c) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useEventListenr 신규 훅 추가 - @ssi02014
+
+- [#476](https://github.com/modern-agile-team/modern-kit/pull/476) [`b0f3cbc`](https://github.com/modern-agile-team/modern-kit/commit/b0f3cbcb9a2a2e805480ddc96186d480dc8c888c) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useOnClickOutside -> useOutsidePointerDown 네이밍 변경 (BC) - @ssi02014
+
 ## 1.18.0
 
 ### Minor Changes
