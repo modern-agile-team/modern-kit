@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { usePreservedCallback } from '../usePreservedCallback';
 import { noop } from '@modern-kit/utils';
+import { useEventListener } from '../../hooks/useEventListener';
+import { useCallback } from 'react';
 
 type VisibilityChangeCallbackAction = (
   event: Event,
@@ -16,18 +16,15 @@ export function useVisibilityChange({
   onShow = noop,
   onHide = noop,
 }: UseVisibilityChangeProps = {}) {
-  const handleVisibilityChange = usePreservedCallback((event: Event) => {
-    const isVisible = document.visibilityState === 'visible';
-    const callbackAction = isVisible ? onShow : onHide;
+  const handleVisibilityChange = useCallback(
+    (event: Event) => {
+      const isVisible = document.visibilityState === 'visible';
+      const callbackAction = isVisible ? onShow : onHide;
 
-    callbackAction(event, document.visibilityState);
-  });
+      callbackAction(event, document.visibilityState);
+    },
+    [onShow, onHide]
+  );
 
-  useEffect(() => {
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, [handleVisibilityChange]);
+  useEventListener(document, 'visibilitychange', handleVisibilityChange);
 }

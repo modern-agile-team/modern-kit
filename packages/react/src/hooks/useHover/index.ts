@@ -27,15 +27,15 @@ export function useHover<T extends HTMLElement>({
   });
 
   useEffect(() => {
-    const target = targetRef.current;
-    if (!target) return;
+    const targetElement = targetRef.current;
+    if (!targetElement) return;
 
-    target.addEventListener('mouseenter', onMouseEnter);
-    target.addEventListener('mouseleave', onMouseLeave);
+    targetElement.addEventListener('mouseenter', onMouseEnter);
+    targetElement.addEventListener('mouseleave', onMouseLeave);
 
     return () => {
-      target.removeEventListener('mouseenter', onMouseEnter);
-      target.removeEventListener('mouseleave', onMouseLeave);
+      targetElement.removeEventListener('mouseenter', onMouseEnter);
+      targetElement.removeEventListener('mouseleave', onMouseLeave);
     };
   }, [onMouseEnter, onMouseLeave]);
 

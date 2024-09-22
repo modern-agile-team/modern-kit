@@ -1,0 +1,110 @@
+import { useMemo, useState } from 'react';
+import { useOutsidePointerDown } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useOutsidePointerDown
+
+특정 요소 외부에서 마우스 또는 터치 이벤트가 발생할 때 호출되는 콜백을 등록하는 커스텀 훅입니다.
+
+지정된 요소(`ref`로 지정된 요소) 외부에서 사용자가 마우스를 클릭하거나, 터치 이벤트가 발생할 때마다 제공된 `callback` 함수를 호출합니다. 
+
+모바일 환경에서는 `touchstart`, 데스크탑 환경에서는 `mousedown` 이벤트를 감지합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOutsidePointerDown/index.ts)
+
+## Interface
+
+```ts title="typescript"
+const useOutsidePointerDown: <T extends HTMLElement>(
+  action: (targetElement: T) => void
+) => React.RefObject<T>;
+```
+
+## Usage
+```tsx title="typescript"
+import { useMemo, useState } from 'react';
+import { useOutsidePointerDown } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+  const targetRef = useOutsidePointerDown<HTMLDivElement>(() => {
+    setNumber(number + 1);
+  });
+  
+  const outerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      height: '400px',
+      background: '#439966',
+      color: '#fff',
+    };
+  }, []);
+
+  const InnerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      height: '400px',
+      background: '#439966',
+      color: '#fff',
+    };
+  }, []);
+
+  return (
+    <div style={outerBoxStyle}>
+      <h3>Inner Box 외부를 클릭해보세요!</h3>
+      <p>number: {number}</p> 
+
+      <div ref={targetRef} style={InnerBoxStyle}>
+        <h3>Inner Box</h3>
+      </div>
+    </div>
+  );
+};
+```
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const targetRef = useOutsidePointerDown(() => {
+    setNumber(number + 1);
+  });
+  
+  const outerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      height: '400px',
+      background: '#439966',
+      color: '#fff',
+    };
+  }, []);
+
+  const InnerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      height: '400px',
+      background: '#439966',
+      color: '#fff',
+    };
+  }, []);
+
+  return (
+    <div style={outerBoxStyle}>
+      <h3>Inner Box 외부를 클릭해보세요!</h3>
+      <p>number: {number}</p> 
+
+      <div ref={targetRef} style={InnerBoxStyle}>
+        <h3>Inner Box</h3>
+      </div>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
+
+
+## Note
+- [PointerEvent](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent)

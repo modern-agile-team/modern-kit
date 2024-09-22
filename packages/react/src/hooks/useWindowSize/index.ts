@@ -1,48 +1,44 @@
-import { useCallback, useMemo, useState } from 'react';
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
+import { useCallback, useState } from 'react';
 import { useDebounce } from '../useDebounce';
-import { Nullable } from '@modern-kit/types';
-import { usePreservedCallback } from '../usePreservedCallback';
+import { useEventListener } from '../../hooks/useEventListener';
+import { isServer } from '@modern-kit/utils';
 
 interface WindowSize {
-  width: Nullable<number>;
-  height: Nullable<number>;
+  width: number | null;
+  height: number | null;
 }
 
 interface useWindowSizeProps {
-  isDebounce?: boolean;
-  wait?: number;
+  debounceWait?: number;
 }
 
-export function useWindowSize(options: useWindowSizeProps = {}) {
-  const { isDebounce = false, wait = 300 } = options;
-  const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: null,
-    height: null,
+const initialSize = {
+  width: null,
+  height: null,
+};
+
+export function useWindowSize({ debounceWait }: useWindowSizeProps = {}) {
+  const [windowSize, setWindowSize] = useState<WindowSize>(() => {
+    if (isServer()) return initialSize;
+
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   });
 
-  const onResize = useCallback(() => {
-    setWindowSize({
+  const debouncedResize = useDebounce(setWindowSize, debounceWait);
+
+  const handleResize = useCallback(() => {
+    const setSize = debounceWait ? debouncedResize : setWindowSize;
+
+    setSize({
       width: window.innerWidth,
       height: window.innerHeight,
     });
-  }, []);
+  }, [debounceWait, debouncedResize]);
 
-  const debounceResize = useDebounce(onResize, wait);
-  const preservedDebounceResize = usePreservedCallback(debounceResize);
-
-  const handleResize = useMemo(() => {
-    return isDebounce ? preservedDebounceResize : onResize;
-  }, [onResize, isDebounce, preservedDebounceResize]);
-
-  useIsomorphicLayoutEffect(() => {
-    onResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [onResize, handleResize]);
+  useEventListener(window, 'resize', handleResize);
 
   return windowSize;
 }

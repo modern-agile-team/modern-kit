@@ -1,5 +1,5 @@
 import { ComponentProps, ElementType, ReactNode, forwardRef } from 'react';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useOutsidePointerDown } from '../../hooks/useOutsidePointerDown';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
 type NonHaveChildElements =
@@ -40,12 +40,12 @@ const OutsideClick = <Tag extends ElementType = 'div'>(
   { as, children, callback, ...props }: OutsideClickProps<Tag>,
   ref: React.ForwardedRef<any>
 ) => {
-  const { ref: outsideRef } = useOnClickOutside<AllowedTagName<Tag>>(callback);
+  const targetRef = useOutsidePointerDown<AllowedTagName<Tag>>(callback);
 
   const Component = as || 'div';
 
   return (
-    <Component ref={useMergeRefs(outsideRef, ref)} {...props}>
+    <Component ref={useMergeRefs(targetRef, ref)} {...props}>
       {children}
     </Component>
   );

@@ -11,33 +11,33 @@ describe('useMouse with connected ref', () => {
     return (
       <>
         <div ref={ref} role="box" />
-        <p>clientX: {position.clientX ?? 'undefined'}</p>
-        <p>clientY: {position.clientY ?? 'undefined'}</p>
-        <p>screenX: {position.screenX ?? 'undefined'}</p>
-        <p>screenY: {position.screenY ?? 'undefined'}</p>
-        <p>pageX: {position.pageX ?? 'undefined'}</p>
-        <p>pageY: {position.pageY ?? 'undefined'}</p>
-        <p>elementRelativeX: {position.elementRelativeX ?? 'undefined'}</p>
-        <p>elementRelativeY: {position.elementRelativeY ?? 'undefined'}</p>
-        <p>elementPositionX: {position.elementPositionX ?? 'undefined'}</p>
-        <p>elementPositionY: {position.elementPositionY ?? 'undefined'}</p>
+        <p>clientX: {position.clientX ?? 'null'}</p>
+        <p>clientY: {position.clientY ?? 'null'}</p>
+        <p>screenX: {position.screenX ?? 'null'}</p>
+        <p>screenY: {position.screenY ?? 'null'}</p>
+        <p>pageX: {position.pageX ?? 'null'}</p>
+        <p>pageY: {position.pageY ?? 'null'}</p>
+        <p>elementRelativeX: {position.elementRelativeX ?? 'null'}</p>
+        <p>elementRelativeY: {position.elementRelativeY ?? 'null'}</p>
+        <p>elementPositionX: {position.elementPositionX ?? 'null'}</p>
+        <p>elementPositionY: {position.elementPositionY ?? 'null'}</p>
       </>
     );
   };
 
-  it('should return undefined position when first render', async () => {
+  it('should return null position when first render', async () => {
     renderSetup(<RefConnectedComponent />);
 
-    expect(screen.getByText('clientX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('clientY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('screenX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('screenY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('pageX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('pageY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('clientX: null')).toBeInTheDocument();
+    expect(screen.getByText('clientY: null')).toBeInTheDocument();
+    expect(screen.getByText('screenX: null')).toBeInTheDocument();
+    expect(screen.getByText('screenY: null')).toBeInTheDocument();
+    expect(screen.getByText('pageX: null')).toBeInTheDocument();
+    expect(screen.getByText('pageY: null')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeY: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionY: null')).toBeInTheDocument();
   });
 
   it('should correctly return mouse position, relative mouse position, and element position when the mouse moves', async () => {
@@ -83,21 +83,21 @@ describe('useMouse without connected ref', () => {
 
     return (
       <>
-        <p>clientX: {position.clientX ?? 'undefined'}</p>
-        <p>clientY: {position.clientY ?? 'undefined'}</p>
-        <p>screenX: {position.screenX ?? 'undefined'}</p>
-        <p>screenY: {position.screenY ?? 'undefined'}</p>
-        <p>pageX: {position.pageX ?? 'undefined'}</p>
-        <p>pageY: {position.pageY ?? 'undefined'}</p>
-        <p>elementRelativeX: {position.elementRelativeX ?? 'undefined'}</p>
-        <p>elementRelativeY: {position.elementRelativeY ?? 'undefined'}</p>
-        <p>elementPositionX: {position.elementPositionX ?? 'undefined'}</p>
-        <p>elementPositionY: {position.elementPositionY ?? 'undefined'}</p>
+        <p>clientX: {position.clientX ?? 'null'}</p>
+        <p>clientY: {position.clientY ?? 'null'}</p>
+        <p>screenX: {position.screenX ?? 'null'}</p>
+        <p>screenY: {position.screenY ?? 'null'}</p>
+        <p>pageX: {position.pageX ?? 'null'}</p>
+        <p>pageY: {position.pageY ?? 'null'}</p>
+        <p>elementRelativeX: {position.elementRelativeX ?? 'null'}</p>
+        <p>elementRelativeY: {position.elementRelativeY ?? 'null'}</p>
+        <p>elementPositionX: {position.elementPositionX ?? 'null'}</p>
+        <p>elementPositionY: {position.elementPositionY ?? 'null'}</p>
       </>
     );
   };
 
-  it('should return undefined position when first render', async () => {
+  it('should return null position when first render', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
     fireEvent.mouseMove(document, {
@@ -113,13 +113,13 @@ describe('useMouse without connected ref', () => {
     expect(screen.getByText('screenY: 150')).toBeInTheDocument();
     expect(screen.getByText('pageX: 150')).toBeInTheDocument();
     expect(screen.getByText('pageY: 150')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeY: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionY: null')).toBeInTheDocument();
   });
 
-  it('should return undefined for mouse position, relative mouse position, and element position when the mouse moves', async () => {
+  it('should return null for mouse position, relative mouse position, and element position when the mouse moves', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
     fireEvent.mouseMove(document, {
@@ -135,9 +135,9 @@ describe('useMouse without connected ref', () => {
     expect(screen.getByText('screenY: 150')).toBeInTheDocument();
     expect(screen.getByText('pageX: 150')).toBeInTheDocument();
     expect(screen.getByText('pageY: 150')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementRelativeY: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionX: undefined')).toBeInTheDocument();
-    expect(screen.getByText('elementPositionY: undefined')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementRelativeY: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionX: null')).toBeInTheDocument();
+    expect(screen.getByText('elementPositionY: null')).toBeInTheDocument();
   });
 });

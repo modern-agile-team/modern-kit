@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useMouse } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useMouse
 
@@ -109,4 +110,6 @@ export const Example = () => {
   );
 };
 
-<Example />
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

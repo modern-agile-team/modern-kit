@@ -1,0 +1,104 @@
+import { useEventListener } from '@modern-kit/react';
+import { useState, useRef } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useEventListener
+
+지정된 요소에 `이벤트 리스너를 추가`하고, 컴포넌트가 언마운트될 때 `자동으로 제거`합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useEventListener/index.ts)
+
+## Interface
+```ts title="typescript"
+// Window Event based useEventListener interface
+export function useEventListener<K extends keyof WindowEventMap>(
+  element: Window,
+  type: K,
+  listener: (event: WindowEventMap[K]) => void,
+  options?: UseEventListenerOptions<Window>
+): void;
+
+// Document Event based useEventListener interface
+export function useEventListener<K extends keyof DocumentEventMap>(
+  element: Document,
+  type: K,
+  listener: (event: DocumentEventMap[K]) => void,
+  options?: UseEventListenerOptions<Document>
+): void;
+
+// MediaQueryList Event based useEventListener interface
+export function useEventListener<K extends keyof MediaQueryListEventMap>(
+  element: MediaQueryList,
+  type: K,
+  listener: (event: MediaQueryListEventMap[K]) => void,
+  options?: UseEventListenerOptions<MediaQueryList>
+): void;
+
+// Element Event based useEventListener interface
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends HTMLElement
+>(
+  element: T | null,
+  type: K,
+  listener: (event: HTMLElementEventMap[K]) => void,
+  options?: UseEventListenerOptions<T>
+): void;
+
+// SVGElement Event based useEventListener interface
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends SVGElement
+>(
+  element: T | null,
+  type: K,
+  listener: (event: SVGElementEventMap[K]) => void,
+  options?: UseEventListenerOptions<T>
+): void;
+```
+
+## Usage
+```tsx title="typescript"
+import { useState, useRef } from 'react';
+import { useEventListener } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0)
+  
+  // document에 click 이벤트 리스터 추가
+  useEventListener(document, 'click', () => {
+    setNumber(number + 1);
+  })
+
+  return (
+    <div>
+      <h3>화면을 클릭해보세요!</h3>
+      <p>number: {number}</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0)
+
+  useEventListener(document, 'click', () => {
+    setNumber(number + 1);
+  })
+
+  return (
+    <div>
+      <h3>화면을 클릭해보세요!</h3>
+      <p>number: {number}</p>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
