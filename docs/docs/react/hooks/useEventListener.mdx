@@ -13,8 +13,22 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 ## Interface
 ```ts title="typescript"
+type EventListenerAvailableElement =
+  | Window
+  | Document
+  | HTMLElement
+  | SVGElement
+  | MediaQueryList;
+
+type TargetElement<T extends EventListenerAvailableElement> =
+  | T
+  | null
+  | undefined
+  | RefObject<T | null | undefined>;
+```
+```ts title="typescript"
 // Window Event based useEventListener interface
-export function useEventListener<K extends keyof WindowEventMap>(
+function useEventListener<K extends keyof WindowEventMap>(
   element: Window,
   type: K,
   listener: (event: WindowEventMap[K]) => void,
@@ -22,7 +36,7 @@ export function useEventListener<K extends keyof WindowEventMap>(
 ): void;
 
 // Document Event based useEventListener interface
-export function useEventListener<K extends keyof DocumentEventMap>(
+function useEventListener<K extends keyof DocumentEventMap>(
   element: Document,
   type: K,
   listener: (event: DocumentEventMap[K]) => void,
@@ -30,7 +44,7 @@ export function useEventListener<K extends keyof DocumentEventMap>(
 ): void;
 
 // MediaQueryList Event based useEventListener interface
-export function useEventListener<K extends keyof MediaQueryListEventMap>(
+function useEventListener<K extends keyof MediaQueryListEventMap>(
   element: MediaQueryList,
   type: K,
   listener: (event: MediaQueryListEventMap[K]) => void,
@@ -38,22 +52,22 @@ export function useEventListener<K extends keyof MediaQueryListEventMap>(
 ): void;
 
 // Element Event based useEventListener interface
-export function useEventListener<
+function useEventListener<
   K extends keyof HTMLElementEventMap,
   T extends HTMLElement
 >(
-  element: T | null,
+  element: TargetElement<T>,
   type: K,
   listener: (event: HTMLElementEventMap[K]) => void,
   options?: AddEventListenerOptions
 ): void;
 
 // SVGElement Event based useEventListener interface
-export function useEventListener<
+function useEventListener<
   K extends keyof HTMLElementEventMap,
   T extends SVGElement
 >(
-  element: T | null,
+  element: TargetElement<T>,
   type: K,
   listener: (event: SVGElementEventMap[K]) => void,
   options?: AddEventListenerOptions
@@ -67,16 +81,20 @@ import { useEventListener } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0)
-  
-  // document에 click 이벤트 리스터 추가
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   useEventListener(document, 'click', () => {
+    console.log(number);
+  })
+
+  useEventListener(buttonRef, 'click', () => {
     setNumber(number + 1);
   })
 
   return (
     <div>
-      <h3>화면을 클릭해보세요!</h3>
       <p>number: {number}</p>
+      <button ref={buttonRef}>숫자 더하기</button>
     </div>
   );
 };
@@ -86,15 +104,20 @@ const Example = () => {
 
 export const Example = () => {
   const [number, setNumber] = useState(0)
+  const buttonRef = useRef(null);
 
   useEventListener(document, 'click', () => {
+    console.log(number);
+  })
+
+  useEventListener(buttonRef, 'click', () => {
     setNumber(number + 1);
   })
 
   return (
     <div>
-      <h3>화면을 클릭해보세요!</h3>
       <p>number: {number}</p>
+      <button ref={buttonRef}>숫자 더하기</button>
     </div>
   );
 };

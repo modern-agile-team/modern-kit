@@ -64,7 +64,7 @@ export function useMouse<T extends HTMLElement>() {
     });
   }, []);
 
-  useEventListener(window.document, 'mousemove', handleMouseMove);
+  useEventListener(document, 'mousemove', handleMouseMove);
 
   return { ref: targetRef, position: cursorPosition };
 }

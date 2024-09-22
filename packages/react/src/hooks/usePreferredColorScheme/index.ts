@@ -12,7 +12,7 @@ import { useMediaQuery } from '../useMediaQuery';
  * const colorScheme = usePreferredColorScheme();
  * // colorScheme; // 'dark' 또는 'light' 반환
  */
-export function usePreferredColorScheme() {
+export function usePreferredColorScheme(): 'dark' | 'light' {
   const isDark = useMediaQuery('(prefers-color-scheme: dark)');
 
   return isDark ? 'dark' : 'light';
