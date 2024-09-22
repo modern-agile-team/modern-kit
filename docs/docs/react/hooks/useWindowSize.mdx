@@ -13,18 +13,17 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 ## Interface
 ```ts title="typescript"
-type Nullable<T> = T | null;
-
 interface WindowSize {
-  width: Nullable<number>;
-  height: Nullable<number>;
+  width: number | null;
+  height: number | null;
 }
 
 interface useWindowSizeProps {
   debounceWait?: number; // debounce delay time, default: 300
 }
-
-const useWindowSize: (options?: useWindowSizeProps) => WindowSize
+```
+```ts title="typescript"
+function useWindowSize({ debounceWait }: useWindowSizeProps = {}): WindowSize
 ```
 
 ## Usage

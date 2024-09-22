@@ -4,9 +4,9 @@ import { useKeyDown } from '.';
 import { screen } from '@testing-library/react';
 
 const TestComponent = (props: Parameters<typeof useKeyDown>[0]) => {
-  const { ref } = useKeyDown<HTMLButtonElement>(props);
+  const targetRef = useKeyDown<HTMLButtonElement>(props);
 
-  return <button ref={ref}>버튼</button>;
+  return <button ref={targetRef}>버튼</button>;
 };
 
 describe('useKeyDown', () => {
