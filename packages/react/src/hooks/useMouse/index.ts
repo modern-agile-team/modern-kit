@@ -14,49 +14,40 @@ interface CursorPosition {
   elementPositionY: number | null;
 }
 
-type RelativePosition = Pick<
-  CursorPosition,
-  'elementRelativeX' | 'elementRelativeY'
->;
-type ElementPosition = Pick<
-  CursorPosition,
-  'elementPositionX' | 'elementPositionY'
->;
+const initialCursorPosition: CursorPosition = {
+  screenX: null,
+  screenY: null,
+  clientX: null,
+  clientY: null,
+  pageX: null,
+  pageY: null,
+  elementRelativeX: null,
+  elementRelativeY: null,
+  elementPositionX: null,
+  elementPositionY: null,
+};
 
 export function useMouse<T extends HTMLElement>() {
   const targetRef = useRef<T>(null);
-  const [cursorPosition, setCursorPosition] = useState<CursorPosition>({
-    screenX: null,
-    screenY: null,
-    clientX: null,
-    clientY: null,
-    pageX: null,
-    pageY: null,
-    elementRelativeX: null,
-    elementRelativeY: null,
-    elementPositionX: null,
-    elementPositionY: null,
-  });
+  const [cursorPosition, setCursorPosition] = useState<CursorPosition>(
+    initialCursorPosition
+  );
 
   const handleMouseMove = useCallback((event: MouseEvent) => {
     const { screenX, screenY, clientX, clientY, pageX, pageY } = event;
 
-    const relativePosition = {} as RelativePosition;
-    const elementPosition = {} as ElementPosition;
+    let elementRelativeX = null;
+    let elementRelativeY = null;
+    let elementPositionX = null;
+    let elementPositionY = null;
 
     if (targetRef.current) {
       const clientRect = targetRef.current.getBoundingClientRect();
-      const elementRelativeX = clientX - clientRect.left;
-      const elementRelativeY = clientY - clientRect.top;
 
-      const elementPositionX = clientRect.left + window.scrollX;
-      const elementPositionY = clientRect.top + window.scrollY;
-
-      relativePosition.elementRelativeX = elementRelativeX;
-      relativePosition.elementRelativeY = elementRelativeY;
-
-      elementPosition.elementPositionX = elementPositionX;
-      elementPosition.elementPositionY = elementPositionY;
+      elementRelativeX = clientX - clientRect.left;
+      elementRelativeY = clientY - clientRect.top;
+      elementPositionX = clientRect.left + window.scrollX;
+      elementPositionY = clientRect.top + window.scrollY;
     }
 
     setCursorPosition({
@@ -66,8 +57,10 @@ export function useMouse<T extends HTMLElement>() {
       clientY,
       pageX,
       pageY,
-      ...relativePosition,
-      ...elementPosition,
+      elementRelativeX,
+      elementRelativeY,
+      elementPositionX,
+      elementPositionY,
     });
   }, []);
 

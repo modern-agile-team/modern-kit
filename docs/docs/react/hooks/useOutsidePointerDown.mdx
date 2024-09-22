@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useOutsidePointerDown } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useOutsidePointerDown
 
@@ -100,7 +101,9 @@ export const Example = () => {
   );
 };
 
-<Example />
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
 
 
 ## Note

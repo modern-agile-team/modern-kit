@@ -1,5 +1,6 @@
 import { useEventListener } from '@modern-kit/react';
 import { useState, useRef } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useEventListener
 
@@ -66,7 +67,7 @@ import { useEventListener } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0)
-
+  
   // document에 click 이벤트 리스터 추가
   useEventListener(document, 'click', () => {
     setNumber(number + 1);
@@ -98,4 +99,6 @@ export const Example = () => {
   );
 };
 
-<Example />
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

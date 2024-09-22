@@ -1,5 +1,6 @@
 import { useWindowSize } from '@modern-kit/react';
 import { useMemo } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useWindowSize
 
@@ -71,7 +72,9 @@ export const DefaultExample = () => {
   );
 };
 
-<DefaultExample />
+<BrowserOnly>
+  {() => <DefaultExample />}
+</BrowserOnly>
 
 <br />
 
@@ -119,6 +122,8 @@ export const DebounceExample = () => {
   );
 };
 
-<DebounceExample />
+<BrowserOnly>
+  {() => <DebounceExample />}
+</BrowserOnly>
 
 <br />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { OutsideClick } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # OutsideClick
 
@@ -94,7 +95,9 @@ export const DefaultExample = () => {
 };
 
 
-<DefaultExample />
+<BrowserOnly>
+  {() => <DefaultExample />}
+</BrowserOnly>
 
 <br />
 
@@ -135,5 +138,6 @@ export const AsExample = () => {
   );
 };
 
-
-<AsExample />
+<BrowserOnly>
+  {() => <AsExample />}
+</BrowserOnly>
