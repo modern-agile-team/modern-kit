@@ -22,8 +22,6 @@ type EventListenerAvailableElement =
 
 type TargetElement<T extends EventListenerAvailableElement> =
   | T
-  | null
-  | undefined
   | RefObject<T | null | undefined>;
 ```
 ```ts title="typescript"
@@ -64,7 +62,7 @@ function useEventListener<
 
 // SVGElement Event based useEventListener interface
 function useEventListener<
-  K extends keyof HTMLElementEventMap,
+  K extends keyof SVGElementEventMap,
   T extends SVGElement
 >(
   element: TargetElement<T>,

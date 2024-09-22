@@ -1,3 +1,4 @@
+import { hasProperty } from '@modern-kit/utils';
 import { RefObject } from 'react';
 
 /**
@@ -11,12 +12,10 @@ export type EventListenerAvailableElement =
   | MediaQueryList;
 
 /**
- * @description `특정 유형`, `null`, `undefined`, `RefObject`가 될 수 있는 대상 요소입니다.
+ * @description `특정 유형`, `RefObject`가 될 수 있는 대상 요소입니다.
  */
 export type TargetElement<T extends EventListenerAvailableElement> =
   | T
-  | null
-  | undefined
   | RefObject<T | null | undefined>;
 
 /**
@@ -25,5 +24,6 @@ export type TargetElement<T extends EventListenerAvailableElement> =
 export const isRefObject = <T extends EventListenerAvailableElement>(
   element: TargetElement<T>
 ): element is RefObject<T | null | undefined> => {
-  return !!(element as RefObject<T | null | undefined>)?.current;
+  if (!element) return false;
+  return hasProperty(element, 'current');
 };
