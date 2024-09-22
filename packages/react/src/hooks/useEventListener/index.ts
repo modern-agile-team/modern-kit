@@ -1,18 +1,24 @@
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 import { usePreservedState } from '../../hooks/usePreservedState';
 import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
+import {
+  EventListenerAvailableElement,
+  TargetElement,
+  isRefObject,
+} from './useEventListener.utils';
 
 /**
  * @description 지정된 요소에 이벤트 리스너를 추가하고, 컴포넌트가 언마운트될 때 자동으로 제거합니다.
  *
  * @template W - Window에서 사용할 수 있는 이벤트 타입
  * @template D - Document에서 사용할 수 있는 이벤트 타입
- * @template E - HTMLElement에서 사용할 수 있는 이벤트 타입
  * @template M - MediaQueryList에서 사용할 수 있는 이벤트 타입
+ * @template E - HTMLElement에서 사용할 수 있는 이벤트 타입
+ * @template S - SVGElement에서 사용할 수 있는 이벤트 타입
  * @template T - 이벤트 리스너가 등록될 요소 타입
  *
- * @param {T | null} element - 이벤트 리스너를 등록할 대상 요소입니다.
- * @param {W | D | M | E} type - 등록할 이벤트 타입입니다. `click`, `resize`, `keydown` 등의 값이 올 수 있습니다.
+ * @param {TargetElement<T>} element - 이벤트 리스너를 등록할 대상 요소입니다.
+ * @param {W | D | M | E | S} type - 등록할 이벤트 타입입니다. `click`, `resize`, `keydown` 등의 값이 올 수 있습니다.
  * @param {(
  * event:
  *   | WindowEventMap[W]
@@ -30,17 +36,21 @@ import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect
  *
  * @example
  * // window
- * useEventListener(window, 'click', callback);
+ * useEventListener(window, 'resize', callback);
+ *
+ * @example
+ * // document
+ * useEventListener(document, 'click', callback);
  *
  * @example
  * // element
  * const buttonRef = useRef<HTMLButtonElement | null>(null);
- * useEventListener(buttonRef.current, 'click', callback);
+ * useEventListener(buttonRef, 'click', callback);
  *
  * @example
- * // onBeforeAddListener
- * const buttonRef = useRef<HTMLButtonElement | null>(null);
- * useEventListener(buttonRef.current, 'click', callback, { onBeforeAddListener });
+ * // media query
+ * const mediaQueryList = window.matchMedia(mediaQueryString);
+ * useEventListener(mediaQueryList, 'change', handleChange);
  */
 // Window Event based useEventListener interface
 export function useEventListener<K extends keyof WindowEventMap>(
@@ -71,7 +81,7 @@ export function useEventListener<
   K extends keyof HTMLElementEventMap,
   T extends HTMLElement
 >(
-  element: T | null,
+  element: TargetElement<T>,
   type: K,
   listener: (event: HTMLElementEventMap[K]) => void,
   options?: AddEventListenerOptions
@@ -79,10 +89,10 @@ export function useEventListener<
 
 // SVGElement Event based useEventListener interface
 export function useEventListener<
-  K extends keyof HTMLElementEventMap,
+  K extends keyof SVGElementEventMap,
   T extends SVGElement
 >(
-  element: T | null,
+  element: TargetElement<T>,
   type: K,
   listener: (event: SVGElementEventMap[K]) => void,
   options?: AddEventListenerOptions
@@ -93,16 +103,17 @@ export function useEventListener<
   D extends keyof DocumentEventMap,
   M extends keyof MediaQueryListEventMap,
   E extends keyof HTMLElementEventMap,
-  T extends Window | Document | HTMLElement | SVGElement | MediaQueryList
+  S extends keyof SVGElementEventMap,
+  T extends EventListenerAvailableElement
 >(
-  element: T | null,
-  type: W | D | M | E,
+  element: TargetElement<T>,
+  type: W | D | M | E | S,
   listener: (
     event:
       | WindowEventMap[W]
       | DocumentEventMap[D]
       | HTMLElementEventMap[E]
-      | SVGElementEventMap[E]
+      | SVGElementEventMap[S]
       | MediaQueryListEventMap[M]
       | Event
   ) => void,
@@ -112,14 +123,20 @@ export function useEventListener<
   const preservedListener = usePreservedCallback(listener);
 
   useIsomorphicLayoutEffect(() => {
-    if (!element) return;
+    const targetElement = isRefObject(element) ? element.current : element;
+
+    if (!targetElement) return;
 
     // event registration
-    element.addEventListener(type, preservedListener, preservedOptions);
+    targetElement.addEventListener(type, preservedListener, preservedOptions);
 
     // clean up
     return () => {
-      element.removeEventListener(type, preservedListener, preservedOptions);
+      targetElement.removeEventListener(
+        type,
+        preservedListener,
+        preservedOptions
+      );
     };
   }, [type, element, preservedOptions, preservedListener]);
 }

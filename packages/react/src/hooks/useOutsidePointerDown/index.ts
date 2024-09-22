@@ -46,7 +46,7 @@ export function useOutsidePointerDown<T extends HTMLElement>(
     [callback]
   );
 
-  useEventListener(window.document, eventType, handleOutsideClick);
+  useEventListener(document, eventType, handleOutsideClick);
 
   return targetRef;
 }
