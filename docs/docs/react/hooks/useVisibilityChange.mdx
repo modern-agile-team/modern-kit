@@ -18,8 +18,12 @@ interface useVisibilityChangeProps {
   onShow?: VisibilityChangeCallbackAction;
   onHide?: VisibilityChangeCallbackAction;
 }
-
-const useVisibilityChange: ({ onShow, onHide, }: useVisibilityChangeProps) => void
+```
+```ts title="typescript"
+function useVisibilityChange({
+  onShow,
+  onHide,
+}: UseVisibilityChangeProps = {}): void;
 ```
 
 ## Usage

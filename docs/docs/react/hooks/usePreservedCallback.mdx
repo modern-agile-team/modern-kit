@@ -12,7 +12,7 @@
 ## Interface
 ```ts title="typescript"
 function usePreservedCallback<T extends (...args: any[]) => any>(
-  callback?: T
+  callback?: T // default: noop
 ): T;
 ```
 

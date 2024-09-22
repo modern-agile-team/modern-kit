@@ -19,21 +19,21 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ```ts title="typescript"
 
 interface CursorPosition {
-  screenX?: number;
-  screenY?: number;
-  clientX?: number;
-  clientY?: number;
-  pageX?: number;
-  pageY?: number;
-  elementRelativeX?: number;
-  elementRelativeY?: number;
-  elementPositionX?: number;
-  elementPositionY?: number;
+  screenX: number | null;
+  screenY: number | null;
+  clientX: number | null;
+  clientY: number | null;
+  pageX: number | null;
+  pageY: number | null;
+  elementRelativeX: number | null;
+  elementRelativeY: number | null;
+  elementPositionX: number | null;
+  elementPositionY: number | null;
 }
 
-const useMouse: <T extends HTMLElement>() => {
-  targetRef: T,
-  position: CursorPosition:
+function useMouse<T extends HTMLElement>(): {
+  ref: React.RefObject<T>;
+  position: CursorPosition;
 }
 ```
 

@@ -16,11 +16,10 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOutsidePointerDown/index.ts)
 
 ## Interface
-
 ```ts title="typescript"
-const useOutsidePointerDown: <T extends HTMLElement>(
-  action: (targetElement: T) => void
-) => React.RefObject<T>;
+function useOutsidePointerDown<T extends HTMLElement>(
+  callback: (targetElement: T) => void
+): React.RefObject<T>;
 ```
 
 ## Usage
