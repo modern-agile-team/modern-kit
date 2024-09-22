@@ -8,6 +8,7 @@ export * from './useDebounce';
 export * from './useDebouncedInputValue';
 export * from './useDebouncedState';
 export * from './useDocumentTitle';
+export * from './useEventListener';
 export * from './useFileReader';
 export * from './useForceUpdate';
 export * from './useHover';

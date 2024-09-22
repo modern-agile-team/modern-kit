@@ -1,17 +1,17 @@
-import { useRef, useState } from 'react';
-import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
+import { useCallback, useRef, useState } from 'react';
+import { useEventListener } from '../../hooks/useEventListener';
 
 interface CursorPosition {
-  screenX?: number;
-  screenY?: number;
-  clientX?: number;
-  clientY?: number;
-  pageX?: number;
-  pageY?: number;
-  elementRelativeX?: number;
-  elementRelativeY?: number;
-  elementPositionX?: number;
-  elementPositionY?: number;
+  screenX: number | null;
+  screenY: number | null;
+  clientX: number | null;
+  clientY: number | null;
+  pageX: number | null;
+  pageY: number | null;
+  elementRelativeX: number | null;
+  elementRelativeY: number | null;
+  elementPositionX: number | null;
+  elementPositionY: number | null;
 }
 
 type RelativePosition = Pick<
@@ -26,58 +26,52 @@ type ElementPosition = Pick<
 export function useMouse<T extends HTMLElement>() {
   const targetRef = useRef<T>(null);
   const [cursorPosition, setCursorPosition] = useState<CursorPosition>({
-    screenX: undefined,
-    screenY: undefined,
-    clientX: undefined,
-    clientY: undefined,
-    pageX: undefined,
-    pageY: undefined,
-    elementRelativeX: undefined,
-    elementRelativeY: undefined,
-    elementPositionX: undefined,
-    elementPositionY: undefined,
+    screenX: null,
+    screenY: null,
+    clientX: null,
+    clientY: null,
+    pageX: null,
+    pageY: null,
+    elementRelativeX: null,
+    elementRelativeY: null,
+    elementPositionX: null,
+    elementPositionY: null,
   });
 
-  useIsomorphicLayoutEffect(() => {
-    const onMouseMove = (event: MouseEvent) => {
-      const { screenX, screenY, clientX, clientY, pageX, pageY } = event;
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    const { screenX, screenY, clientX, clientY, pageX, pageY } = event;
 
-      const relativePosition: RelativePosition = {};
-      const elementPosition: ElementPosition = {};
+    const relativePosition = {} as RelativePosition;
+    const elementPosition = {} as ElementPosition;
 
-      if (targetRef.current) {
-        const rect = targetRef.current.getBoundingClientRect();
-        const elementRelativeX = clientX - rect.left;
-        const elementRelativeY = clientY - rect.top;
+    if (targetRef.current) {
+      const clientRect = targetRef.current.getBoundingClientRect();
+      const elementRelativeX = clientX - clientRect.left;
+      const elementRelativeY = clientY - clientRect.top;
 
-        const elementPositionX = rect.left + window.scrollX;
-        const elementPositionY = rect.top + window.scrollY;
+      const elementPositionX = clientRect.left + window.scrollX;
+      const elementPositionY = clientRect.top + window.scrollY;
 
-        relativePosition.elementRelativeX = elementRelativeX;
-        relativePosition.elementRelativeY = elementRelativeY;
+      relativePosition.elementRelativeX = elementRelativeX;
+      relativePosition.elementRelativeY = elementRelativeY;
 
-        elementPosition.elementPositionX = elementPositionX;
-        elementPosition.elementPositionY = elementPositionY;
-      }
+      elementPosition.elementPositionX = elementPositionX;
+      elementPosition.elementPositionY = elementPositionY;
+    }
 
-      setCursorPosition({
-        screenX,
-        screenY,
-        clientX,
-        clientY,
-        pageX,
-        pageY,
-        ...relativePosition,
-        ...elementPosition,
-      });
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-    };
+    setCursorPosition({
+      screenX,
+      screenY,
+      clientX,
+      clientY,
+      pageX,
+      pageY,
+      ...relativePosition,
+      ...elementPosition,
+    });
   }, []);
+
+  useEventListener(window.document, 'mousemove', handleMouseMove);
 
   return { ref: targetRef, position: cursorPosition };
 }

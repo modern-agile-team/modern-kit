@@ -1,5 +1,6 @@
 import { isClient } from '@modern-kit/utils';
-import { useEffect, useState } from 'react';
+import { useEventListener } from '../../hooks/useEventListener';
+import { useState } from 'react';
 
 const getMatchMedia = (mediaQueryString: string, defaultValue?: boolean) => {
   if (isClient()) {
@@ -24,20 +25,16 @@ const getMatchMedia = (mediaQueryString: string, defaultValue?: boolean) => {
 export function useMediaQuery(
   mediaQueryString: string,
   defaultValue?: boolean
-) {
+): boolean {
   const [isMatch, setIsMatch] = useState(
     getMatchMedia(mediaQueryString, defaultValue)
   );
 
-  useEffect(() => {
-    const matchMedia = window.matchMedia(mediaQueryString);
-
-    const handleChange = (e: MediaQueryListEvent) => setIsMatch(e.matches);
-
-    matchMedia.addEventListener('change', handleChange);
-
-    return () => matchMedia.removeEventListener('change', handleChange);
-  }, [mediaQueryString]);
+  useEventListener(
+    window.matchMedia(mediaQueryString),
+    'change',
+    (e: MediaQueryListEvent) => setIsMatch(e.matches)
+  );
 
   return isMatch;
 }

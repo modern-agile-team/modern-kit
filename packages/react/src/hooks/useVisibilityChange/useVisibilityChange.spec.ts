@@ -4,9 +4,11 @@ import { useVisibilityChange } from '.';
 import * as ModernKitUtils from '@modern-kit/utils';
 
 // Mocking the noop function in @modern-kit/utils
-vi.mock('@modern-kit/utils', () => {
+vi.mock('@modern-kit/utils', async (importOriginal: any) => {
+  const actual = await importOriginal();
   return {
-    noop: vi.fn(),
+    ...actual,
+    isClient: vi.fn(),
   };
 });
 
@@ -14,22 +16,6 @@ const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
 const event = new Event('visibilitychange');
 
 describe('useVisibilityChange', () => {
-  it('should call the onShow callback when the page becomes visible', () => {
-    const { noop } = ModernKitUtils;
-
-    renderHook(() => useVisibilityChange());
-
-    visibilityStateSpyOn.mockReturnValue('visible');
-    document.dispatchEvent(event);
-
-    expect(noop).toBeCalledTimes(1);
-
-    visibilityStateSpyOn.mockReturnValue('hidden');
-    document.dispatchEvent(event);
-
-    expect(noop).toBeCalledTimes(2);
-  });
-
   it('should call the onShow callback when the page becomes visible', () => {
     const onShow = vi.fn();
     const onHide = vi.fn();

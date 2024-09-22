@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { usePreservedCallback } from '../usePreservedCallback';
+import { useCallback, useRef, useMemo } from 'react';
 import { isMobile } from '@modern-kit/utils';
+import { useEventListener } from '../../hooks/useEventListener';
 
 /**
  * @description 특정 요소 외부에서 마우스 또는 터치 이벤트가 발생할 때 호출되는 콜백을 등록하는 커스텀 훅입니다.
@@ -30,25 +30,23 @@ export function useOnClickOutside<T extends HTMLElement>(
   callback: (targetElement: T) => void
 ): { ref: React.RefObject<T> } {
   const ref = useRef<T>(null);
-  const callbackAction = usePreservedCallback(callback);
+  const eventType = useMemo(
+    () => (isMobile() ? 'touchstart' : 'mousedown'),
+    []
+  );
 
-  useEffect(() => {
-    const eventType = isMobile() ? 'touchstart' : 'mousedown';
-
-    const listener = ({ target }: MouseEvent | TouchEvent) => {
+  const handleOutsideClick = useCallback(
+    ({ target }: MouseEvent | TouchEvent) => {
       const targetElement = ref.current;
 
       if (targetElement && !targetElement.contains(target as Node)) {
-        callbackAction(targetElement);
+        callback(targetElement);
       }
-    };
+    },
+    [callback]
+  );
 
-    document.addEventListener(eventType, listener);
-
-    return () => {
-      document.removeEventListener(eventType, listener);
-    };
-  }, [callbackAction]);
+  useEventListener(document, eventType, handleOutsideClick);
 
   return { ref };
 }

@@ -1,12 +1,11 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { useDebounce } from '../useDebounce';
-import { Nullable } from '@modern-kit/types';
 import { usePreservedCallback } from '../usePreservedCallback';
+import { useEventListener } from '../../hooks/useEventListener';
 
 interface WindowSize {
-  width: Nullable<number>;
-  height: Nullable<number>;
+  width: number | null;
+  height: number | null;
 }
 
 interface useWindowSizeProps {
@@ -28,21 +27,15 @@ export function useWindowSize(options: useWindowSizeProps = {}) {
     });
   }, []);
 
-  const debounceResize = useDebounce(onResize, wait);
-  const preservedDebounceResize = usePreservedCallback(debounceResize);
+  const debouncedResize = useDebounce(onResize, wait);
 
   const handleResize = useMemo(() => {
-    return isDebounce ? preservedDebounceResize : onResize;
-  }, [onResize, isDebounce, preservedDebounceResize]);
+    return isDebounce ? debouncedResize : onResize;
+  }, [onResize, isDebounce, debouncedResize]);
 
-  useIsomorphicLayoutEffect(() => {
-    onResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [onResize, handleResize]);
+  useEventListener(window, 'resize', handleResize, {
+    beforeListenerAction: onResize,
+  });
 
   return windowSize;
 }
