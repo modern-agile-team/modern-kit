@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.19.1
+
+### Patch Changes
+
+- [#479](https://github.com/modern-agile-team/modern-kit/pull/479) [`aa6f860`](https://github.com/modern-agile-team/modern-kit/commit/aa6f86089257956c6e51de4c690c1d5e3385a15a) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: useEventListener ref 대응 추가 - @ssi02014
+
 ## 1.19.0
 
 ### Minor Changes
