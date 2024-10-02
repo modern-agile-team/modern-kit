@@ -1,0 +1,115 @@
+import { useColorScheme } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useColorScheme
+
+사용자의 Color Scheme(다크 모드 또는 라이트 모드)을 관리하기 위한 훅입니다.
+
+현재 Color Scheme을 의미하는 상태와 해당 상태를 핸들링하기 위한 set 함수들을 반환합니다.
+
+[`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) 는 `안드로이드 버전10 미만`에서는 지원하지 않는 이슈가 있을 수 있으며, Color Scheme 관련 정보를 외부에서 전달받는 케이스도 있을 수 있습니다. (예를 들어 앱에서 웹뷰를 띄울 때 `UserAgent`로 전달) 이런 경우 `defaultValue`를 활용 할 수 있습니다.
+
+위와 같은 방식을 통해 `외부에서 제공 받는 Color Scheme을 유지`할 수도 있고, 웹에서 단독으로 사용 할 때의 `자체적인 Color Scheme 정책`도 관리 할 수 있습니다.
+
+### state
+- `colorScheme`: 현재 적용된 색상 테마(`dark`, `light`)입니다. 로컬 스토리지에 저장된 값이 있다면 해당 값을 가져옵니다.
+스토리지에 저장된 값이 없는 상황에서 `defaultValue`가 설정되어 있다면 우선적으로 `defaultValue` 값을 갖습니다.
+만약, `defaultValue`가 없다면 다음으로 사용자 선호 색상(`prefers-color-scheme`) 값을 가져옵니다.
+- `preferredColorScheme`: 사용자의 선호 색상 테마입니다. 사용자 시스템 설정에 따라 달라집니다.
+
+### set
+- `setToggleMode`: 현재 색상 테마를 `다크 모드`와 `라이트 모드` 사이에서 전환합니다.
+- `setDarkMode`: 현제 색상 테마를 `다크 모드`로 설정합니다.
+- `setLightMode`: 현재 색상 테마를 `라이트 모드`로 설정합니다.
+- `setPreferredMode` - 현재 색상 테마를 사용자의 선호 색상(`prefers-color-scheme`)으로 설정합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useColorScheme/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseColorSchemeOptions {
+  defaultValue?: (() => ColorScheme) | ColorScheme;
+  key?: string; // dafault: COLOR_SCHEME_DEFAULT_KEY: 'color-scheme'
+  shouldSetBodyClass?: boolean; // default: false
+}
+
+interface UseColorSchemeReturnType {
+  colorScheme: ColorScheme;
+  preferredColorScheme: ColorScheme;
+  setToggleMode: () => void;
+  setDarkMode: () => void;
+  setLightMode: () => void;
+  setPreferredMode: () => void;
+}
+```
+```ts title="typescript"
+function useColorScheme({
+  defaultValue,
+  key,
+  shouldSetBodyClass,
+}: UseColorSchemeOptions = {}): UseColorSchemeReturnType;
+```
+
+## Usage
+```tsx title="typescript"
+const Example = () => {
+  const {
+    colorScheme,
+    preferredColorScheme,
+    setToggleMode,
+    setDarkMode,
+    setLightMode,
+    setPreferredMode,
+  } = useColorScheme({
+    shouldSetBodyClass: true, // true라면 body class에 colorScheme이 추가
+  });
+
+  return (
+    <div>
+      <p>colorScheme: {`${colorScheme}`}</p>
+      <p>preferredColorScheme: {`${preferredColorScheme}`}</p>
+      <div>
+        <button onClick={setToggleMode}>모드 토글</button>
+        <button onClick={setDarkMode}>다크 모드 변경</button>
+        <button onClick={setLightMode}>라이트 모드 변경</button>
+        <button onClick={setPreferredMode}>사용자 선호 모드 변경</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const {
+    colorScheme,
+    preferredColorScheme,
+    setToggleMode,
+    setDarkMode,
+    setLightMode,
+    setPreferredMode,
+  } = useColorScheme({
+    shouldSetBodyClass: true,
+  });
+
+  return (
+    <div>
+      <p>colorScheme: {`${colorScheme}`}</p>
+      <p>preferredColorScheme: {`${preferredColorScheme}`}</p>
+      <div>
+        <button onClick={setToggleMode}>모드 토글</button>
+        <button onClick={setDarkMode}>다크 모드 변경</button>
+        <button onClick={setLightMode}>라이트 모드 변경</button>
+        <button onClick={setPreferredMode}>사용자 선호 모드 변경</button>
+      </div>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

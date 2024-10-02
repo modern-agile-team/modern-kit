@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { Nullable } from '@modern-kit/types';
 import { noop } from '@modern-kit/utils';
@@ -78,25 +78,28 @@ export function useIntersectionObserver<T extends HTMLElement>({
     }
   );
 
-  const targetRef = (node: T) => {
-    // 기존 observer가 활성화된 상태에서 새로운 요소를 관찰하기 전에 기존 observer 관찰 중지하며, 메모리 누수를 방지
-    if (intersectionObserverRef.current) {
-      intersectionObserverRef.current.disconnect();
-    }
-
-    intersectionObserverRef.current = new IntersectionObserver(
-      intersectionObserverCallback,
-      {
-        threshold,
-        root,
-        rootMargin,
+  const targetRef = useCallback(
+    (node: T) => {
+      // 기존 observer가 활성화된 상태에서 새로운 요소를 관찰하기 전에 기존 observer 관찰 중지하며, 메모리 누수를 방지
+      if (intersectionObserverRef.current) {
+        intersectionObserverRef.current.disconnect();
+        intersectionObserverRef.current = null;
       }
-    );
 
-    if (node) {
+      if (node === null) return;
+
+      intersectionObserverRef.current = new IntersectionObserver(
+        intersectionObserverCallback,
+        {
+          threshold,
+          root,
+          rootMargin,
+        }
+      );
       intersectionObserverRef.current.observe(node);
-    }
-  };
+    },
+    [threshold, root, rootMargin, intersectionObserverCallback]
+  );
 
   return { ref: targetRef };
 }

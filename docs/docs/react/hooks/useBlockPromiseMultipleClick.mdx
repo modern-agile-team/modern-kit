@@ -16,9 +16,9 @@ import { useBlockPromiseMultipleClick } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
-const useBlockPromiseMultipleClick: () => {
+function useBlockPromiseMultipleClick(): {
   isLoading: boolean;
-  blockMultipleClick: (callback: () => Promise<unknown>) => Promise<void>;
+  blockMultipleClick: <T>(callback: () => Promise<T>) => Promise<T | undefined>;
 };
 ```
 
