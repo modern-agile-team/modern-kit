@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const useAsyncPreservedCallback: <T extends (...args: any[]) => Promise<any>>(
+function useAsyncPreservedCallback<T extends (...args: any[]) => Promise<any>>(
   callback: T
-) => (...args: any[]) => Promise<any>;
+): T;
 ```

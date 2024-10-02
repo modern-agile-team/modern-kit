@@ -13,7 +13,7 @@ interface UseColorSchemeReturnType {
   setToggleMode: () => void;
   setDarkMode: () => void;
   setLightMode: () => void;
-  setColorSchemeToPreferredMode: () => void;
+  setPreferredMode: () => void;
 }
 
 interface UseColorSchemeOptions {
@@ -27,18 +27,18 @@ interface UseColorSchemeOptions {
  *
  * @param {UseColorSchemeOptions} [options={}] - 색상 테마를 관리를 위한 추가 옵션입니다.
  * - `key`: 스토리지에 저장 할 key 값입니다. 기본 값은 `'color-scheme'`입니다.
- * - `defaultValue`: 기본 값으로 셋팅 값입니다. `prefers-color-scheme`를 지원하지 않는 OS의 경우 `defaultValue`를 활용 할 수 있습니다.
+ * - `defaultValue`: 기본 값으로 셋팅 값입니다. `prefers-color-scheme`를 지원하지 않는 OS의 경우 혹은 외부에서 테마 값을 전달 받는 경우 `defaultValue`를 활용 할 수 있습니다.
  * - `shouldSetBodyClass`: document.body의 클래스에 색상 테마를 저장 할 여부를 결정하는 값입니다. 기본 값은 `false`입니다.
  *
  * @returns {UseColorSchemeReturnType}
- * - `colorScheme`: 현재 적용된 색상 테마(`dark`, `light`)입니다. 스토리지에 저장된 값이 있다면 해당 값을 가져옵니다.
+ * - `colorScheme`: 현재 적용된 색상 테마(`dark`, `light`)입니다. 로컬 스토리지에 저장된 값이 있다면 해당 값을 가져옵니다.
  * 스토리지에 저장된 값이 없는 상황에서 `defaultValue`가 설정되어 있다면 우선적으로 `defaultValue` 값을 갖습니다.
  * 만약, `defaultValue`가 없다면 다음으로 사용자 선호 색상(`prefers-color-scheme`) 값을 가져옵니다.
  * - `preferredColorScheme`: 사용자의 선호 색상 테마입니다. 사용자 시스템 설정에 따라 달라집니다.
  * - `setToggleMode`: 현재 색상 테마를 `다크 모드`와 `라이트 모드` 사이에서 전환합니다.
  * - `setDarkMode`: 현제 색상 테마를 `다크 모드`로 설정합니다.
  * - `setLightMode`: 현재 색상 테마를 `라이트 모드`로 설정합니다.
- * - `setColorSchemeToPreferredMode` - 현재 색상 테마를 사용자의 선호 색상(`prefers-color-scheme`)으로 설정합니다.
+ * - `setPreferredMode` - 현재 색상 테마를 사용자의 선호 색상(`prefers-color-scheme`)으로 설정합니다.
  *
  * @example
  * // 사용자의 선호 색상(`prefers-color-scheme`)이 Light 모드인 경우
@@ -48,7 +48,7 @@ interface UseColorSchemeOptions {
  *  setDarkMode,
  *  setLightMode,
  *  setToggleMode,
- *  setColorSchemeToPreferredMode
+ *  setPreferredMode
  * } = useColorScheme();
  *
  * // 초기 상태
@@ -58,7 +58,7 @@ interface UseColorSchemeOptions {
  * setToggleMode(); // colorScheme: 'dark', preferredColorScheme: 'light'
  * setLightMode(); // colorScheme: 'light', preferredColorScheme: 'light'
  * setDarkMode(); // colorScheme: 'dark', preferredColorScheme: 'light'
- * setColorSchemeToPreferredMode(); // colorScheme: 'light', preferredColorScheme: 'light'
+ * setPreferredMode(); // colorScheme: 'light', preferredColorScheme: 'light'
  *
  * @example
  * // 옵션 설정
@@ -99,14 +99,19 @@ export function useColorScheme({
     setColorScheme('light');
   }, [setColorScheme]);
 
-  const setColorSchemeToPreferredMode = useCallback(() => {
+  const setPreferredMode = useCallback(() => {
     setColorScheme(preferredColorScheme);
   }, [setColorScheme, preferredColorScheme]);
 
   useEffect(() => {
     if (shouldSetBodyClass) {
-      document.body.classList.add(COLOR_SCHEME_DEFAULT_KEY, colorScheme);
+      document.body.classList.add(colorScheme);
     }
+    return () => {
+      if (shouldSetBodyClass) {
+        document.body.classList.remove(colorScheme);
+      }
+    };
   }, [colorScheme, shouldSetBodyClass]);
 
   return {
@@ -115,6 +120,6 @@ export function useColorScheme({
     setToggleMode,
     setDarkMode,
     setLightMode,
-    setColorSchemeToPreferredMode,
+    setPreferredMode,
   };
 }

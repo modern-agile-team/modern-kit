@@ -15,4 +15,13 @@ describe('isNumericString', () => {
     expect(isNumericString('12.00')).toBeFalsy();
     expect(isNumericString('1 ')).toBeFalsy();
   });
+
+  it('should validate numeric strings correctly, allowing signs when sign option is enabled', () => {
+    expect(isNumericString('123.45', { sign: true })).toBeTruthy();
+    expect(isNumericString('-123.45', { sign: true })).toBeTruthy();
+
+    expect(isNumericString('12.3a45', { sign: true })).toBeFalsy();
+    expect(isNumericString('12-345', { sign: true })).toBeFalsy();
+    expect(isNumericString('123.', { sign: true })).toBeFalsy();
+  });
 });
