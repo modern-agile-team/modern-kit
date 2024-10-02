@@ -1,4 +1,5 @@
 import { useColorScheme } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useColorScheme
 
@@ -109,4 +110,6 @@ export const Example = () => {
   );
 };
 
-<Example />
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
