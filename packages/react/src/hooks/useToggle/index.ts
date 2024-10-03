@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useToggleState } from '../useToggleState';
 
 /**
  * @description boolean 값을 토글하는 기능을 제공하는 훅입니다.
@@ -18,11 +18,5 @@ import { useCallback, useState } from 'react';
  * isToggled; // true
  */
 export function useToggle(defaultValue = false): [boolean, () => void] {
-  const [boolean, setBoolean] = useState(defaultValue);
-
-  const toggle = useCallback(() => {
-    setBoolean((prevBoolean) => !prevBoolean);
-  }, []);
-
-  return [boolean, toggle];
+  return useToggleState(defaultValue, !defaultValue);
 }
