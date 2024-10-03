@@ -1,3 +1,5 @@
+import { useToggleState } from '@modern-kit/react';
+
 # useToggleState
 
 두 개의 값을 토글하는 기능을 제공하는 훅입니다.
@@ -29,3 +31,18 @@ const Example = () => {
   );
 }
 ```
+
+## Example
+
+export const Example = () => {
+  const [value, toggle] = useToggleState('ON', 'OFF');
+
+  return (
+    <div>
+      {value}
+      <button onClick={toggle}>Toggle Button</button>
+    </div>
+  );
+}
+
+<Example />
