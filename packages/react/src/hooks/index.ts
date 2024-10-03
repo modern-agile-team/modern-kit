@@ -38,6 +38,7 @@ export * from './useStepState';
 export * from './useThrottle';
 export * from './useTimeout';
 export * from './useToggle';
+export * from './useToggleState';
 export * from './useUnmount';
 export * from './useUserAgent';
 export * from './useVhProperty';
