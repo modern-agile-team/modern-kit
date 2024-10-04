@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useUserAgent } from '.';
+import * as ModernKitUtils from '@modern-kit/utils';
 
 let userAgentSpy: MockInstance;
 
@@ -30,5 +31,13 @@ describe('useUserAgent', () => {
       type: 'mobile',
     });
     expect(cpu).toEqual({ architecture: 'arm' });
+  });
+
+  it('should return null in a server environment', () => {
+    vi.spyOn(ModernKitUtils, 'isClient').mockReturnValue(false);
+
+    const { result } = renderHook(() => useUserAgent());
+
+    expect(result.current).toBeNull();
   });
 });
