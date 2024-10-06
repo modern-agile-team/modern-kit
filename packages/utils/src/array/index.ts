@@ -22,3 +22,4 @@ export * from './swap';
 export * from './take';
 export * from './union';
 export * from './uniq';
+export * from './xor';
