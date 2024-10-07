@@ -11,10 +11,10 @@
 
 ## Interface
 ```ts title="typescript"
-const xor: <T>(
-  array1: T[] | readonly T[],
-  array2: T[] | readonly T[],
-  iteratee?: ((item: T) => string | number) | undefined
+const xor: <T, U>(
+  arr1: T[] | readonly T[],
+  arr2: T[] | readonly T[],
+  iteratee?: (item: T) => U
 ) => T[];
 ```
 
