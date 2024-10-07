@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { UAParser } from 'ua-parser-js';
-import { isClient } from '@modern-kit/utils';
+import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
 
 /**
  * @description 사용자의 User Agent 정보를 분석하여 반환합니다.
@@ -15,13 +15,13 @@ import { isClient } from '@modern-kit/utils';
  * console.log(userAgent?.browser.name); // 'Chrome', 'Firefox' 등
  */
 export function useUserAgent(): UAParser.IResult | null {
-  const [userAgent] = useState<UAParser.IResult | null>(() => {
-    if (!isClient()) {
-      return null;
-    }
+  const [userAgent, setUserAgent] = useState<UAParser.IResult | null>(null);
+
+  useIsomorphicLayoutEffect(() => {
     const uaParser = new UAParser(window.navigator.userAgent);
 
-    return uaParser.getResult();
-  });
+    setUserAgent(uaParser.getResult());
+  }, []);
+
   return userAgent;
 }
