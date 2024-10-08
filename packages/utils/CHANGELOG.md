@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 1.19.0
+
+### Minor Changes
+
+- [#500](https://github.com/modern-agile-team/modern-kit/pull/500) [`a60dad3`](https://github.com/modern-agile-team/modern-kit/commit/a60dad392f022e67267d110def25ee25c104bccf) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils) xor 유틸 함수 추가 - @Gaic4o
+
+- [#498](https://github.com/modern-agile-team/modern-kit/pull/498) [`8069768`](https://github.com/modern-agile-team/modern-kit/commit/80697688c5c42655f32d690edbaefbe64060b180) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): at 신규 함수 추가 - @ssi02014
+
 ## 1.18.0
 
 ### Minor Changes
