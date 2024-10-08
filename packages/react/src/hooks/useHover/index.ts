@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { noop } from '@modern-kit/utils';
 import { useEventListener } from '../../hooks/useEventListener';
-import { usePreservedCallback } from 'hooks/usePreservedCallback';
+import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 
 interface UseHoverProps {
   onEnter?: (event: MouseEvent) => void;
