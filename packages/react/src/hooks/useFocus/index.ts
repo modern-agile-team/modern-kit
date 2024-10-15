@@ -31,13 +31,13 @@ interface UseFocusReturnType<T extends HTMLElement> {
  *
  * @example
  * const { ref, isFocused, setFocus } = useFocus<HTMLInputElement>({
- *   focusAction: () => console.log("포커스"),
- *   blurAction: () => console.log("포커스 해제")
+ *   focusAction: () => console.log("focus"),
+ *   blurAction: () => console.log("blur")
  * });
  *
  * <input ref={ref} />
- * <button onClick={() => setFocus()}>Input 포커스</button>
- * <div>{isFocused ? '포커스' : '포커스 해제'}</div>
+ * <button onClick={() => setFocus()}>focus trigger</button>
+ * <div>{isFocused ? 'focus' : 'blur'}</div>
  */
 export function useFocus<T extends HTMLElement>({
   focusAction = noop,
