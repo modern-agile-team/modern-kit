@@ -18,7 +18,7 @@ interface UseFocusProps {
 }
 
 interface UseFocusReturnType<T extends HTMLElement> {
-  ref: React.RefObject<T>;
+  ref: RefObject<T>;
   isFocus: boolean;
   setFocus: () => void;
 }
