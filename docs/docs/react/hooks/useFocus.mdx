@@ -34,17 +34,17 @@ const useFocus<T extends HTMLElement>({
 import { useFocus } from '@modern-kit/react';
 
 const Example = () => {
-    const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
-        focusAction: () => console.log("포커스"),
-        blurAction: () => console.log("포커스 해제"),
-    });
+  const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
+    focusAction: () => console.log("포커스"),
+    blurAction: () => console.log("포커스 해제"),
+  });
 
-    return (
-        <>
-            <input ref={ref} />
-            <button onClick={() => setFocus()}>focus trigger</button>
-            <div>{isFocus ? 'Focus' : 'Blur'}</div>
-        </>
-    )
+  return (
+    <>
+      <input ref={ref} />
+      <button onClick={() => setFocus()}>focus trigger</button>
+      <div>{isFocus ? 'Focus' : 'Blur'}</div>
+    </>
+  )
 };
 ```
