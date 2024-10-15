@@ -57,9 +57,7 @@ describe('useFocus', () => {
     expect(targetStatus.textContent).toBe('Blur');
     expect(blurMockFn).toBeCalled();
   });
-});
 
-describe('useFocus without connected ref', () => {
   it('should not throw error when ref is not connected', async () => {
     const focusMockFn = vi.fn();
     const blurMockFn = vi.fn();
@@ -85,5 +83,25 @@ describe('useFocus without connected ref', () => {
     expect(focusTarget).not.toHaveFocus();
     expect(targetStatus.textContent).toBe('Blur');
     expect(blurMockFn).not.toBeCalled();
+  });
+
+  it('should not throw error when focusAction and blurAction is not provided', async () => {
+    const { user } = renderSetup(<TestComponent connectedRef />);
+
+    const focusTarget = screen.getByRole('focus-target');
+    const targetTrigger = screen.getByRole('target-trigger');
+    const targetStatus = screen.getByRole('target-status');
+
+    await act(async () => {
+      await user.click(targetTrigger);
+    });
+    expect(focusTarget).toHaveFocus();
+    expect(targetStatus.textContent).toBe('Focus');
+
+    await act(async () => {
+      await user.click(targetStatus);
+    });
+    expect(focusTarget).not.toHaveFocus();
+    expect(targetStatus.textContent).toBe('Blur');
   });
 });
