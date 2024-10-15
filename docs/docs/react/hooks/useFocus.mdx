@@ -1,0 +1,50 @@
+import { useFocus } from '@modern-kit/react';
+
+# useFocus
+
+대상 요소를 기준으로 포커스 상태를 반환하고, 포커스 상태에 따른 액션을 정의할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useFocus/index.ts)
+
+## Interface
+```ts title="typescript"
+
+interface UseFocusProps {
+  focusAction?: (event: FocusEvent) => void;
+  blurAction?: (event: FocusEvent) => void;
+}
+
+interface UseFocusReturnType<T extends HTMLElement> {
+  ref: React.RefObject<T>;
+  isFocus: boolean;
+  setFocus: () => void;
+}
+
+const useFocus<T extends HTMLElement>({
+  focusAction = noop,
+  blurAction = noop,
+}: UseFocusProps = {}): UseFocusReturnType<T>
+```
+
+## Usage
+```tsx title="typescript"
+import { useFocus } from '@modern-kit/react';
+
+const Example = () => {
+    const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
+        focusAction: () => console.log("포커스"),
+        blurAction: () => console.log("포커스 해제"),
+    });
+
+    return (
+        <>
+            <input ref={ref} />
+            <button onClick={() => setFocus()}>focus trigger</button>
+            <div>{isFocus ? 'Focus' : 'Blur'}</div>
+        </>
+    )
+};
+```
