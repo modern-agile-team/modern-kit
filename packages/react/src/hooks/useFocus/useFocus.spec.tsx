@@ -1,7 +1,7 @@
 import { describe, it, expect, Mock, vi } from 'vitest';
 import { useFocus } from '.';
 import { renderSetup } from '../../utils/test/renderSetup';
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 
 const TestComponent = ({
   focusMockFn,
@@ -43,14 +43,16 @@ describe('useFocus', () => {
     const targetTrigger = screen.getByRole('target-trigger');
     const targetStatus = screen.getByRole('target-status');
 
-    await user.click(targetTrigger);
-
+    await act(async () => {
+      await user.click(targetTrigger);
+    });
     expect(focusTarget).toHaveFocus();
     expect(targetStatus.textContent).toBe('Focus');
     expect(focusMockFn).toBeCalled();
 
-    await user.click(targetStatus);
-
+    await act(async () => {
+      await user.click(targetStatus);
+    });
     expect(focusTarget).not.toHaveFocus();
     expect(targetStatus.textContent).toBe('Blur');
     expect(blurMockFn).toBeCalled();
@@ -70,14 +72,16 @@ describe('useFocus without connected ref', () => {
     const targetTrigger = screen.getByRole('target-trigger');
     const targetStatus = screen.getByRole('target-status');
 
-    await user.click(targetTrigger);
-
+    await act(async () => {
+      await user.click(targetTrigger);
+    });
     expect(focusTarget).not.toHaveFocus();
     expect(targetStatus.textContent).toBe('Blur');
     expect(focusMockFn).not.toBeCalled();
 
-    await user.click(targetStatus);
-
+    await act(async () => {
+      await user.click(targetStatus);
+    });
     expect(focusTarget).not.toHaveFocus();
     expect(targetStatus.textContent).toBe('Blur');
     expect(blurMockFn).not.toBeCalled();
