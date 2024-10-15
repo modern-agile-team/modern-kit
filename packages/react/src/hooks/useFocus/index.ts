@@ -1,0 +1,77 @@
+import React from 'react';
+import { useEventListener } from '../../hooks/useEventListener';
+import { noop } from '@modern-kit/utils';
+
+interface UseFocusProps {
+  focusAction?: (event: FocusEvent) => void;
+  blurAction?: (event: FocusEvent) => void;
+}
+
+interface UseFocusReturnType<T extends HTMLElement> {
+  ref: React.RefObject<T>;
+  isFocus: boolean;
+  setFocus: () => void;
+}
+
+/**
+ * @description 대상 요소를 기준으로 포커스 상태를 반환하고, 포커스 상태에 따른 액션을 정의할 수 있는 커스텀 훅입니다.
+ *
+ * @template T - HTML 엘리먼트 타입을 지정합니다.
+ * @param {{
+ *  focusAction?: (event: FocusEvent) => void;
+ *  blurAction?: (event: FocusEvent) => void;
+ * }} props - 포커스 상태에 따른 콜백 함수를 포함한 선택적 속성입니다.
+ * - `focusAction`: 요소에 포커스가 들어올 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
+ * - `blurAction`: 요소에서 포커스가 빠져나갈 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
+ *
+ * @returns {UseFocusReturnType<T>} `ref`, `isFocus`, `setFocus`를 포함한 객체를 반환합니다.
+ * - `ref`: 추적할 대상 요소의 참조입니다.
+ * - `isFocus`: 요소가 포커스 상태인지 여부를 나타내는 불리언 값입니다.
+ * - `setFocus`: 요소에 포커스를 참 값으로 설정하는 함수입니다.
+ *
+ * @example
+ * const { ref, isFocused, setFocus } = useFocus<HTMLInputElement>({
+ *   focusAction: () => console.log("포커스"),
+ *   blurAction: () => console.log("포커스 해제")
+ * });
+ *
+ * <input ref={ref} />
+ * <button onClick={() => setFocus()}>Input 포커스</button>
+ * <div>{isFocused ? '포커스' : '포커스 해제'}</div>
+ */
+export function useFocus<T extends HTMLElement>({
+  focusAction = noop,
+  blurAction = noop,
+}: UseFocusProps = {}): UseFocusReturnType<T> {
+  const [isFocus, setIsFocus] = React.useState(false);
+
+  const ref = React.useRef<T>(null);
+
+  const onFocus = React.useCallback(
+    (event: FocusEvent) => {
+      setIsFocus(true);
+      focusAction(event);
+    },
+    [focusAction]
+  );
+
+  const onBlur = React.useCallback(
+    (event: FocusEvent) => {
+      setIsFocus(false);
+      blurAction(event);
+    },
+    [blurAction]
+  );
+
+  const setFocus = React.useCallback(() => {
+    if (ref.current) {
+      ref.current.focus();
+      setIsFocus(true);
+    }
+  }, []);
+
+  useEventListener(ref, 'focus', onFocus);
+  useEventListener(ref, 'blur', onBlur);
+
+  return { ref, isFocus, setFocus };
+}

@@ -11,6 +11,7 @@ export * from './useDebouncedState';
 export * from './useDocumentTitle';
 export * from './useEventListener';
 export * from './useFileReader';
+export * from './useFocus';
 export * from './useForceUpdate';
 export * from './useHover';
 export * from './useImageStatus';
