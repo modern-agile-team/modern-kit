@@ -56,7 +56,7 @@ describe('useFocus', () => {
     expect(blurMockFn).toBeCalled();
   });
 
-  it('should not throw error when ref is not connected', async () => {
+  it('should not perform any actions when ref is not assigned', async () => {
     const focusMockFn = vi.fn();
     const blurMockFn = vi.fn();
 
@@ -81,7 +81,7 @@ describe('useFocus', () => {
     expect(blurMockFn).not.toBeCalled();
   });
 
-  it('should not throw error when focusAction and blurAction is not provided', async () => {
+  it('should not perform any actions when onFocus and onBlur are not assigned', async () => {
     const { user } = renderSetup(<TestComponent connectedRef />);
 
     const focusTarget = screen.getByRole('focus-target');
