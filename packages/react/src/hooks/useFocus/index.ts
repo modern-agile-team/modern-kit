@@ -1,10 +1,11 @@
 import { noop } from '@modern-kit/utils';
-import { RefObject, useRef, useState, useCallback } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/useEventListener';
+import { usePreservedCallback } from '../usePreservedCallback';
 
 interface UseFocusProps {
-  focusAction?: (event: FocusEvent) => void;
-  blurAction?: (event: FocusEvent) => void;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
 }
 
 interface UseFocusReturnType<T extends HTMLElement> {
@@ -18,11 +19,11 @@ interface UseFocusReturnType<T extends HTMLElement> {
  *
  * @template T - HTML 엘리먼트 타입을 지정합니다.
  * @param {{
- *  focusAction?: (event: FocusEvent) => void;
- *  blurAction?: (event: FocusEvent) => void;
+ *  onFocus?: (event: FocusEvent) => void;
+ *  onBlur?: (event: FocusEvent) => void;
  * }} props - 포커스 상태에 따른 콜백 함수를 포함한 선택적 속성입니다.
- * - `focusAction`: 요소에 포커스가 들어올 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
- * - `blurAction`: 요소에서 포커스가 빠져나갈 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
+ * - `onFocus`: 요소에 포커스가 들어올 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
+ * - `onBlur`: 요소에서 포커스가 빠져나갈 때 호출되는 함수입니다. 기본값은 `noop` 함수입니다.
  *
  * @returns {UseFocusReturnType<T>} `ref`, `isFocus`, `setFocus`를 포함한 객체를 반환합니다.
  * - `ref`: 추적할 대상 요소의 참조입니다.
@@ -31,8 +32,8 @@ interface UseFocusReturnType<T extends HTMLElement> {
  *
  * @example
  * const { ref, isFocused, setFocus } = useFocus<HTMLInputElement>({
- *   focusAction: () => console.log("focus"),
- *   blurAction: () => console.log("blur")
+ *   onFocus: () => console.log("focus"),
+ *   onBlur: () => console.log("blur")
  * });
  *
  * <input ref={ref} />
@@ -40,38 +41,32 @@ interface UseFocusReturnType<T extends HTMLElement> {
  * <div>{isFocused ? 'focus' : 'blur'}</div>
  */
 export function useFocus<T extends HTMLElement>({
-  focusAction = noop,
-  blurAction = noop,
+  onFocus = noop,
+  onBlur = noop,
 }: UseFocusProps = {}): UseFocusReturnType<T> {
   const [isFocus, setIsFocus] = useState(false);
 
   const ref = useRef<T>(null);
 
-  const onFocus = useCallback(
-    (event: FocusEvent) => {
-      setIsFocus(true);
-      focusAction(event);
-    },
-    [focusAction]
-  );
+  const preservedFocusAction = usePreservedCallback((event: FocusEvent) => {
+    setIsFocus(true);
+    onFocus(event);
+  });
 
-  const onBlur = useCallback(
-    (event: FocusEvent) => {
-      setIsFocus(false);
-      blurAction(event);
-    },
-    [blurAction]
-  );
+  const preservedBlurAction = usePreservedCallback((event: FocusEvent) => {
+    setIsFocus(false);
+    onBlur(event);
+  });
 
   const setFocus = useCallback(() => {
-    if (ref.current) {
-      ref.current.focus();
-      setIsFocus(true);
-    }
+    if (!ref.current) return;
+
+    ref.current.focus();
+    setIsFocus(true);
   }, []);
 
-  useEventListener(ref, 'focus', onFocus);
-  useEventListener(ref, 'blur', onBlur);
+  useEventListener(ref, 'focus', preservedFocusAction);
+  useEventListener(ref, 'blur', preservedBlurAction);
 
   return { ref, isFocus, setFocus };
 }

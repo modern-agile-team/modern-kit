@@ -13,8 +13,8 @@ import { useFocus } from '@modern-kit/react';
 ```ts title="typescript"
 
 interface UseFocusProps {
-  focusAction?: (event: FocusEvent) => void;
-  blurAction?: (event: FocusEvent) => void;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
 }
 
 interface UseFocusReturnType<T extends HTMLElement> {
@@ -24,8 +24,8 @@ interface UseFocusReturnType<T extends HTMLElement> {
 }
 
 const useFocus<T extends HTMLElement>({
-  focusAction = noop,
-  blurAction = noop,
+  onFocus = noop,
+  onBlur = noop,
 }: UseFocusProps = {}): UseFocusReturnType<T>
 ```
 
@@ -35,8 +35,8 @@ import { useFocus } from '@modern-kit/react';
 
 const Example = () => {
   const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
-    focusAction: () => console.log("focus"),
-    blurAction: () => console.log("blur"),
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
   });
 
   return (
@@ -53,8 +53,8 @@ const Example = () => {
 
 export const Example = () => {
   const { ref, isFocus, setFocus } = useFocus({
-    focusAction: () => console.log("focus"),
-    blurAction: () => console.log("blur"),
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
   });
 
   return (
