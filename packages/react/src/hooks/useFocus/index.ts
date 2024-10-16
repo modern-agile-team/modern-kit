@@ -30,15 +30,17 @@ interface UseFocusReturnType<T extends HTMLElement> {
  * - `isFocus`: 요소가 포커스 상태인지 여부를 나타내는 불리언 값입니다.
  * - `setFocus`: 요소에 포커스를 참 값으로 설정하는 함수입니다.
  *
- * @example
- * const { ref, isFocused, setFocus } = useFocus<HTMLInputElement>({
- *   onFocus: () => console.log("focus"),
- *   onBlur: () => console.log("blur")
- * });
- *
- * <input ref={ref} />
- * <button onClick={() => setFocus()}>focus trigger</button>
- * <div>{isFocused ? 'focus' : 'blur'}</div>
+* @example
+* ```tsx
+* const { ref, isFocused, setFocus } = useFocus<HTMLInputElement>({
+*   onFocus: () => console.log("focus"),
+*   onBlur: () => console.log("blur")
+* });
+*
+* <input ref={ref} />
+* <button onClick={() => setFocus()}>focus trigger</button>
+* <div>{isFocused ? 'focus' : 'blur'}</div>
+* ```
  */
 export function useFocus<T extends HTMLElement>({
   onFocus = noop,
