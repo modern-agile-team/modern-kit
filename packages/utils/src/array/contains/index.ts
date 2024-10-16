@@ -4,9 +4,9 @@
  *
  * @template T - 배열의 요소 타입입니다.
  * @param {T[] | readonly T[]} arr - 검색할 배열입니다. 변경 불가능한 읽기 전용 배열도 허용됩니다.
- * @param {U} value - 배열에서 찾고자 하는 값입니다.
- * @param {(x: T, y: U) => boolean} [comparator=Object.is] - 배열의 요소와 찾고자 하는 값을 비교할 때 사용할 사용자 정의 비교 함수입니다. 기본값은 `Object.is`입니다.
- * @returns {value is U} 주어진 값이 배열에 포함되어 있으면 `true`를, 그렇지 않으면 `false`를 반환합니다.
+ * @param {unknown} value - 배열에서 찾고자 하는 값입니다.
+ * @param {(x: any, y: any) => boolean} [comparator=Object.is] - 배열의 요소와 찾고자 하는 값을 비교할 때 사용할 사용자 정의 비교 함수입니다. 기본값은 `Object.is`입니다.
+ * @returns {value is T} 주어진 값이 배열에 포함되어 있으면 `true`를, 그렇지 않으면 `false`를 반환합니다.
  *
  * @example
  * // 기본 비교 함수 사용 (Object.is)
@@ -18,10 +18,9 @@
  * @example
  * // 사용자 정의 비교 함수 사용
  * const objects = [{ id: 1 }, { id: 2 }];
- * const comparator = (a: { id: number }, b: { id: number }) => a.id === b.id;
  *
- * contains(objects, { id: 2 }, (a, b) => a.id === b.id); // true
- * contains(objects, { id: 3 }, (a, b) => a.id === b.id); // false
+ * contains(objects, { id: 2 }, (x, y) => x.id === y.id); // true
+ * contains(objects, { id: 3 }, (x, y) => x.id === y.id); // false
  */
 export function contains<T>(
   arr: T[] | readonly T[],

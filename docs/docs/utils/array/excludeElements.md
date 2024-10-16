@@ -14,7 +14,7 @@
 ```ts title="typescript"
 const excludeElements: <T, U>(
   arr: T[] | readonly T[],
-  excludeArr: T[] | readonly T[],
+  target: T[] | readonly T[],
   iteratee?: ((item: T) => U) | undefined
 ) => T[];
 ```

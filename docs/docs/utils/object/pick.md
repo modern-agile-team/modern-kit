@@ -9,20 +9,24 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/pick/index.ts)
 
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/pick|5,663,602.36|0.0002|`fastest`|
+|lodash/pick|1,035,576.42|0.0010|-|
+
+- **modern-kit/pick**
+  - `4.05x` faster than lodash/pick
+
 ## Interface
 ```ts title="typescript"
-type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
-  keyof T,
-  symbol
->;
-
-const pick: <
-  T extends Record<PropertyKey, T[keyof T]>,
-  K extends ObjectKeys<T>
->(
+function pick<T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
-  keys: K | K[]
-) => Pick<Record<ObjectKeys<T>, T[ObjectKeys<T>]>, K>;
+  keys: K[] | readonly K[]
+): Pick<T, K>;
 ```
 
 ## Usage

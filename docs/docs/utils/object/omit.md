@@ -9,12 +9,24 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/omit/index.ts)
 
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/omit|3,567,312.89|0.0003|`fastest`|
+|lodash/omit|879,967.75|0.0011|-|
+
+- **modern-kit/omit**
+  - `4.05x` faster than lodash/omit
+
 ## Interface
 ```ts title="typescript"
-const omit: <T extends Record<PropertyKey, any>, K extends keyof T>(
+function omit<T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
-  keys: K[]
-) => Omit<T, K>;
+  keys: K[] | readonly K[]
+): Omit<T, K>;
 ```
 
 ## Usage

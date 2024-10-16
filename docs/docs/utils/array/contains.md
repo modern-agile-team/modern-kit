@@ -32,11 +32,11 @@ Object.is(NaN, 0 / 0); // true
 ## Interface
 
 ```ts title="typescript"
-const contains: <T>(
+function contains<T>(
   arr: T[] | readonly T[],
   value: unknown,
   comparator?: (x: any, y: any) => boolean
-) => value is T;
+): value is T;
 ```
 
 ## Usage
