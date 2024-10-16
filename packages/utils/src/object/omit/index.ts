@@ -1,3 +1,5 @@
+import { cloneDeep } from '../../common';
+
 /**
  * @description 주어진 객체에서 지정된 키들을 제거한 새로운 객체를 반환하는 함수입니다.
  *
@@ -17,7 +19,7 @@ export function omit<T extends Record<PropertyKey, any>, K extends keyof T>(
   obj: T,
   keys: K[] | readonly K[]
 ): Omit<T, K> {
-  const result = { ...obj };
+  const result = cloneDeep(obj);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];

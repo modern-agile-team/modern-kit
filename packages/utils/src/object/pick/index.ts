@@ -1,3 +1,5 @@
+import { cloneDeep } from '../../common';
+
 /**
  * @description 주어진 객체에서 지정된 키들만을 선택하여 새로운 객체를 반환하는 함수입니다.
  *
@@ -23,7 +25,7 @@ export function pick<T extends Record<PropertyKey, any>, K extends keyof T>(
   keys: K[] | readonly K[]
 ): Pick<T, K> {
   const result = {} as T;
-  const copiedObj = { ...obj };
+  const copiedObj = cloneDeep(obj);
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];

@@ -15,11 +15,11 @@
 
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/omit|3,567,312.89|0.0003|`fastest`|
-|lodash/omit|879,967.75|0.0011|-|
+|modern-kit/omit|1,505,400.16|0.0003|`fastest`|
+|lodash/omit|901,269.43|0.0011|-|
 
 - **modern-kit/omit**
-  - `4.05x` faster than lodash/omit
+  - `1.67x` faster than lodash/omit
 
 ## Interface
 ```ts title="typescript"

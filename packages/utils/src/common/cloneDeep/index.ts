@@ -1,4 +1,4 @@
-export function deepCopy<T>(value: T) {
+export function cloneDeep<T>(value: T) {
   const referenceMap = new WeakMap();
 
   const copyWthRecursion = (target: T): T => {
@@ -14,11 +14,11 @@ export function deepCopy<T>(value: T) {
 
     // Array
     if (Array.isArray(target)) {
-      const newArray: any[] = [];
-
+      const newArray = new Array(target.length);
       referenceMap.set(target, newArray);
-      for (const item of target) {
-        newArray.push(copyWthRecursion(item));
+
+      for (let i = 0; i < target.length; i++) {
+        newArray[i] = copyWthRecursion(target[i]);
       }
       return newArray as T;
     }
@@ -26,8 +26,8 @@ export function deepCopy<T>(value: T) {
     // Set
     if (target instanceof Set) {
       const newSet = new Set();
-
       referenceMap.set(target, newSet);
+
       for (const item of target) {
         newSet.add(copyWthRecursion(item));
       }
@@ -52,18 +52,21 @@ export function deepCopy<T>(value: T) {
 
     // RegExp
     if (target instanceof RegExp) {
-      return new RegExp(target.source, target.flags) as T;
+      const result = new RegExp(target.source, target.flags);
+      result.lastIndex = target.lastIndex;
+
+      return result as T;
     }
 
     // Object
-    const newObject: Record<PropertyKey, any> = Object.create(
-      Object.getPrototypeOf(target)
-    );
-
+    const newObject: Record<PropertyKey, any> = {};
     referenceMap.set(target, newObject);
+
     const keys = Reflect.ownKeys(target); // symbol 유지
 
-    for (const key of keys) {
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
       newObject[key] = copyWthRecursion(
         (target as Record<PropertyKey, any>)[key]
       );

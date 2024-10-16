@@ -2,8 +2,6 @@
 
 인자로 넣은 `keys`로 구성된 객체를 반환하는 함수입니다. 반환된 객체는 `깊은 복사된 새로운 객체`입니다.
 
-`symbol`은 제외됩니다.
-
 <br />
 
 ## Code
@@ -15,11 +13,11 @@
 
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/pick|5,663,602.36|0.0002|`fastest`|
-|lodash/pick|1,035,576.42|0.0010|-|
+|modern-kit/pick|1,693,028.73|0.0002|`fastest`|
+|lodash/pick|1,022,887.39|0.0010|-|
 
 - **modern-kit/pick**
-  - `4.05x` faster than lodash/pick
+  - `1.60x` faster than lodash/pick
 
 ## Interface
 ```ts title="typescript"
