@@ -23,9 +23,9 @@ interface UseFocusReturnType<T extends HTMLElement> {
   setFocus: () => void;
 }
 
-const useFocus<T extends HTMLElement>({
-  onFocus = noop,
-  onBlur = noop,
+function useFocus<T extends HTMLElement>({
+  onFocus,
+  onBlur,
 }: UseFocusProps = {}): UseFocusReturnType<T>
 ```
 
