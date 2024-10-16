@@ -1,0 +1,69 @@
+import { useFocus } from '@modern-kit/react';
+
+# useFocus
+
+대상 요소를 기준으로 포커스 상태를 반환하고, 포커스 상태에 따른 액션을 정의할 수 있는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useFocus/index.ts)
+
+## Interface
+```ts title="typescript"
+
+interface UseFocusProps {
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
+}
+
+interface UseFocusReturnType<T extends HTMLElement> {
+  ref: RefObject<T>;
+  isFocus: boolean;
+  setFocus: () => void;
+}
+
+function useFocus<T extends HTMLElement>({
+  onFocus,
+  onBlur,
+}: UseFocusProps = {}): UseFocusReturnType<T>
+```
+
+## Usage
+```tsx title="typescript"
+import { useFocus } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
+  });
+
+  return (
+    <div>
+      <input ref={ref} />
+      <button onClick={() => setFocus()}>focus trigger</button>
+      <div>{isFocus ? 'Focus' : 'Blur'}</div>
+    </div>
+  )
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { ref, isFocus, setFocus } = useFocus({
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
+  });
+
+  return (
+    <div>
+      <input ref={ref} />
+      <button onClick={() => setFocus()}>focus trigger</button>
+      <div>{isFocus ? 'Focus' : 'Blur'}</div>
+    </div>
+  )
+};
+
+<Example />
