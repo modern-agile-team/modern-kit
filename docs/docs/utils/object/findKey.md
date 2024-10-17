@@ -38,5 +38,4 @@ const obj = {
 };
 
 findKey(obj, (item) => item.active); // 'bike'
-findKey(obj, (item) => item.inactive); // undefined
 ```
