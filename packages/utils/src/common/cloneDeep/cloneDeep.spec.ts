@@ -1,17 +1,17 @@
 import { describe, it, expect } from 'vitest';
-import { deepCopy } from '.';
+import { cloneDeep } from '.';
 
-describe('deepCopy', () => {
+describe('cloneDeep', () => {
   it('should deeply copy a primitive value', () => {
     const originNum = 42;
-    const copiedNum = deepCopy(originNum);
+    const copiedNum = cloneDeep(originNum);
 
     expect(copiedNum).toBe(originNum);
   });
 
   it('should deeply copy an array', () => {
     const originArray = [1, 2, [3, 4]];
-    const copiedArray = deepCopy(originArray);
+    const copiedArray = cloneDeep(originArray);
 
     expect(copiedArray).toEqual(originArray);
     expect(copiedArray).not.toBe(originArray);
@@ -21,7 +21,7 @@ describe('deepCopy', () => {
     const originArray: any[] = [];
     originArray.push(originArray);
 
-    const copiedArr = deepCopy(originArray);
+    const copiedArr = cloneDeep(originArray);
 
     expect(copiedArr).toEqual(copiedArr[0]);
     expect(copiedArr).not.toBe(originArray);
@@ -32,7 +32,7 @@ describe('deepCopy', () => {
     const originObject = { origin: {} };
     originObject.origin = originObject;
 
-    const copiedObject = deepCopy(originObject);
+    const copiedObject = cloneDeep(originObject);
 
     expect(copiedObject).toEqual(copiedObject.origin);
     expect(copiedObject).not.toBe(originObject);
@@ -40,16 +40,17 @@ describe('deepCopy', () => {
   });
 
   it('should deeply copy an object', () => {
-    const originObj = { a: 1, b: { c: 2 } };
-    const copiedObj = deepCopy(originObj);
+    const originObj = { a: 1, b: { c: 2, d: [0, 1] } };
+    const copiedObj = cloneDeep(originObj);
 
     expect(copiedObj).toEqual(originObj);
     expect(copiedObj).not.toBe(originObj);
+    expect(copiedObj.b.d).not.toBe(originObj.b.d);
   });
 
   it('should deeply copy a set', () => {
     const originSet = new Set([1, 2, 3]);
-    const copiedSet = deepCopy(originSet);
+    const copiedSet = cloneDeep(originSet);
 
     expect(copiedSet).toEqual(originSet);
     expect(copiedSet).not.toBe(originSet);
@@ -60,7 +61,7 @@ describe('deepCopy', () => {
       ['a', 1],
       ['b', 2],
     ]);
-    const copiedMap = deepCopy(originMap);
+    const copiedMap = cloneDeep(originMap);
 
     expect(copiedMap).toEqual(originMap);
     expect(copiedMap).not.toBe(originMap);
@@ -68,7 +69,7 @@ describe('deepCopy', () => {
 
   it('should deeply copy a date', () => {
     const date = new Date();
-    const copiedDate = deepCopy(date);
+    const copiedDate = cloneDeep(date);
 
     expect(copiedDate.getTime()).toEqual(date.getTime());
     expect(copiedDate).not.toBe(date);
@@ -76,7 +77,7 @@ describe('deepCopy', () => {
 
   it('should deeply copy a regex', () => {
     const regex = /test/gi;
-    const copiedRegex = deepCopy(regex);
+    const copiedRegex = cloneDeep(regex);
 
     expect(copiedRegex.source).toEqual(regex.source);
     expect(copiedRegex.flags).toEqual(regex.flags);
