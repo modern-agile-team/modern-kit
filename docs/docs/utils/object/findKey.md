@@ -20,8 +20,7 @@
   - `2.74x` faster than lodash/findKey
 
 ## Interface
-
-```ts
+```ts title="typescript"
 function findKey<T extends Record<PropertyKey, any>>(
   obj: T,
   condition: (value: T[keyof T) => boolean
