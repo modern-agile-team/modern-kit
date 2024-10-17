@@ -19,4 +19,14 @@ describe('getUniqId', () => {
 
     expect(id1).not.toBe(id2);
   });
+
+  it('should allow adding a prefix when generating a unique ID', () => {
+    const prefix = 'id_';
+
+    vi.setSystemTime(new Date('2024-01-01T09:00:00Z'));
+
+    const id1 = getUniqId(prefix);
+
+    expect(id1.startsWith(prefix)).toBeTruthy();
+  });
 });

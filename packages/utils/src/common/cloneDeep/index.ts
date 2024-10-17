@@ -1,4 +1,20 @@
-export function cloneDeep<T>(value: T) {
+/**
+ * @description 인자로 넣은 값을 깊게 복사 함수입니다.
+ * 자주 사용하는 원시 타입, 배열, Set, Map, Date, RegExp, 그리고 일반 객체를 지원하며, 순환 참조도 처리합니다.
+ *
+ * @template T 복사할 값의 타입
+ * @param {T} value 깊은 복사를 수행할 대상 값
+ * @returns {T} 입력된 값의 깊은 복사본을 반환합니다.
+ *
+ * @example
+ * const original = { a: 1, b: { c: 2 } };
+ * const copied = cloneDeep(original);
+ *
+ * copied; // { a: 1, b: { c: 2 } }
+ * copied !== original; // true
+ * copied.b !== original.b; // true
+ */
+export function cloneDeep<T>(value: T): T {
   const referenceMap = new WeakMap();
 
   const copyWthRecursion = (target: T): T => {
