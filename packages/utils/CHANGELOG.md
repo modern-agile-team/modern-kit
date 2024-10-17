@@ -1,5 +1,23 @@
 # @modern-kit/utils
 
+## 1.19.0
+
+### Minor Changes
+
+- [#507](https://github.com/modern-agile-team/modern-kit/pull/507) [`c94a786`](https://github.com/modern-agile-team/modern-kit/commit/c94a7867f70dea890efa7e012ceb99fe4b8e0ac3) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): findKey 함수 추가 - @Sangminnn
+
+- [#512](https://github.com/modern-agile-team/modern-kit/pull/512) [`571ec6e`](https://github.com/modern-agile-team/modern-kit/commit/571ec6e016ebb6b663a2aff5ab34b63eb660d6a6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): deepCopy -> cloneDeep 네이밍 변경 및 기능 개선 - @ssi02014
+
+- [#500](https://github.com/modern-agile-team/modern-kit/pull/500) [`a60dad3`](https://github.com/modern-agile-team/modern-kit/commit/a60dad392f022e67267d110def25ee25c104bccf) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils) xor 유틸 함수 추가 - @Gaic4o
+
+- [#498](https://github.com/modern-agile-team/modern-kit/pull/498) [`8069768`](https://github.com/modern-agile-team/modern-kit/commit/80697688c5c42655f32d690edbaefbe64060b180) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): at 신규 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [#512](https://github.com/modern-agile-team/modern-kit/pull/512) [`571ec6e`](https://github.com/modern-agile-team/modern-kit/commit/571ec6e016ebb6b663a2aff5ab34b63eb660d6a6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): uniq 관련 함수 개선 - @ssi02014
+
+- [#512](https://github.com/modern-agile-team/modern-kit/pull/512) [`571ec6e`](https://github.com/modern-agile-team/modern-kit/commit/571ec6e016ebb6b663a2aff5ab34b63eb660d6a6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): omit, pick 인터페이스 수정 및 로직 간소화 - @ssi02014
+
 ## 1.18.0
 
 ### Minor Changes
