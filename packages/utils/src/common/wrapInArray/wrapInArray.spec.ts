@@ -11,7 +11,7 @@ describe('wrapInArray', () => {
 
   it('should not wrap an array value in an array', () => {
     const arrayValue = [1, 2, 3];
-    const wrappedInArray = wrapInArray([1, 2, 3]);
+    const wrappedInArray = wrapInArray(arrayValue);
 
     expect(wrappedInArray).toBe(arrayValue);
   });
