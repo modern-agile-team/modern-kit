@@ -4,7 +4,7 @@
 
 ## Code
 
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/groupBy/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/findKey/index.ts)
 
 ## Benchmark
 
