@@ -28,8 +28,7 @@ function findKey<T extends Record<PropertyKey, any>>(
 ```
 
 ## Usage
-
-```ts
+```ts title="typescript"
 import { findKey } from '@modern-kit/utils';
 
 const obj = {
