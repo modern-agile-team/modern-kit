@@ -16,7 +16,7 @@
 | modern-kit/findKey | 18,629,221.40 | 0.0001 | `fastest` |
 | lodash/findKey     | 6,807,578.65  | 0.0001 | `slowest` |
 
-- **modern-kit/groupBy**
+- **modern-kit/findKey**
   - `2.74x` faster than lodash/findKey
 
 ## Interface
