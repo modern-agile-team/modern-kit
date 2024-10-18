@@ -20,13 +20,15 @@
  */
 export function flatten<T, D extends number = 1>(
   arr: T[] | readonly T[],
-  depth = 1 as D
+  depth: D = 1 as D
 ): FlatArray<T[], D>[] {
   const result: FlatArray<T[], D>[] = [];
   const flooredDepth = Math.floor(depth);
 
   const recursive = (arr: readonly T[], currentDepth: number) => {
-    for (const item of arr) {
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
+
       if (Array.isArray(item) && currentDepth < flooredDepth) {
         recursive(item, currentDepth + 1);
       } else {

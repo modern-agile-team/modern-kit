@@ -23,7 +23,7 @@ import { flatten } from '../../array';
 export function flatMap<T, U, D extends number>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => U,
-  depth = 1 as D
+  depth: D = 1 as D
 ): FlatArray<U[], D>[] {
   return flatten(
     arr.map((item) => iteratee(item)),
