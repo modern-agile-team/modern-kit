@@ -17,7 +17,7 @@ export type KeyDownCallbackMap = {
   // Whitespace keys
   Enter: (event: KeyboardEvent) => void;
   Tab: (event: KeyboardEvent) => void;
-  ' ': (event: KeyboardEvent) => void;
+  ' ': (event: KeyboardEvent) => void; // Space
 
   // Navigation keys
   ArrowDown: (event: KeyboardEvent) => void;
@@ -272,7 +272,4 @@ export type KeyDownCallbackMap = {
   X: (event: KeyboardEvent) => void;
   Y: (event: KeyboardEvent) => void;
   Z: (event: KeyboardEvent) => void;
-
-  // index signature
-  [key: string]: (event: KeyboardEvent) => void;
 };

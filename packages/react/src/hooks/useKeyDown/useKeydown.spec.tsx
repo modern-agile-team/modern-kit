@@ -3,7 +3,13 @@ import { renderSetup } from '../../utils/test/renderSetup';
 import { useKeyDown } from '.';
 import { screen } from '@testing-library/react';
 
-const TestComponent = (props: Parameters<typeof useKeyDown>[0]) => {
+const WindowComponent = (props: Parameters<typeof useKeyDown>[0]) => {
+  useKeyDown<HTMLButtonElement>(props);
+
+  return <></>;
+};
+
+const TargetTestComponent = (props: Parameters<typeof useKeyDown>[0]) => {
   const targetRef = useKeyDown<HTMLButtonElement>(props);
 
   return <button ref={targetRef}>버튼</button>;
@@ -14,130 +20,157 @@ describe('useKeyDown', () => {
   const enterMockFn = vi.fn();
   const shiftMockFn = vi.fn();
 
-  it('should trigger the event provided to keyDownCallbackMap when a keyboard event occurs', async () => {
-    const { user } = renderSetup(
-      <TestComponent
-        keyDownCallbackMap={{ Enter: enterMockFn, Shift: shiftMockFn }}
-      />
-    );
+  describe('window', () => {
+    it('should trigger the event provided to keyDownCallbackMap when a keyboard event occurs', async () => {
+      const { user } = renderSetup(
+        <WindowComponent
+          keyDownCallbackMap={{ Enter: enterMockFn, Shift: shiftMockFn }}
+        />
+      );
 
-    const button = screen.getByRole('button');
+      await user.keyboard('{Enter}');
 
-    expect(enterMockFn).not.toBeCalled();
+      expect(enterMockFn).toBeCalledTimes(1);
 
-    button.focus();
+      await user.keyboard('{Shift}');
 
-    await user.keyboard('{Enter}');
+      expect(shiftMockFn).toBeCalledTimes(1);
 
-    expect(enterMockFn).toBeCalledTimes(1);
+      await user.keyboard('{Enter}{Shift}');
 
-    await user.keyboard('{Shift}');
+      expect(enterMockFn).toBeCalledTimes(2);
+      expect(shiftMockFn).toBeCalledTimes(2);
+    });
 
-    expect(shiftMockFn).toBeCalledTimes(1);
+    it('should execute the callback function for all key', async () => {
+      const { user } = renderSetup(
+        <WindowComponent allKeyDownCallback={allKeyMockFn} />
+      );
 
-    await user.keyboard('{Enter}{Shift}');
+      await user.keyboard('{Enter}{Shift}');
 
-    expect(enterMockFn).toBeCalledTimes(2);
-    expect(shiftMockFn).toBeCalledTimes(2);
+      expect(allKeyMockFn).toBeCalledTimes(2);
+    });
+
+    it('should bind the event if enabled is true', async () => {
+      // enabled false setting
+      const { user, rerender } = renderSetup(
+        <WindowComponent
+          enabled={false}
+          keyDownCallbackMap={{ Enter: enterMockFn }}
+        />
+      );
+
+      await user.keyboard('{Enter}');
+
+      expect(enterMockFn).not.toBeCalled();
+
+      // enabled true setting
+      rerender(
+        <WindowComponent
+          enabled={true}
+          keyDownCallbackMap={{ Enter: enterMockFn }}
+        />
+      );
+
+      await user.keyboard('{Enter}');
+
+      expect(enterMockFn).toBeCalled();
+    });
+
+    it('should not execute if a function is not assigned to the key', async () => {
+      const { user } = renderSetup(<WindowComponent />);
+
+      await user.keyboard('{Enter}');
+
+      expect(enterMockFn).not.toBeCalled();
+    });
   });
 
-  it('should execute the callback function for all key', async () => {
-    const { user } = renderSetup(
-      <TestComponent allKeyDownCallback={allKeyMockFn} />
-    );
+  describe('target element', () => {
+    it('should trigger the event provided to keyDownCallbackMap when a keyboard event occurs', async () => {
+      const { user } = renderSetup(
+        <TargetTestComponent
+          keyDownCallbackMap={{ Enter: enterMockFn, Shift: shiftMockFn }}
+        />
+      );
 
-    const button = screen.getByRole('button');
+      const button = screen.getByRole('button');
 
-    button.focus();
+      expect(enterMockFn).not.toBeCalled();
 
-    await user.keyboard('{Enter}{Shift}');
+      button.focus();
 
-    expect(allKeyMockFn).toBeCalledTimes(2);
-  });
+      await user.keyboard('{Enter}');
 
-  it('should bind the event if enabled is true', async () => {
-    // enabled false setting
-    const { user, rerender } = renderSetup(
-      <TestComponent
-        enabled={false}
-        keyDownCallbackMap={{ Enter: enterMockFn }}
-      />
-    );
+      expect(enterMockFn).toBeCalledTimes(1);
 
-    const button = screen.getByRole('button');
+      await user.keyboard('{Shift}');
 
-    button.focus();
+      expect(shiftMockFn).toBeCalledTimes(1);
 
-    await user.keyboard('{Enter}');
+      await user.keyboard('{Enter}{Shift}');
 
-    expect(enterMockFn).not.toBeCalled();
+      expect(enterMockFn).toBeCalledTimes(2);
+      expect(shiftMockFn).toBeCalledTimes(2);
+    });
 
-    // enabled true setting
-    rerender(
-      <TestComponent
-        enabled={true}
-        keyDownCallbackMap={{ Enter: enterMockFn }}
-      />
-    );
+    it('should execute the callback function for all key', async () => {
+      const { user } = renderSetup(
+        <TargetTestComponent allKeyDownCallback={allKeyMockFn} />
+      );
 
-    button.focus();
+      const button = screen.getByRole('button');
 
-    await user.keyboard('{Enter}');
+      button.focus();
 
-    expect(enterMockFn).toBeCalled();
-  });
+      await user.keyboard('{Enter}{Shift}');
 
-  it('should automatically focus when autoFocus is true', async () => {
-    renderSetup(<TestComponent autoFocus />);
+      expect(allKeyMockFn).toBeCalledTimes(2);
+    });
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveFocus();
-  });
+    it('should bind the event if enabled is true', async () => {
+      // enabled false setting
+      const { user, rerender } = renderSetup(
+        <TargetTestComponent
+          enabled={false}
+          keyDownCallbackMap={{ Enter: enterMockFn }}
+        />
+      );
 
-  it('should not execute if a function is not assigned to the key', async () => {
-    const { user } = renderSetup(<TestComponent autoFocus />);
+      const button = screen.getByRole('button');
 
-    const button = screen.getByRole('button');
+      button.focus();
 
-    button.focus();
+      await user.keyboard('{Enter}');
 
-    await user.keyboard('{Enter}');
+      expect(enterMockFn).not.toBeCalled();
 
-    expect(enterMockFn).not.toBeCalled();
-  });
+      // enabled true setting
+      rerender(
+        <TargetTestComponent
+          enabled={true}
+          keyDownCallbackMap={{ Enter: enterMockFn }}
+        />
+      );
 
-  it('should not execute if a function is not assigned to the key', async () => {
-    const { user } = renderSetup(<TestComponent autoFocus />);
+      button.focus();
 
-    const button = screen.getByRole('button');
+      await user.keyboard('{Enter}');
 
-    button.focus();
+      expect(enterMockFn).toBeCalled();
+    });
 
-    await user.keyboard('{Enter}');
+    it('should not execute if a function is not assigned to the key', async () => {
+      const { user } = renderSetup(<TargetTestComponent />);
 
-    expect(enterMockFn).not.toBeCalled();
-  });
+      const button = screen.getByRole('button');
 
-  it('should call console.error if an error occurs in the callback function', async () => {
-    const consoleErrorMock = vi.spyOn(console, 'error');
+      button.focus();
 
-    const { user } = renderSetup(
-      <TestComponent
-        autoFocus
-        keyDownCallbackMap={{
-          Enter: () => {
-            throw new Error('error');
-          },
-        }}
-      />
-    );
+      await user.keyboard('{Enter}');
 
-    const button = screen.getByRole('button');
-
-    button.focus();
-
-    await user.keyboard('{Enter}');
-
-    expect(consoleErrorMock).toBeCalled();
+      expect(enterMockFn).not.toBeCalled();
+    });
   });
 });

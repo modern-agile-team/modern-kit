@@ -44,18 +44,18 @@ export function useHover<T extends HTMLElement>({
 
   const targetRef = useRef<T>(null);
 
-  const onMouseEnter = usePreservedCallback((event: MouseEvent) => {
+  const preservedEnterAction = usePreservedCallback((event: MouseEvent) => {
     setIsHovered(true);
     onEnter(event);
   });
 
-  const onMouseLeave = usePreservedCallback((event: MouseEvent) => {
+  const preservedLeaveAction = usePreservedCallback((event: MouseEvent) => {
     setIsHovered(false);
     onLeave(event);
   });
 
-  useEventListener(targetRef, 'mouseenter', onMouseEnter);
-  useEventListener(targetRef, 'mouseleave', onMouseLeave);
+  useEventListener(targetRef, 'mouseenter', preservedEnterAction);
+  useEventListener(targetRef, 'mouseleave', preservedLeaveAction);
 
   return { ref: targetRef, isHovered };
 }
