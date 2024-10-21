@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 1.20.0
+
+### Minor Changes
+
+- [#521](https://github.com/modern-agile-team/modern-kit/pull/521) [`a291208`](https://github.com/modern-agile-team/modern-kit/commit/a291208a56cef156d5bb3982d3dd7dd5b807e5ac) Thanks [@99mini](https://github.com/99mini)! - feat(utils): formatSizeStyleValue 함수 추가 - @99mini
+
+- [#514](https://github.com/modern-agile-team/modern-kit/pull/514) [`dc69e83`](https://github.com/modern-agile-team/modern-kit/commit/dc69e839317357ee82fea82592c4c04db4ea74a6) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(utils): findLastKey 함수 추가 - @Sangminnn
+
 ## 1.19.0
 
 ### Minor Changes
