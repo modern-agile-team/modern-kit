@@ -1,10 +1,8 @@
 # formatSizeStyleValue
 
-`css` 스타일 값으로 사용할 수 있는 값을 반환합니다.
+`css` 스타일 값으로 사용할 수 있는 값을 `<value>[suffix]` 형태로 반환합니다.
 
-`value`가 `string` 타입인 경우 그대로 반환합니다.
-
-`value`가 `number` 타입인 `default`로 `px`를 `suffix`로 사용합니다.
+`value`만 주어진 경우 `default`로 `px`를 `suffix`로 사용합니다.
 
 `suffix`값이 있다면 해당 값에 접미사를 붙입니다.
 
@@ -16,29 +14,28 @@
 
 ## Interface
 ```ts title="typescript"
-const SUFFIX_UNITS = [
-  'cm',
-  'mm',
-  'Q',
-  'in',
-  'pc',
-  'pt',
-  'px',
-  'em',
-  'ex',
-  'ch',
-  'rem',
-  'vw',
-  'vh',
-  'vmin',
-  'vmax',
-  '%',
-] as const;
-
-type SuffixUnit = (typeof SUFFIX_UNITS)[number];
+type SuffixUnit =
+  | 'cm'
+  | 'mm'
+  | 'Q'
+  | 'in'
+  | 'pc'
+  | 'pt'
+  | 'px'
+  | 'em'
+  | 'ex'
+  | 'ch'
+  | 'rem'
+  | 'vw'
+  | 'vh'
+  | 'vmin'
+  | 'vmax'
+  | 'lh'
+  | 'rlh'
+  | '%';
 
 function formatSizeStyleValue(
-  value: string | number,
+  value: number,
   suffix?: SuffixUnit
 ): string
 ```
@@ -47,7 +44,6 @@ function formatSizeStyleValue(
 ```ts title="typescript"
 import { formatSizeStyleValue } from '@modern-kit/utils';
 
-formatSizeStyleValue('10px');    // '10px'
 formatSizeStyleValue(10);        // '10px'
 formatSizeStyleValue(10, '%');   // '10%'
 ```
