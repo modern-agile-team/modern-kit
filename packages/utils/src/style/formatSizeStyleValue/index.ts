@@ -26,7 +26,7 @@ type SuffixUnit =
  *
  * `suffix`옵션을 통해서 해당 값에 접미사를 붙여 반환할 수 있습니다. 해당 옵션이 없다면 `default`로 `px`을 접미사로 사용합니다.
  * @param {number} value 점미사를 붙일 값
- * @param {SuffixUnit} suffix `css` 스타일 값의 단위 값 (default: `px`)
+ * @param {SuffixUnit} [suffix = 'px'] `css` 스타일 값의 단위 값
  * @returns {string} `css` 스타일 값으로 사용할 수 있는 값
  * @example
  * ```typescript
