@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.21.0
+
+### Minor Changes
+
+- [#522](https://github.com/modern-agile-team/modern-kit/pull/522) [`9ff3274`](https://github.com/modern-agile-team/modern-kit/commit/9ff327419f2c749715bd9d25a20c1850b41d340f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useKeyDown 및 useResizeObserver 로직 개선 - @ssi02014
+
 ## 1.20.0
 
 ### Minor Changes
