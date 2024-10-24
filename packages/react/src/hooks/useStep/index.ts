@@ -29,8 +29,7 @@ interface UseStepReturnType {
 
 /**
  * @description 단계별로 이동할 수 있는 기능을 제공하며, 초기 단계 설정, 다음 단계로의 이동, 이전 단계로의 이동, 특정 단계로의 설정 등의 기능을 포함합니다.
- *
- * 스텝 설정 함수들은 action 콜백을 받을 수 있습니다.
+ * 스텝 설정 함수 호출 시 `action` 함수를 인자로 넣어 원하는 action을 실행 시킬 수 있습니다.
  *
  * @param {Object} props - 훅에 전달되는 매개변수 객체
  * @property {number} props.maxStep - 가능한 최대 단계. 이 값은 필수이며, 최종 단계의 번호를 정의합니다.
