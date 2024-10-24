@@ -38,13 +38,13 @@ interface UseStepReturnType {
  * @property {boolean} [props.infinite=false] - 무한 반복 여부. true일 경우, 마지막 단계에서 'nextStep'을 호출하면 첫 단계로 돌아가며, 첫 단계에서 'prevStep'을 호출하면 마지막 단계로 이동합니다. 기본값은 false입니다.
  *
  * @returns {UseStepReturnType} 단계 관리 기능을 제공하는 여러 함수 및 값들을 반환합니다.
- * @property {number} currentStep - 현재 단계. 현재 진행 중인 단계를 나타냅니다.
- * @property {boolean} hasNextStep - 다음 단계가 있는지 여부를 반환합니다.
- * @property {boolean} hasPrevStep - 이전 단계가 있는지 여부를 반환합니다.
- * @property {(action?: StepAction) => void} goToNextStep - 다음 단계로 이동하는 함수입니다.
- * @property {(action?: StepAction) => void} goToPrevStep - 이전 단계로 이동하는 함수입니다.
- * @property {(step: SetStateAction<number>, action?: StepAction) => void} setStep - 특정 단계로 이동하는 함수입니다.
- * @property {(action?: StepAction) => void} resetStep - 초기 단계로 리셋하는 함수입니다.
+ * - `currentStep`: 현재 단계. 현재 진행 중인 단계를 나타냅니다.
+ * - `hasNextStep`: 다음 단계가 있는지 여부를 반환합니다.
+ * - `hasPrevStep`: 이전 단계가 있는지 여부를 반환합니다.
+ * - `goToNextStep`: 다음 단계로 이동하는 함수입니다.
+ * - `goToPrevStep`: 이전 단계로 이동하는 함수입니다.
+ * - `setStep`: 특정 단계로 이동하는 함수입니다.
+ * - `resetStep`: 초기 단계로 리셋하는 함수입니다.
  *
  * @example
  * const {
