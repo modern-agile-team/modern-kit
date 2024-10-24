@@ -32,7 +32,7 @@ interface UseCycleListReturnType<T> {
  */
 export function useCycleList<T>(
   arr: T[] | readonly T[],
-  initialIndex = 0
+  initialIndex: number = 0
 ): UseCycleListReturnType<T> {
   const { currentStep, goToNextStep, goToPrevStep, setStep } = useStep({
     maxStep: arr.length - 1,
