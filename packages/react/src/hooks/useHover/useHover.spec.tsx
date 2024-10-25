@@ -8,8 +8,8 @@ describe('useHover', () => {
     enterMockFn,
     leaveMockFn,
   }: {
-    enterMockFn?: Mock<any, any>;
-    leaveMockFn?: Mock<any, any>;
+    enterMockFn?: Mock<any>;
+    leaveMockFn?: Mock<any>;
   }) => {
     const { ref, isHovered } = useHover<HTMLDivElement>({
       onEnter: enterMockFn,

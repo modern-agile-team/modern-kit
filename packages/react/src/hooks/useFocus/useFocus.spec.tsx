@@ -8,8 +8,8 @@ const TestComponent = ({
   blurMockFn,
   connectedRef,
 }: {
-  focusMockFn?: Mock<any, any>;
-  blurMockFn?: Mock<any, any>;
+  focusMockFn?: Mock<any>;
+  blurMockFn?: Mock<any>;
   connectedRef?: boolean;
 }) => {
   const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
