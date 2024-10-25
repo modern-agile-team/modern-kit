@@ -13,6 +13,8 @@
 
 `@modern-kit`는 Next.js의 `SSR(Server Side Rendering)`환경에서도 호환되는 등 `CJS(CommonJs)`환경에서도 호환되기 위해 `CJS(CommonJs)`와 `ESM(ECMAScript Module)` 두 포맷을 모두 지원합니다.
 
+`@modern-kit`은 한국인들의 접근성을 높이고 진입 장벽을 낮추기 위해, `한국어만을 지원`합니다. (wip. 영어로 작성된 부분들을 단계적으로 한국어로 교체 할 예정입니다.)
+
 <br />
 
 ## Official Documentation

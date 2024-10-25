@@ -5,7 +5,7 @@ export * from './groupBy';
 export * from './invert';
 export * from './mapKeys';
 export * from './mapValues';
-export * from './mergeProperties';
+export * from './merge';
 export * from './objectEntries';
 export * from './objectKeys';
 export * from './objectValues';
