@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 import packageJson from './package.json';
 
 export default defineConfig({
@@ -14,7 +14,9 @@ export default defineConfig({
       exclude: [
         'src/utils/test/**',
         'src/**/internal.ts',
+        'src/**/*.utils.ts',
         'src/hooks/useClipboard',
+        ...coverageConfigDefaults.exclude,
       ],
     },
   },

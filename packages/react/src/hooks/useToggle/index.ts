@@ -17,6 +17,8 @@ import { useToggleState } from '../useToggleState';
  * setValue(true);
  * isToggled; // true
  */
-export function useToggle(defaultValue = false): [boolean, () => void] {
+export function useToggle(
+  defaultValue: boolean = false
+): [boolean, () => void] {
   return useToggleState(defaultValue, !defaultValue);
 }
