@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 1.21.0
+
+### Minor Changes
+
+- [#531](https://github.com/modern-agile-team/modern-kit/pull/531) [`f3dbad6`](https://github.com/modern-agile-team/modern-kit/commit/f3dbad69978e6fb2d7e3d99ca8f81cfb02db0739) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): merge 함수 추가 및 mergeProperties deprecate - @ssi02014
+
+### Patch Changes
+
+- [#529](https://github.com/modern-agile-team/modern-kit/pull/529) [`e20ac17`](https://github.com/modern-agile-team/modern-kit/commit/e20ac1751d16ab7149154ce2ddf9c3349283ad5f) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): isPlainObject 로직 수정'
+
 ## 1.20.0
 
 ### Minor Changes

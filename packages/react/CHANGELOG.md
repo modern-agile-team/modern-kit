@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.22.0
+
+### Minor Changes
+
+- [#529](https://github.com/modern-agile-team/modern-kit/pull/529) [`e20ac17`](https://github.com/modern-agile-team/modern-kit/commit/e20ac1751d16ab7149154ce2ddf9c3349283ad5f) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useCycleList reset 기능 추가 - @ssi02014
+
 ## 1.21.0
 
 ### Minor Changes
