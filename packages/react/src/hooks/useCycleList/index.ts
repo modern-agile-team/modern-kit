@@ -1,4 +1,4 @@
-import { SetStateAction, useCallback } from 'react';
+import { SetStateAction } from 'react';
 import { StepAction, useStep } from '../useStep';
 
 interface UseCycleListReturnType<T> {
