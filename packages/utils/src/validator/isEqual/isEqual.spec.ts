@@ -48,16 +48,13 @@ describe('isEqual', () => {
   it('should return true if function are deeply equal', () => {
     const origin = () => 1;
     const target = origin;
-
     expect(
       isEqual(
         () => 1,
         () => 1
       )
     ).toBeTruthy();
-
     expect(isEqual(origin, target)).toBeTruthy();
-
     expect(
       isEqual(
         (a: number) => a,
