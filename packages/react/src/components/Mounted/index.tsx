@@ -1,13 +1,13 @@
 import { useIsMounted } from '../../hooks/useIsMounted';
 
-interface ClientOnlyProps {
+interface MountedProps {
   fallback?: JSX.Element;
 }
 
-export const ClientOnly = ({
+export const Mounted = ({
   fallback = <></>,
   children,
-}: React.PropsWithChildren<ClientOnlyProps>) => {
+}: React.PropsWithChildren<MountedProps>) => {
   const isMounted = useIsMounted();
 
   if (!isMounted) return fallback;
