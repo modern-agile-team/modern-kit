@@ -8,6 +8,7 @@ export * from './ExtractSetType';
 export * from './IndexSignature';
 export * from './Integer';
 export * from './NaturalNumber';
+export * from './NonEmptyArray';
 export * from './Nullable';
 export * from './ObjectEntries';
 export * from './ObjectKeys';
