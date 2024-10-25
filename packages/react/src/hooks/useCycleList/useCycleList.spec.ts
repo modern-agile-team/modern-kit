@@ -6,6 +6,7 @@ describe('useCycleList', () => {
   const nextIndexActionMockFn = vi.fn();
   const prevIndexActionMockFn = vi.fn();
   const setIndexActionMockFn = vi.fn();
+  const resetIndexActionMockFn = vi.fn();
 
   it('should cycle through the list correctly', async () => {
     const { result } = renderHook(() => useCycleList([1, 2, 3, 4, 5]));
@@ -37,6 +38,15 @@ describe('useCycleList', () => {
     await waitFor(() => {
       expect(result.current.currentItem).toBe(4);
       expect(setIndexActionMockFn).toBeCalledTimes(1);
+    });
+
+    await waitFor(() => {
+      result.current.resetIndex(resetIndexActionMockFn);
+    });
+
+    await waitFor(() => {
+      expect(result.current.currentItem).toBe(1);
+      expect(resetIndexActionMockFn).toBeCalledTimes(1);
     });
   });
 });

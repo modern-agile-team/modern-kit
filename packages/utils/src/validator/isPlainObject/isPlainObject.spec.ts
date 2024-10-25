@@ -5,6 +5,8 @@ describe('isPlainObject', () => {
   it('should return true for the plain object.', () => {
     expect(isPlainObject({})).toBe(true);
     expect(isPlainObject(new Object())).toBe(true);
+    expect(isPlainObject(Object.create({}))).toBe(true);
+    expect(isPlainObject(Object.create(null))).toBe(true);
   });
 
   it('should return false for non plain object', () => {
