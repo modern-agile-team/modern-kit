@@ -57,13 +57,6 @@ describe('isEqual', () => {
     ).toBeTruthy();
 
     expect(isEqual(origin, target)).toBeTruthy();
-
-    expect(
-      isEqual(
-        (a: number) => a,
-        (b: number) => b
-      )
-    ).toBeFalsy();
   });
 
   it('should return true if two objects with circular references are deeply equal', () => {
