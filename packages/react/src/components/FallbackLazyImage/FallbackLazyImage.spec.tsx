@@ -17,7 +17,7 @@ afterEach(() => {
   mockIntersectionObserverCleanup();
 });
 
-const TestComponent = ({ mockFn }: { mockFn?: Mock<any, any> }) => {
+const TestComponent = ({ mockFn }: { mockFn?: Mock }) => {
   return (
     <FallbackLazyImage
       className="img1"
