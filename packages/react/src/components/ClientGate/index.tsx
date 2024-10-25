@@ -1,6 +1,8 @@
 import { PropsWithChildren, useSyncExternalStore } from 'react';
 
-const emptySubscribe = () => () => {};
+import { noop } from '@modern-kit/utils';
+
+const emptySubscribe = () => noop;
 
 interface ClientGateProps {
   fallback?: JSX.Element;
