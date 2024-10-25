@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 import packageJson from './package.json';
 
 export default defineConfig({
@@ -17,6 +17,7 @@ export default defineConfig({
         'src/file',
         'src/**/internal.ts',
         'src/**/*.bench.ts',
+        ...coverageConfigDefaults.exclude,
       ],
     },
   },
