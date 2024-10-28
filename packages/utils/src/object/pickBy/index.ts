@@ -1,4 +1,4 @@
-import { objectKeys } from 'object/objectKeys';
+import { objectKeys } from '../../object/objectKeys';
 
 /**
  * @description 주어진 객체에서 `predicate` 함수를 만족하는 프로퍼티로 구성된 새로운 객체를 반환하는 함수입니다.
