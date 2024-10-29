@@ -13,29 +13,31 @@ describe('useNetwork', () => {
   const onlineCallbackMock = vi.fn();
   const offlineCallbackMock = vi.fn();
 
-  it('should return true for isOnline when online', () => {
+  it('네트워크가 온라인 상태 일때 isOnline은 true를 반환해야 합니다.', () => {
     navigatorOnLineMockSpy.mockReturnValue(true);
 
     const { result } = renderHook(() => useNetwork());
+    const isOnline = result.current;
 
-    expect(result.current.isOnline).toBeTruthy();
+    expect(isOnline).toBeTruthy();
   });
 
-  it('should return false for isOnline when offline', () => {
+  it('네트워크가 오프라인 상태 일때 isOnline은 false를 반환해야 합니다.', () => {
     navigatorOnLineMockSpy.mockReturnValue(false);
 
     const { result } = renderHook(() => useNetwork());
+    const isOnline = result.current;
 
-    expect(result.current.isOnline).toBeFalsy();
+    expect(isOnline).toBeFalsy();
   });
 
-  it('should execute the registered callback when the network status changes', () => {
+  it('네트워크 상태가 변경되면 등록된 콜백을 실행해야 합니다.', () => {
     navigatorOnLineMockSpy.mockReturnValue(true);
 
     renderHook(() =>
       useNetwork({
-        onlineCallback: onlineCallbackMock,
-        offlineCallback: offlineCallbackMock,
+        onlineAction: onlineCallbackMock,
+        offlineAction: offlineCallbackMock,
       })
     );
 
@@ -51,11 +53,14 @@ describe('useNetwork', () => {
     expect(onlineCallbackMock).toBeCalled();
   });
 
-  it('should return true for isOnline during server-side rendering', () => {
+  /**
+   * @see https://react.dev/reference/react/useSyncExternalStore#adding-support-for-server-rendering
+   */
+  it('서버 측 렌더링 중에 isOnline은 true을 반환해야 합니다.', () => {
     const TestComponent = () => {
-      const { isOnline } = useNetwork({
-        onlineCallback: onlineCallbackMock,
-        offlineCallback: offlineCallbackMock,
+      const isOnline = useNetwork({
+        onlineAction: onlineCallbackMock,
+        offlineAction: offlineCallbackMock,
       });
       return <p>{isOnline ? 'online' : 'offline'}</p>;
     };
