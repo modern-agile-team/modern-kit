@@ -10,5 +10,6 @@ export * from './LazyImage';
 export * from './OutsideClick';
 export * from './Portal';
 export * from './SeparatedIterator';
+export * from './Slot';
 export * from './When';
 export * from './SwitchCase';
