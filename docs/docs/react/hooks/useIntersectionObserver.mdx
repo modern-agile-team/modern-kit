@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useIntersectionObserver } from '@modern-kit/react';
 
 # useIntersectionObserver
@@ -49,6 +50,7 @@ const useIntersectionObserver: <T extends HTMLElement>({
 import { useIntersectionObserver } from '@modern-kit/react';
 
 const Example = () => {
+  const [enabled, setEnabled] = useState(false);
   const { ref: targetRef } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
@@ -56,8 +58,8 @@ const Example = () => {
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
     },
+    enabled,
   });
-  
   const boxStyle = {
     height: "800px", 
     backgroundColor: "teal"
@@ -65,6 +67,7 @@ const Example = () => {
 
   return (
     <div>
+      <button onClick={() => setEnabled(!enabled)}>Toggle Enabled: {`${enabled}`}</button>
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
         타겟 요소<br />
@@ -79,6 +82,7 @@ const Example = () => {
 ## Exmaple
 
 export const Example = () => {
+  const [enabled, setEnabled] = useState(false);
   const { ref: targetRef } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
@@ -86,6 +90,7 @@ export const Example = () => {
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
     },
+    enabled,
   });
   const boxStyle = {
     height: "800px", 
@@ -93,6 +98,7 @@ export const Example = () => {
   }
   return (
     <div>
+      <button onClick={() => setEnabled(!enabled)}>Toggle Enabled: {`${enabled}`}</button>
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
         타겟 요소<br />
