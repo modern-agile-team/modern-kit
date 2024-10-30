@@ -55,7 +55,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
 
   const intersectionObserverCallback = usePreservedCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      if (!enabled || !entry) return;
+      if (!entry) return;
 
       const targetElement = entry.target as T;
 
@@ -86,7 +86,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
         intersectionObserverRef.current = null;
       }
 
-      if (node === null) return;
+      if (node === null || !enabled) return;
 
       intersectionObserverRef.current = new IntersectionObserver(
         intersectionObserverCallback,
@@ -98,7 +98,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
       );
       intersectionObserverRef.current.observe(node);
     },
-    [threshold, root, rootMargin, intersectionObserverCallback]
+    [enabled, threshold, root, rootMargin, intersectionObserverCallback]
   );
 
   return { ref: targetRef };
