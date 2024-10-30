@@ -1,5 +1,19 @@
 # @modern-kit/react
 
+## 1.23.0
+
+### Minor Changes
+
+- [#552](https://github.com/modern-agile-team/modern-kit/pull/552) [`9ec94d0`](https://github.com/modern-agile-team/modern-kit/commit/9ec94d0f15a6245601c4284a4f936e95814a9221) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): Slot 컴포넌트 추가 - @ssi02014
+
+- [#538](https://github.com/modern-agile-team/modern-kit/pull/538) [`c25bbbb`](https://github.com/modern-agile-team/modern-kit/commit/c25bbbbb90de673002b81a658347eed23c18c63e) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): ClientGate 컴포넌트 추가 - @Sangminnn
+
+### Patch Changes
+
+- [#550](https://github.com/modern-agile-team/modern-kit/pull/550) [`f1a84c8`](https://github.com/modern-agile-team/modern-kit/commit/f1a84c8a66d0eff0051ae04d4b39ef1989b8f65e) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useNetwork 스펙 변경 - @ssi02014
+
+- [#551](https://github.com/modern-agile-team/modern-kit/pull/551) [`c714508`](https://github.com/modern-agile-team/modern-kit/commit/c7145089f5d56bfcb3d219fd0233edb9ea0c9c99) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useIntersectionObserver 기능 개선 - @ssi02014
+
 ## 1.22.0
 
 ### Minor Changes
