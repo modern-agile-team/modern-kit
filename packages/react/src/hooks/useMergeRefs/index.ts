@@ -20,3 +20,5 @@ export function useMergeRefs<T = unknown>(
   // eslint-disable-next-line
   return useCallback(mergeRefs(...refs), refs);
 }
+
+export { mergeRefs };

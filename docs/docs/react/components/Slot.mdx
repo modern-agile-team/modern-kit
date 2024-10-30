@@ -1,0 +1,121 @@
+import { Slot, Slottable } from '@modern-kit/react'
+
+# Slot
+
+주어진 Props를 직계 자식 컴포넌트에 병합하는 컴포넌트입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Slot/index.tsx)
+
+## Interface
+```ts title="typescript"
+function Slot({
+  children,
+  containerRef,
+}: {
+  children: React.ReactNode;
+  containerRef?: React.RefObject<HTMLElement | null>;
+}): JSX.Element;
+```
+
+## Usage
+```tsx title="typescript"
+import { Slot } from '@modern-kit/react'
+
+// Basic
+const Button = ({
+  asChild,
+  ...props
+}: PropsWithChildren<{ asChild?: boolean } & ComponentProps<'button'>>) => {
+  const Comp = asChild ? Slot : 'button';
+
+  return <Comp {...props} />;
+};
+```
+```tsx title='typescript'
+// with Slottable
+const SlottableButton = ({
+  asChild,
+  leftElement,
+  rightElement,
+  ...props
+}: PropsWithChildren<
+  {
+    asChild?: boolean;
+    leftElement: ReactElement;
+    rightElement: ReactElement;
+  } & ComponentProps<'button'>
+>) => {
+  const Comp = asChild ? Slot : 'button';
+
+  return (
+    <Comp {...props}>
+      {leftElement}
+      <Slottable>{props.children}</Slottable>
+      {rightElement}
+    </Comp>
+  );
+};
+```
+
+### Basic
+```tsx title="typescript"
+// Basic Usage
+<Button onClick={() => console.log('click')}>Button</Button>
+```
+
+<Button onClick={() => console.log('click')}>Button</Button>
+
+<br />
+
+### AsChild
+```tsx title="typescript"
+// AsChild Usage
+<Button asChild onClick={() => console.log('click')}>
+  <div>asChild Button</div>
+</Button>
+```
+
+<Button asChild onClick={() => console.log('click')}>
+  <div>asChild Button</div>
+</Button>
+
+
+### Slottable
+```tsx title="typescript"
+<SlottableButton leftElement={<span>left</span>} rightElement={<span>right</span>}>
+  <span> Slottable Button </span>
+</SlottableButton>
+```
+
+<SlottableButton leftElement={<span>left</span>} rightElement={<span>right</span>}>
+  <span> Slottable Button </span>
+</SlottableButton>
+
+export const Button = ({
+  asChild,
+  ...props
+}) => {
+  const Comp = asChild ? Slot : 'button';
+
+  return <Comp {...props} />;
+};
+
+export const SlottableButton = ({
+  asChild,
+  leftElement,
+  rightElement,
+  ...props
+}) => {
+  const Comp = asChild ? Slot : 'button';
+
+  return (
+    <Comp {...props}>
+      {leftElement}
+      <Slottable>{props.children}</Slottable>
+      {rightElement}
+    </Comp>
+  );
+};
