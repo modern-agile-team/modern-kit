@@ -11,13 +11,14 @@ import { Slot, Slottable } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-function Slot({
-  children,
-  containerRef,
-}: {
-  children: React.ReactNode;
-  containerRef?: React.RefObject<HTMLElement | null>;
-}): JSX.Element;
+const Slot: React.ForwardRefExoticComponent<
+  React.HTMLAttributes<HTMLElement> & {
+    children?: React.ReactNode;
+  } & React.RefAttributes<HTMLElement>
+>;
+```
+```ts title="typescript"
+const Slottable: ({ children }: React.PropsWithChildren) => JSX.Element;
 ```
 
 ## Usage
