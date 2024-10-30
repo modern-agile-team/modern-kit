@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.22.0
+
+### Minor Changes
+
+- [#544](https://github.com/modern-agile-team/modern-kit/pull/544) [`3ff42e5`](https://github.com/modern-agile-team/modern-kit/commit/3ff42e58c2765332cd54cba045d56173a0cdd67d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): pickBy, omitBy 함수 추가 - @ssi02014
+
 ## 1.21.0
 
 ### Minor Changes

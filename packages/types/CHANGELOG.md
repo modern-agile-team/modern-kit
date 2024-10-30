@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.5.0
+
+### Minor Changes
+
+- [#538](https://github.com/modern-agile-team/modern-kit/pull/538) [`c25bbbb`](https://github.com/modern-agile-team/modern-kit/commit/c25bbbbb90de673002b81a658347eed23c18c63e) Thanks [@Sangminnn](https://github.com/Sangminnn)! - feat(react): ClientGate 컴포넌트 추가 - @Sangminnn
+
 ## 1.4.0
 
 ### Minor Changes
