@@ -64,7 +64,7 @@ const SlotClone = React.forwardRef<HTMLElement, React.PropsWithChildren>(
       const childrenRef = getElementRef(children);
       return React.cloneElement(children, {
         ...mergeProps(slotProps, children.props), // props 병합
-        // @ts-ignore
+        // @ts-expect-error NOTE: 에러 무시
         ref: forwardedRef ? mergeRefs(forwardedRef, childrenRef) : childrenRef, // ref 병합
       });
     }

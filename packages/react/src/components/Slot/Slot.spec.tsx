@@ -40,7 +40,7 @@ describe('Slot', () => {
   const onClickMock = vi.fn();
 
   describe('Default', () => {
-    it('', async () => {
+    it('button 태그가 렌더링되야 합니다.', async () => {
       const { user } = renderSetup(
         <TestButton onClick={onClickMock}>Default Button</TestButton>
       );
@@ -52,7 +52,7 @@ describe('Slot', () => {
       expect(onClickMock).toBeCalledTimes(1);
     });
 
-    it('', async () => {
+    it('asChild 속성이 있으면 자식 요소가 그대로 렌더링되야 합니다.', async () => {
       const { user } = renderSetup(
         <TestButton asChild onClick={onClickMock}>
           <div role="custom-button">Custom Button</div>
@@ -68,7 +68,7 @@ describe('Slot', () => {
   });
 
   describe('Slottable', () => {
-    it('', async () => {
+    it('Slottable이 있을 경우 Slottable 자식에 렌더링되야 합니다.', async () => {
       const { user } = renderSetup(
         <SlottableTestButton
           onClick={onClickMock}
@@ -89,7 +89,7 @@ describe('Slot', () => {
       expect(onClickMock).toBeCalledTimes(1);
     });
 
-    it('', async () => {
+    it('asChild가 있을 경우 자식 요소가 그대로 Slottable 자식에 렌더링되야 합니다.', async () => {
       const { user } = renderSetup(
         <SlottableTestButton
           asChild
