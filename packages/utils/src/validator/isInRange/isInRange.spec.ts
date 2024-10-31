@@ -2,139 +2,72 @@ import { describe, it, expect } from 'vitest';
 import { isInRange } from '.';
 
 describe('isInRange', () => {
-  it('should return true if value is in range', () => {
+  it('값이 min/max 범위 내에 있을 경우 true를 반환해야 합니다.', () => {
     expect(
       isInRange({
         value: 5,
         min: 0,
         max: 10,
       })
-    ).toBe(true);
+    ).toBeTruthy();
   });
 
-  it('should return correct value if equalOptions min is true and max is false', () => {
-    expect(
-      isInRange({
-        value: 0,
-        min: 0,
-        max: 10,
-      })
-    ).toBe(true);
-    expect(
-      isInRange({
-        value: 10,
-        min: 0,
-        max: 10,
-      })
-    ).toBe(false);
-  });
-
-  it('should return correct value if equalOptions min is false and max is true', () => {
-    expect(
-      isInRange({
-        value: 0,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          min: false,
-          max: true,
-        },
-      })
-    ).toBe(false);
-    expect(
-      isInRange({
-        value: 10,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          min: false,
-          max: true,
-        },
-      })
-    ).toBe(true);
-  });
-
-  it('should return correct value if equalOptions min and max is false', () => {
-    expect(
-      isInRange({
-        value: 0,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          min: false,
-        },
-      })
-    ).toBe(false);
-    expect(
-      isInRange({
-        value: 10,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          min: false,
-        },
-      })
-    ).toBe(false);
-  });
-
-  it('should return correct value if equalOptions min and max is true', () => {
-    expect(
-      isInRange({
-        value: 0,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          max: true,
-        },
-      })
-    ).toBe(true);
-    expect(
-      isInRange({
-        value: 10,
-        min: 0,
-        max: 10,
-        equalOptions: {
-          max: true,
-        },
-      })
-    ).toBe(true);
-  });
-
-  it('should return false if value is not in range', () => {
+  it('값이 min/max 범위 내에 없을 경우 false를 반환해야 합니다.', () => {
     expect(
       isInRange({
         value: 15,
         min: 0,
         max: 10,
       })
-    ).toBe(false);
+    ).toBeFalsy();
   });
 
-  it('should throw error if min or max is invalid value', () => {
-    expect(() =>
-      isInRange({
-        value: 0,
-        min: null as unknown as number,
-        max: 10,
-      })
-    ).toThrowError('min and max values are invalid.');
-
-    expect(() =>
+  it('기본적으로 min을 경계 값으로 포함하며, max는 경계 값으로 포함하지 않아야 합니다.', () => {
+    expect(
       isInRange({
         value: 0,
         min: 0,
-        max: null as unknown as number,
+        max: 10,
       })
-    ).toThrowError('min and max values are invalid.');
+    ).toBeTruthy();
+    expect(
+      isInRange({
+        value: 10,
+        min: 0,
+        max: 10,
+      })
+    ).toBeFalsy();
   });
 
-  it('should throw error if min is greater than max', () => {
+  it('withinMin/withinMax 옵션을 통해 경계 값 포함 여부를 지정 할 수 있어야 합니다.', () => {
+    expect(
+      isInRange({
+        value: 10,
+        min: 0,
+        max: 10,
+        inclusiveMin: false,
+        inclusiveMax: true,
+      })
+    ).toBeTruthy();
+
+    expect(
+      isInRange({
+        value: 0,
+        min: 0,
+        max: 10,
+        inclusiveMin: false,
+        inclusiveMax: true,
+      })
+    ).toBeFalsy();
+  });
+
+  it('min이 max보다 클 경우 오류를 발생시켜야 합니다.', () => {
     expect(() =>
       isInRange({
         value: 5,
         min: 10,
         max: 0,
       })
-    ).toThrowError('min value cannot be greater than the max value.');
+    ).toThrowError('최소값은 최대값보다 크거나 같은 수 없습니다.');
   });
 });

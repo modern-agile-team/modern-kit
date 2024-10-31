@@ -1,38 +1,43 @@
 # isInRange
 
-대상 값이 주어진 범위 내에 있는지 확인합니다.
+주어진 value가 `min`과 `max`로 지정된 범위 내에 있는지 여부를 판단합니다.
 
-인자로 equalOptions 객체를 받아, 범위의 양 끝을 포함할지 여부를 설정할 수 있습니다.
-
-equalOptions의 기본값은 min값은 true, max값은 false로 min값은 포함, max값은 포함하지 않습니다.
+`inclusiveMin`/`inclusiveMax`를 통해 경계 값을 포함할지 여부를 설정할 수 있습니다. 기본적으로 최소값은 포함하며 최대값은 포함하지 않습니다.
 
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isInRange/index.ts)
 
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/isInRange|24,435,490.55|0.0000|`fastest`|
+|lodash/inRange|9,373,021.30|0.0001|`slowest`|
+
+- **modern-kit/isInRange**
+  - `2.61x` faster than lodash/inRange
+
 ## Interface
 ```ts title="typescript"
-
 interface IsInRangeProps {
   value: number;
   min: number;
   max: number;
-  equalOptions?: {
-    min?: boolean;
-    max?: boolean;
-  };
+  inclusiveMin?: boolean;
+  inclusiveMax?: boolean;
 }
 
-const isInRange = ({
+function isInRange({
   value,
   min,
   max,
-  equalOptions = {
-    min: true,
-    max: false,
-  },
-}: IsInRangeProps) => boolean;
+  inclusiveMin,
+  inclusiveMax,
+}: IsInRangeProps): boolean;
 ```
 
 ## Usage
@@ -41,11 +46,10 @@ import { isInRange } from '@modern-kit/utils';
 
 isInRange({ value: 5, min: 0, max: 10 }) // true
 isInRange({ value: 0, min: 0, max: 10 }) // true
-isInRange({ value: 10, min: 0, max: 10, equalOptions: { max: true } }) // true
-isInRange({ value: 10, min: 0, max: 10, equalOptions: { min: false, max: true } }) // true
-isInRange({ value: 10, min: 0, max: 10, equalOptions: { min: true, max: true } }) // true
+isInRange({ value: 10, min: 0, max: 10, inclusiveMin: true }) // true
+isInRange({ value: 10, min: 0, max: 10, inclusiveMin: false, inclusiveMax: true }) // true
+isInRange({ value: 10, min: 0, max: 10, inclusiveMin: true, inclusiveMax: true }) // true
 
-isInRange({ value: 5, max: 10, equalOptions: { max: true } }) // Error('min값은 필수입니다.')
-isInRange({ value: 5, min: 10, equalOptions: { max: true } }) // Error('max값은 필수입니다.')
-isInRange({ value: 5, min: 10, max: 0, equalOptions: { max: true } }) // Error('min은 max보다 작아야합니다.')
+// Error
+isInRange({ value: 5, min: 10, max: 0 }) // Error('min은 max보다 작아야합니다.')
 ```
