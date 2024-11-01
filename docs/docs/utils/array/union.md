@@ -2,20 +2,45 @@
 
 두 배열을 결합 후, `중복 요소를 제외해 고유한 값만을 갖는` 새로운 배열을 반환하는 함수입니다.
 
-기본적으로 `원시 값`에 대해서만 중복 요소를 판단하며, 필요 시 3번째 인자인 `iteratee` 함수 결과로 중복 요소임을 판단 할 수 있습니다.
+ 기본적으로 `원시 값`에 대해서만 중복 요소를 판단합니다.
+
+ 2번째 인자인 `iteratee` 함수를 제공하면, 각 요소를 iteratee 반환값에 따라 중복 여부를 판단할 수 있습니다.
 
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/union/index.ts)
 
+### Default
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/union|4,409,019.08|0.0002|`fastest`|
+|lodash/union|3,714,184.11|0.0003|`slowest`|
+
+- **modern-kit/union**
+  - `1.19x` faster than **lodash/union**
+
+### with iteratee
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/union|3,801,245.65|0.0003|`fastest`|
+|lodash/unionBy|2,537,527.22|0.0004|`slowest`|
+
+- **modern-kit/union**
+  - `1.50x` faster than **lodash/unionBy**
+
 ## Interface
 ```ts title="typescript"
-const union: <T, U = T>(
+function union<T>(
+  arr1: T[] | readonly T[],
+  arr2: T[] | readonly T[]
+): T[];
+
+function union<T, U = T>(
   arr1: T[] | readonly T[],
   arr2: T[] | readonly T[],
-  iteratee?: ((item: T) => U) | undefined
-) => T[];
+  iteratee?: (item: T) => U
+): T[];
 ```
 
 ## Usage

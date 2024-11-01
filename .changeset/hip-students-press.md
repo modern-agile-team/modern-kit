@@ -2,4 +2,4 @@
 '@modern-kit/utils': patch
 ---
 
-fix(utils): uniq 함수 개선 - @ssi02014
+fix(utils): uniq/union 기능 및 타입 개선 - @ssi02014

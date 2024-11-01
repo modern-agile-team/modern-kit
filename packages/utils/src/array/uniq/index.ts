@@ -2,6 +2,7 @@
  * @description 배열에서 중복된 요소를 제거하여 고유한 요소로 이루어진 새 배열을 반환합니다.
  *
  * 기본적으로 `원시 값`에 대해서만 중복 요소를 판단합니다.
+ *
  * 2번째 인자인 `iteratee` 함수를 제공하면, 각 요소를 iteratee 반환값에 따라 중복 여부를 판단할 수 있습니다.
  *
  * @template T - 배열 요소의 타입
@@ -18,6 +19,13 @@
  * @example
  * uniq([{ id: 1 }, { id: 2 }, { id: 1 }], item => item.id); // [{ id: 1 }, { id: 2 }]
  */
+export function uniq<T>(arr: T[] | readonly T[]): T[];
+
+export function uniq<T, U = T>(
+  arr: T[] | readonly T[],
+  iteratee?: (item: T) => U
+): T[];
+
 export function uniq<T, U = T>(
   arr: T[] | readonly T[],
   iteratee?: (item: T) => U
