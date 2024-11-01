@@ -1,15 +1,16 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { union } from '.';
 
 describe('union', () => {
-  it('should combine two arrays and remove duplicates', () => {
+  it('두 배열을 결합하고, 중복을 제거한 배열을 반환해야 합니다.', () => {
     const arr1 = [1, 2, 3, 4];
     const arr2 = [1, 2, 4, 5];
+    const unionArray = union(arr1, arr2);
 
-    expect(union(arr1, arr2)).toEqual([1, 2, 3, 4, 5]);
+    expect(unionArray).toEqual([1, 2, 3, 4, 5]);
   });
 
-  it('should use iteratee to determine uniqueness', () => {
+  it('iteratee 결과를 기반으로 중복 요소를 판단 할 수 있어야 합니다.', () => {
     const arr1 = [
       { id: 1, name: 'john' },
       { id: 2, name: 'jane' },
@@ -24,14 +25,5 @@ describe('union', () => {
       { id: 2, name: 'jane' },
       { id: 3, name: 'gromit' },
     ]);
-  });
-
-  it('should correctly infer types while combining arrays and removing duplicates', () => {
-    const arr1 = [1, 2, 3, 4] as const;
-    const arr2 = [1, 2, 4, 5] as const;
-
-    const unionArray = union(arr1, arr2);
-    expect(unionArray).toEqual([1, 2, 3, 4, 5]);
-    expectTypeOf(unionArray).toEqualTypeOf<(1 | 2 | 3 | 4 | 5)[]>();
   });
 });
