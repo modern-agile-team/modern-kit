@@ -1,10 +1,14 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
 import { isPromise } from '.';
+import { asyncNoop } from '../../common/asyncNoop';
 
 describe('isPromise', () => {
-  it('should return true if the given value is a Promise', () => {
+  it('value가 Promise라면 true를 반환해야 합니다.', () => {
     expect(isPromise(Promise.resolve())).toBeTruthy();
+    expect(isPromise(asyncNoop())).toBeTruthy();
+  });
 
+  it('value가 Promise가 아니라면 false를 반환해야 합니다.', () => {
     expect(isPromise(() => {})).toBeFalsy();
     expect(isPromise('123')).toBeFalsy();
     expect(isPromise(true)).toBeFalsy();
@@ -12,7 +16,7 @@ describe('isPromise', () => {
     expect(isPromise(null)).toBeFalsy();
   });
 
-  it('should narrow the type to Promise if isPromise returns true', () => {
+  it('isPromise가 true를 반환하면 value의 타입이 Promise로 좁혀져야 합니다.', () => {
     const promise: any = Promise.resolve(1);
 
     if (isPromise<number>(promise)) {
