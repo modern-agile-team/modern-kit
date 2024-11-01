@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 1.22.1
+
+### Patch Changes
+
+- [#554](https://github.com/modern-agile-team/modern-kit/pull/554) [`5b0d154`](https://github.com/modern-agile-team/modern-kit/commit/5b0d1542160fd2eaf39f8fa1feb2c5244a818412) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): isInRange, range 로직 개선 - @ssi02014
+
+- [#557](https://github.com/modern-agile-team/modern-kit/pull/557) [`c142bff`](https://github.com/modern-agile-team/modern-kit/commit/c142bffb9f4cdb0e6c723102a3608bd715471dcb) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): uniq/union 기능 및 타입 개선 - @ssi02014
+
+- [#556](https://github.com/modern-agile-team/modern-kit/pull/556) [`d9f442f`](https://github.com/modern-agile-team/modern-kit/commit/d9f442fb54eac52d531a0e3684f16dbb4241e8a7) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithCommas 기능 개선 - @ssi02014
+
 ## 1.22.0
 
 ### Minor Changes
