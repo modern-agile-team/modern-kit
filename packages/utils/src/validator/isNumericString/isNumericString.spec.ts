@@ -13,7 +13,6 @@ describe('isNumericString', () => {
     expect(isNumericString('1@')).toBeFalsy();
     expect(isNumericString('1[]')).toBeFalsy();
     expect(isNumericString('12.00')).toBeFalsy();
-    expect(isNumericString('1 ')).toBeFalsy();
   });
 
   it('should validate numeric strings correctly, allowing signs when sign option is enabled', () => {

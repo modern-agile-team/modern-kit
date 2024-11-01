@@ -1,6 +1,6 @@
 # isPromise
 
-주어진 인자가 `Promise`인지 검사하는 함수입니다. Promise가 맞다면 타입을 좁혀줍니다.
+주어진 인자가 `Promise`인지 검사하는 함수입니다. isPromise가 true를 반환하면 인자를 Promise로 타입을 좁혀줍니다.
 
 <br />
 
@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isPromise: <T = any>(value: any) => value is Promise<T>
+function isPromise<T = any>(value: unknown): value is Promise<T>;
 ```
 
 ## Usage
@@ -17,6 +17,7 @@ const isPromise: <T = any>(value: any) => value is Promise<T>
 import { isPromise } from '@modern-kit/utils';
 
 isPromise(Promise.resolve()); // true
+isPromise((async () => {})()); // true
 
 isPromise(() => {}); // false
 isPromise('123'); // false

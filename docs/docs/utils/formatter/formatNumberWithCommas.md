@@ -9,16 +9,29 @@
 
 ## Interface
 ```ts title="typescript"
-const formatNumberWithCommas: (value: string | number) => string
+interface FormatNumberWithCommasOptions {
+  maximumDecimalDigits?: Intl.NumberFormatOptions['maximumFractionDigits'];
+  minimumDecimalDigits?: Intl.NumberFormatOptions['minimumFractionDigits'];
+}
+```
+```ts title="typescript"
+function formatNumberWithCommas(
+  value: number | string,
+  options?: FormatNumberWithCommasOptions
+): string;
 ```
 
 ## Usage
 ```ts title="typescript"
 import { formatNumberWithCommas } from '@modern-kit/utils';
 
-const numberWithComma1 = formatNumberWithCommas(200); // '200'
-const numberWithComma2 = formatNumberWithCommas(3000); // '3,000'
-const numberWithComma3 = formatNumberWithCommas('50000'); // '50,000'
-const numberWithComma4 = formatNumberWithCommas('123123123'); // '123,123,123'
-const numberWithComma5 = formatNumberWithCommas('price: 500000'); // 'price: 500,000'
+formatNumberWithCommas(200); // '200'
+formatNumberWithCommas(3000); // '3,000'
+formatNumberWithCommas(-123123123); // '-123,123,123'
+formatNumberWithCommas(123456.123); // '123,456.123'
+
+formatNumberWithCommas('200'); // '200'
+formatNumberWithCommas('3000'); // '3,000'
+formatNumberWithCommas('-123123123'); // '-123,123,123'
+formatNumberWithCommas('123456.123'); // '123,456.123'
 ```
