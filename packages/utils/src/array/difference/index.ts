@@ -1,6 +1,7 @@
 /**
  * @description 첫 번째 배열에서 두 번째 배열에 없는 요소들을 반환하는 함수입니다.
- * 선택적으로 제공된 `iteratee` 함수를 사용하여 각 요소를 변환한 후 비교할 수 있습니다.
+ *
+ * `iteratee` 함수를 제공하여 각 요소를 변환한 후 결과 값을 기반으로 비교할 수 있습니다.
  *
  * @template T - 첫 번째 배열의 요소 타입입니다.
  * @template U - `iteratee` 함수가 반환하는 타입으로, 기본값은 `T`와 같습니다.
@@ -38,8 +39,9 @@ export function difference<T, U = T>(
     iteratee ? secondArr.map(iteratee) : secondArr
   );
 
-  for (const item of firstArr) {
-    const mappedItem = iteratee ? iteratee(item) : item;
+  for (let i = 0; i < firstArr.length; i++) {
+    const item = firstArr[i];
+    const mappedItem = iteratee ? iteratee(firstArr[i]) : firstArr[i];
 
     if (!secondSet.has(mappedItem)) {
       result.push(item);
