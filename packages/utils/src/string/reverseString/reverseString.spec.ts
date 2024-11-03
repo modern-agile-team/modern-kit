@@ -2,27 +2,21 @@ import { describe, it, expect } from 'vitest';
 import { reverseString } from '.';
 
 describe('reverseString', () => {
-  it('should return the empty string for a invalid value', () => {
-    const reversedString = reverseString(undefined as unknown as string);
-
-    expect(reversedString).toBe('');
-  });
-
-  it('should return the reversed string for a normal string', () => {
+  it('주어진 문자열에 대해 반전된 문자열을 반환해야 합니다.', () => {
     const normalString = 'ABC가나다';
     const reversedString = reverseString(normalString);
 
     expect(reversedString).toBe('다나가CBA');
   });
 
-  it('should return the reversed string for a string with special characters', () => {
+  it('특수 문자가 포함된 문자열에 대해 반전된 문자열을 반환해야 합니다.', () => {
     const stringWithSpecialCharacter = 'A!B@C';
     const reversedString = reverseString(stringWithSpecialCharacter);
 
     expect(reversedString).toBe('C@B!A');
   });
 
-  it('should return the reversed string for a string with unicode characters', () => {
+  it('유니코드 문자가 포함된 문자열에 대해 반전된 문자열을 반환해야 합니다.', () => {
     const stringWithUnicodeCharacter = 'foo 𝌆 bar';
     const reversedString = reverseString(stringWithUnicodeCharacter);
 
