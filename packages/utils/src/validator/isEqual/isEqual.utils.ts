@@ -12,7 +12,9 @@ const compareObjectOrArray = (
     return false;
   }
 
-  for (const key of sourceKeys) {
+  for (let i = 0; i < sourceKeys.length; i++) {
+    const key = sourceKeys[i];
+
     if (
       !targetKeys.includes(key) ||
       !isEqualInternal(source[key], target[key], visited)
