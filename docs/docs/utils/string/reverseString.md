@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-const reverseString: (value: string) => string
+function reverseString(value: string): string
 ```
 
 ## Usage

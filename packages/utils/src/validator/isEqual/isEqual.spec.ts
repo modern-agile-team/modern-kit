@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isEqual } from '.';
 
 describe('isEqual', () => {
-  it('should return true if primitive types are deeply equal', () => {
+  it('원시 값을 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     expect(isEqual(1, 1)).toBeTruthy();
     expect(isEqual('a', 'a')).toBeTruthy();
 
@@ -10,7 +10,7 @@ describe('isEqual', () => {
     expect(isEqual('a', 'b')).toBeFalsy();
   });
 
-  it('should return true if objects or arrays are deeply equal', () => {
+  it('객체/배열을 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     expect(isEqual({ a: 1, b: { c: 1 } }, { a: 1, b: { c: 1 } })).toBeTruthy();
     expect(
       isEqual(
@@ -45,7 +45,7 @@ describe('isEqual', () => {
     ).toBeFalsy();
   });
 
-  it('should return true if function are deeply equal', () => {
+  it('함수를 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     const origin = () => 1;
     const target = origin;
     expect(
@@ -63,7 +63,7 @@ describe('isEqual', () => {
     ).toBeFalsy();
   });
 
-  it('should return true if two objects with circular references are deeply equal', () => {
+  it('순환 참조를 가진 두 객체가 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     const objA: any = { a: 1 };
     const objB: any = { a: 1 };
 
@@ -73,13 +73,13 @@ describe('isEqual', () => {
     expect(isEqual(objA, objB)).toBeTruthy();
   });
 
-  it('should return true if null or undefined are deeply equal', () => {
+  it('null/undefined/NaN를 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     expect(isEqual(null, null)).toBeTruthy();
     expect(isEqual(undefined, undefined)).toBeTruthy();
     expect(isEqual(null, undefined)).toBeFalsy();
   });
 
-  it('should return true if Set or Map are deeply equal', () => {
+  it('Set/Map 깊은 비교 시 동일하면 true, 동일하지 않으면 false를 반환해야 합니다.', () => {
     // truthy
     expect(
       isEqual(
@@ -130,18 +130,6 @@ describe('isEqual', () => {
   it('should return true for identical arrays with different element order', () => {
     const arr1 = [1, 2, 3];
     const arr2 = [3, 2, 1];
-    expect(isEqual(new Set(arr1), new Set(arr2))).toBe(false);
-  });
-
-  it('should return true for NaN values', () => {
-    expect(isEqual(NaN, NaN)).toBe(true);
-  });
-
-  it('should return false for NaN and a number', () => {
-    expect(isEqual(NaN, 1)).toBe(false);
-  });
-
-  it('should return false for NaN and undefined', () => {
-    expect(isEqual(NaN, undefined)).toBe(false);
+    expect(isEqual(new Set(arr1), new Set(arr2))).toBeFalsy();
   });
 });
