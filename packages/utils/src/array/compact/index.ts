@@ -18,7 +18,9 @@ type Retained<T> = Exclude<T, Removable>;
 export function compact<T>(arr: T[] | readonly T[]): Retained<T>[] {
   const result: Retained<T>[] = [];
 
-  for (const item of arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
+
     if (item) {
       result.push(item as Retained<T>);
     }
