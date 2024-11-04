@@ -48,7 +48,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@changesets/changelog-github", "npm:0.5.0"],\
           ["@changesets/cli", "npm:2.27.1"],\
-          ["@eslint/js", "npm:9.11.1"],\
+          ["@eslint/js", "npm:9.14.0"],\
           ["@types/node", "npm:22.8.2"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.13.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.31.0"],\
@@ -7178,17 +7178,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@eslint/js", [\
-      ["npm:9.11.1", {\
-        "packageLocation": "./.yarn/cache/@eslint-js-npm-9.11.1-b61091a0b9-22916ef7b0.zip/node_modules/@eslint/js/",\
-        "packageDependencies": [\
-          ["@eslint/js", "npm:9.11.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:9.13.0", {\
         "packageLocation": "./.yarn/cache/@eslint-js-npm-9.13.0-2ac1161c0b-672257bffe.zip/node_modules/@eslint/js/",\
         "packageDependencies": [\
           ["@eslint/js", "npm:9.13.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:9.14.0", {\
+        "packageLocation": "./.yarn/cache/@eslint-js-npm-9.14.0-778d6db19a-a423dd435e.zip/node_modules/@eslint/js/",\
+        "packageDependencies": [\
+          ["@eslint/js", "npm:9.14.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -20905,7 +20905,7 @@ const RAW_RUNTIME_STATE =
           ["modern-kit", "workspace:."],\
           ["@changesets/changelog-github", "npm:0.5.0"],\
           ["@changesets/cli", "npm:2.27.1"],\
-          ["@eslint/js", "npm:9.11.1"],\
+          ["@eslint/js", "npm:9.14.0"],\
           ["@types/node", "npm:22.8.2"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.13.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.31.0"],\
