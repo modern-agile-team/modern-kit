@@ -12,15 +12,15 @@ describe('difference', () => {
   it('iteratee를 사용하여 두 객체 배열의 차이를 찾아야 합니다.', () => {
     const arr1 = [
       { id: 1, name: 'john' },
-      { id: 2, name: 'front' },
+      { id: 2, name: 'gromit' },
     ];
     const arr2 = [
       { id: 1, name: 'john' },
-      { id: 3, name: 'bgzt' },
+      { id: 3, name: 'dylan' },
     ];
 
     expect(difference(arr1, arr2, (item) => item.id)).toEqual([
-      { id: 2, name: 'front' },
+      { id: 2, name: 'gromit' },
     ]);
   });
 });
