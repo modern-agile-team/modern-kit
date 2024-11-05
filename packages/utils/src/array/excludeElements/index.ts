@@ -1,3 +1,5 @@
+import { difference } from '../../array/difference';
+
 /**
  * @description 주어진 배열에서 특정 요소를 제외한 배열을 반환하는 함수입니다.
  * `target` 배열에 포함된 요소들이 `arr`에서 필터링되며, 선택적으로 제공되는 `iteratee` 함수를
@@ -30,11 +32,5 @@ export function excludeElements<T, U>(
   target: T[] | readonly T[],
   iteratee?: (item: T) => U
 ): T[] {
-  const exclusionSet = new Set<U | T>(iteratee ? target.map(iteratee) : target);
-
-  const filterFn = iteratee
-    ? (element: T) => !exclusionSet.has(iteratee(element))
-    : (element: T) => !exclusionSet.has(element);
-
-  return arr.filter(filterFn);
+  return difference(arr, target, iteratee);
 }

@@ -34,19 +34,11 @@ export function difference<T, U = T>(
   secondArr: T[] | readonly T[],
   iteratee?: (item: T) => U
 ): T[] {
-  const result = [];
-  const secondSet = new Set<T | U>(
-    iteratee ? secondArr.map(iteratee) : secondArr
-  );
-
-  for (let i = 0; i < firstArr.length; i++) {
-    const item = firstArr[i];
-    const mappedItem = iteratee ? iteratee(firstArr[i]) : firstArr[i];
-
-    if (!secondSet.has(mappedItem)) {
-      result.push(item);
-    }
+  if (!iteratee) {
+    const secondSet = new Set(secondArr);
+    return firstArr.filter((item) => !secondSet.has(item));
   }
 
-  return result;
+  const secondSet = new Set(secondArr.map((item) => iteratee(item)));
+  return firstArr.filter((item) => !secondSet.has(iteratee(item)));
 }
