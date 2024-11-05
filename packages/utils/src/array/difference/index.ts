@@ -20,14 +20,16 @@
  * @example
  * // iteratee 함수 사용 예제
  * const users = [
- *   { id: 1, name: 'Alice' },
- *   { id: 2, name: 'Bob' },
- *   { id: 3, name: 'Charlie' }
+ *   { id: 1, name: 'john' },
+ *   { id: 2, name: 'front' },
  * ];
- * const activeUserIds = [1, 3];
+ * const activeUserIds = [
+ *   { id: 1, name: 'john' },
+ *   { id: 3, name: 'bgzt' },
+ * ];
  *
  * difference(users, activeUserIds, user => user.id));
- * // [{ id: 2, name: 'Bob' }]
+ * // [{ id: 2, name: 'front' }]
  */
 export function difference<T, U = T>(
   firstArr: T[] | readonly T[],
