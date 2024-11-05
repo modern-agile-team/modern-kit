@@ -15,21 +15,31 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
+### Default
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/intersection|338,190.49|0.0030|`fastest`|
-|lodash/intersectionBy|159,624.82|0.0063|`slowest`|
+|modern-kit/intersection|8,649,185.29|0.0001|`fastest`|
+|lodash/intersection|3,722,050.21|0.0003|`slowest`|
 
 - **modern-kit/intersection**
-  - `2.12x` faster than lodash/intersectionBy
+  - `2.32x` faster than **lodash/intersection**
+
+### with iteratee
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/intersection|10,210,296.98|0.0001|`fastest`|
+|lodash/intersectionBy|1,278,057.73|0.0002|`slowest`|
+
+- **modern-kit/intersection**
+  - `7.99x` faster than **lodash/intersectionBy**
 
 ## Interface
 ```ts title="typescript"
-const intersection: <T, U = T>(
+function intersection<T, U>(
   firstArr: T[] | readonly T[],
   secondArr: T[] | readonly T[],
   iteratee?: ((item: T) => U) | undefined
-) => T[];
+): T[];
 ```
 
 ## Usage
