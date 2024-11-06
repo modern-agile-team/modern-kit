@@ -1,24 +1,42 @@
 # invert
 
-객체의 `key`와 `value`를 뒤집는 함수입니다.
+주어진 객체의 각 키와 값을 반전하여 새로운 객체를 생성합니다.
 
-필요 시 2번째 인자로 함수(`keyTransformer`)를 넘겨 key를 직접 핸들링 할 수 있습니다.
+기본적으로 객체의 키와 값을 반전하지만, `iteratee` 함수를 제공하면 각 값에 대해 변형된 키를 생성하여 반전할 수 있습니다.
 
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/invert/index.ts)
 
+### Default
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/invert|6,119,008.75|0.0002|`fastest`|
+|lodash/invert|4,459,920.52|0.0003|`slowest`|
+
+- **modern-kit/invert**
+  - `1.37x` faster than **lodash/invert**
+
+### with iteratee
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/invert|4,154,655.71|0.0003|`fastest`|
+|lodash/invertBy|2,262,596.79|0.0004|`slowest`|
+
+- **modern-kit/invert**
+  - `1.84x` faster than **lodash/invertBy**
+
 ## Interface
 ```ts title="typescript"
-const invert: <
-  K extends PropertyKey,
-  V,
-  TK extends PropertyKey = V extends PropertyKey ? V : PropertyKey
->(
+function invert<K extends PropertyKey, V extends PropertyKey>(
+  obj: Record<K, V>
+): Record<V, K>;
+
+function invert<K extends PropertyKey, V, TK extends PropertyKey>(
   obj: Record<K, V>,
-  keyTransformer?: (value: V) => TK
-) => Record<TK, Exclude<K, symbol>>;
+  iteratee: (iterateData: { value: V; key: K; obj: Record<K, V> }) => TK
+): Record<TK, K>;
 ```
 
 ## Usage
@@ -33,20 +51,7 @@ invert(obj);
 // type: Record<number, "a" | "b" | "c">
 ```
 
-### KeyTransformer
-```ts title="typescript"
-import { invert } from '@modern-kit/utils';
-
-const obj = { a: [1, 2, 3], b: [4, 5, 6] };
-
-invert(obj, (value) => {
-  return JSON.stringify(value);
-}); 
-// value: { '[1,2,3]': 'a', '[4,5,6]': 'b' }
-// type: Record<string, "a" | "b">
-```
-
-### const assertion
+### with iteratee
 ```ts title="typescript"
 import { invert } from '@modern-kit/utils';
 
