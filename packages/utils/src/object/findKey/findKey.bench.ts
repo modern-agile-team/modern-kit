@@ -10,10 +10,10 @@ describe('findKey', () => {
   };
 
   bench('modern-kit/findKey', () => {
-    findKey(obj, (item) => item.active);
+    findKey(obj, ({ value }) => value.active);
   });
 
   bench('lodash/findKey', () => {
-    findKeyLodash(obj, (item) => item.active);
+    findKeyLodash(obj, (value) => value.active);
   });
 });

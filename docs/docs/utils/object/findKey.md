@@ -23,8 +23,12 @@
 ```ts title="typescript"
 function findKey<T extends Record<PropertyKey, any>>(
   obj: T,
-  condition: (value: T[keyof T) => boolean
-): string | undefined
+  predicate: (predicateData: {
+    value: T[keyof T];
+    key: keyof T;
+    obj: T;
+  }) => boolean
+): string | undefined;
 ```
 
 ## Usage
