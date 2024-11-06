@@ -1,6 +1,6 @@
 # mapKeys 
 
-주어진 객체의 각 키에 대해 제공된 `변환 함수`를 호출하여 새 객체를 생성하는 함수입니다. 반환된 객체는 원본 객체의 키들을 변환한 후 생성된 새로운 객체입니다.
+주어진 객체의 각 키를 주어진 `iteratee` 함수 결과에 따라 변환하여 새로운 객체를 반환합니다.
 
 ## Code 
 
@@ -12,21 +12,18 @@
 
 |이름|hz|mean|성능|
 |------|---|---|---|
-|modern-kit/mapKeys|411,676.30|0.0024|`fastest`|
-|lodash/mapKeys|386,336.12|0.0026|`slowest`|
+|modern-kit/mapKeys|3,983,407.38|0.0003|`fastest`|
+|lodash/mapKeys|3,060,203.94|0.0003|`slowest`|
 
 - **modern-kit/mapKeys**
-  - `1.07x` faster than lodash/mapKeys
+  - `1.30x` faster than lodash/mapKeys
 
 ## Interface
 ```ts title="typescript"
-function mapKeys<
-  T extends Record<PropertyKey, any>,
-  U extends PropertyKey
->(
-  object: T,
-  iteratee: (iterateData: { key: keyof T; value: T[keyof T]; object: T }) => U
-): Record<U, T[keyof T]>
+function mapKeys<T extends Record<PropertyKey, any>, K extends PropertyKey>(
+  obj: T,
+  iteratee: (iterateData: { key: keyof T; value: T[keyof T]; obj: T }) => K
+): Record<K, T[keyof T]>;
 ```
 
 ## Usage

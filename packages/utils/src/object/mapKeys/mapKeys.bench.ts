@@ -2,22 +2,12 @@ import { bench, describe } from 'vitest';
 import { mapKeys as mapKeysLodash } from 'lodash-es';
 import { mapKeys } from '.';
 
-const createObj = (depth: number) => {
-  const obj = {} as Record<string, string>;
-  for (let i = 0; i < depth; i++) {
-    obj[`key${i}`] = `value${i}`;
-  }
-  return obj;
-};
-
 describe('mapKeys', () => {
-  const obj = createObj(20);
-
   bench('modern-kit/mapKeys', () => {
-    mapKeys(obj, ({ key, value }) => key + value);
+    mapKeys({ a: 1, b: 2, c: 3, d: 4 }, ({ key, value }) => key + value);
   });
 
   bench('lodash/mapKeys', () => {
-    mapKeysLodash(obj, (value, key) => key + value);
+    mapKeysLodash({ a: 1, b: 2, c: 3, d: 4 }, (value, key) => key + value);
   });
 });
