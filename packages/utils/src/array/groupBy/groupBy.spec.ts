@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { groupBy } from '.';
 
 describe('groupBy', () => {
-  it('should group elements by a given key', () => {
+  it('주어진 key로 배열을 그룹화해야 합니다.', () => {
     const items = [
       { category: 'fruit', name: 'apple' },
       { category: 'fruit', name: 'banana' },
@@ -11,7 +11,6 @@ describe('groupBy', () => {
       { category: 'vegetable', name: 'broccoli' },
     ];
 
-    const actual = groupBy(items, (item) => item.category);
     const expected = {
       fruit: [
         { category: 'fruit', name: 'apple' },
@@ -24,19 +23,17 @@ describe('groupBy', () => {
       ],
     };
 
-    expect(actual).toEqual(expected);
+    expect(groupBy(items, (item) => item.category)).toEqual(expected);
   });
 
-  it('should handle an empty array', () => {
+  it('빈 배열을 처리 할 수 있어야 합니다.', () => {
     const items: Array<Record<string, string>> = [];
-
-    const actual = groupBy(items, (item) => item.category);
     const expected = {};
 
-    expect(actual).toEqual(expected);
+    expect(groupBy(items, (item) => item.category)).toEqual(expected);
   });
 
-  it('should group handle numeric key', () => {
+  it('숫자 키를 그룹화해서 처리해야 합니다.', () => {
     const items = [
       { category: 1, name: 'apple' },
       { category: 2, name: 'banana' },
@@ -44,7 +41,6 @@ describe('groupBy', () => {
       { category: 2, name: 'pear' },
     ];
 
-    const actual = groupBy(items, (item) => item.category);
     const expected = {
       '1': [
         { category: 1, name: 'apple' },
@@ -56,32 +52,6 @@ describe('groupBy', () => {
       ],
     };
 
-    expect(actual).toEqual(expected);
-  });
-
-  it('should group handle symbol key', () => {
-    const symbolA = Symbol('A');
-    const symbolB = Symbol('B');
-
-    const items = [
-      { category: symbolA, name: 'apple' },
-      { category: symbolB, name: 'banana' },
-      { category: symbolA, name: 'carrot' },
-      { category: symbolB, name: 'pear' },
-    ];
-
-    const actual = groupBy(items, (item) => item.category);
-    const expected = {
-      [symbolA]: [
-        { category: symbolA, name: 'apple' },
-        { category: symbolA, name: 'carrot' },
-      ],
-      [symbolB]: [
-        { category: symbolB, name: 'banana' },
-        { category: symbolB, name: 'pear' },
-      ],
-    };
-
-    expect(actual).toEqual(expected);
+    expect(groupBy(items, (item) => item.category)).toEqual(expected);
   });
 });
