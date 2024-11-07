@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isValidEmail } from '.';
 
 describe('isValidEmail', () => {
-  it('should return true if email is in an valid format', () => {
+  it('유효한 이메일 형식이면 true를 반환해야 합니다.', () => {
     expect(isValidEmail('user123@gmail.com')).toBeTruthy();
     expect(isValidEmail('user.jeon@yahoo.co.kr')).toBeTruthy();
     expect(isValidEmail('user^@naver.com')).toBeTruthy();
@@ -10,8 +10,7 @@ describe('isValidEmail', () => {
     expect(isValidEmail('user@my-example.com')).toBeTruthy();
     expect(isValidEmail('user@sub.sub.example.com')).toBeTruthy();
   });
-
-  it('should return false if email is in an invalid format', () => {
+  it('유효하지 않은 이메일 형식이면 false를 반환해야 합니다.', () => {
     expect(isValidEmail('invalid-email')).toBeFalsy();
     expect(isValidEmail('user@')).toBeFalsy();
     expect(isValidEmail('user @naver.com')).toBeFalsy();
