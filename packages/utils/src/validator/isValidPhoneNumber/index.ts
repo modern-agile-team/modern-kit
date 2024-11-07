@@ -8,14 +8,14 @@
  * @returns {boolean} 전화번호 형식이 유효하면 `true`, 그렇지 않으면 `false`를 반환합니다.
  *
  * @example
- * isValidPhoneNumberFormat("010-1234-5678"); // true
- * isValidPhoneNumberFormat("02-123-4567"); // true
+ * isValidPhoneNumber("010-1234-5678"); // true
+ * isValidPhoneNumber("02-123-4567"); // true
  *
  * @example
- * isValidPhoneNumberFormat("01012345678"); // false
- * isValidPhoneNumberFormat('0-123-1234'); // false
+ * isValidPhoneNumber("01012345678"); // false
+ * isValidPhoneNumber('0-123-1234'); // false
  */
-export function isValidPhoneNumberFormat(value: string): boolean {
+export function isValidPhoneNumber(value: string): boolean {
   const regex = /^(\d{2,3}-)?\d{3,4}-\d{4}$/;
 
   return regex.test(value);

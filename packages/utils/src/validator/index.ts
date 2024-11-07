@@ -18,5 +18,5 @@ export * from './isString';
 export * from './isSubset';
 export * from './isValidEmail';
 export * from './isValidPassword';
-export * from './isValidPhoneNumberFormat';
+export * from './isValidPhoneNumber';
 export * from './isWindow';
