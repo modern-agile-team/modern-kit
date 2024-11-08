@@ -66,7 +66,7 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
   }, [externalStoreState, initialValueToUse]);
 
   const setState = useCallback(
-    (value: Dispatch<SetStateAction<T | null>>) => {
+    (value: SetStateAction<T | null>) => {
       try {
         const prevStateString = getSnapshot(key);
         const prevState = prevStateString
