@@ -3,7 +3,9 @@ import { AspectRatio } from '@modern-kit/react';
 
 # AspectRatio
 
-자식 요소의 가로, 세로 비율 **[aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)** 을 편리하게 맞춰 줄 수 있는 컴포넌트입니다.
+주어진 **[aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)** 비율에 맞게 가로/세로 비율을 편리하게 맞춰주는 컴포넌트입니다.
+
+미리 영역을 확보하여 Layout Shift를 방지하는데 효과적입니다.
 
 <br />
 
@@ -12,17 +14,19 @@ import { AspectRatio } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
-interface AspectRatioProps extends ComponentProps<'div'> {
-  ratio: number;
-}
-
-const AspectRatio: React.ForwardRefExoticComponent<
-  Omit<PropsWithChildren<AspectRatioProps>, 'ref'> &
-    React.RefAttributes<HTMLDivElement>
->;
+const AspectRatio: <
+  T extends React.ElementType = 'div'
+>({
+  asChild,
+  ratio,
+  children,
+  ...props
+}: React.PropsWithChildren<AspectRatioProps<T>>) => JSX.Element;
 ```
 
 ## Usage
+### Basic
+- 기본적으로 div 태그를 부모로 두고 자식 요소를 렌더링 하며, div 태그에 aspect-ratio 속성을 적용합니다.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
 
@@ -37,9 +41,7 @@ const Example = () => {
 };
 ```
 
-## Example
-
-export const Example = () => {
+export const Example1 = () => {
   return (
     <div style={{ width: '500px' }}>
       <AspectRatio ratio={427 / 640}>
@@ -49,4 +51,36 @@ export const Example = () => {
   );
 };
 
-<Example />
+<Example1 />
+
+### asChild
+- asChild 속성을 true로 설정하면 자식 요소에 aspect-ratio 속성을 적용합니다.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <div style={{ width: '500px' }}>
+      <AspectRatio ratio={427 / 640} asChild>
+        <section> {/* section 태그에 aspect-ratio 속성이 적용됩니다. */}
+          <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+        </section>
+      </AspectRatio>
+    </div>
+  );
+};
+```
+
+export const Example2 = () => {
+  return (
+    <div style={{ width: '500px' }}>
+      <AspectRatio ratio={427 / 640} asChild>
+        <section>
+          <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+        </section>
+      </AspectRatio>
+    </div>
+  );
+};
+
+<Example2 />
