@@ -1,5 +1,21 @@
 # @modern-kit/utils
 
+## 1.23.0
+
+### Minor Changes
+
+- [#567](https://github.com/modern-agile-team/modern-kit/pull/567) [`b3d371f`](https://github.com/modern-agile-team/modern-kit/commit/b3d371ffae4779c1377dbdc91f0bd79e058ce8eb) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): intersectionWithDuplicates 제거 및 difference/intersection 개선 - @ssi02014
+
+- [#575](https://github.com/modern-agile-team/modern-kit/pull/575) [`1d18dd5`](https://github.com/modern-agile-team/modern-kit/commit/1d18dd5d959bbbf0233796d00bf6bb55d2ce6723) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): isValidPhoneNumber 네이밍 변경 - @ssi02014
+
+### Patch Changes
+
+- [#574](https://github.com/modern-agile-team/modern-kit/pull/574) [`0de16eb`](https://github.com/modern-agile-team/modern-kit/commit/0de16eb44f645ae3c258b5f80539e22be88cacfd) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): findKey 인터페이스 변경 - @ssi00214
+
+- [#559](https://github.com/modern-agile-team/modern-kit/pull/559) [`5601799`](https://github.com/modern-agile-team/modern-kit/commit/5601799f4a72f0add55b09b3c5ee8bbffa775ddc) Thanks [@ssi02014](https://github.com/ssi02014)! - imp(utils): difference 성능 개선 및 문서 개선 - @ssi02014
+
+- [#573](https://github.com/modern-agile-team/modern-kit/pull/573) [`ca40d96`](https://github.com/modern-agile-team/modern-kit/commit/ca40d96bc213dbf8b6878870ef81c28a32cae7a4) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): invert 스펙 변경 - @ssi02014
+
 ## 1.22.1
 
 ### Patch Changes
