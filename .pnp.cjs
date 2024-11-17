@@ -7736,7 +7736,6 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
-          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"],\
           ["classnames", "npm:2.5.1"],\
           ["esbuild", "npm:0.24.0"],\
@@ -7752,7 +7751,7 @@ const RAW_RUNTIME_STATE =
           ["tslib", "npm:2.8.0"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
           ["typescript-plugin-css-modules", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:5.1.0"],\
-          ["ua-parser-js", "npm:1.0.38"],\
+          ["ua-parser-js", "npm:1.0.39"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"]\
         ],\
         "packagePeers": [\
@@ -7780,7 +7779,6 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
-          ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"],\
           ["classnames", "npm:2.5.1"],\
           ["esbuild", "npm:0.24.0"],\
@@ -7796,7 +7794,7 @@ const RAW_RUNTIME_STATE =
           ["tslib", "npm:2.8.0"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
           ["typescript-plugin-css-modules", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:5.1.0"],\
-          ["ua-parser-js", "npm:1.0.38"],\
+          ["ua-parser-js", "npm:1.0.39"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"]\
         ],\
         "linkType": "SOFT"\
@@ -9944,15 +9942,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/sockjs", "npm:0.3.36"],\
           ["@types/node", "npm:22.9.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/ua-parser-js", [\
-      ["npm:0.7.39", {\
-        "packageLocation": "./.yarn/cache/@types-ua-parser-js-npm-0.7.39-23053990d8-fea522f42d.zip/node_modules/@types/ua-parser-js/",\
-        "packageDependencies": [\
-          ["@types/ua-parser-js", "npm:0.7.39"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -28375,10 +28364,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["ua-parser-js", [\
-      ["npm:1.0.38", {\
-        "packageLocation": "./.yarn/cache/ua-parser-js-npm-1.0.38-63d05d91e2-b1dd11b87e.zip/node_modules/ua-parser-js/",\
+      ["npm:1.0.39", {\
+        "packageLocation": "./.yarn/cache/ua-parser-js-npm-1.0.39-3d3fb8d47d-c6452b0c68.zip/node_modules/ua-parser-js/",\
         "packageDependencies": [\
-          ["ua-parser-js", "npm:1.0.38"]\
+          ["ua-parser-js", "npm:1.0.39"]\
         ],\
         "linkType": "HARD"\
       }]\
