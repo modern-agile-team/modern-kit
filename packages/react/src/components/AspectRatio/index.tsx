@@ -1,13 +1,18 @@
 import classNames from 'classnames';
 import styles from './AspectRatio.module.css';
 import { Slot } from '../Slot';
-import React from 'react';
+import {
+  CSSProperties,
+  Children,
+  ComponentProps,
+  PropsWithChildren,
+  useMemo,
+} from 'react';
 
-type AspectRatioProps<T extends React.ElementType = 'div'> =
-  React.ComponentPropsWithoutRef<T> & {
-    asChild?: boolean;
-    ratio: number;
-  };
+interface AspectRatioProps extends ComponentProps<'div'> {
+  asChild?: boolean;
+  ratio: number;
+}
 
 /**
  * @description 주어진 aspect-ratio 비율에 맞게 가로/세로 비율을 편리하게 맞춰주는 컴포넌트입니다.
@@ -28,7 +33,7 @@ type AspectRatioProps<T extends React.ElementType = 'div'> =
  * // 기본적으로 div를 생성 후 aspect-ratio 속성을 적용합니다.
  * ```tsx
  * <AspectRatio ratio={16 / 9}>
- *  <p>Content</p>
+ *  <img src={imgUrl} alt="placeholder" />
  * </AspectRatio>
  * ```
  *
@@ -36,18 +41,20 @@ type AspectRatioProps<T extends React.ElementType = 'div'> =
  * // asChild 속성을 true로 설정하면 자식 요소에 aspect-ratio 속성을 적용합니다.
  * ```tsx
  * <AspectRatio ratio={16 / 9} asChild>
- *  <section>Content</section>
+ *  <section>
+ *    <img src={imgUrl} alt="placeholder" />
+ *  </section>
  * </AspectRatio>
  * ```
  */
-export const AspectRatio = <T extends React.ElementType = 'div'>({
+export const AspectRatio = ({
   asChild = false,
   ratio,
   children,
   ...props
-}: React.PropsWithChildren<AspectRatioProps<T>>): JSX.Element => {
+}: PropsWithChildren<AspectRatioProps>): JSX.Element => {
   const Wrapper = asChild ? Slot : 'div';
-  const customStyle: React.CSSProperties = React.useMemo(
+  const customStyle: CSSProperties = useMemo(
     () => ({
       paddingTop: `calc(100% * (1 / ${ratio}))`,
       ...props.style,
@@ -60,7 +67,7 @@ export const AspectRatio = <T extends React.ElementType = 'div'>({
       className={classNames(styles['wrapper'], props.className)}
       style={customStyle}
       {...props}>
-      {React.Children.only(children)}
+      {Children.only(children)}
     </Wrapper>
   );
 };
