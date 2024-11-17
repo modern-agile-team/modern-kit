@@ -1,5 +1,20 @@
 # @modern-kit/react
 
+## 1.24.0
+
+### Minor Changes
+
+- [#587](https://github.com/modern-agile-team/modern-kit/pull/587) [`77f2d1b`](https://github.com/modern-agile-team/modern-kit/commit/77f2d1b91e5c182681673c8bfe536b4c82a326c3) Thanks [@ssi02014](https://github.com/ssi02014)! - chore(react): lodash-es 의존성 위치 변경 - @ssi02014
+
+- [#579](https://github.com/modern-agile-team/modern-kit/pull/579) [`b14a556`](https://github.com/modern-agile-team/modern-kit/commit/b14a55672db9c77874644c1561b4ff6019eb6909) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): AspectRatio Slot 적용 - @ssi0214
+
+### Patch Changes
+
+- [#585](https://github.com/modern-agile-team/modern-kit/pull/585) [`28d3035`](https://github.com/modern-agile-team/modern-kit/commit/28d303518ce91b24ee7d885efb75b47e182beeba) Thanks [@ssi02014](https://github.com/ssi02014)! - refac(react): useLocalStorage/SessionStorage setState 함수 타입 변경 - @ssi02014
+
+- Updated dependencies [[`0de16eb`](https://github.com/modern-agile-team/modern-kit/commit/0de16eb44f645ae3c258b5f80539e22be88cacfd), [`b3d371f`](https://github.com/modern-agile-team/modern-kit/commit/b3d371ffae4779c1377dbdc91f0bd79e058ce8eb), [`5601799`](https://github.com/modern-agile-team/modern-kit/commit/5601799f4a72f0add55b09b3c5ee8bbffa775ddc), [`ca40d96`](https://github.com/modern-agile-team/modern-kit/commit/ca40d96bc213dbf8b6878870ef81c28a32cae7a4), [`1d18dd5`](https://github.com/modern-agile-team/modern-kit/commit/1d18dd5d959bbbf0233796d00bf6bb55d2ce6723)]:
+  - @modern-kit/utils@1.23.0
+
 ## 1.23.0
 
 ### Minor Changes
