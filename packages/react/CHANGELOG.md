@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.24.1
+
+### Patch Changes
+
+- [#588](https://github.com/modern-agile-team/modern-kit/pull/588) [`29a8a04`](https://github.com/modern-agile-team/modern-kit/commit/29a8a04c6e2300a1aace014eb08ea7777978d866) Thanks [@ssi02014](https://github.com/ssi02014)! - chore(react): lodash-es @types 의존성 위치 변경 - @ssi02014
+
 ## 1.24.0
 
 ### Minor Changes
