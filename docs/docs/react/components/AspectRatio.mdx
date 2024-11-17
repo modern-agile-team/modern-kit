@@ -14,14 +14,10 @@ import { AspectRatio } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
-const AspectRatio: <
-  T extends React.ElementType = 'div'
->({
-  asChild,
-  ratio,
-  children,
-  ...props
-}: React.PropsWithChildren<AspectRatioProps<T>>) => JSX.Element;
+interface AspectRatioProps extends ComponentProps<'div'> {
+  asChild?: boolean;
+  ratio: number;
+}
 ```
 
 ## Usage
