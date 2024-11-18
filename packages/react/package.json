@@ -58,7 +58,7 @@
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21",
-    "ua-parser-js": "^1.0.39"
+    "ua-parser-js": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^18.0.0",
