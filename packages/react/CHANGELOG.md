@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.24.2
+
+### Patch Changes
+
+- [#590](https://github.com/modern-agile-team/modern-kit/pull/590) [`78c9b28`](https://github.com/modern-agile-team/modern-kit/commit/78c9b28682bdf7cc7a521f8dede57377f1236ab6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): @modern-kit/utils 의존성 위치 변경 - @ssi02014
+
 ## 1.24.1
 
 ### Patch Changes
