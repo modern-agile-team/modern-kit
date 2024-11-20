@@ -17,24 +17,12 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 
 ## Interface
 ```ts title="typescript"
-interface IntersectionObserverInit {
-    root?: Element | Document | null;
-    rootMargin?: string;
-    threshold?: number | number[];
+interface InViewProps extends UseIntersectionObserverProps {
+  children: JSX.Element;
 }
-
-interface UseIntersectionObserverProps extends IntersectionObserverInit {
-  onIntersectStart?: (entry: IntersectionObserverEntry) => void;
-  onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
-  calledOnce?: boolean;
-}
-
-type InViewProps = React.ComponentProps<'div'> & UseIntersectionObserverProps;
-
-const InView: React.ForwardRefExoticComponent<
-  Omit<React.PropsWithChildren<InViewProps>, 'ref'> &
-    React.RefAttributes<HTMLDivElement>
->;
+```
+```ts title="typescript"
+const InView: ({ children, ...props }: InViewProps) => JSX.Element
 ```
 
 ## Usage
@@ -57,7 +45,7 @@ const Example = () => {
         onIntersectStart={handleIntersectStart}
         onIntersectStart={handleIntersectEnd}
         calledOnce>
-        Box1
+        <div>Box1</div>
       </InView>
     </div>;
   );
@@ -85,15 +73,14 @@ export const Example = () => {
         스크롤 해주세요.
       </div>
       <InView
-        style={{
-          ...inViewStyle,
-          background: '#c0392B',
-        }}
         onIntersectStart={() => console.log('action onIntersectStart(1)')}
         onIntersectEnd={() => console.log('action onIntersectEnd(1)')}
         calledOnce
       >
-        <div>
+        <div style={{
+          ...inViewStyle,
+          background: '#c0392B',
+        }}>
           <p>Box1</p>
           <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
           <p>onIntersectStart가 최초 1회만 호출됩니다.</p>
@@ -102,14 +89,13 @@ export const Example = () => {
       </InView>
       <div style={{ height: '300px' }} />
       <InView
-        style={{
-          ...inViewStyle,
-          background: '#89a5ea',
-        }}
         onIntersectStart={() => console.log('action onIntersectStart(2)')}
         onIntersectEnd={() => console.log('action onIntersectEnd(2)')}
       >
-        <div>
+        <div style={{
+          ...inViewStyle,
+          background: '#89a5ea',
+        }}>
           <p>Box2</p>
           <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
           <p>onIntersectStart, onIntersectEnd 함수가 여러 번 호출됩니다.</p>
