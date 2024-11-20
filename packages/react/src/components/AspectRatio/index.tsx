@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './AspectRatio.module.css';
 import { Slot } from '../Slot';
-import { CSSProperties, Children, PropsWithChildren, useMemo } from 'react';
+import { CSSProperties, Children, useMemo } from 'react';
 
 interface AspectRatioProps {
   children: JSX.Element;
