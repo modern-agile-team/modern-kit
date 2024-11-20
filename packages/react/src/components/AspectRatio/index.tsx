@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-import styles from './AspectRatio.module.css';
 import { Slot } from '../Slot';
 import { CSSProperties, Children, useMemo } from 'react';
 
@@ -39,9 +37,5 @@ export const AspectRatio = ({
     [ratio]
   );
 
-  return (
-    <Slot className={classNames(styles['wrapper'])} style={customStyle}>
-      {Children.only(children)}
-    </Slot>
-  );
+  return <Slot style={customStyle}>{Children.only(children)}</Slot>;
 };

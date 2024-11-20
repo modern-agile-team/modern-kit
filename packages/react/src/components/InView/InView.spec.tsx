@@ -32,16 +32,16 @@ const TestComponent = ({
       onIntersectStart={onIntersectStart}
       onIntersectEnd={onIntersectEnd}
       calledOnce={calledOnce}>
-      box
+      <div>box</div>
     </InView>
   );
 };
 
-describe('InView Component', () => {
+describe('InView', () => {
   const intersectStartMock = vi.fn();
   const intersectEndMock = vi.fn();
 
-  it('should call the action function when the InView component is exposed to the viewport', async () => {
+  it('InView 컴포넌트가 viewport에 노출되거나 숨겨질 때 onIntersect 콜백 함수를 호출해야 합니다.', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
@@ -61,7 +61,7 @@ describe('InView Component', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('should call the action callback function once if the calledOnce prop is true', async () => {
+  it('calledOnce 프로퍼티가 true이면 onIntersect 콜백 함수를 한 번 호출해야 합니다.', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
