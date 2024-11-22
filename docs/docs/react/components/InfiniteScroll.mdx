@@ -1,0 +1,83 @@
+import { useState } from 'react';
+import { InfiniteScroll } from '@modern-kit/react';
+
+# InfiniteScroll
+
+`무한 스크롤` 기능을 선언적으로 활용 할 수 있는 컴포넌트입니다.
+
+`@modern-kit/react`의 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 훅을 사용하여 구현되었습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InfiniteScroll/index.tsx)
+
+## Interface
+```ts title="typescript"
+
+interface InfiniteScrollProps
+  extends Omit<
+    UseIntersectionObserverProps,
+    'onIntersectStart' | 'onIntersectEnd' | 'calledOnce'
+  > {
+  onScrollAction: (entry: IntersectionObserverEntry) => void;
+  triggerPosition?: 'before' | 'after';
+}
+```
+```ts title="typescript"
+const InfiniteScroll: ({
+  onScrollAction,
+  children,
+  root,
+  threshold,
+  enabled,
+  triggerPosition,
+  rootMargin,
+}: PropsWithChildren<InfiniteScrollProps>) => JSX.Element;
+```
+
+## Usage
+```tsx title="typescript"
+import { InfiniteScroll } from '@modern-kit/react'
+
+const Example = () => {
+  const [list, setList] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const onScrollAction = () => {
+    setList((prev) => [...prev, ...Array.from({ length: 10 }, (_, i) => prev.length + i + 1)]);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', height: '500px', overflow: 'scroll' }}>
+      <InfiniteScroll onScrollAction={onScrollAction} triggerPosition="after">
+        {list.map((value) => (
+          <div key={value} style={{ height: '80px', backgroundColor: '#ccccff' }}>
+            Item {value}
+          </div>
+        ))}
+        </InfiniteScroll>
+    </div>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  const [list, setList] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const onScrollAction = () => {
+    setList((prev) => [...prev, ...Array.from({ length: 10 }, (_, i) => prev.length + i + 1)]);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+      <InfiniteScroll onScrollAction={onScrollAction} triggerPosition="after">
+        {list.map((value) => (
+          <div key={value} style={{ height: '80px', backgroundColor: '#ccccff' }}>
+            Item {value}
+          </div>
+        ))}
+      </InfiniteScroll>
+    </div>
+  );
+};
+
+<Example />
