@@ -4,6 +4,7 @@ export * from './Mounted';
 export * from './DebounceWrapper';
 export * from './FallbackLazyImage';
 export * from './IfElse';
+export * from './InfiniteScroll';
 export * from './InView';
 export * from './Iterator';
 export * from './LazyImage';
