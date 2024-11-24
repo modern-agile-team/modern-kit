@@ -3,3 +3,4 @@ export * from './min';
 export * from './range';
 export * from './sum';
 export * from './average';
+export * from './clamp';
