@@ -26,7 +26,7 @@ const TestComponent = () => {
 };
 
 describe('LazyImage', () => {
-  it('should not load the image before it is exposed to the viewport', () => {
+  it('이미지가 viewport에 노출되기 전에는 이미지가 로드되지 않아야 합니다.', () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');
@@ -34,11 +34,11 @@ describe('LazyImage', () => {
 
     expect(img1).not.toHaveAttribute('src', 'img1');
     expect(img2).not.toHaveAttribute('src', 'img2');
-    expect(img1).toHaveAttribute('class', 'lazy-image img1');
-    expect(img2).toHaveAttribute('class', 'lazy-image img2');
+    expect(img1).toHaveAttribute('class', 'img1');
+    expect(img2).toHaveAttribute('class', 'img2');
   });
 
-  it('should load the image when it is exposed to the viewport', async () => {
+  it('이미지가 viewport에 노출되면 이미지가 로드되어야 합니다.', async () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');

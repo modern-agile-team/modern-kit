@@ -1,5 +1,4 @@
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
-import { usePreservedState } from '../../hooks/usePreservedState';
 import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect';
 import {
   EventListenerAvailableElement,
@@ -28,7 +27,7 @@ import {
  *   | SVGElementEventMap[E]
  *   | Event
  * ) => void} listener - 이벤트가 발생할 때 호출될 콜백 함수입니다.
- * @param {AddEventListenerOptions} [options={}] 이벤트 리스너에 대한 옵션 객체입니다.
+ * @param {AddEventListenerOptions} [options] 이벤트 리스너에 대한 옵션 객체입니다.
  * 옵션에는 `once`, `capture`, `passive`와 같은 기본 이벤트 리스너 옵션과 `onBeforeAddListener`과 같은 커스텀 옵션이 포함될 수 있습니다.
  * - `onBeforeAddListener`: 이벤트 리스너를 등록하기 전에 특정 작업을 수행하고자 할 때 사용됩니다.
  *
@@ -117,9 +116,8 @@ export function useEventListener<
       | MediaQueryListEventMap[M]
       | Event
   ) => void,
-  options: AddEventListenerOptions = {}
+  options?: AddEventListenerOptions
 ): void {
-  const preservedOptions = usePreservedState(options);
   const preservedListener = usePreservedCallback(listener);
 
   useIsomorphicLayoutEffect(() => {
@@ -128,15 +126,11 @@ export function useEventListener<
     if (!targetElement) return;
 
     // event registration
-    targetElement.addEventListener(type, preservedListener, preservedOptions);
+    targetElement.addEventListener(type, preservedListener, options);
 
     // clean up
     return () => {
-      targetElement.removeEventListener(
-        type,
-        preservedListener,
-        preservedOptions
-      );
+      targetElement.removeEventListener(type, preservedListener, options);
     };
-  }, [type, element, preservedOptions, preservedListener]);
+  }, [type, element, options, preservedListener]);
 }
