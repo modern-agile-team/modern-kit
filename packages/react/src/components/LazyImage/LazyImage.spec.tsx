@@ -34,8 +34,8 @@ describe('LazyImage', () => {
 
     expect(img1).not.toHaveAttribute('src', 'img1');
     expect(img2).not.toHaveAttribute('src', 'img2');
-    expect(img1).toHaveAttribute('class', 'lazy-image img1');
-    expect(img2).toHaveAttribute('class', 'lazy-image img2');
+    expect(img1).toHaveAttribute('class', 'img1');
+    expect(img2).toHaveAttribute('class', 'img2');
   });
 
   it('should load the image when it is exposed to the viewport', async () => {

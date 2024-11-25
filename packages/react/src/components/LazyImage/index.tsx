@@ -9,7 +9,7 @@ export interface LazyImageProps
 }
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
-  ({ src, threshold, root, rootMargin, alt, className, ...restProps }, ref) => {
+  ({ src, threshold, root, rootMargin, ...restProps }, ref) => {
     const { ref: imgRef } = useIntersectionObserver<HTMLImageElement>({
       onIntersectStart: (entry) => {
         const targetImgElement = entry.target as HTMLImageElement;
@@ -21,18 +21,7 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       rootMargin,
     });
 
-    const customClassName = className
-      ? `lazy-image ${className}`
-      : 'lazy-image';
-
-    return (
-      <img
-        className={customClassName}
-        ref={useMergeRefs(ref, imgRef)}
-        alt={alt}
-        {...restProps}
-      />
-    );
+    return <img ref={useMergeRefs(ref, imgRef)} {...restProps} />;
   }
 );
 
