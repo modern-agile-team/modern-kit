@@ -1,0 +1,40 @@
+import { useBeforeUnload } from '@modern-kit/react'
+
+# useBeforeUnload 
+
+**[beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event)** 이벤트를 리액트에서 쉽게 다룰 수 있는 훅입니다.
+
+`beforeunload` 이벤트는 사용자가 페이지를 떠날 때 발생하는 이벤트입니다.
+
+beforeunload 이벤트의 주요 사례는 웹 페이지에서 사용자에게 실제로 페이지를 떠날 것인지 묻는 확인 대화 상자를 표시해 확인하는 것입니다.
+
+사용자가 확인 버튼을 누를 경우 브라우저는 새 페이지로 이동하고 그렇지 않으면 탐색을 취소하고 현재 페이지에 머무릅니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBeforeUnload/index.ts)
+
+## Interface
+```ts title="typescript"
+function useBeforeUnload(enabled?: boolean | (() => boolean) = true): void
+```
+
+## Usage
+```tsx title="typescript"
+import { useBeforeUnload } from '@modern-kit/react'
+
+const Example = () => {
+  useBeforeUnload();
+  return <div>페이지를 떠나보세요.</div>;
+};
+```
+
+## Example
+
+export const Example = () => {
+  useBeforeUnload();
+  return <div>페이지를 떠나보세요.</div>;
+};
+
+<Example />

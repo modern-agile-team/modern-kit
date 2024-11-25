@@ -6,7 +6,7 @@ import { useEventListener } from '.';
 const windowAddEventListenerSpy = vi.spyOn(window, 'addEventListener');
 const windowRemoveEventListenerSpy = vi.spyOn(window, 'removeEventListener');
 
-// element
+// Element
 const divElement = document.createElement('div');
 const elementAddEventListenerSpy = vi.spyOn(divElement, 'addEventListener');
 const elementRemoveEventListenerSpy = vi.spyOn(
@@ -14,7 +14,7 @@ const elementRemoveEventListenerSpy = vi.spyOn(
   'removeEventListener'
 );
 
-// document
+// document 이벤트 리스너 스파이
 const documentAddEventListenerSpy = vi.spyOn(
   window.document,
   'addEventListener'
@@ -28,8 +28,8 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-describe('useEventListener()', () => {
-  it('should bind/unbind the event listener to the window when element is not provided', () => {
+describe('useEventListener', () => {
+  it('Element가 제공되지 않았을 때 window에 이벤트 리스너를 바인딩/언바인딩해야 한다', () => {
     const eventName = 'click';
     const handler = vi.fn();
 
@@ -40,7 +40,7 @@ describe('useEventListener()', () => {
     expect(windowAddEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
 
     unmount();
@@ -48,11 +48,11 @@ describe('useEventListener()', () => {
     expect(windowRemoveEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
   });
 
-  it('should bind/unbind the event listener to the element when element is provided', () => {
+  it('Element가 제공되었을 때 해당 Element에 이벤트 리스너를 바인딩/언바인딩해야 한다', () => {
     const eventName = 'click';
     const handler = vi.fn();
 
@@ -63,7 +63,7 @@ describe('useEventListener()', () => {
     expect(elementAddEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
 
     unmount();
@@ -71,11 +71,11 @@ describe('useEventListener()', () => {
     expect(elementRemoveEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
   });
 
-  it('should bind/unbind the event listener to the document when document is provided', () => {
+  it('document가 제공되었을 때 document에 이벤트 리스너를 바인딩/언바인딩해야 한다', () => {
     const eventName = 'click';
     const handler = vi.fn();
 
@@ -86,7 +86,7 @@ describe('useEventListener()', () => {
     expect(documentAddEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
 
     unmount();
@@ -94,11 +94,11 @@ describe('useEventListener()', () => {
     expect(documentRemoveEventListenerSpy).toHaveBeenCalledWith(
       eventName,
       expect.any(Function),
-      {}
+      undefined
     );
   });
 
-  it('should pass the options to the event listener', () => {
+  it('이벤트 리스너에 옵션을 전달해서 처리할 수 있어야 한다', () => {
     const eventName = 'click';
     const handler = vi.fn();
     const options = {
