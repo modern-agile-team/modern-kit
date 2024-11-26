@@ -1,13 +1,13 @@
-import React, { Children } from 'react';
-import { Slot } from '../Slot';
+import React from 'react';
 import {
   useIntersectionObserver,
   UseIntersectionObserverProps,
 } from '../../hooks/useIntersectionObserver';
+import { polymorphicForwardRef } from '../../types/polymorphicForwardRef';
+import { useMergeRefs } from '../../hooks/useMergeRefs';
 
 interface InViewProps extends UseIntersectionObserverProps {
   children: React.ReactNode;
-  asChild?: boolean;
 }
 
 /**
@@ -38,40 +38,27 @@ interface InViewProps extends UseIntersectionObserverProps {
  * // 해당 div가 viewport에 노출되거나 숨겨질 때 onIntersectStart/onIntersectEnd 콜백 함수를 호출합니다.
  * <InView onIntersectStart={onIntersectStart} onIntersectEnd={onIntersectEnd}>
  *   <div>Content1</div>
- *   <div>Content2</div>
  * </InView>
  * ```
  *
  * @example
  * ```tsx
- * // asChild 프로퍼티를 사용하면 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정합니다.
- * // 자식 요소가 viewport에 노출되거나 숨겨질 때 onIntersectStart/onIntersectEnd 콜백이 호출됩니다.
- * // 이때 자식 요소는 단일 요소만 허용됩니다.
- * const ref = useRef<HTMLUListElement>(null);
- *
- * <InView asChild onIntersectStart={onIntersectStart} onIntersectEnd={onIntersectEnd}>
- *   <ul ref={ref} style={style}>
- *     <li>List Item1</li>
- *     <li>List Item2</li>
- *   </ul>
+ * // as 속성을 통해 특정 요소로 렌더링할 수 있습니다.
+ * <InView as="ul" onIntersectStart={onIntersectStart} onIntersectEnd={onIntersectEnd}>
+ *   <li>List Item1</li>
+ *   <li>List Item2</li>
  * </InView>
  * ```
  */
-export const InView = ({
-  children,
-  asChild = false,
-  ...props
-}: InViewProps): JSX.Element => {
-  const InViewWrapper = asChild ? Slot : 'div';
-  const { ref: intersectionObserverRef } = useIntersectionObserver(props);
-  const childrenCount = Children.count(children);
+export const InView = polymorphicForwardRef<'div', InViewProps>(
+  ({ children, as = 'div', ...props }, ref) => {
+    const Wrapper = as ?? 'div';
+    const { ref: intersectionObserverRef } = useIntersectionObserver(props);
 
-  if (asChild && childrenCount > 1) {
-    throw new Error(
-      'InView 컴포넌트는 asChild 프로퍼티가 true일 경우 자식으로 단일 요소만 허용합니다.'
+    return (
+      <Wrapper ref={useMergeRefs(ref, intersectionObserverRef)} {...props}>
+        {children}
+      </Wrapper>
     );
   }
-  return (
-    <InViewWrapper ref={intersectionObserverRef}>{children}</InViewWrapper>
-  );
-};
+);

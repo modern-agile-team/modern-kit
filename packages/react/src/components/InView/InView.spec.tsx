@@ -7,6 +7,7 @@ import {
   mockIntersectionObserverSetup,
 } from '../../utils/test/mockIntersectionObserver';
 import { renderSetup } from '../../utils/test/renderSetup';
+import { ElementType } from 'react';
 
 beforeEach(() => {
   mockIntersectionObserverSetup();
@@ -19,19 +20,19 @@ afterEach(() => {
 interface TestComponentProps {
   onIntersectStart: () => void;
   onIntersectEnd: () => void;
+  as?: ElementType;
   calledOnce?: boolean;
-  asChild?: boolean;
 }
 
 const TestComponent = ({
   onIntersectStart,
   onIntersectEnd,
+  as,
   calledOnce,
-  asChild,
 }: TestComponentProps) => {
   return (
     <InView
-      asChild={asChild}
+      as={as}
       onIntersectStart={onIntersectStart}
       onIntersectEnd={onIntersectEnd}
       calledOnce={calledOnce}>
@@ -44,7 +45,7 @@ describe('InView', () => {
   const intersectStartMock = vi.fn();
   const intersectEndMock = vi.fn();
 
-  it('InView 컴포넌트가 viewport에 노출되거나 숨겨질 때 onIntersect 콜백 함수를 호출해야 합니다.', async () => {
+  it('InView 컴포넌트가 viewport에 노출되거나 숨겨질 때 onIntersect 콜백 함수를 호출해야 합니다. 기본적으로 div 요소로 렌더링되어야 합니다.', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
@@ -53,6 +54,7 @@ describe('InView', () => {
     );
 
     const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
+    expect(boxWrapper.tagName).toBe('DIV');
 
     expect(intersectStartMock).toBeCalledTimes(0);
     expect(intersectEndMock).toBeCalledTimes(0);
@@ -68,32 +70,22 @@ describe('InView', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('asChild 프로퍼티가 true이면 자식 요소가 그대로 렌더링되야 하며, 자식 요소를 관찰 대상으로 설정해야 합니다.', async () => {
+  it('as props를 통해 특정 요소로 렌더링할 수 있습니다.', async () => {
     renderSetup(
       <TestComponent
+        as="ul"
         onIntersectStart={intersectStartMock}
         onIntersectEnd={intersectEndMock}
-        asChild={true}
       />
     );
 
-    const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
-    const box = screen.getByText('box');
+    const ulWrapper = screen.getByText('box').parentElement as HTMLElement;
+    expect(ulWrapper.tagName).toBe('UL');
 
-    await waitFor(() =>
-      mockIntersecting({ type: 'view', element: boxWrapper })
-    );
-    expect(intersectStartMock).toBeCalledTimes(0);
-
-    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
+    await waitFor(() => mockIntersecting({ type: 'view', element: ulWrapper }));
     expect(intersectStartMock).toBeCalledTimes(1);
 
-    await waitFor(() =>
-      mockIntersecting({ type: 'hide', element: boxWrapper })
-    );
-    expect(intersectEndMock).toBeCalledTimes(0);
-
-    await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
+    await waitFor(() => mockIntersecting({ type: 'hide', element: ulWrapper }));
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
@@ -106,32 +98,29 @@ describe('InView', () => {
       />
     );
 
-    const box = screen.getByText('box');
+    const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
 
-    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
-    expect(intersectStartMock).toBeCalledTimes(1);
-
-    await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
-    expect(intersectEndMock).toBeCalledTimes(1);
-
-    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
-    await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
-    await waitFor(() => mockIntersecting({ type: 'view', element: box }));
-
-    expect(intersectStartMock).toBeCalledTimes(1);
-    expect(intersectEndMock).toBeCalledTimes(1);
-  });
-
-  it('asChild 프로퍼티가 true일 경우 자식 요소로 단일 요소가 아닐 경우 에러가 발생합니다.', () => {
-    expect(() =>
-      renderSetup(
-        <InView asChild={true}>
-          <div>box1</div>
-          <div>box2</div>
-        </InView>
-      )
-    ).toThrow(
-      'InView 컴포넌트는 asChild 프로퍼티가 true일 경우 자식으로 단일 요소만 허용합니다.'
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
     );
+    expect(intersectStartMock).toBeCalledTimes(1);
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'hide', element: boxWrapper })
+    );
+    expect(intersectEndMock).toBeCalledTimes(1);
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
+    );
+    await waitFor(() =>
+      mockIntersecting({ type: 'hide', element: boxWrapper })
+    );
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
+    );
+
+    expect(intersectStartMock).toBeCalledTimes(1);
+    expect(intersectEndMock).toBeCalledTimes(1);
   });
 });
