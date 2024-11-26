@@ -20,15 +20,18 @@ interface TestComponentProps {
   onIntersectStart: () => void;
   onIntersectEnd: () => void;
   calledOnce?: boolean;
+  asChild?: boolean;
 }
 
 const TestComponent = ({
   onIntersectStart,
   onIntersectEnd,
   calledOnce,
+  asChild,
 }: TestComponentProps) => {
   return (
     <InView
+      asChild={asChild}
       onIntersectStart={onIntersectStart}
       onIntersectEnd={onIntersectEnd}
       calledOnce={calledOnce}>
@@ -49,13 +52,46 @@ describe('InView', () => {
       />
     );
 
-    const box = screen.getByText('box');
+    const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
 
     expect(intersectStartMock).toBeCalledTimes(0);
     expect(intersectEndMock).toBeCalledTimes(0);
 
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
+    );
+    expect(intersectStartMock).toBeCalledTimes(1);
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'hide', element: boxWrapper })
+    );
+    expect(intersectEndMock).toBeCalledTimes(1);
+  });
+
+  it('asChild 프로퍼티가 true이면 자식 요소가 그대로 렌더링되야 하며, 자식 요소를 관찰 대상으로 설정해야 합니다.', async () => {
+    renderSetup(
+      <TestComponent
+        onIntersectStart={intersectStartMock}
+        onIntersectEnd={intersectEndMock}
+        asChild={true}
+      />
+    );
+
+    const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
+    const box = screen.getByText('box');
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
+    );
+    expect(intersectStartMock).toBeCalledTimes(0);
+
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
     expect(intersectStartMock).toBeCalledTimes(1);
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'hide', element: boxWrapper })
+    );
+    expect(intersectEndMock).toBeCalledTimes(0);
 
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
     expect(intersectEndMock).toBeCalledTimes(1);
@@ -84,5 +120,18 @@ describe('InView', () => {
 
     expect(intersectStartMock).toBeCalledTimes(1);
     expect(intersectEndMock).toBeCalledTimes(1);
+  });
+
+  it('asChild 프로퍼티가 true일 경우 자식 요소로 단일 요소가 아닐 경우 에러가 발생합니다.', () => {
+    expect(() =>
+      renderSetup(
+        <InView asChild={true}>
+          <div>box1</div>
+          <div>box2</div>
+        </InView>
+      )
+    ).toThrow(
+      'InView 컴포넌트는 asChild 프로퍼티가 true일 경우 자식으로 단일 요소만 허용합니다.'
+    );
   });
 });
