@@ -5,7 +5,7 @@ import {
   MockFileReaderForcedCallOnError,
   MockFileReaderThrowError,
   mockFileList,
-} from '../../utils/test/mockFile';
+} from '../../_internal/test/mockFile';
 
 const getSuccessFileContent = (file: File) => {
   return {

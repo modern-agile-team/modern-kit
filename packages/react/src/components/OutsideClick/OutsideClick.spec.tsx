@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { waitFor, screen } from '@testing-library/react';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { OutsideClick } from './index';
 
 describe('OutsideClick', () => {

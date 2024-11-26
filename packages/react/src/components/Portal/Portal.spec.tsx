@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { useRef, useState } from 'react';
 import { Portal } from '.';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { Nullable } from '@modern-kit/types';
 
 const DefaultTestComponent = () => {

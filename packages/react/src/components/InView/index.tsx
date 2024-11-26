@@ -3,7 +3,7 @@ import {
   useIntersectionObserver,
   UseIntersectionObserverProps,
 } from '../../hooks/useIntersectionObserver';
-import { polymorphicForwardRef } from '../../types/polymorphicForwardRef';
+import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
 
 interface InViewProps extends UseIntersectionObserverProps {

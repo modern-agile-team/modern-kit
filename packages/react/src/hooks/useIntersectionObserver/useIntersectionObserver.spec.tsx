@@ -3,10 +3,10 @@ import {
   mockIntersecting,
   mockIntersectionObserverCleanup,
   mockIntersectionObserverSetup,
-} from '../../utils/test/mockIntersectionObserver';
+} from '../../_internal/test/mockIntersectionObserver';
 import { useIntersectionObserver } from '.';
 import { waitFor, screen } from '@testing-library/react';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 
 beforeEach(() => {
   mockIntersectionObserverSetup();

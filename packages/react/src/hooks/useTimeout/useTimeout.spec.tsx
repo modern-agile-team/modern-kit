@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { act, renderHook, screen } from '@testing-library/react';
 import { useTimeout } from '.';
 import { useState } from 'react';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 
 const delayTime = 1000;
 
