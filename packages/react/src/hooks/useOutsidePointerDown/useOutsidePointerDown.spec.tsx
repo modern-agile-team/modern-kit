@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { screen } from '@testing-library/react';
 import { useOutsidePointerDown } from '.';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 
 const TestComponent = ({ onAction }: { onAction: () => void }) => {
   const targetRef = useOutsidePointerDown<HTMLDivElement>(onAction);

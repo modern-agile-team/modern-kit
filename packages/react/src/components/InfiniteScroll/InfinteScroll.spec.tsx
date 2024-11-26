@@ -5,8 +5,8 @@ import {
   mockIntersecting,
   mockIntersectionObserverCleanup,
   mockIntersectionObserverSetup,
-} from '../../utils/test/mockIntersectionObserver';
-import { renderSetup } from '../../utils/test/renderSetup';
+} from '../../_internal/test/mockIntersectionObserver';
+import { renderSetup } from '../../_internal/test/renderSetup';
 
 beforeEach(() => {
   mockIntersectionObserverSetup();

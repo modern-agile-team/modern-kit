@@ -1,6 +1,6 @@
 import { describe, it, expect, Mock, vi } from 'vitest';
 import { useHover } from '.';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { screen, waitFor } from '@testing-library/react';
 
 describe('useHover', () => {

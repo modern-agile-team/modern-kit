@@ -4,13 +4,11 @@ import { InView } from '@modern-kit/react';
 
 `InView`는 `IntersectionObserver`를 선언적으로 활용 할 수 있는 컴포넌트입니다.
 
+관찰 대상이 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
+
+다형성을 지원하기 때문에 `as` 속성을 통해 특정 요소로 렌더링할 수 있습니다.
+
 `@modern-kit/react`의 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 훅을 사용하여 구현되었습니다.
-
-`Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
-
-`calledOnce`를 활용하면 `onIntersectStart`와 `onIntersectEnd`를 각각 한번씩 호출 할 수 있습니다.
-
-Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
 
 <br />
 
@@ -20,14 +18,17 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 ## Interface
 ```ts title="typescript"
 interface InViewProps extends UseIntersectionObserverProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 ```
 ```ts title="typescript"
-const InView: ({ children, ...props }: InViewProps) => JSX.Element
+const InView: PolyForwardComponent<"div", InViewProps, React.ElementType>
 ```
 
 ## Usage
+### Default
+- 기본적으로 `div`로 감싸지며, 해당 `div`를 관찰 대상으로 설정합니다.
+- 해당 `div`가 viewport에 노출되거나 숨겨질 때 `onIntersectStart/onIntersectEnd` 콜백 함수를 호출합니다.
 ```tsx title="typescript"
 import { InView } from '@modern-kit/react';
 
@@ -42,12 +43,41 @@ const Example = () => {
 
   return (
     <div>
-      {/* ... */}
-      <InView
-        onIntersectStart={handleIntersectStart}
-        onIntersectStart={handleIntersectEnd}
-        calledOnce>
+      <InView onIntersectStart={handleIntersectStart} onIntersectEnd={handleIntersectEnd}>
         <div>Box1</div>
+      </InView>
+    </div>;
+  );
+}; 
+```
+
+### asChild
+- 자식 요소를 그대로 렌더링하고, 해당 요소를 관찰 대상으로 설정합니다.
+- 자식 요소가 viewport에 노출되거나 숨겨질 때 `onIntersectStart/onIntersectEnd` 콜백 함수를 호출합니다.
+- 이때 자식 요소는 단일 요소만 허용됩니다.
+```tsx title="typescript"
+import { InView } from '@modern-kit/react';
+
+const Example = () => {
+  const ref = useRef<HTMLUListElement>(null);
+
+  const handleIntersectStart = () => {
+    /* action */
+  }
+
+  const handleIntersectEnd = () => {
+    /* action */
+  }
+
+  return (
+    <div>
+      <InView
+        as='ul'
+        onIntersectStart={handleIntersectStart}
+        onIntersectEnd={handleIntersectEnd}
+      >
+        <li>List Item1</li>
+        <li>List Item2</li> 
       </InView>
     </div>;
   );
@@ -77,32 +107,30 @@ export const Example = () => {
       <InView
         onIntersectStart={() => console.log('action onIntersectStart(1)')}
         onIntersectEnd={() => console.log('action onIntersectEnd(1)')}
-        calledOnce
-      >
-        <div style={{
+        style={{
           ...inViewStyle,
           background: '#c0392B',
-        }}>
-          <p>Box1</p>
-          <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
-          <p>onIntersectStart가 최초 1회만 호출됩니다.</p>
-          <p>calledOnce: true</p>
-        </div>
+        }}
+        calledOnce
+      >
+        <p>Box1</p>
+        <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
+        <p>calledOnce: true</p>
+        <p>as: div</p>
       </InView>
       <div style={{ height: '300px' }} />
       <InView
         onIntersectStart={() => console.log('action onIntersectStart(2)')}
         onIntersectEnd={() => console.log('action onIntersectEnd(2)')}
-      >
-        <div style={{
+        style={{
           ...inViewStyle,
           background: '#89a5ea',
-        }}>
-          <p>Box2</p>
-          <p>브라우저 개발자 도구의 콘솔을 확인해주세요.</p>
-          <p>onIntersectStart, onIntersectEnd 함수가 여러 번 호출됩니다.</p>
-          <p>calledOnce: false</p>
-        </div>
+        }}
+      >
+        <li>Box2</li>
+        <li>브라우저 개발자 도구의 콘솔을 확인해주세요.</li>
+        <li>calledOnce: false</li>
+        <li>as: ul</li>
       </InView>
       <div style={{ width: '100%', height: '900px', textAlign: 'center' }} />
     </div>

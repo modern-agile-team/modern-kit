@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { useKeyDown } from '.';
 import { screen } from '@testing-library/react';
 

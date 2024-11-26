@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { screen, renderHook, act } from '@testing-library/react';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { useBlockPromiseMultipleClick } from '.';
 import { delay } from '@modern-kit/utils';
 

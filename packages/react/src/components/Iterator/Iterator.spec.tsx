@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { screen } from '@testing-library/react';
 import { Iterator } from '.';
 

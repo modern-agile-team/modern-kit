@@ -1,6 +1,6 @@
 import { describe, it, expect, Mock, vi } from 'vitest';
 import { useFocus } from '.';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { screen } from '@testing-library/react';
 
 const TestComponent = ({

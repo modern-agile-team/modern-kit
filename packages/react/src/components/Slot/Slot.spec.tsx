@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { Slot, Slottable } from '.';
 import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { screen } from '@testing-library/dom';
 
 const TestButton = ({

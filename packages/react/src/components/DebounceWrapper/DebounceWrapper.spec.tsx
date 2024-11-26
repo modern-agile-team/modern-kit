@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { renderSetup } from '../../utils/test/renderSetup';
+import { renderSetup } from '../../_internal/test/renderSetup';
 import { DebounceWrapper } from '.';
 import { ChangeEvent, useState } from 'react';
 import { act, screen } from '@testing-library/react';
