@@ -1,5 +1,5 @@
 ---
-'@modern-kit/react': patch
+'@modern-kit/react': minor
 ---
 
-fix(react): 컴포넌트 InView Slot 적용 및 개선 - @ssi00214
+fix(react): InView 컴포넌트 다형성(polymorphicForwardRef) 적용 - @ssi00214
