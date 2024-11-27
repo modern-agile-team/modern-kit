@@ -22,6 +22,7 @@ interface TestComponentProps {
   onIntersectEnd: () => void;
   as?: ElementType;
   calledOnce?: boolean;
+  asChild?: boolean;
 }
 
 const TestComponent = ({
@@ -86,6 +87,29 @@ describe('InView', () => {
     expect(intersectStartMock).toBeCalledTimes(1);
 
     await waitFor(() => mockIntersecting({ type: 'hide', element: ulWrapper }));
+    expect(intersectEndMock).toBeCalledTimes(1);
+  });
+
+  it('asChild props를 통해 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정할 수 있습니다.', async () => {
+    renderSetup(
+      <TestComponent
+        onIntersectStart={intersectStartMock}
+        onIntersectEnd={intersectEndMock}
+        asChild={true}
+      />
+    );
+
+    const boxWrapper = screen.getByText('box');
+    expect(boxWrapper.tagName).toBe('DIV');
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'view', element: boxWrapper })
+    );
+    expect(intersectStartMock).toBeCalledTimes(1);
+
+    await waitFor(() =>
+      mockIntersecting({ type: 'hide', element: boxWrapper })
+    );
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
