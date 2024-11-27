@@ -7,6 +7,15 @@ import { AspectRatio } from '@modern-kit/react';
 
 미리 영역을 확보하여 `Layout Shift`를 방지하는데 효과적입니다.
 
+다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다. 
+
+- `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, 해당 요소에 `padding-top` 속성이 적용해 영역을 확보합니다. 기본 값은 `div`입니다.
+  - `div` 요소의 너비는 부모 요소의 너비를 따라갑니다.
+- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성이 적용됩니다.
+  - Slot의 자식은 `단일 요소`만 허용됩니다.
+  - Slot의 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다.
+  - 자세한 내용은 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
+
 <br />
 
 ## Code
@@ -17,19 +26,25 @@ import { AspectRatio } from '@modern-kit/react';
 interface AspectRatioProps {
   children: JSX.Element;
   ratio: number;
+  asChild?: boolean;
+  style?: CSSProperties;
+  className?: string;
 }
 ```
 ```tsx title="typescript"
-const AspectRatio: ({ ratio, children }: AspectRatioProps) => JSX.Element;
+const AspectRatio: PolyForwardComponent<"div", AspectRatioProps, React.ElementType>
 ```
 
 ## Usage
+### Default
+- 기본적으로 `div` 요소에 감싸지며 해당 `div`에 `padding-top` 속성이 적용해 영역을 확보합니다.
+- `div` 요소의 너비는 부모 요소의 너비를 따라갑니다.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
 
 const Example = () => {
   return (
-    <div style={{ width: '700px' }}>
+    <div style={{ width: '500px' }}>
       <AspectRatio ratio={427 / 640}>
         <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
       </AspectRatio>
@@ -38,15 +53,64 @@ const Example = () => {
 };
 ```
 
-export const Example1 = () => {
+### as
+- `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, 해당 요소에 `padding-top` 속성이 적용해 영역을 확보합니다.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
   return (
-    <div style={{ width: '700px' }}>
+    <div style={{ width: '500px' }}>
+      <AspectRatio as="article" ratio={427 / 640}>
+        <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+      </AspectRatio>
+    </div>
+  );
+};
+```
+
+### asChild
+- `asChild` 속성이 true라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성이 적용됩니다.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+      <AspectRatio asChild ratio={427 / 640}>
+        <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+      </AspectRatio>
+  );
+};
+```
+
+export const Example = () => {
+  return (
+    <div style={{ width: '500px' }}>
+      <h3>Default</h3>
       <AspectRatio ratio={427 / 640}>
+        <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+      </AspectRatio>
+
+      <br />
+
+      <h3>as article</h3>
+      <AspectRatio as="article" ratio={427 / 640}>
+        <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
+      </AspectRatio>
+
+      <br />
+
+      <h3>asChild</h3>
+      <AspectRatio asChild ratio={427 / 640}>
         <img src="https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9" />
       </AspectRatio>
     </div>
   );
 };
 
-<Example1 />
+## Example
+
+<Example />
+
+
 

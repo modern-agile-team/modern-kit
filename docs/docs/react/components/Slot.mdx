@@ -2,7 +2,52 @@ import { Slot, Slottable } from '@modern-kit/react'
 
 # Slot
 
-주어진 Props를 직계 자식 컴포넌트에 병합하는 컴포넌트입니다.
+주어진 Props를 직계 자식 컴포넌트에 병합하고, 자식 컴포넌트를 렌더링하는 컴포넌트입니다.
+
+Slot은 부모 컴포넌트의 기능을 자식 컴포넌트에 전달하는 합성 패턴을 구현합니다. 이를 통해:
+
+- 부모 컴포넌트의 `props`, `ref`, `이벤트 핸들러` 등을 자식 컴포넌트에 전달할 수 있습니다
+- 자식 컴포넌트의 구현을 변경하지 않고도 새로운 기능을 추가할 수 있습니다
+- 컴포넌트 간의 결합도를 낮추고 재사용성을 높일 수 있습니다
+
+예를 들어 **[InView](https://modern-agile-team.github.io/modern-kit/docs/react/components/InView)** 나 **[AspectRatio](https://modern-agile-team.github.io/modern-kit/docs/react/components/AspectRatio)** 와 같은 컴포넌트에서 `asChild` prop과 함께 사용되어, 래퍼 요소 없이 자식 컴포넌트에 직접 기능을 주입할 수 있습니다.
+
+Slot은 아래와 같은 특징이 있습니다.
+1. 자식 요소로 `단일 요소`만 허용됩니다.
+```tsx title="typescript"
+// 가능
+<Slot>
+  <div>Contents</div>
+</Slot>
+
+// 가능
+<Slot>
+  <div>
+    <div>Contents1</div>
+    <div>Contents2</div>
+  </div>
+</Slot>
+```
+
+```tsx title="typescript"
+// 불가능
+<Slot>
+  <div>Contents1</div>
+  <div>Contents2</div>
+</Slot>
+```
+
+2. 자식 요소로 컴포넌트가 온다면 해당 컴포넌트는 필수적으로 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 기능이 정상적으로 동작하지 않습니다.
+- **[radix-ui#your-component-must-forward-ref](https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-forward-ref)**
+```tsx title="typescript"
+const MyButton = React.forwardRef((props, forwardedRef) => (
+  <button {...props} ref={forwardedRef} />
+));
+
+<Slot>
+  <MyButton>Button</MyButton>
+</Slot>
+```
 
 <br />
 
@@ -22,10 +67,10 @@ const Slottable: ({ children }: React.PropsWithChildren) => JSX.Element;
 ```
 
 ## Usage
+### Default
 ```tsx title="typescript"
 import { Slot } from '@modern-kit/react'
 
-// Basic
 const Button = ({
   asChild,
   ...props
@@ -35,8 +80,9 @@ const Button = ({
   return <Comp {...props} />;
 };
 ```
+
+### With Slottable
 ```tsx title='typescript'
-// with Slottable
 const SlottableButton = ({
   asChild,
   leftElement,
@@ -61,7 +107,8 @@ const SlottableButton = ({
 };
 ```
 
-### Basic
+## Example
+### Default
 ```tsx title="typescript"
 // Basic Usage
 <Button onClick={() => console.log('click')}>Button</Button>

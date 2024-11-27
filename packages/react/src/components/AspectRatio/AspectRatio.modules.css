@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+  padding-top: calc(100% * (1 / var(--aspect-ratio)));
+}
+
+.wrapper > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

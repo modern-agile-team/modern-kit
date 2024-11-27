@@ -7,7 +7,35 @@ export type SlotProps = React.PropsWithChildren<
 >;
 
 /**
- * @description 주어진 Props를 직계 자식 컴포넌트에 병합하는 컴포넌트입니다.
+ * @description 주어진 Props를 직계 자식 컴포넌트에 병합하고, 자식 컴포넌트를 렌더링하는 컴포넌트입니다.
+ *
+ * Slot은 부모 컴포넌트의 기능을 자식 컴포넌트에 전달하는 합성 패턴을 구현합니다. 이를 통해:
+ * - 부모 컴포넌트의 `props`, `ref`, `이벤트 핸들러` 등을 자식 컴포넌트에 전달할 수 있습니다.
+ * - 자식 컴포넌트의 구현을 변경하지 않고도 새로운 기능을 추가할 수 있습니다.
+ * - 컴포넌트 간의 결합도를 낮추고 재사용성을 높일 수 있습니다.
+ *
+ * Slot은 아래와 같은 특징이 있습니다.
+ * - 자식 요소로 `단일 요소`만 허용됩니다.
+ * - 자식 요소로 컴포넌트가 온다면 해당 컴포넌트는 필수적으로 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 기능이 정상적으로 동작하지 않습니다.
+ *
+ * @example
+ * ```tsx
+ * import React from "react";
+ * import { Slot } from "@modern-kit/react";
+ *
+ * function Button({ asChild, ...props }) {
+ *   const Comp = asChild ? Slot : "button";
+ *   return <Comp {...props} />;
+ * }
+ *
+ * // default
+ * <Button onClick={onClick}>Button</Button>
+ *
+ * // asChild
+ * <Button asChild onClick={onClick}>
+ *   <div>asChild Button</div>
+ * </Button>
+ * ```
  */
 export const Slot = React.forwardRef<HTMLElement, SlotProps>(
   (props, forwardedRef) => {

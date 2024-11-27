@@ -5,9 +5,11 @@ import {
 } from '../../hooks/useIntersectionObserver';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { useMergeRefs } from '../../hooks/useMergeRefs';
+import { Slot } from '../../components/Slot';
 
 interface InViewProps extends UseIntersectionObserverProps {
   children: React.ReactNode;
+  asChild?: boolean;
 }
 
 /**
@@ -19,9 +21,19 @@ interface InViewProps extends UseIntersectionObserverProps {
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver
  *
+ * 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다.
+ *
+ * `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, `해당 요소가 관찰 대상`입니다. 기본 값은 `div`입니다.
+ *
+ * `asChild` 속성이 true라면 `Slot` 을 통해 자식 요소를 그대로 렌더링하고, `자식 요소를 관찰 대상으로 설정`할 수 있습니다.
+ *
+ * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
+ *
+ *
  * @param {InViewProps} props - 컴포넌트에 전달되는 속성들입니다.
  * @param {React.ReactNode} props.children - 관찰할 자식 요소입니다.
- * @param {boolean} props.asChild - 자식 요소를 그대로 렌더링할지 여부를 나타냅니다. `true`일 경우 자식 요소가 그대로 렌더링되며, 자식 요소가 관찰 대상이됩니다.
+ * @param {string} props.as - 감싸는 요소를 특정 요소로 변경합니다. 기본 값은 `div`입니다. 해당 요소가 관찰 대상입니다.
+ * @param {boolean} props.asChild - 자식 요소를 그대로 렌더링할지 여부를 나타냅니다. `true`일 경우 자식 요소가 그대로 렌더링되며, 자식 요소가 관찰 대상입니다.
  * @param {(entry: IntersectionObserverEntry) => void} props.onIntersectStart - 타겟 요소가 viewport 내에 들어갈 때 호출되는 콜백 함수입니다.
  * @param {(entry: IntersectionObserverEntry) => void} props.onIntersectEnd - 타겟 요소가 viewport에서 나갈 때 호출되는 콜백 함수입니다.
  * @param {number | number[]} props.threshold - 관찰을 시작할 viewport의 가시성 비율입니다.
@@ -49,10 +61,18 @@ interface InViewProps extends UseIntersectionObserverProps {
  *   <li>List Item2</li>
  * </InView>
  * ```
+ *
+ * @example
+ * ```tsx
+ * // asChild 속성을 통해 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정할 수 있습니다.
+ * <InView asChild onIntersectStart={handleIntersectStart} onIntersectEnd={handleIntersectEnd}>
+ *   <div>Box1</div>
+ * </InView>
+ * ```
  */
-export const InView = polymorphicForwardRef<'div', InViewProps>(
-  ({ children, as = 'div', ...props }, ref) => {
-    const Wrapper = as ?? 'div';
+export const InView = polymorphicForwardRef<'button', InViewProps>(
+  ({ children, as = 'div', asChild = false, ...props }, ref) => {
+    const Wrapper = asChild ? Slot : as;
     const { ref: intersectionObserverRef } = useIntersectionObserver(props);
 
     return (
