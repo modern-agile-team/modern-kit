@@ -23,9 +23,8 @@ interface InViewProps extends UseIntersectionObserverProps {
  *
  * 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다.
  *
- * `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, `해당 요소가 관찰 대상`입니다. 기본 값은 `div`입니다.
- *
- * `asChild` 속성이 true라면 `Slot` 을 통해 자식 요소를 그대로 렌더링하고, `자식 요소를 관찰 대상으로 설정`할 수 있습니다.
+ * - `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, `해당 요소가 관찰 대상`입니다. 기본 값은 `div`입니다.
+ * - `asChild` 속성이 true라면 `Slot` 을 통해 자식 요소를 그대로 렌더링하고, `자식 요소를 관찰 대상으로 설정`할 수 있습니다.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
  *

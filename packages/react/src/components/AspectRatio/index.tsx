@@ -20,10 +20,8 @@ interface AspectRatioProps {
  *
  * 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다.
  *
- * `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, 해당 요소에 `padding-top` 속성을 적용해 영역을 확보합니다. 기본 값은 `div`입니다.
- * - `div` 요소의 너비는 부모 요소의 너비를 따라갑니다.
- *
- * `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성이 적용됩니다.
+ * - `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있으며, 해당 요소에 `padding-top` 속성을 적용해 영역을 확보합니다. 기본 값은 `div`입니다. `div` 요소의 너비는 부모 요소의 너비를 따라갑니다.
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
  *
