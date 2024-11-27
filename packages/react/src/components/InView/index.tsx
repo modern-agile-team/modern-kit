@@ -24,15 +24,16 @@ interface InViewProps extends UseIntersectionObserverProps {
  * 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다.
  *
  * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때 해당 요소가 관찰 대상입니다.
- * - `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정할 수 있습니다.
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정할 수 있습니다.
+ * - `asChild` 속성을 사용 할 경우 아래 링크를 참고하세요.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
  *
  *
  * @param {InViewProps} props - 컴포넌트에 전달되는 속성들입니다.
  * @param {React.ReactNode} props.children - 관찰할 자식 요소입니다.
- * @param {string} props.as - 감싸는 요소를 특정 요소로 변경합니다. 기본 값은 `div`입니다. 해당 요소가 관찰 대상입니다.
- * @param {boolean} props.asChild - 자식 요소를 그대로 렌더링할지 여부를 나타냅니다. `true`일 경우 자식 요소가 그대로 렌더링되며, 자식 요소가 관찰 대상입니다.
+ * @param {string} props.as - 관찰할 요소의 타입입니다. 기본값은 `div`입니다.
+ * @param {boolean} [props.asChild=false] - 자식 요소를 래퍼 요소 없이 렌더링하고, 관찰 대상으로 설정할지 여부입니다. `true`일 경우 `Slot` 컴포넌트를 통해 자식 요소에 직접 props를 전달합니다.
  * @param {(entry: IntersectionObserverEntry) => void} props.onIntersectStart - 타겟 요소가 viewport 내에 들어갈 때 호출되는 콜백 함수입니다.
  * @param {(entry: IntersectionObserverEntry) => void} props.onIntersectEnd - 타겟 요소가 viewport에서 나갈 때 호출되는 콜백 함수입니다.
  * @param {number | number[]} props.threshold - 관찰을 시작할 viewport의 가시성 비율입니다.
@@ -45,15 +46,15 @@ interface InViewProps extends UseIntersectionObserverProps {
  *
  * @example
  * ```tsx
- * // 기본적으로 div로 감싸지며, 해당 div를 관찰 대상으로 설정합니다.
+ * // 기본적으로 `div`로 감싸지며, 해당 `div`를 관찰 대상으로 설정합니다.
  * <InView onIntersectStart={onIntersectStart} onIntersectEnd={onIntersectEnd}>
- *   <div>Content1</div>
+ *   <div>Contents</div>
  * </InView>
  * ```
  *
  * @example
  * ```tsx
- * // as 속성을 통해 특정 요소로 렌더링할 수 있으며, 해당 요소가 관찰 대상입니다.
+ * // `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 해당 요소를 관찰 대상으로 설정합니다.
  * <InView as="ul" onIntersectStart={onIntersectStart} onIntersectEnd={onIntersectEnd}>
  *   <li>List Item1</li>
  *   <li>List Item2</li>
@@ -62,9 +63,9 @@ interface InViewProps extends UseIntersectionObserverProps {
  *
  * @example
  * ```tsx
- * // asChild 속성을 통해 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정할 수 있습니다.
+ * // `asChild`가 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링하고, 자식 요소를 관찰 대상으로 설정합니다.
  * <InView asChild onIntersectStart={handleIntersectStart} onIntersectEnd={handleIntersectEnd}>
- *   <div>Box1</div>
+ *   <div>Contents</div>
  * </InView>
  * ```
  */

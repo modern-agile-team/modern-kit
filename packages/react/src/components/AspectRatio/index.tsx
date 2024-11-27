@@ -22,6 +22,7 @@ interface AspectRatioProps {
  *
  * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때, 해당 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
  * - `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+ * - `asChild` 속성을 사용 할 경우 아래 링크를 참고하세요.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
  *
@@ -31,12 +32,12 @@ interface AspectRatioProps {
  * @param {CSSProperties} props.style - 추가적인 스타일을 지정합니다.
  * @param {string} props.className - 추가적인 클래스를 지정합니다.
  * @param {string} props.as - 감싸는 요소를 지정합니다. 기본 값은 `div`입니다. 해당 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
- * @param {boolean} props.asChild - 자식 요소를 그대로 렌더링할지 여부를 지정합니다. `true`일 경우 자식 요소가 그대로 렌더링되며, 자식 요소에 `aspect-ratio` 속성이 적용됩니다.
- *
+ * @param {boolean} props.asChild - `true`일 경우 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
  * @returns {JSX.Element} 주어진 aspect-ratio 비율에 맞춰 스타일이 적용된 자식 요소를 반환합니다.
  *
  * @example
  * ```tsx
+ * // Default
  * <AspectRatio ratio={16 / 9}>
  *  <img src={imgUrl} alt="image" />
  * </AspectRatio>
@@ -44,6 +45,7 @@ interface AspectRatioProps {
  *
  * @example
  * ```tsx
+ * // as article
  * <AspectRatio ratio={16 / 9} as="article">
  *  <img src={imgUrl} alt="image" />
  * </AspectRatio>
@@ -51,6 +53,7 @@ interface AspectRatioProps {
  *
  * @example
  * ```tsx
+ * // asChild
  * <AspectRatio ratio={16 / 9} asChild>
  *  <img src={imgUrl} alt="image" />
  * </AspectRatio>

@@ -4,17 +4,18 @@ import { InView } from '@modern-kit/react';
 
 `InView`는 `IntersectionObserver`를 선언적으로 활용 할 수 있는 컴포넌트입니다.
 
+- `@modern-kit/react`의 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 훅을 사용하여 구현되었습니다.
+
 관찰 대상이 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
 
 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다. 
 
 - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때 `해당 요소가 관찰 대상`입니다.
-- `asChild` 속성이 true라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 그대로 렌더링하고, `자식 요소를 관찰 대상으로 설정`할 수 있습니다.
+- `asChild` 속성이 true라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링하고, `자식 요소를 관찰 대상으로 설정`할 수 있습니다.
   - Slot의 자식은 `단일 요소`만 허용됩니다.
   - Slot의 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다.
-  - 자세한 내용은 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
+  - `asChild` 속성을 사용 할 경우 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
 
-`@modern-kit/react`의 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 훅을 사용하여 구현되었습니다.
 
 <br />
 

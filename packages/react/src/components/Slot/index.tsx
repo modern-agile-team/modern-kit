@@ -17,7 +17,9 @@ export type SlotProps = React.PropsWithChildren<
  * Slot은 아래와 같은 특징이 있습니다.
  * - 자식 요소로 `단일 요소`만 허용됩니다.
  * - 자식 요소로 컴포넌트가 온다면 해당 컴포넌트는 필수적으로 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 기능이 정상적으로 동작하지 않습니다.
+ *  - Slot을 사용 할 경우 아래 링크를 참고하세요.
  *
+ * @see https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-spread-props
  * @see https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-forward-ref
  *
  * @example

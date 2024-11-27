@@ -10,7 +10,7 @@ Slot은 부모 컴포넌트의 기능을 자식 컴포넌트에 전달하는 합
 - 자식 컴포넌트의 구현을 변경하지 않고도 새로운 기능을 추가할 수 있습니다
 - 컴포넌트 간의 결합도를 낮추고 재사용성을 높일 수 있습니다
 
-예를 들어 **[InView](https://modern-agile-team.github.io/modern-kit/docs/react/components/InView)** 나 **[AspectRatio](https://modern-agile-team.github.io/modern-kit/docs/react/components/AspectRatio)** 와 같은 컴포넌트에서 `asChild` prop과 함께 사용되어, 래퍼 요소 없이 자식 컴포넌트에 직접 기능을 주입할 수 있습니다.
+예를 들어 **[InView](https://modern-agile-team.github.io/modern-kit/docs/react/components/InView)** 나 **[AspectRatio](https://modern-agile-team.github.io/modern-kit/docs/react/components/AspectRatio)** 와 같은 컴포넌트에서 `asChild` prop을 사용해서, 래퍼 요소 없이 자식 컴포넌트에 직접 기능을 주입할 수 있습니다.
 
 Slot은 아래와 같은 특징이 있습니다.
 1. 자식 요소로 `단일 요소`만 허용됩니다.
@@ -38,6 +38,7 @@ Slot은 아래와 같은 특징이 있습니다.
 ```
 
 2. 자식 요소로 컴포넌트가 온다면 해당 컴포넌트는 필수적으로 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 기능이 정상적으로 동작하지 않습니다.
+- **[radix-ui#your-component-must-spread-props](https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-spread-props)**
 - **[radix-ui#your-component-must-forward-ref](https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-forward-ref)**
 ```tsx title="typescript"
 const MyButton = React.forwardRef((props, forwardedRef) => (
