@@ -1,5 +1,17 @@
 # @modern-kit/react
 
+## 1.25.0
+
+### Minor Changes
+
+- [#601](https://github.com/modern-agile-team/modern-kit/pull/601) [`ad1ab11`](https://github.com/modern-agile-team/modern-kit/commit/ad1ab112d757751c149d5b636bfbd9ad83b805f8) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): InView 컴포넌트 Slot 및 polymorphicForwardRef 활용을 통한 다형성 지원 - @ssi02014
+
+- [#602](https://github.com/modern-agile-team/modern-kit/pull/602) [`f373ec5`](https://github.com/modern-agile-team/modern-kit/commit/f373ec51e839a95d7caf7c58cc50550a29b0ebc7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): InfiniteScroll 컴포넌트 추가 - @ssi02014
+
+- [#604](https://github.com/modern-agile-team/modern-kit/pull/604) [`8ce270c`](https://github.com/modern-agile-team/modern-kit/commit/8ce270c61d44c833c7705032af0788bf4bc48ec6) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useBeforUnload 훅 추가 - @ssi02014
+
+- [#609](https://github.com/modern-agile-team/modern-kit/pull/609) [`7b98712`](https://github.com/modern-agile-team/modern-kit/commit/7b98712b5abd2479c960c8b2cca45f09fea20ecc) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): AspectRatio Slot 및 polymorphicForwardRef 활용을 통한 다형성 지원 - @ssi02014
+
 ## 1.24.2
 
 ### Patch Changes
