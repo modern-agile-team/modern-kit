@@ -7,9 +7,13 @@ import { AspectRatio } from '@modern-kit/react';
 
 미리 영역을 확보하여 `Layout Shift`를 방지하는데 효과적입니다.
 
-다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다. 
+### 다형성
+`AspectRatio` 컴포넌트는 `as`, `asChild` 속성을 모두 지원합니다.
 
+### as
 - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 해당 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+
+### asChild
 - `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
   - Slot은 자식으로 `단일 요소`만 허용됩니다.
   - Slot은 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 정상적으로 동작하지 않습니다.
