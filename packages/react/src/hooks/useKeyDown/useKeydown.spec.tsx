@@ -21,7 +21,7 @@ describe('useKeyDown', () => {
   const shiftMockFn = vi.fn();
 
   describe('window', () => {
-    it('should trigger the event provided to keyDownCallbackMap when a keyboard event occurs', async () => {
+    it('키보드 이벤트가 발생했을 때 keyDownCallbackMap에 제공된 이벤트가 트리거되어야 합니다', async () => {
       const { user } = renderSetup(
         <WindowComponent
           keyDownCallbackMap={{ Enter: enterMockFn, Shift: shiftMockFn }}
@@ -42,7 +42,7 @@ describe('useKeyDown', () => {
       expect(shiftMockFn).toBeCalledTimes(2);
     });
 
-    it('should execute the callback function for all key', async () => {
+    it('모든 키에 대한 콜백 함수가 실행되어야 합니다', async () => {
       const { user } = renderSetup(
         <WindowComponent allKeyDownCallback={allKeyMockFn} />
       );
@@ -52,8 +52,8 @@ describe('useKeyDown', () => {
       expect(allKeyMockFn).toBeCalledTimes(2);
     });
 
-    it('should bind the event if enabled is true', async () => {
-      // enabled false setting
+    it('enabled가 true일 때 이벤트가 바인딩되어야 합니다', async () => {
+      // enabled false 설정
       const { user, rerender } = renderSetup(
         <WindowComponent
           enabled={false}
@@ -65,7 +65,7 @@ describe('useKeyDown', () => {
 
       expect(enterMockFn).not.toBeCalled();
 
-      // enabled true setting
+      // enabled true 설정
       rerender(
         <WindowComponent
           enabled={true}
@@ -78,7 +78,7 @@ describe('useKeyDown', () => {
       expect(enterMockFn).toBeCalled();
     });
 
-    it('should not execute if a function is not assigned to the key', async () => {
+    it('키에 함수가 할당되지 않은 경우 실행되지 않아야 합니다', async () => {
       const { user } = renderSetup(<WindowComponent />);
 
       await user.keyboard('{Enter}');
@@ -87,8 +87,8 @@ describe('useKeyDown', () => {
     });
   });
 
-  describe('target element', () => {
-    it('should trigger the event provided to keyDownCallbackMap when a keyboard event occurs', async () => {
+  describe('대상 요소', () => {
+    it('키보드 이벤트가 발생했을 때 keyDownCallbackMap에 제공된 이벤트가 트리거되어야 합니다', async () => {
       const { user } = renderSetup(
         <TargetTestComponent
           keyDownCallbackMap={{ Enter: enterMockFn, Shift: shiftMockFn }}
@@ -115,7 +115,7 @@ describe('useKeyDown', () => {
       expect(shiftMockFn).toBeCalledTimes(2);
     });
 
-    it('should execute the callback function for all key', async () => {
+    it('모든 키에 대한 콜백 함수가 실행되어야 합니다', async () => {
       const { user } = renderSetup(
         <TargetTestComponent allKeyDownCallback={allKeyMockFn} />
       );
@@ -129,8 +129,8 @@ describe('useKeyDown', () => {
       expect(allKeyMockFn).toBeCalledTimes(2);
     });
 
-    it('should bind the event if enabled is true', async () => {
-      // enabled false setting
+    it('enabled가 true일 때 이벤트가 바인딩되어야 합니다', async () => {
+      // enabled false 설정
       const { user, rerender } = renderSetup(
         <TargetTestComponent
           enabled={false}
@@ -146,7 +146,7 @@ describe('useKeyDown', () => {
 
       expect(enterMockFn).not.toBeCalled();
 
-      // enabled true setting
+      // enabled true 설정
       rerender(
         <TargetTestComponent
           enabled={true}
@@ -161,7 +161,7 @@ describe('useKeyDown', () => {
       expect(enterMockFn).toBeCalled();
     });
 
-    it('should not execute if a function is not assigned to the key', async () => {
+    it('키에 함수가 할당되지 않은 경우 실행되지 않아야 합니다', async () => {
       const { user } = renderSetup(<TargetTestComponent />);
 
       const button = screen.getByRole('button');

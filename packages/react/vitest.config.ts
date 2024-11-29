@@ -12,10 +12,12 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       exclude: [
-        'src/utils/test/**',
+        'src/utils/**',
+        'src/_internal/**',
         'src/**/internal.ts',
         'src/**/*.utils.ts',
         'src/hooks/useClipboard',
+        'src/hooks/useResizeObserver',
         ...coverageConfigDefaults.exclude,
       ],
     },

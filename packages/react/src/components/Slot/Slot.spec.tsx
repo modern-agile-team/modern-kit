@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
 import { Slot, Slottable } from '.';
-import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
+import {
+  ComponentProps,
+  PropsWithChildren,
+  ReactElement,
+  forwardRef,
+} from 'react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { screen } from '@testing-library/dom';
 
@@ -109,6 +114,69 @@ describe('Slot', () => {
       expect(leftElement).toBeInTheDocument();
       expect(rightElement).toBeInTheDocument();
       expect(onClickMock).toBeCalledTimes(1);
+    });
+  });
+
+  describe('에러 케이스', () => {
+    // 기본 버튼
+    const DefaultButton = ({ children }: PropsWithChildren) => (
+      <button>{children}</button>
+    );
+
+    // forwardRef/Props 허용 버튼
+    const ButtonWithForwardRefAndProps = forwardRef<
+      HTMLButtonElement,
+      ComponentProps<'button'>
+    >((props, ref) => <button ref={ref} {...props} />);
+
+    ButtonWithForwardRefAndProps.displayName = 'Button';
+
+    it('Slot은 단일 요소만을 허용해야 합니다.', async () => {
+      expect(() => {
+        renderSetup(
+          <Slot>
+            <p>안녕하세요.</p>
+            <p>안녕하세요.</p>
+          </Slot>
+        );
+      }).toThrow(
+        'React.Children.only expected to receive a single React element child.'
+      );
+    });
+
+    it('Slot은 정상적인 ReactElement 타입이 아니면 null을 반환해야 합니다.', async () => {
+      renderSetup(<Slot>안녕하세요.</Slot>);
+
+      const text = screen.queryByText('안녕하세요.');
+      expect(text).toBeNull();
+    });
+
+    it('Slot은 자식으로 컴포넌트를 사용 할 경우 forwardRef/Props를 허용해야 정상적으로 동작해야 합니다.', async () => {
+      const { user } = renderSetup(
+        <Slot onClick={onClickMock}>
+          <ButtonWithForwardRefAndProps>Button</ButtonWithForwardRefAndProps>
+        </Slot>
+      );
+
+      const button = screen.getByRole('button');
+
+      await user.click(button);
+
+      expect(onClickMock).toBeCalledTimes(1); // 정상 호출
+    });
+
+    it('Slot은 자식으로 컴포넌트를 사용 할 경우 forwardRef/Props를 전달하지 않으면 정상적으로 동작하지 않아야 합니다.', async () => {
+      const { user } = renderSetup(
+        <Slot onClick={onClickMock}>
+          <DefaultButton>Button</DefaultButton>
+        </Slot>
+      );
+
+      const button = screen.getByRole('button');
+
+      await user.click(button);
+
+      expect(onClickMock).toBeCalledTimes(0); // 정상 호출 X
     });
   });
 });
