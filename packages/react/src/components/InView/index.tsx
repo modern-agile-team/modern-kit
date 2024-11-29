@@ -12,6 +12,9 @@ interface InViewProps extends UseIntersectionObserverProps {
   asChild?: boolean;
 }
 
+const IN_VIEW_ERROR_MESSAGE =
+  'InView는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 단일 요소만 허용됩니다.';
+
 /**
  * @description `InView`는 `IntersectionObserver`를 선언적으로 활용 할 수 있는 컴포넌트입니다.
  *
@@ -69,16 +72,21 @@ interface InViewProps extends UseIntersectionObserverProps {
  * </InView>
  * ```
  */
-export const InView = polymorphicForwardRef<'button', InViewProps>(
-  ({ as = 'div', asChild = false, ...props }, ref) => {
+export const InView = polymorphicForwardRef<'div', InViewProps>(
+  ({ children, as = 'div', asChild = false, ...props }, ref) => {
     const InViewWrapper = asChild ? Slot : as;
     const { ref: intersectionObserverRef } = useIntersectionObserver(props);
+
+    if (asChild && !React.isValidElement(children)) {
+      throw new Error(IN_VIEW_ERROR_MESSAGE);
+    }
 
     return (
       <InViewWrapper
         ref={useMergeRefs(ref, intersectionObserverRef)}
-        {...props}
-      />
+        {...props}>
+        {children}
+      </InViewWrapper>
     );
   }
 );

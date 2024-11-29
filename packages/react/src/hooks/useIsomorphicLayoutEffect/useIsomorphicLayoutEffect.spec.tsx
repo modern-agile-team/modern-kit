@@ -8,7 +8,7 @@ describe('useIsomorphicLayoutEffect', () => {
     vi.resetModules();
   });
 
-  it('should be useEffect in server environment', async () => {
+  it('서버 환경에서는 useEffect를 사용해야 합니다', async () => {
     Object.defineProperty(global, 'window', {
       value: undefined,
     });
@@ -17,7 +17,7 @@ describe('useIsomorphicLayoutEffect', () => {
     expect(useIsomorphicLayoutEffect).toEqual(useEffect);
   });
 
-  it('should be useLayoutEffect in client environment', async () => {
+  it('클라이언트 환경에서는 useLayoutEffect를 사용해야 합니다', async () => {
     Object.defineProperty(global, 'window', {
       value: originWindow,
     });

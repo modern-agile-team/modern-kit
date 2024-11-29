@@ -19,19 +19,19 @@ beforeEach(() => {
 });
 
 describe('useMediaQuery', () => {
-  it('should return true for matches when query matches', () => {
+  it('쿼리가 일치할 때 true를 반환해야 합니다', () => {
     const { result } = renderHook(() => useMediaQuery('(min-width: 600px)'));
 
     expect(result.current).toBe(true);
   });
 
-  it('should return false when query does not match', () => {
+  it('쿼리가 일치하지 않을 때 false를 반환해야 합니다', () => {
     const { result } = renderHook(() => useMediaQuery('(min-width: 599px)'));
 
     expect(result.current).toBe(false);
   });
 
-  it('should return false for isMatch when not in a client environment', () => {
+  it('클라이언트 환경이 아닐 때 false를 반환해야 합니다', () => {
     vi.spyOn(ModernKitUtils, 'isClient').mockReturnValue(false);
 
     const { result } = renderHook(() => useMediaQuery('(min-width: 600px)'));

@@ -30,7 +30,7 @@ const TestComponent = () => {
 };
 
 describe('useMergeRefs', () => {
-  it('can merge multiple refs into one', async () => {
+  it('여러 개의 ref를 하나로 병합할 수 있어야 합니다.', async () => {
     const { user } = renderSetup(<TestComponent />);
 
     const button = screen.getByText('button');

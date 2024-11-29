@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { mergeRefs } from './utils';
+import { mergeRefs } from '../../utils/mergeRefs';
 
 /**
  * @description `useMergeRefs`는 여러 개의 React ref를 하나의 ref로 병합하여, 한 번에 여러 ref에 값을 설정할 수 있도록 하는 커스텀 훅입니다.

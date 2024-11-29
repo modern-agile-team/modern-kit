@@ -12,8 +12,8 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       exclude: [
-        'src/utils/test/**',
-        'src/**/internal.ts',
+        'src/utils/**',
+        'src/_internal/**',
         'src/**/*.utils.ts',
         'src/hooks/useClipboard',
         ...coverageConfigDefaults.exclude,
