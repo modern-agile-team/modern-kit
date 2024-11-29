@@ -147,4 +147,10 @@ describe('InView', () => {
     expect(intersectStartMock).toBeCalledTimes(1);
     expect(intersectEndMock).toBeCalledTimes(1);
   });
+
+  it('asChild가 true일 때 children이 유효한 React 요소가 아니면 에러를 반환해야 합니다.', () => {
+    expect(() =>
+      renderSetup(<InView asChild={true}>일반 텍스트 노드</InView>)
+    ).toThrow();
+  });
 });

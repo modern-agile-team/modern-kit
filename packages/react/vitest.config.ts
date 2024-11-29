@@ -14,8 +14,10 @@ export default defineConfig({
       exclude: [
         'src/utils/**',
         'src/_internal/**',
+        'src/**/internal.ts',
         'src/**/*.utils.ts',
         'src/hooks/useClipboard',
+        'src/hooks/useResizeObserver',
         ...coverageConfigDefaults.exclude,
       ],
     },
