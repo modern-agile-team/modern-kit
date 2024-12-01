@@ -1,14 +1,19 @@
-// /*
-//   callback: 실행 할 콜백
-//   delay: timeout delay
-//   deps: 의존성 배열
-//   callOnMount: 최초 마운트 시에 callback 호출 할 것인지 결정
-// */
-// useDependencyTimeout(callback, delay, deps, { callOnMount });
-
 import { useEffect, useRef } from 'react';
-import { useTimeout } from '../useTimeout';
+import { useTimeout } from 'hooks/useTimeout';
 
+/**
+ * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ *
+ * @param callback: 실행 할 콜백
+ * @param delay: timeout delay
+ * @param deps: 의존성 배열
+ * @param callOnMount: 최초 마운트 시에 callback 호출 할 것인지 결정 *
+ *
+ * @return {ReturnType<typeof useTimeout>}
+ *
+ * @example
+ * const { set, reset, clear } = useDependencyTimeout(() => console.log(something), 500, deps);
+ */
 export default function useDependencyTimeout(
   callback: () => void,
   delay: number,
