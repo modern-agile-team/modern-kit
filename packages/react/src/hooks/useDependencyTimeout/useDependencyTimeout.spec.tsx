@@ -13,7 +13,7 @@ afterEach(() => {
 });
 
 describe('useDependencyTimeout', () => {
-  it('should call callback on mount if callOnMount is true', () => {
+  it('callOnMount가 true면 마운트 시 콜백을 호출해야 합니다.', () => {
     const mockFn = vi.fn();
 
     renderHook(() =>
@@ -27,7 +27,7 @@ describe('useDependencyTimeout', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should not call callback on mount if callOnMount is false', () => {
+  it('callOnMount가 false면 마운트 시 콜백을 호출하지 않아야 합니다.', () => {
     const mockFn = vi.fn();
 
     renderHook(() =>
@@ -41,7 +41,7 @@ describe('useDependencyTimeout', () => {
     expect(mockFn).toBeCalledTimes(1);
   });
 
-  it('should reset the timeout when dependencies change', () => {
+  it('의존성이 변경될 때 타임아웃을 리셋해야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { rerender } = renderHook(
@@ -65,7 +65,7 @@ describe('useDependencyTimeout', () => {
     expect(mockFn).toBeCalledTimes(1);
   });
 
-  it('should allow clearing the timeout', () => {
+  it('타임아웃을 해제할 수 있어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() =>
@@ -83,7 +83,7 @@ describe('useDependencyTimeout', () => {
     expect(mockFn).not.toBeCalled();
   });
 
-  it('should allow manual reset of the timeout', () => {
+  it('타임아웃을 수동으로 리셋할 수 있어야 합니다.', () => {
     const mockFn = vi.fn();
 
     renderHook(() =>
