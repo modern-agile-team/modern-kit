@@ -7713,7 +7713,6 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:15.3.0"],\
-          ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4"],\
           ["@rollup/plugin-typescript", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:12.1.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
           ["@testing-library/jest-dom", "npm:6.6.2"],\
@@ -7724,6 +7723,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"],\
+          ["autoprefixer", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:10.4.20"],\
           ["classnames", "npm:2.5.1"],\
           ["esbuild", "npm:0.24.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:25.0.0"],\
@@ -7757,7 +7757,6 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:15.3.0"],\
-          ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4"],\
           ["@rollup/plugin-typescript", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:12.1.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
           ["@testing-library/jest-dom", "npm:6.6.2"],\
@@ -7768,6 +7767,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/ua-parser-js", "npm:0.7.39"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"],\
+          ["autoprefixer", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:10.4.20"],\
           ["classnames", "npm:2.5.1"],\
           ["esbuild", "npm:0.24.0"],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:25.0.0"],\
@@ -7808,7 +7808,6 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/types", "workspace:packages/types"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:15.3.0"],\
-          ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4"],\
           ["@rollup/plugin-typescript", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:12.1.0"],\
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:2.1.3"],\
@@ -8414,31 +8413,6 @@ const RAW_RUNTIME_STATE =
           ["is-module", "npm:1.0.0"],\
           ["resolve", "patch:resolve@npm%3A1.22.4#optional!builtin<compat/resolve>::version=1.22.4&hash=c3c19d"],\
           ["rollup", "npm:4.27.3"]\
-        ],\
-        "packagePeers": [\
-          "@types/rollup",\
-          "rollup"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@rollup/plugin-terser", [\
-      ["npm:0.4.4", {\
-        "packageLocation": "./.yarn/cache/@rollup-plugin-terser-npm-0.4.4-c6896dd264-b9cb6c8f02.zip/node_modules/@rollup/plugin-terser/",\
-        "packageDependencies": [\
-          ["@rollup/plugin-terser", "npm:0.4.4"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4", {\
-        "packageLocation": "./.yarn/__virtual__/@rollup-plugin-terser-virtual-a1d3374247/0/cache/@rollup-plugin-terser-npm-0.4.4-c6896dd264-b9cb6c8f02.zip/node_modules/@rollup/plugin-terser/",\
-        "packageDependencies": [\
-          ["@rollup/plugin-terser", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.4.4"],\
-          ["@types/rollup", null],\
-          ["rollup", "npm:4.27.3"],\
-          ["serialize-javascript", "npm:6.0.1"],\
-          ["smob", "npm:1.4.0"],\
-          ["terser", "npm:5.19.2"]\
         ],\
         "packagePeers": [\
           "@types/rollup",\
@@ -11365,6 +11339,13 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["npm:10.4.20", {\
+        "packageLocation": "./.yarn/cache/autoprefixer-npm-10.4.20-dd5fd05d27-e1f00978a2.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "npm:10.4.20"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
       ["virtual:0eeb47616a973aea69d3d4c5ada611d9cfb56263bf00b5e98fc2c4f55dd497dd07f4c9038e9a36baa1ad052f484e7905b73a447a7fe9daae487183fcf13884c7#npm:10.4.16", {\
         "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-93a5abfdd7/0/cache/autoprefixer-npm-10.4.16-e5a0ee424d-e00256e754.zip/node_modules/autoprefixer/",\
         "packageDependencies": [\
@@ -11376,6 +11357,25 @@ const RAW_RUNTIME_STATE =
           ["normalize-range", "npm:0.1.2"],\
           ["picocolors", "npm:1.0.0"],\
           ["postcss", "npm:8.4.31"],\
+          ["postcss-value-parser", "npm:4.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/postcss",\
+          "postcss"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:10.4.20", {\
+        "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-3fa32cac33/0/cache/autoprefixer-npm-10.4.20-dd5fd05d27-e1f00978a2.zip/node_modules/autoprefixer/",\
+        "packageDependencies": [\
+          ["autoprefixer", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:10.4.20"],\
+          ["@types/postcss", null],\
+          ["browserslist", "npm:4.24.2"],\
+          ["caniuse-lite", "npm:1.0.30001651"],\
+          ["fraction.js", "npm:4.3.7"],\
+          ["normalize-range", "npm:0.1.2"],\
+          ["picocolors", "npm:1.0.1"],\
+          ["postcss", "npm:8.4.41"],\
           ["postcss-value-parser", "npm:4.2.0"]\
         ],\
         "packagePeers": [\
@@ -26811,15 +26811,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["smob", [\
-      ["npm:1.4.0", {\
-        "packageLocation": "./.yarn/cache/smob-npm-1.4.0-2bf978343e-b74e1fb724.zip/node_modules/smob/",\
-        "packageDependencies": [\
-          ["smob", "npm:1.4.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["snake-case", [\
       ["npm:3.0.4", {\
         "packageLocation": "./.yarn/cache/snake-case-npm-3.0.4-67f447c30d-ab19a91396.zip/node_modules/snake-case/",\
@@ -27641,17 +27632,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["terser", [\
-      ["npm:5.19.2", {\
-        "packageLocation": "./.yarn/cache/terser-npm-5.19.2-91391d2f00-95817b8661.zip/node_modules/terser/",\
-        "packageDependencies": [\
-          ["terser", "npm:5.19.2"],\
-          ["@jridgewell/source-map", "npm:0.3.5"],\
-          ["acorn", "npm:8.10.0"],\
-          ["commander", "npm:2.20.3"],\
-          ["source-map-support", "npm:0.5.21"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:5.24.0", {\
         "packageLocation": "./.yarn/cache/terser-npm-5.24.0-0761eb3a43-9a73ae5282.zip/node_modules/terser/",\
         "packageDependencies": [\

@@ -1,11 +1,11 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import pkg from './package.json' assert { type: 'json' };
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -24,7 +24,10 @@ export default {
       format: 'esm',
     },
   ],
-  external: ['react', 'react-dom'],
+  external: [
+    ...Object.keys(pkg.dependencies),
+    ...Object.keys(pkg.peerDependencies),
+  ],
   plugins: [
     peerDepsExternal(),
     nodeResolve({
@@ -34,12 +37,11 @@ export default {
       exclude: ['**/*.spec.tsx', '**/*.spec.ts'],
     }),
     commonjs(),
-    esbuild(),
+    esbuild({ minify: true }),
     postcss({
-      extract: false,
       modules: true,
       minimize: true,
+      plugins: [autoprefixer()],
     }),
-    terser(),
   ],
 };
