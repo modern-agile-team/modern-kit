@@ -62,7 +62,7 @@ const TestComponentWithInput = ({ capture, wait }: TestComponentProps) => {
 };
 
 describe('DebounceWrapper Component', () => {
-  it('should debounce click event from child element', async () => {
+  it('자식 요소의 onClick 이벤트를 디바운스해야 합니다.', async () => {
     const mockFn = vi.fn();
     // https://github.com/testing-library/user-event/issues/833
     const { user } = renderSetup(
@@ -90,7 +90,7 @@ describe('DebounceWrapper Component', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should debounce change event from child element', async () => {
+  it('자식 요소의 onChange 이벤트를 디바운스해야 합니다.', async () => {
     const { user } = renderSetup(
       <TestComponentWithInput capture="onChange" wait={500} />,
       { delay: null }

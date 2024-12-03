@@ -15,7 +15,7 @@ export type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
  *
  * @param {DebounceParameters[0]} callback - 디바운스 처리할 콜백 함수입니다.
  * @param {DebounceParameters[1]} wait - 디바운스가 적용될 시간(ms)입니다. 이 시간이 지나면 콜백이 실행됩니다.
- * @param {DebounceParameters[2]} [options={}] - 디바운스 동작에 영향을 주는 추가 옵션입니다. `leading(default: false)`, `trailing(default: true)`, `maxWait` 옵션을 받을 수 있습니다.
+ * @param {DebounceParameters[2]} [options] - 디바운스 동작에 영향을 주는 추가 옵션입니다. `leading(default: false)`, `trailing(default: true)`, `maxWait` 옵션을 받을 수 있습니다.
  *
  * @returns {DebounceReturnType<T>} 디바운스 처리된 콜백 함수를 반환합니다.
  *
@@ -27,7 +27,7 @@ export type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
 export function useDebounce<T extends DebounceParameters[0]>(
   callback: T,
   wait: DebounceParameters[1],
-  options: DebounceParameters[2] = {}
+  options?: DebounceParameters[2]
 ): DebounceReturnType<T> {
   const callbackAction = usePreservedCallback(callback);
   const preservedOptions = usePreservedState(options);
