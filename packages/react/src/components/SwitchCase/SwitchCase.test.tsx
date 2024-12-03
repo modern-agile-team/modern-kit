@@ -3,50 +3,41 @@ import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { SwitchCase } from '.';
 
+const TestComponent = ({ value }: { value: string }) => {
+  return (
+    <SwitchCase
+      value={value}
+      caseBy={{ a: <div>A</div>, b: <div>B</div> }}
+      defaultComponent={<div>Default</div>}
+    />
+  );
+};
+
 describe('SwitchCase', () => {
-  it('should SwitchCase component receive condition.', () => {
-    renderSetup(
-      <SwitchCase condition={0} cases={{ 0: <button>case no.1</button> }} />
-    );
-    const CaseOneComponent = screen.queryByRole('button', {
-      name: 'case no.1',
-    });
+  it(`value가 'a'일 때 'A'가 렌더링되어야 합니다.`, () => {
+    renderSetup(<TestComponent value="a" />);
 
-    expect(CaseOneComponent).toBeInTheDocument();
+    expect(screen.getByText('A')).toBeInTheDocument();
+
+    expect(screen.queryByText('B')).not.toBeInTheDocument();
+    expect(screen.queryByText('Default')).not.toBeInTheDocument();
   });
 
-  it('should render defaultCaseComponent when there is no matched condition.', () => {
-    renderSetup(
-      <SwitchCase
-        condition={0 as number}
-        cases={{ 1: <button>case no.1</button> }}
-        defaultCaseComponent={<button>default component</button>}
-      />
-    );
+  it(`value가 'b'일 때 'B'가 렌더링되어야 합니다.`, () => {
+    renderSetup(<TestComponent value="b" />);
 
-    const CaseOneComponent = screen.queryByRole('button', {
-      name: 'case no.1',
-    });
-    const DefaultCaseComponent = screen.queryByRole('button', {
-      name: 'default component',
-    });
+    expect(screen.getByText('B')).toBeInTheDocument();
 
-    expect(CaseOneComponent).not.toBeInTheDocument();
-    expect(DefaultCaseComponent).toBeInTheDocument();
+    expect(screen.queryByText('A')).not.toBeInTheDocument();
+    expect(screen.queryByText('Default')).not.toBeInTheDocument();
   });
 
-  it('should render defaultCaseComponent when condition is nullable.', () => {
-    renderSetup(
-      <SwitchCase
-        condition={null}
-        cases={{}}
-        defaultCaseComponent={<button>default component</button>}
-      />
-    );
+  it(`일치하는 value가 없을 때 'Default'가 렌더링되어야 합니다.`, () => {
+    renderSetup(<TestComponent value="cc" />);
 
-    const DefaultCaseComponent = screen.queryByRole('button', {
-      name: 'default component',
-    });
-    expect(DefaultCaseComponent).toBeInTheDocument();
+    expect(screen.getByText('Default')).toBeInTheDocument();
+
+    expect(screen.queryByText('A')).not.toBeInTheDocument();
+    expect(screen.queryByText('B')).not.toBeInTheDocument();
   });
 });
