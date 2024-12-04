@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.24.0
+
+### Minor Changes
+
+- [#603](https://github.com/modern-agile-team/modern-kit/pull/603) [`7aa51ec`](https://github.com/modern-agile-team/modern-kit/commit/7aa51ec69c126625f063e342002fafa4b9e04957) Thanks [@metacode22](https://github.com/metacode22)! - feat(utils): clamp 추가 - @metacode22
+
 ## 1.23.0
 
 ### Minor Changes
