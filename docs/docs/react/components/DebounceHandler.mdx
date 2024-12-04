@@ -1,38 +1,33 @@
 import { useState } from 'react';
-import { DebounceWrapper } from '@modern-kit/react';
+import { DebounceHandler } from '@modern-kit/react';
 
-# DebounceWrapper
+# DebounceHandler
 
 자식 컴포넌트의 이벤트 핸들러에 디바운스(debounce)를 선언적으로 적용할 수 있는 컴포넌트입니다.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/DebounceWrapper/index.tsx)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/DebounceHandler/index.tsx)
 
 ## Interface
 ```ts title="typescript"
 type DebounceParameters = Parameters<typeof debounce>;
 
-interface DebounceWrapperProps {
-  children: JSX.Element; // 하나의 요소만 children prop으로 넘겨줄 수 있습니다.
+interface DebounceHandlerProps {
+  children: JSX.Element;
   capture: string;
-  wait: DebounceParameters[1]; // number
-  options?: DebounceParameters[2]; // DebounceSettings
+  wait: DebounceParameters[1];
+  options?: DebounceParameters[2];
 }
 
-const DebounceWrapper: ({
-  children,
-  capture,
-  wait,
-  options,
-}: DebounceWrapperProps) => React.FunctionComponentElement<any>;
+const DebounceHandler: ({ children, capture, wait, options, }: DebounceHandlerProps) => JSX.Element
 ```
 
 ## Usage
 ### Button Click Case
 ```tsx title="typescript"
-import { DebounceWrapper } from '@modern-kit/react'
+import { DebounceHandler } from '@modern-kit/react'
 
 const Example = () => {
   const onClick = () => {
@@ -40,9 +35,9 @@ const Example = () => {
   };
   
   return (
-    <DebounceWrapper capture="onClick" wait={500}>
+    <DebounceHandler capture="onClick" wait={500}>
       <button onClick={nClick}>Button</button>
-    </DebounceWrapper>
+    </DebounceHandler>
   );
 };
 ```
@@ -69,9 +64,9 @@ const Example = () => {
 
   return (
     <>
-      <DebounceWrapper capture={'onChange'} wait={500}>
+      <DebounceHandler capture={'onChange'} wait={500}>
         <Input onChange={onChange} />
-      </DebounceWrapper>
+      </DebounceHandler>
       <p>{text}</p>
     </>
   );
@@ -81,11 +76,11 @@ const Example = () => {
 ## Example
 ### Button Click Case
 <p style={{ marginBottom: '4px' }}>브라우저의 개발자 도구의 콘솔에서 동작을 확인하세요.</p>
-<DebounceWrapper capture="onClick" wait={500}>
+<DebounceHandler capture="onClick" wait={500}>
   <button onClick={() => {
     console.log('debounce');
   }}>Button</button>
-</DebounceWrapper>
+</DebounceHandler>
 
 <br />
 
@@ -105,9 +100,9 @@ export const InputExample = () => {
   };
   return (
     <>
-      <DebounceWrapper capture={'onChange'} wait={500}>
+      <DebounceHandler capture={'onChange'} wait={500}>
         <Input onChange={onChange} />
-      </DebounceWrapper>
+      </DebounceHandler>
       <p>Text: {text}</p>
     </>
   );

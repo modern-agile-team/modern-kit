@@ -2,7 +2,7 @@ import { Children, cloneElement } from 'react';
 import { DebounceParameters, useDebounce } from '../../hooks/useDebounce';
 import { isFunction } from '@modern-kit/utils';
 
-export interface DebounceWrapperProps {
+interface DebounceHandlerProps {
   children: JSX.Element;
   capture: string;
   wait: DebounceParameters[1];
@@ -12,7 +12,7 @@ export interface DebounceWrapperProps {
 /**
  * @description 자식 컴포넌트의 이벤트 핸들러에 디바운스를 선언적으로 적용할 수 있는 컴포넌트입니다.
  *
- * @param {DebounceWrapperProps} props - `DebounceWrapper` 컴포넌트의 속성
+ * @param {DebounceHandlerProps} props - `DebounceHandler` 컴포넌트의 속성
  * @param {JSX.Element} props.children - 디바운스를 적용할 자식 컴포넌트
  * @param {string} props.capture - 디바운스를 적용할 이벤트 핸들러 이름 (예: 'onClick', 'onChange')
  * @param {number} props.wait - 디바운스가 적용될 시간(ms)입니다. 이 시간이 지나면 콜백이 실행됩니다.
@@ -23,9 +23,9 @@ export interface DebounceWrapperProps {
  * @example
  * ```tsx
  * // onClick debounce
- * <DebounceWrapper capture="onClick" wait={300}>
+ * <DebounceHandler capture="onClick" wait={300}>
  *   <button onClick={handleClick}>Button</button>
- * </DebounceWrapper>
+ * </DebounceHandler>
  * ```
  *
  * @example
@@ -49,17 +49,17 @@ export interface DebounceWrapperProps {
  *   return <input onChange={handleChange} value={value} />;
  * };
  *
- * <DebounceWrapper capture="onChange" wait={300}>
+ * <DebounceHandler capture="onChange" wait={300}>
  *   <Input onChange={onChange} />
- * </DebounceWrapper>
+ * </DebounceHandler>
  * ```
  */
-export const DebounceWrapper = ({
+export const DebounceHandler = ({
   children,
   capture,
   wait,
   options,
-}: DebounceWrapperProps): JSX.Element => {
+}: DebounceHandlerProps): JSX.Element => {
   const child = Children.only(children);
 
   const debouncedCallback = useDebounce(

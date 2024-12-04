@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { OutsideClick } from '@modern-kit/react';
+import { OutsidePointerDownHandler } from '@modern-kit/react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-# OutsidePointerDown
+# OutsidePointerDownHandler
 
 `useOutsidePointerDown`의 기능을 선언적으로 처리하는 컴포넌트입니다.
 
@@ -13,9 +13,16 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsideClick/index.tsx)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
 
 ## Interface
+```ts title="typescript"
+interface OutsidePointerDownHandlerProps {
+  asChild?: boolean;
+  onPointerDown: () => void;
+  children: ReactNode;
+}
+```
 ```ts title="typescript"
 const OutsidePointerDown: PolyForwardComponent<
   'div',
@@ -36,11 +43,11 @@ const DefaultExample = () => {
     backgroundColor: 'skyBlue',
   };
   return (
-    <OutsideClick
+    <OutsidePointerDownHandler
       style={style}
       callback={() => console.log('DefaultExample Outside Clicked!')}>
       외부 영역 클릭 후 콘솔을 확인해주세요.
-    </OutsideClick>
+    </OutsidePointerDownHandler>
   );
 };
 ```
@@ -52,11 +59,11 @@ export const DefaultExample = () => {
     backgroundColor: 'skyBlue',
   };
   return (
-    <OutsideClick
+    <OutsidePointerDownHandler
       style={style}
       callback={() => console.log('DefaultExample Outside Clicked!')}>
       외부 영역 클릭 후 콘솔을 확인해주세요.
-    </OutsideClick>
+    </OutsidePointerDownHandler>
   );
 };
 
@@ -69,7 +76,7 @@ export const DefaultExample = () => {
 
 ### As-Example
 ```tsx title="typescript"
-import { OutsideClick } from '@modern-kit/react';
+import { OutsidePointerDownHandler } from '@modern-kit/react';
 
 const AsExample = () => {
   const style = {
@@ -77,9 +84,9 @@ const AsExample = () => {
     height: "50px",
   };
   return (
-    // OutsideClick 컴포넌트의 "제네릭 타입" 지정 후 "as" props를 입력해주세요. 
+    // OutsidePointerDownHandler 컴포넌트의 "제네릭 타입" 지정 후 "as" props를 입력해주세요. 
     // 원활한 타입 추론이 가능합니다.
-    <OutsideClick<'input'> 
+    <OutsidePointerDownHandler<'input'> 
       as="input"
       placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
       callback={() => console.log('As-Example Outslide Clicked!')}
@@ -95,7 +102,7 @@ export const AsExample = () => {
     height: "50px",
   };
   return (
-    <OutsideClick
+    <OutsidePointerDownHandler
       as="input"
       placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
       callback={() => console.log('As-Example Outslide Clicked!')}
