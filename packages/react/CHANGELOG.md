@@ -1,5 +1,17 @@
 # @modern-kit/react
 
+## 1.26.0
+
+### Minor Changes
+
+- [#623](https://github.com/modern-agile-team/modern-kit/pull/623) [`8fba1a6`](https://github.com/modern-agile-team/modern-kit/commit/8fba1a613248418556ab0f38bf4406255787b2ba) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): OutsidePointerDownHandler 다형성 및 컴포넌트 합성 기능 추가 - @ssi02014
+
+### Patch Changes
+
+- [#622](https://github.com/modern-agile-team/modern-kit/pull/622) [`eb5e4d6`](https://github.com/modern-agile-team/modern-kit/commit/eb5e4d63b9f40721530e849c6cebbe3b02099377) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): SwithCase 인터페이스 개선 - @ssi02014
+
+- [#613](https://github.com/modern-agile-team/modern-kit/pull/613) [`acc099f`](https://github.com/modern-agile-team/modern-kit/commit/acc099f4a72ea354e4c31121b72d74906738c570) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): inView 타입 수정 - @ssi02014
+
 ## 1.25.0
 
 ### Minor Changes
