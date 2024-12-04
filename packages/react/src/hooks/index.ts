@@ -45,3 +45,4 @@ export * from './useUserAgent';
 export * from './useVhProperty';
 export * from './useVisibilityChange';
 export * from './useWindowSize';
+export * from './useDependencyTimeout';
