@@ -4,7 +4,7 @@ import {
   UseIntersectionObserverProps,
 } from '../../hooks/useIntersectionObserver';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
-import { useMergeRefs } from '../../hooks/useMergeRefs';
+import { mergeRefs } from '../../utils/mergeRefs';
 import { Slot } from '../../components/Slot';
 
 interface InViewProps extends UseIntersectionObserverProps {
@@ -13,7 +13,7 @@ interface InViewProps extends UseIntersectionObserverProps {
 }
 
 const IN_VIEW_ERROR_MESSAGE =
-  'InView는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 단일 요소만 허용됩니다.';
+  'InView는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 또한, 단일 요소만 허용합니다.';
 
 /**
  * @description `InView`는 `IntersectionObserver`를 선언적으로 활용 할 수 있는 컴포넌트입니다.
@@ -24,11 +24,14 @@ const IN_VIEW_ERROR_MESSAGE =
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver
  *
- * 다형성을 지원하기 때문에 `as`, `asChild` 속성을 지원합니다.
+ * `다형성(polymorphism)`을 위해 `as` 속성을 지원합니다.
+ * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
+ * - 이때 해당 요소가 `IntersectionObserver`의 관찰 대상입니다.
  *
- * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때 해당 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
- * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링하고, 자식 요소를 `IntersectionObserver`의 관찰 대상이 됩니다.
- * - `asChild` 속성을 사용 할 경우 아래 Slot 링크를 참고하세요.
+ * `리액트 컴포넌트 합성(Composition)`을 지원하기 위해 `asChild` 속성을 지원합니다.
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링 합니다.
+ * - 이때, 자식 요소가 `IntersectionObserver`의 관찰 대상입니다.
+ * - `asChild`를 사용 할 경우 아래 링크를 참고하세요.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
  *
@@ -82,9 +85,7 @@ export const InView = polymorphicForwardRef<'div', InViewProps>(
     }
 
     return (
-      <InViewWrapper
-        ref={useMergeRefs(ref, intersectionObserverRef)}
-        {...props}>
+      <InViewWrapper ref={mergeRefs(ref, intersectionObserverRef)} {...props}>
         {children}
       </InViewWrapper>
     );

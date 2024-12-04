@@ -8,14 +8,19 @@ import { InView } from '@modern-kit/react';
 
 관찰 대상이 `Viewport`에 노출될 때(`onIntersectStart`) 혹은 나갈 때(`onIntersectEnd`) 특정 action 함수를 호출 할 수 있는 컴포넌트입니다.
 
-### 다형성
-`InView` 컴포넌트는 `as`, `asChild` 속성을 모두 지원합니다.
+<br />
 
-### as
-- 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때 해당 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
+### 다형성(polymorphism)
+`InView` 컴포넌트는 `다형성`을 위해 `as` 속성을 지원합니다.
 
-### asChild
-- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링하고, 해당 자식 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
+- 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
+- 이때, 해당 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
+
+### 컴포넌트 합성(Composition)
+`InView` 컴포넌트는 컴포넌트 합성을 위해 `asChild` 속성을 지원합니다.
+
+- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링합니다. 
+- 이때, 해당 자식 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
   - Slot의 자식은 `단일 요소`만 허용됩니다.
   - Slot은 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 정상적으로 동작하지 않습니다.
   - `asChild` 속성을 사용 할 경우 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.

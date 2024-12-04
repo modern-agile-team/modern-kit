@@ -1,0 +1,156 @@
+import { useState } from 'react';
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# OutsidePointerDownHandler
+
+**[@modern-kit/useOutsidePointerDown](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown)** 훅을 선언적으로 활용 할 수 있는 컴포넌트입니다.
+
+컴포넌트 외부 영역 클릭 및 터치 시 `onPointerDown` 함수를 실행하는 컴포넌트입니다.
+
+<br />
+
+### 다형성(polymorphism)
+`OutsidePointerDownHandler`컴포넌트는 `다형성`을 위해 `as` 속성을 지원합니다.
+
+- 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
+- 이때, 해당 요소의 외부 영역을 클릭 시 `onPointerDown` 콜백 함수가 호출됩니다.
+
+### 컴포넌트 합성(Composition)
+`OutsidePointerDownHandler` 컴포넌트는 컴포넌트 합성을 위해 `asChild` 속성을 지원합니다.
+
+- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링합니다.
+- 이때, 자식 요소의 외부 영역을 클릭 시 `onPointerDown` 콜백 함수가 호출됩니다.
+  - Slot의 자식은 `단일 요소`만 허용됩니다.
+  - Slot은 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 정상적으로 동작하지 않습니다.
+  - `asChild` 속성을 사용 할 경우 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
+
+## Interface
+```ts title="typescript"
+interface OutsidePointerDownHandlerProps {
+  asChild?: boolean;
+  onPointerDown: () => void;
+  children: ReactNode;
+}
+```
+```ts title="typescript"
+const OutsidePointerDown: PolyForwardComponent<
+  'div',
+  OutsidePointerDownProps,
+  React.ElementType
+>;
+```
+
+## Usage
+### Default
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const DefaultExample = () => {
+  const style = {
+    width: '500px',
+    height: '100px',
+    backgroundColor: 'skyBlue',
+  };
+  return (
+    <OutsidePointerDownHandler
+      style={style}
+      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
+      <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const DefaultExample = () => {
+  const style = {
+    width: '500px',
+    height: '100px',
+    backgroundColor: 'skyBlue',
+  };
+  return (
+    <OutsidePointerDownHandler
+      style={style}
+      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
+      외부 영역 클릭 후 콘솔을 확인해주세요.
+    </OutsidePointerDownHandler>
+  );
+};
+
+
+<BrowserOnly>
+  {() => <DefaultExample />}
+</BrowserOnly>
+
+<br />
+
+### as
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const Example = () => {
+  return (
+    <OutsidePointerDownHandler
+      as="ul"
+      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const AsExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      as="ul"
+      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
+  );
+};
+
+<BrowserOnly>
+  {() => <AsExample />}
+</BrowserOnly>
+
+### asChild
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+    </OutsidePointerDownHandler>
+  );
+};
+
+<BrowserOnly>
+  {() => <AsChildExample />}
+</BrowserOnly>

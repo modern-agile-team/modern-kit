@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { DebounceWrapper } from '.';
+import { DebounceHandler } from '.';
 import { ChangeEvent, useState } from 'react';
 import { act, screen } from '@testing-library/react';
 
@@ -27,9 +27,9 @@ const TestComponentWithButton = ({
   wait,
 }: ButtonTestComponentProps) => {
   return (
-    <DebounceWrapper capture={capture} wait={wait}>
+    <DebounceHandler capture={capture} wait={wait}>
       <button onClick={onClick}>Button</button>
-    </DebounceWrapper>
+    </DebounceHandler>
   );
 };
 
@@ -53,15 +53,15 @@ const TestComponentWithInput = ({ capture, wait }: TestComponentProps) => {
 
   return (
     <>
-      <DebounceWrapper capture={capture} wait={wait}>
+      <DebounceHandler capture={capture} wait={wait}>
         <TestInput onChange={onChange} />
-      </DebounceWrapper>
+      </DebounceHandler>
       <p role="paragraph">{text}</p>
     </>
   );
 };
 
-describe('DebounceWrapper Component', () => {
+describe('DebounceHandler', () => {
   it('자식 요소의 onClick 이벤트를 디바운스해야 합니다.', async () => {
     const mockFn = vi.fn();
     // https://github.com/testing-library/user-event/issues/833
