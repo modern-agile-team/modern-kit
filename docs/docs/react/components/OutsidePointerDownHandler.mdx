@@ -6,7 +6,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 `useOutsidePointerDown`의 기능을 선언적으로 처리하는 컴포넌트입니다.
 
-`OutsidePointerDown`로 감싸진 컴포넌트 외부를 클릭하는 경우 `callback`이 실행됩니다.
+`OutsidePointerDown`로 감싸진 컴포넌트 외부를 클릭하는 경우 `onPointerDown`이 실행됩니다.
 
 `as` 속성을 통해 OutsidePointerDown 컴포넌트의 원하는 태그로 변경 할 수 있습니다. (아래 예제를 참고해주세요)
 
@@ -34,7 +34,7 @@ const OutsidePointerDown: PolyForwardComponent<
 ## Usage
 ### Default
 ```tsx title="typescript"
-import { OutsidePointerDown } from '@modern-kit/react';
+import { OutsidePointerDownHandler } from '@modern-kit/react';
 
 const DefaultExample = () => {
   const style = {
@@ -45,8 +45,8 @@ const DefaultExample = () => {
   return (
     <OutsidePointerDownHandler
       style={style}
-      callback={() => console.log('DefaultExample Outside Clicked!')}>
-      외부 영역 클릭 후 콘솔을 확인해주세요.
+      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
+      <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
     </OutsidePointerDownHandler>
   );
 };
@@ -61,7 +61,7 @@ export const DefaultExample = () => {
   return (
     <OutsidePointerDownHandler
       style={style}
-      callback={() => console.log('DefaultExample Outside Clicked!')}>
+      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
       외부 영역 클릭 후 콘솔을 확인해주세요.
     </OutsidePointerDownHandler>
   );
@@ -74,43 +74,68 @@ export const DefaultExample = () => {
 
 <br />
 
-### As-Example
+### as
 ```tsx title="typescript"
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 
-const AsExample = () => {
-  const style = {
-    width: "300px",
-    height: "50px",
-  };
+const Example = () => {
   return (
-    // OutsidePointerDownHandler 컴포넌트의 "제네릭 타입" 지정 후 "as" props를 입력해주세요. 
-    // 원활한 타입 추론이 가능합니다.
-    <OutsidePointerDownHandler<'input'> 
-      as="input"
+    <OutsidePointerDownHandler
+      as="ul"
       placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
-      callback={() => console.log('As-Example Outslide Clicked!')}
-      style={style}
-    />
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
   );
 };
 ```
 
 export const AsExample = () => {
-  const style = {
-    width: "300px",
-    height: "50px",
-  };
   return (
     <OutsidePointerDownHandler
-      as="input"
+      as="ul"
       placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
-      callback={() => console.log('As-Example Outslide Clicked!')}
-      style={style}
-    />
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
   );
 };
 
 <BrowserOnly>
   {() => <AsExample />}
+</BrowserOnly>
+
+### asChild
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+    </OutsidePointerDownHandler>
+  );
+};
+
+<BrowserOnly>
+  {() => <AsChildExample />}
 </BrowserOnly>
