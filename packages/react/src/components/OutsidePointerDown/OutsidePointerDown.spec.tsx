@@ -1,17 +1,17 @@
 import { describe, it, expect, vi } from 'vitest';
 import { waitFor, screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { OutsideClick } from './index';
+import { OutsidePointerDown } from './index';
 
-describe('OutsideClick', () => {
+describe('OutsidePointerDown', () => {
   it('should call the callback when an event occurs outside the component', async () => {
     const callbackMockFn = vi.fn();
 
     const { user } = renderSetup(
       <>
-        <OutsideClick callback={callbackMockFn}>
+        <OutsidePointerDown onPointerDown={callbackMockFn}>
           <div role="inside-element">inside</div>
-        </OutsideClick>
+        </OutsidePointerDown>
 
         <div role="outside-element">outside</div>
       </>
@@ -37,9 +37,9 @@ describe('OutsideClick', () => {
     const callbackMockFn = vi.fn();
 
     const { user } = renderSetup(
-      <OutsideClick callback={callbackMockFn}>
+      <OutsidePointerDown onPointerDown={callbackMockFn}>
         <div role="inside-element">inside</div>
-      </OutsideClick>
+      </OutsidePointerDown>
     );
 
     await user.click(screen.getByRole('inside-element'));

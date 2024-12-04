@@ -8,7 +8,7 @@ export * from './InfiniteScroll';
 export * from './InView';
 export * from './Iterator';
 export * from './LazyImage';
-export * from './OutsideClick';
+export * from './OutsidePointerDown';
 export * from './Portal';
 export * from './SeparatedIterator';
 export * from './Slot';
