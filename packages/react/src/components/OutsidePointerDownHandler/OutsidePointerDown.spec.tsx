@@ -4,6 +4,9 @@ import { renderSetup } from '../../_internal/test/renderSetup';
 import { OutsidePointerDownHandler } from './index';
 import { ElementType } from 'react';
 
+const OUTSIDE_POINTER_DOWN_HANDLER_ERROR_MESSAGE =
+  'OutsidePointerDownHandler는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 또한, 단일 요소만 허용합니다.';
+
 const TestComponent = ({
   onPointerDown,
   asChild = false,
@@ -108,6 +111,20 @@ describe('OutsidePointerDownHandler', () => {
 
       await user.click(insideElement); // 내부 요소
       expect(onPointerDownMockFn).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('에러 케이스', () => {
+    it('asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다.', () => {
+      expect(() =>
+        renderSetup(
+          <OutsidePointerDownHandler
+            onPointerDown={onPointerDownMockFn}
+            asChild={true}>
+            일반 text 노드
+          </OutsidePointerDownHandler>
+        )
+      ).toThrow(OUTSIDE_POINTER_DOWN_HANDLER_ERROR_MESSAGE);
     });
   });
 });

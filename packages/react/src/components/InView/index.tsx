@@ -13,7 +13,7 @@ interface InViewProps extends UseIntersectionObserverProps {
 }
 
 const IN_VIEW_ERROR_MESSAGE =
-  'InView는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 단일 요소만 허용됩니다.';
+  'InView는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 또한, 단일 요소만 허용합니다.';
 
 /**
  * @description `InView`는 `IntersectionObserver`를 선언적으로 활용 할 수 있는 컴포넌트입니다.

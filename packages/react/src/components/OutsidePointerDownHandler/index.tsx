@@ -3,6 +3,7 @@ import { useOutsidePointerDown } from '../../hooks/useOutsidePointerDown';
 import { mergeRefs } from '../../utils/mergeRefs';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { Slot } from '../Slot';
+import React from 'react';
 
 interface OutsidePointerDownHandlerProps {
   onPointerDown: (targetElement: HTMLElement) => void;
@@ -10,12 +11,15 @@ interface OutsidePointerDownHandlerProps {
   asChild?: boolean;
 }
 
+const OUTSIDE_POINTER_DOWN_HANDLER_ERROR_MESSAGE =
+  'OutsidePointerDownHandler는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 또한, 단일 요소만 허용합니다.';
+
 /**
  * @description `OutsidePointerDownHandler`는 `useOutsidePointerDown` 훅을 선언적으로 활용 할 수 있는 컴포넌트입니다.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown
  *
- * 컴포넌트 외부 영역 클릭 및 터치를 감지하여 콜백을 실행하는 컴포넌트입니다.
+ * 컴포넌트 외부 영역 클릭 및 터치 시 `onPointerDown` 함수를 실행하는 컴포넌트입니다.
  *
  * `다형성(polymorphism)`을 위해 `as` 속성을 지원합니다.
  * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
@@ -60,10 +64,18 @@ interface OutsidePointerDownHandlerProps {
 export const OutsidePointerDownHandler = polymorphicForwardRef<
   'div',
   OutsidePointerDownHandlerProps
->(({ as = 'div', asChild = false, onPointerDown, ...props }, ref) => {
+>(({ children, as = 'div', asChild = false, onPointerDown, ...props }, ref) => {
   const targetRef = useOutsidePointerDown<HTMLElement>(onPointerDown);
 
   const Wrapper = asChild ? Slot : as;
 
-  return <Wrapper ref={mergeRefs(targetRef, ref)} {...props} />;
+  if (asChild && !React.isValidElement(children)) {
+    throw new Error(OUTSIDE_POINTER_DOWN_HANDLER_ERROR_MESSAGE);
+  }
+
+  return (
+    <Wrapper ref={mergeRefs(targetRef, ref)} {...props}>
+      {children}
+    </Wrapper>
+  );
 });
