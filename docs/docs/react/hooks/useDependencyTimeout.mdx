@@ -55,17 +55,18 @@ const Example = () => {
 ```
 
 ## Example
-
-export const Example = ({ deps }) => {
+export const Example = () => {
   const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
 
   const { set, reset, clear } = useDependencyTimeout(() => {
     setNumber(number + 1);
-  }, { delay: 1000, enabled: true }, deps);
+  }, 1000, [boolean]);
 
   return (
     <div>
       <p>{number}</p>
+      <button onClick={() => setBoolean(!boolean)}>Toggle 의존성 배열 수정</button>
       <div>
         <button onClick={() => set()}>set</button>
         <button onClick={() => reset()}>reset</button>
