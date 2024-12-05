@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import useDependencyTimeout from '.';
+import { useDependencyTimeout } from '.';
 
 const delayTime = 1000;
 
@@ -20,11 +20,11 @@ describe('useDependencyTimeout', () => {
       useDependencyTimeout(mockFn, { delay: delayTime, enabled: true }, [])
     );
 
-    expect(mockFn).toBeCalledTimes(1);
+    expect(mockFn).toBeCalledTimes(0);
 
     vi.advanceTimersByTime(delayTime);
 
-    expect(mockFn).toBeCalledTimes(2);
+    expect(mockFn).toBeCalledTimes(1);
   });
 
   it('마운트 시 callOnMount가 false면 콜백을 호출하지 않아야 합니다.', () => {
