@@ -15,19 +15,19 @@ const OUTSIDE_POINTER_DOWN_HANDLER_ERROR_MESSAGE =
   'OutsidePointerDownHandler는 asChild가 true일 경우 children으로 유효한 React 요소만을 허용합니다. 또한, 단일 요소만 허용합니다.';
 
 /**
- * @description `OutsidePointerDownHandler`는 `useOutsidePointerDown` 훅을 선언적으로 활용 할 수 있는 컴포넌트입니다.
+ * @description `OutsidePointerDownHandler`는 컴포넌트 외부 영역 클릭 및 터치를 감지하여 `onPointerDown` 함수를 호출하는 컴포넌트입니다.
+ *
+ * @modern-kit/react의 `useOutsidePointerDown` 훅을 기반으로 구현됐습니다.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown
  *
- * 컴포넌트 외부 영역 클릭 및 터치 시 `onPointerDown` 함수를 실행하는 컴포넌트입니다.
+ * `as` 속성을 통해 `다형성(polymorphism)`을 지원합니다:
+ * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 Wrapper 요소의 태그를 변경해 렌더링할 수 있습니다. (ex. div -> article)
+ * - 이때, 해당 Wrapper 요소의 외부 영역을 클릭 혹은 터치 시 `onPointerDown` 콜백 함수가 호출됩니다.
  *
- * `다형성(polymorphism)`을 위해 `as` 속성을 지원합니다.
- * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
- * - 이때, 해당 요소의 외부 영역을 클릭 시 `onPointerDown` 콜백 함수가 호출됩니다.
- *
- * `리액트 컴포넌트 합성(Composition)`을 지원하기 위해 `asChild` 속성을 지원합니다.
- * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링합니다.
- * - 이때, 자식 요소의 외부 영역을 클릭 시 `onPointerDown` 콜백 함수가 호출됩니다.
+ * `asChild` 속성을 통해 `합성(Composition)`, `렌더링 위임(Rendering Delegation)` 패턴을 지원합니다:
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 렌더링합니다.
+ * - 이때, 자식 요소의 외부 영역을 클릭 혹은 터치 시 `onPointerDown` 콜백 함수가 호출됩니다.
  * - `asChild`를 사용 할 경우 아래 링크를 참고하세요.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
