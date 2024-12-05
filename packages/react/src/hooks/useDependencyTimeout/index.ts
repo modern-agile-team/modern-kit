@@ -35,7 +35,7 @@ export function useDependencyTimeout(
 ): ReturnType<typeof useTimeout> {
   const { delay, enabled } = getTimeoutOptions(options);
 
-  const { set, reset, clear } = useTimeout(callback, delay);
+  const { set, reset, clear } = useTimeout(callback, { delay, enabled: false });
 
   useEffect(() => {
     if (delay < 0 || !enabled) return;
