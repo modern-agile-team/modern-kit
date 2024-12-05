@@ -28,7 +28,7 @@ export function useDependencyTimeout(
  * @example
  * useDependencyTimeout(callback, { delay: 300, enabled }, [condition]);
  */
-export default function useDependencyTimeout(
+export function useDependencyTimeout(
   callback: () => void,
   options: number | TimeoutOptions,
   deps: DependencyList
