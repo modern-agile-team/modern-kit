@@ -1,7 +1,7 @@
 import { useEffect, DependencyList } from 'react';
-import { useTimeout } from 'hooks/useTimeout';
-import { getTimeoutOptions } from 'hooks/useTimeout/useTimeout.utils';
-import type { TimeoutOptions } from 'hooks/useTimeout/useTimeout.types';
+import { useTimeout } from '../useTimeout';
+import { getTimeoutOptions } from '../useTimeout/useTimeout.utils';
+import type { TimeoutOptions } from '../useTimeout/useTimeout.types';
 
 export function useDependencyTimeout(
   callback: () => void,
