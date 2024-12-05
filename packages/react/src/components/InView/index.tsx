@@ -24,12 +24,12 @@ const IN_VIEW_ERROR_MESSAGE =
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver
  *
- * `다형성(polymorphism)`을 위해 `as` 속성을 지원합니다.
- * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다.
- * - 이때 해당 요소가 `IntersectionObserver`의 관찰 대상입니다.
+ * `as` 속성을 통해 `다형성(polymorphism)`을 지원합니다:
+ * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 Wrapper 요소의 태그를 변경해 렌더링할 수 있습니다. (ex. div -> article)
+ * - 이때 해당 Wrapper 요소가 `IntersectionObserver`의 관찰 대상입니다.
  *
- * `리액트 컴포넌트 합성(Composition)`을 지원하기 위해 `asChild` 속성을 지원합니다.
- * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링 합니다.
+ * `asChild` 속성을 통해 `합성(Composition)`, `렌더링 위임(Rendering Delegation)` 패턴을 지원합니다:
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 래퍼 요소 없이 자식 요소를 렌더링합니다.
  * - 이때, 자식 요소가 `IntersectionObserver`의 관찰 대상입니다.
  * - `asChild`를 사용 할 경우 아래 링크를 참고하세요.
  *

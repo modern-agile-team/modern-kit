@@ -18,11 +18,13 @@ interface AspectRatioProps {
  * 미리 영역을 확보하여 `Layout Shift`를 방지하는데 효과적입니다.
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
  *
- * `다형성(polymorphism)`을 위해 `as` 속성을 지원합니다.
- * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 요소를 특정 요소로 변경해 렌더링할 수 있습니다. 이때, 해당 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+ * `as` 속성을 통해 `다형성(polymorphism)`을 지원합니다:
+ * - 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 Wrapper 요소의 태그를 변경해 렌더링할 수 있습니다. (ex. div -> article)
+ * - 이때, 해당 Wrapper 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
  *
- * `리액트 컴포넌트 합성(Composition)`을 지원하기 위해 `asChild` 속성을 지원합니다.
- * - `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+ * `asChild` 속성을 통해 `합성(Composition)`, `렌더링 위임(Rendering Delegation)` 패턴을 지원합니다:
+ * - `asChild` 속성이 `true`라면 `Slot`을 통해 자식 요소를 렌더링합니다.
+ * - 이때, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
  * - `asChild` 속성을 사용 할 경우 아래 링크들을 참고하세요.
  *
  * @see https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot
