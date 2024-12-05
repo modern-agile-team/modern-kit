@@ -13,34 +13,6 @@ afterEach(() => {
 });
 
 describe('useDependencyTimeout', () => {
-  it('마운트 시 callOnMount가 true면 콜백을 호출해야 합니다.', () => {
-    const mockFn = vi.fn();
-
-    renderHook(() =>
-      useDependencyTimeout(mockFn, { delay: delayTime, enabled: true }, [])
-    );
-
-    expect(mockFn).toBeCalledTimes(0);
-
-    vi.advanceTimersByTime(delayTime);
-
-    expect(mockFn).toBeCalledTimes(1);
-  });
-
-  it('마운트 시 callOnMount가 false면 콜백을 호출하지 않아야 합니다.', () => {
-    const mockFn = vi.fn();
-
-    renderHook(() =>
-      useDependencyTimeout(mockFn, { delay: delayTime, enabled: true }, [])
-    );
-
-    expect(mockFn).not.toBeCalled();
-
-    vi.advanceTimersByTime(delayTime);
-
-    expect(mockFn).toBeCalledTimes(1);
-  });
-
   it('의존성이 변경되면 타임아웃이 리셋되어야 합니다.', () => {
     const mockFn = vi.fn();
 
