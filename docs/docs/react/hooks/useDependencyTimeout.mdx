@@ -30,11 +30,12 @@ import { useDependencyTimeout } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
 
   const { set, reset, clear } = useDependencyTimeout(() => {
     setNumber(number + 1);
-  }, 1000);
-
+  }, 1000, [boolean]);
+  
   /*
    * useDependencyTimeout(() => {
    *   setNumber(number + 1);
@@ -44,6 +45,7 @@ const Example = () => {
   return (
     <div>
       <p>{number}</p>
+      <button onClick={() => setBoolean(!boolean)}>Toggle 의존성 배열 수정</button>
       <div>
         <button onClick={() => set()}>set</button>
         <button onClick={() => reset()}>reset</button>
