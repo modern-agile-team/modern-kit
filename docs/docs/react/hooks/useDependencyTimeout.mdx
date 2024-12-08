@@ -3,11 +3,13 @@ import { useState, DependencyList } from 'react';
 
 # useDependencyTimeout
 
-`useTimeout`를 dependency로 관리해 사용할 수 있는 커스텀 훅 입니다. 
+**[useTimeout](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout)** 을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.
 
-`callback` 함수, `delay` 숫자, `deps` 배열, 첫 마운트 여부를 수행하는 `{ callOnMount }`를 받습니다.
+첫 번째 인자로 `callback` 함수를 받습니다. 
+두 번째 인자로 `delay` 숫자 혹은 `TimerOptions`를 받을 수 있습니다. `TimerOptions`는 `delay`와 `enabled`를 포함하는 객체입니다.
+세 번째 인자는 의존성 배열인 `deps` 입니다. 해당 의존성 배열 내 값이 바뀌면 `Timeout`을 재설정합니다. 
 
-Timeout을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 반환합니다.
+`Timeout`을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 포함한 객체를 반환합니다.
 
 <br />
 
