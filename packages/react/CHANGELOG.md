@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.0
+
+### Minor Changes
+
+- [#615](https://github.com/modern-agile-team/modern-kit/pull/615) [`fa2db96`](https://github.com/modern-agile-team/modern-kit/commit/fa2db96b33427940aac77d36a06163f6ad60339c) Thanks [@Collection50](https://github.com/Collection50)! - feat(react): useDependencyTimeout 구현 - @Collection50
+
 ## 1.26.0
 
 ### Minor Changes
