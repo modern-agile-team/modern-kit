@@ -4,7 +4,8 @@ import { getTimeoutOptions } from '../useTimeout/useTimeout.utils';
 import type { TimeoutOptions } from '../useTimeout/useTimeout.types';
 
 /**
- * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ * @description `useTimeout`을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.
+ * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout
  *
  * @param {() => void} callback - delay 후에 실행될 함수입니다.
  * @param {number} delay - 밀리초(ms) 단위의 지연 시간
@@ -20,7 +21,8 @@ export function useDependencyTimeout(
 ): ReturnType<typeof useTimeout>;
 
 /**
- * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ * @description `useTimeout`을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.
+ * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout
  *
  * @param {() => void} callback - delay 후에 실행될 함수입니다.
  * @param {TimeoutOptions} options - timeout 옵션입니다. enabled, delay를 포함 합니다.
@@ -36,7 +38,8 @@ export function useDependencyTimeout(
 ): ReturnType<typeof useTimeout>;
 
 /**
- * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ * @description `useTimeout`을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.
+ * @see https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout
  *
  * @param {() => void} callback - delay 후에 실행될 함수입니다.
  * @param {number | TimeoutOptions} options - 밀리초(ms) 단위의 지연 시간 또는 옵션 객체(delay, enabled)입니다.
