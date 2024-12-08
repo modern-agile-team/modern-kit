@@ -16,11 +16,17 @@ Timeout을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 반
 
 ## Interface
 ```ts title="typescript"
-interface TimeoutOptions {
-  callback: () => void;
-  options: number | TimeoutOptions;
-  deps: DependencyList[];
-}
+export function useDependencyTimeout(
+  callback: () => void,
+  delay: number,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
+
+export function useDependencyTimeout(
+  callback: () => void,
+  options: TimeoutOptions,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
 ```
 
 ## Usage
