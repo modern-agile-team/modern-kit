@@ -29,7 +29,7 @@ const TestComponent = () => {
 };
 
 describe('useTimeout', () => {
-  it('should call the function after the specified delay', () => {
+  it('지정된 delay 후에 함수가 호출되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     renderHook(() => useTimeout(mockFn, { delay: delayTime }));
@@ -40,7 +40,7 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('should call the function only when enabled', () => {
+  it('활성화된 경우에만 함수가 호출되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { rerender } = renderHook(
@@ -62,7 +62,7 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('should call the function after being set and reset', () => {
+  it('설정 및 재설정된 후 함수가 호출되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(
@@ -90,7 +90,7 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should disable the timeout when delay is undefined', () => {
+  it('delay가 undefined일 경우 타이머가 비활성화되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     renderHook(() =>
@@ -103,7 +103,7 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('should ensure the callback function always has the latest state', () => {
+  it('콜백 함수가 항상 최신 상태를 유지해야 합니다.', () => {
     renderSetup(<TestComponent />);
 
     expect(screen.getByText('0')).toBeInTheDocument();

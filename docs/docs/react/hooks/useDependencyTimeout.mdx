@@ -1,0 +1,88 @@
+import { useDependencyTimeout } from '@modern-kit/react';
+import { useState, DependencyList } from 'react';
+
+# useDependencyTimeout
+
+**[useTimeout](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout)** 을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.
+
+첫 번째 인자로 `callback` 함수를 받습니다. 
+두 번째 인자로 `delay` 숫자 혹은 `TimerOptions`를 받을 수 있습니다. `TimerOptions`는 `delay`와 `enabled`를 포함하는 객체입니다.
+세 번째 인자는 의존성 배열인 `deps` 입니다. 해당 의존성 배열 내 값이 바뀌면 `Timeout`을 재설정합니다. 
+
+`Timeout`을 직접 핸들링 할 수 있는 `set`, `reset`, `clear` 함수를 포함한 객체를 반환합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDependencyTimeout/index.ts)
+
+## Interface
+```ts title="typescript"
+export function useDependencyTimeout(
+  callback: () => void,
+  delay: number,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
+
+export function useDependencyTimeout(
+  callback: () => void,
+  options: TimeoutOptions,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
+```
+
+## Usage
+```tsx title="typescript"
+import { useDependencyTimeout } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
+
+  const { set, reset, clear } = useDependencyTimeout(() => {
+    setNumber(number + 1);
+  }, 1000, [boolean]);
+  
+  /*
+   * useDependencyTimeout(() => {
+   *   setNumber(number + 1);
+   * }, { delay: 1000, enabled: true });
+   */
+
+  return (
+    <div>
+      <p>{number}</p>
+      <button onClick={() => setBoolean(!boolean)}>Toggle 의존성 배열 수정</button>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
+
+  const { set, reset, clear } = useDependencyTimeout(() => {
+    setNumber(number + 1);
+  }, 1000, [boolean]);
+
+  return (
+    <div>
+      <p>{number}</p>
+      <button onClick={() => setBoolean(!boolean)}>Toggle 의존성 배열 수정</button>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />
