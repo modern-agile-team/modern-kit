@@ -3,12 +3,32 @@ import { useTimeout } from '../useTimeout';
 import { getTimeoutOptions } from '../useTimeout/useTimeout.utils';
 import type { TimeoutOptions } from '../useTimeout/useTimeout.types';
 
+/**
+ * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ *
+ * @param {() => void} callback - delay 후에 실행될 함수입니다.
+ * @param {number} delay - 밀리초(ms) 단위의 지연 시간
+ * @param {DependencyList} deps - 의존성 배열
+ *
+ * @example
+ * useDependencyTimeout(callback, 300, [condition]);
+ */
 export function useDependencyTimeout(
   callback: () => void,
   delay: number,
   deps: DependencyList
 ): ReturnType<typeof useTimeout>;
 
+/**
+ * @description useTimeout를 dependency 배열로 제어하는 훅입니다.
+ *
+ * @param {() => void} callback - delay 후에 실행될 함수입니다.
+ * @param {TimeoutOptions} options - timeout 옵션입니다. enabled, delay를 포함 합니다.
+ * @param {DependencyList} deps - 의존성 배열
+ *
+ * @example
+ * useDependencyTimeout(callback, { delay: 300, enabled }, [condition]);
+ */
 export function useDependencyTimeout(
   callback: () => void,
   options: TimeoutOptions,
