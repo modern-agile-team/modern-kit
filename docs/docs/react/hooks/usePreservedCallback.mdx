@@ -29,12 +29,14 @@ const Example = () => {
   };
 
   useEffect(() => {
-    callback(); // 무한 호출
+    callback();
+    // 1. state 변경으로 컴포넌트 리렌더링 발생
+    // 2. 리렌더링 시 callback 함수가 새로 생성됨
+    // 3. useEffect의 의존성 배열에 포함된 callback이 변경되어 다시 실행
+    // 4. 1~3 과정이 반복되면서 무한 루프 발생
   }, [callback]);
 
-  return (
-    <>{/* ... */}</>
-  );
+  // ...
 }
 ```
 
@@ -46,16 +48,17 @@ import { usePreservedCallback } from '@modern-kit/react';
 const Example = () => {
   const [state, setState] = useState(0);
 
-  const callback = usePreservedCallback(() => {
+  const preservedCallback = usePreservedCallback(() => {
     setState(state + 1);
   });
 
   useEffect(() => {
-    callback(); // 1회만 호출
-  }, [callback]);
+    preservedCallback(); 
+    // 1. state 변경으로 컴포넌트 리렌더링 발생
+    // 2. 리렌더링 시 usePreservedCallback이 반환하는 preservedCallback 함수의 참조는 변경되지 않음
+    // 3. useEffect의 의존성 배열에 포함된 preservedCallback이 변경되지 않아 다시 실행되지 않음
+  }, [preservedCallback]);
 
-  return (
-    <>{/* ... */}</>
-  );
+  // ...
 }
 ```
