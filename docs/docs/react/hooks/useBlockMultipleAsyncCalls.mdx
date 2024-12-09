@@ -1,24 +1,31 @@
 import { useState } from 'react';
-import { useBlockPromiseMultipleClick } from '@modern-kit/react';
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
 
-# useBlockPromiseMultipleClick
+# useBlockMultipleAsyncCalls
 
-인자로 넘겨준 Callback 함수의 `Promise` 동작을 수행하는 동안 `중복 호출이 불가능하도록 차단`하는 커스텀 훅입니다.
+`useBlockMultipleAsyncCalls` 훅은 진행 중인 비동기 호출이 있을 때 중복 호출을 방지하기 위한 커스텀 훅입니다.
 
-[useDebounce](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useDebounce)를 사용해 중복 호출을 방지할 수는 있지만, 시간 값에 의존하기 때문에 만약 `Promise`가 이행될 때까지 호출을 완벽하게 차단해야 한다면 부족합니다.
+`debounce`는 함수의 중복 호출을 방지하는 데 대부분의 경우에 효과적입니다.
+하지만, `debounce`는 비동기 작업의 완료를 보장하지 않기 때문에 다음과 같은 한계가 있습니다:
 
-해당 훅은 Promise 동작을 수행하는 동안 중복 호출을 방지하기 때문에, `Promise` 이행을 보장하면서 중복 호출을 방지하고 싶을 때 사용할 수 있습니다.
+1. `debounce` 시간이 API 응답 시간보다 짧을 경우: 비동기 작업이 완료되지 않은 상태에서 `다시 호출`될 수 있습니다.
+2. `debounce` 시간이 API 응답 시간보다 길 경우: 비동기 작업이 완료되었지만 `버튼`과 같은 요소가 여전히 `비활성화`되어 있을 수 있습니다.
+3. `즉각적인 반응`을 원하는 경우: `debounce`는 호출을 지연시키기 때문에 사용자에게 `즉각적인 반응`을 보여주기에 제한적입니다.
+
+대부분의 경우에 `debounce`만으로 충분하지만, 위와 같은 한계점을 대응하고자 한다면 `useBlockMultipleAsyncCalls`를 사용할 수 있습니다.
+
+- [useDebounce](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebounce/index.ts)
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBlockPromiseMultipleClick/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBlockMultipleAsyncCalls/index.ts)
 
 ## Interface
 ```ts title="typescript"
-function useBlockPromiseMultipleClick(): {
+function useBlockMultipleAsyncCalls(): {
   isLoading: boolean;
-  blockMultipleClick: <T>(callback: () => Promise<T>) => Promise<T | undefined>;
+  blockMultipleAsyncCalls: <T>(callback: () => Promise<T>) => Promise<T | undefined>;
 };
 ```
 
@@ -26,7 +33,7 @@ function useBlockPromiseMultipleClick(): {
 
 ```tsx title="typescript"
 import React, { useState } from 'react';
-import { useBlockPromiseMultipleClick } from '@modern-kit/react';
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
 
 interface Value {
   userId: number;
@@ -40,7 +47,7 @@ const Example = () => {
   const [nonBlockingCount, setNonBlockingCount] = useState(1);
   const [value, setValue] = useState<Value | null>(null);
 
-  const { isLoading, blockMultipleClick } = useBlockPromiseMultipleClick();
+  const { isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
 
   const fetchApi = async () => {
     const res = await fetch(
@@ -53,7 +60,7 @@ const Example = () => {
 
   const handleClick = () => {
     setNonBlockingCount(nonBlockingCount + 1);
-    blockMultipleClick(fetchApi); // (*) Promise 반환하는 함수를 인자로 넣어주세요.
+    blockMultipleAsyncCalls(fetchApi); // (*) Promise 반환하는 함수를 인자로 넣어주세요.
   };
 
   return (
@@ -75,7 +82,7 @@ export const Example = () => {
   const [blockingCount, setBlockingCount] = useState(1);
   const [nonBlockingCount, setNonBlockingCount] = useState(1);
   const [value, setValue] = useState(null);
-  const { isLoading, blockMultipleClick } = useBlockPromiseMultipleClick();
+  const { isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
   const fetchApi = async () => {
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
@@ -85,7 +92,7 @@ export const Example = () => {
   };
   const handleClick = () => {
     setNonBlockingCount(nonBlockingCount + 1);
-    blockMultipleClick(fetchApi);
+    blockMultipleAsyncCalls(fetchApi);
   };
   return (
     <div>
