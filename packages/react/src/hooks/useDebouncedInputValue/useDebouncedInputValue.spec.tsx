@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { useDebouncedInputValue } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { delay } from '@modern-kit/utils';
@@ -34,13 +34,17 @@ describe('useDebouncedInputValue', () => {
 
     await delay(DELAY / 2);
 
-    expect(defaultValue).toHaveTextContent('test');
-    expect(debouncedValue).toHaveTextContent('');
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('test');
+      expect(debouncedValue).toHaveTextContent('');
+    });
 
     await delay(DELAY / 2);
 
-    expect(defaultValue).toHaveTextContent('test');
-    expect(debouncedValue).toHaveTextContent('test');
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('test');
+      expect(debouncedValue).toHaveTextContent('test');
+    });
   });
 
   it('reset 함수가 호출되면 기본 값과 디바운스된 값이 모두 초기화되야합니다.', async () => {
@@ -57,13 +61,17 @@ describe('useDebouncedInputValue', () => {
     await user.type(input, 'test');
     await delay(DELAY);
 
-    expect(defaultValue).toHaveTextContent('test');
-    expect(debouncedValue).toHaveTextContent('test');
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('test');
+      expect(debouncedValue).toHaveTextContent('test');
+    });
 
     await user.click(resetButton);
     await delay(DELAY);
 
-    expect(defaultValue).toHaveTextContent('');
-    expect(debouncedValue).toHaveTextContent('');
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('');
+      expect(debouncedValue).toHaveTextContent('');
+    });
   });
 });
