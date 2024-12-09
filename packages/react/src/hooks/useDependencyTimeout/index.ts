@@ -63,6 +63,7 @@ export function useDependencyTimeout(
   useEffect(() => {
     if (delay < 0 || !enabled) return;
     reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [delay, enabled, reset, ...deps]);
 
   return { set, reset, clear };
