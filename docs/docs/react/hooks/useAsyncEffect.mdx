@@ -1,0 +1,76 @@
+import { useAsyncEffect, DebounceHandler } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useAsyncEffect 
+
+일반적으로 `useEffect`에 전달하는 콜백 함수는 비동기 함수를 사용할 수 없습니다.
+
+`useAsyncEffect`는 `비동기 함수`를 `useEffect`와 함께 사용하기 위한 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useAsyncEffect/index.ts)
+
+## Interface
+```ts title="typescript"
+function useAsyncEffect(effectCallback: () => Promise<void>, deps?: DependencyList): void
+```
+
+## Usage
+```tsx title="typescript"
+import { useAsyncEffect, DebounceHandler } from '@modern-kit/react'
+
+const Example = () => {
+  const [data, setData] = useState(null)
+  const [id, setId] = useState(1);
+
+  const fetchData = async () => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const data = await res.json()
+    setData(data)
+  }
+
+  useAsyncEffect(fetchData, [id]);
+
+  return (
+    <div>
+      {/* DebounceHandler를 활용해 버튼 클릭 이벤트를 디바운스 처리합니다. */}
+      <DebounceHandler wait={500} capture={'onClick'}>
+        <button onClick={() => setId(id + 1)}>ID Change: {id}</button>
+      </DebounceHandler>
+      <p>ID: {data?.id}</p>
+      <p>TITLE: {data?.title}</p>
+      <p>BODY: {data?.body}</p>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [data, setData] = useState(null)
+  const [id, setId] = useState(1);
+
+  const fetchData = async () => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const data = await res.json()
+    setData(data)
+  }
+
+  useAsyncEffect(fetchData, [id]);
+
+  return (
+    <div>
+      <DebounceHandler wait={500} capture={'onClick'}>
+        <button onClick={() => setId(id + 1)}>ID Change: {id}</button>
+      </DebounceHandler>
+      <p>ID: {data?.id}</p>
+      <p>TITLE: {data?.title}</p>
+      <p>BODY: {data?.body}</p>
+    </div>
+  );
+}
+
+<Example />
