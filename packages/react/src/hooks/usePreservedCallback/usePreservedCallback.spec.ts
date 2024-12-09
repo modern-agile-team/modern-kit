@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { usePreservedCallback } from '.';
 
 describe('usePreservedCallback', () => {
-  it('should preserve the callback function', () => {
+  it('콜백 함수의 참조를 항상 유지해야 합니다.', () => {
     let counter = 0;
 
     const { result, rerender } = renderHook(
@@ -23,7 +23,7 @@ describe('usePreservedCallback', () => {
     expect(result.current()).toBe(1);
   });
 
-  it('should not recreate the callback on each render', () => {
+  it('리렌더링마다 콜백 함수를 재생성하지 않아야 합니다.', () => {
     const callback = vi.fn();
     const { result, rerender } = renderHook(() =>
       usePreservedCallback(callback)
@@ -35,7 +35,7 @@ describe('usePreservedCallback', () => {
     expect(result.current).toBe(preservedCallback);
   });
 
-  it('should call the latest callback', async () => {
+  it('최신의 콜백 함수를 호출해야 합니다.', async () => {
     const callback1 = vi.fn();
     const callback2 = vi.fn();
 
