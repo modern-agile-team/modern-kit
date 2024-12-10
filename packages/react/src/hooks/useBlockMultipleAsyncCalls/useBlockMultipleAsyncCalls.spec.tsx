@@ -27,7 +27,7 @@ describe('useBlockMultipleAsyncCalls', () => {
     blockMultipleAsyncCalls(mockFn);
 
     await waitFor(async () => {
-      expect(result.current.isLoading).toBe(true);
+      expect(result.current.isLoading).toBeTruthy();
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
@@ -35,11 +35,6 @@ describe('useBlockMultipleAsyncCalls', () => {
 
     await waitFor(async () => {
       expect(result.current.isLoading).toBeFalsy();
-    });
-
-    vi.advanceTimersByTime(DELAY_TIME);
-
-    await waitFor(async () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });
@@ -62,7 +57,7 @@ describe('useBlockMultipleAsyncCalls', () => {
     await user.click(button);
 
     await waitFor(async () => {
-      expect(result.current.isLoading).toBe(true);
+      expect(result.current.isLoading).toBeTruthy();
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
@@ -70,13 +65,16 @@ describe('useBlockMultipleAsyncCalls', () => {
 
     await waitFor(async () => {
       expect(result.current.isLoading).toBeFalsy();
+      expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });
 
   it('비동기 작업 중 에러가 발생하면 이후 호출되는 여러 비동기 함수를 차단해야 합니다.', async () => {
-    const mockFn = vi.fn(async () => {
+    const errorMockFn = vi.fn(async () => {
       throw new Error('비동기 작업 중 에러 발생');
     });
+    const defaultMockFn = vi.fn(async () => await delay(DELAY_TIME));
+
     const { result } = renderHook(useBlockMultipleAsyncCalls);
 
     const { blockMultipleAsyncCalls } = result.current;
@@ -86,11 +84,27 @@ describe('useBlockMultipleAsyncCalls', () => {
 
     await waitFor(async () => {
       try {
-        await blockMultipleAsyncCalls(mockFn);
-      } catch (error) {
+        await blockMultipleAsyncCalls(errorMockFn); // 에러 비동기 함수 호출
+      } catch {
         expect(result.current.isLoading).toBeFalsy();
         expect(result.current.isError).toBeTruthy();
       }
+    });
+
+    blockMultipleAsyncCalls(defaultMockFn); // 정상 비동기 함수 호출
+
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBeTruthy();
+      expect(result.current.isError).toBeFalsy();
+      expect(defaultMockFn).toHaveBeenCalledTimes(1);
+    });
+
+    vi.advanceTimersByTime(DELAY_TIME);
+
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.isError).toBeFalsy();
+      expect(defaultMockFn).toHaveBeenCalledTimes(1);
     });
   });
 });

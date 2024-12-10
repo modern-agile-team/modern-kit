@@ -5,7 +5,6 @@ import {
 } from '@modern-kit/utils';
 import { UseStepProps, useStep } from '../useStep';
 import { SetStateAction, useCallback, useState } from 'react';
-import { usePreservedState } from '../usePreservedState';
 
 interface StorageOptions {
   key: string;
