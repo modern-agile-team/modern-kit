@@ -22,8 +22,9 @@ interface ReadFileOptions {
   readType: ReadType;
   accepts?: string[];
 }
-
-const useFileReader: () => {
+```
+```ts title="typescript"
+function useFileReader(): {
   readFile: ({
     file,
     readType,
@@ -40,12 +41,14 @@ import React, { useState } from 'react';
 import { useFileReader } from '@modern-kit/react';
 
 const Example = () => {
-  const { readFile, fileContents, loading } = useFileReader()
+  const { readFile, fileContents, isLoading } = useFileReader()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!e.target.files) return;
 
-    readFile({ file: e.target.files, readType: 'readAsText' }); 
+    const data = await readFile({ file: e.target.files, readType: 'readAsText' });
+    // data 처리
+
     /*
      * 1. readFile은 Promise<FileContent[]> 반환합니다. 해당 값은 fileContents와 동일합니다.
      * ex) const data = await readFile(e.target.files, 'readAsDataURL'); 
