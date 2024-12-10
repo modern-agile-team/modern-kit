@@ -116,7 +116,7 @@ export function useEventListener<
       | MediaQueryListEventMap[M]
       | Event
   ) => void,
-  options?: boolean | boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void {
   const preservedListener = usePreservedCallback(listener);
 
