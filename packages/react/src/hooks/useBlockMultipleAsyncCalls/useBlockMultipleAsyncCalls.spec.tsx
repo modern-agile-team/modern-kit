@@ -20,7 +20,7 @@ describe('useBlockMultipleAsyncCalls', () => {
     const { result } = renderHook(useBlockMultipleAsyncCalls);
 
     const { blockMultipleAsyncCalls } = result.current;
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isLoading).toBeFalsy();
 
     blockMultipleAsyncCalls(mockFn);
     blockMultipleAsyncCalls(mockFn);
@@ -34,7 +34,7 @@ describe('useBlockMultipleAsyncCalls', () => {
     vi.advanceTimersByTime(DELAY_TIME);
 
     await waitFor(async () => {
-      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isLoading).toBeFalsy();
     });
 
     vi.advanceTimersByTime(DELAY_TIME);
@@ -55,7 +55,7 @@ describe('useBlockMultipleAsyncCalls', () => {
     const { user } = renderSetup(<button onClick={onClick}>TestButton</button>);
     const button = screen.getByRole('button');
 
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isLoading).toBeFalsy();
 
     await user.click(button);
     await user.click(button);
@@ -69,7 +69,28 @@ describe('useBlockMultipleAsyncCalls', () => {
     vi.advanceTimersByTime(DELAY_TIME);
 
     await waitFor(async () => {
-      expect(result.current.isLoading).toBe(false);
+      expect(result.current.isLoading).toBeFalsy();
+    });
+  });
+
+  it('비동기 작업 중 에러가 발생하면 이후 호출되는 여러 비동기 함수를 차단해야 합니다.', async () => {
+    const mockFn = vi.fn(async () => {
+      throw new Error('비동기 작업 중 에러 발생');
+    });
+    const { result } = renderHook(useBlockMultipleAsyncCalls);
+
+    const { blockMultipleAsyncCalls } = result.current;
+
+    expect(result.current.isLoading).toBeFalsy();
+    expect(result.current.isError).toBeFalsy();
+
+    await waitFor(async () => {
+      try {
+        await blockMultipleAsyncCalls(mockFn);
+      } catch (error) {
+        expect(result.current.isLoading).toBeFalsy();
+        expect(result.current.isError).toBeTruthy();
+      }
     });
   });
 });

@@ -6,7 +6,6 @@ import {
   useMemo,
   useSyncExternalStore,
 } from 'react';
-import { usePreservedState } from '../usePreservedState';
 import {
   getServerSnapshot,
   getSnapshot,
@@ -48,9 +47,9 @@ export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
   const { key } = props;
   const initialValue = 'initialValue' in props ? props.initialValue : null;
 
-  const initialValueToUse = usePreservedState(
-    isFunction(initialValue) ? initialValue() : initialValue
-  );
+  const initialValueToUse = isFunction(initialValue)
+    ? initialValue()
+    : initialValue;
 
   const externalStoreState = useSyncExternalStore(
     subscribe,
@@ -77,7 +76,7 @@ export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
         sessionStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
-          `Failed to store data for key "${key}" in sessionStorage: ${err}`
+          `세션 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
         );
       }
     },
@@ -90,7 +89,7 @@ export function useSessionStorage<T>(props: UseSessionStorageProps<T>) {
       sessionStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
-        `Failed to remove key "${key}" from sessionStorage: ${err}`
+        `세션 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다: ${err}`
       );
     }
   }, [key]);

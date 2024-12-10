@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { usePreservedCallback, usePreservedState } from '../../hooks';
+import { usePreservedCallback } from '../usePreservedCallback';
 import { getIntervalOptions } from './useInterval.utils';
 import {
   type UseIntervalReturnType,
@@ -48,14 +48,13 @@ export function useInterval(
 ): UseIntervalReturnType {
   const intervalRef = useRef<number | null>();
 
-  const callbackAction = usePreservedCallback(callback);
-  const preservedOptions = usePreservedState(options);
+  const preservedCallback = usePreservedCallback(callback);
 
-  const { delay, enabled } = getIntervalOptions(preservedOptions);
+  const { delay, enabled } = getIntervalOptions(options);
 
   const set = useCallback(() => {
-    intervalRef.current = window.setInterval(callbackAction, delay);
-  }, [callbackAction, delay]);
+    intervalRef.current = window.setInterval(preservedCallback, delay);
+  }, [preservedCallback, delay]);
 
   const clear = useCallback(() => {
     if (intervalRef.current) {

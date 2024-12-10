@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { useOutsidePointerDown } from '@modern-kit/react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -18,7 +18,10 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Interface
 ```ts title="typescript"
 function useOutsidePointerDown<T extends HTMLElement>(
-  callback: (targetElement: T) => void
+  callback: (targetElement: T) => void,
+  options?: {
+    excludeRefs: React.RefObject<HTMLElement>[];
+  }
 ): React.RefObject<T>;
 ```
 
@@ -29,35 +32,37 @@ import { useOutsidePointerDown } from '@modern-kit/react';
 
 const Example = () => {
   const [number, setNumber] = useState(0);
+
+  const excludeRef = useRef<HTMLDivElement>(null);
   const targetRef = useOutsidePointerDown<HTMLDivElement>(() => {
     setNumber(number + 1);
+  }, {
+    excludeRefs: [excludeRef], // 외부 클릭 및 터치 감지를 제외할 요소의 ref 배열입니다.
   });
   
   const outerBoxStyle = useMemo(() => {
-    return {
-      width: '400px',
-      height: '400px',
-      background: '#439966',
-      color: '#fff',
-    };
+    return { /* ... */ };
   }, []);
 
   const InnerBoxStyle = useMemo(() => {
-    return {
-      width: '400px',
-      height: '400px',
-      background: '#439966',
-      color: '#fff',
-    };
+    return { /* ... */ };
+  }, []);
+
+  const ExcludeBoxStyle = useMemo(() => {
+    return { /* ... */ };
   }, []);
 
   return (
     <div style={outerBoxStyle}>
-      <h3>Inner Box 외부를 클릭해보세요!</h3>
+      <h3>Target Box 외부를 클릭해보세요!<br />(Exclude Box는 클릭 감지에 제외됩니다.)</h3>
       <p>number: {number}</p> 
 
       <div ref={targetRef} style={InnerBoxStyle}>
-        <h3>Inner Box</h3>
+        <h3>Target Box</h3>
+      </div>
+
+      <div ref={excludeRef} style={ExcludeBoxStyle}>
+        <h3>Exclude Box</h3>
       </div>
     </div>
   );
@@ -66,15 +71,17 @@ const Example = () => {
 
 export const Example = () => {
   const [number, setNumber] = useState(0);
+  const excludeRef = useRef(null);
   const targetRef = useOutsidePointerDown(() => {
     setNumber(number + 1);
+  }, {
+    excludeRefs: [excludeRef],
   });
   
   const outerBoxStyle = useMemo(() => {
     return {
       width: '400px',
-      height: '400px',
-      background: '#439966',
+      background: 'blue',
       color: '#fff',
     };
   }, []);
@@ -82,19 +89,32 @@ export const Example = () => {
   const InnerBoxStyle = useMemo(() => {
     return {
       width: '400px',
-      height: '400px',
       background: '#439966',
       color: '#fff',
+      padding: '20px',
+    };
+  }, []);
+
+  const ExcludeBoxStyle = useMemo(() => {
+    return {
+      width: '200px',
+      background: 'red',
+      color: '#fff',
+      padding: '20px',
     };
   }, []);
 
   return (
     <div style={outerBoxStyle}>
-      <h3>Inner Box 외부를 클릭해보세요!</h3>
+      <h3>Target Box 외부를 클릭해보세요!<br />(Exclude Box는 클릭 감지에 제외됩니다.)</h3>
       <p>number: {number}</p> 
 
       <div ref={targetRef} style={InnerBoxStyle}>
-        <h3>Inner Box</h3>
+        <h3>Target Box</h3>
+      </div>
+
+      <div ref={excludeRef} style={ExcludeBoxStyle}>
+        <h3>Exclude Box</h3>
       </div>
     </div>
   );
