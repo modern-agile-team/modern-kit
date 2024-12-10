@@ -1,5 +1,19 @@
 # @modern-kit/react
 
+## 1.27.0
+
+### Minor Changes
+
+- [#628](https://github.com/modern-agile-team/modern-kit/pull/628) [`52131b7`](https://github.com/modern-agile-team/modern-kit/commit/52131b788c304a7955dee27bf170a4a723a6d5a7) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useBlockMultipleClick -> useBlockMultipleAsyncCalls 네이밍 변경 - @ssi02014
+
+- [#627](https://github.com/modern-agile-team/modern-kit/pull/627) [`d7ad2bc`](https://github.com/modern-agile-team/modern-kit/commit/d7ad2bc7c6fb794ebf9884e1b5191d409e1c2094) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useAsyncEffect 신규 훅 추가 - @ssi02014
+
+- [#615](https://github.com/modern-agile-team/modern-kit/pull/615) [`fa2db96`](https://github.com/modern-agile-team/modern-kit/commit/fa2db96b33427940aac77d36a06163f6ad60339c) Thanks [@Collection50](https://github.com/Collection50)! - feat(react): useDependencyTimeout 구현 - @Collection50
+
+- [#635](https://github.com/modern-agile-team/modern-kit/pull/635) [`c1120fc`](https://github.com/modern-agile-team/modern-kit/commit/c1120fc7037c68f7bd00b9af895e59f468167d1b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useOutsidePointerDown 훅 excludeRefs 신규 props 추가 - @ssi02014
+
+- [#626](https://github.com/modern-agile-team/modern-kit/pull/626) [`889289c`](https://github.com/modern-agile-team/modern-kit/commit/889289c6cd40c0eb95526b336d52c6773881ec40) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useAsyncPreservedCallback 불 필요한 훅 제거 및 peerDependencies 업데이트 - @ssi02014
+
 ## 1.26.0
 
 ### Minor Changes
