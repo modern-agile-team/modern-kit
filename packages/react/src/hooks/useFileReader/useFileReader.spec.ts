@@ -32,8 +32,8 @@ const errorFileContent = {
 };
 
 describe('useFileReader', () => {
-  describe('Success Case', () => {
-    it('should return the normal file contents in "fileContents" when a value of type "File" is passed as an argument to "readFile"', async () => {
+  describe('성공 케이스', () => {
+    it('"readFile"의 인자로 "File" 타입의 값이 전달되면 "fileContents"에 정상적인 파일 내용을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [getSuccessFileContent(testFile1)];
 
@@ -55,7 +55,7 @@ describe('useFileReader', () => {
       });
     });
 
-    it('should return the normal file contents in "fileContents" when a value of type "FileList" is passed as an argument to "readFile"', async () => {
+    it('"readFile"의 인자로 "FileList" 타입의 값이 전달되면 "fileContents"에 정상적인 파일 내용을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [
         getSuccessFileContent(testFile1),
@@ -80,7 +80,7 @@ describe('useFileReader', () => {
       });
     });
 
-    it('should only read files of types specified in the "accepts" attribute', async () => {
+    it('"accepts" 속성에 지정된 타입의 파일만 읽어야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [getSuccessFileContent(testFile2)];
 
@@ -103,9 +103,9 @@ describe('useFileReader', () => {
     });
   });
 
-  describe('Error Case', () => {
+  describe('에러 케이스', () => {
     // Line: getReaderPromise - reader.onerror
-    it('should return the error contents in "fileContents" when "reader.onerror" is called', async () => {
+    it('"reader.onerror"가 호출되면 "fileContents"에 에러 내용을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
       const failedExpectedFileContents = [errorFileContent];
 
@@ -125,7 +125,7 @@ describe('useFileReader', () => {
     });
 
     // Line: readerPromises - catch
-    it('should return the error contents in "fileContents" if an error occurs during the call to "reader[readType]"', async () => {
+    it('"reader[readType]" 호출 중 에러가 발생하면 "fileContents"에 에러 내용을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
       const failedExpectedFileContents = [errorFileContent];
 
@@ -146,7 +146,7 @@ describe('useFileReader', () => {
     });
 
     // Line: inValidFileType
-    it('should return an empty array for "fileContents" if the argument to "readFile" is neither of type "File" nor "FileList"', async () => {
+    it('"readFile"의 인자가 "File" 또는 "FileList" 타입이 아닌 경우 "fileContents"에 빈 배열을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
 
       await waitFor(async () => {

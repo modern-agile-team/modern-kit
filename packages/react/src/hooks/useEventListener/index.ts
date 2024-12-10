@@ -27,15 +27,19 @@ import {
  *   | SVGElementEventMap[E]
  *   | Event
  * ) => void} listener - 이벤트가 발생할 때 호출될 콜백 함수입니다.
- * @param {AddEventListenerOptions} [options] 이벤트 리스너에 대한 옵션 객체입니다.
- * 옵션에는 `once`, `capture`, `passive`와 같은 기본 이벤트 리스너 옵션과 `onBeforeAddListener`과 같은 커스텀 옵션이 포함될 수 있습니다.
- * - `onBeforeAddListener`: 이벤트 리스너를 등록하기 전에 특정 작업을 수행하고자 할 때 사용됩니다.
+ * @param {boolean | AddEventListenerOptions} options - 이벤트 리스너에 대한 옵션 객체 또는 `useCapture`를 의미하는 `boolean` 값이 올 수 있습니다.
+ * - 옵션 객체에는 `once`, `capture`, `passive`와 같은 기본 이벤트 리스너 옵션들을 포함합니다.
+ * - useCapture는 이벤트 전파 단계를 결정하는 값으로, `true`일 경우 `캡처링` 단계에서, `false`일 경우 `버블링` 단계에서 이벤트가 처리됩니다. 기본값은 `false`입니다.
  *
  * @returns {void}
  *
  * @example
- * // window
+ * // window 타겟 및 options/useCapture 사용 예제
  * useEventListener(window, 'resize', callback);
+ *
+ * useEventListener(window, 'resize', callback, options);
+ *
+ * useEventListener(window, 'resize', callback, true); // 캡처링 설정
  *
  * @example
  * // document
@@ -56,7 +60,7 @@ export function useEventListener<K extends keyof WindowEventMap>(
   element: Window,
   type: K,
   listener: (event: WindowEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // Document Event based useEventListener interface
@@ -64,7 +68,7 @@ export function useEventListener<K extends keyof DocumentEventMap>(
   element: Document,
   type: K,
   listener: (event: DocumentEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // MediaQueryList Event based useEventListener interface
@@ -72,7 +76,7 @@ export function useEventListener<K extends keyof MediaQueryListEventMap>(
   element: MediaQueryList,
   type: K,
   listener: (event: MediaQueryListEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // Element Event based useEventListener interface
@@ -83,7 +87,7 @@ export function useEventListener<
   element: TargetElement<T>,
   type: K,
   listener: (event: HTMLElementEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // SVGElement Event based useEventListener interface
@@ -94,7 +98,7 @@ export function useEventListener<
   element: TargetElement<T>,
   type: K,
   listener: (event: SVGElementEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 export function useEventListener<
@@ -116,7 +120,7 @@ export function useEventListener<
       | MediaQueryListEventMap[M]
       | Event
   ) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void {
   const preservedListener = usePreservedCallback(listener);
 

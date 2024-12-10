@@ -5,7 +5,6 @@ import {
 } from '@modern-kit/utils';
 import { UseStepProps, useStep } from '../useStep';
 import { SetStateAction, useCallback, useState } from 'react';
-import { usePreservedState } from '../usePreservedState';
 
 interface StorageOptions {
   key: string;
@@ -29,48 +28,45 @@ export function useStepState<T>({
   initialState,
   ...props
 }: UseStepWithInitialState<T>): ReturnType<typeof useStep> & {
-  readonly state: T;
-  readonly setState: (newState: SetStateAction<T>) => void;
-  readonly clearState: () => void;
+  state: T;
+  setState: (newState: SetStateAction<T>) => void;
+  clearState: () => void;
 };
 
 export function useStepState<T>(props: UseStepWithoutInitialState): ReturnType<
   typeof useStep
 > & {
-  readonly state: T | null;
-  readonly setState: (newState: SetStateAction<T | null>) => void;
-  readonly clearState: () => void;
+  state: T | null;
+  setState: (newState: SetStateAction<T | null>) => void;
+  clearState: () => void;
 };
 
 export function useStepState<T>(props: UseStepStateProps<T>) {
   const initialState = 'initialState' in props ? props.initialState : null;
-  const preservedStorageOptions = usePreservedState(props.storageOptions);
-  const preservedInitialState = usePreservedState(initialState);
+  const { type, key } = props?.storageOptions ?? {};
 
-  const [_state, _setState] = useState<T | null>(preservedInitialState);
+  const [_state, _setState] = useState<T | null>(initialState);
 
   const setState = useCallback(
     (newState: SetStateAction<T | null>) => {
       _setState((prev) => {
         const newStateToUse = isFunction(newState) ? newState(prev) : newState;
 
-        if (preservedStorageOptions) {
-          const { type, key } = preservedStorageOptions;
+        if (type && key) {
           setStorageItem(type, key, newStateToUse);
         }
         return newStateToUse;
       });
     },
-    [preservedStorageOptions]
+    [type, key]
   );
 
   const clearState = useCallback(() => {
-    if (preservedStorageOptions) {
-      const { type, key } = preservedStorageOptions;
+    if (type && key) {
       removeStorageItem(type, key);
     }
     _setState(null);
-  }, [preservedStorageOptions]);
+  }, [type, key]);
 
-  return { state: _state, setState, clearState, ...useStep(props) } as const;
+  return { state: _state, setState, clearState, ...useStep(props) };
 }

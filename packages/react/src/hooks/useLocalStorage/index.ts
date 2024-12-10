@@ -6,7 +6,6 @@ import {
   useMemo,
   useSyncExternalStore,
 } from 'react';
-import { usePreservedState } from '../usePreservedState';
 import {
   getServerSnapshot,
   getSnapshot,
@@ -49,9 +48,9 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
   const { key } = props;
   const initialValue = 'initialValue' in props ? props.initialValue : null;
 
-  const initialValueToUse = usePreservedState(
-    isFunction(initialValue) ? initialValue() : initialValue
-  );
+  const initialValueToUse = isFunction(initialValue)
+    ? initialValue()
+    : initialValue;
 
   const externalStoreState = useSyncExternalStore(
     subscribe,
@@ -78,7 +77,7 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
         localStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
-          `Failed to store data for key "${key}" in localStorage: ${err}`
+          `로컬 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
         );
       }
     },
@@ -91,7 +90,7 @@ export function useLocalStorage<T>(props: UseLocalStorageProps<T>) {
       localStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
-        `Failed to remove key "${key}" from localStorage: ${err}`
+        `로컬 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다: ${err}`
       );
     }
   }, [key]);
