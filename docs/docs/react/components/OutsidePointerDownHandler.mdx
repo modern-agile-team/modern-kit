@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -33,9 +33,10 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Interface
 ```ts title="typescript"
 interface OutsidePointerDownHandlerProps {
-  asChild?: boolean;
-  onPointerDown: () => void;
   children: ReactNode;
+  onPointerDown: (targetElement: HTMLElement) => void;
+  excludeRefs?: React.RefObject<HTMLElement>[];
+  asChild?: boolean;
 }
 ```
 ```ts title="typescript"
@@ -52,33 +53,52 @@ const OutsidePointerDown: PolyForwardComponent<
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 
 const DefaultExample = () => {
+  const excludeRef = useRef<HTMLDivElement>(null);
   const style = {
-    width: '500px',
-    height: '100px',
-    backgroundColor: 'skyBlue',
+    // ...
+  };
+  const excludeStyle = {
+    // ...
   };
   return (
-    <OutsidePointerDownHandler
-      style={style}
-      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
-      <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
-    </OutsidePointerDownHandler>
+    <div style={{ background: 'gray'}}>
+      <OutsidePointerDownHandler
+        style={style}
+        onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
+        excludeRefs={[excludeRef]}
+      >
+        <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
+      </OutsidePointerDownHandler>
+      <div ref={excludeRef} style={excludeStyle}>외부 클릭 및 터치 감지를 제외할 요소의 ref 배열입니다.</div>
+    </div>
   );
 };
 ```
 
 export const DefaultExample = () => {
+  const excludeRef = useRef(null);
   const style = {
     width: '500px',
-    height: '100px',
     backgroundColor: 'skyBlue',
+    padding: '20px',
+  };
+  const excludeStyle = {
+    width: '300px',
+    backgroundColor: '#439966',
+    color: 'white',
+    padding: '20px',
   };
   return (
-    <OutsidePointerDownHandler
-      style={style}
-      onPointerDown={() => console.log('DefaultExample Outside Clicked!')}>
-      외부 영역 클릭 후 콘솔을 확인해주세요.
-    </OutsidePointerDownHandler>
+    <div style={{ background: 'gray'}}>
+      <OutsidePointerDownHandler
+        style={style}
+        onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
+        excludeRefs={[excludeRef]}
+      >
+        <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
+      </OutsidePointerDownHandler>
+      <div ref={excludeRef} style={excludeStyle}>외부 클릭 및 터치 감지를 제외할 요소의 ref 배열입니다.</div>
+    </div>
   );
 };
 

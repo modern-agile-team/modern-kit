@@ -2,7 +2,6 @@ import { usePreservedCallback } from '../usePreservedCallback';
 import { RefObject, useEffect, useRef } from 'react';
 import { KeyDownCallbackMap } from './useKeyDown.utils';
 import { isFunction } from '@modern-kit/utils';
-import { usePreservedState } from '../../hooks/usePreservedState';
 
 interface UseKeyDownProps {
   enabled?: boolean;
@@ -65,7 +64,6 @@ export function useKeyDown<T extends HTMLElement>({
   keyDownCallbackMap = {},
   allKeyDownCallback,
 }: UseKeyDownProps): RefObject<Window | T> {
-  const preservedKeyDownCallbackMap = usePreservedState(keyDownCallbackMap);
   const targetRef = useRef<T | null | Window>(null);
 
   const onKeyDown = usePreservedCallback((event: KeyboardEvent) => {
@@ -78,7 +76,7 @@ export function useKeyDown<T extends HTMLElement>({
 
     const key = event.key as keyof KeyDownCallbackMap;
 
-    const keyDownCallback = preservedKeyDownCallbackMap[key];
+    const keyDownCallback = keyDownCallbackMap[key];
 
     if (isFunction(keyDownCallback)) {
       keyDownCallback(event);

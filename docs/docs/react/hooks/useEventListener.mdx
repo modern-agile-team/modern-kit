@@ -30,7 +30,7 @@ function useEventListener<K extends keyof WindowEventMap>(
   element: Window,
   type: K,
   listener: (event: WindowEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // Document Event based useEventListener interface
@@ -38,7 +38,7 @@ function useEventListener<K extends keyof DocumentEventMap>(
   element: Document,
   type: K,
   listener: (event: DocumentEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // MediaQueryList Event based useEventListener interface
@@ -46,7 +46,7 @@ function useEventListener<K extends keyof MediaQueryListEventMap>(
   element: MediaQueryList,
   type: K,
   listener: (event: MediaQueryListEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // Element Event based useEventListener interface
@@ -57,7 +57,7 @@ function useEventListener<
   element: TargetElement<T>,
   type: K,
   listener: (event: HTMLElementEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 
 // SVGElement Event based useEventListener interface
@@ -68,7 +68,7 @@ function useEventListener<
   element: TargetElement<T>,
   type: K,
   listener: (event: SVGElementEventMap[K]) => void,
-  options?: AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions
 ): void;
 ```
 

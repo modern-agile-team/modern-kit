@@ -1,3 +1,5 @@
+import { useKeyDown } from '@modern-kit/react';
+
 # useKeyDown
 
 `ref`를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 `key`에 트리거되어 콜백 함수를 호출합니다.
@@ -78,9 +80,38 @@ const Example = () => {
     }
   });
 
-  return <button ref={targetRef}>버튼</button>;
+  return (
+    <input 
+      ref={targetRef} 
+      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요" 
+      style={{ width: '300px' }} 
+    />
+  );
 };
 ```
+
+## Example
+export const Example = () => {
+  const targetRef = useKeyDown({
+    enabled: true, // default: true
+    keyDownCallbackMap: {
+      Enter: (event) => console.log('Enter', event.key), 
+      Shift: (event) => console.log('Shift', event.key),
+      ' ': (event) => console.log('Space', event.key),
+    }
+  });
+
+  return (
+    <input 
+      ref={targetRef} 
+      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요" 
+      style={{ width: '300px' }} 
+    />
+  );
+};
+
+<Example />
+
 
 ## Note
 - [Key values for keyboard events(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)

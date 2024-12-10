@@ -4,7 +4,7 @@ import {
   type UseTimeoutReturnType,
   type TimeoutOptions,
 } from './useTimeout.types';
-import { usePreservedCallback, usePreservedState } from '../../hooks';
+import { usePreservedCallback } from '../usePreservedCallback';
 
 /**
  * @description `useTimeout`훅은 지정된 지연 시간 후에 콜백 함수를 호출하는 커스텀 훅입니다.
@@ -49,9 +49,8 @@ export function useTimeout(
   const timeoutRef = useRef<NodeJS.Timeout | number | null>();
 
   const callbackAction = usePreservedCallback(callback);
-  const preservedOptions = usePreservedState(options);
 
-  const { delay, enabled } = getTimeoutOptions(preservedOptions);
+  const { delay, enabled } = getTimeoutOptions(options);
 
   const set = useCallback(() => {
     timeoutRef.current = setTimeout(callbackAction, delay);
