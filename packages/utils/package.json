@@ -32,7 +32,7 @@
   "devDependencies": {
     "@modern-kit/types": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.0",
-    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.0",
     "@types/lodash-es": "^4.17.12",
     "@vitest/coverage-istanbul": "^2.1.3",
