@@ -1,6 +1,7 @@
 # objectValues
 
 `Object.values()`와 동일하게 동작하는 함수입니다.
+이때, `symbol` 프로퍼티는 열거형이 아니기 때문에 제외됩니다.
 
 <br />
 
@@ -9,14 +10,15 @@
 
 ## Interface
 ```ts title="typescript"
-type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
+// modern-kit/types
+type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
   keyof T,
   symbol
 >;
 
-const objectValues: <T extends Record<PropertyKey, T[keyof T]>>(
+function objectValues<T extends Record<PropertyKey, any>>(
   obj: T
-) => T[ObjectKeys<T>][];
+): T[ObjectKeys<T>][];
 ```
 
 ## Usage

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { objectValues } from '.';
 
 describe('objectValues', () => {
-  it('should behave identical to Object.values()', () => {
+  it('Object.values()와 동일하게 동작해야 합니다', () => {
     const symbol = Symbol('d');
     const obj = {
       a: 1,

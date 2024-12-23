@@ -1,4 +1,4 @@
-export type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
+export type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
   keyof T,
   symbol
 >;
