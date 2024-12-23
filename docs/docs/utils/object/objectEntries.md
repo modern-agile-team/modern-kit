@@ -1,6 +1,7 @@
 # objectEntries
 
-`Object.entries()`와 동일하게 동작하지만 `key`타입을 지켜주는 함수입니다.
+`Object.entries()`와 동일하게 동작하지만 `key` 타입을 지켜주는 함수입니다.
+이때, `symbol` 프로퍼티는 열거형이 아니기 때문에 제외됩니다.
 
 <br />
 
@@ -10,14 +11,15 @@
 
 ## Interface
 ```ts title="typescript"
-type ObjectKeys<T extends Record<PropertyKey, T[keyof T]>> = Exclude<
+// modern-kit/types
+type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
   keyof T,
   symbol
 >;
 
-const objectEntries: <T extends Record<PropertyKey, T[keyof T]>>(
+function objectEntries<T extends Record<PropertyKey, any>>(
   obj: T
-) => [ObjectKeys<T>, T[ObjectKeys<T>]][];
+): [ObjectKeys<T>, T[ObjectKeys<T>]][];
 ```
 
 ## Usage
