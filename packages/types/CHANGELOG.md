@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.5.1
+
+### Patch Changes
+
+- [#640](https://github.com/modern-agile-team/modern-kit/pull/640) [`caf8d1d`](https://github.com/modern-agile-team/modern-kit/commit/caf8d1db4b7844fe50f928296fb47974ad821ebd) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: objectKeys/Values/Entries 타입 수정 및 ts-doc 추가 - @ssi02014
+
 ## 1.5.0
 
 ### Minor Changes
