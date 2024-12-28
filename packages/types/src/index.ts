@@ -1,5 +1,5 @@
 export * from './Arrayable';
-export * from './ArrayWithReadonly';
+export * from './DistributiveOmit';
 export * from './ExcludeNullish';
 export * from './ExtractMapType';
 export * from './ExtractNestedArrayType';
@@ -16,5 +16,6 @@ export * from './ObjectEntries';
 export * from './ObjectKeys';
 export * from './Primitive';
 export * from './Promiseable';
+export * from './ReadonlyArray';
 export * from './Reference';
 export * from './WholeNumber';

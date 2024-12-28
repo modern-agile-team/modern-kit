@@ -5,8 +5,8 @@
  * @returns 입력된 타입 T가 음수인 경우 T를 반환하고, 그렇지 않으면 never를 반환
  *
  * @example
- * type validNegativeNumber = NegativeNumber<-1>; // -1
- * type invalidNegativeNumber = NegativeNumber<1>;  // never
+ * type ValidNegativeNumber = NegativeNumber<-1>; // -1
+ * type InvalidNegativeNumber = NegativeNumber<1>;  // never
  */
 export type NegativeNumber<T extends number> = `${T}` extends `-${number}`
   ? T
