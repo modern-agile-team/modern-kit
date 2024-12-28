@@ -2,7 +2,7 @@ import { describe, it, expectTypeOf } from 'vitest';
 import { ExtractNestedArrayType } from '.';
 
 describe('ExtractNestedArrayType', () => {
-  it('should correctly extract the nested array type when all elements are numbers', () => {
+  it('모든 요소가 숫자인 중첩 배열에서 올바르게 타입을 추출해야 합니다.', () => {
     const arr = [1, 2, [3, 4, [5, 6]]]; // (number | (number | number[])[])[]
     const flattenArray = arr.flat(2); // number[]
 
@@ -11,7 +11,7 @@ describe('ExtractNestedArrayType', () => {
     expectTypeOf(flattenArray).toEqualTypeOf<extractedType[]>();
   });
 
-  it('should correctly extract the nested array type when elements are of mixed types', () => {
+  it('요소가 혼합된 타입인 중첩 배열에서 올바르게 타입을 추출해야 합니다.', () => {
     const arr = [1, 2, ['string', 4, [true, 6]]]; // (number | (string | number | (number | boolean)[])[])[]
     const flattenArray = arr.flat(3); // (string | number | boolean)[]
 

@@ -2,7 +2,7 @@ import { describe, it, expectTypeOf } from 'vitest';
 import { ExtractMapType } from '.';
 
 describe('ExtractMapType', () => {
-  it('should infer the generic type of a Map', () => {
+  it('Map의 제네릭 타입을 올바르게 추론해야 합니다.', () => {
     const key = 'foo' as 'foo' | 'bar';
     const value = 1 as 1 | 2 | 3;
 
