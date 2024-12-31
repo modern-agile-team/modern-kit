@@ -3,12 +3,10 @@ import { useRef, useState } from 'react';
 import { useMergeRefs } from '.';
 import { screen, waitFor } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { Nullable } from '@modern-kit/types';
 
 const TestComponent = () => {
   const [result, setResult] = useState(false);
-  const [ref3Element, setRef3Element] =
-    useState<Nullable<HTMLDivElement>>(null);
+  const [ref3Element, setRef3Element] = useState<HTMLDivElement | null>(null);
 
   const ref1 = useRef<HTMLDivElement>(null);
   const ref2 = useRef<HTMLDivElement>(null);

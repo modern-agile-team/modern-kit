@@ -26,7 +26,6 @@
   "author": "ssi02014 <ssi02014@naver.com>",
   "license": "MIT",
   "devDependencies": {
-    "@modern-kit/types": "workspace:*",
     "@modern-kit/utils": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^16.0.0",

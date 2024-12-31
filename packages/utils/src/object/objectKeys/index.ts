@@ -1,4 +1,7 @@
-import { ObjectKeys } from '@modern-kit/types';
+export type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
+  keyof T,
+  symbol
+>;
 
 /**
  * @description `Object.keys()`와 동일하게 동작하지만 `key` 타입을 지켜주는 함수입니다.

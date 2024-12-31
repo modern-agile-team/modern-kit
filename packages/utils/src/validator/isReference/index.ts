@@ -1,5 +1,16 @@
-import { Reference } from '@modern-kit/types';
 import { isPrimitive } from '../isPrimitive';
+
+type Reference =
+  | Record<PropertyKey, any>
+  | any[]
+  | ((...args: any[]) => any)
+  | Set<any>
+  | Map<any, any>
+  | WeakMap<object, any>
+  | WeakSet<object>
+  | Date
+  | RegExp
+  | Error;
 
 /**
  * @description 주어진 값이 참조 타입(Reference)인지 확인합니다.

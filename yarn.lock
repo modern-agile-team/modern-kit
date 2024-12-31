@@ -4955,7 +4955,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/react@workspace:packages/react"
   dependencies:
-    "@modern-kit/types": "workspace:*"
     "@modern-kit/utils": "workspace:*"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
@@ -4992,7 +4991,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modern-kit/types@workspace:*, @modern-kit/types@workspace:^, @modern-kit/types@workspace:packages/types":
+"@modern-kit/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@modern-kit/types@workspace:packages/types"
   dependencies:
@@ -5006,7 +5005,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"
   dependencies:
-    "@modern-kit/types": "workspace:^"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@rollup/plugin-typescript": "npm:^12.1.0"

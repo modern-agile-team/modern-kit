@@ -1,6 +1,5 @@
 import { useCallback, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
-import { Nullable } from '@modern-kit/types';
 
 interface UseScrollLockProps {
   autoLock?: boolean;
@@ -9,9 +8,8 @@ interface UseScrollLockProps {
 export function useScrollLock<T extends HTMLElement>({
   autoLock = true,
 }: UseScrollLockProps = {}) {
-  const ref = useRef<Nullable<T>>(null);
-  const originalOverflow =
-    useRef<Nullable<CSSStyleDeclaration['overflow']>>(null);
+  const ref = useRef<T | null>(null);
+  const originalOverflow = useRef<CSSStyleDeclaration['overflow'] | null>(null);
 
   const lock = useCallback(() => {
     const targetElement = ref.current as T;

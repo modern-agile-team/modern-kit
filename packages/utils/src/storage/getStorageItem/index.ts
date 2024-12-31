@@ -1,13 +1,12 @@
 import { StorageType } from '../types';
 import { isClient } from '../../device';
 import { isFunction } from '../../validator/isFunction';
-import { Nullable } from '@modern-kit/types';
 import { parseJSON } from '../../common';
 
 export function getStorageItem<T>(
   type: StorageType,
   key: string,
-  initialValue: Nullable<T | (() => T)> = null
+  initialValue: T | (() => T) | null = null
 ) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');

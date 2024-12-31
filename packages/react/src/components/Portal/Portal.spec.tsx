@@ -3,7 +3,6 @@ import { screen, waitFor } from '@testing-library/react';
 import { useRef, useState } from 'react';
 import { Portal } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { Nullable } from '@modern-kit/types';
 
 const DefaultTestComponent = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -26,7 +25,7 @@ const DefaultTestComponent = () => {
 };
 
 const ContainerTestComponent = () => {
-  const ref = useRef<Nullable<HTMLDivElement>>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <div id="parent">
@@ -40,7 +39,7 @@ const ContainerTestComponent = () => {
 };
 
 const NestedTestComponent = () => {
-  const ref = useRef<Nullable<HTMLDivElement>>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <div id="parent">
