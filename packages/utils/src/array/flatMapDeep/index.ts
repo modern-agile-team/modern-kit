@@ -1,5 +1,8 @@
-import { ExtractNestedArrayType } from '@modern-kit/types';
 import { flattenDeep } from '../../array';
+
+type ExtractNestedArrayType<T> = T extends readonly (infer U)[]
+  ? ExtractNestedArrayType<U>
+  : T;
 
 /**
  * 주어진 iteratee 함수로 배열의 각 요소를 재귀적으로 매핑한 후, 결과 배열을 깊게 평탄화합니다.

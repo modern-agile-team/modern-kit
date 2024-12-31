@@ -1,9 +1,7 @@
-import { Nullable } from '@modern-kit/types';
-
 export interface FileContent {
   status: 'fulfilled' | 'rejected';
   readValue: string | ArrayBuffer;
-  originFile: Nullable<File>;
+  originFile: File | null;
 }
 
 export function isFile(file: FileList | File): file is File {
@@ -27,7 +25,7 @@ export function getFiles(file: File | FileList, accepts: string[]) {
 }
 
 export function getReaderPromise(reader: FileReader, file: File) {
-  return new Promise<Nullable<FileContent['readValue']>>((resolve, reject) => {
+  return new Promise<FileContent['readValue'] | null>((resolve, reject) => {
     reader.onload = () => {
       resolve(reader.result);
     };

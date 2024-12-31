@@ -1,6 +1,5 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
-import { Primitive } from '@modern-kit/types';
-import { isPrimitive } from '.';
+import { type Primitive, isPrimitive } from '.';
 import { isNumber } from '../isNumber';
 import { isString } from '../isString';
 

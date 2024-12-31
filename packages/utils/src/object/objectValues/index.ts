@@ -1,4 +1,4 @@
-import { ObjectKeys } from '@modern-kit/types';
+import { type ObjectKeys } from '../../object/objectKeys';
 
 /**
  * @description `Object.values()`와 동일하게 동작하는 함수입니다.

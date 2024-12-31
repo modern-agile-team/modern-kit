@@ -1,6 +1,7 @@
 export * from './array';
 export * from './clipboard';
 export * from './common';
+export * from './date';
 export * from './device';
 export * from './formatter';
 export * from './math';

@@ -1,4 +1,11 @@
-import { Primitive } from '@modern-kit/types';
+export type Primitive =
+  | string
+  | number
+  | boolean
+  | symbol
+  | bigint
+  | null
+  | undefined;
 
 /**
  * @description 주어진 값이 원시 타입(Primitive)인지 확인합니다.
