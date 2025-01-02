@@ -1,5 +1,4 @@
 import { objectKeys } from '../../object/objectKeys';
-import { isDate } from '../../validator/isDate';
 
 type CalculatedTimeResult = Record<keyof typeof TIME_UNITS, number>;
 
@@ -34,7 +33,7 @@ const TIME_UNITS_KEYS = objectKeys(TIME_UNITS);
  * // { days: 0, hours: -5, minutes: -44, seconds: -30 }
  */
 export function getDDay(date: string | number | Date): CalculatedTimeResult {
-  const targetDate = isDate(date) ? date : new Date(date);
+  const targetDate = new Date(date);
 
   // 유효하지 않은 날짜 형식인 경우 에러 발생
   if (isNaN(targetDate.getTime())) {
