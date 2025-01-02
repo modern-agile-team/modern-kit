@@ -14,8 +14,13 @@ interface IsAfterDateParams {
  * @returns {boolean} 목표 날짜가 비교 날짜보다 이후이면 true, 아니면 false를 반환
  *
  * @example
- * isAfterDate({ targetDate: '2024-01-01', compareDate: '2024-12-31' }); // true
- * isAfterDate({ targetDate: '2024-12-31', compareDate: '2024-01-01' }); // false
+ * // 현재 날짜가 2025년 1월 1일 00:00:00 일 때
+ * // 비교 날짜(compareDate)가 없을 때 현재 날짜를 기준으로 목표 날짜가 현재 날짜보다 이후인 경우 true를 반환합니다.
+ * isAfterDate({ targetDate: '2025-01-02' }); // true
+ *
+ * @example
+ * isAfterDate({ targetDate: '2025-01-01', compareDate: '2024-12-31' }); // true
+ * isAfterDate({ targetDate: '2024-12-31', compareDate: '2025-01-01' }); // false
  *
  * @example
  * isAfterDate({ targetDate: '2024-01-01', compareDate: '2024-01-01', inclusive: true }); // true

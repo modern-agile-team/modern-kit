@@ -1,5 +1,4 @@
 import { objectKeys } from '../../object/objectKeys';
-import { isDate } from '../../validator/isDate';
 
 type CalculatedTimeResult = Record<keyof typeof TIME_UNITS, number>;
 
