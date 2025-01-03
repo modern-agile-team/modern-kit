@@ -1,5 +1,13 @@
 # @modern-kit/types
 
+## 1.6.0
+
+### Minor Changes
+
+- [#645](https://github.com/modern-agile-team/modern-kit/pull/645) [`1aa0e45`](https://github.com/modern-agile-team/modern-kit/commit/1aa0e4528cc4feec43312c31555173869096f1a2) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): Merge, Invert, NegativeNumber 타입 추가 - @ssi02014
+
+- [#647](https://github.com/modern-agile-team/modern-kit/pull/647) [`ac6da6e`](https://github.com/modern-agile-team/modern-kit/commit/ac6da6e074a9f18dc9136cf156e257d57be17d6b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): DistributiveOmit 타입 추가 - @ssi02014
+
 ## 1.5.1
 
 ### Patch Changes

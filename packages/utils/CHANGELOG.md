@@ -1,5 +1,19 @@
 # @modern-kit/utils
 
+## 1.25.0
+
+### Minor Changes
+
+- [#652](https://github.com/modern-agile-team/modern-kit/pull/652) [`cd87aec`](https://github.com/modern-agile-team/modern-kit/commit/cd87aecce51ef712b878ec0f410c9db81c39ae5b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isAfterDate, isBeforeDate 추가 - @ssi02014
+
+- [#654](https://github.com/modern-agile-team/modern-kit/pull/654) [`7db2d20`](https://github.com/modern-agile-team/modern-kit/commit/7db2d2084cedf97c0746fa4ff9e3563bba7c2659) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isDateInRange 함수 추가 - @ssi02014
+
+- [#650](https://github.com/modern-agile-team/modern-kit/pull/650) [`b655d00`](https://github.com/modern-agile-team/modern-kit/commit/b655d00df66232d40a1005da35969dbaab281c8e) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isDate, getDDay 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [#650](https://github.com/modern-agile-team/modern-kit/pull/650) [`b655d00`](https://github.com/modern-agile-team/modern-kit/commit/b655d00df66232d40a1005da35969dbaab281c8e) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: react/utils modern-kit/types 의존성 제거 - @ssi02014
+
 ## 1.24.1
 
 ### Patch Changes
