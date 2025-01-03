@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.1
+
+### Patch Changes
+
+- [#650](https://github.com/modern-agile-team/modern-kit/pull/650) [`b655d00`](https://github.com/modern-agile-team/modern-kit/commit/b655d00df66232d40a1005da35969dbaab281c8e) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: react/utils modern-kit/types 의존성 제거 - @ssi02014
+
 ## 1.27.0
 
 ### Minor Changes
