@@ -6046,10 +6046,17 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0", {\
-        "packageLocation": "./.yarn/__virtual__/@docusaurus-module-type-aliases-virtual-392ee9609e/0/cache/@docusaurus-module-type-aliases-npm-3.6.0-363cf49d2e-944eb527a3.zip/node_modules/@docusaurus/module-type-aliases/",\
+      ["npm:3.7.0", {\
+        "packageLocation": "./.yarn/cache/@docusaurus-module-type-aliases-npm-3.7.0-f6df846902-fca90450af.zip/node_modules/@docusaurus/module-type-aliases/",\
         "packageDependencies": [\
-          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
+          ["@docusaurus/module-type-aliases", "npm:3.7.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:6a5dc506d4bd69b34053c48059557882936b77f9e1b403348afaea5193274392fe7ec1b965255341bebe7da1d943a055590205bd719444a88ae68770ca7dc341#npm:3.6.0", {\
+        "packageLocation": "./.yarn/__virtual__/@docusaurus-module-type-aliases-virtual-7d4cd33f5d/0/cache/@docusaurus-module-type-aliases-npm-3.6.0-363cf49d2e-944eb527a3.zip/node_modules/@docusaurus/module-type-aliases/",\
+        "packageDependencies": [\
+          ["@docusaurus/module-type-aliases", "virtual:6a5dc506d4bd69b34053c48059557882936b77f9e1b403348afaea5193274392fe7ec1b965255341bebe7da1d943a055590205bd719444a88ae68770ca7dc341#npm:3.6.0"],\
           ["@docusaurus/types", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
           ["@types/history", "npm:4.7.11"],\
           ["@types/react", "npm:18.3.1"],\
@@ -6058,7 +6065,36 @@ const RAW_RUNTIME_STATE =
           ["@types/react-router-dom", "npm:5.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
-          ["react-helmet-async", "virtual:392ee9609eec8e5f51cc8752a050660994b21c44a364b16d0c2195460acb92765fb58873c2c9fab614b9a817247b25c449d1995ea3fa2ef4313279fb0e6c3b88#npm:2.0.1"],\
+          ["react-helmet-async", "virtual:7d4cd33f5d82dc76ac35c525c4197f7f0e3d6adee37f27b54c0d3ffdf33b9946eb0fcca2216f530da33c17c4b688998f45643244af33bbaff523299769eb4298#npm:2.0.1"],\
+          ["react-loadable", [\
+            "@docusaurus/react-loadable",\
+            "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:6.0.0"\
+          ]]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.7.0", {\
+        "packageLocation": "./.yarn/__virtual__/@docusaurus-module-type-aliases-virtual-3e652d309e/0/cache/@docusaurus-module-type-aliases-npm-3.7.0-f6df846902-fca90450af.zip/node_modules/@docusaurus/module-type-aliases/",\
+        "packageDependencies": [\
+          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.7.0"],\
+          ["@docusaurus/types", "virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:3.7.0"],\
+          ["@types/history", "npm:4.7.11"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["@types/react-router-config", "npm:5.0.10"],\
+          ["@types/react-router-dom", "npm:5.3.3"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
+          ["react-helmet-async", [\
+            "@slorber/react-helmet-async",\
+            "virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:1.3.0"\
+          ]],\
           ["react-loadable", [\
             "@docusaurus/react-loadable",\
             "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:6.0.0"\
@@ -6136,7 +6172,7 @@ const RAW_RUNTIME_STATE =
           ["@docusaurus/core", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/logger", "npm:3.6.0"],\
           ["@docusaurus/mdx-loader", "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:3.6.0"],\
-          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
+          ["@docusaurus/module-type-aliases", "virtual:6a5dc506d4bd69b34053c48059557882936b77f9e1b403348afaea5193274392fe7ec1b965255341bebe7da1d943a055590205bd719444a88ae68770ca7dc341#npm:3.6.0"],\
           ["@docusaurus/theme-common", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/types", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
           ["@docusaurus/utils", "virtual:0ccbb622d525a4efb677fcc9cd5233fb7e3a64993776fd0e29f34c7fc16e7c411ab8ac6844e3a871dd71b2e34d7829cb6d99b73bbd9759b3a6c127d47b2fa80d#npm:3.6.0"],\
@@ -6432,7 +6468,7 @@ const RAW_RUNTIME_STATE =
           ["@docusaurus/core", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
           ["@docusaurus/logger", "npm:3.6.0"],\
           ["@docusaurus/mdx-loader", "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:3.6.0"],\
-          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
+          ["@docusaurus/module-type-aliases", "virtual:6a5dc506d4bd69b34053c48059557882936b77f9e1b403348afaea5193274392fe7ec1b965255341bebe7da1d943a055590205bd719444a88ae68770ca7dc341#npm:3.6.0"],\
           ["@docusaurus/plugin-content-blog", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/plugin-content-docs", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/plugin-content-pages", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
@@ -6482,7 +6518,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@docusaurus/theme-common", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/mdx-loader", "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:3.6.0"],\
-          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
+          ["@docusaurus/module-type-aliases", "virtual:6a5dc506d4bd69b34053c48059557882936b77f9e1b403348afaea5193274392fe7ec1b965255341bebe7da1d943a055590205bd719444a88ae68770ca7dc341#npm:3.6.0"],\
           ["@docusaurus/plugin-content-docs", "virtual:5c36f9a31886da8825a3ed641d0c9421de542a2303a3fbdf71619309df843cc6e34abe74346a83ec7e4e2f29b7a7fb85d14101af4693c15bf2eafa7a23c19f9a#npm:3.6.0"],\
           ["@docusaurus/utils", "virtual:54e7fc54e3d2b04f5ad6cab5ba4d5f36b6a99e350fb97586afac0f12f5acffab27cfa2404b0086f66ba37341c51bf76e1313349a02ec41f2057f6558e19b6e48#npm:3.6.0"],\
           ["@docusaurus/utils-common", "virtual:3b31f3c3513734d0f0ac1abc322b62ec23e22390f46e16c70e16b42d4399e9e4056f063c2a0ded4076ddae23ec87b14166c3235f69fd279421537c76b9657b1a#npm:3.6.0"],\
@@ -6571,6 +6607,13 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["npm:3.7.0", {\
+        "packageLocation": "./.yarn/cache/@docusaurus-types-npm-3.7.0-49887720ec-256d3b579e.zip/node_modules/@docusaurus/types/",\
+        "packageDependencies": [\
+          ["@docusaurus/types", "npm:3.7.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
       ["virtual:0eeb47616a973aea69d3d4c5ada611d9cfb56263bf00b5e98fc2c4f55dd497dd07f4c9038e9a36baa1ad052f484e7905b73a447a7fe9daae487183fcf13884c7#npm:3.6.0", {\
         "packageLocation": "./.yarn/__virtual__/@docusaurus-types-virtual-d01ba4f6c3/0/cache/@docusaurus-types-npm-3.6.0-5446b860a9-1b2efe8d13.zip/node_modules/@docusaurus/types/",\
         "packageDependencies": [\
@@ -6590,6 +6633,34 @@ const RAW_RUNTIME_STATE =
         ],\
         "packagePeers": [\
           "@types/react-dom",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:3.7.0", {\
+        "packageLocation": "./.yarn/__virtual__/@docusaurus-types-virtual-f09596142d/0/cache/@docusaurus-types-npm-3.7.0-49887720ec-256d3b579e.zip/node_modules/@docusaurus/types/",\
+        "packageDependencies": [\
+          ["@docusaurus/types", "virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:3.7.0"],\
+          ["@mdx-js/mdx", "npm:3.0.0"],\
+          ["@types/history", "npm:4.7.11"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["commander", "npm:5.1.0"],\
+          ["joi", "npm:17.11.0"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
+          ["react-helmet-async", [\
+            "@slorber/react-helmet-async",\
+            "virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:1.3.0"\
+          ]],\
+          ["utility-types", "npm:3.10.0"],\
+          ["webpack", "virtual:b6983c34cdb72e0a48e78b912b551d6d6604e7e8bcd2001361c434f921512416d48bec510ae56e07127a745ef082b3428f70d5962bea99e0593425afa8aaf512#npm:5.96.1"],\
+          ["webpack-merge", "npm:5.10.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
           "react-dom",\
           "react"\
         ],\
@@ -7684,7 +7755,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@modern-kit/docs", "workspace:docs"],\
           ["@docusaurus/core", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
-          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
+          ["@docusaurus/module-type-aliases", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.7.0"],\
           ["@docusaurus/preset-classic", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
           ["@docusaurus/theme-classic", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
           ["@docusaurus/types", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.6.0"],\
@@ -8818,6 +8889,37 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@sindresorhus-is-npm-5.6.0-a25321ecc2-66727344d0.zip/node_modules/@sindresorhus/is/",\
         "packageDependencies": [\
           ["@sindresorhus/is", "npm:5.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@slorber/react-helmet-async", [\
+      ["npm:1.3.0", {\
+        "packageLocation": "./.yarn/cache/@slorber-react-helmet-async-npm-1.3.0-6a9a526f72-7a13470a0d.zip/node_modules/@slorber/react-helmet-async/",\
+        "packageDependencies": [\
+          ["@slorber/react-helmet-async", "npm:1.3.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:1.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/@slorber-react-helmet-async-virtual-ba04d0f697/0/cache/@slorber-react-helmet-async-npm-1.3.0-6a9a526f72-7a13470a0d.zip/node_modules/@slorber/react-helmet-async/",\
+        "packageDependencies": [\
+          ["@slorber/react-helmet-async", "virtual:3e652d309e54d95a2b4c8b1f3c0902a503f202d28ca73e0b72b3f20867083915d293abc9a085e16f9747883563273e7565eab09816436df7ea6e4fb4cf758f99#npm:1.3.0"],\
+          ["@babel/runtime", "npm:7.22.10"],\
+          ["@types/react", "npm:18.3.1"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["invariant", "npm:2.2.4"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
+          ["react-fast-compare", "npm:3.2.2"],\
+          ["shallowequal", "npm:1.1.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -25139,10 +25241,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:392ee9609eec8e5f51cc8752a050660994b21c44a364b16d0c2195460acb92765fb58873c2c9fab614b9a817247b25c449d1995ea3fa2ef4313279fb0e6c3b88#npm:2.0.1", {\
-        "packageLocation": "./.yarn/__virtual__/react-helmet-async-virtual-dbfb333f47/0/cache/react-helmet-async-npm-2.0.1-25e370065e-f1fec97ae4.zip/node_modules/react-helmet-async/",\
+      ["virtual:7d4cd33f5d82dc76ac35c525c4197f7f0e3d6adee37f27b54c0d3ffdf33b9946eb0fcca2216f530da33c17c4b688998f45643244af33bbaff523299769eb4298#npm:2.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/react-helmet-async-virtual-a358e7be6f/0/cache/react-helmet-async-npm-2.0.1-25e370065e-f1fec97ae4.zip/node_modules/react-helmet-async/",\
         "packageDependencies": [\
-          ["react-helmet-async", "virtual:392ee9609eec8e5f51cc8752a050660994b21c44a364b16d0c2195460acb92765fb58873c2c9fab614b9a817247b25c449d1995ea3fa2ef4313279fb0e6c3b88#npm:2.0.1"],\
+          ["react-helmet-async", "virtual:7d4cd33f5d82dc76ac35c525c4197f7f0e3d6adee37f27b54c0d3ffdf33b9946eb0fcca2216f530da33c17c4b688998f45643244af33bbaff523299769eb4298#npm:2.0.1"],\
           ["@types/react", "npm:18.3.1"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["invariant", "npm:2.2.4"],\
