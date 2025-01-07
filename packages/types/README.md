@@ -1,6 +1,6 @@
-# @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest"></a>
+# @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a>
 
-유용한 타입스크립트 유틸 타입들을 제공합니다.
+클라이언트 개발에 유용한 타입스크립트 유틸 타입들을 제공합니다.
 
 <br />
 
@@ -10,7 +10,7 @@
 
 <br />
 
-## Usage
+## Download
 ```shell
 npm i -D @modern-kit/types
 ```
@@ -19,9 +19,21 @@ npm i -D @modern-kit/types
 yarn add -D @modern-kit/types
 ```
 
-
 ```shell
 pnpm i -D @modern-kit/types
+```
+
+<br />
+
+## Usage
+
+```ts
+import { Merge } from '@modern-kit/types';
+
+type A = { a: string, b: number }
+type B = { b: string, c: boolean }
+type Result = Merge<A, B>
+// { a: string, b: string, c: boolean }
 ```
 
 <br />

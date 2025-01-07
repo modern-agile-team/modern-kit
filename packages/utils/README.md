@@ -1,6 +1,6 @@
 # @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
 
-클라이언트 개발과 관련된 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
+클라이언트 개발에 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
 
 <br />
 
@@ -10,7 +10,7 @@
 
 <br />
 
-## Usage
+## Download
 ```shell
 npm i @modern-kit/utils
 ```
@@ -22,6 +22,17 @@ yarn add @modern-kit/utils
 
 ```shell
 pnpm i @modern-kit/utils
+```
+
+<br />
+
+## Usage
+
+```ts
+import { flatten } from '@modern-kit/utils';
+
+const arr = [1, [2, [3, 4], 5]];
+const result = flatten(arr); // [1, 2, 3, 4, 5]
 ```
 
 <br />

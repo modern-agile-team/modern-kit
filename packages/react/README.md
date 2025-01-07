@@ -10,7 +10,7 @@ React와 관련된 유용한 `컴포넌트`와 `커스텀 훅`을 제공하는 �
 
 <br />
 
-## Usage
+## Download
 ```shell
 npm i @modern-kit/react
 ```
@@ -21,6 +21,22 @@ yarn add @modern-kit/react
 
 ```shell
 pnpm i @modern-kit/react
+```
+
+<br />
+
+## Usage
+
+```tsx
+import { useInterval } from '@modern-kit/react';
+
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+}
 ```
 
 <br />

@@ -23,12 +23,15 @@
 
 <br />
 
-## Usage
+## Library
 
 ### @modern-kit/react <a href="https://www.npmjs.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/react.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest"></a>
 
 - React와 관련된 유용한 `컴포넌트`와 `커스텀 훅`을 제공하는 라이브러리입니다.
 
+<br />
+
+<b>Download</b>
 ```shell
 npm i @modern-kit/react
 ```
@@ -43,9 +46,29 @@ pnpm i @modern-kit/react
 
 <br />
 
+<b>Usage</b>
+
+```tsx
+import { useInterval } from '@modern-kit/react';
+
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+}
+```
+
+<br />
+
 ### @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest"></a>
 
-- 클라이언트 개발과 관련된 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
+- 클라이언트 개발에 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
+
+<br />
+
+<b>Download</b>
 
 ```shell
 npm i @modern-kit/utils
@@ -61,9 +84,24 @@ pnpm i @modern-kit/utils
 
 <br />
 
-### @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a> <a href="https://bundlephobia.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest"></a>
+<b>Usage</b>
 
-- 유용한 `유틸 타입`들을 제공하는 라이브러리 입니다.
+```ts
+import { flatten } from '@modern-kit/utils';
+
+const arr = [1, [2, [3, 4], 5]];
+const result = flatten(arr); // [1, 2, 3, 4, 5]
+```
+
+<br />
+
+### @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a>
+
+- 클라이언트 개발에 유용한 `유틸 타입`들을 제공하는 라이브러리 입니다.
+
+<br />
+
+<b>Download</b>
 
 ```shell
 npm i @modern-kit/types
@@ -75,6 +113,19 @@ yarn add @modern-kit/types
 
 ```shell
 pnpm i @modern-kit/types
+```
+
+<br />
+
+<b>Usage</b>
+
+```ts
+import { Merge } from '@modern-kit/types';
+
+type A = { a: string, b: number }
+type B = { b: string, c: boolean }
+type Result = Merge<A, B>
+// { a: string, b: string, c: boolean }
 ```
 
 <br />
@@ -143,7 +194,7 @@ yarn build:docs
 <br />
 
 ## Contributing
-모든 기여에 감사드립니다! 누구든지 라이브러리에 기여할 수 있습니다.
+`@modern-kit`에 기여해주셔서 감사드립니다! 누구든지 `@modern-kit`에 기여할 수 있습니다.
 [Contributing Guide](./.github/CONTRIBUTING.md)
 
 #### Contributors
@@ -152,21 +203,6 @@ yarn build:docs
 </a>
 
 <br />
-<br />
-
-## Tools
-
-- `Yarn Berry(v4)`와 `workspaces`를 활용해 **Monolithic Repository** 환경을 구축
-  - packages 내부의 패키지들은 **로컬 패키지**처럼 **상호 의존성**을 갖습니다.
-- `lerna`를 활용한 **통합 빌드**, **통합 테스트**, **통합 배포** 환경 구축
-- `github actions`를 활용한 **CI/CD** 구축
-- `changeset`을 활용한 모노레포 환경에서 **패키지 일관성 유지** 및 **NPM 배포** 진행
-- `dependabot`을 활용한 **자동 의존성** 관리
-- `codecov`를 활용한 **테스트 코드 커버리지 리포트** 및 **신뢰성 있는 코드** 제공
-- `docusaurus`를 활용한 **공식 문서 제공**
-- `vitest`를 활용한 **테스트 코드 작성 및 테스트** 진행
-  - @modern-kit/utils의 경우 `Benchmark` 테스트 포함
-
 <br />
 
 ## License
