@@ -1,6 +1,6 @@
 # formatNumberWithCommas
 
-`문자열` 또는 `숫자`를 입력하면 숫자를 천 단위로 `(,)comma`를 추가한 문자열을 반환하는 함수입니다.
+`숫자로 이루어진 문자열` 또는 `숫자`를 입력하면 천 단위로 `(,)comma`를 추가한 문자열을 반환하는 함수입니다.
 
 <br />
 
@@ -9,16 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-interface FormatNumberWithCommasOptions {
-  maximumDecimalDigits?: Intl.NumberFormatOptions['maximumFractionDigits'];
-  minimumDecimalDigits?: Intl.NumberFormatOptions['minimumFractionDigits'];
-}
-```
-```ts title="typescript"
-function formatNumberWithCommas(
-  value: number | string,
-  options?: FormatNumberWithCommasOptions
-): string;
+function formatNumberWithCommas(value: number | string): string
 ```
 
 ## Usage
@@ -28,10 +19,10 @@ import { formatNumberWithCommas } from '@modern-kit/utils';
 formatNumberWithCommas(200); // '200'
 formatNumberWithCommas(3000); // '3,000'
 formatNumberWithCommas(-123123123); // '-123,123,123'
-formatNumberWithCommas(123456.123); // '123,456.123'
+formatNumberWithCommas(123456.12345); // '123,456.12345'
 
 formatNumberWithCommas('200'); // '200'
 formatNumberWithCommas('3000'); // '3,000'
 formatNumberWithCommas('-123123123'); // '-123,123,123'
-formatNumberWithCommas('123456.123'); // '123,456.123'
+formatNumberWithCommas('123456.12345'); // '123,456.12345'
 ```
