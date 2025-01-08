@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.25.1
+
+### Patch Changes
+
+- [#664](https://github.com/modern-agile-team/modern-kit/pull/664) [`3ac397e`](https://github.com/modern-agile-team/modern-kit/commit/3ac397e26b4afdfc7a83fa4f5077dd0bae748b32) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithCommas 로직 수정으로 인터페이스 개선 - @ssi02014
+
 ## 1.25.0
 
 ### Minor Changes
