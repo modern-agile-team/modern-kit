@@ -26,6 +26,7 @@ export interface FormatNumberWithUnitsOptions {
   commas?: boolean;
   floorUnit?: FloorUnit;
   space?: boolean;
+  decimal?: number;
 }
 
 const ONE_TRILLION = 1_000_000_000_000;
@@ -46,7 +47,7 @@ export const DEFAULT_UNITS: Unit[] = [
  * @returns {string} 포맷팅된 문자열
  */
 export const getNumberWithConditionalCommas = (
-  value: number,
+  value: number | string,
   commas: boolean
 ): string => {
   return commas ? formatNumberWithCommas(value) : String(value);
@@ -61,6 +62,7 @@ export const getNumberWithConditionalCommas = (
  * @param {boolean} [options.commas=true] - 천 단위 구분 쉼표 사용 여부
  * @param {number} [options.floorUnit=1] - 버림 단위(기본값: 1). 버림 단위보다 작은 숫자는 '0'으로 반환합니다.
  * @param {boolean} [options.space=true] - 단위 사이 공백 추가 여부
+ * @param {number} [options.decimal=0] - 소수점 자리수
  * @returns {string} 포맷팅된 문자열
  * @throws 입력값이 숫자로 변환할 수 없는 경우 에러 발생
  *
@@ -83,22 +85,20 @@ export const getNumberWithConditionalCommas = (
  * formatNumberWithUnits(1234567, { floorUnit: 10000 }) // "123만"
  *
  * @example
+ * // 소수점 자리수
+ * formatNumberWithUnits(1234567.123, { decimal: 2 }) // "123만 4,567.12"
+ *
+ * // floorUnit이 1보다 크면 소수점 자리수를 적용하지 않습니다.
+ * formatNumberWithUnits(1234567.123, { decimal: 3, floorUnit: 1000 }) // "123만 4,000"
+ *
+ * @example
  * // 사용자 정의 단위
  * const customUnits = [
  *   { unit: 'K', value: 1000 },
  *   { unit: 'M', value: 1000000 },
  * ];
  *
- * formatNumberWithUnits(1234567, {
- *   units: customUnits,
- *   floorUnit: 1000,
- * }) // "1M 234K"
- *
- * // 단위 적용 X
- * formatNumberWithUnits(1234567, {
- *   units: [],
- *   floorUnit: 1000,
- * }); // "1,234,000"
+ * formatNumberWithUnits(1234567, { units: customUnits, floorUnit: 1000 }) // "1M 234K"
  */
 export function formatNumberWithUnits(
   value: number | string,
@@ -109,12 +109,21 @@ export function formatNumberWithUnits(
     space = true,
     commas = true,
     floorUnit = 1,
+    decimal = 0,
   } = options;
 
   const valueToUse = isNumber(value) ? value : Number(value);
 
   if (isNaN(valueToUse)) {
     throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
+  }
+
+  if (!Number.isInteger(floorUnit) || floorUnit < 1) {
+    throw new Error('floorUnit은 1 이상의 정수여야 합니다.');
+  }
+
+  if (!Number.isInteger(decimal) || decimal < 0) {
+    throw new Error('decimal은 0 이상의 정수여야 합니다.');
   }
 
   // value가 floorUnit(버림 단위)보다 작으면 '0'을 반환
@@ -127,7 +136,10 @@ export function formatNumberWithUnits(
   const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
   let formattedResult = '';
-  let remainingValue = Math.floor(absoluteValue / floorUnit) * floorUnit;
+  let remainingValue =
+    floorUnit > 1
+      ? Math.floor(absoluteValue / floorUnit) * floorUnit
+      : absoluteValue;
 
   // unit 별로 나누기
   for (let i = 0; i < sortedUnits.length; i++) {
@@ -147,7 +159,7 @@ export function formatNumberWithUnits(
   // 남은 remainingValue가 있으면 추가
   if (remainingValue > 0) {
     formattedResult += `${getNumberWithConditionalCommas(
-      remainingValue,
+      remainingValue.toFixed(decimal),
       commas
     )}`;
   }
