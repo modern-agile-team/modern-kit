@@ -40,10 +40,12 @@ export const getFormattedValueWithUnits = (
   }
 
   let formattedResult = '';
-  let remainingValue =
-    floorUnit > 1
-      ? Math.floor(absoluteValue / floorUnit) * floorUnit
-      : absoluteValue;
+  let remainingValue = absoluteValue;
+
+  // floorUnit이 1보다 큰 경우, 최종 결과에서 floorUnit 미만의 값은 버림
+  if (floorUnit > 1) {
+    remainingValue = Math.floor(remainingValue / floorUnit) * floorUnit;
+  }
 
   // unit 별로 나누기
   for (let i = 0; i < units.length; i++) {
@@ -62,8 +64,12 @@ export const getFormattedValueWithUnits = (
 
   // 남은 remainingValue가 있으면 추가
   if (remainingValue > 0) {
+    const formattedValue = Number.isInteger(remainingValue)
+      ? remainingValue
+      : remainingValue.toFixed(decimal);
+
     formattedResult += `${getNumberWithConditionalCommas(
-      remainingValue.toFixed(decimal),
+      formattedValue,
       commas
     )}`;
   }
