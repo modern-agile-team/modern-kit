@@ -41,7 +41,7 @@ export function formatValueWithSymbol(
   options: FormatNumberWithSymbolOptions = {}
 ): string {
   const { symbol = '', position = 'suffix', space = false } = options;
-  const valueToUse = String(value).trim();
+  const valueToUse = String(value);
   const isNegative = valueToUse.startsWith('-');
 
   return getFormattedNumberWithSymbol(valueToUse, {

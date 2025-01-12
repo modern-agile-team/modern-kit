@@ -28,12 +28,6 @@ describe('formatNumberWithSymbol', () => {
         formatValueWithSymbol('-1,234,567', { symbol: '$', position: 'prefix' })
       ).toBe('-$1,234,567');
     });
-
-    it('좌우 공백은 제거 후 포맷팅되어야 합니다.', () => {
-      expect(formatValueWithSymbol('    1000    ', { symbol: '원' })).toBe(
-        '1000원'
-      );
-    });
   });
 
   describe('옵션 적용', () => {
