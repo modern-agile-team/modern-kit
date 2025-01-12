@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.26.1
+
+### Patch Changes
+
+- [#671](https://github.com/modern-agile-team/modern-kit/pull/671) [`37ef40a`](https://github.com/modern-agile-team/modern-kit/commit/37ef40acf5c37c679c60531c67228a66146b6306) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithCurrency locale 값 타입을 locale 포맷에 맞게 변경 - @ssi02014
+
 ## 1.26.0
 
 ### Minor Changes
