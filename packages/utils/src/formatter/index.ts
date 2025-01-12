@@ -1,4 +1,4 @@
-export * from './formatNumberByUnits';
-export * from './formatNumberCurrency';
 export * from './formatNumberWithCommas';
+export * from './formatNumberWithCurrency';
+export * from './formatNumberWithUnits';
 export * from './formatPhoneNumber';

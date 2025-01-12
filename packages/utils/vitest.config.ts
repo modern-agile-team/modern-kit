@@ -17,6 +17,7 @@ export default defineConfig({
         'src/file',
         'src/**/internal.ts',
         'src/**/*.bench.ts',
+        'src/**/*.utils.ts',
         ...coverageConfigDefaults.exclude,
       ],
     },
