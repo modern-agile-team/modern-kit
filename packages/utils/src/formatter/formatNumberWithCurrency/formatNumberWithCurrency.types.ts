@@ -8,5 +8,4 @@ export interface FormatNumberCurrencyOptions {
   space?: boolean;
   commas?: boolean;
   locale?: Locale;
-  decimal?: number;
 }

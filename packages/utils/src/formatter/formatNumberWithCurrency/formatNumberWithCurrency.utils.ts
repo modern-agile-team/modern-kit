@@ -12,8 +12,8 @@ import { FormatNumberCurrencyOptions } from './formatNumberWithCurrency.types';
  * @returns {string} 통화 기호가 추가된 문자열
  */
 export const getFormattedNumberWithCurrency = (
-  value: string,
-  options: Omit<FormatNumberCurrencyOptions, 'decimal'> & {
+  value: number,
+  options: FormatNumberCurrencyOptions & {
     isNegative: boolean;
   }
 ): string => {
