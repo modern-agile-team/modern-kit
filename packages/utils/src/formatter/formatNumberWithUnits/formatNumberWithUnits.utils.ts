@@ -1,8 +1,5 @@
 import { formatNumberWithCommas } from '../../formatter/formatNumberWithCommas';
-import {
-  FormatNumberWithUnitsOptions,
-  Unit,
-} from './formatNumberWithUnits.types';
+import { FormatNumberWithUnitsOptions } from './formatNumberWithUnits.types';
 
 /**
  * @description 쉼표 사용 여부에 따라 숫자를 포맷팅하는 함수
@@ -22,8 +19,7 @@ const getNumberWithConditionalCommas = (
  * @description 주어진 단위(units)에 따라 숫자를 포맷팅하는 함수
  *
  * @param {number} value - 포맷팅할 숫자 값
- * @param {Unit[] | readonly Unit[]} units - 변환할 단위 배열
- * @param {Omit<Required<FormatNumberWithUnitsOptions>, 'units'>} options - 포맷팅 옵션
+ * @param {Required<FormatNumberWithUnitsOptions>} options - 포맷팅 옵션
  * @param {boolean} options.commas - 천 단위 구분 쉼표 사용 여부입니다.
  * @param {boolean} options.space - 단위 사이 공백 추가 여부입니다.
  * @param {number} options.decimal - 소수점 자릿수입니다.
@@ -31,10 +27,9 @@ const getNumberWithConditionalCommas = (
  */
 export const getFormattedValueWithUnits = (
   value: number,
-  units: Unit[] | readonly Unit[],
-  options: Omit<Required<FormatNumberWithUnitsOptions>, 'units'>
+  options: Required<FormatNumberWithUnitsOptions>
 ): string => {
-  const { commas, space, decimal, floorUnit } = options;
+  const { units, commas, space, decimal, floorUnit } = options;
 
   const absoluteValue = Math.abs(value);
   const isNegative = value < 0;

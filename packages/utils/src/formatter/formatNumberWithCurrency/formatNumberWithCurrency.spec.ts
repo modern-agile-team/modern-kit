@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { formatNumberWithCurrency } from './index';
+import { Locale } from './formatNumberWithCurrency.types';
 
 describe('formatNumberWithCurrency', () => {
   describe('기본 동작', () => {
@@ -78,40 +79,44 @@ describe('formatNumberWithCurrency', () => {
       ).toBe('$1000');
     });
 
-    it('locale 옵션으로 통화 기호를 자동 적용해야 합니다.', () => {
+    it('decimal 옵션을 기반으로 소숫점 자리수를 포맷팅해야 합니다.', () => {
       expect(
-        formatNumberWithCurrency(1000, {
-          locale: 'USD',
+        formatNumberWithCurrency(1000.234, {
+          symbol: '$',
+          position: 'prefix',
+          decimal: 3,
         })
-      ).toBe('$1,000');
+      ).toBe('$1,000.234');
 
       expect(
-        formatNumberWithCurrency(1000, {
-          locale: 'KRW',
+        formatNumberWithCurrency(1000.23, {
+          symbol: '$',
+          position: 'prefix',
+          decimal: 0,
         })
-      ).toBe('1,000원');
+      ).toBe('$1,000');
     });
 
-    it('locale 옵션이 있으면 commas 옵션을 제외한 나머지 옵션들은 무시되어야 합니다.', () => {
+    it('locale 옵션이 있으면 locale 옵션에 따라 통화 기호가 적용되어야 합니다.', () => {
       expect(
         formatNumberWithCurrency(1000, {
-          locale: 'USD',
-          commas: true,
-          symbol: '*', // 무시
-          position: 'prefix', // 무시
-          space: true, // 무시
+          locale: 'en-US', // { symbol: '$', position: 'prefix', space: false, commas: true }
         })
       ).toBe('$1,000');
 
       expect(
         formatNumberWithCurrency(1000, {
-          locale: 'USD',
-          commas: false,
-          symbol: '*', // 무시
-          position: 'prefix', // 무시
-          space: true, // 무시
+          locale: 'ko-KR', // { symbol: '₩', position: 'prefix', space: false, commas: true }
         })
-      ).toBe('$1000');
+      ).toBe('₩1,000');
+
+      // 소숫점 자리수 포맷팅
+      expect(
+        formatNumberWithCurrency(1000.123, {
+          locale: 'en-US', // { symbol: '$', position: 'prefix', space: false, commas: true }
+          decimal: 2,
+        })
+      ).toBe('$1,000.12');
     });
   });
 
@@ -122,10 +127,16 @@ describe('formatNumberWithCurrency', () => {
       );
     });
 
+    it('decimal이 0 이상의 정수가 아닌 경우 에러를 던져야 합니다.', () => {
+      expect(() => formatNumberWithCurrency(1000, { decimal: -1 })).toThrow(
+        'decimal은 0 이상의 정수여야 합니다.'
+      );
+    });
+
     it('지원하지 않는 locale 입력시 에러를 던져야 합니다.', () => {
       expect(() =>
         formatNumberWithCurrency(1000, {
-          locale: 'INVALID' as unknown as 'KRW',
+          locale: 'INVALID' as unknown as Locale,
         })
       ).toThrow('유효하지 않은 locale 입니다.');
     });

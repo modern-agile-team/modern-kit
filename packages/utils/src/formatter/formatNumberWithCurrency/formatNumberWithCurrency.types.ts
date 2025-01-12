@@ -1,4 +1,6 @@
-type Locale = 'KRW' | 'KRW_SYMBOL' | 'USD' | 'JPY' | 'CNY' | 'EUR';
+import { LOCALE_CURRENCY_MAP } from './formatNumberWithCurrency.constants';
+
+export type Locale = keyof typeof LOCALE_CURRENCY_MAP;
 
 export interface FormatNumberCurrencyOptions {
   symbol?: string;
@@ -6,4 +8,5 @@ export interface FormatNumberCurrencyOptions {
   space?: boolean;
   commas?: boolean;
   locale?: Locale;
+  decimal?: number;
 }

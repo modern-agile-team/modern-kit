@@ -66,8 +66,8 @@ export function formatNumberWithUnits(
 
   // value 값을 기준으로 내림차순 정렬
   const sortedUnits = [...units].sort((a, b) => b.value - a.value);
-
   const valueToUse = isNumber(value) ? value : Number(value);
+
   // 에러 처리
   if (isNaN(valueToUse)) {
     throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
@@ -86,12 +86,11 @@ export function formatNumberWithUnits(
     throw new Error('decimal은 0 이상의 정수여야 합니다.');
   }
 
-  const formattedResult = getFormattedValueWithUnits(valueToUse, sortedUnits, {
+  return getFormattedValueWithUnits(valueToUse, {
+    units: sortedUnits,
     commas,
     space,
     decimal,
     floorUnit,
   });
-
-  return formattedResult;
 }
