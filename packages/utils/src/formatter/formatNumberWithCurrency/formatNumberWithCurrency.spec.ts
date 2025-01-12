@@ -3,84 +3,131 @@ import { formatNumberWithCurrency } from './index';
 
 describe('formatNumberWithCurrency', () => {
   describe('기본 동작', () => {
-    it('접미사(suffix) 위치에 통화 기호를 추가한다', () => {
-      expect(formatNumberWithCurrency(45000, { currency: '원' })).toBe(
-        '4만 5,000원'
-      );
+    it('옵션 없이 호출하면 숫자만 반환해야 합니다.', () => {
+      expect(formatNumberWithCurrency(1000)).toBe('1,000');
+      expect(formatNumberWithCurrency('1000')).toBe('1,000');
+    });
 
-      expect(formatNumberWithCurrency('45000', { currency: '원' })).toBe(
-        '4만 5,000원'
+    it('기본적으로 접미사(suffix) 위치에 통화 기호를 추가해야 합니다.', () => {
+      expect(formatNumberWithCurrency(1000, { symbol: '원' })).toBe('1,000원');
+      expect(formatNumberWithCurrency('1000', { symbol: '원' })).toBe(
+        '1,000원'
       );
     });
 
-    it('접두사(prefix) 위치에 통화 기호를 추가한다', () => {
+    it('음수일 때 통화 기호를 앞에 추가해야 합니다.', () => {
       expect(
-        formatNumberWithCurrency(1000, {
-          currency: '$',
-          position: 'prefix',
-        })
-      ).toBe('$1,000');
-
+        formatNumberWithCurrency(-1000, { symbol: '$', position: 'prefix' })
+      ).toBe('-$1,000');
       expect(
-        formatNumberWithCurrency('1000', {
-          currency: '$',
-          position: 'prefix',
-        })
-      ).toBe('$1,000');
+        formatNumberWithCurrency('-1000', { symbol: '$', position: 'prefix' })
+      ).toBe('-$1,000');
     });
   });
 
   describe('옵션 적용', () => {
-    it('floorUnit 주어진 값에 따라 버림 단위를 적용해야 합니다.', () => {
+    it('position 옵션을 기반으로 기호를 추가해야 합니다.', () => {
       expect(
-        formatNumberWithCurrency(12345, { floorUnit: 10000, currency: '원' })
-      ).toBe('1만원');
-    });
-
-    it('commas가 true라면 ","를 추가하며, false라면 제외해야 합니다.', () => {
-      expect(
-        formatNumberWithCurrency(45000, { commas: false, currency: '원' })
-      ).toBe('4만 5000원');
-
-      expect(
-        formatNumberWithCurrency(45000, { commas: true, currency: '원' })
-      ).toBe('4만 5,000원');
-    });
-
-    it('space가 true라면 단위 사이에 공백을 추가하며, false라면 제외해야 합니다.', () => {
-      expect(
-        formatNumberWithCurrency(45000, { space: false, currency: '원' })
-      ).toBe('4만5,000원');
-
-      expect(
-        formatNumberWithCurrency(45000, { space: true, currency: '원' })
-      ).toBe('4만 5,000원');
-    });
-
-    it('사용자 정의 단위를 적용할 수 있습니다.', () => {
-      const customUnits = [
-        { unit: 'M', value: 1000000 },
-        { unit: 'K', value: 1000 },
-      ];
-
-      expect(
-        formatNumberWithCurrency(1234567, {
-          units: customUnits,
-          floorUnit: 1000000,
-          currency: '$',
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
           position: 'prefix',
         })
-      ).toBe('$1M');
+      ).toBe('$1,000');
 
-      // 단위 적용 X
       expect(
-        formatNumberWithCurrency(1234567, {
-          units: [],
-          floorUnit: 1000,
-          currency: '$',
-          position: 'prefix',
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
+          position: 'suffix',
         })
-      ).toBe('$1,234,000');
+      ).toBe('1,000$');
+    });
+
+    it('space가 true일 때 통화 기호와 숫자 사이에 공백을 추가해야 합니다.', () => {
+      expect(
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
+          position: 'prefix',
+          space: true,
+        })
+      ).toBe('$ 1,000');
+
+      expect(
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
+          position: 'prefix',
+          space: false,
+        })
+      ).toBe('$1,000');
+    });
+
+    it('commas 옵션을 기반으로 쉼표를 추가해야 합니다.', () => {
+      expect(
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
+          position: 'prefix',
+          commas: true,
+        })
+      ).toBe('$1,000');
+
+      expect(
+        formatNumberWithCurrency(1000, {
+          symbol: '$',
+          position: 'prefix',
+          commas: false,
+        })
+      ).toBe('$1000');
+    });
+
+    it('locale 옵션으로 통화 기호를 자동 적용해야 합니다.', () => {
+      expect(
+        formatNumberWithCurrency(1000, {
+          locale: 'USD',
+        })
+      ).toBe('$1,000');
+
+      expect(
+        formatNumberWithCurrency(1000, {
+          locale: 'KRW',
+        })
+      ).toBe('1,000원');
+    });
+
+    it('locale 옵션이 있으면 commas 옵션을 제외한 나머지 옵션들은 무시되어야 합니다.', () => {
+      expect(
+        formatNumberWithCurrency(1000, {
+          locale: 'USD',
+          commas: true,
+          symbol: '*', // 무시
+          position: 'prefix', // 무시
+          space: true, // 무시
+        })
+      ).toBe('$1,000');
+
+      expect(
+        formatNumberWithCurrency(1000, {
+          locale: 'USD',
+          commas: false,
+          symbol: '*', // 무시
+          position: 'prefix', // 무시
+          space: true, // 무시
+        })
+      ).toBe('$1000');
+    });
+  });
+
+  describe('에러 처리', () => {
+    it('숫자가 아닌 값이 주어지면 에러를 던져야 합니다.', () => {
+      expect(() => formatNumberWithCurrency('10d00')).toThrow(
+        'value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.'
+      );
+    });
+
+    it('지원하지 않는 locale 입력시 에러를 던져야 합니다.', () => {
+      expect(() =>
+        formatNumberWithCurrency(1000, {
+          locale: 'INVALID' as unknown as 'KRW',
+        })
+      ).toThrow('유효하지 않은 locale 입니다.');
     });
   });
 });

@@ -29,14 +29,8 @@ type FloorUnit =
   | 100_000_000_000
   | 1_000_000_000_000;
 
-const DEFAULT_UNITS: Unit[] = [
-  { unit: '조', value: ONE_TRILLION },
-  { unit: '억', value: ONE_HUNDRED_MILLION },
-  { unit: '만', value: TEN_THOUSAND },
-];
-
 interface FormatNumberWithUnitsOptions {
-  units?: Unit[]; // default: DEFAULT_UNITS
+  units?: Unit[] | readonly Unit[]; // default: []
   commas?: boolean; // default: true
   floorUnit?: FloorUnit; // default: 1
   space?: boolean; // default: true
@@ -54,9 +48,19 @@ function formatNumberWithUnits(
 ```ts title="typescript"
 import { formatNumberWithUnits } from '@modern-kit/utils';
 
+const KRW_UNITS = [
+  { unit: '조', value: 1_000_000_000_000 },
+  { unit: '억', value: 100_000_000 },
+  { unit: '만', value: 10_000 },
+] as const;
+
 // 기본 동작
-formatNumberWithUnits(1234567) // "123만 4,567"
-formatNumberWithUnits('1234567') // "123만 4,567", 숫자로 이루어진 문자열 허용
+formatNumberWithUnits(1234567) // "1,234,567"
+
+formatNumberWithUnits(1234567, { units: KRW_UNITS }) // "123만 4,567"
+formatNumberWithUnits(-1234567, { units: KRW_UNITS }) // "-123만 4,567", 음수 처리
+
+formatNumberWithUnits('1234567', { units: KRW_UNITS }) // "123만 4,567", 숫자로 이루어진 문자열 허용
 ```
 
 <br />
@@ -65,31 +69,23 @@ formatNumberWithUnits('1234567') // "123만 4,567", 숫자로 이루어진 문�
 ```ts title="typescript"
 import { formatNumberWithUnits } from '@modern-kit/utils';
 
-// 단위 사이 공백 추가
-formatNumberWithUnits(1234567, { space: true }) // "123만 4,567"
-formatNumberWithUnits(1234567, { space: false }) // "123만4,567"
+const KRW_UNITS = [
+  { unit: '조', value: 1_000_000_000_000 },
+  { unit: '억', value: 100_000_000 },
+  { unit: '만', value: 10_000 },
+] as const;
 
-// 쉼표 사용 여부
-formatNumberWithUnits(1234567, { commas: false }) // "123만 4567"
-formatNumberWithUnits(1234567, { commas: true }) // "123만 4,567"
+// 단위 사이 공백 추가 (기본값: true)
+formatNumberWithUnits(1234567, { units: KRW_UNITS, space: true }) // "123만 4,567"
+formatNumberWithUnits(1234567, { units: KRW_UNITS, space: false }) // "123만4,567"
 
-// 버림 단위
-formatNumberWithUnits(1234567, { floorUnit: 10000 }) // "123만"
+// 쉼표 사용 여부 (기본값: true)
+formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
+formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: true }) // "123만 4,567"
 
-// 사용자 정의 단위
-const customUnits = [
-  { unit: 'K', value: 1000 },
-  { unit: 'M', value: 1000000 },
-];
+// 버림 단위 (기본값: 1)
+formatNumberWithUnits(1234567, { units: KRW_UNITS, floorUnit: 10000 }) // "123만"
 
-formatNumberWithUnits(1234567, { 
-  units: customUnits, 
-  floorUnit: 1000, 
-}); // "1M 234K"
-
-// 단위 적용 X
-formatNumberWithUnits(1234567, { 
-  units: [], 
-  floorUnit: 1000, 
-}); // "1,234,000"
+// 소수점 자리수 (기본값: 0)
+formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
 ```

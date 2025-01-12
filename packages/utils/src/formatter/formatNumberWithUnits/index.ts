@@ -1,4 +1,4 @@
-import { formatNumberWithCommas } from '../../formatter/formatNumberWithCommas';
+import { getNumberWithConditionalCommas } from './formatNumberWithUnits.utils';
 import { isNumber } from '../../validator/isNumber';
 
 interface Unit {
@@ -21,37 +21,13 @@ type FloorUnit =
   | 100_000_000_000
   | 1_000_000_000_000;
 
-export interface FormatNumberWithUnitsOptions {
-  units?: Unit[];
+interface FormatNumberWithUnitsOptions {
+  units?: Unit[] | readonly Unit[];
   commas?: boolean;
   floorUnit?: FloorUnit;
   space?: boolean;
   decimal?: number;
 }
-
-const ONE_TRILLION = 1_000_000_000_000;
-const ONE_HUNDRED_MILLION = 100_000_000;
-const TEN_THOUSAND = 10_000;
-
-export const DEFAULT_UNITS: Unit[] = [
-  { unit: '조', value: ONE_TRILLION },
-  { unit: '억', value: ONE_HUNDRED_MILLION },
-  { unit: '만', value: TEN_THOUSAND },
-];
-
-/**
- * @description 쉼표 사용 여부에 따라 숫자를 포맷팅하는 함수
- *
- * @param {number} value - 포맷팅할 숫자
- * @param {boolean} commas - 쉼표 사용 여부
- * @returns {string} 포맷팅된 문자열
- */
-export const getNumberWithConditionalCommas = (
-  value: number | string,
-  commas: boolean
-): string => {
-  return commas ? formatNumberWithCommas(value) : String(value);
-};
 
 /**
  * @description `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
@@ -59,81 +35,90 @@ export const getNumberWithConditionalCommas = (
  * @param {number | string} value - 포맷팅할 숫자 또는 숫자로 이루어진 문자열
  * @param {FormatNumberWithUnitsOptions} options - 포맷팅 옵션
  * @param {Unit[]} [options.units=DEFAULT_UNITS] - 사용할 단위 배열(조,억,만). 직접 정의해서 사용할 수 있습니다.
- * @param {boolean} [options.commas=true] - 천 단위 구분 쉼표 사용 여부
- * @param {number} [options.floorUnit=1] - 버림 단위(기본값: 1). 버림 단위보다 작은 숫자는 '0'으로 반환합니다.
- * @param {boolean} [options.space=true] - 단위 사이 공백 추가 여부
- * @param {number} [options.decimal=0] - 소수점 자리수
+ * @param {boolean} [options.commas=true] - 천 단위 구분 쉼표 사용 여부입니다.
+ * @param {number} [options.floorUnit=1] - 버림 단위이며, 10의 제곱수를 단위로 사용합니다. 만약, 버림 단위보다 작은 숫자는 '0'으로 반환합니다.
+ * @param {boolean} [options.space=true] - 단위 사이 공백 추가 여부입니다.
+ * @param {number} [options.decimal=0] - 소수점 자리수입니다. 버림 단위가 1보다 클 경우 소수점 자리수를 적용하지 않습니다.
  * @returns {string} 포맷팅된 문자열
- * @throws 입력값이 숫자로 변환할 수 없는 경우 에러 발생
+ * @throws 입력값이 올바른 형식이 아니거나 floorUnit, decimal이 올바른 형식이 아닐 경우 에러 발생
  *
  * @example
  * // 기본 동작
- * formatNumberWithUnits(1234567) // "123만 4,567"
+ * const KRW_UNITS = [
+ *   { unit: '조', value: 1_000_000_000_000 },
+ *   { unit: '억', value: 100_000_000 },
+ *   { unit: '만', value: 10_000 },
+ * ] as const;
+ *
+ * formatNumberWithUnits(1234567) // "1,234,567"
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS }) // "123만 4,567"
+ * formatNumberWithUnits('1234567', { units: KRW_UNITS }) // "123만 4,567"
  *
  * @example
- * // 단위 사이 공백 추가
- * formatNumberWithUnits(1234567, { space: true }) // "123만 4,567"
- * formatNumberWithUnits(1234567, { space: false }) // "123만4,567"
+ * // 단위 사이 공백 추가 (기본값: true)
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS, space: true }) // "123만 4,567"
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS, space: false }) // "123만4,567"
  *
  * @example
- * // 쉼표 사용 여부
- * formatNumberWithUnits(1234567, { commas: false }) // "123만 4567"
- * formatNumberWithUnits(1234567, { commas: true }) // "123만 4,567"
+ * // 쉼표 사용 여부 (기본값: true)
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: true }) // "123만 4,567"
  *
  * @example
- * // 버림 단위
- * formatNumberWithUnits(1234567, { floorUnit: 10000 }) // "123만"
+ * // 버림 단위 (기본값: 1)
+ * formatNumberWithUnits(1234567, { units: KRW_UNITS, floorUnit: 10000 }) // "123만"
  *
  * @example
- * // 소수점 자리수
- * formatNumberWithUnits(1234567.123, { decimal: 2 }) // "123만 4,567.12"
+ * // 소수점 자리수 (기본값: 0)
+ * formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
  *
  * // floorUnit이 1보다 크면 소수점 자리수를 적용하지 않습니다.
- * formatNumberWithUnits(1234567.123, { decimal: 3, floorUnit: 1000 }) // "123만 4,000"
- *
- * @example
- * // 사용자 정의 단위
- * const customUnits = [
- *   { unit: 'K', value: 1000 },
- *   { unit: 'M', value: 1000000 },
- * ];
- *
- * formatNumberWithUnits(1234567, { units: customUnits, floorUnit: 1000 }) // "1M 234K"
+ * formatNumberWithUnits(1234567.123, {
+ *   units: KRW_UNITS,
+ *   decimal: 3,
+ *   floorUnit: 1000
+ * }) // "123만 4,000"
  */
 export function formatNumberWithUnits(
   value: number | string,
   options: FormatNumberWithUnitsOptions = {}
 ): string {
   const {
-    units = DEFAULT_UNITS,
+    units = [],
     space = true,
     commas = true,
     floorUnit = 1,
     decimal = 0,
   } = options;
 
-  const valueToUse = isNumber(value) ? value : Number(value);
+  // value 값을 기준으로 내림차순 정렬
+  const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
+  const valueToUse = isNumber(value) ? value : Number(value);
+  const isNegative = valueToUse < 0;
+  const absoluteValue = Math.abs(valueToUse);
+
+  // 에러 처리
   if (isNaN(valueToUse)) {
     throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
   }
 
-  if (!Number.isInteger(floorUnit) || floorUnit < 1) {
-    throw new Error('floorUnit은 1 이상의 정수여야 합니다.');
-  }
+  const isValidFloorUnit =
+    !Number.isInteger(floorUnit) ||
+    floorUnit < 1 ||
+    (floorUnit !== 1 && floorUnit % 10 !== 0);
 
+  if (isValidFloorUnit) {
+    throw new Error('floorUnit은 1을 포함한 10의 제곱수여야 합니다.');
+  }
   if (!Number.isInteger(decimal) || decimal < 0) {
     throw new Error('decimal은 0 이상의 정수여야 합니다.');
   }
 
   // value가 floorUnit(버림 단위)보다 작으면 '0'을 반환
-  if (Math.abs(valueToUse) < floorUnit) {
+  if (absoluteValue < floorUnit) {
     return '0';
   }
-
-  const isNegative = valueToUse < 0;
-  const absoluteValue = Math.abs(valueToUse);
-  const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
   let formattedResult = '';
   let remainingValue =

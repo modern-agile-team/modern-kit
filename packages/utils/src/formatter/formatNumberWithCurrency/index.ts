@@ -1,95 +1,74 @@
-import {
-  formatNumberWithUnits,
-  FormatNumberWithUnitsOptions,
-} from '../formatNumberWithUnits';
-
-interface CurrencyOptions {
-  currency: string;
-  position: 'prefix' | 'suffix';
-}
-
-type FormatNumberCurrencyOptions = FormatNumberWithUnitsOptions &
-  Partial<CurrencyOptions>;
+import { isNumber } from '../../validator/isNumber';
+import { FormatNumberCurrencyOptions } from './formatNumberWithCurrency.types';
+import { addCurrency } from './formatNumberWithCurrency.utils';
 
 /**
- * @description 숫자에 통화 단위를 추가하는 함수입니다.
- *
- * @param {number | string} value - 통화 단위를 추가할 숫자 문자열
- * @param {CurrencyOptions} currencyOption - 통화 단위 옵션
- * @param {string} [currencyOption.currency=''] - 통화 단위
- * @param {string} [currencyOption.position='suffix'] - 통화 단위 위치
- * @returns {string} 통화 단위가 추가된 숫자 문자열
- */
-export const addCurrency = (
-  value: string,
-  currencyOption: CurrencyOptions
-): string => {
-  const { currency, position } = currencyOption;
-
-  if (position === 'prefix') {
-    return currency + value;
-  }
-  return value + currency;
-};
-
-/**
- * @description 숫자 값을 단위 별로 나누고, 통화 기호와 함께 포맷팅하는 함수입니다.
- *
- * @modern-kit/utils의 `formatNumberWithUnits`를 확장했기 때문에 해당 함수 옵션을 함께 활용 할 수 있습니다.
- *
- * @see https://modern-agile-team.github.io/modern-kit/docs/utils/formatter/formatNumberWithUnits
+ * @description `숫자 혹은 숫자로 이뤄진 문자열`을 주어진 `통화 기호`를 추가하는 함수입니다.
  *
  * @param {number | string} value - 포맷팅할 숫자 값
  * @param {FormatNumberCurrencyOptions} options - 포맷팅 옵션
- * @param {string} [options.currency=''] - 통화 기호
- * @param {string} [options.position='suffix'] - 통화 기호 위치 ('prefix' | 'suffix')
- * @param {Unit[]} [options.units=[]] - 사용할 단위 배열. 직접 정의해서 사용할 수 있습니다.
- * @param {boolean} [options.commas=true] - 천 단위 구분 쉼표 사용 여부
- * @param {number} [options.floorUnit=1] - 버림 단위(기본값: 1). 버림 단위보다 작은 숫자는 '0'으로 반환합니다.
- * @param {boolean} [options.space=true] - 단위 사이 공백 추가 여부
+ * @param {string} [options.symbol=''] - 통화 기호
+ * @param {'prefix' | 'suffix'} [options.position='suffix'] - 통화 기호 위치
+ * @param {boolean} [options.space=false] - 숫자와 통화 기호 사이 공백 여부
+ * @param {boolean} [options.commas=true] - 천의 단위 구분 여부
+ * @param {'KRW' | 'KRW_SYMBOL' | 'USD' | 'JPY' | 'CNY' | 'EUR'} [options.locale] - 통화 단위
  * @returns 통화 기호가 포함된 포맷팅된 문자열
  *
  * @example
- * // 기본 동작
- * formatNumberWithCurrency(1000, { currency: '$', position: 'prefix' }) // '$1,000'
- * formatNumberWithCurrency(1000, { currency: '원', position: 'suffix' }) // '1,000원'
+ * // 기본 사용법
+ * formatNumberWithCurrency(1000) // '1,000'
+ *
+ * // 통화 기호 추가 (기본값: '')
+ * formatNumberWithCurrency(1000, { symbol: '원' }) // '1,000원'
+ *
+ * // 음수 처리
+ * formatNumberWithCurrency(-1000, { symbol: '$', position: 'prefix' }) // '-$1,000'
+ *
+ * // 숫자로 이뤄진 문자열 허용
+ * formatNumberWithCurrency('1000', { symbol: '원' }) // '1,000원'
  *
  * @example
- * // 단위 사이 공백 추가
- * formatNumberWithCurrency(12345, { currency: '원', position: 'suffix', space: false }) // '1만2,345원'
- * formatNumberWithCurrency(12345, { currency: '원', position: 'suffix', space: true }) // '1만 2,345원'
+ * // 통호 기호 위치 변경 (기본값: 'suffix')
+ * formatNumberWithCurrency(1000, { symbol: '$', position: 'prefix' }) // '$1,000'
  *
- * @example
- * // 쉼표 사용 여부
- * formatNumberWithCurrency(12345, { currency: '원', position: 'suffix', commas: false }) // '1만 2345원'
- * formatNumberWithCurrency(12345, { currency: '원', position: 'suffix', commas: true }) // '1만 2,345원'
+ * // 공백 추가 (기본값: false)
+ * formatNumberWithCurrency(1000, { symbol: '₩',  space: true }) // '1,000 원'
  *
- * @example
- * // 버림 단위
- * formatNumberWithCurrency(12345, { currency: '원', position: 'suffix', floorUnit: 10000 }) // '1만원'
+ * // 천의 단위 구분 여부 (기본값: true)
+ * formatNumberWithCurrency(1000, { symbol: '원', commas: false }) // '1000원'
+ * formatNumberWithCurrency(1000, { symbol: '원', commas: true }) // '1,000원'
  *
- * @example
- * // 사용자 정의 단위
- * const customUnits = [
- *   { unit: 'K', value: 1000 },
- *   { unit: 'M', value: 1000000 },
- * ];
+ * // locale 사용
+ * formatNumberWithCurrency(1000, { locale: 'USD' }) // '$1,000'
+ * formatNumberWithCurrency(1000, { locale: 'KRW' }) // '1,000원'
  *
- * formatNumberWithCurrency(1234567, {
- *   units: customUnits,
- *   currency: '$',
- *   position: 'prefix',
- *   floorUnit: 1000000
- * }) // '$1M'
+ * // locale 옵션이 있으면 commas 옵션을 제외한 나머지 옵션들은 무시됩니다.
+ * formatNumberWithCurrency(1000, { locale: 'KRW', commas: false }) // '1000원'
  */
 export function formatNumberWithCurrency(
   value: number | string,
   options: FormatNumberCurrencyOptions = {}
 ) {
-  const { currency = '', position = 'suffix', ...restOptions } = options;
+  const {
+    symbol = '',
+    position = 'suffix',
+    space = false,
+    commas = true,
+    locale,
+  } = options;
+  const valueToUse = isNumber(value) ? value : Number(value);
+  const isNegative = valueToUse < 0;
 
-  return addCurrency(formatNumberWithUnits(value, restOptions), {
-    currency,
+  if (isNaN(valueToUse)) {
+    throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
+  }
+
+  return addCurrency(valueToUse, {
+    symbol,
     position,
+    space,
+    locale,
+    commas,
+    isNegative,
   });
 }
