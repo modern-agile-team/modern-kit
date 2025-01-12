@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.26.0
+
+### Minor Changes
+
+- [#666](https://github.com/modern-agile-team/modern-kit/pull/666) [`57ff5c1`](https://github.com/modern-agile-team/modern-kit/commit/57ff5c1045bd6cee5df99ba3595e96057bf19a3d) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithUnits, formatNumberWithCurrency 로직 개선 및 인터페이스 변경 - @ssi02014
+
 ## 1.25.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.7.0
+
+### Minor Changes
+
+- [#667](https://github.com/modern-agile-team/modern-kit/pull/667) [`2ecdfd1`](https://github.com/modern-agile-team/modern-kit/commit/2ecdfd11297cbb35941760a52c1201424e51af6c) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): DeepPartial 유틸 타입 추가 - @ssi02014
+
 ## 1.6.0
 
 ### Minor Changes
