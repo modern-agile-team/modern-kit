@@ -42,7 +42,7 @@ const getCurrencyOption = (
  * @param {boolean} [currencyOption.space=false] - 숫자와 통화 기호 사이 공백 여부
  * @returns {string} 통화 기호가 추가된 문자열
  */
-export const addCurrency = (
+export const getFormattedNumberWithCurrency = (
   value: number,
   options: FormatNumberCurrencyOptions & { isNegative: boolean }
 ): string => {

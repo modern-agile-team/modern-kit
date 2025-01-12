@@ -1,6 +1,6 @@
 import { isNumber } from '../../validator/isNumber';
 import { FormatNumberCurrencyOptions } from './formatNumberWithCurrency.types';
-import { addCurrency } from './formatNumberWithCurrency.utils';
+import { getFormattedNumberWithCurrency } from './formatNumberWithCurrency.utils';
 
 /**
  * @description `숫자 혹은 숫자로 이뤄진 문자열`을 주어진 `통화 기호`를 추가하는 함수입니다.
@@ -63,7 +63,7 @@ export function formatNumberWithCurrency(
     throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
   }
 
-  return addCurrency(valueToUse, {
+  const formattedResult = getFormattedNumberWithCurrency(valueToUse, {
     symbol,
     position,
     space,
@@ -71,4 +71,6 @@ export function formatNumberWithCurrency(
     commas,
     isNegative,
   });
+
+  return formattedResult;
 }

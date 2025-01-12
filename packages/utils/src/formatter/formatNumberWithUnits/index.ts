@@ -1,33 +1,6 @@
-import { getNumberWithConditionalCommas } from './formatNumberWithUnits.utils';
+import { getFormattedValueWithUnits } from './formatNumberWithUnits.utils';
 import { isNumber } from '../../validator/isNumber';
-
-interface Unit {
-  unit: string;
-  value: number;
-}
-
-type FloorUnit =
-  | 1
-  | 10
-  | 100
-  | 1_000
-  | 10_000
-  | 100_000
-  | 1_000_000
-  | 10_000_000
-  | 100_000_000
-  | 1_000_000_000
-  | 10_000_000_000
-  | 100_000_000_000
-  | 1_000_000_000_000;
-
-interface FormatNumberWithUnitsOptions {
-  units?: Unit[] | readonly Unit[];
-  commas?: boolean;
-  floorUnit?: FloorUnit;
-  space?: boolean;
-  decimal?: number;
-}
+import { FormatNumberWithUnitsOptions } from './formatNumberWithUnits.types';
 
 /**
  * @description `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
@@ -95,9 +68,6 @@ export function formatNumberWithUnits(
   const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
   const valueToUse = isNumber(value) ? value : Number(value);
-  const isNegative = valueToUse < 0;
-  const absoluteValue = Math.abs(valueToUse);
-
   // 에러 처리
   if (isNaN(valueToUse)) {
     throw new Error('value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.');
@@ -111,44 +81,17 @@ export function formatNumberWithUnits(
   if (isValidFloorUnit) {
     throw new Error('floorUnit은 1을 포함한 10의 제곱수여야 합니다.');
   }
+
   if (!Number.isInteger(decimal) || decimal < 0) {
     throw new Error('decimal은 0 이상의 정수여야 합니다.');
   }
 
-  // value가 floorUnit(버림 단위)보다 작으면 '0'을 반환
-  if (absoluteValue < floorUnit) {
-    return '0';
-  }
+  const formattedResult = getFormattedValueWithUnits(valueToUse, sortedUnits, {
+    commas,
+    space,
+    decimal,
+    floorUnit,
+  });
 
-  let formattedResult = '';
-  let remainingValue =
-    floorUnit > 1
-      ? Math.floor(absoluteValue / floorUnit) * floorUnit
-      : absoluteValue;
-
-  // unit 별로 나누기
-  for (let i = 0; i < sortedUnits.length; i++) {
-    const { unit, value } = sortedUnits[i];
-    const quotient = Math.floor(remainingValue / value);
-
-    if (quotient <= 0) continue;
-
-    formattedResult += `${getNumberWithConditionalCommas(
-      quotient,
-      commas
-    )}${unit}${space ? ' ' : ''}`;
-
-    remainingValue %= value;
-  }
-
-  // 남은 remainingValue가 있으면 추가
-  if (remainingValue > 0) {
-    formattedResult += `${getNumberWithConditionalCommas(
-      remainingValue.toFixed(decimal),
-      commas
-    )}`;
-  }
-
-  // 음수일 경우 앞에 '-' 붙이며, 앞/뒤 공백 제거
-  return (isNegative ? '-' : '') + formattedResult.trim();
+  return formattedResult;
 }
