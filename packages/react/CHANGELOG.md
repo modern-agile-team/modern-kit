@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.2
+
+### Patch Changes
+
+- [#677](https://github.com/modern-agile-team/modern-kit/pull/677) [`41a4223`](https://github.com/modern-agile-team/modern-kit/commit/41a42238f4f700f5c2531fb4627a740cb7119b15) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): SwitchCase 하위 타입스크립트/리액트 버전 타입 호환성을 위해 반환 타입 수정 - @ssi02014
+
 ## 1.27.1
 
 ### Patch Changes

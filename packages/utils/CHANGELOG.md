@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 1.26.2
+
+### Patch Changes
+
+- [#674](https://github.com/modern-agile-team/modern-kit/pull/674) [`8b3f288`](https://github.com/modern-agile-team/modern-kit/commit/8b3f288142384b78fc888e1d45d3412dfd768c8b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatValueWithSymbol 자연스러운 역할 이해를 위해 네이밍 변경 - @ssi02014
+
 ## 1.26.1
 
 ### Patch Changes
