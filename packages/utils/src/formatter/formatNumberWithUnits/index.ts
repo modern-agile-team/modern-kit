@@ -86,6 +86,12 @@ export function formatNumberWithUnits(
     throw new Error('decimal은 0 이상의 정수여야 합니다.');
   }
 
+  // 0일 경우 바로 반환
+  if (valueToUse === 0) {
+    return '0';
+  }
+
+  // 포맷팅
   return getFormattedValueWithUnits(valueToUse, {
     units: sortedUnits,
     commas,
