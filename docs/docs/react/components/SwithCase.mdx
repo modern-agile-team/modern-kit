@@ -16,19 +16,18 @@ import { SwitchCase } from '@modern-kit/react';
 
 ## Interface
 ```ts title="typescript"
-type Component = Nullable<React.ReactNode>;
-
-interface SwitchCaseProps<Condition extends string | number> {
-  condition: Condition | null | undefined;
-  cases: Partial<Record<Condition, Component>>;
-  defaultCaseComponent?: Component;
+interface SwitchCaseProps<Case extends PropertyKey> {
+  value: Case | null | undefined;
+  caseBy: Record<Case, React.ReactNode>;
+  defaultComponent?: React.ReactNode;
 }
-
-const SwitchCase: <Condition extends string | number>({
-  condition,
-  cases,
-  defaultCaseComponent,
-}: SwitchCaseProps<Condition>) => JSX.Element;
+```
+```ts title="typescript"
+const SwitchCase: <Case extends PropertyKey>({
+  caseBy,
+  value,
+  defaultComponent,
+}: SwitchCaseProps<Case>) => JSX.Element;
 ```
 
 ## Usage

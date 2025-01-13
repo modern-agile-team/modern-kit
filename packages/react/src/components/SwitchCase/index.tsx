@@ -15,7 +15,7 @@ interface SwitchCaseProps<Case extends PropertyKey> {
  * @param {Record<Case, React.ReactNode>} props.caseBy - `value` 값에 대응하는 컴포넌트들을 담은 객체
  * @param {React.ReactNode} props.defaultComponent - `value`가 `null`이거나 `caseBy`에 해당하는 컴포넌트가 없을 때 렌더링할 기본 컴포넌트
  *
- * @returns {React.ReactNode} - 조건부로 렌더링된 컴포넌트
+ * @returns {JSX.Element} - 조건부로 렌더링된 컴포넌트
  *
  * @example
  * ```tsx
@@ -30,10 +30,10 @@ export const SwitchCase = <Case extends PropertyKey>({
   caseBy,
   value,
   defaultComponent = null,
-}: SwitchCaseProps<Case>): React.ReactNode => {
+}: SwitchCaseProps<Case>): JSX.Element => {
   if (isNil(value)) {
-    return defaultComponent;
+    return <>{defaultComponent}</>;
   }
 
-  return caseBy[value] ?? defaultComponent;
+  return <>{caseBy[value] ?? defaultComponent}</>;
 };
