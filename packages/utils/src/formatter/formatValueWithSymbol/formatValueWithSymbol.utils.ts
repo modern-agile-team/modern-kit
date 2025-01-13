@@ -1,4 +1,4 @@
-import { FormatNumberWithSymbolOptions } from './formatValueWithSymbol.types';
+import { FormatValueWithSymbolOptions } from './formatValueWithSymbol.types';
 
 /**
  * @description 주어진 문자열에 기호를 추가하는 내부 유틸리티 함수입니다.
@@ -8,7 +8,7 @@ import { FormatNumberWithSymbolOptions } from './formatValueWithSymbol.types';
  * - 기호와 값 사이에 공백을 추가할 수 있습니다.
  *
  * @param {number | string} value - 통화 기호를 추가할 숫자 또는 문자열
- * @param {FormatNumberWithSymbolOptions & { isNegative: boolean }} options - 포맷팅 옵션
+ * @param {Omit<FormatValueWithSymbolOptions, 'separator'> & { isNegative: boolean }} options - 포맷팅 옵션
  * @param {string} [options.symbol=''] - 추가할 기호
  * @param {'prefix' | 'suffix'} [options.position='suffix'] - 기호 위치
  * @param {boolean} [options.space=false] - 숫자와 기호 사이 공백 여부
@@ -16,7 +16,7 @@ import { FormatNumberWithSymbolOptions } from './formatValueWithSymbol.types';
  */
 export const getFormattedNumberWithSymbol = (
   value: string,
-  options: FormatNumberWithSymbolOptions & {
+  options: Omit<FormatValueWithSymbolOptions, 'separator'> & {
     isNegative: boolean;
   }
 ): string => {

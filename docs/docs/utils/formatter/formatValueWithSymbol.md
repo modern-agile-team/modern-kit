@@ -5,7 +5,7 @@
 - 기호는 `prefix` 또는 `suffix` 위치에 추가할 수 있습니다.
 - 음수일 경우 기호 앞에 `-`가 추가됩니다.
 - 기호와 값 사이에 공백 여부(`space`)를 선택할 수 있습니다.
-- 천 단위 구분 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
+- 천 단위 구분 기호 (`separator`)를 선택할 수 있습니다.
 
 <br />
 
@@ -15,9 +15,10 @@
 ## Interface
 ```ts title="typescript"
 interface FormatValueWithSymbolOptions {
-  symbol?: string;
-  position?: 'prefix' | 'suffix';
-  space?: boolean;
+  symbol?: string; // default: ''
+  position?: 'prefix' | 'suffix'; // default: 'suffix'
+  space?: boolean; // default: false
+  separator?: string; // default: ','
 }
 ```
 ```ts title="typescript"
@@ -32,27 +33,28 @@ function formatValueWithSymbol(
 import { formatValueWithSymbol } from '@modern-kit/utils';
 
 // 통화 기호 추가 (기본 값: '')
-formatValueWithSymbol(1000) // '1000'
-formatValueWithSymbol(1000, { symbol: '원' }) // '1000원'
+formatValueWithSymbol(1000) // '1,000'
+formatValueWithSymbol(1000, { symbol: '원' }) // '1,000원'
 
 // 통호 기호 위치 변경 (기본값: 'suffix')
-formatValueWithSymbol(1000, { symbol: '$', position: 'prefix' }) // '$1000'
-formatValueWithSymbol(1000, { symbol: '원', position: 'suffix' }) // '1000원'
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix' }) // '$1,000'
+formatValueWithSymbol(1000, { symbol: '원', position: 'suffix' }) // '1,000원'
 
 // 공백 추가 (기본값: false)
-formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', space: false }) // '$1000'
-formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', space: true }) // '$ 1000'
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', space: false }) // '$1,000'
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', space: true }) // '$ 1,000'
+
+// 천 단위 구분 기호 변경 (기본값: `,`)
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', separator: '' }) // '$1000'
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', separator: ',' }) // '$1,000'
+formatValueWithSymbol(1000, { symbol: '$', position: 'prefix', separator: '-' }) // '$1-000'
 ```
 
 <br />
 
-### 응용
+### 응용 (with formatNumberWithUnits)
 ```ts title="typescript"
-import { 
-  formatValueWithSymbol, 
-  formatNumberWithCommas, 
-  formatNumberWithUnits 
-} from '@modern-kit/utils';
+import { formatValueWithSymbol, formatNumberWithUnits } from '@modern-kit/utils';
 
 const KRW_UNITS = [
   { unit: '조', value: 1_000_000_000_000 },
@@ -60,9 +62,7 @@ const KRW_UNITS = [
   { unit: '만', value: 10_000 },
 ] as const;
 
-const numberWithCommas = formatNumberWithCommas(1234567); // 1,234,567
-const numberWithKRWUnits = formatNumberWithUnits(1230000, { units: KRW_UNITS }); // 123만
+const numberWithKRWUnits = formatNumberWithUnits(12340000, { units: KRW_UNITS }); // 1,234만
 
-formatValueWithSymbol(numberWithKRWUnits, { symbol: '원' }) // '123만원'
-formatValueWithSymbol(numberWithCommas, { symbol: '원' }) // '1,234,567원'
+formatValueWithSymbol(numberWithKRWUnits, { symbol: '원' }) // '1,234만원'
 ```

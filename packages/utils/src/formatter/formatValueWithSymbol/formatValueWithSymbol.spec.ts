@@ -65,14 +65,18 @@ describe('formatNumberWithSymbol', () => {
       ).toBe('$1,000');
     });
 
-    it('commas 옵션을 기반으로 천 단위 구분 쉼표를 추가해야 합니다.', () => {
-      expect(formatValueWithSymbol(1000, { symbol: '원', commas: false })).toBe(
+    it('separator 옵션을 기반으로 천 단위 구분 기호를 추가해야 합니다.', () => {
+      expect(formatValueWithSymbol(1000, { symbol: '원', separator: '' })).toBe(
         '1000원'
       );
 
-      expect(formatValueWithSymbol(1000, { symbol: '원', commas: true })).toBe(
-        '1,000원'
-      );
+      expect(
+        formatValueWithSymbol(1000, { symbol: '원', separator: ',' })
+      ).toBe('1,000원');
+
+      expect(
+        formatValueWithSymbol(1000, { symbol: '원', separator: ' ' })
+      ).toBe('1 000원');
     });
   });
 });

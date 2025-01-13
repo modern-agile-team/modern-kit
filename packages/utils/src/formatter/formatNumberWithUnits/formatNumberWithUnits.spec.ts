@@ -66,23 +66,30 @@ describe('formatNumberWithUnits', () => {
       expect(formatNumberWithUnits(12345, { floorUnit: 10000 })).toBe('10,000');
     });
 
-    it('commas가 true라면 ","를 추가하며, false라면 제외해야 합니다.', () => {
+    it('separator가 주어진 값에 따라 천 단위 구분 기호를 적용해야 합니다.', () => {
       expect(
         formatNumberWithUnits(1234567890000, {
-          commas: false,
+          separator: '',
           units: KRW_UNITS,
         })
       ).toBe('1조 2345억 6789만');
 
       expect(
         formatNumberWithUnits(1234567890000, {
-          commas: true,
+          separator: ',',
           units: KRW_UNITS,
         })
       ).toBe('1조 2,345억 6,789만');
 
+      expect(
+        formatNumberWithUnits(1234567890000, {
+          separator: '-',
+          units: KRW_UNITS,
+        })
+      ).toBe('1조 2-345억 6-789만');
+
       // units 옵션이 주어지지 않으면 기본 단위로 포맷팅
-      expect(formatNumberWithUnits(1234567890000, { commas: true })).toBe(
+      expect(formatNumberWithUnits(1234567890000, { separator: ',' })).toBe(
         '1,234,567,890,000'
       );
     });
@@ -141,12 +148,6 @@ describe('formatNumberWithUnits', () => {
       expect(() =>
         formatNumberWithUnits(1234567, { floorUnit: -1 as unknown as 10 })
       ).toThrow('floorUnit은 1을 포함한 10의 제곱수여야 합니다.');
-    });
-
-    it('floorUnit가 value의 절대값보다 작으면 예외를 발생시킵니다.', () => {
-      expect(() =>
-        formatNumberWithUnits(1234567, { floorUnit: 1000000000 })
-      ).toThrow('floorUnit 값은 value의 절대값보다 크거나 같아야 합니다.');
     });
 
     it('decimal이 0보다 작으면 예외를 발생시킵니다.', () => {

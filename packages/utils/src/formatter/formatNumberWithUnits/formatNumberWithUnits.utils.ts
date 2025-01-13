@@ -8,17 +8,19 @@ interface FormatOptions
 }
 
 /**
- * @description 쉼표 사용 여부에 따라 숫자를 포맷팅하는 함수
+ * @description 구분 기호 사용 여부에 따라 숫자를 포맷팅하는 함수
  *
  * @param {number} value - 포맷팅할 숫자
- * @param {boolean} commas - 쉼표 사용 여부
+ * @param {string} separator - 구분 기호
  * @returns {string} 포맷팅된 문자열
  */
-const formatNumberWithConditionalCommas = (
+const formatNumberWithConditionalSeparator = (
   value: number | string,
-  commas: boolean
+  separator: string
 ): string => {
-  return commas ? formatNumberWithSeparator(value) : String(value);
+  return separator
+    ? formatNumberWithSeparator(value, separator)
+    : String(value);
 };
 
 /**
@@ -26,18 +28,18 @@ const formatNumberWithConditionalCommas = (
  *
  * @param {FormatOptions} options - 포맷팅 옵션
  * @param {number} options.decimal - 소수점 자리수
- * @param {boolean} options.commas - 쉼표 사용 여부
+ * @param {string} options.separator - 천 단위 구분 기호
  * @returns {string} 포맷팅된 문자열
  */
 const formatRemainingValue = ({
   value,
   decimal,
-  commas,
+  separator,
 }: Omit<FormatOptions, 'space' | 'unit'>): string => {
   const formattedValue = Number.isInteger(value)
     ? value
     : value.toFixed(decimal);
-  return formatNumberWithConditionalCommas(formattedValue, commas);
+  return formatNumberWithConditionalSeparator(formattedValue, separator);
 };
 
 /**
@@ -46,17 +48,17 @@ const formatRemainingValue = ({
  * @param {FormatOptions} options - 포맷팅 옵션
  * @param {number} options.value - 포맷팅할 숫자
  * @param {string} options.unit - 단위
- * @param {boolean} options.commas - 쉼표 사용 여부
+ * @param {string} options.separator - 천 단위 구분 기호
  * @param {boolean} options.space - 단위 사이 공백 추가 여부
  * @returns {string} 포맷팅된 문자열
  */
 const formatUnitValue = ({
   value,
   unit,
-  commas,
+  separator,
   space,
 }: Omit<FormatOptions, 'decimal'>): string => {
-  return `${formatNumberWithConditionalCommas(value, commas)}${unit}${
+  return `${formatNumberWithConditionalSeparator(value, separator)}${unit}${
     space ? ' ' : ''
   }`;
 };
@@ -66,7 +68,7 @@ const formatUnitValue = ({
  *
  * @param {number} value - 포맷팅할 숫자 값
  * @param {Required<FormatNumberWithUnitsOptions>} options - 포맷팅 옵션
- * @param {boolean} options.commas - 천 단위 구분 쉼표 사용 여부입니다.
+ * @param {string} options.separator - 천의 단위 구분 기호
  * @param {boolean} options.space - 단위 사이 공백 추가 여부입니다.
  * @param {number} options.floorUnit - 버림 단위입니다.
  * @param {number} options.decimal - 소수점 자리수입니다.
@@ -76,7 +78,7 @@ export const getFormattedValueWithUnits = (
   value: number,
   options: Required<FormatNumberWithUnitsOptions>
 ): string => {
-  const { units, commas, space, decimal, floorUnit } = options;
+  const { units, separator, space, decimal, floorUnit } = options;
 
   const absoluteValue = Math.abs(value);
   const isNegative = value < 0;
@@ -85,7 +87,7 @@ export const getFormattedValueWithUnits = (
 
   // value가 floorUnit(버림 단위)보다 작으면 '0'을 반환
   if (absoluteValue < floorUnit) {
-    throw new Error('floorUnit 값은 value의 절대값보다 크거나 같아야 합니다.');
+    return '0';
   }
 
   // floorUnit이 1보다 큰 경우, 최종 결과에서 floorUnit 미만의 값은 버림
@@ -103,7 +105,7 @@ export const getFormattedValueWithUnits = (
     formattedResult += formatUnitValue({
       value: quotient,
       unit,
-      commas,
+      separator,
       space,
     });
     remainingValue %= value;
@@ -114,7 +116,7 @@ export const getFormattedValueWithUnits = (
     formattedResult += formatRemainingValue({
       value: remainingValue,
       decimal,
-      commas,
+      separator,
     });
   }
 

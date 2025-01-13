@@ -1,6 +1,6 @@
-export interface FormatNumberWithSymbolOptions {
+export interface FormatValueWithSymbolOptions {
   symbol?: string;
   position?: 'prefix' | 'suffix' | 'both';
   space?: boolean;
-  commas?: boolean;
+  separator?: string;
 }

@@ -20,7 +20,7 @@ export interface Unit {
 
 export interface FormatNumberWithUnitsOptions {
   units?: Unit[] | readonly Unit[];
-  commas?: boolean;
+  separator?: string;
   floorUnit?: FloorUnit;
   space?: boolean;
   decimal?: number;

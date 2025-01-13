@@ -2,7 +2,7 @@
 
 `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
 
-- 천 단위 구분 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
+- 천 단위 구분 기호 (`separator`)를 선택할 수 있습니다.
 - 버림 단위(`floorUnit`)를 선택할 수 있습니다.
 - 소수 일 경우 소수점 자리수(`decimal`)를 선택할 수 있습니다. 단, 버림 단위가 존재할 경우 소수 부분은 제거됩니다.
 - 단위 사이 공백 추가 여부(`space`)를 선택할 수 있습니다.
@@ -36,9 +36,10 @@ type FloorUnit =
 
 interface FormatNumberWithUnitsOptions {
   units?: Unit[] | readonly Unit[]; // default: []
-  commas?: boolean; // default: true
+  separator?: string; // default: ','
   floorUnit?: FloorUnit; // default: 1
   space?: boolean; // default: true
+  decimal?: number; // default: 0
 }
 ```
 ```ts title="typescript"
@@ -84,9 +85,10 @@ const KRW_UNITS = [
 formatNumberWithUnits(1234567, { units: KRW_UNITS, space: true }) // "123만 4,567"
 formatNumberWithUnits(1234567, { units: KRW_UNITS, space: false }) // "123만4,567"
 
-// 쉼표 사용 여부 (기본값: true)
-formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
-formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: true }) // "123만 4,567"
+// 쉼표 사용 여부 (기본값: ',')
+formatNumberWithUnits(1234567, { units: KRW_UNITS, separator: '' }) // "123만 4567"
+formatNumberWithUnits(1234567, { units: KRW_UNITS, separator: ',' }) // "123만 4,567"
+formatNumberWithUnits(1234567, { units: KRW_UNITS, separator: ' ' }) // "123만 4 567"
 
 // 버림 단위 (기본값: 1)
 formatNumberWithUnits(1234567, { units: KRW_UNITS, floorUnit: 10000 }) // "123만"
