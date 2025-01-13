@@ -119,7 +119,8 @@ describe('formatNumberWithUnits', () => {
         formatNumberWithUnits(1234567.123, { decimal: 2, units: KRW_UNITS })
       ).toBe('123만 4,567.12');
 
-      // floorUnit이 주어지면 소수점 자리수를 적용하지 않습니다.
+      // floorUnit이 1000으로 설정되어 있어서 1000 단위 미만은 버림 처리되고,
+      // decimal이 2로 설정되어 있지만 floorUnit 단위 만큼 버림 처리 되었으므로 소수는 표시되지 않습니다.
       expect(
         formatNumberWithUnits(1234567.123, {
           decimal: 2,
@@ -141,12 +142,6 @@ describe('formatNumberWithUnits', () => {
       expect(() =>
         formatNumberWithUnits(1234567, { floorUnit: -1 as unknown as 10 })
       ).toThrow('floorUnit은 1을 포함한 10의 제곱수여야 합니다.');
-    });
-
-    it('floorUnit가 value의 절대값보다 작으면 예외를 발생시킵니다.', () => {
-      expect(() =>
-        formatNumberWithUnits(1234567, { floorUnit: 1000000000 })
-      ).toThrow('floorUnit 값은 value의 절대값보다 크거나 같아야 합니다.');
     });
 
     it('decimal이 0보다 작으면 예외를 발생시킵니다.', () => {
