@@ -1,4 +1,4 @@
-import { formatNumberWithCommas } from '../../formatter/formatNumberWithCommas';
+import { formatNumberWithSeparator } from '../formatNumberWithSeparator';
 import { FormatNumberWithUnitsOptions } from './formatNumberWithUnits.types';
 
 interface FormatOptions
@@ -18,7 +18,7 @@ const formatNumberWithConditionalCommas = (
   value: number | string,
   commas: boolean
 ): string => {
-  return commas ? formatNumberWithCommas(value) : String(value);
+  return commas ? formatNumberWithSeparator(value) : String(value);
 };
 
 /**

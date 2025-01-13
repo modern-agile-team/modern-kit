@@ -1,4 +1,4 @@
-import { formatNumberWithCommas } from '../../formatter/formatNumberWithCommas';
+import { formatNumberWithSeparator } from '../formatNumberWithSeparator';
 import { FormatNumberWithSymbolOptions } from './formatValueWithSymbol.types';
 import { getFormattedNumberWithSymbol } from './formatValueWithSymbol.utils';
 
@@ -55,7 +55,7 @@ export function formatValueWithSymbol(
     space = false,
     commas = true,
   } = options;
-  const valueToUse = commas ? formatNumberWithCommas(value) : String(value);
+  const valueToUse = commas ? formatNumberWithSeparator(value) : String(value);
   const isNegative = valueToUse.startsWith('-');
 
   return getFormattedNumberWithSymbol(valueToUse, {
