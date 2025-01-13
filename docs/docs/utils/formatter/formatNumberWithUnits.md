@@ -2,6 +2,11 @@
 
 `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
 
+- 버림 단위(`floorUnit`)를 선택할 수 있습니다.
+- 소수 일 경우 소수점 자리수(`decimal`)를 선택할 수 있습니다. 단, 버림 단위가 존재할 경우 소수 부분은 제거됩니다.
+- 단위 사이 공백 추가 여부(`space`)를 선택할 수 있습니다.
+- 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
+
 <br />
 
 ## Code
@@ -80,12 +85,21 @@ formatNumberWithUnits(1234567, { units: KRW_UNITS, space: true }) // "123만 4,5
 formatNumberWithUnits(1234567, { units: KRW_UNITS, space: false }) // "123만4,567"
 
 // 쉼표 사용 여부 (기본값: true)
-formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
 formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: true }) // "123만 4,567"
+formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
 
 // 버림 단위 (기본값: 1)
+formatNumberWithUnits(1234567, { units: KRW_UNITS, floorUnit: 1000 }) // "123만 4000"
 formatNumberWithUnits(1234567, { units: KRW_UNITS, floorUnit: 10000 }) // "123만"
 
 // 소수점 자리수 (기본값: 0)
 formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
+
+// floorUnit이 1000으로 설정되어 있어서 1000 단위 미만은 버림 처리되고,
+// decimal이 2로 설정되어 있지만 floorUnit 단위 만큼 버림 처리 되었으므로 소수는 표시되지 않습니다.
+formatNumberWithUnits(1234567.123, {
+  units: KRW_UNITS,
+  decimal: 2,
+  floorUnit: 1000
+}) // "123만 4,000"
 ```

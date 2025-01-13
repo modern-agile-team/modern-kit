@@ -1,12 +1,6 @@
 import { formatNumberWithCommas } from '../../formatter/formatNumberWithCommas';
 import { FormatNumberWithUnitsOptions } from './formatNumberWithUnits.types';
 
-interface FormatOptions
-  extends Omit<Required<FormatNumberWithUnitsOptions>, 'units' | 'floorUnit'> {
-  value: number;
-  unit: string;
-}
-
 /**
  * @description 쉼표 사용 여부에 따라 숫자를 포맷팅하는 함수
  *
@@ -19,46 +13,6 @@ const formatNumberWithConditionalCommas = (
   commas: boolean
 ): string => {
   return commas ? formatNumberWithCommas(value) : String(value);
-};
-
-/**
- * @description 남은 값을 포맷팅하는 내부 유틸 함수
- *
- * @param {FormatOptions} options - 포맷팅 옵션
- * @param {number} options.decimal - 소수점 자리수
- * @param {boolean} options.commas - 쉼표 사용 여부
- * @returns {string} 포맷팅된 문자열
- */
-const formatRemainingValue = ({
-  value,
-  decimal,
-  commas,
-}: Omit<FormatOptions, 'space' | 'unit'>): string => {
-  const formattedValue = Number.isInteger(value)
-    ? value
-    : value.toFixed(decimal);
-  return formatNumberWithConditionalCommas(formattedValue, commas);
-};
-
-/**
- * @description 숫자에 단위를 추가하고 포맷팅하는 내부 유틸 함수
- *
- * @param {FormatOptions} options - 포맷팅 옵션
- * @param {number} options.value - 포맷팅할 숫자
- * @param {string} options.unit - 단위
- * @param {boolean} options.commas - 쉼표 사용 여부
- * @param {boolean} options.space - 단위 사이 공백 추가 여부
- * @returns {string} 포맷팅된 문자열
- */
-const formatUnitValue = ({
-  value,
-  unit,
-  commas,
-  space,
-}: Omit<FormatOptions, 'decimal'>): string => {
-  return `${formatNumberWithConditionalCommas(value, commas)}${unit}${
-    space ? ' ' : ''
-  }`;
 };
 
 /**
@@ -80,16 +34,18 @@ export const getFormattedValueWithUnits = (
 
   const absoluteValue = Math.abs(value);
   const isNegative = value < 0;
+  const hasFloorUnit = floorUnit > 1;
+
   let formattedResult = '';
   let remainingValue = absoluteValue;
 
-  // value가 floorUnit(버림 단위)보다 작으면 '0'을 반환
+  // value의 절대값이 floorUnit(버림 단위)보다 작으면 '0'을 반환
   if (absoluteValue < floorUnit) {
-    throw new Error('floorUnit 값은 value의 절대값보다 크거나 같아야 합니다.');
+    return '0';
   }
 
   // floorUnit이 1보다 큰 경우, 최종 결과에서 floorUnit 미만의 값은 버림
-  if (floorUnit > 1) {
+  if (hasFloorUnit) {
     remainingValue = Math.floor(remainingValue / floorUnit) * floorUnit;
   }
 
@@ -97,25 +53,26 @@ export const getFormattedValueWithUnits = (
   for (let i = 0; i < units.length; i++) {
     const { unit, value } = units[i];
     const quotient = Math.floor(remainingValue / value);
+    const spaceToUse = space ? ' ' : '';
 
     if (quotient <= 0) continue;
 
-    formattedResult += formatUnitValue({
-      value: quotient,
-      unit,
-      commas,
-      space,
-    });
+    formattedResult += `${formatNumberWithConditionalCommas(
+      quotient,
+      commas
+    )}${unit}${spaceToUse}`;
     remainingValue %= value;
   }
 
   // 남은 remainingValue가 있으면 추가
   if (remainingValue > 0) {
-    formattedResult += formatRemainingValue({
-      value: remainingValue,
-      decimal,
-      commas,
-    });
+    // floorUnit이 주어지고, 정수가 아니라면 소수점 자리수를 적용
+    const shouldApplyDecimal = !hasFloorUnit && !Number.isInteger(value);
+
+    formattedResult += formatNumberWithConditionalCommas(
+      remainingValue.toFixed(shouldApplyDecimal ? decimal : 0),
+      commas
+    );
   }
 
   // 음수일 경우 앞에 '-' 붙이며, 앞/뒤 공백 제거
