@@ -5,13 +5,18 @@ import { FormatNumberWithUnitsOptions } from './formatNumberWithUnits.types';
 /**
  * @description `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
  *
+ * - 천 단위 구분 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
+ * - 버림 단위(`floorUnit`)를 선택할 수 있습니다.
+ * - 소수 일 경우 소수점 자리수(`decimal`)를 선택할 수 있습니다. 단, 버림 단위가 존재할 경우 소수 부분은 제거됩니다.
+ * - 단위 사이 공백 추가 여부(`space`)를 선택할 수 있습니다.
+ *
  * @param {number | string} value - 포맷팅할 숫자 또는 숫자로 이루어진 문자열
  * @param {FormatNumberWithUnitsOptions} options - 포맷팅 옵션
  * @param {Unit[]} [options.units=DEFAULT_UNITS] - 사용할 단위 배열(조,억,만). 직접 정의해서 사용할 수 있습니다.
  * @param {boolean} [options.commas=true] - 천 단위 구분 쉼표 사용 여부입니다.
  * @param {number} [options.floorUnit=1] - 버림 단위이며, 10의 제곱수를 단위로 사용합니다. 만약, 버림 단위보다 작은 숫자는 '0'으로 반환합니다.
  * @param {boolean} [options.space=true] - 단위 사이 공백 추가 여부입니다.
- * @param {number} [options.decimal=0] - 소수점 자리수입니다. 버림 단위가 1보다 클 경우 소수점 자리수를 적용하지 않습니다.
+ * @param {number} [options.decimal=0] - 소수점 자리수입니다. 단, 버림 단위가 존재할 경우 소수는 제거됩니다.
  * @returns {string} 포맷팅된 문자열
  * @throws 입력값이 올바른 형식이 아니거나 floorUnit, decimal이 올바른 형식이 아닐 경우 에러 발생
  *

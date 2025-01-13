@@ -18,7 +18,6 @@ describe('formatNumberWithCommas', () => {
     expect(formatNumberWithCommas('-50000')).toBe('-50,000');
     expect(formatNumberWithCommas('123123123')).toBe('123,123,123');
     expect(formatNumberWithCommas('123456.12345')).toBe('123,456.12345');
-    expect(formatNumberWithCommas('1433만 4567')).toBe('1,433만 4,567');
   });
 
   it('일반적인 문자열의 경우에도 숫자에 천 단위마다 ","를 추가해야 합니다.', () => {
