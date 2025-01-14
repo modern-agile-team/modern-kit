@@ -1,7 +1,9 @@
 import { useEffect, DependencyList } from 'react';
 import { useTimeout } from '../useTimeout';
-import { getTimeoutOptions } from '../useTimeout/useTimeout.utils';
-import type { TimeoutOptions } from '../useTimeout/useTimeout.types';
+import {
+  TimeoutOptions,
+  getTimeoutOptions,
+} from './useDependencyTimeout.utils';
 
 /**
  * @description `useTimeout`을 사용해 인자로 전달하는 의존성 배열의 값이 변경되면 `Timeout`을 재설정하는 커스텀 훅입니다.

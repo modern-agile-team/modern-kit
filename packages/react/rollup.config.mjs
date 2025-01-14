@@ -7,21 +7,41 @@ import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 
+import {
+  componentsSubEntryKeys,
+  hooksSubEntryKeys,
+  utilsEntryKey,
+} from './subEntries.mjs';
+
+import { getSubEntryMap, getFormatEntryFileNames } from './build.utils.mjs';
+
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
-  preserveModules: true,
-  input: './src/index.ts', // 진입 경로
+  preserveModules: false,
+  input: {
+    components: './src/components/index.ts',
+    hooks: './src/hooks/index.ts',
+    utils: './src/utils/index.ts',
+    index: './src/index.ts', // 진입 경로,
+    ...getSubEntryMap(componentsSubEntryKeys, 'components'),
+    ...getSubEntryMap(hooksSubEntryKeys, 'hooks'),
+    ...getSubEntryMap(utilsEntryKey, 'utils'),
+  },
   output: [
     {
-      file: pkg.main,
+      dir: './dist',
       sourcemap: true,
       format: 'cjs',
+      preserveModules: false,
+      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'js'),
     },
     {
-      file: pkg.module,
+      dir: './dist',
       sourcemap: true,
       format: 'esm',
+      preserveModules: false,
+      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'mjs'),
     },
   ],
   external: [
@@ -34,10 +54,10 @@ export default {
       extensions,
     }),
     typescript({
-      exclude: ['**/*.spec.tsx', '**/*.spec.ts'],
+      exclude: ['**/*.spec.tsx', '**/*.spec.ts', './src/_internal/test/*'],
     }),
     commonjs(),
-    esbuild({ minify: true }),
+    esbuild(),
     postcss({
       modules: true,
       minimize: true,
