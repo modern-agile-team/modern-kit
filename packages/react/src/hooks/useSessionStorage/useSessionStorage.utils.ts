@@ -1,7 +1,17 @@
-import { getCustomEventHandler } from '../../_internal/storage';
+const CUSTOM_EVENT_KEYS = 'modern-kit-session-storage';
 
-export const sessionStorageEventHandler =
-  getCustomEventHandler('sessionStorage');
+export const sessionStorageEventHandler = {
+  key: CUSTOM_EVENT_KEYS,
+  subscribe: (callback: () => void) => {
+    window.addEventListener(CUSTOM_EVENT_KEYS, callback);
+  },
+  unsubscribe: (callback: () => void) => {
+    window.removeEventListener(CUSTOM_EVENT_KEYS, callback);
+  },
+  dispatchEvent: () => {
+    window.dispatchEvent(new StorageEvent(CUSTOM_EVENT_KEYS));
+  },
+};
 
 export const getSnapshot = (key: string) => {
   return window.sessionStorage.getItem(key);

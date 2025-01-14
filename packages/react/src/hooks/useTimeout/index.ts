@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { type TimeoutOptions } from './useTimeout.types';
 import { usePreservedCallback } from '../usePreservedCallback';
-import { getTimeoutOptions } from '_internal/timeout';
+import { getTimeoutOptions, TimeoutOptions } from './useTimeout.utils';
 
 interface UseTimeoutReturnType {
   set: () => void;

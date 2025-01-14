@@ -1,16 +1,8 @@
 {
   "name": "@modern-kit/react",
   "sideEffects": false,
-  "version": "1.27.2",
+  "version": "2.0.0-rc.1",
   "description": "modern-kit/react",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    },
-    "./package.json": "./package.json"
-  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -75,5 +67,43 @@
     "hooks",
     "custom hooks"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "require": "./dist/components/index.js",
+      "import": "./dist/components/index.mjs"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "require": "./dist/hooks/index.js",
+      "import": "./dist/hooks/index.mjs"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "require": "./dist/utils/index.js",
+      "import": "./dist/utils/index.mjs"
+    },
+    "./components/*": {
+      "types": "./dist/components/[name]/[name].d.ts",
+      "require": "./dist/components/[name]/[name].js",
+      "import": "./dist/components/[name]/[name].mjs"
+    },
+    "./hooks/*": {
+      "types": "./dist/hooks/[name]/[name].d.ts",
+      "require": "./dist/hooks/[name]/[name].js",
+      "import": "./dist/hooks/[name]/[name].mjs"
+    },
+    "./utils/*": {
+      "types": "./dist/utils/[name]/[name].d.ts",
+      "require": "./dist/utils/[name]/[name].js",
+      "import": "./dist/utils/[name]/[name].mjs"
+    },
+    "./package.json": "./package.json"
+  },
   "gitHead": "f451da4fef108695b343911200ec95ee34da4e97"
 }

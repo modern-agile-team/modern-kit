@@ -1,6 +1,17 @@
-import { getCustomEventHandler } from '../../_internal/storage';
+const CUSTOM_EVENT_KEYS = 'modern-kit-local-storage';
 
-export const localStorageEventHandler = getCustomEventHandler('localStorage');
+export const localStorageEventHandler = {
+  key: CUSTOM_EVENT_KEYS,
+  subscribe: (callback: () => void) => {
+    window.addEventListener(CUSTOM_EVENT_KEYS, callback);
+  },
+  unsubscribe: (callback: () => void) => {
+    window.removeEventListener(CUSTOM_EVENT_KEYS, callback);
+  },
+  dispatchEvent: () => {
+    window.dispatchEvent(new StorageEvent(CUSTOM_EVENT_KEYS));
+  },
+};
 
 export const getSnapshot = (key: string) => {
   return window.localStorage.getItem(key);
