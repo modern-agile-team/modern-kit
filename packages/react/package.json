@@ -78,30 +78,30 @@
       "require": "./dist/components/index.js",
       "import": "./dist/components/index.mjs"
     },
+    "./components/*": {
+      "types": "./dist/components/*/index.d.ts",
+      "require": "./dist/components/*/index.js",
+      "import": "./dist/components/*/index.mjs"
+    },
     "./hooks": {
       "types": "./dist/hooks/index.d.ts",
       "require": "./dist/hooks/index.js",
       "import": "./dist/hooks/index.mjs"
+    },
+    "./hooks/*": {
+      "types": "./dist/hooks/*/index.d.ts",
+      "require": "./dist/hooks/*/index.js",
+      "import": "./dist/hooks/*/index.mjs"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
       "require": "./dist/utils/index.js",
       "import": "./dist/utils/index.mjs"
     },
-    "./components/*": {
-      "types": "./dist/components/[name]/[name].d.ts",
-      "require": "./dist/components/[name]/[name].js",
-      "import": "./dist/components/[name]/[name].mjs"
-    },
-    "./hooks/*": {
-      "types": "./dist/hooks/[name]/[name].d.ts",
-      "require": "./dist/hooks/[name]/[name].js",
-      "import": "./dist/hooks/[name]/[name].mjs"
-    },
     "./utils/*": {
-      "types": "./dist/utils/[name]/[name].d.ts",
-      "require": "./dist/utils/[name]/[name].js",
-      "import": "./dist/utils/[name]/[name].mjs"
+      "types": "./dist/utils/*/index.d.ts",
+      "require": "./dist/utils/*/index.js",
+      "import": "./dist/utils/*/index.mjs"
     },
     "./package.json": "./package.json"
   },
