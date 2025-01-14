@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import { useMergeRefs } from '../../hooks/useMergeRefs';
+import { mergeRefs } from '../../utils/mergeRefs';
 
 export interface LazyImageProps
   extends React.ComponentProps<'img'>,
@@ -44,7 +44,7 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       rootMargin,
     });
 
-    return <img ref={useMergeRefs(ref, imgRef)} {...restProps} />;
+    return <img ref={mergeRefs(ref, imgRef)} {...restProps} />;
   }
 );
 
