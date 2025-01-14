@@ -1,6 +1,6 @@
 const getEntryFileNames = (name, format, path) => {
   const cleanName = name.replace(`${path}-`, '');
-  return `${path}/${cleanName}/${cleanName}.${format}`;
+  return `${path}/${cleanName}/index.${format}`;
 };
 
 export const getFormatEntryFileNames = (chunkInfo, format) => {
