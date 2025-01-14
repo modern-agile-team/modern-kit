@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.6
+
+### Patch Changes
+
+- [#686](https://github.com/modern-agile-team/modern-kit/pull/686) [`6405c00`](https://github.com/modern-agile-team/modern-kit/commit/6405c00006bc75e3220d0a950316f27f88585796) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): rollup setting 수정 - @ssi02014
+
 ## 1.27.5
 
 ### Patch Changes
