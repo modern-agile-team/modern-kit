@@ -45,7 +45,7 @@
     "vitest": "^2.1.3"
   },
   "dependencies": {
-    "@modern-kit/utils": "workspace:^",
+    "@modern-kit/utils": "^1",
     "@types/lodash-es": "^4.17.12",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21",
