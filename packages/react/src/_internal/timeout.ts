@@ -1,5 +1,9 @@
 import { isNumber } from '@modern-kit/utils';
-import { type TimeoutOptions } from './useTimeout.types';
+
+export interface TimeoutOptions {
+  delay: number;
+  enabled?: boolean;
+}
 
 export const getTimeoutOptions = (options: number | TimeoutOptions) => {
   return isNumber(options)

@@ -26,7 +26,6 @@
   "author": "ssi02014 <ssi02014@naver.com>",
   "license": "MIT",
   "devDependencies": {
-    "@modern-kit/utils": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.0",
@@ -54,6 +53,7 @@
     "vitest": "^2.1.3"
   },
   "dependencies": {
+    "@modern-kit/utils": "workspace:^",
     "@types/lodash-es": "^4.17.12",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21",

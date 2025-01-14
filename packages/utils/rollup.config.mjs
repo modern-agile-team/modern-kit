@@ -25,7 +25,7 @@ export default {
       extensions,
     }),
     commonjs(),
-    esbuild({ minify: true }),
+    esbuild(),
     typescript({ tsconfig: './tsconfig.json', exclude: ['**/*.spec.ts'] }),
   ],
 };

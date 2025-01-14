@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { getTimeoutOptions } from './useTimeout.utils';
-import {
-  type UseTimeoutReturnType,
-  type TimeoutOptions,
-} from './useTimeout.types';
+import { type TimeoutOptions } from './useTimeout.types';
 import { usePreservedCallback } from '../usePreservedCallback';
+import { getTimeoutOptions } from '_internal/timeout';
+
+interface UseTimeoutReturnType {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+}
 
 /**
  * @description `useTimeout`훅은 지정된 지연 시간 후에 콜백 함수를 호출하는 커스텀 훅입니다.
