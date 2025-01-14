@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.5
+
+### Patch Changes
+
+- [#684](https://github.com/modern-agile-team/modern-kit/pull/684) [`5add6d9`](https://github.com/modern-agile-team/modern-kit/commit/5add6d940a902397ec5048a7251659ba7068147b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): package.json 및 build utils 변경 - @ssi02014
+
 ## 1.27.4
 
 ### Patch Changes
