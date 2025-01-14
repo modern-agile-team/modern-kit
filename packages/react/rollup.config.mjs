@@ -18,7 +18,7 @@ import { getSubEntryMap, getFormatEntryFileNames } from './build.utils.mjs';
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
-  preserveModules: false,
+  preserveModules: true,
   input: {
     components: './src/components/index.ts',
     hooks: './src/hooks/index.ts',
@@ -33,14 +33,12 @@ export default {
       dir: './dist',
       sourcemap: true,
       format: 'cjs',
-      preserveModules: false,
       entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'js'),
     },
     {
       dir: './dist',
       sourcemap: true,
       format: 'esm',
-      preserveModules: false,
       entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'mjs'),
     },
   ],
@@ -57,7 +55,7 @@ export default {
       exclude: ['**/*.spec.tsx', '**/*.spec.ts', './src/_internal/test/*'],
     }),
     commonjs(),
-    esbuild(),
+    esbuild({ minify: true }),
     postcss({
       modules: true,
       minimize: true,
