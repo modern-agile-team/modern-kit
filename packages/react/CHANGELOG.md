@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.4
+
+### Patch Changes
+
+- [#682](https://github.com/modern-agile-team/modern-kit/pull/682) [`780be1b`](https://github.com/modern-agile-team/modern-kit/commit/780be1b52fce718cf81e9968bf4334293b994330) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): package.json dependencies - @ssi02014
+
 ## 1.27.3
 
 ### Patch Changes
