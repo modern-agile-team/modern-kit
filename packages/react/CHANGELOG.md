@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.3
+
+### Patch Changes
+
+- [#678](https://github.com/modern-agile-team/modern-kit/pull/678) [`8a6494b`](https://github.com/modern-agile-team/modern-kit/commit/8a6494b4d782e1c845e5617505cace5641466a07) Thanks [@ssi02014](https://github.com/ssi02014)! - chore(react): subPath 임시 적용 - @ssi02014
+
 ## 1.27.2
 
 ### Patch Changes
