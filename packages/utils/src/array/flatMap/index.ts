@@ -1,4 +1,4 @@
-import { flatten } from '../../array';
+import { flatten } from '../flatten';
 
 /**
  * 각 배열 요소를 iteratee 함수로 매핑하고 지정된 깊이까지 결과를 평탄화합니다.
