@@ -2,6 +2,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
+import pkg from './package.json' assert { type: 'json' };
 
 import {
   arrayPathKeys,
@@ -56,6 +57,7 @@ export default {
       entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'mjs'),
     },
   ],
+  external: [...Object.keys(pkg.dependencies)],
   plugins: [
     nodeResolve({
       extensions,
