@@ -8,10 +8,10 @@ import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 
 import {
-  componentsSubEntryKeys,
-  hooksSubEntryKeys,
-  utilsEntryKey,
-} from './subEntries.mjs';
+  componentsPathKeys,
+  hooksPathKeys,
+  utilsPathKey,
+} from './subPaths.mjs';
 
 import { getSubEntryMap, getFormatEntryFileNames } from './build.utils.mjs';
 
@@ -24,9 +24,9 @@ export default {
     hooks: './src/hooks/index.ts',
     utils: './src/utils/index.ts',
     index: './src/index.ts', // 진입 경로,
-    ...getSubEntryMap(componentsSubEntryKeys, 'components'),
-    ...getSubEntryMap(hooksSubEntryKeys, 'hooks'),
-    ...getSubEntryMap(utilsEntryKey, 'utils'),
+    ...getSubEntryMap(componentsPathKeys, 'components'),
+    ...getSubEntryMap(hooksPathKeys, 'hooks'),
+    ...getSubEntryMap(utilsPathKey, 'utils'),
   },
   output: [
     {
