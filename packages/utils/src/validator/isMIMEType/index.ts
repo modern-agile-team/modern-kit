@@ -1,6 +1,6 @@
 import { isString } from '../isString';
 
-export const MIME_TYPES = [
+const MIME_TYPES = [
   'application/json',
   'application/javascript',
   'application/pdf',
