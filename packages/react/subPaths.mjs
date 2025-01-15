@@ -1,4 +1,5 @@
 export const componentsPathKeys = [
+  'index',
   'AspectRatio',
   'ClientGate',
   'Mounted',
@@ -19,6 +20,7 @@ export const componentsPathKeys = [
 ];
 
 export const hooksPathKeys = [
+  'index',
   'useAsyncEffect',
   'useAsyncProcessQueue',
   'useBeforeUnload',
@@ -72,6 +74,7 @@ export const hooksPathKeys = [
 ];
 
 export const utilsPathKey = [
+  'index',
   'mergeRefs',
   'polymorphicForwardRef',
   // 신규 유틸 모듈 추가 시 추가

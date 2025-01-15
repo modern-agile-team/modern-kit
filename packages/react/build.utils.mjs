@@ -12,7 +12,7 @@ export const getFormatEntryFileNames = (chunkInfo, format) => {
   };
 
   for (const [key, value] of Object.entries(prefixMap)) {
-    if (chunkInfo.name === key) {
+    if (chunkInfo.name === `${key}-index`) {
       return `${key}/index.${format}`;
     }
 

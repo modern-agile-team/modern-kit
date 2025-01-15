@@ -20,9 +20,6 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 export default {
   preserveModules: true,
   input: {
-    components: './src/components/index.ts',
-    hooks: './src/hooks/index.ts',
-    utils: './src/utils/index.ts',
     index: './src/index.ts', // 진입 경로,
     ...getSubEntryMap(componentsPathKeys, 'components'),
     ...getSubEntryMap(hooksPathKeys, 'hooks'),
@@ -33,7 +30,7 @@ export default {
       dir: './dist',
       sourcemap: true,
       format: 'cjs',
-      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'js'),
+      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'cjs'),
     },
     {
       dir: './dist',
