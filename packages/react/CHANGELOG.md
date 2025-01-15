@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 1.27.7
+
+### Patch Changes
+
+- [#688](https://github.com/modern-agile-team/modern-kit/pull/688) [`f91b55c`](https://github.com/modern-agile-team/modern-kit/commit/f91b55cc8cdf78fde337c838dcd6558970cbaa25) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): dist exports 추가하여 SubPath 동작 개선 - @ssi02014
+
 ## 1.27.6
 
 ### Patch Changes
