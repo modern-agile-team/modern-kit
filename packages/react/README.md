@@ -38,6 +38,16 @@ const App = () => {
   return <div>Modern Kit</div>;
 }
 ```
+```ts
+// SubPath 사용 예시
+// tsconfig moduleResolution 옵션이 `bundler`일 경우
+import { flatten } from '@modern-kit/utils/array/flatten';
+// tsconfig moduleResolution 옵션이 `node`일 경우
+import { flatten } from '@modern-kit/utils/dist/array/flatten';
+
+const arr = [1, [2, [3, 4], 5]];
+const result = flatten(arr); // [1, 2, 3, 4, 5]
+```
 
 <br />
 

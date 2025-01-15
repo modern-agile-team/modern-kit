@@ -1,4 +1,4 @@
-import { flattenDeep } from '../../array';
+import { flattenDeep } from '../flattenDeep';
 
 type ExtractNestedArrayType<T> = T extends readonly (infer U)[]
   ? ExtractNestedArrayType<U>

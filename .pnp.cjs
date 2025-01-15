@@ -8624,6 +8624,7 @@ const RAW_RUNTIME_STATE =
           ["@docusaurus/types", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.7.0"],\
           ["@mdx-js/react", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:3.1.0"],\
           ["@modern-kit/react", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#workspace:packages/react"],\
+          ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@tsconfig/docusaurus", "npm:2.0.3"],\
           ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:18.3.1"],\

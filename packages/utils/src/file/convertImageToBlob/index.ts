@@ -1,7 +1,10 @@
-import {
-  CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER,
-  CanvasImageType,
-} from '../constants';
+const CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+} as const;
+type CanvasImageType = keyof typeof CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER;
 
 const createBlobFromCanvas = (canvas: HTMLCanvasElement, format: string) => {
   return new Promise<Blob>((resolve, reject) => {

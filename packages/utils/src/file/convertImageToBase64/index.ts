@@ -1,7 +1,10 @@
-import {
-  CanvasImageType,
-  CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER,
-} from '../constants';
+const CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+} as const;
+export type CanvasImageType = keyof typeof CANVAS_IMAGE_TYPE_TO_FORMAT_MAPPER;
 
 export async function convertImageToBase64(
   url: string,

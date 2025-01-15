@@ -7,4 +7,3 @@ export * from './getMIMEType';
 export * from './getMIMETypeFromFile';
 export * from './getMIMETypeFromResponse';
 export * from './getMIMETypeFromUrl';
-export * from './constants';

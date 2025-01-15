@@ -6,12 +6,22 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
+    },
+    "./dist/*": {
+      "types": "./dist/*",
+      "require": "./dist/*",
+      "import": "./dist/*"
+    },
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "require": "./dist/*/index.cjs",
+      "import": "./dist/*/index.mjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [

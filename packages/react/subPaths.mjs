@@ -1,4 +1,4 @@
-export const componentsSubEntryKeys = [
+export const componentsPathKeys = [
   'AspectRatio',
   'ClientGate',
   'Mounted',
@@ -18,7 +18,7 @@ export const componentsSubEntryKeys = [
   // 컴포넌트 추가 시 추가
 ];
 
-export const hooksSubEntryKeys = [
+export const hooksPathKeys = [
   'useAsyncEffect',
   'useAsyncProcessQueue',
   'useBeforeUnload',
@@ -71,7 +71,7 @@ export const hooksSubEntryKeys = [
   // 신규 훅 추가 시 추가
 ];
 
-export const utilsEntryKey = [
+export const utilsPathKey = [
   'mergeRefs',
   'polymorphicForwardRef',
   // 신규 유틸 모듈 추가 시 추가

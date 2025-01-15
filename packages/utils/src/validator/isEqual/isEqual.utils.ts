@@ -1,4 +1,5 @@
-import { isNumber, isFunction } from '../../validator';
+import { isNumber } from '../isNumber';
+import { isFunction } from '../isFunction';
 
 const compareObjectOrArray = (
   source: any,
