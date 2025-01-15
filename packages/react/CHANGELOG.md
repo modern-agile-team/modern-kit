@@ -1,5 +1,16 @@
 # @modern-kit/react
 
+## 2.0.0
+
+### Major Changes
+
+- [#693](https://github.com/modern-agile-team/modern-kit/pull/693) [`d86d4d0`](https://github.com/modern-agile-team/modern-kit/commit/d86d4d0c7ed83a9dae649e03356732c8ea6e80d5) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: @modern-kit/react SubPath 제공 - @ssi0214
+
+### Patch Changes
+
+- Updated dependencies [[`360e4a4`](https://github.com/modern-agile-team/modern-kit/commit/360e4a4154ebc30dbce033b74bf6d5eb664491b3)]:
+  - @modern-kit/utils@2.0.0
+
 ## 1.27.7
 
 ### Patch Changes
