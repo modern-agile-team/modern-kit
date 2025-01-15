@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.0.0
+
+### Major Changes
+
+- [#690](https://github.com/modern-agile-team/modern-kit/pull/690) [`360e4a4`](https://github.com/modern-agile-team/modern-kit/commit/360e4a4154ebc30dbce033b74bf6d5eb664491b3) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: @modern-kit/utils SubPath 제공 - @ssi0214
+
 ## 1.26.2
 
 ### Patch Changes
