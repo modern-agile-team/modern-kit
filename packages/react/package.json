@@ -3,7 +3,7 @@
   "sideEffects": false,
   "version": "1.27.7",
   "description": "modern-kit/react",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
@@ -70,7 +70,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
     },
     "./dist/*": {
@@ -80,7 +80,7 @@
     },
     "./*": {
       "types": "./dist/*/index.d.ts",
-      "require": "./dist/*/index.js",
+      "require": "./dist/*/index.cjs",
       "import": "./dist/*/index.mjs"
     },
     "./package.json": "./package.json"
