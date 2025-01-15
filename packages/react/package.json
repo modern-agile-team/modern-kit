@@ -1,7 +1,7 @@
 {
   "name": "@modern-kit/react",
   "sideEffects": false,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "modern-kit/react",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -39,7 +39,6 @@
     "rollup-plugin-esbuild": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "tslib": "^2.6.1",
     "typescript": "^5.1.6",
     "typescript-plugin-css-modules": "^5.1.0",
     "vitest": "^2.1.3"
@@ -49,6 +48,7 @@
     "@types/lodash-es": "^4.17.12",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21",
+    "tslib": "^2.8.1",
     "ua-parser-js": "^1.0.39"
   },
   "peerDependencies": {
