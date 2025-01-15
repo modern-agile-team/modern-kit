@@ -55,7 +55,7 @@ export default {
       exclude: ['**/*.spec.tsx', '**/*.spec.ts', './src/_internal/test/*'],
     }),
     commonjs(),
-    esbuild({ minify: true }),
+    esbuild(),
     postcss({
       modules: true,
       minimize: true,
