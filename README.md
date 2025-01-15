@@ -175,6 +175,61 @@ const App = () => {
 }
 ```
 
+<details>
+  <summary><b>Next.js 개발 환경 SubPath 사용 차이</b></summary>
+
+  <h3>SubPath 사용하지 않은 경우</h3>
+
+  ```tsx
+  import { flatten } from "@modern-kit/utils";
+
+  export default function Home() {
+    console.log(flatten([1, [2], [3], [4], [5]]));
+
+    return (
+      <div>{}</div>
+    );
+  }
+  ```
+
+  <img width="600" alt="스크린샷 2025-01-16 오전 5 13 20" src="https://github.com/user-attachments/assets/abd1881d-ae7c-4a66-9b2f-83184571b9d3" />
+
+  <br />
+  <br />
+
+  첫 번째 이미지는 `SubPath`를 사용하지 않은 경우입니다. 전체 모듈에서 `flatten`을 가져온 경우입니다.
+  위 이미지와 같이 `@modern-kit/utils`의 모든 모듈을 불러오는 것을 확인 할 수 있습니다.
+
+  <br />
+
+  <h3>SubPath 사용한 경우</h3>
+
+  ```tsx
+  // tsconfig moduleResolution 옵션이 `node`
+  import { flatten } from "@modern-kit/utils/dist/array/flatten";
+
+  export default function Home() {
+    console.log(flatten([1, [2], [3], [4], [5]]));
+
+    return (
+      <div>{}</div>
+    );
+  }
+  ```
+
+  <img width="600" alt="스크린샷 2025-01-16 오전 5 12 10" src="https://github.com/user-attachments/assets/6f3bc81d-06f5-4617-b941-b83fea4204aa" />
+
+  <br />
+  <br />
+
+  두 번째 이미지는 `SubPath`를 사용한 경우입니다. 개별 경로를 통해 `flatten`을 가져온 경우입니다.
+  첫 번째 케이스와 다르게 사용하는 `@modern-kit/utils`의 `flatten`만 불러오는 것을 확인 할 수 있습니다.
+
+  이러한 차이는 개발 서버 성능에 영향을 미칠 수 있습니다.
+
+</details>
+
+
 <br />
 
 ## Lint & Test & build
