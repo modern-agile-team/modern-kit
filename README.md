@@ -59,6 +59,21 @@ const App = () => {
   return <div>Modern Kit</div>;
 }
 ```
+```ts
+// SubPath 사용 예시
+// tsconfig moduleResolution 옵션이 `node`일 경우
+import { useInterval } from '@modern-kit/react/dist/hooks/useInterval';
+// tsconfig moduleResolution 옵션이 `bundler`일 경우
+import { useInterval } from '@modern-kit/react/hooks/useInterval';
+
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+}
+```
 
 <br />
 
@@ -88,6 +103,16 @@ pnpm i @modern-kit/utils
 
 ```ts
 import { flatten } from '@modern-kit/utils';
+
+const arr = [1, [2, [3, 4], 5]];
+const result = flatten(arr); // [1, 2, 3, 4, 5]
+```
+```ts
+// SubPath 사용 예시
+// tsconfig moduleResolution 옵션이 `bundler`일 경우
+import { flatten } from '@modern-kit/utils/array/flatten';
+// tsconfig moduleResolution 옵션이 `node`일 경우
+import { flatten } from '@modern-kit/utils/dist/array/flatten';
 
 const arr = [1, [2, [3, 4], 5]];
 const result = flatten(arr); // [1, 2, 3, 4, 5]
@@ -126,6 +151,28 @@ type A = { a: string, b: number }
 type B = { b: string, c: boolean }
 type Result = Merge<A, B>
 // { a: string, b: string, c: boolean }
+```
+
+<br />
+
+## SubPath
+- `@modern-kit/react`, `@modern-kit/utils`는 `SubPath`를 사용하여 개별 모듈을 불러올 수 있습니다.
+- 전체 모듈을 불러오는 것이 아닌 필요한 모듈만 직접 가져오기 때문에 `불 필요한 코드를 불러오는 것을 방지`할 수 있으며, `번들러가 모듈을 읽고, 식별하는 과정`을 최적화 할 수 있습니다.
+- 번들러가 개별 모듈을 더 잘 식별할 수 있기 때문에, `Tree-shaking`이 더욱 효과적으로 동작하도록 개선 할 수 있습니다. 이는 결과적으로 최종 번들 크기를 줄이는데 도움이 됩니다.
+
+```tsx
+// tsconfig moduleResolution 옵션이 `node`일 경우
+import { useInterval } from '@modern-kit/react/dist/hooks/useInterval';
+// tsconfig moduleResolution 옵션이 `bundler`일 경우
+import { useInterval } from '@modern-kit/react/hooks/useInterval';
+
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+}
 ```
 
 <br />

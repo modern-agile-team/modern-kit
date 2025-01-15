@@ -5448,6 +5448,7 @@ __metadata:
     "@docusaurus/types": "npm:^3.7.0"
     "@mdx-js/react": "npm:^3.0.0"
     "@modern-kit/react": "workspace:*"
+    "@modern-kit/utils": "workspace:*"
     "@tsconfig/docusaurus": "npm:^2.0.0"
     "@types/node": "npm:^22.0.0"
     "@types/react": "npm:^18.2.20"
@@ -5511,7 +5512,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modern-kit/utils@npm:^1, @modern-kit/utils@workspace:packages/utils":
+"@modern-kit/utils@npm:^1, @modern-kit/utils@workspace:*, @modern-kit/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"
   dependencies:
