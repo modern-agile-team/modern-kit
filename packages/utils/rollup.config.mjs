@@ -1,7 +1,6 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
-import pkg from './package.json' assert { type: 'json' };
 import esbuild from 'rollup-plugin-esbuild';
 
 import {
@@ -48,7 +47,7 @@ export default {
       dir: './dist',
       sourcemap: true,
       format: 'cjs',
-      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'js'),
+      entryFileNames: (chunkInfo) => getFormatEntryFileNames(chunkInfo, 'cjs'),
     },
     {
       dir: './dist',
