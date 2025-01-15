@@ -1,6 +1,5 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
-import { isMIMEType } from '.';
-import { MIMEType } from '../../file/constants';
+import { isMIMEType, MIMEType } from '.';
 
 describe('isMIMEType', () => {
   it('should return true if the argument is a MIMEType and false otherwise', () => {
