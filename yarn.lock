@@ -5478,7 +5478,7 @@ __metadata:
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
     "@types/ua-parser-js": "npm:^0.7.39"
-    "@vitest/coverage-istanbul": "npm:^2.1.3"
+    "@vitest/coverage-istanbul": "npm:^3.0.2"
     autoprefixer: "npm:^10.4.20"
     classnames: "npm:^2.5.1"
     esbuild: "npm:^0.24.0"
@@ -5520,7 +5520,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@rollup/plugin-typescript": "npm:^12.1.0"
     "@types/lodash-es": "npm:^4.17.12"
-    "@vitest/coverage-istanbul": "npm:^2.1.3"
+    "@vitest/coverage-istanbul": "npm:^3.0.2"
     esbuild: "npm:^0.24.0"
     jsdom: "npm:^25.0.0"
     lodash-es: "npm:^4.17.21"
@@ -7309,23 +7309,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-istanbul@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "@vitest/coverage-istanbul@npm:2.1.3"
+"@vitest/coverage-istanbul@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@vitest/coverage-istanbul@npm:3.0.2"
   dependencies:
     "@istanbuljs/schema": "npm:^0.1.3"
-    debug: "npm:^4.3.6"
+    debug: "npm:^4.4.0"
     istanbul-lib-coverage: "npm:^3.2.2"
     istanbul-lib-instrument: "npm:^6.0.3"
     istanbul-lib-report: "npm:^3.0.1"
     istanbul-lib-source-maps: "npm:^5.0.6"
     istanbul-reports: "npm:^3.1.7"
-    magicast: "npm:^0.3.4"
+    magicast: "npm:^0.3.5"
     test-exclude: "npm:^7.0.1"
-    tinyrainbow: "npm:^1.2.0"
+    tinyrainbow: "npm:^2.0.0"
   peerDependencies:
-    vitest: 2.1.3
-  checksum: 6b21eb219f45dc0f3bfb35049280658687b6b2f4ba5e17dc2c7e2c221f5d37e60c6962c5cfd77bd5f2848bb56debd26f82e5684b293f5775a8a416a0173f1803
+    vitest: 3.0.2
+  checksum: 3456741031d4b083b0a667469874c5ab11cd59667add4f06a98994e2896fe458d1a6aec226deca464c9efde1a013816a0f11b4d0e4e32d191835bbd471247cb5
   languageName: node
   linkType: hard
 
@@ -10340,6 +10340,18 @@ __metadata:
     supports-color:
       optional: true
   checksum: 1471db19c3b06d485a622d62f65947a19a23fbd0dd73f7fd3eafb697eec5360cde447fb075919987899b1a2096e85d35d4eb5a4de09a57600ac9cf7e6c8e768b
+  languageName: node
+  linkType: hard
+
+"debug@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "debug@npm:4.4.0"
+  dependencies:
+    ms: "npm:^2.1.3"
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: db94f1a182bf886f57b4755f85b3a74c39b5114b9377b7ab375dc2cfa3454f09490cc6c30f829df3fc8042bc8b8995f6567ce5cd96f3bc3688bd24027197d9de
   languageName: node
   linkType: hard
 
@@ -15514,7 +15526,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magicast@npm:^0.3.4":
+"magicast@npm:^0.3.5":
   version: 0.3.5
   resolution: "magicast@npm:0.3.5"
   dependencies:
@@ -22310,6 +22322,13 @@ __metadata:
   version: 1.2.0
   resolution: "tinyrainbow@npm:1.2.0"
   checksum: 7f78a4b997e5ba0f5ecb75e7ed786f30bab9063716e7dff24dd84013fb338802e43d176cb21ed12480561f5649a82184cf31efb296601a29d38145b1cdb4c192
+  languageName: node
+  linkType: hard
+
+"tinyrainbow@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "tinyrainbow@npm:2.0.0"
+  checksum: c83c52bef4e0ae7fb8ec6a722f70b5b6fa8d8be1c85792e829f56c0e1be94ab70b293c032dc5048d4d37cfe678f1f5babb04bdc65fd123098800148ca989184f
   languageName: node
   linkType: hard
 
