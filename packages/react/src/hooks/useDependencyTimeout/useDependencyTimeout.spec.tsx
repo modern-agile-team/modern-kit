@@ -5,7 +5,8 @@ import { useDependencyTimeout } from '.';
 const delayTime = 1000;
 
 beforeEach(() => {
-  vi.useFakeTimers();
+  // https://github.com/testing-library/user-event/issues/833#issuecomment-1725364780
+  vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
 afterEach(() => {

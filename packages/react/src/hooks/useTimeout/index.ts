@@ -48,7 +48,7 @@ export function useTimeout(
   callback: () => void,
   options: number | TimeoutOptions
 ): UseTimeoutReturnType {
-  const timeoutRef = useRef<NodeJS.Timeout | number | null>();
+  const timeoutRef = useRef<number | null>();
 
   const callbackAction = usePreservedCallback(callback);
 

@@ -3,7 +3,8 @@ import { renderHook } from '@testing-library/react';
 import { useDebounce } from '.';
 
 beforeEach(() => {
-  vi.useFakeTimers();
+  // https://github.com/testing-library/user-event/issues/833#issuecomment-1725364780
+  vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
 afterEach(() => {
@@ -11,7 +12,7 @@ afterEach(() => {
 });
 
 describe('useDebounce', () => {
-  it('should call passed function after given amount of time', () => {
+  it('주어진 시간이 지난 후에 전달된 함수가 호출되어야 합니다', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() => useDebounce(mockFn, 500));
@@ -25,7 +26,7 @@ describe('useDebounce', () => {
     expect(mockFn).toBeCalledTimes(1);
   });
 
-  it('should only be called once even if it is called multiple times within the delay time.', () => {
+  it('지연 시간 내에 여러 번 호출되어도 한 번만 실행되어야 합니다', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() => useDebounce(mockFn, 500));
@@ -51,7 +52,7 @@ describe('useDebounce', () => {
     expect(mockFn).toBeCalledTimes(3);
   });
 
-  it('debounce should be cancelled on unmount', () => {
+  it('컴포넌트가 언마운트되면 디바운스가 취소되어야 합니다', () => {
     const mockFn = vi.fn();
 
     const { result, unmount } = renderHook(() => useDebounce(mockFn, 500));
