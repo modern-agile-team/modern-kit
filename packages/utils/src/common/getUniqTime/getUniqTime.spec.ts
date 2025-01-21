@@ -10,7 +10,7 @@ afterEach(() => {
 });
 
 describe('getUniqTime', () => {
-  it('should return a unique time when called multiple times at the same time', () => {
+  it('동일한 시간에 여러 번 호출되어도 고유한 시간값을 반환해야 합니다', () => {
     vi.setSystemTime(new Date('2023-08-07T09:00:00Z'));
 
     const time1 = getUniqTime();

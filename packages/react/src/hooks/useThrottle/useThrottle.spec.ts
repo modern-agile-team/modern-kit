@@ -5,7 +5,8 @@ import { useThrottle } from '.';
 const DELAY_TIME = 300;
 
 beforeEach(() => {
-  vi.useFakeTimers();
+  // https://github.com/testing-library/user-event/issues/833#issuecomment-1725364780
+  vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
 afterEach(() => {
@@ -13,7 +14,7 @@ afterEach(() => {
 });
 
 describe('useThrottle', () => {
-  it('should call the callback function before the timeout.', () => {
+  it('타임아웃 이전에 콜백 함수가 호출되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() => useThrottle(mockFn, DELAY_TIME));
@@ -31,7 +32,7 @@ describe('useThrottle', () => {
     expect(mockFn).toBeCalledTimes(1);
   });
 
-  it('should call the function once more at the end of the timeout if called again within the delay period.', () => {
+  it('지연 시간 내에 다시 호출되면 타임아웃 종료 시 한 번 더 호출되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() => useThrottle(mockFn, DELAY_TIME));
@@ -50,7 +51,7 @@ describe('useThrottle', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('should cancel throttling when the component is unmounted.', () => {
+  it('컴포넌트가 언마운트되면 쓰로틀링이 취소되어야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result, unmount } = renderHook(() =>
@@ -77,7 +78,7 @@ describe('useThrottle', () => {
     expect(mockFn).toBeCalledTimes(1);
   });
 
-  it('should not call the function at the end if trailing option is set to false.', () => {
+  it('trailing 옵션이 false로 설정된 경우 마지막에 함수가 호출되지 않아야 합니다.', () => {
     const mockFn = vi.fn();
 
     const { result } = renderHook(() =>
