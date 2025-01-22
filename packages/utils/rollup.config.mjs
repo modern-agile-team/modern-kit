@@ -1,7 +1,6 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
-import pkg from './package.json' assert { type: 'json' };
 import { dts } from 'rollup-plugin-dts';
 
 import {
@@ -64,14 +63,12 @@ export default [
         chunkFileNames: `_chunk/[name]-[hash:6].cjs`,
       },
     ],
-    external: [...Object.keys(pkg.dependencies)],
     plugins: [
       nodeResolve({
         extensions,
       }),
       commonjs(),
       esbuild(),
-      // typescript({ tsconfig: './tsconfig.json', exclude: ['**/*.spec.ts'] }),
     ],
   },
   {
