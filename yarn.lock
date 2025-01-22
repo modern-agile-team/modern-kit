@@ -5487,10 +5487,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/react@workspace:packages/react"
   dependencies:
-    "@modern-kit/utils": "npm:^2.0.2"
+    "@modern-kit/utils": "workspace:^"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
-    "@rollup/plugin-typescript": "npm:^12.1.0"
     "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/jest-dom": "npm:^6.5.0"
     "@testing-library/react": "npm:^16.2.0"
@@ -5509,10 +5508,10 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     rollup: "npm:^4.24.0"
+    rollup-plugin-dts: "npm:^6.1.1"
     rollup-plugin-esbuild: "npm:^6.1.1"
     rollup-plugin-peer-deps-external: "npm:^2.2.4"
     rollup-plugin-postcss: "npm:^4.0.2"
-    tslib: "npm:^2.8.1"
     typescript: "npm:^5.1.6"
     typescript-plugin-css-modules: "npm:^5.1.0"
     ua-parser-js: "npm:^1.0.39"
@@ -5533,7 +5532,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modern-kit/utils@npm:^2.0.2, @modern-kit/utils@workspace:*, @modern-kit/utils@workspace:packages/utils":
+"@modern-kit/utils@workspace:*, @modern-kit/utils@workspace:^, @modern-kit/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"
   dependencies:
@@ -15597,7 +15596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.17":
+"magic-string@npm:^0.30.10, magic-string@npm:^0.30.17":
   version: 0.30.17
   resolution: "magic-string@npm:0.30.17"
   dependencies:
@@ -20823,6 +20822,22 @@ __metadata:
   bin:
     rimraf: dist/cjs/src/bin.js
   checksum: 8c5e142d26d8b222be9dc9a1a41ba48e95d8f374e813e66a8533e87c6180174fcb3f573b9b592eca12740ebf8b78526d136acd971d4a790763d6f2232c34fa24
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-dts@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "rollup-plugin-dts@npm:6.1.1"
+  dependencies:
+    "@babel/code-frame": "npm:^7.24.2"
+    magic-string: "npm:^0.30.10"
+  peerDependencies:
+    rollup: ^3.29.4 || ^4
+    typescript: ^4.5 || ^5.0
+  dependenciesMeta:
+    "@babel/code-frame":
+      optional: true
+  checksum: 2b042198ff00fb10c9c70087bbac9013f748dc34be0dbfcca82c6353884ead1467b4a8a37bafe9a8b9356479d43715c7cbc591eeb8e4112c583452431c1cb0a0
   languageName: node
   linkType: hard
 
