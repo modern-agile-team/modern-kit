@@ -1,9 +1,8 @@
-import { StorageType } from '../types';
 import { isClient } from '../../device';
 import { isFunction } from '../../validator';
 
 export function setStorageItem<T>(
-  type: StorageType,
+  type: 'localStorage' | 'sessionStorage',
   key: string,
   value: T | (() => T)
 ) {

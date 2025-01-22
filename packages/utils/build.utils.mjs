@@ -36,7 +36,9 @@ export const getFormatEntryFileNames = (chunkInfo, format) => {
 
 export const getSubEntryMap = (keys, path) => {
   return keys.reduce((acc, entry) => {
-    acc[`${path}-${entry}`] = `./src/${path}/${entry}`;
+    acc[`${path}-${entry}`] = `./src/${path}/${
+      entry === 'index' ? 'index.ts' : `${entry}/index.ts`
+    }`;
     return acc;
   }, {});
 };

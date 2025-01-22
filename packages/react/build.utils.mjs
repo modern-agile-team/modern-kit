@@ -24,7 +24,7 @@ export const getFormatEntryFileNames = (chunkInfo, format) => {
   return `[name].${format}`; // 기본 파일 이름
 };
 
-export const getSubEntryMap = (keys, path, isDTS = false) => {
+export const getSubEntryMap = (keys, path) => {
   return keys.reduce((acc, entry) => {
     acc[`${path}-${entry}`] = `./src/${path}/${
       entry === 'index'

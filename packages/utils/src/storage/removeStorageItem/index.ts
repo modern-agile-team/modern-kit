@@ -1,7 +1,9 @@
-import { StorageType } from '../types';
 import { isClient } from '../../device';
 
-export function removeStorageItem(type: StorageType, key: string) {
+export function removeStorageItem(
+  type: 'localStorage' | 'sessionStorage',
+  key: string
+) {
   if (!isClient()) {
     throw new Error('Cannot be executed unless it is a client environment.');
   }

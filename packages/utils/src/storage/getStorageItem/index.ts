@@ -1,10 +1,9 @@
-import { StorageType } from '../types';
 import { isClient } from '../../device';
 import { isFunction } from '../../validator/isFunction';
 import { parseJSON } from '../../common';
 
 export function getStorageItem<T>(
-  type: StorageType,
+  type: 'localStorage' | 'sessionStorage',
   key: string,
   initialValue: T | (() => T) | null = null
 ) {
