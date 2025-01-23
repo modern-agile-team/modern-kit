@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { AspectRatio } from '@modern-kit/react';
+import { AspectRatio } from '@modern-kit/react/components/AspectRatio';
+import { useStep } from '@modern-kit/react/hooks/useStep';
 
 # AspectRatio
 
@@ -100,7 +101,6 @@ const Example = () => {
 
 export const Example = () => {
   const imgUrl = 'https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9';
-
   return (
     <div style={{ width: '500px' }}>
       <h3>Default</h3>

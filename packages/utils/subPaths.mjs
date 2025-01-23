@@ -148,7 +148,6 @@ export const storageKeys = [
   'getStorageItem',
   'removeStorageItem',
   'setStorageItem',
-  'types',
   // 모듈 추가 시 추가
 ];
 

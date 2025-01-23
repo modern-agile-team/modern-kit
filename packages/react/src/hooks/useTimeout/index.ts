@@ -55,7 +55,7 @@ export function useTimeout(
   const { delay, enabled } = getTimeoutOptions(options);
 
   const set = useCallback(() => {
-    timeoutRef.current = setTimeout(callbackAction, delay);
+    timeoutRef.current = window.setTimeout(callbackAction, delay);
   }, [callbackAction, delay]);
 
   const clear = useCallback(() => {
