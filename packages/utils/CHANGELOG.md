@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [#706](https://github.com/modern-agile-team/modern-kit/pull/706) [`7574f89`](https://github.com/modern-agile-team/modern-kit/commit/7574f894e7cbad5fe2bc0bab634dbd41ced73d68) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: update react/utils build setting - @ssi02014
+
 ## 2.0.0
 
 ### Major Changes
