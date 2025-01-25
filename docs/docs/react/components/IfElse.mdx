@@ -4,8 +4,8 @@ import { IfElse } from '@modern-kit/react';
 # IfElse
 
 `IfElse` 컴포넌트는 주어진 조건에 따라 두 가지 컴포넌트 중 하나를 렌더링하는 간단한 도구입니다.
-이 컴포넌트는 **condition**이라는 property를 통해 조건을 지정하고, 조건이 참(`true`)이면 `trueComponent`를, 
-거짓(`false`)이면 `falseComponent`를 렌더링합니다.
+이 컴포넌트는 **condition**이라는 property를 통해 조건을 지정하고, 조건이 참(`true`)이면 `truthyComponent`를, 
+거짓(`false`)이면 `falsyComponent`를 렌더링합니다.
 
 **condition** property는 단순한 `boolean`값 뿐만 아니라, `boolean`값을 반환하는 함수도 허용됩니다. 
 이 경우, 컴포넌트는 해당 함수를 호출하여 조건을 평가합니다.
@@ -20,12 +20,16 @@ import { IfElse } from '@modern-kit/react';
 type Condition = boolean | (() => boolean);
 
 interface IfElseProps {
-    condition: Condition;
-    trueComponent: React.ReactNode;
-    falseComponent: React.ReactNode;
+  condition: Condition;
+  truthyComponent: React.ReactNode;
+  falsyComponent: React.ReactNode;
 }
 
-const IfElse = ({ condition, trueComponent, falseComponent }: IfElseProps) => JSX.Element;
+const IfElse: ({
+  condition,
+  truthyComponent,
+  falsyComponent,
+}: IfElseProps) => JSX.Element;
 ```
 
 ## Usage
@@ -39,8 +43,8 @@ const Example = () => {
       <button onClick={() => setState(!state)}>Toggle Button</button>
       <IfElse 
         condition={state}
-        trueComponent={<h1>true component</h1>}
-        falseComponent={<h1>false component</h1>}
+        truthyComponent={<h1>true component</h1>}
+        falsyComponent={<h1>false component</h1>}
       />
     </>
   );
@@ -55,8 +59,8 @@ export const Example = () => {
       <button onClick={() => setState(!state)}>Toggle Button</button>
       <IfElse 
         condition={state}
-        trueComponent={<h1>true component</h1>}
-        falseComponent={<h1>false component</h1>}
+        truthyComponent={<h1>true component</h1>}
+        falsyComponent={<h1>false component</h1>}
       />
     </>
   );

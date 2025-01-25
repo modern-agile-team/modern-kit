@@ -17,15 +17,12 @@ condition prop으로 `boolean을 반환하는 함수`도 허용됩니다.
 type Condition = boolean | (() => boolean);
 
 interface WhenProps {
+  children: React.ReactNode;
   condition: Condition;
   fallback?: React.ReactNode;
 }
 
-const When: ({
-  children,
-  condition,
-  fallback,
-}: PropsWithChildren<WhenProps>) => JSX.Element;
+const When: ({ children, condition, fallback }: WhenProps) => JSX.Element;
 ```
 
 ## Usage

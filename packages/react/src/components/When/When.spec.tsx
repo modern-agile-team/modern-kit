@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { When } from '.';
 
-describe('When Component', () => {
-  it('should render the child element when the condition prop is true', () => {
+describe('When', () => {
+  it('condition prop이 true일 때 자식 요소를 렌더링해야 한다', () => {
     render(
       <When condition={true}>
         <p role="paragraph">render</p>
@@ -15,7 +15,7 @@ describe('When Component', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('should not render the child element when the condition prop is false', () => {
+  it('condition prop이 false일 때 자식 요소를 렌더링하지 않아야 한다', () => {
     render(
       <When condition={false}>
         <p role="paragraph">render</p>
@@ -27,7 +27,7 @@ describe('When Component', () => {
     expect(header).not.toBeInTheDocument();
   });
 
-  it('should render the child element when the condition prop function returns true', () => {
+  it('condition prop 함수가 true를 반환할 때 자식 요소를 렌더링해야 한다', () => {
     render(
       <When condition={() => true}>
         <p role="paragraph">render</p>
@@ -39,7 +39,7 @@ describe('When Component', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('should not render the child element when the condition prop function returns false', () => {
+  it('condition prop 함수가 false를 반환할 때 자식 요소를 렌더링하지 않아야 한다', () => {
     render(
       <When condition={() => false}>
         <p role="paragraph">render</p>
@@ -51,7 +51,7 @@ describe('When Component', () => {
     expect(header).not.toBeInTheDocument();
   });
 
-  it('should render fallback when condition is false and has fallback props', () => {
+  it('condition이 false이고 fallback prop이 있을 때 fallback을 렌더링해야 한다', () => {
     render(
       <When condition={false} fallback={<p role="paragraph">false</p>}>
         <button>true</button>
