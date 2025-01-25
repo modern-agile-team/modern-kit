@@ -3,9 +3,18 @@ import { ClientGate } from '@modern-kit/react';
 
 # ClientGate
 
-Client Side에서는 children을, Server Side에서는 fallback component를 보여주는 컴포넌트입니다.
+`ClientGate`는 렌더링 환경에 따라 다른 컨텐츠를 보여주는 컴포넌트입니다:
+- Client Side: `children` 컴포넌트를 렌더링
+- Server Side: `fallback` 컴포넌트를 렌더링
 
-Pure CSR 환경에서 렌더시에는 첫 라이프 사이클이 수행되어 mount가 완료되기 전부터 해당 component를 보여줍니다.
+`CSR(Client-Side Rendering)` 환경에서는 컴포넌트가 마운트되기 전부터 children이 렌더링됩니다.
+
+일반적인 `useEffect` 사용하여 클라이언트 사이드 렌더링을 감지할 경우, 다음과 같은 문제가 발생할 수 있습니다:
+- 초기 렌더링에서 fallback이 표시됨
+- `useEffect` 실행 후 children으로 리렌더링되는 `이중 렌더링` 발생 
+
+`useSyncExternalStore`를 사용하여 서버와 클라이언트 간의 hydration mismatch를 방지합니다.
+- https://tkdodo.eu/blog/avoiding-hydration-mismatches-with-use-sync-external-store#usesyncexternalstore
 
 <br />
 
@@ -16,12 +25,11 @@ Pure CSR 환경에서 렌더시에는 첫 라이프 사이클이 수행되어 mo
 ```ts title="typescript"
 
 interface ClientGateProps {
-  fallback?: JSX.Element;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
 }
 
-const ClientGate: ({
-  fallback = <></>
-}: PropsWithChildren<ClientGateProps>) => JSX.Element;
+function ClientGate({ fallback, children }: ClientGateProps): JSX.Element;
 ```
 
 ## Usage
