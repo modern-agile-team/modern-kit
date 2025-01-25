@@ -1,36 +1,42 @@
+const PATH_PREFIX_MAP = {
+  _internal: '_internal',
+  utils: 'utils',
+  components: 'components',
+  hooks: 'hooks',
+};
+
 const getEntryFileNames = (name, format, path) => {
   const cleanName = name.replace(`${path}-`, '');
   return `${path}/${cleanName}/index.${format}`;
 };
 
 export const getFormatEntryFileNames = (chunkInfo, format) => {
-  const prefixMap = {
-    _internal: '_internal',
-    utils: 'utils',
-    components: 'components',
-    hooks: 'hooks',
-  };
+  const { name } = chunkInfo;
 
-  for (const [key, value] of Object.entries(prefixMap)) {
-    if (chunkInfo.name === `${key}-index`) {
+  for (const [key, value] of Object.entries(PATH_PREFIX_MAP)) {
+    // 각 모듈의 index
+    if (name === `${key}-index`) {
       return `${key}/index.${format}`;
     }
 
-    if (chunkInfo.name.startsWith(value)) {
-      return getEntryFileNames(chunkInfo.name, format, key);
+    // 기본 모듈
+    if (name.startsWith(value)) {
+      return getEntryFileNames(name, format, key);
     }
   }
 
-  return `[name].${format}`; // 기본 파일 이름
+  // root index
+  return `[name].${format}`;
 };
 
 export const getSubEntryMap = (keys, path) => {
+  const getEntryExtension = path === 'components' ? 'tsx' : 'ts';
+
   return keys.reduce((acc, entry) => {
-    acc[`${path}-${entry}`] = `./src/${path}/${
-      entry === 'index'
-        ? 'index.ts'
-        : `${entry}/index.${path === 'components' ? 'tsx' : 'ts'}`
-    }`;
+    const entryPath =
+      entry === 'index' ? 'index.ts' : `${entry}/index.${getEntryExtension}`;
+
+    acc[`${path}-${entry}`] = `./src/${path}/${entryPath}`;
     return acc;
   }, {});
 };
