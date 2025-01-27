@@ -31,7 +31,7 @@
     "@vitest/coverage-istanbul": "^3.0.3",
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.24.0",
-    "jsdom": "^25.0.0",
+    "jsdom": "^26.0.0",
     "postcss": "^8.4.41",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
