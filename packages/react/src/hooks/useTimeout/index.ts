@@ -71,11 +71,11 @@ export function useTimeout(
   }, [clear, set]);
 
   useEffect(() => {
-    if (delay < 0 || !enabled) return;
+    if (!enabled) return;
 
     set();
     return () => clear();
-  }, [set, clear, delay, enabled]);
+  }, [set, clear, enabled]);
 
   return { set, reset, clear };
 }
