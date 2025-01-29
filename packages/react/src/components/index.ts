@@ -2,6 +2,7 @@ export * from './AspectRatio';
 export * from './ClientGate';
 export * from './Mounted';
 export * from './DebounceHandler';
+export * from './Delay';
 export * from './FallbackLazyImage';
 export * from './IfElse';
 export * from './InfiniteScroll';

@@ -1,8 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { act, renderHook, screen } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useTimeout } from '.';
-import { useState } from 'react';
-import { renderSetup } from '../../_internal/test/renderSetup';
 
 const delayTime = 1000;
 
@@ -15,24 +13,10 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-const TestComponent = () => {
-  const [number, setNumber] = useState(0);
-
-  useTimeout(() => {
-    act(() => setNumber(number + 1));
-  }, delayTime);
-
-  useTimeout(() => {
-    act(() => setNumber(number + 1));
-  }, delayTime * 2);
-
-  return <div>{number}</div>;
-};
-
 describe('useTimeout', () => {
-  it('지정된 delay 후에 함수가 호출되어야 합니다.', () => {
-    const mockFn = vi.fn();
+  const mockFn = vi.fn();
 
+  it('지정된 delay 후에 함수가 호출되어야 합니다.', () => {
     renderHook(() => useTimeout(mockFn, { delay: delayTime }));
 
     expect(mockFn).not.toBeCalled();
@@ -42,8 +26,6 @@ describe('useTimeout', () => {
   });
 
   it('활성화된 경우에만 함수가 호출되어야 합니다.', () => {
-    const mockFn = vi.fn();
-
     const { rerender } = renderHook(
       ({ enabled }) => useTimeout(mockFn, { delay: delayTime, enabled }),
       {
@@ -64,8 +46,6 @@ describe('useTimeout', () => {
   });
 
   it('설정 및 재설정된 후 함수가 호출되어야 합니다.', () => {
-    const mockFn = vi.fn();
-
     const { result } = renderHook(
       ({ enabled }) => useTimeout(mockFn, { delay: delayTime, enabled }),
       {
@@ -91,9 +71,7 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalledTimes(2);
   });
 
-  it('delay가 undefined일 경우 타이머가 비활성화되어야 합니다.', () => {
-    const mockFn = vi.fn();
-
+  it('delay가 undefined일 경우 타이머가 바로 실행되어야 합니다.', () => {
     renderHook(() =>
       useTimeout(mockFn, { delay: undefined as unknown as number })
     );
@@ -104,15 +82,21 @@ describe('useTimeout', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('콜백 함수가 항상 최신 상태를 유지해야 합니다.', () => {
-    renderSetup(<TestComponent />);
+  it('delay가 0일 경우 타이머가 바로 실행되어야 합니다.', () => {
+    renderHook(() => useTimeout(mockFn, { delay: 0 }));
 
-    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(mockFn).not.toBeCalled();
 
     vi.advanceTimersByTime(delayTime);
-    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(mockFn).toBeCalled();
+  });
 
-    vi.advanceTimersByTime(delayTime * 2);
-    expect(screen.getByText('2')).toBeInTheDocument();
+  it('delay가 음수일 경우 타이머가 바로 실행되어야 합니다.', () => {
+    renderHook(() => useTimeout(mockFn, { delay: -1 }));
+
+    expect(mockFn).not.toBeCalled();
+
+    vi.advanceTimersByTime(delayTime);
+    expect(mockFn).toBeCalled();
   });
 });

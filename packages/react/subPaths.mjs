@@ -4,6 +4,7 @@ export const componentsPathKeys = [
   'ClientGate',
   'Mounted',
   'DebounceHandler',
+  'Delay',
   'FallbackLazyImage',
   'IfElse',
   'InfiniteScroll',
