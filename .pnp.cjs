@@ -48,7 +48,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@changesets/changelog-github", "npm:0.5.0"],\
           ["@changesets/cli", "npm:2.27.1"],\
-          ["@eslint/js", "npm:9.18.0"],\
+          ["@eslint/js", "npm:9.19.0"],\
           ["@types/node", "npm:22.10.1"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.17.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.31.0"],\
@@ -8210,10 +8210,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:9.18.0", {\
-        "packageLocation": "./.yarn/cache/@eslint-js-npm-9.18.0-a952cf1b19-3938344c5a.zip/node_modules/@eslint/js/",\
+      ["npm:9.19.0", {\
+        "packageLocation": "./.yarn/cache/@eslint-js-npm-9.19.0-12d90bd733-45dc544c88.zip/node_modules/@eslint/js/",\
         "packageDependencies": [\
-          ["@eslint/js", "npm:9.18.0"]\
+          ["@eslint/js", "npm:9.19.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21948,7 +21948,7 @@ const RAW_RUNTIME_STATE =
           ["modern-kit", "workspace:."],\
           ["@changesets/changelog-github", "npm:0.5.0"],\
           ["@changesets/cli", "npm:2.27.1"],\
-          ["@eslint/js", "npm:9.18.0"],\
+          ["@eslint/js", "npm:9.19.0"],\
           ["@types/node", "npm:22.10.1"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.17.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.31.0"],\
