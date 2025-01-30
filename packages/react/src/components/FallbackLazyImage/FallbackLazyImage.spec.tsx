@@ -34,7 +34,7 @@ const TestComponent = ({ mockFn }: { mockFn?: Mock }) => {
 describe('FallbackLazyImage', () => {
   const onLoadMockFn = vi.fn();
 
-  it('should not load the image before it is exposed to the viewport and render the fallback', () => {
+  it('viewport에 노출되기 전에는 이미지를 로드하지 않고 fallback을 렌더링해야 합니다', () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');
@@ -49,7 +49,7 @@ describe('FallbackLazyImage', () => {
     expect(img1).toHaveStyle('transition: opacity 0.2s');
   });
 
-  it('should load the image when it is exposed in the viewport and remove the fallback', async () => {
+  it('viewport에 노출되면 이미지를 로드하고 fallback은 렌더링에서 제외되어야 합니다', async () => {
     renderSetup(<TestComponent mockFn={onLoadMockFn} />);
 
     const img1 = screen.getByAltText('img1');

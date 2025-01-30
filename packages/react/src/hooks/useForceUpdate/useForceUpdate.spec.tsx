@@ -22,7 +22,7 @@ const TestComponent = () => {
 };
 
 describe('useForceUpdate', () => {
-  it('should re-render component each time returned function is called', () => {
+  it('반환된 함수가 호출될 때마다 컴포넌트가 리렌더링되어야 합니다', () => {
     render(<TestComponent />);
 
     const button = screen.getByText('Button');

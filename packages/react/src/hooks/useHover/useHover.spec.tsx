@@ -26,7 +26,7 @@ describe('useHover', () => {
     );
   };
 
-  it('should trigger callback at target hover and leave', async () => {
+  it('타겟 요소에 hover와 leave 이벤트가 발생하면 콜백이 트리거되어야 합니다', async () => {
     const enterMockFn = vi.fn();
     const leaveMockFn = vi.fn();
 
@@ -45,7 +45,7 @@ describe('useHover', () => {
     expect(leaveMockFn).toBeCalled();
   });
 
-  it('should return the value of isHover based on whether the element is hovered.', async () => {
+  it('요소가 hover 상태인지에 따라 isHover 값이 반환되어야 합니다', async () => {
     const { user } = renderSetup(<TestComponent />);
 
     const hoverTarget = screen.getByRole('hover-target');

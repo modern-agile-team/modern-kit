@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react';
 import { usePrevious } from '.';
 
 describe('usePrevious', () => {
-  it('should return the value of the argument from the previous render', () => {
+  it('이전 렌더링의 인자 값을 반환해야 합니다', () => {
     const { result, rerender } = renderHook(({ value }) => usePrevious(value), {
       initialProps: { value: 0 },
     });

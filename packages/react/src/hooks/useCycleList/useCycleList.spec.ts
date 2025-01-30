@@ -8,7 +8,7 @@ describe('useCycleList', () => {
   const setIndexActionMockFn = vi.fn();
   const resetIndexActionMockFn = vi.fn();
 
-  it('should cycle through the list correctly', async () => {
+  it('리스트를 올바르게 순환해야 합니다', async () => {
     const { result } = renderHook(() => useCycleList([1, 2, 3, 4, 5]));
 
     expect(result.current.currentItem).toBe(1);

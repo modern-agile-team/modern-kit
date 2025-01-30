@@ -17,7 +17,7 @@ const TestComponent = () => {
 };
 
 describe('useDebouncedState', () => {
-  it('should update debouncedState after the delay time when setDebouncedState is called.', async () => {
+  it('setDebouncedState가 호출되면 지연 시간 이후에 debouncedState가 업데이트되어야 합니다', async () => {
     const { user } = renderSetup(<TestComponent />);
 
     const input = screen.getByRole('textbox');
@@ -32,7 +32,7 @@ describe('useDebouncedState', () => {
     expect(debouncedState).toHaveTextContent('test');
   });
 
-  it('should only update debouncedState once even if setDebouncedState is called multiple times within the delay time.', async () => {
+  it('지연 시간 내에 setDebouncedState가 여러 번 호출되어도 한 번만 업데이트되어야 합니다', async () => {
     const { user } = renderSetup(<TestComponent />);
 
     const input = screen.getByRole('textbox');

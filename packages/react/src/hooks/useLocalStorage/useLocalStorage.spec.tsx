@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 describe('useLocalStorage', () => {
-  it('should initialize with the default value if no value is in localStorage', () => {
+  it('localStorage에 값이 없을 때 기본값으로 초기화되어야 합니다', () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key: 'test', initialValue: 'default' })
     );
@@ -16,7 +16,7 @@ describe('useLocalStorage', () => {
     expect(result.current.state).toBe('default');
   });
 
-  it('should initialize with the default function return value if no value is in localStorage', () => {
+  it('localStorage에 값이 없을 때 기본값 함수의 반환값으로 초기화되어야 합니다', () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key: 'test', initialValue: () => 'default' })
     );
@@ -24,7 +24,7 @@ describe('useLocalStorage', () => {
     expect(result.current.state).toBe('default');
   });
 
-  it('should initialize with the value from localStorage', () => {
+  it('localStorage에 저장된 값으로 초기화되어야 합니다', () => {
     localStorage.setItem('test', JSON.stringify('storedValue'));
 
     const { result } = renderHook(() =>
@@ -34,7 +34,7 @@ describe('useLocalStorage', () => {
     expect(result.current.state).toBe('storedValue');
   });
 
-  it('should update localStorage when state changes(1)', async () => {
+  it('상태가 변경될 때 localStorage도 업데이트되어야 합니다(1)', async () => {
     const { result } = renderHook(() =>
       useLocalStorage({ key: 'test', initialValue: 'default' })
     );
@@ -47,7 +47,7 @@ describe('useLocalStorage', () => {
     expect(localStorage.getItem('test')).toBe(JSON.stringify('newValue'));
   });
 
-  it('should update localStorage when state changes(2)', async () => {
+  it('상태가 변경될 때 localStorage도 업데이트되어야 합니다(2)', async () => {
     localStorage.setItem('test', JSON.stringify([1, 2, 3]));
 
     const { result } = renderHook(() =>
@@ -62,7 +62,7 @@ describe('useLocalStorage', () => {
     expect(localStorage.getItem('test')).toBe(JSON.stringify([1, 2, 3, 4]));
   });
 
-  it('should remove the value from localStorage', async () => {
+  it('localStorage에서 값이 제거되어야 합니다', async () => {
     localStorage.setItem('test', JSON.stringify('storedValue'));
 
     const { result } = renderHook(() =>
@@ -77,7 +77,7 @@ describe('useLocalStorage', () => {
     expect(localStorage.getItem('test')).toBeNull();
   });
 
-  it('should render initial value during server-side rendering', async () => {
+  it('서버 사이드 렌더링 중에는 초기값이 렌더링되어야 합니다', async () => {
     const TestComponent = () => {
       const { state } = useLocalStorage({ key: 'test', initialValue: 'ssr' });
       return <p>{state}</p>;
@@ -88,7 +88,7 @@ describe('useLocalStorage', () => {
     expect(html).toContain('ssr');
   });
 
-  it('should infer the type based on the presence of initialValue', () => {
+  it('initialValue의 존재 여부에 따라 타입이 추론되어야 합니다', () => {
     const { result: result1 } = renderHook(() =>
       useLocalStorage<string>({ key: 'test' })
     );
@@ -100,7 +100,7 @@ describe('useLocalStorage', () => {
     expectTypeOf(result2.current.state).toEqualTypeOf<string>();
   });
 
-  it('should throw an error when localStorage contains invalid JSON', async () => {
+  it('localStorage에 유효하지 않은 JSON이 포함되어 있을 때 에러가 발생해야 합니다', async () => {
     localStorage.setItem('test', "{key: 'value'}");
 
     expect(() => {
@@ -108,7 +108,7 @@ describe('useLocalStorage', () => {
     }).toThrowError();
   });
 
-  it('should throw an error when setting an item in localStorage fails', async () => {
+  it('localStorage에 아이템 설정이 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useLocalStorage({ key: 'test' }));
 
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
@@ -118,7 +118,7 @@ describe('useLocalStorage', () => {
     expect(() => result.current.setState('error')).toThrowError();
   });
 
-  it('should throw an error when removing an item from localStorage fails', async () => {
+  it('localStorage에서 아이템 제거가 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useLocalStorage({ key: 'test' }));
 
     vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
