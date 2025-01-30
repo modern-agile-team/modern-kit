@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe('useDocumentTitle', () => {
-  it('should update the document title', () => {
+  it('문서 제목이 업데이트되어야 합니다', () => {
     const { rerender, unmount } = renderHook(
       ({ title }) => useDocumentTitle(title),
       {
@@ -30,7 +30,7 @@ describe('useDocumentTitle', () => {
     expect(document.title).toBe(ORIGIN_TITLE);
   });
 
-  it('should revert to the original title on unmount if preserveTitleOnUnmount is false', () => {
+  it('preserveTitleOnUnmount가 false일 때 언마운트 시 원래 제목으로 되돌아가야 합니다', () => {
     const { unmount } = renderHook(() =>
       useDocumentTitle(FIRST_CHANGE_TITLE, { preserveTitleOnUnmount: false })
     );
@@ -42,7 +42,7 @@ describe('useDocumentTitle', () => {
     expect(document.title).toBe(ORIGIN_TITLE);
   });
 
-  it('should retain the changed title on unmount if preserveTitleOnUnmount is true', () => {
+  it('preserveTitleOnUnmount가 true일 때 언마운트 시 변경된 제목을 유지해야 합니다', () => {
     const { unmount } = renderHook(() =>
       useDocumentTitle(FIRST_CHANGE_TITLE, { preserveTitleOnUnmount: true })
     );

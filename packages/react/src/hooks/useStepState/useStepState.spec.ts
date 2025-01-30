@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useStepState } from '.';
 
 describe('useStepState', () => {
-  it('should initialize state with the provided initial state and update it correctly', async () => {
+  it('초기 상태를 제공된 값으로 초기화하고 올바르게 업데이트해야 합니다', async () => {
     const { result } = renderHook(() =>
       useStepState({
         maxStep: 3,
@@ -20,7 +20,7 @@ describe('useStepState', () => {
     }>();
   });
 
-  it('should initialize state as null and update it correctly', async () => {
+  it('상태를 null로 초기화하고 올바르게 업데이트해야 합니다', async () => {
     const { result } = renderHook(() =>
       useStepState<{ name: string }>({ maxStep: 3 })
     );
@@ -42,7 +42,7 @@ describe('useStepState', () => {
     } | null>();
   });
 
-  it('should save state to sessionStorage and then to localStorage on rerender with new storage options', async () => {
+  it('새로운 스토리지 옵션으로 리렌더링 시 해당 스토리지에 저장해야 합니다', async () => {
     const { result, rerender } = renderHook(
       ({ storageOptions }) =>
         useStepState<{ name: string }>({
@@ -101,7 +101,7 @@ describe('useStepState', () => {
     });
   });
 
-  it('should save state to sessionStorage, clear state, and restore initial state on command', async () => {
+  it('상태를 sessionStorage에 저장하고, 상태를 초기화한 다음, 명령에 따라 초기 상태를 복원해야 합니다', async () => {
     const { result } = renderHook(() =>
       useStepState<{ name: string }>({
         maxStep: 3,
@@ -127,7 +127,7 @@ describe('useStepState', () => {
     expect(sessionStorage.getItem('stepState')).toBe(null);
   });
 
-  it('should go to the next step and call the provided action', async () => {
+  it('다음 단계로 이동하고 제공된 액션을 호출해야 합니다', async () => {
     const { result } = renderHook(() => useStepState({ maxStep: 3 }));
 
     await waitFor(() => {
@@ -138,7 +138,7 @@ describe('useStepState', () => {
     expect(result.current.hasNextStep).toBe(true);
   });
 
-  it('should go to the previous step', async () => {
+  it('이전 단계로 이동해야 합니다', async () => {
     const { result } = renderHook(() =>
       useStepState({ maxStep: 4, initialStep: 3 })
     );
@@ -151,7 +151,7 @@ describe('useStepState', () => {
     expect(result.current.hasPrevStep).toBe(true);
   });
 
-  it('should set the step correctly', async () => {
+  it('단계를 올바르게 설정해야 합니다', async () => {
     const { result } = renderHook(() => useStepState({ maxStep: 3 }));
 
     await waitFor(() => {
@@ -161,7 +161,7 @@ describe('useStepState', () => {
     expect(result.current.currentStep).toBe(2);
   });
 
-  it('should reset to the initial step', async () => {
+  it('초기 단계로 리셋해야 합니다', async () => {
     const { result } = renderHook(() => useStepState({ maxStep: 3 }));
 
     await waitFor(() => {

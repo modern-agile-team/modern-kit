@@ -8,7 +8,7 @@ vi.mock('../useMediaQuery', () => ({
 }));
 
 describe('usePreferredColorScheme', () => {
-  it('should return "dark" when prefers-color-scheme is dark', () => {
+  it('prefers-color-scheme가 dark일 때 "dark"를 반환해야 합니다', () => {
     (useMediaQuery as Mock).mockImplementation((query: string) => {
       return query === '(prefers-color-scheme: dark)';
     });
@@ -17,7 +17,7 @@ describe('usePreferredColorScheme', () => {
     expect(result.current).toBe('dark');
   });
 
-  it('should return "light" when prefers-color-scheme is light', () => {
+  it('prefers-color-scheme가 light일 때 "light"를 반환해야 합니다', () => {
     (useMediaQuery as Mock).mockImplementation((query: string) => {
       return query === '(prefers-color-scheme: light)';
     });

@@ -13,9 +13,7 @@ describe('AspectRatio', () => {
     const parentElement = screen.getByRole('paragraph')
       .parentElement as HTMLElement;
 
-    expect(parentElement).toHaveStyle(
-      'padding-top: calc(100% * (1 / 1.7777777777777777))'
-    );
+    expect(parentElement).toHaveStyle('aspect-ratio: 1.7777777777777777');
   });
 
   it('as props를 통해 특정 요소로 렌더링할 수 있습니다.', () => {
@@ -28,9 +26,8 @@ describe('AspectRatio', () => {
     const parentElement = screen.getByRole('paragraph')
       .parentElement as HTMLElement;
     expect(parentElement.tagName).toBe('UL');
-    expect(parentElement).toHaveStyle(
-      'padding-top: calc(100% * (1 / 1.7777777777777777))'
-    );
+
+    expect(parentElement).toHaveStyle('aspect-ratio: 1.7777777777777777');
   });
 
   it('asChild props를 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 aspect-ratio 속성을 적용할 수 있습니다.', () => {

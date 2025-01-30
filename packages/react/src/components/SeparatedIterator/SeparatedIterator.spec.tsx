@@ -15,7 +15,7 @@ const testItems: TestItem[] = [
 ];
 
 describe('SeparatedIterator', () => {
-  it('should render the correct number of items with separators', () => {
+  it('구분자와 함께 올바른 수의 아이템이 렌더링되어야 합니다', () => {
     renderSetup(
       <SeparatedIterator
         items={testItems}
@@ -31,7 +31,7 @@ describe('SeparatedIterator', () => {
     expect(separators).toHaveLength(testItems.length - 1);
   });
 
-  it('should render the correct number of items and separators at the specified interval', () => {
+  it('지정된 간격으로 올바른 수의 아이템과 구분자가 렌더링되어야 합니다', () => {
     renderSetup(
       <SeparatedIterator
         items={testItems}
@@ -48,7 +48,7 @@ describe('SeparatedIterator', () => {
     expect(separators).toHaveLength(1);
   });
 
-  it('should render the correct number of separators when includeLastSeparator is true', () => {
+  it('includeLastSeparator가 true일 때 올바른 수의 구분자가 렌더링되어야 합니다', () => {
     renderSetup(
       <SeparatedIterator
         items={testItems}
@@ -65,7 +65,7 @@ describe('SeparatedIterator', () => {
     expect(separators).toHaveLength(testItems.length);
   });
 
-  it('should not render any items when items prop is undefined', () => {
+  it('items prop이 undefined일 때 아무것도 렌더링되지 않아야 합니다', () => {
     renderSetup(
       <SeparatedIterator
         items={undefined}

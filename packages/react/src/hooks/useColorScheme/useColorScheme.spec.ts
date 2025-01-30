@@ -18,13 +18,13 @@ beforeEach(() => {
 });
 
 describe('useColorScheme', () => {
-  it('should return default color scheme', () => {
+  it('기본 색상 모드를 반환해야 합니다', () => {
     const { result } = renderHook(() => useColorScheme({ key: TEST_KEY }));
 
     expect(result.current.colorScheme).toBe('dark');
   });
 
-  it('should return default color scheme', () => {
+  it('기본 색상 모드를 반환해야 합니다', () => {
     const { result } = renderHook(() =>
       useColorScheme({ defaultValue: 'light', key: TEST_KEY })
     );
@@ -32,7 +32,7 @@ describe('useColorScheme', () => {
     expect(result.current.colorScheme).toBe('light');
   });
 
-  it('should toggle between dark and light mode', async () => {
+  it('다크 모드와 라이트 모드를 토글해야 합니다', async () => {
     const { result } = renderHook(() =>
       useColorScheme({ defaultValue: 'light' })
     );
@@ -50,7 +50,7 @@ describe('useColorScheme', () => {
     expect(result.current.colorScheme).toBe('light');
   });
 
-  it('should set dark mode', async () => {
+  it('다크 모드로 설정해야 합니다', async () => {
     const { result } = renderHook(() =>
       useColorScheme({ defaultValue: 'light' })
     );
@@ -62,7 +62,7 @@ describe('useColorScheme', () => {
     expect(result.current.colorScheme).toBe('dark');
   });
 
-  it('should set light mode', async () => {
+  it('라이트 모드로 설정해야 합니다', async () => {
     const { result } = renderHook(() =>
       useColorScheme({ defaultValue: 'dark' })
     );
@@ -74,7 +74,7 @@ describe('useColorScheme', () => {
     expect(result.current.colorScheme).toBe('light');
   });
 
-  it('should set color scheme to preferred mode', async () => {
+  it('선호하는 색상 모드로 설정해야 합니다', async () => {
     const { result } = renderHook(() =>
       useColorScheme({ defaultValue: 'light' })
     );
@@ -86,7 +86,7 @@ describe('useColorScheme', () => {
     expect(result.current.colorScheme).toBe('dark');
   });
 
-  it('should add class to body if shouldSetBodyClass is true', async () => {
+  it('shouldSetBodyClass가 true일 때 body에 클래스를 추가해야 합니다', async () => {
     const { unmount } = renderHook(() =>
       useColorScheme({
         defaultValue: 'light',

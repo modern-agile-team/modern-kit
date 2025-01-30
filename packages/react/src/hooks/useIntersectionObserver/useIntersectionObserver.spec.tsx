@@ -43,7 +43,7 @@ describe('useIntersectionObserver', () => {
   const intersectStartMock = vi.fn();
   const intersectEndMock = vi.fn();
 
-  it('should call the action callback function when the target element assigned to the returned "ref" is exposed to the Viewport', async () => {
+  it('반환된 "ref"가 할당된 타겟 요소가 viewport에 노출될 때 콜백 함수가 호출되어야 합니다', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
@@ -63,7 +63,7 @@ describe('useIntersectionObserver', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('should call the action callback function only once when the calledOnce option is true', async () => {
+  it('calledOnce 옵션이 true일 때 콜백 함수가 한 번만 호출되어야 합니다', async () => {
     renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}
@@ -88,7 +88,7 @@ describe('useIntersectionObserver', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('should not call the action callback functions when the enabled option is false', async () => {
+  it('enabled 옵션이 false일 때 콜백 함수가 호출되지 않아야 합니다', async () => {
     const { rerender } = renderSetup(
       <TestComponent
         onIntersectStart={intersectStartMock}

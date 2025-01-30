@@ -19,7 +19,7 @@ const TestComponent = ({ name }: TestItem) => {
 };
 
 describe('Iterator', () => {
-  it('should render the correct number of items as div elements', () => {
+  it('div 요소로 올바른 수의 아이템이 렌더링되어야 합니다', () => {
     renderSetup(
       <Iterator
         itemKey="id"
@@ -33,7 +33,7 @@ describe('Iterator', () => {
     expect(renderItems).toHaveLength(testItems.length);
   });
 
-  it('should not render any items when items prop is undefined', () => {
+  it('items prop이 undefined일 때 아무것도 렌더링되지 않아야 합니다', () => {
     renderSetup(
       <Iterator items={undefined} renderItem={() => <div>Item</div>} />
     );
@@ -42,7 +42,7 @@ describe('Iterator', () => {
     expect(renderItems).toHaveLength(0);
   });
 
-  it('should render the correct number of items when items prop is an array of strings', () => {
+  it('items prop이 문자열 배열일 때 올바른 수의 아이템이 렌더링되어야 합니다', () => {
     renderSetup(
       <Iterator
         items={['Item 1', 'Item 2', 'Item 3']}
@@ -54,7 +54,7 @@ describe('Iterator', () => {
     expect(renderItems).toHaveLength(3);
   });
 
-  it('should render the correct number of items as TestComponent elements', () => {
+  it('TestComponent 요소로 올바른 수의 아이템이 렌더링되어야 합니다', () => {
     renderSetup(
       <Iterator
         itemKey="id"

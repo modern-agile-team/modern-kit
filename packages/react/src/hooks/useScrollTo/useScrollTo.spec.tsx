@@ -25,7 +25,7 @@ beforeEach(() => {
 });
 
 describe('useScrollTo', () => {
-  it('should scroll to the default position when no arguments are provided', () => {
+  it('인자가 제공되지 않았을 때 기본 위치로 스크롤되어야 합니다', () => {
     const { result } = renderHook(() => useScrollTo());
 
     result.current.scrollToPosition();
@@ -33,7 +33,7 @@ describe('useScrollTo', () => {
     expect(window.scrollTo).toHaveBeenCalledWith(DEFAULT_OPTIONS);
   });
 
-  it('should call scrollToPosition on the div element with the correct options', () => {
+  it('div 요소에서 scrollToPosition이 올바른 옵션과 함께 호출되어야 합니다', () => {
     const { result } = renderHook(() => useScrollTo<HTMLDivElement>());
 
     const container = document.createElement('div');
@@ -46,7 +46,7 @@ describe('useScrollTo', () => {
     expect(container.scrollTo).toHaveBeenCalledWith(SCROLL_OPTIONS);
   });
 
-  it('should call scrollToElement on the window with the correct options', () => {
+  it('window에서 scrollToElement가 올바른 옵션과 함께 호출되어야 합니다', () => {
     const { result } = renderHook(() => useScrollTo<HTMLDivElement>());
 
     const target = document.createElement('div');
@@ -56,7 +56,7 @@ describe('useScrollTo', () => {
     expect(window.scrollTo).toHaveBeenCalledWith(SCROLL_OPTIONS);
   });
 
-  it('should call scrollToElement on the container element with the correct options when scrolling to an element', () => {
+  it('요소로 스크롤할 때 container 요소에서 scrollToElement가 올바른 옵션과 함께 호출되어야 합니다', () => {
     const { result } = renderHook(() => useScrollTo<HTMLDivElement>());
 
     const container = document.createElement('div');

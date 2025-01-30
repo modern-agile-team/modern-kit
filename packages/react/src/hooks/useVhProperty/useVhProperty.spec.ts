@@ -3,13 +3,13 @@ import { renderHook } from '@testing-library/react';
 import { useVhProperty } from '.';
 
 describe('useVhProperty', () => {
-  it('should set --vh property on documentElement', () => {
+  it('documentElement에 --vh 속성을 설정해야 합니다', () => {
     window.innerHeight = 800;
     renderHook(() => useVhProperty());
     expect(document.documentElement.style.getPropertyValue('--vh')).toBe('8px');
   });
 
-  it('should set --custom property on documentElement', () => {
+  it('documentElement에 --custom 속성을 설정해야 합니다', () => {
     window.innerHeight = 800;
     renderHook(() => useVhProperty({ name: 'custom' }));
     expect(document.documentElement.style.getPropertyValue('--custom')).toBe(
@@ -17,7 +17,7 @@ describe('useVhProperty', () => {
     );
   });
 
-  it('should set --vh property on documentElement and update on resize', () => {
+  it('documentElement에 --vh 속성을 설정하고 리사이즈 시 업데이트해야 합니다', () => {
     window.innerHeight = 800;
     renderHook(() =>
       useVhProperty({

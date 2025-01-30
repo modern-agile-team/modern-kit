@@ -59,7 +59,7 @@ const NestedTestComponent = () => {
 };
 
 describe('Default Portal Component', () => {
-  it("should render the portalElement in 'document.body' by default", () => {
+  it('기본적으로 portalElement가 document.body에 렌더링되어야 합니다', () => {
     const { container } = renderSetup(<DefaultTestComponent />);
 
     const parentElement = container.querySelector('#parent');
@@ -73,7 +73,7 @@ describe('Default Portal Component', () => {
     expect(documentPortalChild).toBeInTheDocument();
   });
 
-  it('should render children of the Portal component based on multiple states', async () => {
+  it('Portal 컴포넌트의 자식 요소가 여러 상태에 따라 렌더링되어야 합니다', async () => {
     const { user } = renderSetup(<DefaultTestComponent />);
 
     const documentPortal = document.querySelector('.portal');
@@ -111,7 +111,7 @@ describe('Default Portal Component', () => {
     });
   });
 
-  it('should remove the portalElement on unmount.', () => {
+  it('언마운트 시 portalElement가 제거되어야 합니다', () => {
     const { unmount } = renderSetup(<DefaultTestComponent />);
 
     const documentPortal = document.querySelector('.portal');
@@ -123,7 +123,7 @@ describe('Default Portal Component', () => {
 });
 
 describe('Container Portal Component', () => {
-  it("should render to any other DOM element you want instead of the 'document.body' by passing in the 'containerRef' prop", () => {
+  it('containerRef prop을 전달하여 document.body 대신 다른 DOM 요소에 렌더링되어야 합니다', () => {
     const { container } = renderSetup(<ContainerTestComponent />);
 
     const outerElement = container.querySelector('#outer');
@@ -133,7 +133,7 @@ describe('Container Portal Component', () => {
     expect(outerInnerChild).toBeInTheDocument();
   });
 
-  it('should remove the portalElement on unmount', () => {
+  it('언마운트 시 portalElement가 제거되어야 합니다', () => {
     const { container, unmount } = renderSetup(<ContainerTestComponent />);
 
     const outerElement = container.querySelector('#outer');
@@ -146,7 +146,7 @@ describe('Container Portal Component', () => {
 });
 
 describe('Nested Portal Component', () => {
-  it('should create a nested Portal DOM hierarchy when nesting multiple Portal Components', () => {
+  it('여러 Portal 컴포넌트를 중첩할 때 중첩된 Portal DOM 계층 구조가 생성되어야 합니다', () => {
     renderSetup(<NestedTestComponent />);
 
     const documentPortal = document.querySelector('.portal');
@@ -165,7 +165,7 @@ describe('Nested Portal Component', () => {
     expect(nestedChild2).toBeInTheDocument();
   });
 
-  it("should render a nested Portal Component to the parent portalElement if the nested Portal Component has a 'containerRef' prop", () => {
+  it('중첩된 Portal 컴포넌트에 containerRef prop이 있는 경우 부모 portalElement에 렌더링되어야 합니다', () => {
     const { container } = renderSetup(<NestedTestComponent />);
 
     const outerElement = container.querySelector('#outer');

@@ -16,7 +16,7 @@ const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
 const event = new Event('visibilitychange');
 
 describe('useVisibilityChange', () => {
-  it('should call the onShow callback when the page becomes visible', () => {
+  it('페이지가 보일 때 onShow 콜백이 호출되어야 합니다', () => {
     const onShow = vi.fn();
     const onHide = vi.fn();
 
@@ -34,7 +34,7 @@ describe('useVisibilityChange', () => {
     expect(onHide).toBeCalledTimes(0);
   });
 
-  it('should call the onHide callback when the page becomes hidden', () => {
+  it('페이지가 숨겨질 때 onHide 콜백이 호출되어야 합니다', () => {
     const onShow = vi.fn();
     const onHide = vi.fn();
 

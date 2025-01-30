@@ -25,7 +25,7 @@ describe('useMouse with connected ref', () => {
     );
   };
 
-  it('should return null position when first render', async () => {
+  it('첫 렌더링시 position이 null이어야 합니다', async () => {
     renderSetup(<RefConnectedComponent />);
 
     expect(screen.getByText('clientX: null')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('useMouse with connected ref', () => {
     expect(screen.getByText('elementPositionY: null')).toBeInTheDocument();
   });
 
-  it('should correctly return mouse position, relative mouse position, and element position when the mouse moves', async () => {
+  it('마우스가 움직일 때 마우스 위치, 상대적 마우스 위치, 요소 위치가 올바르게 반환되어야 합니다', async () => {
     renderSetup(<RefConnectedComponent />);
 
     const box = screen.getByRole('box');
@@ -97,7 +97,7 @@ describe('useMouse without connected ref', () => {
     );
   };
 
-  it('should return null position when first render', async () => {
+  it('첫 렌더링시 position이 null이어야 합니다', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
     fireEvent.mouseMove(document, {
@@ -119,7 +119,7 @@ describe('useMouse without connected ref', () => {
     expect(screen.getByText('elementPositionY: null')).toBeInTheDocument();
   });
 
-  it('should return null for mouse position, relative mouse position, and element position when the mouse moves', async () => {
+  it('마우스가 움직일 때 마우스 위치, 상대적 마우스 위치, 요소 위치가 null이어야 합니다', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
     fireEvent.mouseMove(document, {

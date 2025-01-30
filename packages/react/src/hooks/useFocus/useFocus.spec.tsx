@@ -27,7 +27,7 @@ const TestComponent = ({
 };
 
 describe('useFocus', () => {
-  it('should trigger callback at target focus and blur', async () => {
+  it('타겟 요소에 focus와 blur 이벤트가 발생하면 콜백이 트리거되어야 합니다', async () => {
     const focusMockFn = vi.fn();
     const blurMockFn = vi.fn();
 
@@ -56,7 +56,7 @@ describe('useFocus', () => {
     expect(blurMockFn).toBeCalled();
   });
 
-  it('should not perform any actions when ref is not assigned', async () => {
+  it('ref가 할당되지 않았을 때 어떤 동작도 수행하지 않아야 합니다', async () => {
     const focusMockFn = vi.fn();
     const blurMockFn = vi.fn();
 
@@ -81,7 +81,7 @@ describe('useFocus', () => {
     expect(blurMockFn).not.toBeCalled();
   });
 
-  it('should not perform any actions when onFocus and onBlur are not assigned', async () => {
+  it('onFocus와 onBlur가 할당되지 않았을 때 어떤 동작도 수행하지 않아야 합니다', async () => {
     const { user } = renderSetup(<TestComponent connectedRef />);
 
     const focusTarget = screen.getByRole('focus-target');

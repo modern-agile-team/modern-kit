@@ -9,7 +9,7 @@ afterEach(() => {
 });
 
 describe('useScrollLock', () => {
-  it('should initialize properly with autoLock as true', () => {
+  it('autoLock이 true일 때 자동으로 스크롤 잠금이 되어야 합니다', () => {
     document.body.style.overflow = 'auto';
 
     const { result, unmount } = renderHook(() => useScrollLock());
@@ -23,7 +23,7 @@ describe('useScrollLock', () => {
     expect(document.body.style.overflow).toBe('auto');
   });
 
-  it('should initialize properly with autoLock as false', () => {
+  it('autoLock이 false일 때 자동으로 스크롤 잠금이 되지 않아야 합니다', () => {
     document.body.style.overflow = 'auto';
 
     const { result } = renderHook(() => useScrollLock({ autoLock: false }));
@@ -33,7 +33,7 @@ describe('useScrollLock', () => {
     expect(document.body.style.overflow).toBe('auto');
   });
 
-  it('should lock and unlock properly', async () => {
+  it('스크롤 잠금과 해제가 올바르게 동작해야 합니다', async () => {
     const { result } = renderHook(() => useScrollLock());
     const divElement = document.createElement('div');
 

@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe('useUserAgent', () => {
-  it('should parse the userAgent string and return the CPU information', () => {
+  it('userAgent 문자열을 파싱하고 CPU 정보를 반환해야 합니다', () => {
     const { result } = renderHook(() => useUserAgent());
 
     if (!result.current) return;

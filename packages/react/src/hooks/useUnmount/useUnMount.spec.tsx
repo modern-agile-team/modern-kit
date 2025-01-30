@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react';
 import { useUnmount } from '.';
 
 describe('useUnMount', () => {
-  it('should call provided callback on unmount', () => {
+  it('언마운트 시 제공된 콜백이 호출되어야 합니다', () => {
     const mockFn = vi.fn();
 
     const { unmount } = renderHook(() => useUnmount(mockFn));
@@ -15,7 +15,7 @@ describe('useUnMount', () => {
     expect(mockFn).toBeCalled();
   });
 
-  it('should call provided callback if is has been changed', () => {
+  it('콜백이 변경되었을 때 제공된 콜백이 호출되어야 합니다', () => {
     const mockFn1 = vi.fn();
     const mockFn2 = vi.fn();
     const mockFn3 = vi.fn();
