@@ -174,6 +174,7 @@ export const validatorKeys = [
   'index',
   'hasProperty',
   'isArray',
+  'isBlob',
   'isBoolean',
   'isDate',
   'isEqual',
