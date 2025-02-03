@@ -112,12 +112,6 @@ export default function Home(): JSX.Element {
                 rel="noreferrer">
                 <img src="https://img.shields.io/npm/v/@modern-kit/types.svg" />
               </a>
-              <a
-                href="https://bundlephobia.com/package/@modern-kit/types"
-                target="_blank"
-                rel="noreferrer">
-                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/types/latest" />
-              </a>
             </div>
           </h2>
           <p className={styles.mainContentParagraph}>

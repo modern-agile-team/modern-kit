@@ -50,16 +50,20 @@ const useIntersectionObserver: <T extends HTMLElement>({
 import { useIntersectionObserver } from '@modern-kit/react';
 
 const Example = () => {
-  const [enabled, setEnabled] = useState(false);
+  const [value, setValue] = useState(0);
+  const [enabled, setEnabled] = useState(true);
   const { ref: targetRef } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
+      setValue(value + 1);
     },
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
+      setValue(value + 1);
     },
     enabled,
   });
+
   const boxStyle = {
     height: "800px", 
     backgroundColor: "teal"
@@ -67,10 +71,11 @@ const Example = () => {
 
   return (
     <div>
-      <button onClick={() => setEnabled(!enabled)}>Toggle Enabled: {`${enabled}`}</button>
+      <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
         타겟 요소<br />
+        value: {value}<br />
         개발자 도구 콘솔을 확인해주세요.
       </div>
       <div style={boxStyle} />
@@ -79,16 +84,19 @@ const Example = () => {
 };
 ```
 
-## Exmaple
+## Example
 
 export const Example = () => {
-  const [enabled, setEnabled] = useState(false);
+  const [value, setValue] = useState(0);
+  const [enabled, setEnabled] = useState(true);
   const { ref: targetRef } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
+      setValue(value + 1);
     },
     onIntersectEnd: (entry) => {
       console.log("onIntersectEnd: ", entry);
+      setValue(value + 1);
     },
     enabled,
   });
@@ -98,11 +106,11 @@ export const Example = () => {
   }
   return (
     <div>
-      <button onClick={() => setEnabled(!enabled)}>Toggle Enabled: {`${enabled}`}</button>
+      <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
         타겟 요소<br />
-        개발자 도구 콘솔을 확인해주세요.
+        value: {value}
       </div>
       <div style={boxStyle} />
     </div>
