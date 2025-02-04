@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [#718](https://github.com/modern-agile-team/modern-kit/pull/718) [`87238a3`](https://github.com/modern-agile-team/modern-kit/commit/87238a36ced9566c972852d609e6377c0b34efe7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isBlob 함수 추가 - @ssi02014
+
+- [#706](https://github.com/modern-agile-team/modern-kit/pull/706) [`7574f89`](https://github.com/modern-agile-team/modern-kit/commit/7574f894e7cbad5fe2bc0bab634dbd41ced73d68) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: update react/utils build setting - @ssi02014
+
 ## 2.0.0
 
 ### Major Changes
