@@ -7,21 +7,13 @@ import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import { dts } from 'rollup-plugin-dts';
 
-import {
-  componentsPathKeys,
-  hooksPathKeys,
-  utilsPathKey,
-} from './subPaths.mjs';
-
-import { getSubEntryMap, getFormatEntryFileNames } from './build.utils.mjs';
+import { getAllEntries, getFormatEntryFileNames } from './build.utils.mjs';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 const input = {
   index: './src/index.ts', // 진입 경로,
-  ...getSubEntryMap(componentsPathKeys, 'components'),
-  ...getSubEntryMap(hooksPathKeys, 'hooks'),
-  ...getSubEntryMap(utilsPathKey, 'utils'),
+  ...getAllEntries(),
 };
 
 export default [
