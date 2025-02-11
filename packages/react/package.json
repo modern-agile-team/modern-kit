@@ -30,7 +30,7 @@
     "@types/ua-parser-js": "^0.7.39",
     "@vitest/coverage-istanbul": "^3.0.3",
     "autoprefixer": "^10.4.20",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "jsdom": "^26.0.0",
     "postcss": "^8.4.41",
     "react": "^18.2.0",
