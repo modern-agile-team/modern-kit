@@ -20,7 +20,7 @@ afterEach(() => {
 });
 
 describe('getViewportSize', () => {
-  it('should return width 500 and height 300', () => {
+  it('width 500과 height 300을 반환해야 합니다.', () => {
     windowSpy.mockImplementation(() => ({
       innerWidth: 500,
       innerHeight: 300,
@@ -35,7 +35,7 @@ describe('getViewportSize', () => {
     expect(height).toBe(300);
   });
 
-  it('should return width 0 and height 0 if window is undefined', () => {
+  it('window가 정의되지 않은 경우 width 0과 height 0을 반환해야 합니다.', () => {
     windowSpy.mockImplementation(() => undefined);
 
     const { width, height } = getViewportSize();

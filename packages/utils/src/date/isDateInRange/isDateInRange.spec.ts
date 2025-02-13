@@ -23,7 +23,6 @@ describe('isDateInRange', () => {
             toDate: new Date('2025-02-01'),
           })
         ).toBeTruthy();
-
         expect(
           isDateInRange({
             fromDate: new Date('2024-01-01'),
@@ -35,28 +34,26 @@ describe('isDateInRange', () => {
         expect(
           isDateInRange({ fromDate: '2024-12-01', toDate: '2025-02-01' })
         ).toBeTruthy();
-
         expect(
           isDateInRange({ fromDate: '2024-01-01', toDate: '2024-12-31' })
+        ).toBeFalsy();
+
+        // 숫자
+        expect(
+          isDateInRange({ fromDate: 1733011200000, toDate: 1738368000000 })
+        ).toBeTruthy();
+        expect(
+          isDateInRange({ fromDate: 1704067200000, toDate: 1735603200000 })
         ).toBeFalsy();
       });
     });
 
     describe('시작 날짜만 있는 경우', () => {
       it('현재 날짜가 시작 날짜 이후면 true를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(
-          isDateInRange({ fromDate: new Date('2024-12-31') })
-        ).toBeTruthy();
-
-        // 문자열 테스트
         expect(isDateInRange({ fromDate: '2024-12-31' })).toBeTruthy();
       });
 
       it('현재 날짜가 시작 날짜 이전이면 false를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(isDateInRange({ fromDate: new Date('2025-01-02') })).toBeFalsy();
-
         // 문자열 테스트
         expect(isDateInRange({ fromDate: '2025-01-02' })).toBeFalsy();
       });
@@ -64,17 +61,11 @@ describe('isDateInRange', () => {
 
     describe('종료 날짜만 있는 경우', () => {
       it('현재 날짜가 종료 날짜 이전이면 true를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(isDateInRange({ toDate: new Date('2025-12-31') })).toBeTruthy();
-
         // 문자열 테스트
         expect(isDateInRange({ toDate: '2025-12-31' })).toBeTruthy();
       });
 
       it('현재 날짜가 종료 날짜 이후면 false를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(isDateInRange({ toDate: new Date('2024-12-31') })).toBeFalsy();
-
         // 문자열 테스트
         expect(isDateInRange({ toDate: '2024-12-31' })).toBeFalsy();
       });
@@ -92,6 +83,13 @@ describe('isDateInRange', () => {
             toDate: new Date('2025-01-02'),
           })
         ).toBeTruthy();
+        expect(
+          isDateInRange({
+            targetDate: new Date('2025-01-03'),
+            fromDate: new Date('2024-12-31'),
+            toDate: new Date('2025-01-02'),
+          })
+        ).toBeFalsy();
 
         // 문자열 테스트
         expect(
@@ -101,19 +99,34 @@ describe('isDateInRange', () => {
             toDate: '2025-01-02',
           })
         ).toBeTruthy();
+        expect(
+          isDateInRange({
+            targetDate: '2025-01-03',
+            fromDate: '2024-12-31',
+            toDate: '2025-01-02',
+          })
+        ).toBeFalsy();
+
+        // 숫자
+        expect(
+          isDateInRange({
+            targetDate: 1735689600000,
+            fromDate: 1735603200000,
+            toDate: 1735776000000,
+          })
+        ).toBeTruthy();
+        expect(
+          isDateInRange({
+            targetDate: 1735862400000,
+            fromDate: 1735603200000,
+            toDate: 1735776000000,
+          })
+        ).toBeFalsy();
       });
     });
 
     describe('시작 날짜만 있는 경우', () => {
       it('타겟 날짜가 시작 날짜 이후면 true를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(
-          isDateInRange({
-            targetDate: new Date('2025-01-01'),
-            fromDate: new Date('2024-12-31'),
-          })
-        ).toBeTruthy();
-
         // 문자열 테스트
         expect(
           isDateInRange({
@@ -124,14 +137,6 @@ describe('isDateInRange', () => {
       });
 
       it('타겟 날짜가 시작 날짜 이전이면 false를 반환해야 합니다.', () => {
-        // Date 객체 테스트
-        expect(
-          isDateInRange({
-            targetDate: new Date('2024-12-31'),
-            fromDate: new Date('2025-01-01'),
-          })
-        ).toBeFalsy();
-
         // 문자열 테스트
         expect(
           isDateInRange({
@@ -146,13 +151,6 @@ describe('isDateInRange', () => {
       it('타겟 날짜가 종료 날짜 이전이면 true를 반환해야 합니다.', () => {
         expect(
           isDateInRange({
-            targetDate: new Date('2024-12-31'),
-            toDate: new Date('2025-01-01'),
-          })
-        ).toBeTruthy();
-
-        expect(
-          isDateInRange({
             targetDate: '2024-12-31',
             toDate: '2025-01-01',
           })
@@ -160,13 +158,6 @@ describe('isDateInRange', () => {
       });
 
       it('타겟 날짜가 종료 날짜 이후면 false를 반환해야 합니다.', () => {
-        expect(
-          isDateInRange({
-            targetDate: new Date('2025-01-02'),
-            toDate: new Date('2025-01-01'),
-          })
-        ).toBeFalsy();
-
         expect(
           isDateInRange({
             targetDate: '2025-01-02',
@@ -260,6 +251,18 @@ describe('isDateInRange', () => {
     ).toBeFalsy();
   });
 
+  describe('"-", "." 문자를 포함한 날짜 형식 테스트', () => {
+    it('"/", "." 문자를 포함한 날짜 형식은 유효한 날짜 형식이어야 합니다.', () => {
+      expect(
+        isDateInRange({ fromDate: '2024.12.01', toDate: '2025.02.01' })
+      ).toBeTruthy();
+
+      expect(
+        isDateInRange({ fromDate: '2024/12/01', toDate: '2025/02/01' })
+      ).toBeTruthy();
+    });
+  });
+
   describe('에러 케이스', () => {
     it('타겟 날짜가 유효하지 않은 날짜 형식이면 에러를 던져야 합니다.', () => {
       expect(() =>
@@ -293,6 +296,12 @@ describe('isDateInRange', () => {
           toDate: '2025-01-01',
         })
       ).toThrow('시작 날짜가 종료 날짜보다 늦을 수 없습니다.');
+    });
+
+    it('fromDate, toDate 모두 없는 경우 에러를 던져야 합니다.', () => {
+      expect(() => isDateInRange({})).toThrow(
+        '시작 날짜 혹은 종료 날짜 중 하나는 필요합니다.'
+      );
     });
   });
 });

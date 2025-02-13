@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { hexToRgba } from '.';
 
 describe('hexToRgba', () => {
-  it('should convert valid hex color to RGB', () => {
+  it('유효한 16진수 색상을 RGB로 변환해야 합니다.', () => {
     const upperCaseValidHexColor1 = '#1A2B3C';
     const lowerCaseValidHexColor2 = '#1a2b3c';
 
@@ -26,7 +26,7 @@ describe('hexToRgba', () => {
     });
   });
 
-  it('should return null for invalid hex color', () => {
+  it('유효하지 않은 16진수 색상에 대해 null을 반환해야 합니다.', () => {
     const invalidHexColor1 = '#XYZ123';
     const invalidHexColor2 = '#1A23';
 
@@ -34,7 +34,7 @@ describe('hexToRgba', () => {
     expect(hexToRgba(invalidHexColor2)).toBeNull();
   });
 
-  it('should handle short hex color codes', () => {
+  it('짧은 16진수 색상 코드를 처리해야 합니다.', () => {
     const shortHexColor = '#1A2';
     const rgbColor = hexToRgba(shortHexColor, 0.2);
 
@@ -47,7 +47,7 @@ describe('hexToRgba', () => {
     });
   });
 
-  it('should return null for empty string', () => {
+  it('빈 문자열에 대해 null을 반환해야 합니다.', () => {
     const emptyHexColor = '';
     const rgbColor = hexToRgba(emptyHexColor);
 

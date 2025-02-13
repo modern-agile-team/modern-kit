@@ -17,5 +17,8 @@
  * // '1,433만 4,567'
  */
 export function formatNumberWithCommas(value: number | string): string {
-  return String(value).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  const parts = String(value).split('.');
+
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
 }

@@ -10,6 +10,25 @@ interface IsDateInRangeParams {
 }
 
 /**
+ * @description 날짜 문자열을 Date 객체로 변환합니다.
+ * Safari에서 호환되도록 "-", "."을 "/"로 변경합니다. (ex. 2025-01-01 -> 2025/01/01)
+ *
+ * @param {Date | string | number} date - 변환할 날짜 문자열 또는 숫자
+ * @returns {Date} 변환된 Date 객체
+ * @example
+ * parseDate('2025-01-01') // 2025-01-01T00:00:00.000Z
+ * parseDate('2025.01.01') // 2025-01-01T00:00:00.000Z
+ * parseDate('2025/01/01') // 2025-01-01T00:00:00.000Z
+ */
+const parseDate = (date: Date | string | number): Date => {
+  if (date instanceof Date) return date;
+  if (typeof date === 'number') return new Date(date);
+
+  const safeDateString = date.replace(/[-\\.]/g, '/');
+  return new Date(safeDateString);
+};
+
+/**
  * @description 타겟 날짜가 주어진 날짜 범위 내에 있는지 확인합니다. 타겟 날짜(targetDate)가 없을 경우 `현재 날짜`를 사용합니다.
  *
  * 1. 시작 날짜만 주어 질 경우 타겟 날짜(or 현재 날짜)가 시작 날짜 이후인지 확인합니다.
@@ -70,9 +89,9 @@ export function isDateInRange({
   toDate,
   inclusive = 'from',
 }: IsDateInRangeParams): boolean {
-  const fromDateToUse = fromDate ? new Date(fromDate) : null;
-  const toDateToUse = toDate ? new Date(toDate) : null;
-  const targetDateToUse = new Date(targetDate);
+  const fromDateToUse = fromDate ? parseDate(fromDate) : null;
+  const toDateToUse = toDate ? parseDate(toDate) : null;
+  const targetDateToUse = parseDate(targetDate);
 
   // 에러 케이스 대응
   if (isNaN(targetDateToUse.getTime())) {
@@ -126,5 +145,5 @@ export function isDateInRange({
     return compareDate(fromDateToUse, 'from') && compareDate(toDateToUse, 'to');
   }
 
-  return false;
+  throw new Error('시작 날짜 혹은 종료 날짜 중 하나는 필요합니다.');
 }

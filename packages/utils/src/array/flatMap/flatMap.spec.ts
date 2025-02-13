@@ -4,14 +4,14 @@ import { flatMap } from '.';
 describe('flatMap', () => {
   const originArr = [1, 2, 3];
 
-  it('should map and flatten array of numbers with default depth', () => {
+  it('기본 깊이로 숫자 배열을 매핑하고 평탄화해야 합니다.', () => {
     const iteratee = (item: number) => [item, item];
     const expectedArr = [1, 1, 2, 2, 3, 3];
 
     expect(flatMap(originArr, iteratee)).toEqual(expectedArr);
   });
 
-  it('should map and flatten array of numbers with specified depth', () => {
+  it('지정된 깊이로 숫자 배열을 매핑하고 평탄화해야 합니다.', () => {
     const iteratee = (item: number) => [[[item, item]]];
 
     const expectedArr1 = [[[1, 1]], [[2, 2]], [[3, 3]]];
@@ -28,7 +28,7 @@ describe('flatMap', () => {
     expect(flatMap(originArr, iteratee, 3)).toEqual(expectedArr3);
   });
 
-  it('should handle empty array', () => {
+  it('빈 배열을 처리해야 합니다.', () => {
     const emptyArr: number[] = [];
     const result = flatMap(emptyArr, (item) => [item, item]);
     expect(result).toEqual([]);
