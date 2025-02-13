@@ -3,6 +3,32 @@
   "sideEffects": false,
   "version": "2.0.2",
   "description": "modern-kit/react",
+  "author": "ssi02014 <ssi02014@naver.com>",
+  "license": "MIT",
+  "bugs": "https://github.com/modern-agile-team/modern-kit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modern-agile-team/modern-kit"
+  },
+  "homepage": "https://modern-agile-team.github.io/modern-kit",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./dist/*": {
+      "types": "./dist/*",
+      "require": "./dist/*",
+      "import": "./dist/*"
+    },
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "require": "./dist/*/index.cjs",
+      "import": "./dist/*/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -15,8 +41,6 @@
     "build": "rm -rf dist && rollup -c",
     "typecheck": "tsc --noEmit"
   },
-  "author": "ssi02014 <ssi02014@naver.com>",
-  "license": "MIT",
   "devDependencies": {
     "@modern-kit/utils": "workspace:^",
     "@rollup/plugin-commonjs": "^28.0.0",
@@ -66,23 +90,5 @@
     "hooks",
     "custom hooks"
   ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
-    },
-    "./dist/*": {
-      "types": "./dist/*",
-      "require": "./dist/*",
-      "import": "./dist/*"
-    },
-    "./*": {
-      "types": "./dist/*/index.d.ts",
-      "require": "./dist/*/index.cjs",
-      "import": "./dist/*/index.mjs"
-    },
-    "./package.json": "./package.json"
-  },
   "gitHead": "f451da4fef108695b343911200ec95ee34da4e97"
 }
