@@ -9,12 +9,22 @@ interface IsDateInRangeParams {
   inclusive?: 'both' | 'from' | 'to' | 'none';
 }
 
+/**
+ * @description 날짜 문자열을 Date 객체로 변환합니다.
+ * Safari에서 호환되도록 "-", "."을 "/"로 변경합니다. (ex. 2025-01-01 -> 2025/01/01)
+ *
+ * @param {Date | string | number} date - 변환할 날짜 문자열 또는 숫자
+ * @returns {Date} 변환된 Date 객체
+ * @example
+ * parseDate('2025-01-01') // 2025-01-01T00:00:00.000Z
+ * parseDate('2025.01.01') // 2025-01-01T00:00:00.000Z
+ * parseDate('2025/01/01') // 2025-01-01T00:00:00.000Z
+ */
 const parseDate = (date: Date | string | number): Date => {
   if (date instanceof Date) return date;
   if (typeof date === 'number') return new Date(date);
 
-  // Safari에서 호환되도록 YYYY-MM-DD 형식을 YYYY/MM/DD로 변환
-  const safeDateString = date.replace(/-/g, '/');
+  const safeDateString = date.replace(/[-\\.]/g, '/');
   return new Date(safeDateString);
 };
 

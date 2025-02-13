@@ -2,54 +2,54 @@ import { describe, it, expect } from 'vitest';
 import { isFunction } from '.';
 
 describe('isFunction', () => {
-  it('should return true for arrow function', () => {
-    expect(isFunction(() => {})).toBe(true);
+  it('화살표 함수에 대해 true를 반환해야 합니다.', () => {
+    expect(isFunction(() => {})).toBeTruthy();
   });
 
-  it('should return true for anonymous function', () => {
-    expect(isFunction(function () {})).toBe(true);
+  it('익명 함수에 대해 true를 반환해야 합니다.', () => {
+    expect(isFunction(function () {})).toBeTruthy();
   });
 
-  it('should return true for named function', () => {
-    expect(isFunction(function namedFunction() {})).toBe(true);
+  it('기명 함수에 대해 true를 반환해야 합니다.', () => {
+    expect(isFunction(function namedFunction() {})).toBeTruthy();
   });
 
-  it('should return true for class method', () => {
+  it('클래스 메서드에 대해 true를 반환해야 합니다.', () => {
     class MyClass {
       method() {}
     }
-    expect(isFunction(new MyClass().method)).toBe(true);
+    expect(isFunction(new MyClass().method)).toBeTruthy();
   });
 
-  it('should return true for Function constructor', () => {
-    expect(isFunction(new Function())).toBe(true);
+  it('Function 생성자에 대해 true를 반환해야 합니다.', () => {
+    expect(isFunction(new Function())).toBeTruthy();
   });
 
-  it('should return false for object', () => {
-    expect(isFunction({})).toBe(false);
+  it('객체에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction({})).toBeFalsy();
   });
 
-  it('should return false for number', () => {
-    expect(isFunction(123)).toBe(false);
+  it('숫자에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction(123)).toBeFalsy();
   });
 
-  it('should return false for string', () => {
-    expect(isFunction('test')).toBe(false);
+  it('문자열에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction('test')).toBeFalsy();
   });
 
-  it('should return false for boolean', () => {
-    expect(isFunction(true)).toBe(false);
+  it('불리언에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction(true)).toBeFalsy();
   });
 
-  it('should return false for array', () => {
-    expect(isFunction([])).toBe(false);
+  it('배열에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction([])).toBeFalsy();
   });
 
-  it('should return false for null', () => {
-    expect(isFunction(null)).toBe(false);
+  it('null에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction(null)).toBeFalsy();
   });
 
-  it('should return false for undefined', () => {
-    expect(isFunction(undefined)).toBe(false);
+  it('undefined에 대해 false를 반환해야 합니다.', () => {
+    expect(isFunction(undefined)).toBeFalsy();
   });
 });

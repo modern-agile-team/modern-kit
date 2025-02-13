@@ -5,7 +5,7 @@ type ExtractNestedArrayType<T> = T extends readonly (infer U)[]
   : T;
 
 /**
- * 주어진 iteratee 함수로 배열의 각 요소를 재귀적으로 매핑한 후, 결과 배열을 깊게 평탄화합니다.
+ * @description 배열의 각 요소에 iteratee 함수를 적용하고 결과를 모든 깊이로 평탄화합니다.
  *
  * @template T - 배열 요소의 유형입니다.
  * @template U - iteratee 함수에서 반환되는 배열 요소들의 타입입니다.

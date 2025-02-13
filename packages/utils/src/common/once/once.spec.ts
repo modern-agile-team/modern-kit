@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { once } from '.';
 
 describe('once', () => {
-  it('should call the function only once', () => {
+  it('함수가 한 번만 호출되어야 합니다.', () => {
     const callback = vi.fn(() => 'result');
     const onceCallback = once(callback);
 
@@ -14,7 +14,7 @@ describe('once', () => {
     expect(secondResult).toBe('result');
   });
 
-  it('should return the cached result on subsequent calls', () => {
+  it('이후 호출에서는 캐시된 결과를 반환해야 합니다.', () => {
     const callback = vi.fn(() => Math.random()); // random
     const onceCallback = once(callback);
 
@@ -25,7 +25,7 @@ describe('once', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should pass the arguments to the callback on the first call', () => {
+  it('첫 번째 호출에서는 콜백에 인자를 전달해야 합니다.', () => {
     const callback = vi.fn((x: number, y: number) => x + y);
     const onceCallback = once(callback);
 
@@ -37,7 +37,7 @@ describe('once', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should ignore arguments on subsequent calls', () => {
+  it('이후 호출에서는 인자를 무시해야 합니다.', () => {
     const callback = vi.fn((x: number, y: number) => x + y);
     const onceCallback = once(callback);
 

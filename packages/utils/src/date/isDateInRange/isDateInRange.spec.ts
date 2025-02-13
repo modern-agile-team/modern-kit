@@ -260,6 +260,18 @@ describe('isDateInRange', () => {
     ).toBeFalsy();
   });
 
+  describe('"-", "." 문자를 포함한 날짜 형식 테스트', () => {
+    it('"/", "." 문자를 포함한 날짜 형식은 유효한 날짜 형식이어야 합니다.', () => {
+      expect(
+        isDateInRange({ fromDate: '2024.12.01', toDate: '2025.02.01' })
+      ).toBeTruthy();
+
+      expect(
+        isDateInRange({ fromDate: '2024/12/01', toDate: '2025/02/01' })
+      ).toBeTruthy();
+    });
+  });
+
   describe('에러 케이스', () => {
     it('타겟 날짜가 유효하지 않은 날짜 형식이면 에러를 던져야 합니다.', () => {
       expect(() =>

@@ -4,14 +4,14 @@ import { flatten } from '.';
 describe('flatten', () => {
   const originArr = [1, [2, [3, [4]]]];
 
-  it('should flatten a array to the default depth of 1', () => {
+  it('기본 깊이 1로 배열을 평탄화해야 합니다.', () => {
     const expectedArr = [1, 2, [3, [4]]];
 
     expect(flatten(originArr)).toEqual(expectedArr);
     expect(originArr.flat()).toEqual(expectedArr);
   });
 
-  it('should flatten a deeply nested array to the specified depth', () => {
+  it('지정된 깊이로 깊게 중첩된 배열을 평탄화해야 합니다.', () => {
     const expectedArr1 = [1, 2, [3, [4]]];
     expect(flatten(originArr, 1)).toEqual(expectedArr1);
     expect(originArr.flat(1)).toEqual(expectedArr1);
@@ -25,7 +25,7 @@ describe('flatten', () => {
     expect(originArr.flat(3)).toEqual(expectedArr3);
   });
 
-  it('should return the same array if depth is 0 or NaN or negative', () => {
+  it('깊이가 0이거나 NaN이거나 음수인 경우 동일한 배열을 반환해야 합니다.', () => {
     const expectedArr = [1, [2, [3, [4]]]];
 
     expect(flatten(originArr, 0)).toEqual(expectedArr);
@@ -38,7 +38,7 @@ describe('flatten', () => {
     expect(originArr.flat(-1)).toEqual(expectedArr);
   });
 
-  it('should flatten arrays to the specified depth considering floating point values', () => {
+  it('부동 소수점 값을 고려하여 지정된 깊이로 배열을 평탄화해야 합니다.', () => {
     const expectedArr1 = [1, 2, [3, [4]]];
     expect(flatten(originArr, 1.5)).toEqual(expectedArr1);
     expect(originArr.flat(1.3)).toEqual(expectedArr1);
@@ -48,7 +48,7 @@ describe('flatten', () => {
     expect(originArr.flat(2.5)).toEqual(expectedArr2);
   });
 
-  it('should handle empty arrays', () => {
+  it('빈 배열을 처리해야 합니다.', () => {
     const originArr: number[] = [];
 
     expect(flatten(originArr, 2)).toEqual([]);

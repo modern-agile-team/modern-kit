@@ -27,7 +27,10 @@ interface HexToRgbaReturnType {
  * hexToRgba('#1A2', 0.2); // '#1A2' -> 변환: '#11AA22'
  * // { r: 17, g: 170, b: 34, a: 0.2, stringifiedValue: 'rgba(17,170,34,0.2)' }
  */
-export function hexToRgba(hex: string, alpha = 1): HexToRgbaReturnType | null {
+export function hexToRgba(
+  hex: string,
+  alpha: number = 1
+): HexToRgbaReturnType | null {
   const regex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
 
   if (!regex.test(hex)) {

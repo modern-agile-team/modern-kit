@@ -4,7 +4,7 @@ import { delay } from '.';
 const time = 200;
 
 describe('delay', () => {
-  it('should delay the promise by the given time', async () => {
+  it('주어진 시간만큼 프로미스를 지연시켜야 합니다.', async () => {
     const start = Date.now();
 
     await delay(time);
@@ -14,7 +14,7 @@ describe('delay', () => {
     expect(end - start).toBeGreaterThanOrEqual(time);
   });
 
-  it('should reject with invalid time', () => {
+  it('유효하지 않은 시간이 주어지면 거부해야 합니다.', () => {
     const errorMessage = 'Invalid time value';
 
     expect(delay(-100)).rejects.toThrow(errorMessage);
