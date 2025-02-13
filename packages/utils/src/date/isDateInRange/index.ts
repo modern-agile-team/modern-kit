@@ -145,5 +145,5 @@ export function isDateInRange({
     return compareDate(fromDateToUse, 'from') && compareDate(toDateToUse, 'to');
   }
 
-  return false;
+  throw new Error('시작 날짜 혹은 종료 날짜 중 하나는 필요합니다.');
 }

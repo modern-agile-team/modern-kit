@@ -12,10 +12,5 @@
  * isBlob(notBlob); // false
  */
 export function isBlob(x: unknown): x is Blob {
-  // Blob 타입을 지원하지 않는 경우 false를 반환
-  if (typeof Blob === 'undefined') {
-    return false;
-  }
-
   return x instanceof Blob;
 }
