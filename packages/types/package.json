@@ -3,6 +3,14 @@
   "sideEffects": false,
   "version": "1.7.1",
   "description": "modern-kit/types",
+  "author": "ssi02014 <ssi02014@naver.com>",
+  "license": "MIT",
+  "bugs": "https://github.com/modern-agile-team/modern-kit/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modern-agile-team/modern-kit"
+  },
+  "homepage": "https://modern-agile-team.github.io/modern-kit",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts"
@@ -19,8 +27,6 @@
     "typecheck": "tsc",
     "build": "rm -rf dist && yarn typecheck"
   },
-  "author": "ssi02014 <ssi02014@naver.com>",
-  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
