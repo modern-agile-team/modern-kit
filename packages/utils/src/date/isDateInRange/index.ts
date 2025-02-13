@@ -9,6 +9,15 @@ interface IsDateInRangeParams {
   inclusive?: 'both' | 'from' | 'to' | 'none';
 }
 
+const parseDate = (date: Date | string | number): Date => {
+  if (date instanceof Date) return date;
+  if (typeof date === 'number') return new Date(date);
+
+  // Safari에서 호환되도록 YYYY-MM-DD 형식을 YYYY/MM/DD로 변환
+  const safeDateString = date.replace(/-/g, '/');
+  return new Date(safeDateString);
+};
+
 /**
  * @description 타겟 날짜가 주어진 날짜 범위 내에 있는지 확인합니다. 타겟 날짜(targetDate)가 없을 경우 `현재 날짜`를 사용합니다.
  *
@@ -70,9 +79,9 @@ export function isDateInRange({
   toDate,
   inclusive = 'from',
 }: IsDateInRangeParams): boolean {
-  const fromDateToUse = fromDate ? new Date(fromDate) : null;
-  const toDateToUse = toDate ? new Date(toDate) : null;
-  const targetDateToUse = new Date(targetDate);
+  const fromDateToUse = fromDate ? parseDate(fromDate) : null;
+  const toDateToUse = toDate ? parseDate(toDate) : null;
+  const targetDateToUse = parseDate(targetDate);
 
   // 에러 케이스 대응
   if (isNaN(targetDateToUse.getTime())) {
