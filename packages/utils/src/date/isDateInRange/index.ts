@@ -15,10 +15,6 @@ interface IsDateInRangeParams {
  *
  * @param {Date | string | number} date - 변환할 날짜 문자열 또는 숫자
  * @returns {Date} 변환된 Date 객체
- * @example
- * parseDate('2025-01-01') // 2025-01-01T00:00:00.000Z
- * parseDate('2025.01.01') // 2025-01-01T00:00:00.000Z
- * parseDate('2025/01/01') // 2025-01-01T00:00:00.000Z
  */
 const parseDate = (date: Date | string | number): Date => {
   if (date instanceof Date) return date;
@@ -95,13 +91,13 @@ export function isDateInRange({
 
   // 에러 케이스 대응
   if (isNaN(targetDateToUse.getTime())) {
-    throw new Error('타겟 날짜가 유효하지 않은 날짜 형식입니다.');
+    throw new Error('targetDate가 유효하지 않은 날짜 형식입니다.');
   }
   if (!isNil(fromDateToUse) && isNaN(fromDateToUse.getTime())) {
-    throw new Error('시작 날짜가 유효하지 않은 날짜 형식입니다.');
+    throw new Error('fromDate가 유효하지 않은 날짜 형식입니다.');
   }
   if (!isNil(toDateToUse) && isNaN(toDateToUse.getTime())) {
-    throw new Error('종료 날짜가 유효하지 않은 날짜 형식입니다.');
+    throw new Error('toDate가 유효하지 않은 날짜 형식입니다.');
   }
 
   // 날짜 비교 내부 함수
@@ -139,11 +135,11 @@ export function isDateInRange({
   // 3. 시작 날짜와 종료 날짜가 모두 주어 질 경우 타겟 날짜(or 현재 날짜)가 시작 날짜와 종료 날짜 사이에 있는지 확인
   if (fromDateToUse && toDateToUse) {
     if (isAfterDate({ targetDate: fromDateToUse, compareDate: toDateToUse })) {
-      throw new Error('시작 날짜가 종료 날짜보다 늦을 수 없습니다.');
+      throw new Error('fromDate가 toDate보다 늦을 수 없습니다.');
     }
 
     return compareDate(fromDateToUse, 'from') && compareDate(toDateToUse, 'to');
   }
 
-  throw new Error('시작 날짜 혹은 종료 날짜 중 하나는 필요합니다.');
+  throw new Error('fromDate 혹은 toDate 중 하나는 필요합니다.');
 }
