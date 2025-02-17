@@ -5,126 +5,167 @@ import { useArrayState } from '.';
 describe('useArrayState', () => {
   it('초기값이 설정되어야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
+    const [array] = result.current;
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 2, 3]);
+      expect(array).toEqual([1, 2, 3]);
     });
   });
 
-  it('push 메서드로 아이템을 추가해야 합니다.', async () => {
+  it('초기값이 함수일 경우 함수를 호출하여 초기값을 설정해야 합니다.', async () => {
+    const { result } = renderHook(() => useArrayState(() => [1, 2, 3]));
+    const [array] = result.current;
+
+    await waitFor(() => {
+      expect(array).toEqual([1, 2, 3]);
+    });
+  });
+
+  it('setArray 직접 호출로 배열을 변경해야 합니다.', async () => {
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+    const setArray = result.current[1];
+
+    setArray([4]);
+
+    await waitFor(() => {
+      expect(result.current[0]).toEqual([4]);
+    });
+  });
+
+  it('setArray.push 메서드로 아이템을 추가해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState<number>([]));
-    result.current.push(4);
+    const setArray = result.current[1];
+
+    setArray.push(4, 3);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([4]);
+      expect(result.current[0]).toEqual([4, 3]);
     });
   });
 
-  it('unshift 메서드로 아이템을 추가해야 합니다.', async () => {
-    const { result } = renderHook(() => useArrayState<number>([2, 3]));
-    result.current.unshift(1);
+  it('setArray.unshift 메서드로 아이템을 추가해야 합니다.', async () => {
+    const { result } = renderHook(() => useArrayState<number>([3, 4]));
+    const setArray = result.current[1];
+
+    setArray.unshift(1, 2);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 2, 3]);
+      expect(result.current[0]).toEqual([1, 2, 3, 4]);
     });
   });
 
-  it('pop 메서드로 마지막 아이템을 제거해야 합니다.', async () => {
+  it('setArray.pop 메서드로 마지막 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.pop();
+    const setArray = result.current[1];
+
+    setArray.pop();
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 2]);
+      expect(result.current[0]).toEqual([1, 2]);
     });
   });
 
-  it('shift 메서드로 첫번째 아이템을 제거해야 합니다.', async () => {
+  it('setArray.shift 메서드로 첫번째 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.shift();
+    const setArray = result.current[1];
+
+    setArray.shift();
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([2, 3]);
+      expect(result.current[0]).toEqual([2, 3]);
     });
   });
 
-  it('remove 메서드로 특정 인덱스의 아이템을 제거해야 합니다.', async () => {
+  it('setArray.splice 메서드로 특정 인덱스의 아이템을 제거하고 추가해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.remove(1);
+    const setArray = result.current[1];
+
+    setArray.splice(1, 1, 4, 5);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 3]);
-    });
-
-    await waitFor(() => {
-      expect(() => result.current.remove(6)).toThrow(
-        '인덱스가 범위를 벗어났습니다'
-      );
+      expect(result.current[0]).toEqual([1, 4, 5, 3]);
     });
   });
 
-  it('multiRemove 메서드로 여러 인덱스의 아이템을 제거해야 합니다.', async () => {
+  it('setArray.remove 메서드로 특정 인덱스의 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.multiRemove([1, 2]);
+    const setArray = result.current[1];
+
+    setArray.remove(1, 2);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1]);
-    });
-
-    await waitFor(() => {
-      expect(() => result.current.multiRemove([6, 7])).toThrow(
-        '인덱스가 범위를 벗어났습니다'
-      );
+      expect(result.current[0]).toEqual([1]);
     });
   });
 
-  it('clear 메서드로 모든 아이템을 제거해야 합니다.', async () => {
+  it('setArray.removeAt 메서드로 특정 인덱스의 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.clear();
+    const setArray = result.current[1];
+
+    setArray.removeAt(1);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([]);
+      expect(result.current[0]).toEqual([1, 3]);
     });
   });
 
-  it('update 메서드로 특정 인덱스의 아이템을 변경해야 합니다.', async () => {
+  it('setArray.removeBy 메서드는 predicate 함수를 통해 배열의 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.update(1, 5);
+    const setArray = result.current[1];
+
+    setArray.removeBy((_, index) => index > 0);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 5, 3]);
-    });
-
-    await waitFor(() => {
-      expect(() => result.current.update(6, 5)).toThrow(
-        '인덱스가 범위를 벗어났습니다'
-      );
+      expect(result.current[0]).toEqual([1]);
     });
   });
 
-  it('multiUpdate 메서드로 여러 인덱스의 아이템을 변경해야 합니다.', async () => {
+  it('setArray.clear 메서드로 모든 아이템을 제거해야 합니다.', async () => {
     const { result } = renderHook(() => useArrayState([1, 2, 3]));
-    result.current.multiUpdate([
-      { index: 1, item: 5 },
-      { index: 2, item: 6 },
-    ]);
+    const setArray = result.current[1];
+
+    setArray.clear();
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 5, 6]);
+      expect(result.current[0]).toEqual([]);
     });
   });
 
-  it('insert 메서드로 특정 인덱스에 아이템을 삽입해야 합니다.', async () => {
+  it('setArray.updateAt 메서드로 특정 인덱스의 아이템을 변경해야 합니다.', async () => {
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+    const setArray = result.current[1];
+
+    setArray.updateAt(1, 5);
+
+    await waitFor(() => {
+      expect(result.current[0]).toEqual([1, 5, 3]);
+    });
+  });
+
+  it('setArray.updateBy 메서드는 iteratee 함수를 통해 배열의 모든 아이템을 변경해야 합니다.', async () => {
+    const { result } = renderHook(() => useArrayState([1, 2, 3]));
+    const setArray = result.current[1];
+
+    setArray.updateBy((item, index) => {
+      if (index > 0) {
+        return item + 1;
+      }
+      return item;
+    });
+
+    await waitFor(() => {
+      expect(result.current[0]).toEqual([1, 3, 4]);
+    });
+  });
+
+  it('setArray.insertAt 메서드로 특정 인덱스에 아이템을 삽입해야 합니다', async () => {
     const { result } = renderHook(() => useArrayState([1, 3]));
-    result.current.insert(1, 2);
+    const setArray = result.current[1];
+
+    setArray.insertAt(1, 2);
 
     await waitFor(() => {
-      expect(result.current.data).toEqual([1, 2, 3]);
-    });
-
-    await waitFor(() => {
-      expect(() => result.current.insert(6, 5)).toThrow(
-        '인덱스가 범위를 벗어났습니다'
-      );
+      expect(result.current[0]).toEqual([1, 2, 3]);
     });
   });
 });

@@ -3,7 +3,30 @@ import { useState } from 'react'
 
 # useArrayState
 
-불변성을 유지하면서 배열 상태를 편리하게 관리하기 위한 커스텀 훅입니다.
+`불변성`을 유지하면서 배열 상태를 편리하게 관리하기 위한 커스텀 훅입니다.
+
+- `setArray`: 배열 상태를 업데이트하는 메서드를 함께 제공합니다.
+  - `setArray.push`: 배열의 끝에 항목을 추가하는 함수
+  - `setArray.unshift`: 배열의 시작에 항목을 추가하는 함수
+  - `setArray.shift`: 배열의 첫 번째 항목을 제거하는 함수
+  - `setArray.pop`: 배열의 마지막 항목을 제거하는 함수
+  - `setArray.splice`: 배열의 특정 위치에서 항목을 제거하고 새 항목을 추가하는 함수
+  - `setArray.remove`: 주어진 인덱스의 항목을 제거하는 함수
+  - `setArray.removeAt`: 주어진 인덱스의 항목을 제거하는 함수
+  - `setArray.removeBy`: predicate 함수 반환값이 true인 항목들을 제거하는 함수
+  - `setArray.updateAt`: 주어진 인덱스의 항목을 업데이트하는 함수
+  - `setArray.updateBy`: iteratee 함수를 통해 배열의 각 항목을 업데이트하는 함수
+  - `setArray.insertAt`: 주어진 인덱스에 항목을 삽입하는 함수
+  - `setArray.clear`: 배열을 비우는 함수
+
+```ts title="Example"
+const [array, setArray] = useArrayState<number>([]);
+
+setArray([1, 2, 3]);
+setArray.push(4);
+setArray.pop();
+// ...
+```
 
 <br />
 
@@ -12,22 +35,23 @@ import { useState } from 'react'
 
 ## Interface
 ```ts title="typescript"
-interface UseArrayStateReturn<T> {
-  data: T[];
-  push: (item: T) => void; // 배열의 끝에 항목을 추가하는 함수
-  unshift: (item: T) => void; // 배열의 시작에 항목을 추가하는 함수
-  shift: () => void; // 배열의 첫 번째 항목을 제거하는 함수
-  pop: () => void; // 배열의 마지막 항목을 제거하는 함수
-  remove: (index: number) => void; // 주어진 인덱스의 항목을 제거하는 함수
-  multiRemove: (indexes: number[]) => void; // 여러 인덱스의 항목을 제거하는 함수
-  clear: () => void; // 배열을 비우는 함수
-  update: (index: number, item: T) => void; // 주어진 인덱스의 항목을 업데이트하는 함수
-  multiUpdate: (items: { index: number; item: T }[]) => void; // 여러 항목을 업데이트하는 함수
-  insert: (index: number, item: T) => void; // 주어진 인덱스에 항목을 삽입하는 함수
-} 
+interface ArrayStateSetters<T> extends Dispatch<SetStateAction<T[]>> {
+  push: (...items: T[]) => void;
+  unshift: (...items: T[]) => void;
+  shift: () => void;
+  pop: () => void;
+  splice: (start: number, deleteCount: number, ...items: T[]) => void;
+  remove: (...indexes: number[]) => void;
+  removeAt: (index: number) => void;
+  removeBy: (predicate: (item: T, index: number) => boolean) => void;
+  updateAt: (index: number, item: T) => void;
+  updateBy: (iteratee: (item: T, index: number) => T) => void;
+  insertAt: (index: number, item: T) => void;
+  clear: () => void;
+}
 ```
 ```ts title="typescript"
-function useArrayState<T>(initialValue: T[]): UseArrayStateReturn<T>
+function useArrayState<T>(initialValue: T[]): [T[], ArrayStateSetters<T>]
 ```
 
 ## Usage
@@ -35,50 +59,61 @@ function useArrayState<T>(initialValue: T[]): UseArrayStateReturn<T>
 import { useArrayState } from '@modern-kit/react'
 
 const Example = () => {
-  const { data, push, remove, clear } = useArrayState<number>([]);
+  const [array, setArray] = useArrayState<number>([]);
 
   const addItem = () => {
-    push(Math.floor(Math.random() * 100));
+    setArray.push(Math.floor(Math.random() * 100));
   };
 
   return (
     <div>
       <button onClick={addItem}>랜덤 숫자 추가</button>
-      <button onClick={clear}>모두 삭제</button>
+      <button onClick={() => setArray.clear()}>모두 삭제</button>
+      <button onClick={() => setArray([1, 2, 3])}>배열 직접 설정</button>
       <ul>
-        {data.map((item, index) => (
+        {array.map((item, index) => (
           <li key={index}>
-            {item} <button onClick={() => remove(index)}>Remove</button>
+            {item} <button onClick={() => setArray.removeAt(index)}>Remove</button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 ```
 
 ## Example
 
 export const Example = () => {
-  const { data, push, remove, clear } = useArrayState([]);
+  const [array, setArray] = useArrayState([]);
 
   const addItem = () => {
-    push(Math.floor(Math.random() * 100));
+    setArray.push(Math.floor(Math.random() * 100));
+  };
+
+  const removeItem = (index) => {
+    setArray.remove(index);
+  };
+
+  const clear = () => {
+    setArray.clear();
   };
 
   return (
     <div>
       <button onClick={addItem}>랜덤 숫자 추가</button>
-      <button onClick={clear}>모두 삭제</button>
+      <button onClick={() => setArray.clear()}>모두 삭제</button>
+      <button onClick={() => setArray([1, 2, 3])}>[1, 2, 3] 배열 직접 설정</button>
       <ul>
-        {data.map((item, index) => (
+        {array.map((item, index) => (
           <li key={index}>
-            {item} <button onClick={() => remove(index)}>Remove</button>
+            {item} <button onClick={() => setArray.removeAt(index)}>Remove</button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
 
 <Example />
