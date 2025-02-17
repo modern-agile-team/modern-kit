@@ -53,11 +53,7 @@ const scanDirectory = (pathKey) => {
 
   entries.forEach((entry) => {
     if (entry.isDirectory()) {
-      const indexPath = path.join(dirPath, entry.name, 'index.ts');
-
-      if (fs.existsSync(indexPath)) {
-        keys.push(entry.name);
-      }
+      keys.push(entry.name);
     }
   });
 
