@@ -38,16 +38,7 @@ const scanDirectory = (pathKey) => {
 
   entries.forEach((entry) => {
     if (entry.isDirectory()) {
-      const tsxPath = path.join(dirPath, entry.name, 'index.tsx');
-      const tsPath = path.join(dirPath, entry.name, 'index.ts');
-
-      const hasValidPath = [tsxPath, tsPath].some((filePath) =>
-        fs.existsSync(filePath)
-      );
-
-      if (hasValidPath) {
-        keys.push(entry.name);
-      }
+      keys.push(entry.name);
     }
   });
 
