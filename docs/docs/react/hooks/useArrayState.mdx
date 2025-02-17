@@ -1,0 +1,84 @@
+import { useArrayState } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useArrayState
+
+불변성을 유지하면서 배열 상태를 편리하게 관리하기 위한 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useArrayState/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseArrayStateReturn<T> {
+  data: T[];
+  push: (item: T) => void; // 배열의 끝에 항목을 추가하는 함수
+  unshift: (item: T) => void; // 배열의 시작에 항목을 추가하는 함수
+  shift: () => void; // 배열의 첫 번째 항목을 제거하는 함수
+  pop: () => void; // 배열의 마지막 항목을 제거하는 함수
+  remove: (index: number) => void; // 주어진 인덱스의 항목을 제거하는 함수
+  multiRemove: (indexes: number[]) => void; // 여러 인덱스의 항목을 제거하는 함수
+  clear: () => void; // 배열을 비우는 함수
+  update: (index: number, item: T) => void; // 주어진 인덱스의 항목을 업데이트하는 함수
+  multiUpdate: (items: { index: number; item: T }[]) => void; // 여러 항목을 업데이트하는 함수
+  insert: (index: number, item: T) => void; // 주어진 인덱스에 항목을 삽입하는 함수
+} 
+```
+```ts title="typescript"
+function useArrayState<T>(initialValue: T[]): UseArrayStateReturn<T>
+```
+
+## Usage
+```tsx title="typescript"
+import { useArrayState } from '@modern-kit/react'
+
+const Example = () => {
+  const { data, push, remove, clear } = useArrayState<number>([]);
+
+  const addItem = () => {
+    push(Math.floor(Math.random() * 100));
+  };
+
+  return (
+    <div>
+      <button onClick={addItem}>랜덤 숫자 추가</button>
+      <button onClick={clear}>모두 삭제</button>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>
+            {item} <button onClick={() => remove(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const { data, push, remove, clear } = useArrayState([]);
+
+  const addItem = () => {
+    push(Math.floor(Math.random() * 100));
+  };
+
+  return (
+    <div>
+      <button onClick={addItem}>랜덤 숫자 추가</button>
+      <button onClick={clear}>모두 삭제</button>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>
+            {item} <button onClick={() => remove(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+<Example />
