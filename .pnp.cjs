@@ -8718,7 +8718,7 @@ const RAW_RUNTIME_STATE =
           ["rollup-plugin-postcss", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
           ["typescript-plugin-css-modules", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:5.1.0"],\
-          ["ua-parser-js", "npm:1.0.39"],\
+          ["ua-parser-js", "npm:2.0.2"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:3.0.2"]\
         ],\
         "packagePeers": [\
@@ -8760,7 +8760,7 @@ const RAW_RUNTIME_STATE =
           ["rollup-plugin-postcss", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
           ["typescript-plugin-css-modules", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:5.1.0"],\
-          ["ua-parser-js", "npm:1.0.39"],\
+          ["ua-parser-js", "npm:2.0.2"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:3.0.2"]\
         ],\
         "linkType": "SOFT"\
@@ -10644,6 +10644,17 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/node", "npm:22.13.0"],\
           ["undici-types", "npm:6.20.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/node-fetch", [\
+      ["npm:2.6.12", {\
+        "packageLocation": "./.yarn/cache/@types-node-fetch-npm-2.6.12-bc850f58da-7693acad54.zip/node_modules/@types/node-fetch/",\
+        "packageDependencies": [\
+          ["@types/node-fetch", "npm:2.6.12"],\
+          ["@types/node", "npm:22.13.0"],\
+          ["form-data", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15087,6 +15098,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["detect-europe-js", [\
+      ["npm:0.1.2", {\
+        "packageLocation": "./.yarn/cache/detect-europe-js-npm-0.1.2-9816312e98-46fccf2a9d.zip/node_modules/detect-europe-js/",\
+        "packageDependencies": [\
+          ["detect-europe-js", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["detect-indent", [\
       ["npm:5.0.0", {\
         "packageLocation": "./.yarn/cache/detect-indent-npm-5.0.0-123fa3fd0b-58d985dd5b.zip/node_modules/detect-indent/",\
@@ -19239,6 +19259,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["is-ssh", "npm:1.4.0"],\
           ["protocols", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["is-standalone-pwa", [\
+      ["npm:0.1.1", {\
+        "packageLocation": "./.yarn/cache/is-standalone-pwa-npm-0.1.1-e10a0adc26-af1a11edef.zip/node_modules/is-standalone-pwa/",\
+        "packageDependencies": [\
+          ["is-standalone-pwa", "npm:0.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -29402,11 +29431,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["ua-parser-js", [\
-      ["npm:1.0.39", {\
-        "packageLocation": "./.yarn/cache/ua-parser-js-npm-1.0.39-3d3fb8d47d-c6452b0c68.zip/node_modules/ua-parser-js/",\
+    ["ua-is-frozen", [\
+      ["npm:0.1.2", {\
+        "packageLocation": "./.yarn/cache/ua-is-frozen-npm-0.1.2-078ef16b13-fb41929bd4.zip/node_modules/ua-is-frozen/",\
         "packageDependencies": [\
-          ["ua-parser-js", "npm:1.0.39"]\
+          ["ua-is-frozen", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["ua-parser-js", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/ua-parser-js-npm-2.0.2-2c56893432-fb64041bce.zip/node_modules/ua-parser-js/",\
+        "packageDependencies": [\
+          ["ua-parser-js", "npm:2.0.2"],\
+          ["@types/node-fetch", "npm:2.6.12"],\
+          ["detect-europe-js", "npm:0.1.2"],\
+          ["is-standalone-pwa", "npm:0.1.1"],\
+          ["node-fetch", "virtual:6c129e45814a3432fa3c05e870d274f2f753f3f4633ff943a2fbc215c4d7f321a72fbaf14ccf59b94633ad16c808307452f6b51b361bdaf5c08d9870df597c13#npm:2.7.0"],\
+          ["ua-is-frozen", "npm:0.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\

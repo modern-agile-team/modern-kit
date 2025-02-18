@@ -5539,7 +5539,7 @@ __metadata:
     rollup-plugin-postcss: "npm:^4.0.2"
     typescript: "npm:^5.1.6"
     typescript-plugin-css-modules: "npm:^5.1.0"
-    ua-parser-js: "npm:^1.0.39"
+    ua-parser-js: "npm:^2.0.2"
     vitest: "npm:^3.0.2"
   peerDependencies:
     react: ">=18"
@@ -6916,6 +6916,16 @@ __metadata:
   version: 0.7.34
   resolution: "@types/ms@npm:0.7.34"
   checksum: ac80bd90012116ceb2d188fde62d96830ca847823e8ca71255616bc73991aa7d9f057b8bfab79e8ee44ffefb031ddd1bcce63ea82f9e66f7c31ec02d2d823ccc
+  languageName: node
+  linkType: hard
+
+"@types/node-fetch@npm:^2.6.12":
+  version: 2.6.12
+  resolution: "@types/node-fetch@npm:2.6.12"
+  dependencies:
+    "@types/node": "npm:*"
+    form-data: "npm:^4.0.0"
+  checksum: 7693acad5499b7df2d1727d46cff092a63896dc04645f36b973dd6dd754a59a7faba76fcb777bdaa35d80625c6a9dd7257cca9c401a4bab03b04480cda7fd1af
   languageName: node
   linkType: hard
 
@@ -10542,6 +10552,13 @@ __metadata:
   version: 1.2.0
   resolution: "destroy@npm:1.2.0"
   checksum: bd7633942f57418f5a3b80d5cb53898127bcf53e24cdf5d5f4396be471417671f0fee48a4ebe9a1e9defbde2a31280011af58a57e090ff822f589b443ed4e643
+  languageName: node
+  linkType: hard
+
+"detect-europe-js@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "detect-europe-js@npm:0.1.2"
+  checksum: 46fccf2a9ddeec8ecb7a369be1452f84856cbd0ccdeb3c47e41fe6c9d69f63d6bd75f91b5aa1ae310e56d8fbcbff0e802b1504cdcc3a92f3327c94408e6d07a2
   languageName: node
   linkType: hard
 
@@ -14336,6 +14353,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-standalone-pwa@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "is-standalone-pwa@npm:0.1.1"
+  checksum: af1a11edef4a8f00c24014576285070fb73eebb3583cae790c0a825e338e19f05048a26e5fd5ef10f6056032d6a4520054ff824532c15df784933c0fcc5e13fd
+  languageName: node
+  linkType: hard
+
 "is-stream@npm:2.0.0":
   version: 2.0.0
   resolution: "is-stream@npm:2.0.0"
@@ -16939,7 +16963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.5.0":
+"node-fetch@npm:^2.5.0, node-fetch@npm:^2.7.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -22667,12 +22691,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^1.0.39":
-  version: 1.0.39
-  resolution: "ua-parser-js@npm:1.0.39"
+"ua-is-frozen@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "ua-is-frozen@npm:0.1.2"
+  checksum: fb41929bd4924c9676391e6d7197d30580749a96697a83c8b6e77fb137e3ff8492dcd1e6f871f6a9517848651a93af37bfefb25385f16d90e19678ade22d30b7
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "ua-parser-js@npm:2.0.2"
+  dependencies:
+    "@types/node-fetch": "npm:^2.6.12"
+    detect-europe-js: "npm:^0.1.2"
+    is-standalone-pwa: "npm:^0.1.1"
+    node-fetch: "npm:^2.7.0"
+    ua-is-frozen: "npm:^0.1.2"
   bin:
     ua-parser-js: script/cli.js
-  checksum: c6452b0c683000f10975cb0a7e74cb1119ea95d4522ae85f396fa53b0b17884358a24ffdd86a66030c6b2981bdc502109a618c79fdaa217ee9032c9e46fcc78a
+  checksum: fb64041bce98d205ffc0e08b6167fc12977ea120b59d76afd25759be5bd472f14bbf1c7650261e7e420f1e9a1aa22a033d38947d437be103c2da46151e9867ed
   languageName: node
   linkType: hard
 
