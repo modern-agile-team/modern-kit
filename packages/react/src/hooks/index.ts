@@ -43,7 +43,6 @@ export * from './useTimeout';
 export * from './useToggle';
 export * from './useToggleState';
 export * from './useUnmount';
-export * from './useUserAgent';
 export * from './useVhProperty';
 export * from './useVisibilityChange';
 export * from './useWindowSize';

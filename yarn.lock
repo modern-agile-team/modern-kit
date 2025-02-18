@@ -5519,7 +5519,6 @@ __metadata:
     "@types/lodash-es": "npm:^4.17.12"
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
-    "@types/ua-parser-js": "npm:^0.7.39"
     "@vitest/coverage-istanbul": "npm:^3.0.3"
     autoprefixer: "npm:^10.4.20"
     classnames: "npm:^2.5.1"
@@ -5536,7 +5535,6 @@ __metadata:
     rollup-plugin-postcss: "npm:^4.0.2"
     typescript: "npm:^5.1.6"
     typescript-plugin-css-modules: "npm:^5.1.0"
-    ua-parser-js: "npm:^1.0.39"
     vitest: "npm:^3.0.2"
   peerDependencies:
     react: ">=18"
@@ -7129,13 +7127,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: b20b7820ee813f22de4f2ce98bdd12c68c930e016a8912b1ed967595ac0d8a4cbbff44f4d486dd97f77f5927e7b5725bdac7472c9ec5b27f53a5a13179f0612f
-  languageName: node
-  linkType: hard
-
-"@types/ua-parser-js@npm:^0.7.39":
-  version: 0.7.39
-  resolution: "@types/ua-parser-js@npm:0.7.39"
-  checksum: fea522f42dfc2854d9c93144a13c3db3bbe1c791458451db06d46bec7e1dbbe945d1542e02bb38378e39a04bdb7810b43e2ead26f9e6c250832e187312522708
   languageName: node
   linkType: hard
 
@@ -22471,15 +22462,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: c2bded58ab897a8341fdbb0c1d92ea2362f498cfffebdc8a529d03e15ea2454142dfbf122dabbd9a5cb79b7123790d27def16e11844887d20636226773ed329a
-  languageName: node
-  linkType: hard
-
-"ua-parser-js@npm:^1.0.39":
-  version: 1.0.39
-  resolution: "ua-parser-js@npm:1.0.39"
-  bin:
-    ua-parser-js: script/cli.js
-  checksum: c6452b0c683000f10975cb0a7e74cb1119ea95d4522ae85f396fa53b0b17884358a24ffdd86a66030c6b2981bdc502109a618c79fdaa217ee9032c9e46fcc78a
   languageName: node
   linkType: hard
 
