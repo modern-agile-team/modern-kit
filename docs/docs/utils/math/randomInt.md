@@ -31,6 +31,6 @@ const result = randomInt(10); // 0 이상 10 미만의 정수형 난수를 반�
 ```ts title="typescript"
 import { randomInt } from '@modern-kit/utils';
 
-const result = randomInt(5, 10); // 7
+const result = randomInt(5, 10); // 5 이상 10 미만의 정수형 난수를 반환
 ```
 
