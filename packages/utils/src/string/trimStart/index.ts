@@ -1,4 +1,5 @@
 import { isNil } from '../../validator/isNil';
+
 /**
  * @description
  * 문자열에서 선행 공백 또는 지정된 문자를 제거합니다.
@@ -13,7 +14,6 @@ import { isNil } from '../../validator/isNil';
  * trimStart('--abc  ', '+'); // '--abc  '
  * trimStart('-_-abc-_-', ['-', '_', '-']); // 'abc-_-'
  */
-
 export function trimStart(str: string, chars?: string | string[]): string {
   if (isNil(chars)) {
     return str.trimStart();
