@@ -25,7 +25,7 @@ function randomInt(minimum: number, maximum: number): number;
 ```ts title="typescript"
 import { randomInt } from '@modern-kit/utils';
 
-const result = randomInt(10); // 3
+const result = randomInt(10); // 0 이상 10 미만의 정수형 난수를 반환
 ```
 
 ```ts title="typescript"
