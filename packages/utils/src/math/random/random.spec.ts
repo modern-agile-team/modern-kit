@@ -6,7 +6,7 @@ describe('random', () => {
     const maximum = 10;
     const result = random(maximum);
     expect(result).toBeGreaterThanOrEqual(0);
-    expect(result).toBeLessThanOrEqual(maximum);
+    expect(result).toBeLessThan(maximum);
   });
 
   it('두 개의 인자를 전달하면 최소값과 최대값 사이의 숫자를 반환해야 한다.', () => {
@@ -14,7 +14,7 @@ describe('random', () => {
     const maximum = 10;
     const result = random(minimum, maximum);
     expect(result).toBeGreaterThanOrEqual(minimum);
-    expect(result).toBeLessThanOrEqual(maximum);
+    expect(result).toBeLessThan(maximum);
   });
 
   it('최소값과 최대값이 같으면 해당 숫자를 반환해야 한다.', () => {
@@ -28,7 +28,7 @@ describe('random', () => {
     const maximum = -5;
     const result = random(minimum, maximum);
     expect(result).toBeGreaterThanOrEqual(minimum);
-    expect(result).toBeLessThanOrEqual(maximum);
+    expect(result).toBeLessThan(maximum);
   });
 
   it('큰 범위에서도 정상적으로 숫자를 반환해야 한다.', () => {
@@ -36,7 +36,7 @@ describe('random', () => {
     const maximum = 200;
     const result = random(minimum, maximum);
     expect(result).toBeGreaterThanOrEqual(minimum);
-    expect(result).toBeLessThanOrEqual(maximum);
+    expect(result).toBeLessThan(maximum);
   });
 
   it('최소값이 최대값보다 크면 에러를 발생시켜야 한다.', () => {
