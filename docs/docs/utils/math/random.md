@@ -1,6 +1,6 @@
 # random
 
-주어진 범위 내의 정수 난수를 생성합니다.
+주어진 범위 내의 실수형 난수를 생성합니다.
 
 단일 인자가 전달되면 해당 인자를 최대값으로 간주하며, 최소값은 `0`으로 처리합니다.
 두 개의 인자가 전달되면 첫 번째 인자는 최소값, 두 번째 인자는 최대값으로 사용됩니다.
@@ -12,7 +12,9 @@
 
 ## Interface
 ```ts title="typescript"
-export function random(minimum: number, maximum?: number): number;
+// 함수 오버로딩
+function random(maximum: number): number;
+function random(minimum: number, maximum: number): number;
 ```
 
 ## Usage
@@ -23,12 +25,12 @@ export function random(minimum: number, maximum?: number): number;
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(10); // 0부터 10 사이의 난수를 반환합니다.
+const result = random(10); // 0 이상 10 미만의 난수를 반환
 ```
 
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(5, 10); // 5부터 10 사이의 난수를 반환합니다.
+const result = random(5, 10); // 5 이상 10 미만의 난수를 반환
 ```
 
