@@ -5,3 +5,4 @@ export * from './isBeforeDate';
 export * from './isBirthDate';
 export * from './isDateInRange';
 export * from './isUnderAge';
+export * from './parseDateString';
