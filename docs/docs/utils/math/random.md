@@ -31,6 +31,6 @@ const result = random(10); // 0 이상 20 미만의 실수형 난수를 반환
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(5, 10); // 6.52
+const result = random(5, 10); // 5 이상 20 미만의 실수형 난수를 반환
 ```
 
