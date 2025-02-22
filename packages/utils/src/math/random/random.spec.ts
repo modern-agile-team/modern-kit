@@ -38,4 +38,8 @@ describe('random', () => {
     expect(result).toBeGreaterThanOrEqual(minimum);
     expect(result).toBeLessThanOrEqual(maximum);
   });
+
+  it('최소값이 최대값보다 크면 에러를 발생시켜야 한다.', () => {
+    expect(() => random(10, 5)).toThrow('maximum은 minimum보다 커야 합니다.');
+  });
 });
