@@ -25,7 +25,7 @@ function random(minimum: number, maximum: number): number;
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(10); // 3.14
+const result = random(10); // 0 이상 20 미만의 실수형 난수를 반환
 ```
 
 ```ts title="typescript"
