@@ -5,3 +5,4 @@ export * from './removeSpecialCharacters';
 export * from './repeatCharacters';
 export * from './reverseString';
 export * from './serialize';
+export * from './trimStart';
