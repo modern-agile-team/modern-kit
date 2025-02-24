@@ -22,6 +22,6 @@ import { trimEnd } from '@modern-kit/utils';
 
 const str1 = trimEnd('  abc  '); // '  abc'
 const str2 = trimEnd('  abc--', '-'); // '  abc'
-const str3 = trimEnd('-_-abc-_-', ['-', '_']); // '-_-abc'
+const str3 = trimEnd('-_-abc-_-', ['-', '_', '-']); // '-_-abc'
 const str4 = trimEnd('--abc  ', '+'); // '--abc  ' 
 ```
