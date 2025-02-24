@@ -2,7 +2,7 @@ import { isNil } from '../../validator/isNil';
 
 /**
  * @description
- * 문자열에서 `뒤에있는 공백` 또는 `지정된 문자`를 제거합니다.
+ * 문자열에서 `후행 공백` 또는 `지정된 문자`를 제거합니다.
  *
  * chars 매개변수가 주어지지 않으면 모든 공백 문자를 제거합니다. (String.prototype.trimEnd와 동일하게 동작합니다.)
  *
