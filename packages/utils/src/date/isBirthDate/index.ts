@@ -91,6 +91,10 @@ const isValidDateInRange = (
  * @description 입력된 생년월일 문자열이 6자리 또는 8자리의 올바른 형식인지,
  * 그리고 해당 날짜가 실제로 존재하는 날짜인지(월, 일 범위 및 윤년 고려) 검사합니다.
  *
+ * 입력값은 아래와 같은 형식을 허용합니다:
+ * - 구분자 포함: `"YYYYMMDD"`, `"YYMMDD"`
+ * - 구분자가 미 포함: `"YY-MM-DD"`, `"YYYY-MM-DD"`, `"YY.MM.DD"`, `"YYYY.MM.DD"`, `"YY/MM/DD"`, `"YYYY/MM/DD"`
+ *
  * @param {string} birthDate 생년월일 문자열
  * @returns {boolean} 유효한 날짜면 true, 아니면 false
  *
