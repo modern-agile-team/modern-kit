@@ -1,4 +1,5 @@
 export * from './hasProperty';
+export * from './isAlphanumeric';
 export * from './isArray';
 export * from './isBlob';
 export * from './isBoolean';
