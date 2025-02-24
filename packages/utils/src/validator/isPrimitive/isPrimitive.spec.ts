@@ -4,7 +4,7 @@ import { isNumber } from '../isNumber';
 import { isString } from '../isString';
 
 describe('isPrimitive', () => {
-  it('should return true if the value is a primitive type, and false if it is a reference type', () => {
+  it('원시 타입인 경우 true를, 참조 타입인 경우 false를 반환해야 합니다.', () => {
     expect(isPrimitive(null)).toBeTruthy();
     expect(isPrimitive(undefined)).toBeTruthy();
     expect(isPrimitive(1)).toBeTruthy();
@@ -19,7 +19,7 @@ describe('isPrimitive', () => {
     expect(isPrimitive(new Map())).toBeFalsy();
   });
 
-  it('should properly infer the type', () => {
+  it('타입을 올바르게 추론해야 합니다.', () => {
     const value = 1 as unknown;
 
     if (isPrimitive(value)) {

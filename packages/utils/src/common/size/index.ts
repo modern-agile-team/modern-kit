@@ -43,5 +43,5 @@ export function size(value: string | Record<PropertyKey, any>): number {
     return Object.keys(value).length;
   }
 
-  throw new Error('Invalid value');
+  throw new Error('유효하지 않은 값입니다.');
 }

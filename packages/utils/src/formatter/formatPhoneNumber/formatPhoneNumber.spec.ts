@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { formatPhoneNumber } from '.';
 
 describe('formatPhoneNumber', () => {
-  it('should return a phone number format', () => {
+  it('전화번호 형식으로 반환해야 합니다.', () => {
     const cellPhoneNumber = '01012341234';
     const localPhoneNumber1 = '0311231234';
     const localPhoneNumber2 = '03112341234';
@@ -18,7 +18,7 @@ describe('formatPhoneNumber', () => {
     expect(formatPhoneNumber(sameLocalPhoneNumber)).toBe('1234-1234');
   });
 
-  it('should remove all non-numeric characters and return a phone number format', () => {
+  it('숫자가 아닌 모든 문자를 제거하고 전화번호 형식으로 반환해야 합니다.', () => {
     const unformattedStr1 = 'asb0 10 12 3 41 234 asb';
     const unformattedStr2 = '010-1234-1234';
     const unformattedStr3 = '(02)12351234';
@@ -28,7 +28,7 @@ describe('formatPhoneNumber', () => {
     expect(formatPhoneNumber(unformattedStr3)).toBe('02-1235-1234');
   });
 
-  it('should return a string with all non-numeric characters removed if the string is not in a valid phone number format', () => {
+  it('유효하지 않은 전화번호 형식일 경우 숫자가 아닌 모든 문자가 제거된 문자열을 반환해야 합니다.', () => {
     const unformattedStr1 = '0102';
     const unformattedStr2 = 'abc';
     const unformattedStr3 = '     ';

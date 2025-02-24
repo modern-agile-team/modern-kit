@@ -127,7 +127,7 @@ describe('isEqual', () => {
     expect(isEqual(map3, map4)).toBeFalsy();
   });
 
-  it('should return true for identical arrays with different element order', () => {
+  it('순서가 다른 동일한 요소를 가진 배열의 경우 false를 반환해야 합니다.', () => {
     const arr1 = [1, 2, 3];
     const arr2 = [3, 2, 1];
     expect(isEqual(new Set(arr1), new Set(arr2))).toBeFalsy();
