@@ -4,8 +4,8 @@
 
 입력값은 아래와 같은 형식을 허용합니다:
 
-- **구분자 포함:** `"YYYYMMDD"`, `"YYMMDD"`
-- **구분자가 미 포함:** `"YY-MM-DD"`, `"YYYY-MM-DD"`, `"YY.MM.DD"`, `"YYYY.MM.DD"`, `"YY/MM/DD"`, `"YYYY/MM/DD"`
+- **구분자 미 포함:** `"YYYYMMDD"`, `"YYMMDD"`
+- **구분자 포함:** `"YY-MM-DD"`, `"YYYY-MM-DD"`, `"YY.MM.DD"`, `"YYYY.MM.DD"`, `"YY/MM/DD"`, `"YYYY/MM/DD"`
 
 구분자로는 하이픈(`-`), 점(`.`) 또는 슬래시(`/`)만 사용할 수 있으며, 올바르지 않은 형식의 입력이나 존재하지 않는 날짜(예: 2월 30일)는 `false`를 반환합니다.
 
