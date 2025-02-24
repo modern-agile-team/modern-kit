@@ -92,7 +92,7 @@ const isValidDateInRange = (
  * 그리고 해당 날짜가 실제로 존재하는 날짜인지(월, 일 범위 및 윤년 고려) 검사합니다.
  *
  * 입력값은 아래와 같은 형식을 허용합니다:
- * - 구분자 미 포함: `"YYYYMMDD"`, `"YYMMDD"`
+ * - 구분자 미포함: `"YYYYMMDD"`, `"YYMMDD"`
  * - 구분자 포함: `"YY-MM-DD"`, `"YYYY-MM-DD"`, `"YY.MM.DD"`, `"YYYY.MM.DD"`, `"YY/MM/DD"`, `"YYYY/MM/DD"`
  *
  * @param {string} birthDate 생년월일 문자열
