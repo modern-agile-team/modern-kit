@@ -87,27 +87,6 @@ describe('formatNumberWithUnits', () => {
       );
     });
 
-    it('space가 true라면 unit 사이 공백을 추가하며, false라면 제외해야 합니다.', () => {
-      expect(
-        formatNumberWithUnits(1234567890000, {
-          space: false,
-          units: KRW_UNITS,
-        })
-      ).toBe('1조2,345억6,789만');
-
-      expect(
-        formatNumberWithUnits(1234567890000, {
-          space: true,
-          units: KRW_UNITS,
-        })
-      ).toBe('1조 2,345억 6,789만');
-
-      // units 옵션이 주어지지 않으면 기본 단위로 포맷팅
-      expect(formatNumberWithUnits(1234567890000, { space: true })).toBe(
-        '1,234,567,890,000'
-      );
-    });
-
     it('decimal가 주어진 값에 따라 소수점 자리수를 적용해야 합니다.', () => {
       // units 옵션이 주어지지 않음
       expect(formatNumberWithUnits(1234567.123, { decimal: 2 })).toBe(

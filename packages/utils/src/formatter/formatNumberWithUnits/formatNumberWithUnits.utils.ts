@@ -21,7 +21,6 @@ const formatNumberWithConditionalCommas = (
  * @param {number} value - 포맷팅할 숫자 값
  * @param {Required<FormatNumberWithUnitsOptions>} options - 포맷팅 옵션
  * @param {boolean} options.commas - 천 단위 구분 쉼표 사용 여부입니다.
- * @param {boolean} options.space - 단위 사이 공백 추가 여부입니다.
  * @param {number} options.floorUnit - 버림 단위입니다.
  * @param {number} options.decimal - 소수점 자리수입니다.
  * @returns {string} 포맷팅된 문자열
@@ -30,11 +29,11 @@ export const getFormattedValueWithUnits = (
   value: number,
   options: Required<FormatNumberWithUnitsOptions>
 ): string => {
-  const { units, commas, space, decimal, floorUnit } = options;
+  const { units, commas, decimal, floorUnit } = options;
 
+  const shouldApplyDecimal = floorUnit === 1 && !Number.isInteger(value);
   const absoluteValue = Math.abs(value);
   const isNegative = value < 0;
-  const hasFloorUnit = floorUnit > 1;
 
   let formattedResult = '';
   let remainingValue = absoluteValue;
@@ -45,7 +44,7 @@ export const getFormattedValueWithUnits = (
   }
 
   // floorUnit이 1보다 큰 경우, 최종 결과에서 floorUnit 미만의 값은 버림
-  if (hasFloorUnit) {
+  if (floorUnit > 1) {
     remainingValue = Math.floor(remainingValue / floorUnit) * floorUnit;
   }
 
@@ -53,24 +52,26 @@ export const getFormattedValueWithUnits = (
   for (let i = 0; i < units.length; i++) {
     const { unit, value } = units[i];
     const quotient = Math.floor(remainingValue / value);
-    const spaceToUse = space ? ' ' : '';
+    const space = ' ';
 
     if (quotient <= 0) continue;
 
     formattedResult += `${formatNumberWithConditionalCommas(
       quotient,
       commas
-    )}${unit}${spaceToUse}`;
+    )}${unit}${space}`;
     remainingValue %= value;
   }
 
   // 남은 remainingValue가 있으면 추가
   if (remainingValue > 0) {
     // floorUnit이 주어지고, 정수가 아니라면 소수점 자리수를 적용
-    const shouldApplyDecimal = !hasFloorUnit && !Number.isInteger(value);
+    const appliedDecimalValue = shouldApplyDecimal
+      ? remainingValue.toFixed(decimal)
+      : remainingValue;
 
     formattedResult += formatNumberWithConditionalCommas(
-      remainingValue.toFixed(shouldApplyDecimal ? decimal : 0),
+      appliedDecimalValue,
       commas
     );
   }

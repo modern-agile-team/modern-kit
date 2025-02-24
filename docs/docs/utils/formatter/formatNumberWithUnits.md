@@ -38,7 +38,7 @@ interface FormatNumberWithUnitsOptions {
   units?: Unit[] | readonly Unit[]; // default: []
   commas?: boolean; // default: true
   floorUnit?: FloorUnit; // default: 1
-  space?: boolean; // default: true
+  decimal?: number; // default: 0
 }
 ```
 ```ts title="typescript"
@@ -79,10 +79,6 @@ const KRW_UNITS = [
   { unit: '억', value: 100_000_000 },
   { unit: '만', value: 10_000 },
 ] as const;
-
-// 단위 사이 공백 추가 (기본값: true)
-formatNumberWithUnits(1234567, { units: KRW_UNITS, space: true }) // "123만 4,567"
-formatNumberWithUnits(1234567, { units: KRW_UNITS, space: false }) // "123만4,567"
 
 // 쉼표 사용 여부 (기본값: true)
 formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: true }) // "123만 4,567"
