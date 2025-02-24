@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isNumber } from '.';
 
 describe('isNumber', () => {
-  it('should return true if the argument is a number and false otherwise', () => {
+  it('숫자인 경우 true를, 그렇지 않은 경우 false를 반환해야 합니다.', () => {
     expect(isNumber(123)).toBeTruthy();
 
     expect(isNumber(() => {})).toBeFalsy();

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isWindow } from '.';
 
 describe('isWindow', () => {
-  it('should correctly identify window objects', () => {
+  it('window 객체를 올바르게 식별해야 합니다.', () => {
     const div = document.createElement('div');
 
     expect(isWindow(window)).toBeTruthy();

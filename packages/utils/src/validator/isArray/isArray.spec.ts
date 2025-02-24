@@ -2,14 +2,14 @@ import { describe, it, expect, expectTypeOf } from 'vitest';
 import { isArray } from '.';
 
 describe('isArray', () => {
-  it('should return true if the argument is an array, and false if it is not', () => {
+  it('배열인 경우 true를, 그렇지 않은 경우 false를 반환해야 합니다.', () => {
     expect(isArray([])).toBeTruthy();
     expect(isArray(1)).toBeFalsy();
     expect(isArray('')).toBeFalsy();
     expect(isArray({})).toBeFalsy();
   });
 
-  it('should narrow the type through if statements', () => {
+  it('if문을 통해 타입을 좁혀야 합니다.', () => {
     const defaultTestArray = ['foo'] as string | string[];
 
     if (isArray(defaultTestArray)) {

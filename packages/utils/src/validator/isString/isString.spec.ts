@@ -2,7 +2,7 @@ import { describe, it, expect, expectTypeOf } from 'vitest';
 import { isString } from '.';
 
 describe('isString', () => {
-  it('should return true if the argument is a string and false otherwise', () => {
+  it('문자열인 경우 true를, 그렇지 않은 경우 false를 반환해야 합니다.', () => {
     expect(isString('123')).toBeTruthy();
 
     expect(isString(() => {})).toBeFalsy();
@@ -12,7 +12,7 @@ describe('isString', () => {
     expect(isString([])).toBeFalsy();
   });
 
-  it('should narrow the type to string if isString returns true', () => {
+  it('isString이 true를 반환하는 경우 타입을 string으로 좁혀야 합니다.', () => {
     const str = '123' as string | number;
 
     if (isString(str)) {

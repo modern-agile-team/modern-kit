@@ -12,7 +12,7 @@ const falsyResult = (errorReason: string) => ({
 });
 
 describe('isValidPassword', () => {
-  it('should return true for a valid password with default options', () => {
+  it('기본 옵션으로 유효한 비밀번호를 검증해야 합니다.', () => {
     // truthy case
     expect(isValidPassword('password')).toEqual(truthyResult);
 
@@ -26,7 +26,7 @@ describe('isValidPassword', () => {
     expect(isValidPassword(' password ')).toEqual(falsyResult('whiteSpace'));
   });
 
-  it('should check password length against custom minLength and maxLength', () => {
+  it('사용자 정의 최소/최대 길이에 따라 비밀번호 길이를 검증해야 합니다.', () => {
     // truthy case
     expect(
       isValidPassword('Password@1', { minLength: 8, maxLength: 12 })
@@ -41,7 +41,7 @@ describe('isValidPassword', () => {
     ).toEqual(falsyResult('length'));
   });
 
-  it('should validate the password based on the containsOptions', () => {
+  it('containsOptions에 따라 비밀번호를 검증해야 합니다.', () => {
     // Check password minimum/maximum length
     expect(isValidPassword('12345678')).toEqual(truthyResult);
     expect(isValidPassword('1234')).toEqual(falsyResult('length'));
@@ -109,7 +109,7 @@ describe('isValidPassword', () => {
     ).toEqual(falsyResult('upperCase'));
   });
 
-  it('should return false for passwords in the forbidden list', () => {
+  it('금지된 비밀번호 목록에 있는 비밀번호를 거부해야 합니다.', () => {
     const forbiddenPasswords = ['12345678', 'admin', 'password'] as const;
 
     forbiddenPasswords.forEach((password) => {
@@ -119,7 +119,7 @@ describe('isValidPassword', () => {
     });
   });
 
-  it('should return false for a password with repeated characters exceeding the limit', () => {
+  it('반복 문자 제한을 초과하는 비밀번호를 거부해야 합니다.', () => {
     expect(isValidPassword('Password@1', { maxRepeatChars: 3 })).toEqual(
       truthyResult
     );
@@ -132,7 +132,7 @@ describe('isValidPassword', () => {
     );
   });
 
-  it('should throw an error for invalid length values', () => {
+  it('유효하지 않은 길이 값에 대해 오류를 발생시켜야 합니다.', () => {
     expect(() =>
       isValidPassword('Password@1234', { minLength: NaN })
     ).toThrowError();

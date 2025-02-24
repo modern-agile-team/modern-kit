@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { getMIMETypeFromResponse } from '.';
 
 describe('getMIMETypeFromResponse', () => {
-  it('should return the correct MIME type from the response headers', () => {
+  it('응답 헤더에서 올바른 MIME 타입을 반환해야 합니다.', () => {
     const headers = new Headers();
     headers.set('Content-Type', 'image/png');
 
@@ -12,7 +12,7 @@ describe('getMIMETypeFromResponse', () => {
     expect(mimeType).toBe('image/png');
   });
 
-  it('should return an empty string if the Content-Type header is not present', () => {
+  it('Content-Type 헤더가 없을 경우 빈 문자열을 반환해야 합니다.', () => {
     const headers = new Headers();
     const mockResponse = new Response(null, { headers });
 
@@ -20,7 +20,7 @@ describe('getMIMETypeFromResponse', () => {
     expect(mimeType).toBe('');
   });
 
-  it('should return an empty string when given an invalid argument', () => {
+  it('인자가 유효하지 않을 경우 빈 문자열을 반환해야 합니다.', () => {
     const mockResponse1 = {} as unknown as Response;
     const mockResponse2 = 123 as unknown as Response;
 

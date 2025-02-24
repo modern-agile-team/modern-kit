@@ -2,21 +2,21 @@ import { describe, it, expect } from 'vitest';
 import { isFloat } from '.';
 
 describe('isFloat', () => {
-  it('should return true if value is float', () => {
+  it('부동 소수점 값인 경우 true를 반환해야 합니다.', () => {
     expect(isFloat(0.5)).toBe(true);
     expect(isFloat(-0.5)).toBe(true);
     expect(isFloat(1.999989899)).toBe(true);
     expect(isFloat(-1.50010101011)).toBe(true);
   });
 
-  it('should return false if value is integer', () => {
+  it('정수인 경우 false를 반환해야 합니다.', () => {
     expect(isFloat(0)).toBe(false);
     expect(isFloat(-1)).toBe(false);
     expect(isFloat(1)).toBe(false);
     expect(isFloat(100)).toBe(false);
   });
 
-  it('should return false if value is not a number', () => {
+  it('숫자가 아닌 경우 false를 반환해야 합니다.', () => {
     expect(isFloat('')).toBe(false);
     expect(isFloat(null)).toBe(false);
     expect(isFloat(undefined)).toBe(false);

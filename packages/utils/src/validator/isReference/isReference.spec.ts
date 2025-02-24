@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isReference } from '.';
 
 describe('isReference', () => {
-  it('should return true for reference types', () => {
+  it('참조 타입인 경우 true를 반환해야 합니다.', () => {
     expect(isReference({})).toBe(true);
     expect(isReference([])).toBe(true);
     expect(isReference(new Set())).toBe(true);
@@ -14,7 +14,7 @@ describe('isReference', () => {
     expect(isReference(() => {})).toBe(true);
   });
 
-  it('should return false for primitive types', () => {
+  it('원시 타입인 경우 false를 반환해야 합니다.', () => {
     expect(isReference(null)).toBe(false);
     expect(isReference(undefined)).toBe(false);
     expect(isReference('string')).toBe(false);

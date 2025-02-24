@@ -22,6 +22,5 @@ export interface FormatNumberWithUnitsOptions {
   units?: Unit[] | readonly Unit[];
   commas?: boolean;
   floorUnit?: FloorUnit;
-  space?: boolean;
   decimal?: number;
 }

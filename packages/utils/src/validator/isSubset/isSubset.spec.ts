@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isSubset } from '.';
 
 describe('isSubset', () => {
-  it('should correctly determine if the subset arrays are subsets of the superset array', () => {
+  it('부분집합 배열이 상위집합 배열의 부분집합인지 올바르게 판단해야 합니다.', () => {
     const superset = [1, 2, 3, 4];
     const subset1 = [1, 3];
     const subset2 = [1, 5];
@@ -11,7 +11,7 @@ describe('isSubset', () => {
     expect(isSubset(superset, subset2)).toBeFalsy();
   });
 
-  it('should return the correct result if the types are different between comparison elements', () => {
+  it('비교 요소 간의 타입이 다른 경우 올바른 결과를 반환해야 합니다.', () => {
     const superset = ['1', 2, 3, 4];
     const subset1 = ['1', 2, 3];
     const subset2 = [1, '2', 3];
@@ -21,7 +21,7 @@ describe('isSubset', () => {
     expect(isSubset(superset, subset2, (el) => Number(el))).toBeTruthy();
   });
 
-  it('should handle elements of type array correctly', () => {
+  it('배열 타입의 요소를 올바르게 처리해야 합니다.', () => {
     const superset = [
       [0, 1, 2, 3, 4],
       [5, 6, 7, 8, 9],
@@ -33,7 +33,7 @@ describe('isSubset', () => {
     expect(isSubset(superset, subset, (arr) => arr[3])).toBeFalsy(); // [3,8], [4]
   });
 
-  it('should handle elements of type reference correctly', () => {
+  it('참조 타입의 요소를 올바르게 처리해야 합니다.', () => {
     const superset = [
       {
         name: 'Peter',
