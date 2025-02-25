@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:7.37.1"],\
           ["eslint-plugin-react-hooks", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:5.1.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.1.2"],\
-          ["globals", "npm:15.15.0"],\
+          ["globals", "npm:16.0.0"],\
           ["lerna", "npm:8.2.0"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:18.3.1"],\
@@ -17715,10 +17715,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:15.15.0", {\
-        "packageLocation": "./.yarn/cache/globals-npm-15.15.0-5ddcb6c553-f9ae809963.zip/node_modules/globals/",\
+      ["npm:16.0.0", {\
+        "packageLocation": "./.yarn/cache/globals-npm-16.0.0-7f7c56ae12-8906d5f018.zip/node_modules/globals/",\
         "packageDependencies": [\
-          ["globals", "npm:15.15.0"]\
+          ["globals", "npm:16.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21933,7 +21933,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:7.37.1"],\
           ["eslint-plugin-react-hooks", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:5.1.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.1.2"],\
-          ["globals", "npm:15.15.0"],\
+          ["globals", "npm:16.0.0"],\
           ["lerna", "npm:8.2.0"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:18.3.1"],\
