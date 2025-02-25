@@ -10,6 +10,7 @@ export * from './useCycleList';
 export * from './useDebounce';
 export * from './useDebouncedInputValue';
 export * from './useDebouncedState';
+export * from './useDidUpdate';
 export * from './useDocumentTitle';
 export * from './useEventListener';
 export * from './useFileReader';
