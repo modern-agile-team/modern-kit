@@ -23,7 +23,7 @@ import { isNil } from '../../validator/isNil';
  *
  * @example
  * trimStart('-_-abc-_-', ['-', '_']); // 'abc-_-', 선행에서 배열 요소인 '-'와 '_'를 모두 제거
- * trimStart('+-*abc-_-', ['+*', '-']); // 'abc-_-', 각 문자열 요소는 개별 문자로 나누고 제거 즉, '+', '*', '-'를 모두 제거
+ * trimStart('+-*abc-_-', ['+*', '-']); // 'abc-_-', 각 문자열 요소는 개별 문자로 나누고('+', '*', '-') 제거
  */
 export function trimStart(str: string, chars?: string | string[]): string {
   if (isNil(chars)) {
