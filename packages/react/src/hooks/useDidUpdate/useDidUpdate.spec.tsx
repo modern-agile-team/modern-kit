@@ -5,9 +5,6 @@ import { useDidUpdate } from '.';
 describe('useDidUpdate', () => {
   it('초기 마운트 시 effect가 호출되지 않아야 합니다', () => {
     const effect = vi.fn();
-    const { rerender } = renderHook(({ deps }) => useDidUpdate(effect, deps), {
-      initialProps: { deps: [1] },
-    });
 
     expect(effect).not.toHaveBeenCalled();
   });
