@@ -1,0 +1,28 @@
+import { DependencyList, useEffect, useRef } from 'react';
+
+/**
+ * @description 최초 마운트시에는 실행되지않고 deps값이 업데이트 되었을때 effect를 실행시키는 커스텀 훅입니다.
+ *
+ * @param effect 실행할 함수입니다.
+ * @param deps effect를 다시 실행 할 의존성 배열입니다.
+ *
+ * @returns void
+ *
+ * @example
+ * useDidUpdate(() => {
+ *  console.log('deps가 변경되었습니다.');
+ * }, [deps]);
+ */
+
+export function useDidUpdate(effect: () => void, deps: DependencyList): void {
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+
+    effect();
+  }, deps);
+}
