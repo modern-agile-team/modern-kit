@@ -1,3 +1,5 @@
+import { parseDate } from '../parseDate';
+
 interface IsAfterDateParams {
   targetDate: string | number | Date;
   compareDate?: string | number | Date;
@@ -30,8 +32,8 @@ export function isAfterDate({
   compareDate = new Date(),
   inclusive = false,
 }: IsAfterDateParams): boolean {
-  const targetDateToUse = new Date(targetDate);
-  const compareDateToUse = new Date(compareDate);
+  const targetDateToUse = parseDate(targetDate);
+  const compareDateToUse = parseDate(compareDate);
 
   return inclusive
     ? targetDateToUse.getTime() >= compareDateToUse.getTime()

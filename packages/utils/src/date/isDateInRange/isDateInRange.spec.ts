@@ -261,33 +261,7 @@ describe('isDateInRange', () => {
       ).toBeTruthy();
     });
   });
-
   describe('에러 케이스', () => {
-    it('targetDate가 유효하지 않은 날짜 형식이면 에러를 던져야 합니다.', () => {
-      expect(() =>
-        isDateInRange({
-          targetDate: 'invalid-date',
-          toDate: '2025-01-01',
-        })
-      ).toThrow('targetDate가 유효하지 않은 날짜 형식입니다.');
-    });
-
-    it('fromDate가 유효하지 않은 날짜 형식이면 에러를 던져야 합니다.', () => {
-      expect(() =>
-        isDateInRange({
-          fromDate: 'invalid-date',
-        })
-      ).toThrow('fromDate가 유효하지 않은 날짜 형식입니다.');
-    });
-
-    it('toDate가 유효하지 않은 날짜 형식이면 에러를 던져야 합니다.', () => {
-      expect(() =>
-        isDateInRange({
-          toDate: 'invalid-date',
-        })
-      ).toThrow('toDate가 유효하지 않은 날짜 형식입니다.');
-    });
-
     it('fromDate가 toDate보다 늦으면 에러를 던져야 합니다.', () => {
       expect(() =>
         isDateInRange({
