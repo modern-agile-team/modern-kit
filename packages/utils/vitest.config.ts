@@ -18,7 +18,7 @@ export default defineConfig({
         'src/**/internal.ts',
         'src/**/*.bench.ts',
         'src/**/*.utils.ts',
-        'src/build.utils.mjs',
+        'build.utils.mjs',
         ...coverageConfigDefaults.exclude,
       ],
     },

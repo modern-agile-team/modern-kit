@@ -1,3 +1,5 @@
+import { parseDate } from '../parseDate';
+
 /**
  * @description 주어진 생년월일을 기준으로 현재 나이를 계산합니다.
  *
@@ -14,12 +16,7 @@
  *
  */
 export function getAge(birthDate: string | number | Date): number {
-  const birthDateTime = new Date(birthDate);
-
-  if (isNaN(birthDateTime.getTime())) {
-    throw new Error('유효하지 않은 날짜 형식입니다.');
-  }
-
+  const birthDateTime = parseDate(birthDate);
   const today = new Date();
 
   const age = today.getFullYear() - birthDateTime.getFullYear();

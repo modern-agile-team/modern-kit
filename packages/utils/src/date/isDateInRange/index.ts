@@ -1,4 +1,4 @@
-import { isNil } from '../../validator/isNil';
+import { parseDate } from '../parseDate';
 import { isAfterDate } from '../isAfterDate';
 import { isBeforeDate } from '../isBeforeDate';
 
@@ -8,21 +8,6 @@ interface IsDateInRangeParams {
   toDate?: Date | string | number;
   inclusive?: 'both' | 'from' | 'to' | 'none';
 }
-
-/**
- * @description 날짜 문자열을 Date 객체로 변환합니다.
- * Safari에서 호환되도록 "-", "."을 "/"로 변경합니다. (ex. 2025-01-01 -> 2025/01/01)
- *
- * @param {Date | string | number} date - 변환할 날짜 문자열 또는 숫자
- * @returns {Date} 변환된 Date 객체
- */
-const parseDate = (date: Date | string | number): Date => {
-  if (date instanceof Date) return date;
-  if (typeof date === 'number') return new Date(date);
-
-  const safeDateString = date.replace(/[-\\.]/g, '/');
-  return new Date(safeDateString);
-};
 
 /**
  * @description 타겟 날짜가 주어진 날짜 범위 내에 있는지 확인합니다. 타겟 날짜(targetDate)가 없을 경우 `현재 날짜`를 사용합니다.
@@ -88,17 +73,6 @@ export function isDateInRange({
   const fromDateToUse = fromDate ? parseDate(fromDate) : null;
   const toDateToUse = toDate ? parseDate(toDate) : null;
   const targetDateToUse = parseDate(targetDate);
-
-  // 에러 케이스 대응
-  if (isNaN(targetDateToUse.getTime())) {
-    throw new Error('targetDate가 유효하지 않은 날짜 형식입니다.');
-  }
-  if (!isNil(fromDateToUse) && isNaN(fromDateToUse.getTime())) {
-    throw new Error('fromDate가 유효하지 않은 날짜 형식입니다.');
-  }
-  if (!isNil(toDateToUse) && isNaN(toDateToUse.getTime())) {
-    throw new Error('toDate가 유효하지 않은 날짜 형식입니다.');
-  }
 
   // 날짜 비교 내부 함수
   const compareDate = (date: Date, type: 'from' | 'to'): boolean => {
