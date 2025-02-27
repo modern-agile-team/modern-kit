@@ -1,5 +1,4 @@
 import { parseDate } from '../parseDate';
-import { isNil } from '../../validator/isNil';
 import { isAfterDate } from '../isAfterDate';
 import { isBeforeDate } from '../isBeforeDate';
 
