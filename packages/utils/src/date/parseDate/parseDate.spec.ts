@@ -12,18 +12,32 @@ afterEach(() => {
 describe('parseDate', () => {
   it('날짜 문자열을 Date 객체로 변환해야 합니다.', () => {
     const dateString1 = '2025-01-01';
-    const dateString2 = '2025/01/01 00:00:00';
-
     const date1 = parseDate(dateString1);
     expect(date1).toBeInstanceOf(Date);
     expect(date1.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
 
+    const dateString2 = '2025/01/01 09:00:00';
     const date2 = parseDate(dateString2);
     expect(date2).toBeInstanceOf(Date);
-    expect(date2.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
+    expect(date2.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 9:00:00');
+
+    const dateString3 = '2025.01.01 18:00:00';
+    const date3 = parseDate(dateString3);
+    expect(date3).toBeInstanceOf(Date);
+    expect(date3.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오후 6:00:00');
+
+    const dateString4 = '2025-01-01T00:00:00';
+    const date4 = parseDate(dateString4);
+    expect(date4).toBeInstanceOf(Date);
+    expect(date4.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
+
+    const dateString5 = '01/01/2025';
+    const date5 = parseDate(dateString5);
+    expect(date5).toBeInstanceOf(Date);
+    expect(date5.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
   });
 
-  it('Date 객체를 Date 객체로 변환해야 합니다.', () => {
+  it('Date 객체를 동일한 Date 객체로 반환해야 합니다.', () => {
     const date = new Date();
     const parsedDate = parseDate(date);
 

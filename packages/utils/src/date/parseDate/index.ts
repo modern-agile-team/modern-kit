@@ -53,7 +53,7 @@ function parseDateString(date: string): string {
  *
  * @example
  * parseDate('2025-01-01') // new Date('2025/01/01') 반환
- * parseDate(new Date()) // new Date() 반환
+ * parseDate(new Date('2025-01-01')) // new Date('2025/01/01') 반환
  * parseDate(1714233600000) // new Date(1714233600000) 반환
  */
 export const parseDate = (date: string | Date | number): Date => {
