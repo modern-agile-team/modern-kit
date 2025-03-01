@@ -1,5 +1,4 @@
 import { isNil } from '../../validator/isNil';
-import { flatMap } from '../../array/flatMap';
 import { trimEnd } from '../trimEnd';
 import { trimStart } from '../trimStart';
 
