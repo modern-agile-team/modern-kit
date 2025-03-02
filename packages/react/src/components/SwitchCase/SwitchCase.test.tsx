@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { SwitchCase } from '.';
 
-const TestComponent = ({ value }: { value: string }) => {
+const TestComponent = ({ value }: { value: string | null | undefined }) => {
   return (
     <SwitchCase
       value={value}
@@ -39,5 +39,11 @@ describe('SwitchCase', () => {
 
     expect(screen.queryByText('A')).not.toBeInTheDocument();
     expect(screen.queryByText('B')).not.toBeInTheDocument();
+  });
+
+  it(`value가 null일 때 'Default'가 렌더링되어야 합니다.`, () => {
+    renderSetup(<TestComponent value={null} />);
+
+    expect(screen.getByText('Default')).toBeInTheDocument();
   });
 });

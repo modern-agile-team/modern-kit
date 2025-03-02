@@ -19,16 +19,7 @@ export const FallbackLazyImage = forwardRef<
   FallbackLazyImageProps
 >(
   (
-    {
-      width,
-      height,
-      fallback,
-      className,
-      style,
-      duration = '0.2s',
-      onLoad,
-      ...restProps
-    },
+    { width, height, fallback, style, duration = '0.2s', onLoad, ...restProps },
     ref
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -64,12 +55,8 @@ export const FallbackLazyImage = forwardRef<
       [onLoad]
     );
 
-    const customClassName = className
-      ? `lazy-image-wrapper ${className}`
-      : 'lazy-image-wrapper';
-
     return (
-      <div className={customClassName} style={wrapperStyle}>
+      <div style={wrapperStyle}>
         {isRenderFallback && fallback}
         <LazyImage
           ref={ref}
