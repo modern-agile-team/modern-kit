@@ -1,0 +1,171 @@
+import { useState } from 'react';
+import { EventExtender } from '@modern-kit/react';
+import { delay } from '@modern-kit/utils';
+
+# EventExtender
+
+자식 컴포넌트의 이벤트 핸들러를 확장하여 `전후 처리`를 가능하게 하는 컴포넌트입니다.
+
+기본적으로 `isAsync` 옵션은 `false`이며, `동기 이벤트`를 처리합니다.
+
+`isAsync` 옵션을 `true`로 주고, `비동기 이벤트` 를 처리 할 수 있습니다. 이를 통해 `비동기 이벤트 순서 보장`을 할 수 있습니다.
+
+단, `비동기 이벤트`를 처리 할 경우 일반적인 이벤트 호출 순서가 아닌 순서로 이벤트가 호출될 수 있습니다.
+
+이런 현상은 대표적으로 `MouseEvent`를 캡처하는 경우에 발생합니다.
+- 예를 들어, `onMouseUp` 이벤트는 `onClick` 이벤트 이전에 호출되는게 일반적이지만, 해당 컴포넌트로 `onMouseUp` 이벤트를 캡처하면 `onMouseUp` 이벤트가 `onClick` 이벤트 이후에 호출됩니다.
+- 이러한 현상은 `isAsync`가 `true`일 시 이벤트를 `await` 하기 때문입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/EventExtender/index.tsx)
+
+## Interface
+```ts title="typescript"
+/**
+ * @description HTML 요소들의 태그 이름 타입 (예: "div", "span", "input" 등)
+ */
+type HTMLElementType = keyof JSX.IntrinsicElements;
+
+/**
+ * @description React.DOMAttributes<HTMLElement>에 정의된 이벤트
+ * - "on"으로 시작하는 이벤트 핸들러 이름만 포함 (예: "onClick", "onChange", "onSubmit" 등)
+ */
+type EventNames = keyof React.DOMAttributes<HTMLElement> & `on${string}`;
+
+/**
+ * @description 특정 HTML 요소의 특정 이벤트에 대한 이벤트 객체 타입을 추론하는 제네릭 타입
+ * @template K - HTML 요소 타입 (예: "button", "input" 등)
+ * @template E - 이벤트 핸들러 이름 (예: "onClick", "onChange" 등)
+ * @returns 해당 이벤트의 이벤트 객체 타입 또는 never
+ */
+type ElementEventType<
+  K extends HTMLElementType,
+  E extends EventNames
+> = JSX.IntrinsicElements[K][E] extends ((e: infer Event) => void) | undefined
+  ? Event
+  : never;
+```
+```tsx title="typescript"
+interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
+  children: JSX.Element;
+  capture: E;
+  isAsync?: boolean; // 기본값: false
+  beforeEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
+  afterEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
+}
+
+const EventExtender: <
+  K extends keyof JSX.IntrinsicElements,
+  E extends EventNames
+>({
+  children,
+  capture,
+  isAsync,
+  beforeEvent,
+  afterEvent,
+}: EventExtenderProps<K, E>) => JSX.Element;
+```
+
+## Usage
+### 기본 사용법
+```tsx title="typescript"
+import { EventExtender } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <EventExtender
+      capture="onClick"
+      beforeEvent={(e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('클릭 전', e);
+      }}
+      afterEvent={(e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('클릭 후', e);
+      }}>
+      <button onClick={(e) => console.log('클릭', e)}>Sync Button</button>
+    </EventExtender>
+  );
+};
+```
+
+export const SyncExample = () => {
+  return (
+    <>
+      <p>개발자 도구 콘솔에서 확인해주세요.</p>
+      <EventExtender
+        capture="onClick"
+        beforeEvent={(e) => {
+          console.log('클릭 전', e);
+        }}
+        afterEvent={(e) => {
+          console.log('클릭 후', e);
+        }}>
+        <button onClick={(e) => console.log('클릭', e)}>Sync Button</button>
+      </EventExtender>
+    </>
+  );
+};
+
+<SyncExample />
+
+<br />
+
+### 비동기 이벤트 처리
+```tsx title="typescript"
+import { EventExtender } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <EventExtender
+      isAsync={true} // (*)
+      capture="onClick"
+      beforeEvent={async (e: React.MouseEvent<HTMLButtonElement>) => {
+        await delay(500);
+        console.log('클릭 전', e);
+      }}
+      afterEvent={async (e: React.MouseEvent<HTMLButtonElement>) => {
+        await delay(500);
+        console.log('클릭 후', e);
+      }}>
+      <button
+        onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+          await delay(500);
+          console.log('클릭', e);
+        }}>
+        Async Button
+      </button>
+    </EventExtender>
+  );
+};
+```
+
+export const AsyncExample = () => {
+  return (
+    <>
+      <p>개발자 도구 콘솔에서 확인해주세요.</p>
+      <EventExtender
+        isAsync
+        capture="onClick"
+        beforeEvent={async (e) => {
+          await delay(500);
+          console.log('클릭 전', e);
+        }}
+        afterEvent={async (e) => {
+          await delay(500);
+          console.log('클릭 후', e);
+        }}>
+        <button
+          onClick={async (e) => {
+            await delay(500);
+            console.log('클릭', e);
+          }}>
+          Async Button
+        </button>
+      </EventExtender>
+    </>
+  );
+};
+
+<AsyncExample />
+

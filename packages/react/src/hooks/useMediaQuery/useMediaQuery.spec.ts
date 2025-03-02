@@ -38,4 +38,14 @@ describe('useMediaQuery', () => {
 
     expect(result.current).toBe(false);
   });
+
+  it('defaultValue가 제공되면, 클라이언트 환경이 아닐 때 defaultValue를 반환해야 합니다', () => {
+    vi.spyOn(ModernKitUtils, 'isClient').mockReturnValue(false);
+
+    const { result } = renderHook(() =>
+      useMediaQuery('(min-width: 600px)', true)
+    );
+
+    expect(result.current).toBe(true);
+  });
 });

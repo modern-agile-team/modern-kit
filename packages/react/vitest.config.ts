@@ -18,6 +18,7 @@ export default defineConfig({
         'src/**/*.utils.ts',
         'src/hooks/useClipboard',
         'src/hooks/useResizeObserver',
+        'build.utils.mjs',
         ...coverageConfigDefaults.exclude,
       ],
     },
