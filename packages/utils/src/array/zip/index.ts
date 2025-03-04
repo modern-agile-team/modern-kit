@@ -21,12 +21,6 @@
  * zip(arr1, arr2, arr3, arr4); // [[1, 'a', true, null], [2, 'b', false, null], [3, 'c', true, undefined]]
  */
 
-function zip<T extends (readonly unknown[])[]>(
-  ...arrs: T
-): Array<{
-  [K in keyof T]: T[K] extends (infer U)[] ? U : never;
-}>;
-
 export function zip<T extends (readonly unknown[])[]>(
   ...arrs: T
 ): Array<{
