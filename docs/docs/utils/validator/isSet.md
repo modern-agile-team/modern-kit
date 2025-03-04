@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isSet: <T>(value: unknown) => value is Set<T>
+function isSet<T>(value: unknown): value is Set<T>
 ```
 
 ## Usage
