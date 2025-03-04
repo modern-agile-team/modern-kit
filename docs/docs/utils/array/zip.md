@@ -12,22 +12,11 @@
 
 ## Interface
 ```ts title="typescript"
-function zip<T>(arr1: T[] | readonly T[]): [T][];
-function zip<T, U>(
-  arr1: T[] | readonly T[],
-  arr2: U[] | readonly U[]
-): [T, U][];
-function zip<T, U, V>(
-  arr1: T[] | readonly T[],
-  arr2: U[] | readonly U[],
-  arr3: V[] | readonly V[]
-): [T, U, V][];
-function zip<T, U, V, W>(
-  arr1: T[] | readonly T[],
-  arr2: U[] | readonly U[],
-  arr3: V[] | readonly V[],
-  arr4: W[] | readonly W[]
-): [T, U, V, W][];
+function zip<T extends (readonly unknown[])[]>(
+  ...arrs: T
+): Array<{
+  [K in keyof T]: T[K] extends (infer U)[] ? U : never;
+}>;
 ```
 
 ## Usage
