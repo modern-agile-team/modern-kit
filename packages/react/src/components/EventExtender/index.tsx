@@ -32,7 +32,7 @@ type ElementEventType<
 interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
   children: JSX.Element;
   capture: E;
-  isAsync?: boolean;
+  shouldAwait?: boolean;
   beforeEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
   afterEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
 }
@@ -40,22 +40,26 @@ interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
 /**
  * @description 자식 컴포넌트의 이벤트 핸들러를 확장하여 `전후 처리`를 가능하게 하는 컴포넌트입니다.
  *
- * 기본적으로 `isAsync` 옵션은 `false`이며, `동기 이벤트`를 처리합니다.
+ * `shouldAwait` 옵션에 따라 다음과 같이 동작합니다:
  *
- * `isAsync` 옵션을 `true`로 주고, `비동기 이벤트` 를 처리 할 수 있습니다. 이를 통해 `비동기 이벤트 순서 보장`을 할 수 있습니다.
+ * `shouldAwait: false` (기본값)
+ * - 비동기 함수를 await 하지 않습니다.
+ * - beforeEvent → 원본 이벤트 → afterEvent 순서로 실행되지만, 각 단계의 완료를 기다리지 않습니다.
+ * - 일반적인 이벤트 호출 순서를 유지합니다.
+ * - 예시: mouseDown -> mouseUp -> click 호출 순서가 유지됩니다.
  *
- * 단, `비동기 이벤트`를 처리 할 경우 일반적인 이벤트 호출 순서가 아닌 순서로 이벤트가 호출될 수 있습니다.
- *
- * 이런 현상은 대표적으로 `MouseEvent`를 캡처하는 경우에 발생합니다.
- * - 예를 들어, `onMouseUp` 이벤트는 `onClick` 이벤트 이전에 호출되는게 일반적이지만, 해당 컴포넌트로 `onMouseUp` 이벤트를 캡처하면 `onMouseUp` 이벤트가 `onClick` 이벤트 이후에 호출됩니다.
- * - 이러한 현상은 `isAsync`가 `true`일 시 이벤트를 `await` 하기 때문입니다.
+ * `shouldAwait: true`
+ * - 비동기 함수를 await 합니다.
+ * - beforeEvent → 원본 이벤트 → afterEvent 순서로 실행을 보장하며, 각 단계의 완료를 기다립니다.
+ * - 주의: 일반적인 이벤트 호출 순서와 달라질 수 있습니다.
+ * - 예시: `mouseUp` 이벤트는 `click` 이벤트 이전에 호출되는게 일반적이지만, `onMouseUp` 이벤트를 캡처하면 `mouseUp` 이벤트가 `click` 이벤트 이후에 호출됩니다.
  *
  * @template K - HTML 요소 타입 (예: "button", "input" 등)
  * @template E - 이벤트 핸들러 이름 (예: "onClick", "onChange" 등)
  * @param {EventExtenderProps<K, E>} props - 컴포넌트 속성
  * @param {JSX.Element} props.children - 단일 자식 컴포넌트 (React 엘리먼트)
  * @param {E} props.capture - 확장하고자 하는 이벤트 핸들러 이름
- * @param {boolean} [props.isAsync=false] - 이벤트 동기 여부
+ * @param {boolean} [props.shouldAwait=false] - 이벤트 핸들러의 비동기 함수를 await 할지 여부. true일 경우 각 핸들러의 완료를 기다립니다.
  * @param {(e: ElementEventType<K, E>) => void | Promise<void>} [props.beforeEvent] - 이벤트 발생 전 실행할 함수, 비동기 함수 허용
  * @param {(e: ElementEventType<K, E>) => void | Promise<void>} [props.afterEvent] - 이벤트 발생 후 실행할 함수, 비동기 함수 허용
  * @returns {JSX.Element} 이벤트가 확장된 자식 컴포넌트
@@ -80,9 +84,9 @@ interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
  *
  * @example
  * ```tsx
- * // 비동기 함수를 사용할 수 있습니다.
+ * // 비동기 함수의 완료를 기다립니다.
  * <EventExtender
- *   isAsync={true} // (*)
+ *   shouldAwait={true} // (*)
  *   capture="onClick"
  *   beforeEvent={async (e: React.MouseEvent<HTMLButtonElement>) => {
  *     console.log('클릭 전', e);
@@ -102,7 +106,7 @@ interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
 export const EventExtender = <K extends HTMLElementType, E extends EventNames>({
   children,
   capture,
-  isAsync = false,
+  shouldAwait = false,
   beforeEvent,
   afterEvent,
 }: EventExtenderProps<K, E>): JSX.Element => {
@@ -139,7 +143,7 @@ export const EventExtender = <K extends HTMLElementType, E extends EventNames>({
   };
 
   const enhancedProps = {
-    [capture]: isAsync ? asyncEvent : syncEvent,
+    [capture]: shouldAwait ? asyncEvent : syncEvent,
   };
 
   return React.cloneElement(child, enhancedProps);
