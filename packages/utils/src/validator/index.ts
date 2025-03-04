@@ -23,3 +23,4 @@ export * from './isValidEmail';
 export * from './isValidPassword';
 export * from './isValidPhoneNumber';
 export * from './isWindow';
+export * from './isSet';
