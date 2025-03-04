@@ -7,12 +7,15 @@
 <br />
 
 ## Code
-
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isSet/index.ts)
 
 ## Interface
 ```ts title="typescript"
 const isSet: <T>(value: unknown) => value is Set<T>
+```
+
+## Usage
+``` ts title="typescript"
 import { isSet } from '@modern-kit/utils';
 
 isSet(new Set()) // true
@@ -25,3 +28,4 @@ isSet(new WeakSet()) // false
 isSet(new Date()) // false
 isSet(null) // false
 isSet(undefined) // false
+```
