@@ -39,12 +39,12 @@ describe('EventExtender', () => {
       expect(array).toEqual(['before', 'origin', 'after']);
     });
 
-    it('비동기 이벤트 핸들러가 정상적으로 동작해야 합니다.', async () => {
+    it('shouldAwait가 true일 경우 비동기 이벤트 핸들러의 순서가 보장되어야 합니다.', async () => {
       const array: string[] = [];
 
       const { user } = renderSetup(
         <EventExtender
-          isAsync
+          shouldAwait
           capture="onClick"
           beforeEvent={async () => {
             await delay(DELAY);
