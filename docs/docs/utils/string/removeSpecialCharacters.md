@@ -1,6 +1,6 @@
 # removeSpecialCharacters
 
-문자열을 입력하면 `특수 문자`를 제거한 문자열을 반환하는 함수입니다.
+주어진 문자열에서 `특수 문자를 제거`하는 함수입니다.
 
 <br />
 
@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const removeSpecialCharacters: (value: string) => string
+function removeSpecialCharacters(value: string): string
 ```
 
 ## Usage

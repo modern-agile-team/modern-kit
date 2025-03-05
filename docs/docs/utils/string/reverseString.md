@@ -1,8 +1,9 @@
 # reverseString
 
-주어진 문자열을 뒤집은 형태로 반환해주는 함수입니다.
+주어진 문자열을 뒤집어 반환하는 함수입니다.
 
-유효하지 않은 값이 들어오는 경우 `빈 문자열`을 반환해줍니다.
+`spread` 연산자를 사용하여 `유니코드 문자열`을 지원합니다.
+- https://github.com/modern-agile-team/modern-kit/issues/272
 
 <br />
 

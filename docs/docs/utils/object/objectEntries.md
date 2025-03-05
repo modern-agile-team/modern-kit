@@ -11,7 +11,6 @@
 
 ## Interface
 ```ts title="typescript"
-// modern-kit/types
 type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
   keyof T,
   symbol

@@ -10,13 +10,12 @@
 
 ## Interface
 ```ts title="typescript"
-// modern-kit/types
 type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
   keyof T,
   symbol
 >;
 
-function objectKeys<T extends Record<ObjectKeys<T>, any>>(
+function objectKeys<T extends Record<PropertyKey, any>>(
   obj: T
 ): ObjectKeys<T>[];
 ```

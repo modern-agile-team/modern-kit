@@ -2,12 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { countSubstringOccurrences } from '.';
 
 describe('countSubstringOccurrences', () => {
-  it('should return 0 if the target word passed in as an argument does not occur', () => {
+  it('인자로 전달된 대상 문자열이 존재하지 않으면 0을 반환해야 합니다.', () => {
     const str1 = 'apple banana apple grapes apple';
     expect(countSubstringOccurrences(str1, 'orange')).toBe(0);
   });
 
-  it('should return the number of occurrences of the target word passed in as an argument', () => {
+  it('인자로 전달된 대상 문자열의 등장 횟수를 반환해야 합니다.', () => {
     const str1 = 'apple banana apple grapes apple';
     expect(countSubstringOccurrences(str1, 'apple')).toBe(3);
     expect(countSubstringOccurrences(str1, 'apple banana')).toBe(1);
@@ -18,18 +18,17 @@ describe('countSubstringOccurrences', () => {
     expect(countSubstringOccurrences(str2, '테스트용 문자열')).toBe(2);
   });
 
-  it('should return 0 when either source or target is an empty string', () => {
+  it('원본 문자열이나 대상 문자열이 빈 문자열일 경우 0을 반환해야 합니다.', () => {
     expect(countSubstringOccurrences('', 'abc')).toBe(0);
     expect(countSubstringOccurrences('abc', '')).toBe(0);
   });
 
-  it('should return the correct count of occurrences', () => {
-    expect(countSubstringOccurrences('abc', 'abc')).toBe(1);
+  it('문자열 등장 횟수를 overlap 옵션에 따라 정확하게 반환해야 합니다.', () => {
     expect(countSubstringOccurrences('aaaa', 'aa', { overlap: true })).toBe(3);
-    expect(countSubstringOccurrences('banana', 'na')).toBe(2);
+    expect(countSubstringOccurrences('aaaa', 'aa', { overlap: false })).toBe(2);
   });
 
-  it('should handle special characters in the target string', () => {
+  it('대상 문자열의 특수 문자를 올바르게 처리해야 합니다.', () => {
     expect(countSubstringOccurrences('a.b.c', '.')).toBe(2);
     expect(countSubstringOccurrences('a(b)c(d)e', '(')).toBe(2);
   });

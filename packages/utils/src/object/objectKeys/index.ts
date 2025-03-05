@@ -17,7 +17,7 @@ export type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
  * const keys = objectKeys(obj); // ['a', 'b', 'c']
  * // const keys: ('a' | 'b' | 'c')[]
  */
-export function objectKeys<T extends Record<ObjectKeys<T>, any>>(
+export function objectKeys<T extends Record<PropertyKey, any>>(
   obj: T
 ): ObjectKeys<T>[] {
   return Object.keys(obj) as ObjectKeys<T>[];
