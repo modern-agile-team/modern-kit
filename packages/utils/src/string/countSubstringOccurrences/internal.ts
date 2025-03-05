@@ -1,4 +1,4 @@
-export const escapeRegExp = (str: string): RegExp => {
+const escapeRegExp = (str: string): RegExp => {
   const escaped = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return new RegExp(escaped, 'g');
 };

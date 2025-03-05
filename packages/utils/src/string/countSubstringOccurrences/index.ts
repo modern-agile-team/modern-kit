@@ -1,8 +1,4 @@
-import {
-  countAllowOverlap,
-  countExceptOverlap,
-  escapeRegExp,
-} from './internal';
+import { countAllowOverlap, countExceptOverlap } from './internal';
 
 interface CountSubstringOccurrencesOptions {
   overlap: boolean;
