@@ -63,5 +63,5 @@ export function trim(str: string, chars?: string | string[]): string {
     return str.trim();
   }
 
-  return trimStart(trimEnd(str, chars as string[]), chars as string[]);
+  return trimStart(trimEnd(str, chars), chars);
 }

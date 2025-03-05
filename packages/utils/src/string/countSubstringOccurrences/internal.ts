@@ -1,8 +1,10 @@
-export const escapeRegExp = (str: string): string => {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export const escapeRegExp = (str: string): RegExp => {
+  const escaped = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(escaped, 'g');
 };
 
-export const countAllowOverlap = (source: string, regex: RegExp) => {
+export const countAllowOverlap = (source: string, target: string) => {
+  const regex = escapeRegExp(target);
   let count = 0;
   let match = regex.exec(source);
 
@@ -16,7 +18,9 @@ export const countAllowOverlap = (source: string, regex: RegExp) => {
   return count;
 };
 
-export const countExceptOverlap = (source: string, regex: RegExp) => {
+export const countExceptOverlap = (source: string, target: string) => {
+  const regex = escapeRegExp(target);
+
   const matches = source.match(regex);
   return matches ? matches.length : 0;
 };

@@ -9,15 +9,15 @@
 
 ## Interface
 ```ts title="typescript"
-interface Options {
-  overlap?: boolean; // default: false
+interface CountSubstringOccurrencesOptions {
+  overlap: boolean;
 }
 
-const countSubstringOccurrences: (
+function countSubstringOccurrences(
   source: string,
   target: string,
-  options?: Options
-) => number;
+  options?: CountSubstringOccurrencesOptions
+): number;
 ```
 
 ## Usage
@@ -29,6 +29,6 @@ const count1 = countSubstringOccurrences(str, 'apple'); // 3
 const count2 = countSubstringOccurrences(str, 'apple banana'); // 1
 
 const duplicatedStr = 'aaaa'
-const count3 = countSubstringOccurrences(duplicatedStr, 'aa'); // 2, double counting not allowed
-const count4 = countSubstringOccurrences(duplicatedStr, 'aa', { overlap: true }); // 3, double counting allowed
+const count3 = countSubstringOccurrences(duplicatedStr, 'aa', { overlap: false }); // 2
+const count4 = countSubstringOccurrences(duplicatedStr, 'aa', { overlap: true }); // 3
 ```

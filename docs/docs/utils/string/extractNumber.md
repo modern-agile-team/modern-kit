@@ -1,6 +1,6 @@
 # extractNumber
 
-`문자열`을 입력하면 숫자를 제외한 모든 문자를 제거한 문자열을 반환하는 함수입니다.
+문자열에서 `숫자만 추출`하는 함수입니다.
 
 <br />
 
@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const extractNumber: (value: string) => string
+function extractNumber(value: string): string
 ```
 
 ## Usage
