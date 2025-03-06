@@ -11,7 +11,7 @@ Promise를 반환하는 함수가 성공할 때까지 다시 시도하는 함수
 ## Interface
 ```ts title="typescript"
 function retry<T>(func: () => Promise<T>): Promise<T>;
-function retry<T>(func: () => Promise<T>, count: number): Promise<T>;
+function retry<T>(func: () => Promise<T>, count: number = 3): Promise<T>;
 function retry<T>(func: () => Promise<T>, { count, delay, signal }: RetryOptions): Promise<T>;
 ```
 
