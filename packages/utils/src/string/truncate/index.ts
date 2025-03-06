@@ -6,8 +6,7 @@ interface Options {
   separator?: RegExp | string;
 }
 /**
- * @description 주어진 문자열을 지정된 길이로 자르고, 필요에 따라 생략 표시(...)를 추가합니다.
- * 이 함수는 `separator` 옵션을 사용하여 특정 구분자로 문자열을 잘라낼 수도 있습니다.
+ * @description 주어진 문자열을 지정된 길이로 줄이고, 필요하면 생략 부호(omission)를 추가하여 반환하는 함수입니다.
  *
  * @param {string} string - 자르고자 하는 문자열입니다.
  * @param {Options} options - 문자열 잘라내기 옵션입니다.
@@ -57,9 +56,7 @@ export function truncate(string: string, options: Options = {}): string {
     if (matchIndex !== -1) {
       truncatedString = truncatedString.slice(0, matchIndex);
     }
-  }
-
-  if (separator instanceof RegExp) {
+  } else {
     const match = truncatedString.match(separator);
 
     if (match) {
