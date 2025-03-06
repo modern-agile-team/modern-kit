@@ -11,4 +11,5 @@ export * from './noop';
 export * from './once';
 export * from './parseJSON';
 export * from './pickFalsy';
+export * from './retry';
 export * from './wrapInArray';
