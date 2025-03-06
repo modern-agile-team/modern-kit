@@ -15,7 +15,7 @@ describe('retry', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
   });
 
-  it('지정된 retry만큼 다시 시도후 결국 실패한다면 error를 throw 해야합니다.', async () => {
+  it('지정된 count만큼 다시 시도후 결국 실패한다면 error를 throw 해야합니다.', async () => {
     const mockFn = vi.fn().mockRejectedValue(new Error('failure'));
 
     await expect(retry(mockFn, 3)).rejects.toThrow('failure');
@@ -30,7 +30,7 @@ describe('retry', () => {
       .mockResolvedValue('success');
 
     const start = Date.now();
-    const result = await retry(mockFn, { retry: 3, delay: 100 });
+    const result = await retry(mockFn, { count: 3, delay: 100 });
     const end = Date.now();
 
     expect(result).toBe('success');
@@ -45,7 +45,7 @@ describe('retry', () => {
     controller.abort();
 
     await expect(
-      retry(mockFn, { retry: 3, signal: controller.signal })
+      retry(mockFn, { count: 3, signal: controller.signal })
     ).rejects.toThrow('aborted로 인해 재시도 작업이 중단되었습니다.');
     expect(mockFn).toHaveBeenCalledTimes(0);
   });
