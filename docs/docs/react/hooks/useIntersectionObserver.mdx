@@ -32,7 +32,7 @@ interface UseIntersectionObserverProps extends IntersectionObserverInit {
 }
 ```
 ```ts title="typescript"
-const useIntersectionObserver: <T extends HTMLElement>({
+function useIntersectionObserver<T extends HTMLElement>({
   onIntersectStart,
   onIntersectEnd,
   enabled, // default: true
@@ -40,8 +40,9 @@ const useIntersectionObserver: <T extends HTMLElement>({
   root, // default: null
   threshold, // default: 0
   rootMargin, // default: '0px 0px 0px 0px'
-}: UseIntersectionObserverProps) => { 
-  ref: React.RefCallback<T> 
+}: UseIntersectionObserverProps): {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
 };
 ```
 
@@ -72,12 +73,13 @@ const Example = () => {
   return (
     <div>
       <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
+      <p>isIntersecting: {`${isIntersecting}`}</p>
+
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
-        타겟 요소<br />
-        value: {value}<br />
-        개발자 도구 콘솔을 확인해주세요.
+        <div>타겟 요소 <br/> value: {value}</div>
       </div>
+
       <div style={boxStyle} />
     </div>
   );
@@ -89,7 +91,7 @@ const Example = () => {
 export const Example = () => {
   const [value, setValue] = useState(0);
   const [enabled, setEnabled] = useState(true);
-  const { ref: targetRef } = useIntersectionObserver({
+  const { ref: targetRef, isIntersecting } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
       setValue(value + 1);
@@ -107,11 +109,13 @@ export const Example = () => {
   return (
     <div>
       <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
+      <p>isIntersecting: {`${isIntersecting}`}</p>
+
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
-        타겟 요소<br />
-        value: {value}
+        <div>타겟 요소 <br/> value: {value}</div>
       </div>
+
       <div style={boxStyle} />
     </div>
   );
