@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { noop } from '@modern-kit/utils';
 
@@ -47,9 +47,12 @@ export function useIntersectionObserver<T extends HTMLElement>({
   root = null,
   threshold = 0,
   rootMargin = '0px 0px 0px 0px',
-}: UseIntersectionObserverProps): { ref: React.RefCallback<T> } {
+}: UseIntersectionObserverProps): {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
+} {
   const calledCount = useRef(0);
-  const isVisible = useRef(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
 
   const intersectionObserverCallback = usePreservedCallback(
@@ -59,13 +62,13 @@ export function useIntersectionObserver<T extends HTMLElement>({
       const targetElement = entry.target as T;
 
       if (entry.isIntersecting) {
-        isVisible.current = true;
+        setIsIntersecting(true);
         calledCount.current += 1;
 
         onIntersectStart(entry);
-      } else if (isVisible.current) {
+      } else if (isIntersecting) {
         // 최초 mount 시에 호출을 방지하고, 타겟 요소가 viewport에서 나갈 때만 호출
-        isVisible.current = false;
+        setIsIntersecting(false);
         calledCount.current += 1;
 
         onIntersectEnd(entry);
@@ -100,5 +103,5 @@ export function useIntersectionObserver<T extends HTMLElement>({
     [enabled, threshold, root, rootMargin, intersectionObserverCallback]
   );
 
-  return { ref: targetRef };
+  return { ref: targetRef, isIntersecting };
 }

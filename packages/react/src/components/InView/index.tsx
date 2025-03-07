@@ -75,17 +75,40 @@ const IN_VIEW_ERROR_MESSAGE =
  * </InView>
  * ```
  */
+
 export const InView = polymorphicForwardRef<'div', InViewProps>(
   ({ children, as = 'div', asChild = false, ...props }, ref) => {
+    const {
+      onIntersectStart,
+      onIntersectEnd,
+      calledOnce,
+      enabled,
+      root,
+      threshold,
+      rootMargin,
+      ...restProps
+    } = props;
+
     const InViewWrapper = asChild ? Slot : as;
-    const { ref: intersectionObserverRef } = useIntersectionObserver(props);
+
+    const { ref: intersectionObserverRef } = useIntersectionObserver({
+      onIntersectStart,
+      onIntersectEnd,
+      calledOnce,
+      enabled,
+      root,
+      threshold,
+      rootMargin,
+    });
 
     if (asChild && !React.isValidElement(children)) {
       throw new Error(IN_VIEW_ERROR_MESSAGE);
     }
 
     return (
-      <InViewWrapper ref={mergeRefs(ref, intersectionObserverRef)} {...props}>
+      <InViewWrapper
+        ref={mergeRefs(ref, intersectionObserverRef)}
+        {...restProps}>
         {children}
       </InViewWrapper>
     );

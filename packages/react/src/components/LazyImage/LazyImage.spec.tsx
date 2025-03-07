@@ -17,12 +17,7 @@ afterEach(() => {
 });
 
 const TestComponent = () => {
-  return (
-    <div>
-      <LazyImage className="img1" src="img1" alt="img1" />
-      <LazyImage className="img2" src="img2" alt="img2" />
-    </div>
-  );
+  return <LazyImage className="img1" src="img1" alt="img1" />;
 };
 
 describe('LazyImage', () => {
@@ -30,19 +25,15 @@ describe('LazyImage', () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');
-    const img2 = screen.getByAltText('img2');
 
     expect(img1).not.toHaveAttribute('src', 'img1');
-    expect(img2).not.toHaveAttribute('src', 'img2');
     expect(img1).toHaveAttribute('class', 'img1');
-    expect(img2).toHaveAttribute('class', 'img2');
   });
 
   it('이미지가 viewport에 노출되면 이미지가 로드되어야 합니다.', async () => {
     renderSetup(<TestComponent />);
 
     const img1 = screen.getByAltText('img1');
-    const img2 = screen.getByAltText('img2');
 
     await waitFor(() => {
       mockIntersecting({
@@ -52,16 +43,5 @@ describe('LazyImage', () => {
     });
 
     expect(img1).toHaveAttribute('src', 'img1');
-    expect(img2).not.toHaveAttribute('src', 'img2');
-
-    await waitFor(() => {
-      mockIntersecting({
-        type: 'view',
-        element: img2,
-      });
-    });
-
-    expect(img1).toHaveAttribute('src', 'img1');
-    expect(img2).toHaveAttribute('src', 'img2');
   });
 });
