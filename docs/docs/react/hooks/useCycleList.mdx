@@ -2,7 +2,7 @@ import { useCycleList } from '@modern-kit/react';
 
 # useCycleList
 
-배열을 요소를 `순환`하며 다음(`nextIndex`), 이전(`prevIndex`) 또는 특정 인덱스로 이동(`setIndex`) 할 수 있는 기능을 제공하는 훅입니다.
+배열의 요소를 `순환`하며 다음(`nextIndex`), 이전(`prevIndex`) 또는 특정 인덱스로 이동(`setIndex`) 할 수 있는 기능을 제공하는 훅입니다.
 
 nextIndex, prevIndex, setIndex, resetIndex 호출 시 `action` 함수를 인자로 넣어 원하는 action을 실행 시킬 수 있습니다.
 
@@ -53,7 +53,7 @@ const Example = () => {
         >
           nextIndex
         </button>
-        <button onClick={() => prevIndex()}>prveIndex</button>
+        <button onClick={() => prevIndex()}>prevIndex</button>
         <button onClick={() => setIndex(2)}>setIndex(2)</button>
       </div>
     </div>

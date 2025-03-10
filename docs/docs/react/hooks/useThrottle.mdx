@@ -3,7 +3,7 @@ import { useThrottle } from '@modern-kit/react'
 
 # useThrottle
 
-`debounce`를 쉽게 사용할 수 있는 커스텀 훅입니다.
+`throttle`을 쉽게 사용할 수 있는 커스텀 훅입니다.
 
 <br />
 
@@ -49,7 +49,7 @@ const Example = () => {
       <div style={{ display: "flex" }}>
         <button onClick={countUp}>버튼 클릭</button>
         <div style={{ width: "50px" }} />
-        <button onClick={throttledCountUp}>debounce 버튼 클릭</button>
+        <button onClick={throttledCountUp}>throttle 버튼 클릭</button>
       </div>
       <div>
         <p>count: {count}</p>
@@ -76,7 +76,7 @@ export const Example = () => {
       <div style={{ display: "flex" }}>
         <button onClick={countUp}>버튼 클릭</button>
         <div style={{ width: "50px" }} />
-        <button onClick={throttledCountUp}>debounce 버튼 클릭</button>
+        <button onClick={throttledCountUp}>throttle 버튼 클릭</button>
       </div>
       <div>
         <p>count: {count}</p>
