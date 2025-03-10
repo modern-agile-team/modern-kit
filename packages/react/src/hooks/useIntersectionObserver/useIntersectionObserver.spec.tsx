@@ -29,14 +29,20 @@ const TestComponent = ({
   calledOnce,
   enabled,
 }: TestComponentProps) => {
-  const { ref: boxRef } = useIntersectionObserver<HTMLDivElement>({
-    onIntersectStart,
-    onIntersectEnd,
-    calledOnce,
-    enabled,
-  });
+  const { ref: boxRef, isIntersecting } =
+    useIntersectionObserver<HTMLDivElement>({
+      onIntersectStart,
+      onIntersectEnd,
+      calledOnce,
+      enabled,
+    });
 
-  return <div ref={boxRef}>box</div>;
+  return (
+    <>
+      <div ref={boxRef}>box</div>
+      <div>{isIntersecting ? 'true' : 'false'}</div>
+    </>
+  );
 };
 
 describe('useIntersectionObserver', () => {
@@ -58,9 +64,11 @@ describe('useIntersectionObserver', () => {
 
     await waitFor(() => mockIntersecting({ type: 'view', element: box }));
     expect(intersectStartMock).toBeCalledTimes(1);
+    expect(screen.getByText('true')).toBeInTheDocument();
 
     await waitFor(() => mockIntersecting({ type: 'hide', element: box }));
     expect(intersectEndMock).toBeCalledTimes(1);
+    expect(screen.getByText('false')).toBeInTheDocument();
   });
 
   it('calledOnce 옵션이 true일 때 콜백 함수가 한 번만 호출되어야 합니다', async () => {
