@@ -5,9 +5,9 @@ import { SwitchCase } from '@modern-kit/react';
 
 `Switch` 문을 컴포넌트 형태로 사용할 수 있는 컴포넌트입니다.
 
-`cases`에는 `key(condition):value(component)` 형태의 프로퍼티를 갖는 객체를 넘겨주고, `condition` props에 매칭되는 `value(컴포넌트)`를 렌더링합니다.
+`caseBy`에는 `key(condition):value(component)` 형태의 프로퍼티를 갖는 객체를 넘겨주고, `value` props에 매칭되는 `value(컴포넌트)`를 렌더링합니다.
 
-`cases`에 매칭되는 `condition`이 없을 때 임시로 보여줄 수 있는 `defaultCaseComponent`를 `props`로 넘겨줄 수 있습니다.
+`caseBy`에 매칭되는 `value`가 없을 때 임시로 보여줄 수 있는 `defaultComponent`를 `props`로 넘겨줄 수 있습니다.
 
 <br />
 
@@ -24,8 +24,8 @@ interface SwitchCaseProps<Case extends PropertyKey> {
 ```
 ```ts title="typescript"
 const SwitchCase: <Case extends PropertyKey>({
-  caseBy,
   value,
+  caseBy,
   defaultComponent,
 }: SwitchCaseProps<Case>) => JSX.Element;
 ```
@@ -47,8 +47,8 @@ const Example = () => {
       </div>
 
       <SwitchCase
-        condition={condition}
-        cases={{
+        value={condition}
+        caseBy={{
           1: <h3>Case No.1</h3>,
           2: <h3>Case No.2</h3>,
           3: <h3>Case No.3</h3>,
@@ -70,8 +70,8 @@ export const Example = () => {
       </div>
 
       <SwitchCase
-        condition={condition}
-        cases={{
+        value={condition}
+        caseBy={{
           1: <h3>Case No.1</h3>,
           2: <h3>Case No.2</h3>,
           3: <h3>Case No.3</h3>,
