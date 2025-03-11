@@ -1,5 +1,5 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
-import { isRegExp } from '.'; // 해당 모듈 경로를 실제 파일 경로로 변경하세요.
+import { isRegExp } from '.';
 
 describe('isRegExp', () => {
   it('RegExp 인스턴스일 경우 true를, 그렇지 않은 경우 false를 반환해야 합니다..', () => {
