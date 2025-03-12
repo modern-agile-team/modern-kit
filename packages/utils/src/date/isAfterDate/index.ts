@@ -35,7 +35,13 @@ export function isAfterDate({
   const targetDateToUse = parseDate(targetDate);
   const compareDateToUse = parseDate(compareDate);
 
+  const timezoneOffset = new Date().getTimezoneOffset();
+  const timezoneMilliseconds = timezoneOffset * 60 * 1000;
+
+  const targetDateTime = targetDateToUse.getTime() + timezoneMilliseconds;
+  const compareDateTime = compareDateToUse.getTime() + timezoneMilliseconds;
+
   return inclusive
-    ? targetDateToUse.getTime() >= compareDateToUse.getTime()
-    : targetDateToUse.getTime() > compareDateToUse.getTime();
+    ? targetDateTime >= compareDateTime
+    : targetDateTime > compareDateTime;
 }

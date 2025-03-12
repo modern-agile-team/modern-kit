@@ -9,6 +9,12 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   enabled?: boolean;
 }
 
+interface UseIntersectionObserverReturnType<T extends HTMLElement> {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
+  hasIntersected: boolean;
+}
+
 /**
  * @description `useIntersectionObserver` 훅은 주어진 타겟 요소가 뷰포트(viewport) 내에 들어오거나 나가는지 관찰하기 위한 Intersection Observer를 설정합니다.
  *
@@ -24,11 +30,14 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
  * @param {number | number[]} [params.threshold=0] - Observer가 콜백을 호출하는 임계값을 나타냅니다.
  * @param {string} [params.rootMargin='0px 0px 0px 0px'] - 루트 요소에 대한 마진을 지정합니다. 이는 뷰포트 또는 루트 요소의 경계를 확장하거나 축소하는데 사용됩니다.
  *
- * @returns {{ ref: React.RefCallback<T> }} 관찰할 타겟 요소에 전달할 ref입니다.
+ * @returns {UseIntersectionObserverReturnType<T>} ref를 포함한 isIntersecting과 hasIntersected 값을 반환합니다.
+ * - `ref`: 관찰할 타겟 요소에 전달할 ref
+ * - `isIntersecting`: 타겟 요소가 교차하는지 여부를 나타내는 boolean 값
+ * - `hasIntersected`: 타겟 요소가 최초로 교차했는지 여부를 나타내는 boolean 값
  *
  * @example
  * ```tsx
- * const targetRef = useIntersectionObserver<HTMLDivElement>({
+ * const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver<HTMLDivElement>({
  *   onIntersectStart: () => console.log('onIntersectStart'),
  *   onIntersectEnd: () => console.log('onIntersectEnd'),
  *   calledOnce: true,
@@ -47,28 +56,27 @@ export function useIntersectionObserver<T extends HTMLElement>({
   root = null,
   threshold = 0,
   rootMargin = '0px 0px 0px 0px',
-}: UseIntersectionObserverProps): {
-  ref: React.RefCallback<T>;
-  isIntersecting: boolean;
-} {
-  const calledCount = useRef(0);
+}: UseIntersectionObserverProps = {}): UseIntersectionObserverReturnType<T> {
   const [isIntersecting, setIsIntersecting] = useState(false);
+  const [hasIntersected, setHasIntersected] = useState(false);
+
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+  const calledCount = useRef(0);
 
   const intersectionObserverCallback = usePreservedCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (!entry) return;
 
       const targetElement = entry.target as T;
+      setIsIntersecting(entry.isIntersecting);
 
       if (entry.isIntersecting) {
-        setIsIntersecting(true);
         calledCount.current += 1;
 
+        setHasIntersected(true);
         onIntersectStart(entry);
       } else if (isIntersecting) {
         // 최초 mount 시에 호출을 방지하고, 타겟 요소가 viewport에서 나갈 때만 호출
-        setIsIntersecting(false);
         calledCount.current += 1;
 
         onIntersectEnd(entry);
@@ -88,7 +96,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
         intersectionObserverRef.current = null;
       }
 
-      if (node === null || !enabled) return;
+      if (node == null || !enabled) return;
 
       intersectionObserverRef.current = new IntersectionObserver(
         intersectionObserverCallback,
@@ -103,5 +111,5 @@ export function useIntersectionObserver<T extends HTMLElement>({
     [enabled, threshold, root, rootMargin, intersectionObserverCallback]
   );
 
-  return { ref: targetRef, isIntersecting };
+  return { ref: targetRef, isIntersecting, hasIntersected };
 }
