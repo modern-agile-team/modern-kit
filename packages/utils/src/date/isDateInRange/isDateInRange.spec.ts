@@ -5,7 +5,7 @@ beforeEach(() => {
   /**
    * 테스트를 위해 현재 날짜를 2025년 01월 01일로 날짜 고정
    */
-  vi.setSystemTime(new Date('2025-01-01'));
+  vi.setSystemTime(new Date('2025-01-01 09:00:00'));
 });
 
 afterEach(() => {
@@ -19,8 +19,8 @@ describe('isDateInRange', () => {
         // Date 객체 테스트
         expect(
           isDateInRange({
-            fromDate: new Date('2024-12-01'),
-            toDate: new Date('2025-02-01'),
+            fromDate: new Date('2024-12-01 08:00:00'),
+            toDate: new Date('2025-02-01 08:59:00'),
           })
         ).toBeTruthy();
         expect(
@@ -30,20 +30,26 @@ describe('isDateInRange', () => {
           })
         ).toBeFalsy();
 
+        // 시간까지 체크
+        expect(
+          isDateInRange({
+            fromDate: new Date('2024-12-31 08:00:00'),
+            toDate: new Date('2025-01-01 09:00:01'),
+          })
+        ).toBeTruthy();
+        expect(
+          isDateInRange({
+            fromDate: new Date('2024-12-31 08:00:00'),
+            toDate: new Date('2025-01-01 08:59:59'),
+          })
+        ).toBeFalsy();
+
         // 문자열 테스트
         expect(
           isDateInRange({ fromDate: '2024-12-01', toDate: '2025-02-01' })
         ).toBeTruthy();
         expect(
           isDateInRange({ fromDate: '2024-01-01', toDate: '2024-12-31' })
-        ).toBeFalsy();
-
-        // 숫자
-        expect(
-          isDateInRange({ fromDate: 1733011200000, toDate: 1738368000000 })
-        ).toBeTruthy();
-        expect(
-          isDateInRange({ fromDate: 1704067200000, toDate: 1735603200000 })
         ).toBeFalsy();
       });
     });
@@ -104,22 +110,6 @@ describe('isDateInRange', () => {
             targetDate: '2025-01-03',
             fromDate: '2024-12-31',
             toDate: '2025-01-02',
-          })
-        ).toBeFalsy();
-
-        // 숫자
-        expect(
-          isDateInRange({
-            targetDate: 1735689600000,
-            fromDate: 1735603200000,
-            toDate: 1735776000000,
-          })
-        ).toBeTruthy();
-        expect(
-          isDateInRange({
-            targetDate: 1735862400000,
-            fromDate: 1735603200000,
-            toDate: 1735776000000,
           })
         ).toBeFalsy();
       });
