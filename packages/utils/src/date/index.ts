@@ -1,3 +1,4 @@
+export * from './convertLocalTimeToUTC';
 export * from './getAge';
 export * from './getDDay';
 export * from './getUTCTime';
