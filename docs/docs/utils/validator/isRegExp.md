@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isRegExp: (value: unknown) => value is RegExp;
+function isRegExp(value: unknown): value is RegExp
 ```
 
 ## Usage 
