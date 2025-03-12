@@ -33,7 +33,7 @@ function parseDateString(date: string): string {
   const yearMonthDay = dateParts[0];
   const time = dateParts[1];
 
-  if (isValidDateFormat(yearMonthDay)) {
+  if (isValidDateFormat(yearMonthDay) && !date.includes('T')) {
     const formattedDate = yearMonthDay.replace(/[-\\.]/g, '/');
     safeDateString = time ? `${formattedDate} ${time}` : formattedDate;
   }
