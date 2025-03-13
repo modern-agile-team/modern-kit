@@ -8,7 +8,7 @@ type CallbackResult = {
 };
 
 describe('forEachRight', () => {
-  it('should call the callback for each element from right to left', () => {
+  it('callback을 오른쪽에서 왼쪽으로 각 요소에 대해 호출해야 합니다', () => {
     const callbackResults: CallbackResult[] = [];
 
     forEachRight([1, 2, 3], (value, index, array) => {
@@ -24,13 +24,13 @@ describe('forEachRight', () => {
     expect(callbackResults).toEqual(expected);
   });
 
-  it('should not modify the original array', () => {
+  it('원래 배열을 수정하지 않아야 합니다', () => {
     const originalArray = [1, 2, 3];
     forEachRight(originalArray, () => {});
     expect(originalArray).toEqual([1, 2, 3]);
   });
 
-  it('should handle empty arrays without producing results and not modify the original array', () => {
+  it('빈 배열을 처리할 때 결과를 생성하지 않고 원래 배열을 수정하지 않아야 합니다', () => {
     const emptyArray: number[] = [];
     const callbackResults: CallbackResult[] = [];
 

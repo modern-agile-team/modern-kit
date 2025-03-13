@@ -2,7 +2,7 @@ import { describe, it, expect, expectTypeOf } from 'vitest';
 import { contains } from '.';
 
 describe('contains', () => {
-  it('should return true if the array contains the element, otherwise return false.', () => {
+  it('배열에 요소가 포함되어 있으면 true를 반환하고, 그렇지 않으면 false를 반환해야 합니다.', () => {
     const arr = [0, 1, 2, 'foo', NaN, {}];
 
     expect(contains(arr, 1)).toBeTruthy();
@@ -15,7 +15,7 @@ describe('contains', () => {
     expect(contains(arr, '2')).toBeFalsy();
   });
 
-  it('should determine inclusion based on the result of the comparator function if provided.', () => {
+  it('제공된 경우 비교기 함수의 결과를 기준으로 포함 여부를 결정해야 합니다.', () => {
     const arr = [{ a: 1, b: 2 }];
 
     expect(contains(arr, { a: 1, c: 2 }, (x, y) => x.a === y.a)).toBeTruthy();
@@ -28,7 +28,7 @@ describe('contains', () => {
     ).toBeTruthy();
   });
 
-  it('should perform type narrowing with conditional expressions.', () => {
+  it('조건부 표현식으로 타입 좁히기를 수행해야 합니다.', () => {
     const arr = [2, 3, 'foo'] as const;
     const value = 'foo' as unknown;
 
