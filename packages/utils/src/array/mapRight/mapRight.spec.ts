@@ -9,7 +9,7 @@ type CallbackResult<T, U> = {
 };
 
 describe('mapRight', () => {
-  it('should map values from right to left in an array', () => {
+  it('배열에서 오른쪽에서 왼쪽으로 값을 매핑해야 합니다', () => {
     const arr = [1, 2, 3];
     const callbackResults: CallbackResult<number, number>[] = [];
     const result = mapRight(arr, (value, index = 0, array = []) => {
@@ -28,7 +28,7 @@ describe('mapRight', () => {
     expect(result).toEqual(expectedMappedArray);
   });
 
-  it('should handle empty arrays correctly', () => {
+  it('빈 배열을 올바르게 처리해야 합니다', () => {
     const emptyArray: number[] = [];
     const callbackResults: CallbackResult<number, number>[] = [];
     const result = mapRight(emptyArray, (value, index = 0, array = []) => {
@@ -40,7 +40,7 @@ describe('mapRight', () => {
     expect(result).toEqual([]);
   });
 
-  it('should handle arrays with one element correctly', () => {
+  it('요소가 하나인 배열을 올바르게 처리해야 합니다', () => {
     const arr = [1];
     const callbackResults: CallbackResult<number, number>[] = [];
     const result = mapRight(arr, (value, index = 0, array = []) => {

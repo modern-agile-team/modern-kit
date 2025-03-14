@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest';
 import { shuffle } from '.';
 
 describe('shuffle', () => {
-  it('should shuffle an array of numbers', () => {
+  it('숫자 배열을 섞어야 합니다', () => {
     const arr = [1, 2, 3, 4, 5];
 
     expect(shuffle(arr).slice().sort()).toEqual(arr.slice().sort());
   });
 
-  it('should not modify the original array', () => {
+  it('원래 배열을 수정하지 않아야 합니다', () => {
     const arr = [1, 2, 3, 4, 5];
     const copiedArr = arr.slice();
 
