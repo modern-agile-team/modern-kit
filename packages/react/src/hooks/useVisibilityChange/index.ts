@@ -1,5 +1,5 @@
 import { noop } from '@modern-kit/utils';
-import { useEventListener } from '../../hooks/useEventListener';
+import { useEventListener } from '../useEventListener';
 import { useCallback } from 'react';
 
 type VisibilityChangeCallbackAction = (
