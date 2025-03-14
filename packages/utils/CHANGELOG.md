@@ -1,5 +1,45 @@
 # @modern-kit/utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [#765](https://github.com/modern-agile-team/modern-kit/pull/765) [`cd2baa4`](https://github.com/modern-agile-team/modern-kit/commit/cd2baa44c00411e1d77174ed1592f6fbb3ee6bad) Thanks [@rhehfl](https://github.com/rhehfl)! - feat(utils): isSet 함수 추가 - @rhehfl
+
+- [#785](https://github.com/modern-agile-team/modern-kit/pull/785) [`68157fc`](https://github.com/modern-agile-team/modern-kit/commit/68157fca11ded81e33cc45d6364548f88f8f75c5) Thanks [@rhehfl](https://github.com/rhehfl)! - feat(utils): isRegExp 함수 추가 - @rhehfl
+
+- [#747](https://github.com/modern-agile-team/modern-kit/pull/747) [`17d1b3c`](https://github.com/modern-agile-team/modern-kit/commit/17d1b3ca1f55d590afffb18ced43cc10f4538094) Thanks [@YeonnJ](https://github.com/YeonnJ)! - feat(utils): trimStart 신규 함수 추가 - @YeonnJ
+
+- [#774](https://github.com/modern-agile-team/modern-kit/pull/774) [`7a65987`](https://github.com/modern-agile-team/modern-kit/commit/7a659870959bfa9e55d41cb687524b43bccd1e69) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): invariant 신규 함수 추가 - @ssi02014
+
+- [#761](https://github.com/modern-agile-team/modern-kit/pull/761) [`0f8ad19`](https://github.com/modern-agile-team/modern-kit/commit/0f8ad195bdf305d309b04e131eac3bfb703a2b36) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): parseDate 신규 유틸 함수 추가 - @ssi02014
+
+- [#748](https://github.com/modern-agile-team/modern-kit/pull/748) [`e0bd3ee`](https://github.com/modern-agile-team/modern-kit/commit/e0bd3ee8498c6e826f7d50b89d31bdc157dce8a9) Thanks [@GNOSss](https://github.com/GNOSss)! - feat(utils): isBirthDate 함수 추가 - @GNOSss
+
+- [#749](https://github.com/modern-agile-team/modern-kit/pull/749) [`66972c2`](https://github.com/modern-agile-team/modern-kit/commit/66972c2127e8d600b8e48e7958d82e1a4eaaf838) Thanks [@dngur9801](https://github.com/dngur9801)! - feat(utils): isAlphanumeric 함수 추가 - @dngur9801
+
+- [#718](https://github.com/modern-agile-team/modern-kit/pull/718) [`87238a3`](https://github.com/modern-agile-team/modern-kit/commit/87238a36ced9566c972852d609e6377c0b34efe7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isBlob 함수 추가 - @ssi02014
+
+- [#766](https://github.com/modern-agile-team/modern-kit/pull/766) [`e852048`](https://github.com/modern-agile-team/modern-kit/commit/e85204831039d6f6866f16379a5a88ae86c0852f) Thanks [@dngur9801](https://github.com/dngur9801)! - feat(utils): zip 함수 추가 - @dngur9801
+
+- [#762](https://github.com/modern-agile-team/modern-kit/pull/762) [`a33b43b`](https://github.com/modern-agile-team/modern-kit/commit/a33b43b8f5cf7503d0d97aec1fe02ddcc26686e4) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): trim 신규 유틸 함수 추가 - @ssi02014
+
+- [#746](https://github.com/modern-agile-team/modern-kit/pull/746) [`8d1a383`](https://github.com/modern-agile-team/modern-kit/commit/8d1a383073f66ffb08a130132c2a6a25486e6823) Thanks [@Gaic4o](https://github.com/Gaic4o)! - feat(utils) random, randomInt 함수 추가 - @Gaic4o
+
+- [#751](https://github.com/modern-agile-team/modern-kit/pull/751) [`346c9e9`](https://github.com/modern-agile-team/modern-kit/commit/346c9e950f7279146862feeb6aaf0e735777014a) Thanks [@YeonnJ](https://github.com/YeonnJ)! - feat(utils) trimEnd 함수 추가 - @YeonnJ
+
+- [#706](https://github.com/modern-agile-team/modern-kit/pull/706) [`7574f89`](https://github.com/modern-agile-team/modern-kit/commit/7574f894e7cbad5fe2bc0bab634dbd41ced73d68) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: update react/utils build setting - @ssi02014
+
+- [#775](https://github.com/modern-agile-team/modern-kit/pull/775) [`a762a44`](https://github.com/modern-agile-team/modern-kit/commit/a762a447ac4e619ac36fc7ad6aa0530b6cfbf1ec) Thanks [@dngur9801](https://github.com/dngur9801)! - feat(utils): retry 함수 추가 - @dngur9801
+
+- [#772](https://github.com/modern-agile-team/modern-kit/pull/772) [`04279f0`](https://github.com/modern-agile-team/modern-kit/commit/04279f090ab2c1a2a85b0e73c2198949a686de65) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): removeLetters 추가 - @ssi02014
+
+- [#788](https://github.com/modern-agile-team/modern-kit/pull/788) [`1fdc1fe`](https://github.com/modern-agile-team/modern-kit/commit/1fdc1fe0cdeb06c0a8c2f704040d71a724ab1e4b) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(utils): isMap 유틸 함수 추가
+
+### Patch Changes
+
+- [#735](https://github.com/modern-agile-team/modern-kit/pull/735) [`9390892`](https://github.com/modern-agile-team/modern-kit/commit/939089263d2ecd1046d816a9f83c0d25968571a8) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithCommas, isDateInRange iOS Safari 대응 - @ssi02014
+
 ## 2.0.0
 
 ### Major Changes
