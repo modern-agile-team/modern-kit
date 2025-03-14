@@ -1,5 +1,8 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { ScrollToElementOptions, getRelativePosition } from './internal';
+import React, { useCallback, useEffect, useRef } from 'react';
+import {
+  ScrollToElementOptions,
+  getRelativePosition,
+} from './useScrollTo.utils';
 
 /**
  * @description 스크롤 기능을 제공하는 커스텀 훅입니다.

@@ -30,6 +30,12 @@ interface UseIntersectionObserverProps extends IntersectionObserverInit {
   calledOnce?: boolean;
   enabled?: boolean;
 }
+
+interface UseIntersectionObserverReturnType<T extends HTMLElement> {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
+  hasIntersected: boolean;
+}
 ```
 ```ts title="typescript"
 function useIntersectionObserver<T extends HTMLElement>({
@@ -40,10 +46,7 @@ function useIntersectionObserver<T extends HTMLElement>({
   root, // default: null
   threshold, // default: 0
   rootMargin, // default: '0px 0px 0px 0px'
-}: UseIntersectionObserverProps): {
-  ref: React.RefCallback<T>;
-  isIntersecting: boolean;
-};
+  }: UseIntersectionObserverProps = {}): UseIntersectionObserverReturnType<T>;
 ```
 
 ## Usage
@@ -53,7 +56,8 @@ import { useIntersectionObserver } from '@modern-kit/react';
 const Example = () => {
   const [value, setValue] = useState(0);
   const [enabled, setEnabled] = useState(true);
-  const { ref: targetRef } = useIntersectionObserver({
+  
+  const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
       setValue(value + 1);
@@ -74,6 +78,7 @@ const Example = () => {
     <div>
       <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
       <p>isIntersecting: {`${isIntersecting}`}</p>
+      <p>hasIntersected: {`${hasIntersected}`}</p>
 
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
@@ -91,7 +96,7 @@ const Example = () => {
 export const Example = () => {
   const [value, setValue] = useState(0);
   const [enabled, setEnabled] = useState(true);
-  const { ref: targetRef, isIntersecting } = useIntersectionObserver({
+  const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver({
     onIntersectStart: (entry) => {
       console.log("onIntersectStart: ", entry);
       setValue(value + 1);
@@ -110,6 +115,7 @@ export const Example = () => {
     <div>
       <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
       <p>isIntersecting: {`${isIntersecting}`}</p>
+      <p>hasIntersected: {`${hasIntersected}`}</p>
 
       <div style={boxStyle} />
       <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
