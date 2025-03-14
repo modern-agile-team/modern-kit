@@ -3,7 +3,7 @@ import { usePreservedCallback } from '../usePreservedCallback';
 import { RefObject, useCallback, useRef, useState } from 'react';
 
 /**
- * @description 드래그 앤 드롭으로 파일을 업로드할 수 있는 영역을 생성하는 커스텀 훅입니다.
+ * @description `드래그 앤 드롭 이벤트`를 처리하여 `파일`을 수신할 수 있는 영역을 생성하는 커스텀 훅입니다.
  *
  * @template T - HTML 엘리먼트 타입을 지정합니다.
  * @param {(files: File[]) => void} onDrop - 파일이 드롭되었을 때 호출되는 콜백 함수입니다.
