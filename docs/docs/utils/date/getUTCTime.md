@@ -1,4 +1,4 @@
-# getAge
+# getUTCTime
 
 로컬 시간을 `UTC` 시간으로 변환합니다.
 
@@ -13,17 +13,17 @@ new Date('2025-01-01 09:30:15').getTime(); // 인도(뉴델리): 1735691415000
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getAge/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getUTCTime/index.ts)
 
 ## Interface
 ```ts title="typescript"
-function getAge(birthDate: string | number | Date): number
+function getUTCTime(birthDate: string | number | Date): number
 ```
 
 ## Usage
 
 ```ts title="typescript"
-import { getAge } from '@modern-kit/utils';
+import { getUTCTime } from '@modern-kit/utils';
 
 // 한국(서울) 기준
 const kstDate = new Date('2025-01-01 09:30:15');
