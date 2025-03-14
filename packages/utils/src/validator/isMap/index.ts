@@ -1,8 +1,8 @@
 /**
- * @description 주어진 값이 `Map` 타입인지 확인합니다. `Map` 타입이 맞다면 인자의 타입은 `Map<any, any>`로 타입을 좁혀줍니다.
+ * @description 주어진 값이 `Map` 타입인지 확인합니다. 타입 체크 및 인자의 타입을 `Map`으로 좁히는 데 유용합니다.
  *
  * @param {unknown} value - `Map`인지 확인할 값.
- * @returns {value is Map<any, any>} - 값이 `Map<any, any>`이면 `true`, 그렇지 않으면 `false`를 반환합니다.
+ * @returns {value is Map<any, any>} - 값이 `Map`인 경우 `true`, 그렇지 않으면 `false`를 반환합니다.
  *
  * @example
  * const maybeMap = new Map([['hello', 5], ['world', 5]]);
