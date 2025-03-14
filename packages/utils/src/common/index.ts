@@ -7,6 +7,7 @@ export * from './getUniqTime';
 export * from './getViewportSize';
 export * from './hexToRgba';
 export * from './identity';
+export * from './invariant';
 export * from './noop';
 export * from './once';
 export * from './parseJSON';
