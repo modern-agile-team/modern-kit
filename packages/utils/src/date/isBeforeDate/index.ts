@@ -1,4 +1,3 @@
-import { convertLocalTimeToUTC } from '../convertLocalTimeToUTC';
 import { parseDate } from '../parseDate';
 
 interface IsBeforeDateParams {
