@@ -1,5 +1,5 @@
 import { describe, it, expect, expectTypeOf } from 'vitest';
-import { isMap as isMap } from '.';
+import { isMap } from '.';
 
 describe('isMap', () => {
   it('Map인 경우 true를, 그렇지 않은 경우 false를 반환해야 합니다.', () => {
