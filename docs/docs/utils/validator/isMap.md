@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-function isMap<K, V>(value: unknown): value is Map<K, V>
+function isMap(value: unknown): value is Map<any, any>
 ```
 
 ## Usage
