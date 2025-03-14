@@ -32,10 +32,10 @@ export function isBeforeDate({
   compareDate = new Date(),
   inclusive = false,
 }: IsBeforeDateParams): boolean {
-  const targetDateToUse = parseDate(targetDate);
-  const compareDateToUse = parseDate(compareDate);
+  const targetDateTime = parseDate(targetDate).getTime();
+  const compareDateTime = parseDate(compareDate).getTime();
 
   return inclusive
-    ? targetDateToUse.getTime() <= compareDateToUse.getTime()
-    : targetDateToUse.getTime() < compareDateToUse.getTime();
+    ? targetDateTime <= compareDateTime
+    : targetDateTime < compareDateTime;
 }
