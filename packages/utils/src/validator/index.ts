@@ -25,3 +25,4 @@ export * from './isValidPhoneNumber';
 export * from './isWindow';
 export * from './isSet';
 export * from './isRegExp';
+export * from "./isMap";
