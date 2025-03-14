@@ -1,0 +1,95 @@
+import { useDropZone } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useDropZone
+
+`드래그 앤 드롭 이벤트`를 처리하여 `파일`을 수신할 수 있는 영역을 생성하는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDropZone/index.ts)
+
+## Interface
+```ts title="typescript"
+const useDropZone: <T extends HTMLElement>(onDrop: (files: File[]) => void) => {
+  ref: React.RefObject<T>;
+  isDragOver: boolean;
+}
+```
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDropZone } from '@modern-kit/react';
+
+const Example = () => {
+  const [fileNameList, setFileNameList] = useState<string[]>([]);
+
+  const { ref, isDragOver } = useDropZone((files) => {
+    console.log('files', files);
+    setFileNameList(files.map((file) => file.name));
+  });
+
+  const wrapperStyle = {
+    width: '400px',
+    height: '200px',
+    border: '1px solid #000',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+  return (
+    <div>
+      <div ref={ref} style={wrapperStyle}>
+        <p>DropZone</p>
+        <p>isDragOver: {`${isDragOver}`}</p>
+      </div>
+      <ul>
+        {fileNameList.map((fileName, index) => (
+          <li key={`${fileName}-${index}`}>{fileName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [fileNameList, setFileNameList] = useState([]);
+
+  const { ref, isDragOver } = useDropZone((files) => {
+    console.log('files', files);
+    setFileNameList(files.map((file) => file.name));
+  });
+
+  const wrapperStyle = {
+    width: '400px',
+    height: '200px',
+    border: '1px solid #000',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+  return (
+    <div>
+      <div ref={ref} style={wrapperStyle}>
+        <p>DropZone</p>
+        <p>isDragOver: {`${isDragOver}`}</p>
+      </div>
+      <ul>
+        {fileNameList.map((fileName, index) => (
+          <li key={`${fileName}-${index}`}>{fileName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+<Example />

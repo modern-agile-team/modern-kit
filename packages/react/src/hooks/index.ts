@@ -12,6 +12,7 @@ export * from './useDebouncedInputValue';
 export * from './useDebouncedState';
 export * from './useDidUpdate';
 export * from './useDocumentTitle';
+export * from './useDropZone';
 export * from './useEventListener';
 export * from './useFileReader';
 export * from './useFocus';
