@@ -78,18 +78,11 @@ export function isDateInRange({
     const inclusiveToUse =
       inclusive === 'both' ||
       (isFrom ? inclusive === 'from' : inclusive === 'to');
+    const compareFunc = isFrom ? isAfterDate : isBeforeDate;
 
-    // inclusive 옵션에 따라 날짜 범위 비교
-    if (isFrom) {
-      return isAfterDate({
-        targetDate: targetDate,
-        compareDate: date, // fromDate
-        inclusive: inclusiveToUse,
-      });
-    }
-    return isBeforeDate({
-      targetDate: targetDate,
-      compareDate: date, // toDate
+    return compareFunc({
+      targetDate,
+      compareDate: date,
       inclusive: inclusiveToUse,
     });
   };

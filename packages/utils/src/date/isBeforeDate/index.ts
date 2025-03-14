@@ -1,4 +1,3 @@
-import { convertLocalTimeToUTC } from '../convertLocalTimeToUTC';
 import { parseDate } from '../parseDate';
 
 interface IsBeforeDateParams {
@@ -33,8 +32,8 @@ export function isBeforeDate({
   compareDate = new Date(),
   inclusive = false,
 }: IsBeforeDateParams): boolean {
-  const targetDateTime = convertLocalTimeToUTC(parseDate(targetDate));
-  const compareDateTime = convertLocalTimeToUTC(parseDate(compareDate));
+  const targetDateTime = parseDate(targetDate).getTime();
+  const compareDateTime = parseDate(compareDate).getTime();
 
   return inclusive
     ? targetDateTime <= compareDateTime

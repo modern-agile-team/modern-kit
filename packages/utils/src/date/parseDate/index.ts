@@ -1,6 +1,6 @@
 const isValidDateFormat = (dateString: string): boolean => {
   const regex =
-    /^\d{4}[-](?:\d{2})[-](?:\d{2})$|^\d{4}[.](?:\d{2})[.](?:\d{2})$|^\d{4}[\/](?:\d{2})[\/](?:\d{2})$/;
+    /^\d{4}[-](?:\d{2})[-](?:\d{2})$|^\d{4}[.](?:\d{2})[.](?:\d{2})$/;
   return regex.test(dateString);
 };
 
@@ -27,13 +27,13 @@ const isValidDateFormat = (dateString: string): boolean => {
  * parseDateString('01/01/2025'); // "01/01/2025" 그대로 반환
  */
 function parseDateString(date: string): string {
-  const dateParts = date.split(/[\sT]/);
+  const dateParts = date.split(/\s/);
   let safeDateString = date;
 
   const yearMonthDay = dateParts[0];
   const time = dateParts[1];
 
-  if (isValidDateFormat(yearMonthDay) && !date.includes('T')) {
+  if (isValidDateFormat(yearMonthDay)) {
     const formattedDate = yearMonthDay.replace(/[-\\.]/g, '/');
     safeDateString = time ? `${formattedDate} ${time}` : formattedDate;
   }
