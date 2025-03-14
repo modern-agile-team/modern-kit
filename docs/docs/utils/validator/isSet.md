@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-function isSet<T>(value: unknown): value is Set<T>
+function isSet(value: unknown): value is Set<any>
 ```
 
 ## Usage
