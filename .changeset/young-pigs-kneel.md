@@ -1,5 +1,4 @@
 ---
-"@modern-kit/docs": patch
 "@modern-kit/utils": minor
 ---
 
