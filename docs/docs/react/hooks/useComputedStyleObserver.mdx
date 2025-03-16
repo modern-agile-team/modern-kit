@@ -1,0 +1,78 @@
+import { useComputedStyleObserver } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useComputedStyleObserver
+
+관찰할 타겟 요소의 특정 `computed style` 값을 `실시간으로 관찰하고 관리`하는 React 훅
+
+- **[MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)** 를 사용하여 요소의 스타일 속성이 변경될 때 콜백을 호출합니다.
+- **[CSSStyleDeclaration: setProperty](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty)** 를 사용하여 요소의 스타일 속성을 직접 변경하더라도 이를 실시간으로 반영합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useComputedStyleObserver/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseComputedStyleObserverReturnType<T extends HTMLElement> {
+  ref: React.RefObject<T>;
+  value: string;
+  setValue: (value: string) => void;
+}
+```
+```ts title="typescript"
+function useComputedStyleObserver<T extends HTMLElement>(
+  key: string
+): UseComputedStyleObserverReturnType<T>;
+```
+
+## Usage
+```tsx title="typescript"
+import { useComputedStyleObserver } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, value, setValue } =
+    useComputedStyleObserver<HTMLDivElement>('color');
+
+  return (
+    <>
+      <div ref={ref} style={{ width: '100px', height: '100px', backgroundColor: 'skyblue' }} />
+      <div>
+        <p>현재 너비: {`${value}`}</p>
+        <button onClick={() => setValue('100px')}>너비 100px로 변경(setValue)</button>
+        <button onClick={() => setValue('300px')}>너비 300px로 변경(setValue)</button>
+
+        <br />
+
+        <button onClick={() => ref.current?.style.setProperty('width', '100px')}>너비 100px로 변경(setProperty)</button>
+        <button onClick={() => ref.current?.style.setProperty('width', '300px')}>너비 300px로 변경(setProperty)</button>
+      </div>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { ref, value, setValue } = useComputedStyleObserver('width');
+
+  return (
+    <>
+      <div ref={ref} style={{ width: '100px', height: '100px', backgroundColor: 'skyblue' }} />
+      <div>
+        <p>현재 너비: {`${value}`}</p>
+        <button onClick={() => setValue('100px')}>너비 100px로 변경(setValue)</button>
+        <button onClick={() => setValue('300px')}>너비 300px로 변경(setValue)</button>
+
+        <br />
+
+        <button onClick={() => ref.current?.style.setProperty('width', '100px')}>너비 100px로 변경(setProperty)</button>
+        <button onClick={() => ref.current?.style.setProperty('width', '300px')}>너비 300px로 변경(setProperty)</button>
+      </div>
+    </>
+  );
+};
+
+<Example />
