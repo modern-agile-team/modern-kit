@@ -1,5 +1,31 @@
 # @modern-kit/react
 
+## 2.1.0
+
+### Minor Changes
+
+- [#716](https://github.com/modern-agile-team/modern-kit/pull/716) [`1718064`](https://github.com/modern-agile-team/modern-kit/commit/1718064cc42618bc02338128e61f5dbdaa3eceb0) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): Delay 컴포넌트 추가 - @ssi02014
+
+- [#738](https://github.com/modern-agile-team/modern-kit/pull/738) [`3cb3572`](https://github.com/modern-agile-team/modern-kit/commit/3cb35727b679ba8528a4e4e559583c83d088b2e8) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useArrayState 신규 훅 추가 - @ssi02014
+
+- [#792](https://github.com/modern-agile-team/modern-kit/pull/792) [`cded639`](https://github.com/modern-agile-team/modern-kit/commit/cded639827fe4cfce22b62ea0319e308bc407e92) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useComputedStyleObserver 신규 훅 추가 - @ssi02014
+
+- [#790](https://github.com/modern-agile-team/modern-kit/pull/790) [`2bd2da3`](https://github.com/modern-agile-team/modern-kit/commit/2bd2da3b9883d1ea863970454c6082af5c2e27fb) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useDropZone 신규 훅 추가 - @ssi02014
+
+- [#743](https://github.com/modern-agile-team/modern-kit/pull/743) [`078ffae`](https://github.com/modern-agile-team/modern-kit/commit/078ffaeb25721311202121c99010d9f3fc4e879b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): remove useUserAgent - @ssi02014
+
+- [#759](https://github.com/modern-agile-team/modern-kit/pull/759) [`47d489e`](https://github.com/modern-agile-team/modern-kit/commit/47d489e5c180607b1403b8a4d4807535ef45dc0d) Thanks [@dngur9801](https://github.com/dngur9801)! - feat(react): useDidUpdate 신규 훅 추가 - @dngur9801
+
+- [#764](https://github.com/modern-agile-team/modern-kit/pull/764) [`77f5fbc`](https://github.com/modern-agile-team/modern-kit/commit/77f5fbc2287ea96ee470595a3b9f46f4edffa19a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): EventExtender 신규 컴포넌트 추가 - @ssi02014
+
+- [#706](https://github.com/modern-agile-team/modern-kit/pull/706) [`7574f89`](https://github.com/modern-agile-team/modern-kit/commit/7574f894e7cbad5fe2bc0bab634dbd41ced73d68) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: update react/utils build setting - @ssi02014
+
+### Patch Changes
+
+- [#710](https://github.com/modern-agile-team/modern-kit/pull/710) [`2ab42b6`](https://github.com/modern-agile-team/modern-kit/commit/2ab42b6e6bfb5ec90948100aa5c084cbfc1d2ea3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): ClientGate, IfElse, When, Mounted 인터페이스 개선 - @ssi02014
+
+- [#777](https://github.com/modern-agile-team/modern-kit/pull/777) [`d5a833b`](https://github.com/modern-agile-team/modern-kit/commit/d5a833b546762117b9a68dcc26b2702e24d14ed3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useIntersectionObserver isIntersecting prop 추가 - @ssi02014
+
 ## 2.0.0
 
 ### Major Changes
