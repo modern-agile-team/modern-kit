@@ -60,7 +60,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [hasIntersected, setHasIntersected] = useState(false);
 
-  const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const calledCount = useRef(0);
 
   const intersectionObserverCallback = usePreservedCallback(
@@ -91,14 +91,14 @@ export function useIntersectionObserver<T extends HTMLElement>({
   const targetRef = useCallback(
     (node: T) => {
       // 기존 observer가 활성화된 상태에서 새로운 요소를 관찰하기 전에 기존 observer 관찰 중지하며, 메모리 누수를 방지
-      if (intersectionObserverRef.current) {
-        intersectionObserverRef.current.disconnect();
-        intersectionObserverRef.current = null;
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
       }
 
       if (node == null || !enabled) return;
 
-      intersectionObserverRef.current = new IntersectionObserver(
+      observerRef.current = new IntersectionObserver(
         intersectionObserverCallback,
         {
           threshold,
@@ -106,7 +106,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
           rootMargin,
         }
       );
-      intersectionObserverRef.current.observe(node);
+      observerRef.current.observe(node);
     },
     [enabled, threshold, root, rootMargin, intersectionObserverCallback]
   );
