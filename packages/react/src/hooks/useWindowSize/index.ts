@@ -56,7 +56,11 @@ export function useWindowSize({
     });
   }, [debounceWait, debouncedResize]);
 
-  useEventListener(window, 'resize', handleResize);
+  useEventListener(
+    typeof window !== 'undefined' ? window : null,
+    'resize',
+    handleResize
+  );
 
   return windowSize;
 }

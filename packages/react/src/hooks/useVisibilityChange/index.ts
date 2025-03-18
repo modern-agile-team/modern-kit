@@ -26,5 +26,9 @@ export function useVisibilityChange({
     [onShow, onHide]
   );
 
-  useEventListener(document, 'visibilitychange', handleVisibilityChange);
+  useEventListener(
+    typeof document !== 'undefined' ? document : null,
+    'visibilitychange',
+    handleVisibilityChange
+  );
 }

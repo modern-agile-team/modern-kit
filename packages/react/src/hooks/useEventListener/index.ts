@@ -21,8 +21,6 @@ import {
  *
  * @example
  * useEventListener(window, 'click', callback);
- * useEventListener(window, 'click', callback, options);
- * useEventListener(window, 'click', callback, true); // 캡처링 설정
  *
  * @example
  * // SSR 환경
@@ -51,8 +49,6 @@ export function useEventListener<K extends keyof WindowEventMap>(
  * @example
  * // document
  * useEventListener(document, 'click', callback);
- * useEventListener(document, 'click', callback, options);
- * useEventListener(document, 'click', callback, true); // 캡처링 설정
  *
  * @example
  * // SSR 환경
@@ -106,6 +102,7 @@ export function useEventListener<K extends keyof MediaQueryListEventMap>(
  * - useCapture는 이벤트 전파 단계를 결정하는 값으로, `true`일 경우 `캡처링` 단계에서, `false`일 경우 `버블링` 단계에서 이벤트가 처리됩니다. 기본값은 `false`입니다.
  *
  * @returns {void}
+ *
  * @example
  * // element
  * const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -134,6 +131,7 @@ export function useEventListener<
  * - useCapture는 이벤트 전파 단계를 결정하는 값으로, `true`일 경우 `캡처링` 단계에서, `false`일 경우 `버블링` 단계에서 이벤트가 처리됩니다. 기본값은 `false`입니다.
  *
  * @returns {void}
+ *
  * @example
  * // element
  * const svgIconRef = useRef<SVGSVGElement | null>(null);
@@ -179,8 +177,6 @@ export function useEventListener<
  * @example
  * // window 타겟 및 options/useCapture 사용 예제
  * useEventListener(window, 'resize', callback);
- * useEventListener(window, 'resize', callback, options);
- * useEventListener(window, 'resize', callback, true); // 캡처링 설정
  *
  * @example
  * // SSR 환경에서 사용 예제

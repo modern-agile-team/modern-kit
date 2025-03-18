@@ -79,7 +79,11 @@ export function useOutsidePointerDown<T extends HTMLElement>(
     }
   };
 
-  useEventListener(document, eventType, handleOutsidePointerDown);
+  useEventListener(
+    typeof document !== 'undefined' ? document : null,
+    eventType,
+    handleOutsidePointerDown
+  );
 
   return targetRef;
 }
