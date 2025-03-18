@@ -20,7 +20,7 @@
  */
 export function flatten<T, D extends number = 1>(
   arr: T[] | readonly T[],
-  depth = 1 as D
+  depth: D = 1 as D
 ): FlatArray<T[], D>[] {
   const result: FlatArray<T[], D>[] = [];
   const flooredDepth = Math.floor(depth);

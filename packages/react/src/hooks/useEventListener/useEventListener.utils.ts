@@ -22,7 +22,7 @@ export type TargetElement<T extends EventListenerAvailableElement> =
  * @description 주어진 요소가 `RefObject`인지 확인합니다.
  */
 export const isRefObject = <T extends EventListenerAvailableElement>(
-  element: TargetElement<T>
+  element: TargetElement<T> | null
 ): element is RefObject<T | null | undefined> => {
   if (!element) return false;
   return hasProperty(element, 'current');

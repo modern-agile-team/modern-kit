@@ -14,5 +14,9 @@
  * isWindow(0); // false
  */
 export function isWindow(element: unknown): element is Window {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   return element === window;
 }

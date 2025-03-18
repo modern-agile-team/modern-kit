@@ -9,6 +9,26 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/sum/index.ts)
 
+## Benchmark
+- `hz`: 초당 작업 수
+- `mean`: 평균 응답 시간(ms)
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/sum|21,825,119.56|0.0000|`fastest`|
+|lodash/sum|7,861,063.97|0.0001|-|
+
+- **modern-kit/sum**
+  - `2.78x` faster than lodash/sum
+
+|이름|hz|mean|성능|
+|------|---|---|---|
+|modern-kit/sum with iteratee|15,978,576.34|0.0001|`fastest`|
+|lodash/sumBy|4,471,676.86|0.0002|-|
+
+- **modern-kit/sum with iteratee**
+  - `3.57x` faster than lodash/sumBy
+
 ## Interface
 ```ts title="typescript"
 // 함수 오버로딩
