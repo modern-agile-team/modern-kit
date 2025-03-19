@@ -25,47 +25,47 @@ type TargetElement<T extends EventListenerAvailableElement> =
   | RefObject<T | null | undefined>;
 ```
 ```ts title="typescript"
-// Window Event based useEventListener interface
+// Window 이벤트 기반 useEventListener 인터페이스
 function useEventListener<K extends keyof WindowEventMap>(
-  element: Window,
+  element: Window | null,
   type: K,
   listener: (event: WindowEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
 ): void;
 
-// Document Event based useEventListener interface
+// Document 이벤트 기반 useEventListener 인터페이스
 function useEventListener<K extends keyof DocumentEventMap>(
-  element: Document,
+  element: Document | null,
   type: K,
   listener: (event: DocumentEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
 ): void;
 
-// MediaQueryList Event based useEventListener interface
+// MediaQueryList 이벤트 기반 useEventListener 인터페이스
 function useEventListener<K extends keyof MediaQueryListEventMap>(
-  element: MediaQueryList,
+  element: MediaQueryList | null,
   type: K,
   listener: (event: MediaQueryListEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
 ): void;
 
-// Element Event based useEventListener interface
+// Element 이벤트 기반 useEventListener 인터페이스
 function useEventListener<
   K extends keyof HTMLElementEventMap,
   T extends HTMLElement
 >(
-  element: TargetElement<T>,
+  element: TargetElement<T> | null,
   type: K,
   listener: (event: HTMLElementEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
 ): void;
 
-// SVGElement Event based useEventListener interface
+// SVGElement 이벤트 기반 useEventListener 인터페이스
 function useEventListener<
   K extends keyof SVGElementEventMap,
   T extends SVGElement
 >(
-  element: TargetElement<T>,
+  element: TargetElement<T> | null,
   type: K,
   listener: (event: SVGElementEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
@@ -96,6 +96,12 @@ const Example = () => {
     </div>
   );
 };
+```
+### SSR 환경에서 사용
+```tsx title="typescript"
+useEventListener(typeof window !== 'undefined' ? window : null, 'click', () => {
+  console.log(number);
+})
 ```
 
 ## Example
