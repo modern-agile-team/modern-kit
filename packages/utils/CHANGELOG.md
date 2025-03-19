@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.1.1
+
+### Patch Changes
+
+- [#795](https://github.com/modern-agile-team/modern-kit/pull/795) [`f990cc2`](https://github.com/modern-agile-team/modern-kit/commit/f990cc209c74701e6ec17f187efd3986c71029af) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): flat, range, isReference 타입 개선 - @ssi02014
+
 ## 2.1.0
 
 ### Minor Changes
