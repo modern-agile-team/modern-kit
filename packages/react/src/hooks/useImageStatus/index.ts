@@ -1,9 +1,9 @@
-import { RefCallback, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 type ImageStatus = 'pending' | 'loading' | 'complete' | 'error';
 
 interface UseImageStatusReturnType {
-  ref: RefCallback<HTMLImageElement>;
+  ref: React.RefCallback<HTMLImageElement>;
   imageStatus: ImageStatus;
 }
 

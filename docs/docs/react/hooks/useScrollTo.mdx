@@ -31,6 +31,7 @@ const { containerRef } = useScrollTo<HTMLDivElement>();
 ## Interface
 ```ts title="typescript"
 type ScrollBehavior = "auto" | "instant" | "smooth";
+
 type Align = 'start' | 'center' | 'end';
 
 interface ScrollOptions {
@@ -49,26 +50,18 @@ interface ScrollToElementOptions {
   alignY?: Align; // default: 'start'
   alignX?: Align; // default: 'start'
 }
-```
-```ts title="typescript"
-// 함수 오버로딩
-function useScrollTo(): {
-  containerRef: React.MutableRefObject<Window | null>;
-  scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
-  scrollToElement: <E extends HTMLElement>(
-    target: E,
-    scrollToElementOptions?: ScrollToElementOptions
-  ) => void;
-};
 
-function useScrollTo<T extends HTMLElement>(): {
+interface UseScrollToReturnType<T extends HTMLElement> {
   containerRef: React.RefObject<T>;
   scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
   scrollToElement: <E extends HTMLElement>(
     target: E,
     scrollToElementOptions?: ScrollToElementOptions
   ) => void;
-};
+}
+```
+```ts title="typescript"
+function useScrollTo<T extends HTMLElement>(): UseScrollToReturnType<T>
 ```
 
 ## Usage
