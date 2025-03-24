@@ -9,7 +9,7 @@ import { useRef } from 'react';
  * @returns {F} - 최초 한 번만 실행되는 메모이제이션된 콜백 함수.
  *
  * @example
- * const MyComponent = () => {
+ * const Example = () => {
  *   const handleClick = useCallbackOnce(() => {
  *     console.log('최초 한번만 실행됩니다.');
  *   });
