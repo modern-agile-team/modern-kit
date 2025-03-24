@@ -1,13 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useCallbackOnce } from '.';
 
 describe('useCallbackOnce', () => {
-  it('콜백이 한 번만 실행되어야 합니다.', () => {
+  it('콜백이 한 번만 실행되어야 합니다.', async () => {
     const callback = vi.fn();
     const { result } = renderHook(() => useCallbackOnce(callback));
 
-    act(() => {
+    await waitFor(() => {
       result.current();
       result.current();
       result.current();
