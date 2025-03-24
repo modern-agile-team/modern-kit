@@ -21,7 +21,7 @@ import { useRef } from 'react';
  */
 export function useCallbackOnce<F extends (...args: any[]) => void>(
   callback: F
-) {
+): F {
   const hasExecuted = useRef(false);
   const memoizedCallback = usePreservedCallback((...args: Parameters<F>) => {
     if (hasExecuted.current) return;
@@ -29,5 +29,5 @@ export function useCallbackOnce<F extends (...args: any[]) => void>(
     hasExecuted.current = true;
   });
 
-  return memoizedCallback;
+  return memoizedCallback as F;
 }
