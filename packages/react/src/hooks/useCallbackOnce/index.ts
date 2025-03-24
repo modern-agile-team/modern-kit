@@ -1,4 +1,5 @@
-import { DependencyList, useCallback, useRef } from 'react';
+import { usePreservedCallback } from '../usePreservedCallback';
+import { useCallback, useRef } from 'react';
 /**
  * @description
  * 주어진 콜백 함수가 최초 실행 이후 다시 실행되지 않도록 보장하는 커스텀 훅입니다.
@@ -21,19 +22,17 @@ import { DependencyList, useCallback, useRef } from 'react';
  * };
  */
 export function useCallbackOnce<F extends (...args: any[]) => void>(
-  callback: F,
-  deps: DependencyList
+  callback: F
 ) {
   const hasExecuted = useRef(false);
-  const memoizedCallback = useCallback((...args: Parameters<F>) => {
-    if (hasExecuted.current) {
-      return;
-    }
+  const preservedCallback = usePreservedCallback(callback);
 
-    callback(...args);
+  const memoizedCallback = useCallback((...args: Parameters<F>) => {
+    if (hasExecuted.current) return;
+
+    preservedCallback(...args);
     hasExecuted.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, []);
 
   return memoizedCallback;
 }
