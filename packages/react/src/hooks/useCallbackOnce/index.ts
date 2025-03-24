@@ -1,5 +1,5 @@
 import { usePreservedCallback } from '../usePreservedCallback';
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 /**
  * @description
  * 주어진 콜백 함수가 최초 실행 이후 다시 실행되지 않도록 보장하는 커스텀 훅입니다.
@@ -25,14 +25,11 @@ export function useCallbackOnce<F extends (...args: any[]) => void>(
   callback: F
 ) {
   const hasExecuted = useRef(false);
-  const preservedCallback = usePreservedCallback(callback);
-
-  const memoizedCallback = useCallback((...args: Parameters<F>) => {
+  const memoizedCallback = usePreservedCallback((...args: Parameters<F>) => {
     if (hasExecuted.current) return;
-
-    preservedCallback(...args);
+    callback(...args);
     hasExecuted.current = true;
-  }, []);
+  });
 
   return memoizedCallback;
 }
