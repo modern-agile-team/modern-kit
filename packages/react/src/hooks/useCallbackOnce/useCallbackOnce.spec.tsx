@@ -3,7 +3,7 @@ import { fireEvent, render, renderHook, waitFor } from '@testing-library/react';
 import { useCallbackOnce } from '.';
 import { useState } from 'react';
 
-function TestComponent({ onCallback }: { onCallback: () => void }) {
+const TestComponent = ({ onCallback }: { onCallback: () => void }) => {
   const [value, setValue] = useState(0);
 
   const handleClick = useCallbackOnce(() => {
@@ -19,7 +19,7 @@ function TestComponent({ onCallback }: { onCallback: () => void }) {
       </button>
     </div>
   );
-}
+};
 
 describe('useCallbackOnce', () => {
   it('콜백이 한 번만 실행되어야 합니다.', async () => {
@@ -42,19 +42,15 @@ describe('useCallbackOnce', () => {
     const callOnceButton = getByText('CallbackOnce 호출');
     const rerenderButton = getByText('상태 변경으로 리렌더링');
 
-    // 1회 클릭 - 콜백 실행됨
     fireEvent.click(callOnceButton);
     expect(spy).toHaveBeenCalledTimes(1);
 
-    // 다시 클릭 - 콜백 실행되지 않음
     fireEvent.click(callOnceButton);
     expect(spy).toHaveBeenCalledTimes(1);
 
-    // 상태 변경 - 리렌더링 발생
     fireEvent.click(rerenderButton);
-    getByText('현재 상태: 1'); // 텍스트로 상태 변화 확인
+    getByText('현재 상태: 1');
 
-    // 다시 클릭 - 콜백 여전히 실행되지 않음
     fireEvent.click(callOnceButton);
     expect(spy).toHaveBeenCalledTimes(1);
   });
