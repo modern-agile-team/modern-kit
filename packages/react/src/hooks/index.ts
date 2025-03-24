@@ -3,6 +3,7 @@ export * from './useAsyncEffect';
 export * from './useAsyncProcessQueue';
 export * from './useBeforeUnload';
 export * from './useBlockMultipleAsyncCalls';
+export * from './useCallbackOnce';
 export * from './useClipboard';
 export * from './useColorScheme';
 export * from './useComputedStyleObserver';
