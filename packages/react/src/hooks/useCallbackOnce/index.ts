@@ -8,7 +8,6 @@ import { useRef } from 'react';
  *
  * @template F - 콜백 함수의 타입. 콜백 함수는 인자들을 받을 수 있는 함수여야 합니다.
  * @param {F} callback - 최초 한 번 실행될 콜백 함수.
- * @param {DependencyList} deps - 의존성 배열. 이 배열의 값이 변경될 때마다 콜백을 다시 메모이제이션합니다.
  *
  * @returns {F} - 최초 한 번만 실행되는 메모이제이션된 콜백 함수.
  *
@@ -16,7 +15,7 @@ import { useRef } from 'react';
  * const MyComponent = () => {
  *   const handleClick = useCallbackOnce((e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
  *     console.log('최초 한번만 실행됩니다.');
- *   }, []);
+ *   });
  *
  *   return <div onClick={handleClick}>Click me</div>;
  * };
