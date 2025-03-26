@@ -23,6 +23,7 @@ export * from './useHover';
 export * from './useImageStatus';
 export * from './useIntersectionObserver';
 export * from './useInterval';
+export * from './useIsClient';
 export * from './useIsMounted';
 export * from './useIsomorphicLayoutEffect';
 export * from './useKeyDown';
