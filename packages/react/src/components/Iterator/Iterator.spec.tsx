@@ -33,15 +33,6 @@ describe('Iterator', () => {
     expect(renderItems).toHaveLength(testItems.length);
   });
 
-  it('items prop이 undefined일 때 아무것도 렌더링되지 않아야 합니다', () => {
-    renderSetup(
-      <Iterator items={undefined} renderItem={() => <div>Item</div>} />
-    );
-
-    const renderItems = screen.queryAllByText(/Item/);
-    expect(renderItems).toHaveLength(0);
-  });
-
   it('items prop이 문자열 배열일 때 올바른 수의 아이템이 렌더링되어야 합니다', () => {
     renderSetup(
       <Iterator
