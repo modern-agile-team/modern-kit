@@ -16,7 +16,7 @@ import { DependencyList, useEffect } from 'react';
  */
 export function useAsyncEffect(
   effectCallback: () => Promise<void>,
-  deps?: DependencyList
+  deps: DependencyList = []
 ): void {
   useEffect(() => {
     const execute = async () => {
