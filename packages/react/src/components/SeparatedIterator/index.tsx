@@ -9,7 +9,7 @@ interface SeparatedIteratorProps<T> extends IteratorProps<T> {
 
 export const SeparatedIterator = <T,>({
   itemKey,
-  items = [],
+  items,
   separator,
   renderItem,
   separatorInterval = 1,
