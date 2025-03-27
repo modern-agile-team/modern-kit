@@ -12,10 +12,10 @@ import { useInputState } from '@modern-kit/react'
 ## Interface
 ```ts title="typescript
 function useInputState(initialValue: T): {
-    value: T | undefined;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    reset: () => void;
-} 
+  value: T | undefined;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  reset: () => void;
+}
 ```
 
 ## Usage
@@ -25,16 +25,16 @@ function useInputState(initialValue: T): {
 import { useInputState } from '@modern-kit/react';
 
 const Example = () => {
-    const { value, onChange, reset } = useInputState<string>();
+  const { value, onChange, reset } = useInputState<string>();
 
-    return (
-        <>
-            <h1>{value}</h1>
-            <input type="text" name="test" onChange={onChange} value={value} />
-            <button onClick={reset}>reset</button>
-        </>
-    )
-}
+  return (
+    <>
+      <h1>{value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
 ```
 
 ```tsx title="typescript"
@@ -43,16 +43,16 @@ const Example = () => {
 import { useInputState } from '@modern-kit/react';
 
 const Example = () => {
-    const { value, onChange, reset } = useInputState<string>("testValue");
+  const { value, onChange, reset } = useInputState<string>('testValue');
 
-    return (
-        <>
-            <h1>{value}</h1>
-            <input type="text" name="test" onChange={onChange} value={value} />
-            <button onClick={reset}>reset</button>
-        </>
-    )
-}
+  return (
+    <>
+      <h1>{value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
 ```
 
 ```tsx title="typescript"
@@ -61,18 +61,18 @@ const Example = () => {
 import { useInputState } from '@modern-kit/react';
 
 const Example = () => {
-    const { value, onChange, reset } = useInputState<{ test: string }>({
-        test: "testValue"
-    });
+  const { value, onChange, reset } = useInputState<{ test: string }>({
+    test: 'testValue',
+  });
 
-    return (
-        <>
-            <h1>{value.test}</h1>
-            <input type="text" name="test" onChange={onChange} value={value.test} />
-            <button onClick={reset}>reset</button>
-        </>
-    )
-}
+  return (
+    <>
+      <h1>{value.test}</h1>
+      <input type="text" name="test" onChange={onChange} value={value.test} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
 ```
 
 ## Example
