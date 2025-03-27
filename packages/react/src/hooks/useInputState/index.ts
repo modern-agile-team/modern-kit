@@ -150,6 +150,8 @@ export function useInputState<T>(initialValue?: T): {
         return value as T;
       }
 
+      if (!name) return prev;
+
       return {
         ...prev,
         [name]: value,
