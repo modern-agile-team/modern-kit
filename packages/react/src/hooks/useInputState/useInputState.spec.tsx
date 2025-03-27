@@ -34,8 +34,24 @@ const TestComponent2 = () => {
 };
 
 describe('useInputState', () => {
+  it('input에 name이 없을 때 오류가 발생합니다.', () => {
+    const { result } = renderHook(() => useInputState('initial value'));
+
+    const { onChange } = result.current;
+
+    const input = document.createElement('input');
+
+    expect(() => {
+      fireEvent.change(input, { target: { value: 'changed value' } });
+      onChange({ target: input } as React.ChangeEvent<HTMLInputElement>);
+    }).toThrowError('The input element must have a "name" attribute.');
+  });
+
   it('초기값으로 string을 넣으면 string으로 초기화 됩니다.', () => {
-    expect(3).toBe(3);
+    renderSetup(<TestComponent1 />);
+
+    const testTitle = screen.getByText('initial value');
+    expect(testTitle).toBeInTheDocument();
   });
 
   it('초기값으로 object를 넣으면 object로 초기화 됩니다.', () => {
