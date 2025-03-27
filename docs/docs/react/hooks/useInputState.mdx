@@ -78,41 +78,39 @@ const Example = () => {
 ## Example
 
 export const ExampleSingleInput = () => {
-  const { value, onChange, reset } = useInputState<string>('');
+  const { value, onChange, reset } = useInputState('');
 
   return (
     <>
-      <h1>{value}</h1>
-      <input type="text" name="test" onChange={onChange} value={value} />
+      <h1>test: {value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} /><br />
       <button onClick={reset}>reset</button>
     </>
   );
 };
 
 export const ExampleMultiple = () => {
-  const { value, onChange, reset } = useInputState<{
-    title: string;
-    description: string;
-  }>({
+  const { value, onChange, reset } = useInputState({
     title: '',
     description: '',
   });
 
   return (
     <>
-      <h1>{value.title}</h1>
-      <p>{value.description}</p>
-      <input type="text" name="title" onChange={onChange} value={value.title} />
+      <h1>title: {value.title}</h1>
+      <p>description: {value.description}</p>
+      <input type="text" name="title" onChange={onChange} value={value.title} /><br />
       <input
         type="text"
         name="description"
         onChange={onChange}
         value={value.description}
-      />
+      /><br />
       <button onClick={reset}>reset</button>
     </>
   );
 };
 
 <ExampleSingleInput />
+<hr />
 <ExampleMultiple />

@@ -2,21 +2,6 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import { isString } from '@modern-kit/utils';
 
 /**
- * @description 이벤트 타겟 요소가 유효한지 확인하는 함수
- */
-const isValidEventTarget = (e: ChangeEvent<HTMLInputElement>) => {
-  if (!e.target) {
-    throw new Error('이벤트 타겟 요소가 정의되지 않았습니다');
-  }
-
-  if (!e.target.name) {
-    throw new Error('이벤트 타겟 요소의 name 속성이 정의되지 않았습니다');
-  }
-
-  return true;
-};
-
-/**
  * @description 입력 필드의 상태를 관리하는 커스텀 훅(초기값 존재)
  *
  * @template T - 입력값의 타입
@@ -139,8 +124,8 @@ export function useInputState<T>(initialValue?: T): {
   const [value, setValue] = useState<T | undefined>(initialValue);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (!isValidEventTarget(e)) {
-      return;
+    if (!e.target) {
+      throw new Error('이벤트 타겟 요소가 정의되지 않았습니다');
     }
 
     const { name, value } = e.target;
