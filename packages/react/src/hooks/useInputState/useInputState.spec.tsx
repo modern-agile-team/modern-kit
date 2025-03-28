@@ -123,12 +123,12 @@ describe('useInputState', () => {
       />
     );
 
-    const titleInput = screen.getByRole('textbox');
+    const input = screen.getByRole('textbox');
     const value = screen.getByRole('test-value');
 
     expect(value).toHaveTextContent('initial value');
 
-    await user.type(titleInput, ' changed');
+    await user.type(input, ' changed');
 
     expect(value).toHaveTextContent('initial value changed');
   });
@@ -143,14 +143,14 @@ describe('useInputState', () => {
     );
 
     const input = screen.getByRole('textbox');
-    const testValue = screen.getByRole('test-value');
+    const value = screen.getByRole('test-value');
 
     await user.type(input, ' changed');
 
-    expect(testValue).toHaveTextContent('initial value changed');
+    expect(value).toHaveTextContent('initial value changed');
 
     await user.click(screen.getByRole('button', { name: 'reset' }));
 
-    expect(testValue).toHaveTextContent('initial value');
+    expect(value).toHaveTextContent('initial value');
   });
 });
