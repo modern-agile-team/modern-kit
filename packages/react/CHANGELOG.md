@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 2.2.0
+
+### Minor Changes
+
+- [#808](https://github.com/modern-agile-team/modern-kit/pull/808) [`1181db8`](https://github.com/modern-agile-team/modern-kit/commit/1181db88c9642582bfa26427738ca14d4bb79e00) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useIsClient 신규 후 추가 - @ssi02014
+
+- [#801](https://github.com/modern-agile-team/modern-kit/pull/801) [`24cd332`](https://github.com/modern-agile-team/modern-kit/commit/24cd332c4f029754c5d0bd7bd70475d992a81b38) Thanks [@rhehfl](https://github.com/rhehfl)! - feat(react): useCallbackOnce 신규 훅 추가 - @rhehfl
+
 ## 2.1.0
 
 ### Minor Changes
