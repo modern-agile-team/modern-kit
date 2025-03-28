@@ -42,7 +42,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@modern-kit/utils": "workspace:^",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@testing-library/dom": "^10.0.0",
@@ -68,6 +67,7 @@
     "vitest": "^3.0.2"
   },
   "dependencies": {
+    "@modern-kit/utils": "latest",
     "@types/lodash-es": "^4.17.12",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21"
