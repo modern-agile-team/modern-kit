@@ -3,7 +3,6 @@ import { useInputState } from '.';
 import { expect, it } from 'vitest';
 import { renderHook, screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { userEvent } from '@testing-library/user-event';
 
 const TestComponent = ({
   initial,
@@ -21,14 +20,14 @@ const TestComponent = ({
       <h1 role="test-value">{isObject ? value.test : value}</h1>
       {isName ? (
         <input
-          data-testid="test-input"
+          type="text"
           name="test"
           onChange={onChange}
           value={isObject ? value.test : value}
         />
       ) : (
         <input
-          data-testid="test-input"
+          type="text"
           onChange={onChange}
           value={isObject ? value.test : value}
         />
@@ -40,7 +39,7 @@ const TestComponent = ({
 
 describe('useInputState', () => {
   it('value값이 단일 값일 때, name이 없어도 값이 변경됩니다.', async () => {
-    renderSetup(
+    const { user } = renderSetup(
       <TestComponent
         initial={'initial value'}
         isObject={false}
@@ -49,15 +48,15 @@ describe('useInputState', () => {
     );
 
     const value = screen.getByRole('test-value');
-    const input = screen.getByTestId('test-input');
+    const input = screen.getByRole('textbox');
 
-    await userEvent.type(input, ' changed');
+    await user.type(input, ' changed');
 
     expect(value).toHaveTextContent('initial value changed');
   });
 
   it('value값이 단일 값이 아니라면 name이 없을 때 값이 변경되지 않습니다.', async () => {
-    renderSetup(
+    const { user } = renderSetup(
       <TestComponent
         initial={{ test: 'initial value' }}
         isObject={true}
@@ -66,9 +65,9 @@ describe('useInputState', () => {
     );
 
     const value = screen.getByRole('test-value');
-    const input = screen.getByTestId('test-input');
+    const input = screen.getByRole('textbox');
 
-    await userEvent.type(input, ' changed');
+    await user.type(input, ' changed');
 
     expect(value).toHaveTextContent('initial value');
   });
@@ -106,7 +105,7 @@ describe('useInputState', () => {
     );
 
     const value = screen.getByRole('test-value');
-    const input = screen.getByTestId('test-input');
+    const input = screen.getByRole('textbox');
 
     expect(value).toHaveTextContent('initial value');
 
@@ -124,7 +123,7 @@ describe('useInputState', () => {
       />
     );
 
-    const titleInput = screen.getByTestId('test-input');
+    const titleInput = screen.getByRole('textbox');
     const value = screen.getByRole('test-value');
 
     expect(value).toHaveTextContent('initial value');
@@ -143,7 +142,7 @@ describe('useInputState', () => {
       />
     );
 
-    const input = screen.getByTestId('test-input');
+    const input = screen.getByRole('textbox');
     const testValue = screen.getByRole('test-value');
 
     await user.type(input, ' changed');
