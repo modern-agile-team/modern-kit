@@ -1,0 +1,116 @@
+import { useInputState } from '@modern-kit/react'
+
+# useInputState
+
+입력 필드의 상태를 관리하는 커스텀 훅 입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/uesInputState/index.ts)
+
+## Interface
+```ts title="typescript
+function useInputState(initialValue: T): {
+  value: T | undefined;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  reset: () => void;
+}
+```
+
+## Usage
+```tsx title="typescript"
+//초기값 없음
+
+import { useInputState } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, onChange, reset } = useInputState<string>();
+
+  return (
+    <>
+      <h1>{value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+```
+
+```tsx title="typescript"
+//문자열 초기값
+
+import { useInputState } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, onChange, reset } = useInputState<string>('testValue');
+
+  return (
+    <>
+      <h1>{value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+```
+
+```tsx title="typescript"
+//객체 초기값
+
+import { useInputState } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, onChange, reset } = useInputState<{ test: string }>({
+    test: 'testValue',
+  });
+
+  return (
+    <>
+      <h1>{value.test}</h1>
+      <input type="text" name="test" onChange={onChange} value={value.test} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+```
+
+## Example
+
+export const ExampleSingleInput = () => {
+  const { value, onChange, reset } = useInputState('');
+
+  return (
+    <>
+      <h1>test: {value}</h1>
+      <input type="text" name="test" onChange={onChange} value={value} /><br />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+
+export const ExampleMultiple = () => {
+  const { value, onChange, reset } = useInputState({
+    title: '',
+    description: '',
+  });
+
+  return (
+    <>
+      <h1>title: {value.title}</h1>
+      <p>description: {value.description}</p>
+      <input type="text" name="title" onChange={onChange} value={value.title} /><br />
+      <input
+        type="text"
+        name="description"
+        onChange={onChange}
+        value={value.description}
+      /><br />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+
+<ExampleSingleInput />
+<hr />
+<ExampleMultiple />
