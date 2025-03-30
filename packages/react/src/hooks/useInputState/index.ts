@@ -63,6 +63,7 @@ export function useInputState<T>(initialValue: T): {
  * const { value, onChange, reset } = useInputState<{ test: string }>();
  * // const value: { test: string } | undefined
  *
+ * // name 속성 필수
  * <input type="text" name="test" onChange={onChange} value={value?.test || ''} />
  * ```
  */
