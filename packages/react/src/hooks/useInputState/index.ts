@@ -27,6 +27,7 @@ import { isString } from '@modern-kit/utils';
  * ```tsx
  * const { value, onChange, reset } = useInputState({ test: '' });
  * // const value: { test: string }
+ *
  * // name 속성 필수
  * <input type="text" name="test" onChange={onChange} value={value.test} />
  * ```
