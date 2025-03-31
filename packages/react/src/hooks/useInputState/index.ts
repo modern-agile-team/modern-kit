@@ -4,6 +4,9 @@ import { isString } from '@modern-kit/utils';
 /**
  * @description 입력 필드의 상태를 관리하는 커스텀 훅(초기값 존재)
  *
+ * 단일 입력 필드와 다중 입력 필드를 지원합니다.
+ * - 다중 입력 필드는 객체 형태로 입력 필드의 `name` 속성을 `key`로 사용합니다.
+ *
  * @template T - 입력값의 타입
  * @param {T} initialValue - 초기값
  * @returns {{
@@ -41,6 +44,9 @@ export function useInputState<T>(initialValue: T): {
 /**
  * @description 입력 필드의 상태를 관리하는 커스텀 훅(초기값 없음)
  *
+ * 단일 입력 필드와 다중 입력 필드를 지원합니다.
+ * - 다중 입력 필드는 객체 형태로 입력 필드의 `name` 속성을 `key`로 사용합니다.
+ *
  * @template T - 입력값의 타입
  * @returns {{
  *  value: T | undefined;
@@ -76,6 +82,9 @@ export function useInputState<T>(): {
 
 /**
  * @description 입력 필드의 상태를 관리하는 커스텀 훅
+ *
+ * 단일 입력 필드와 다중 입력 필드를 지원합니다.
+ * - 다중 입력 필드는 객체 형태로 입력 필드의 `name` 속성을 `key`로 사용합니다.
  *
  * @template T - 입력값의 타입
  * @param {T | undefined} initialValue - 초기값
