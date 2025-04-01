@@ -45,7 +45,7 @@ export function range(start: number, end: number): number[];
  *
  * @param {number} start - 생성할 숫자 범위의 시작 값입니다.
  * @param {number} end - 생성할 숫자 범위의 종료 값입니다.
- * @param {number} step - 숫자의 증가 간격입니다.
+ * @param {number} step - 숫자의 증가 간격입니다. 1 이상의 정수여야 합니다.
  * @returns {number[]} 시작 값에서 종료 값까지 간격에 따라 생성된 숫자의 배열을 반환합니다.
  *
  * @throws {Error} `step`이 1 이상의 정수가 아닐 경우 에러를 발생시킵니다.
@@ -60,7 +60,7 @@ export function range(start: number, end: number, step: number): number[];
  *
  * @param {number} start - 생성할 숫자 범위의 시작 값입니다.
  * @param {number} end - 생성할 숫자 범위의 종료 값입니다.
- * @param {number} step - 숫자의 증가 간격입니다.
+ * @param {number} step - 숫자의 증가 간격입니다. 1 이상의 정수여야 합니다.
  * @returns {number[]} 시작 값에서 종료 값까지 간격에 따라 생성된 숫자의 배열을 반환합니다.
  *
  * @throws {Error} `step`이 1 이상의 정수가 아닐 경우 에러를 발생시킵니다.
