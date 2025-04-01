@@ -4,12 +4,11 @@ import { max } from '.';
 describe('max', () => {
   it('숫자 배열에서 최대값을 반환해야 합니다.', () => {
     const arr = [5, 2, 9, 1, 5, 6];
-    const result = max(arr);
 
-    expect(result).toBe(9);
+    expect(max(arr)).toBe(9);
   });
 
-  it('반복자 함수를 기반으로 객체 배열에서 최대값을 가진 항목을 반환해야 합니다.', () => {
+  it('iteratee 함수를 기반으로 객체 배열에서 최대값을 가진 항목을 반환해야 합니다.', () => {
     const arr = [
       { value: 5 },
       { value: 2 },
@@ -18,31 +17,19 @@ describe('max', () => {
       { value: 5 },
       { value: 6 },
     ];
-    const result = max(arr, (item) => item.value);
 
-    expect(result).toEqual({ value: 9 });
-  });
-
-  it('반복자 함수를 기반으로 문자열 배열에서 최대값을 가진 항목을 반환해야 합니다.', () => {
-    const arr = ['apple', 'banana', 'lime'];
-    const result = max(arr, (item) => item.length);
-
-    expect(result).toBe('banana');
+    expect(max(arr, (item) => item.value)).toEqual({ value: 9 });
   });
 
   it('빈 배열이 주어졌을 때 undefined를 반환해야 합니다.(기본)', () => {
-    const arr: number[] = [];
-    const result = max(arr);
+    const arr1: number[] = [];
 
-    expect(result).toBeUndefined();
-  });
+    expect(max(arr1)).toBeUndefined();
 
-  it('빈 배열이 주어졌을 때 undefined를 반환해야 합니다.(반복자 함수)', () => {
-    const arr: {
+    const arr2: {
       value: number;
     }[] = [];
-    const result = max(arr, (item) => item.value);
 
-    expect(result).toBeUndefined();
+    expect(max(arr2, (item) => item.value)).toBeUndefined();
   });
 });

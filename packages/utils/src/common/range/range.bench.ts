@@ -4,10 +4,14 @@ import { range } from '.';
 
 describe('range', () => {
   bench('modern-kit/range', () => {
-    range(1, 100);
+    range(50);
+    range(10, 50);
+    range(10, 50, 3);
   });
 
   bench('lodash/range', () => {
-    rangeLodash(1, 100);
+    rangeLodash(50);
+    rangeLodash(10, 50);
+    rangeLodash(10, 50, 3);
   });
 });
