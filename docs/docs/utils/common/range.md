@@ -17,7 +17,7 @@
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/range/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/range/index.ts)
 
 ## Benchmark
 - `hz`: 초당 작업 수
