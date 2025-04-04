@@ -10,6 +10,7 @@ const PATH_KEYS = [
   'file',
   'formatter',
   'math',
+  'number',
   'object',
   'regex',
   'storage',
