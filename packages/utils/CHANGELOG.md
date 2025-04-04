@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 2.2.0
+
+### Minor Changes
+
+- [#824](https://github.com/modern-agile-team/modern-kit/pull/824) [`a758f05`](https://github.com/modern-agile-team/modern-kit/commit/a758f05505faebc1a5309a7a751600092821bdaa) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): number pacakge 생성 - @ssi02014
+
+### Patch Changes
+
+- [#795](https://github.com/modern-agile-team/modern-kit/pull/795) [`f990cc2`](https://github.com/modern-agile-team/modern-kit/commit/f990cc209c74701e6ec17f187efd3986c71029af) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): flat, range, isReference 타입 개선 - @ssi02014
+
 ## 2.1.0
 
 ### Minor Changes
