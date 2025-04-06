@@ -1,5 +1,6 @@
 export * from './Arrayable';
 export * from './DeepPartial';
+export * from './DeepRequired';
 export * from './DistributiveOmit';
 export * from './ExcludeNullish';
 export * from './ExtractMapType';
