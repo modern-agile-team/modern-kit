@@ -57,7 +57,7 @@ describe('getDDay', () => {
     });
 
     // 문자열 케이스
-    expect(getDDay(new Date('2024-12-31 18:15:30'))).toEqual({
+    expect(getDDay('2024-12-31 18:15:30')).toEqual({
       days: 0,
       hours: -5,
       minutes: -44,
