@@ -8737,7 +8737,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@modern-kit-react-virtual-563eed158f/1/packages/react/",\
         "packageDependencies": [\
           ["@modern-kit/react", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#workspace:packages/react"],\
-          ["@modern-kit/utils", "npm:2.1.0"],\
+          ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:16.0.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
@@ -8777,7 +8777,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/react/",\
         "packageDependencies": [\
           ["@modern-kit/react", "workspace:packages/react"],\
-          ["@modern-kit/utils", "npm:2.1.0"],\
+          ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:16.0.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
@@ -8820,13 +8820,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@modern-kit/utils", [\
-      ["npm:2.1.0", {\
-        "packageLocation": "./.yarn/cache/@modern-kit-utils-npm-2.1.0-795a8e57fc-1cacebd910.zip/node_modules/@modern-kit/utils/",\
-        "packageDependencies": [\
-          ["@modern-kit/utils", "npm:2.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["workspace:packages/utils", {\
         "packageLocation": "./packages/utils/",\
         "packageDependencies": [\

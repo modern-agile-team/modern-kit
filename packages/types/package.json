@@ -34,6 +34,9 @@
     "typescript": "^5.1.6",
     "vitest": "^3.0.2"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "keywords": [
     "react",
     "next",
