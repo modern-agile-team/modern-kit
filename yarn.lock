@@ -5548,7 +5548,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@modern-kit/react@workspace:packages/react"
   dependencies:
-    "@modern-kit/utils": "npm:latest"
+    "@modern-kit/utils": "workspace:^"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.0"
     "@testing-library/dom": "npm:^10.0.0"
@@ -5590,14 +5590,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@modern-kit/utils@npm:latest":
-  version: 2.1.0
-  resolution: "@modern-kit/utils@npm:2.1.0"
-  checksum: 1cacebd910d6d01216b373a06a8ed0f327a0342945afc1562de31a7eb840f77cc34fe4cb99f52cc12f5c1dd78b74ba5927b01def62c95d93df7e0468a07d3798
-  languageName: node
-  linkType: hard
-
-"@modern-kit/utils@workspace:*, @modern-kit/utils@workspace:packages/utils":
+"@modern-kit/utils@workspace:*, @modern-kit/utils@workspace:^, @modern-kit/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@modern-kit/utils@workspace:packages/utils"
   dependencies:
