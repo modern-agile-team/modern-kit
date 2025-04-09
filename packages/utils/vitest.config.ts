@@ -8,7 +8,7 @@ export default defineConfig({
     dir: './src',
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
-    globals: true,
+    globals: false,
     coverage: {
       provider: 'istanbul',
       exclude: [
