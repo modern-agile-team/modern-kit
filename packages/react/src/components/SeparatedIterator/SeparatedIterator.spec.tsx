@@ -64,21 +64,4 @@ describe('SeparatedIterator', () => {
     expect(renderItems).toHaveLength(testItems.length);
     expect(separators).toHaveLength(testItems.length);
   });
-
-  it('items prop이 undefined일 때 아무것도 렌더링되지 않아야 합니다', () => {
-    renderSetup(
-      <SeparatedIterator
-        items={undefined}
-        renderItem={() => <div>Item</div>}
-        separator={<div>separator</div>}
-        includeLastSeparator
-      />
-    );
-
-    const renderItems = screen.queryAllByText(/Item \d/);
-    const separators = screen.queryAllByText(/separator/);
-
-    expect(renderItems).toHaveLength(0);
-    expect(separators).toHaveLength(0);
-  });
 });

@@ -6,6 +6,6 @@ export default defineConfig({
   test: {
     name: packageJson.name,
     dir: './src',
-    globals: true,
+    globals: false,
   },
 });

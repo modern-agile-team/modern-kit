@@ -1,10 +1,8 @@
 # average
 
-배열 요소의 `합`의 `평균`을 반환합니다.
+숫자 배열의 모든 요소를 합산하여 `평균`을 구하는 함수
 
-기본적으로 `숫자 배열`의 `평균`을 반환하며, 그 외 타입의 배열은 두 번째 인자인 `iteratee` 함수 결과를 토대로 `평균`을 얻을 수 있습니다.
-
-만약, `빈 배열([])`의 경우에는 `0`을 반환합니다.
+`iteratee` 함수를 제공하는 경우 `iteratee` 함수의 반환값을 기준으로 평균을 구합니다.
 
 <br />
 
@@ -14,11 +12,12 @@
 ## Interface
 ```ts title="typescript"
 // 함수 오버로딩
-function average<T extends number>(arr: T[] | readonly T[]): T;
+function average(arr: number[] | readonly number[]): number;
+
 function average<T>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => number
-): T;
+): number;
 ```
 
 ## Usage

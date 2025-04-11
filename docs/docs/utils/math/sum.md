@@ -32,11 +32,12 @@
 ## Interface
 ```ts title="typescript"
 // 함수 오버로딩
-function sum<T extends number>(arr: T[] | readonly T[]): T;
+function sum(arr: number[] | readonly number[]): number;
+
 function sum<T>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => number
-): T;
+): number;
 ```
 
 ## Usage

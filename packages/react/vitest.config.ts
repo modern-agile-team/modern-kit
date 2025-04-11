@@ -7,7 +7,7 @@ export default defineConfig({
     name: packageJson.name,
     dir: './src',
     environment: 'jsdom',
-    globals: true,
+    globals: false,
     setupFiles: './vitest.setup.ts',
     coverage: {
       provider: 'istanbul',

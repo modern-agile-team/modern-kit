@@ -11,6 +11,12 @@
     "url": "https://github.com/modern-agile-team/modern-kit"
   },
   "homepage": "https://modern-agile-team.github.io/modern-kit",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -29,12 +35,6 @@
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "test": "vitest --typecheck",
     "test:run": "vitest run --coverage --typecheck",
@@ -58,6 +58,9 @@
     "rollup-plugin-esbuild": "^6.1.1",
     "typescript": "^5.1.6",
     "vitest": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "keywords": [
     "react",

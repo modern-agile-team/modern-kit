@@ -63,10 +63,10 @@ export function useDependencyTimeout(
   const { set, reset, clear } = useTimeout(callback, { delay, enabled: false });
 
   useEffect(() => {
-    if (delay < 0 || !enabled) return;
+    if (!enabled) return;
     reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [delay, enabled, reset, ...deps]);
+  }, [enabled, reset, ...deps]);
 
   return { set, reset, clear };
 }

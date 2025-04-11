@@ -1,8 +1,8 @@
 # max
 
-배열에서 `최댓값`을 찾습니다. 
+배열에서 `최대값`을 반환하는 함수
 
-기본적으로 `숫자 배열`에서 최댓값을 찾으며, 그 외 타입의 배열은 두 번째 인자인 `iteratee` 함수 결과로 `최댓값`을 판단할 수 있습니다.
+`iteratee` 함수를 제공하는 경우 `iteratee` 함수를 기반으로 배열의 각 요소를 변환한 후 최대값을 가진 항목을 반환합니다.
 
 <br />
 
@@ -12,7 +12,8 @@
 ## Interface
 ```ts title="typescript"
 // 함수 오버로딩
-function max<T extends number>(arr: T[] | readonly T[]): T;
+function max(arr: number[] | readonly number[]): number;
+
 function max<T>(
   arr: T[] | readonly T[],
   iteratee: (item: T) => number

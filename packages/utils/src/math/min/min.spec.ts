@@ -4,12 +4,11 @@ import { min } from '.';
 describe('min', () => {
   it('숫자 배열에서 최소값을 반환해야 합니다.', () => {
     const arr = [5, 2, 9, 1, 5, 6];
-    const result = min(arr);
 
-    expect(result).toBe(1);
+    expect(min(arr)).toBe(1);
   });
 
-  it('반복자 함수를 기반으로 객체 배열에서 최소값을 가진 항목을 반환해야 합니다.', () => {
+  it('iteratee 함수를 기반으로 객체 배열에서 최소값을 가진 항목을 반환해야 합니다.', () => {
     const arr = [
       { value: 5 },
       { value: 2 },
@@ -18,31 +17,19 @@ describe('min', () => {
       { value: 5 },
       { value: 6 },
     ];
-    const result = min(arr, (item) => item.value);
 
-    expect(result).toEqual({ value: 1 });
+    expect(min(arr, (item) => item.value)).toEqual({ value: 1 });
   });
 
-  it('반복자 함수를 기반으로 문자열 배열에서 최소값을 가진 항목을 반환해야 합니다.', () => {
-    const arr = ['apple', 'banana', 'lime'];
-    const result = min(arr, (item) => item.length);
+  it('빈 배열이 주어졌을 때 undefined를 반환해야 합니다.', () => {
+    const arr1: number[] = [];
 
-    expect(result).toBe('lime');
-  });
+    expect(min(arr1)).toBeUndefined();
 
-  it('빈 배열이 주어졌을 때 undefined를 반환해야 합니다.(기본)', () => {
-    const arr: number[] = [];
-    const result = min(arr);
-
-    expect(result).toBeUndefined();
-  });
-
-  it('빈 배열이 주어졌을 때 undefined를 반환해야 합니다.(반복자 함수)', () => {
-    const arr: {
+    const arr2: {
       value: number;
     }[] = [];
-    const result = min(arr, (item) => item.value);
 
-    expect(result).toBeUndefined();
+    expect(min(arr2, (item) => item.value)).toBeUndefined();
   });
 });

@@ -1,14 +1,9 @@
-import { useSyncExternalStore } from 'react';
-import { noop } from '@modern-kit/utils';
+import { useIsClient } from '../../hooks/useIsClient';
 
 interface ClientGateProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
 }
-
-const subscribe = () => noop;
-const getSnapshot = () => false;
-const getServerSnapshot = () => true;
 
 /**
  * @description `ClientGate`는 렌더링 환경에 따라 다른 컨텐츠를 보여주는 컴포넌트입니다:
@@ -38,11 +33,7 @@ export function ClientGate({
   fallback,
   children,
 }: ClientGateProps): JSX.Element {
-  const isServer = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot
-  );
+  const isClient = useIsClient();
 
-  return <>{isServer ? fallback : children}</>;
+  return <>{isClient ? children : fallback}</>;
 }

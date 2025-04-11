@@ -11,11 +11,14 @@
 
 ## Interface
 ```ts title="typescript"
-const xor: <T, U>(
+// 함수 오버로딩
+function xor<T>(arr1: T[] | readonly T[], arr2: T[] | readonly T[]): T[];
+
+function xor<T, U>(
   arr1: T[] | readonly T[],
   arr2: T[] | readonly T[],
-  iteratee?: (item: T) => U
-) => T[];
+  iteratee: (item: T) => U
+): T[];
 ```
 
 ## Usage

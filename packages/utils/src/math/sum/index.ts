@@ -45,15 +45,21 @@ export function sum<T>(
   arr: T[] | readonly T[],
   iteratee?: (item: T) => number
 ): number {
-  if (!iteratee) {
-    return (arr as number[]).reduce((acc, cur) => acc + cur, 0);
-  }
+  const calculateSum = () => {
+    let acc = 0;
+    for (let i = 0; i < arr.length; i++) {
+      acc += arr[i] as number;
+    }
+    return acc;
+  };
 
-  let acc = 0;
+  const calculateSumWithIteratee = (iteratee: (item: T) => number) => {
+    let acc = 0;
+    for (let i = 0; i < arr.length; i++) {
+      acc += iteratee(arr[i]);
+    }
+    return acc;
+  };
 
-  for (let i = 0; i < arr.length; i++) {
-    acc += iteratee(arr[i]);
-  }
-
-  return acc;
+  return iteratee ? calculateSumWithIteratee(iteratee) : calculateSum();
 }
