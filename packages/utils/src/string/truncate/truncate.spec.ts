@@ -39,7 +39,14 @@ describe('truncate', () => {
       truncate('Short!!!', { length: 5, omission: '...............' })
     ).toBe('...............');
   });
-  it('should truncate the string with a custom length and separator', () => {
+  it('separator가 있지만 매치되지 않으면 잘린 그대로 반환한다', () => {
+    const result = truncate('hello world', {
+      length: 8,
+      separator: ',',
+    });
+    expect(result).toBe('hello...');
+  });
+  it('separator 문자열이 포함된 경우 처음 등장하는 위치 기준으로 잘린다', () => {
     const str2 = truncate('hi-diddly-ho there, neighborino', {
       length: 24,
       separator: 'there',
