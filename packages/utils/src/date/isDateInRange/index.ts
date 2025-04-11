@@ -1,4 +1,3 @@
-import { parseDate } from '../parseDate';
 import { isAfterDate } from '../isAfterDate';
 import { isBeforeDate } from '../isBeforeDate';
 
@@ -70,49 +69,41 @@ export function isDateInRange({
   toDate,
   inclusive = 'from',
 }: IsDateInRangeParams): boolean {
-  const fromDateToUse = fromDate ? parseDate(fromDate) : null;
-  const toDateToUse = toDate ? parseDate(toDate) : null;
-  const targetDateToUse = parseDate(targetDate);
-
   // 날짜 비교 내부 함수
-  const compareDate = (date: Date, type: 'from' | 'to'): boolean => {
+  const compareDate = (
+    date: Date | string | number,
+    type: 'from' | 'to'
+  ): boolean => {
     const isFrom = type === 'from';
     const inclusiveToUse =
       inclusive === 'both' ||
       (isFrom ? inclusive === 'from' : inclusive === 'to');
+    const compareFunc = isFrom ? isAfterDate : isBeforeDate;
 
-    // inclusive 옵션에 따라 날짜 범위 비교
-    if (isFrom) {
-      return isAfterDate({
-        targetDate: targetDateToUse,
-        compareDate: date, // fromDate
-        inclusive: inclusiveToUse,
-      });
-    }
-    return isBeforeDate({
-      targetDate: targetDateToUse,
-      compareDate: date, // toDate
+    return compareFunc({
+      targetDate,
+      compareDate: date,
       inclusive: inclusiveToUse,
     });
   };
 
   // 1. 시작 날짜만 주어 질 경우 타겟 날짜(or 현재 날짜)가 시작 날짜 이후인지 확인
-  if (fromDateToUse && !toDateToUse) {
-    return compareDate(fromDateToUse, 'from');
+  if (fromDate && !toDate) {
+    return compareDate(fromDate, 'from');
   }
 
   // 2. 종료 날짜만 주어 질 경우 타겟 날짜(or 현재 날짜)가 종료 날짜 이전인지 확인
-  if (!fromDateToUse && toDateToUse) {
-    return compareDate(toDateToUse, 'to');
+  if (!fromDate && toDate) {
+    return compareDate(toDate, 'to');
   }
 
   // 3. 시작 날짜와 종료 날짜가 모두 주어 질 경우 타겟 날짜(or 현재 날짜)가 시작 날짜와 종료 날짜 사이에 있는지 확인
-  if (fromDateToUse && toDateToUse) {
-    if (isAfterDate({ targetDate: fromDateToUse, compareDate: toDateToUse })) {
+  if (fromDate && toDate) {
+    if (isAfterDate({ targetDate: fromDate, compareDate: toDate })) {
       throw new Error('fromDate가 toDate보다 늦을 수 없습니다.');
     }
 
-    return compareDate(fromDateToUse, 'from') && compareDate(toDateToUse, 'to');
+    return compareDate(fromDate, 'from') && compareDate(toDate, 'to');
   }
 
   throw new Error('fromDate 혹은 toDate 중 하나는 필요합니다.');

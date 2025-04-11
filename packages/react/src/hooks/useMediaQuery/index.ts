@@ -35,7 +35,11 @@ export function useMediaQuery(
     []
   );
 
-  useEventListener(window.matchMedia(mediaQueryString), 'change', handleChange);
+  useEventListener(
+    typeof window !== 'undefined' ? window.matchMedia(mediaQueryString) : null,
+    'change',
+    handleChange
+  );
 
   return isMatch;
 }

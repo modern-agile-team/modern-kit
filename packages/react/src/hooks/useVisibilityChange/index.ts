@@ -1,5 +1,5 @@
 import { noop } from '@modern-kit/utils';
-import { useEventListener } from '../../hooks/useEventListener';
+import { useEventListener } from '../useEventListener';
 import { useCallback } from 'react';
 
 type VisibilityChangeCallbackAction = (
@@ -26,5 +26,9 @@ export function useVisibilityChange({
     [onShow, onHide]
   );
 
-  useEventListener(document, 'visibilitychange', handleVisibilityChange);
+  useEventListener(
+    typeof document !== 'undefined' ? document : null,
+    'visibilitychange',
+    handleVisibilityChange
+  );
 }

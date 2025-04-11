@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
 import { noop } from '@modern-kit/utils';
 
@@ -7,6 +7,12 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
   calledOnce?: boolean;
   enabled?: boolean;
+}
+
+interface UseIntersectionObserverReturnType<T extends HTMLElement> {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
+  hasIntersected: boolean;
 }
 
 /**
@@ -24,11 +30,14 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
  * @param {number | number[]} [params.threshold=0] - Observer가 콜백을 호출하는 임계값을 나타냅니다.
  * @param {string} [params.rootMargin='0px 0px 0px 0px'] - 루트 요소에 대한 마진을 지정합니다. 이는 뷰포트 또는 루트 요소의 경계를 확장하거나 축소하는데 사용됩니다.
  *
- * @returns {{ ref: React.RefCallback<T> }} 관찰할 타겟 요소에 전달할 ref입니다.
+ * @returns {UseIntersectionObserverReturnType<T>} ref를 포함한 isIntersecting과 hasIntersected 값을 반환합니다.
+ * - `ref`: 관찰할 타겟 요소에 전달할 ref
+ * - `isIntersecting`: 타겟 요소가 교차하는지 여부를 나타내는 boolean 값
+ * - `hasIntersected`: 타겟 요소가 최초로 교차했는지 여부를 나타내는 boolean 값
  *
  * @example
  * ```tsx
- * const targetRef = useIntersectionObserver<HTMLDivElement>({
+ * const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver<HTMLDivElement>({
  *   onIntersectStart: () => console.log('onIntersectStart'),
  *   onIntersectEnd: () => console.log('onIntersectEnd'),
  *   calledOnce: true,
@@ -47,25 +56,27 @@ export function useIntersectionObserver<T extends HTMLElement>({
   root = null,
   threshold = 0,
   rootMargin = '0px 0px 0px 0px',
-}: UseIntersectionObserverProps): { ref: React.RefCallback<T> } {
+}: UseIntersectionObserverProps = {}): UseIntersectionObserverReturnType<T> {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [hasIntersected, setHasIntersected] = useState(false);
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const calledCount = useRef(0);
-  const isVisible = useRef(false);
-  const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
 
   const intersectionObserverCallback = usePreservedCallback(
     ([entry]: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (!entry) return;
 
       const targetElement = entry.target as T;
+      setIsIntersecting(entry.isIntersecting);
 
       if (entry.isIntersecting) {
-        isVisible.current = true;
         calledCount.current += 1;
 
+        setHasIntersected(true);
         onIntersectStart(entry);
-      } else if (isVisible.current) {
+      } else if (isIntersecting) {
         // 최초 mount 시에 호출을 방지하고, 타겟 요소가 viewport에서 나갈 때만 호출
-        isVisible.current = false;
         calledCount.current += 1;
 
         onIntersectEnd(entry);
@@ -80,14 +91,14 @@ export function useIntersectionObserver<T extends HTMLElement>({
   const targetRef = useCallback(
     (node: T) => {
       // 기존 observer가 활성화된 상태에서 새로운 요소를 관찰하기 전에 기존 observer 관찰 중지하며, 메모리 누수를 방지
-      if (intersectionObserverRef.current) {
-        intersectionObserverRef.current.disconnect();
-        intersectionObserverRef.current = null;
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
       }
 
-      if (node === null || !enabled) return;
+      if (node == null || !enabled) return;
 
-      intersectionObserverRef.current = new IntersectionObserver(
+      observerRef.current = new IntersectionObserver(
         intersectionObserverCallback,
         {
           threshold,
@@ -95,10 +106,10 @@ export function useIntersectionObserver<T extends HTMLElement>({
           rootMargin,
         }
       );
-      intersectionObserverRef.current.observe(node);
+      observerRef.current.observe(node);
     },
     [enabled, threshold, root, rootMargin, intersectionObserverCallback]
   );
 
-  return { ref: targetRef };
+  return { ref: targetRef, isIntersecting, hasIntersected };
 }

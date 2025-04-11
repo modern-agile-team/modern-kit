@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.8.0
+
+### Minor Changes
+
+- [#708](https://github.com/modern-agile-team/modern-kit/pull/708) [`0b511eb`](https://github.com/modern-agile-team/modern-kit/commit/0b511eb8ac756964e8e636d567c368b1348c12ba) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: tslib 제거 - @ssi02014
+
 ## 1.7.0
 
 ### Minor Changes

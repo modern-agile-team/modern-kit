@@ -32,7 +32,7 @@ function getRangeValue(start: number, end: number, step: number = 1) {
  */
 export function range(end: number): number[];
 export function range(start: number, end: number): number[];
-export function range(start: number, end: number, step?: number): number[];
+export function range(start: number, end: number, step: number): number[];
 export function range(start: number, end?: number, step: number = 1) {
   if (isNil(end)) {
     return getRangeValue(0, start);

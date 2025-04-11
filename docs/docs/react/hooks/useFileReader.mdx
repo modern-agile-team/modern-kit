@@ -43,7 +43,7 @@ import { useFileReader } from '@modern-kit/react';
 const Example = () => {
   const { readFile, fileContents, isLoading } = useFileReader()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if(!e.target.files) return;
 
     const data = await readFile({ file: e.target.files, readType: 'readAsText' });

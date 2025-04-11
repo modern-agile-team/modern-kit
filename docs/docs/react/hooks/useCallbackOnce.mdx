@@ -1,0 +1,58 @@
+import { useCallbackOnce } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useCallbackOnce
+
+주어진 콜백 함수가 최초 실행 이후 다시 실행되지 않도록 보장하는 커스텀 훅입니다. 
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useCallbackOnce/index.ts)
+
+## Interface
+```ts title="typescript"
+function useCallbackOnce<F extends (...args: any[]) => void>(callback: F): F
+```
+
+## Usage
+```tsx title="typescript"
+import { useCallbackOnce } from '@modern-kit/react';
+import { useState } from 'react';
+
+export const Example = () => {
+  const [value, setValue] = useState(0);
+  
+  const handleClick = useCallbackOnce((e) => {
+    alert('최초 한번만 실행됩니다!')
+  });
+
+  return (
+    <div>
+      <p>현재 상태: {value}</p>
+      <button onClick={handleClick}>CallbackOnce 호출</button>
+      <button onClick={() => setValue(value + 1)}>상태 변경으로 리렌더링</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [value, setValue] = useState(0);
+  
+  const handleClick = useCallbackOnce((e) => {
+    alert('최초 한번만 실행됩니다!')
+  });
+
+  return (
+    <div>
+      <p>현재 상태: {value}</p>
+      <button onClick={handleClick}>CallbackOnce 호출</button>
+      <button onClick={() => setValue(value + 1)}>상태 변경으로 리렌더링</button>
+    </div>
+  );
+};
+
+<Example />

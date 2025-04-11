@@ -113,41 +113,6 @@ describe('InView', () => {
     expect(intersectEndMock).toBeCalledTimes(1);
   });
 
-  it('calledOnce 프로퍼티가 true이면 onIntersect 콜백 함수를 한 번 호출해야 합니다.', async () => {
-    renderSetup(
-      <TestComponent
-        onIntersectStart={intersectStartMock}
-        onIntersectEnd={intersectEndMock}
-        calledOnce={true}
-      />
-    );
-
-    const boxWrapper = screen.getByText('box').parentElement as HTMLElement;
-
-    await waitFor(() =>
-      mockIntersecting({ type: 'view', element: boxWrapper })
-    );
-    expect(intersectStartMock).toBeCalledTimes(1);
-
-    await waitFor(() =>
-      mockIntersecting({ type: 'hide', element: boxWrapper })
-    );
-    expect(intersectEndMock).toBeCalledTimes(1);
-
-    await waitFor(() =>
-      mockIntersecting({ type: 'view', element: boxWrapper })
-    );
-    await waitFor(() =>
-      mockIntersecting({ type: 'hide', element: boxWrapper })
-    );
-    await waitFor(() =>
-      mockIntersecting({ type: 'view', element: boxWrapper })
-    );
-
-    expect(intersectStartMock).toBeCalledTimes(1);
-    expect(intersectEndMock).toBeCalledTimes(1);
-  });
-
   it('asChild가 true일 때 children이 유효한 React 요소가 아니면 에러를 반환해야 합니다.', () => {
     expect(() =>
       renderSetup(<InView asChild={true}>일반 텍스트 노드</InView>)
