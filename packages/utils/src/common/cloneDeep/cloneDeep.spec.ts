@@ -2,14 +2,14 @@ import { describe, it, expect } from 'vitest';
 import { cloneDeep } from '.';
 
 describe('cloneDeep', () => {
-  it('should deeply copy a primitive value', () => {
+  it('원시값을 깊게 복사해야 합니다', () => {
     const originNum = 42;
     const copiedNum = cloneDeep(originNum);
 
     expect(copiedNum).toBe(originNum);
   });
 
-  it('should deeply copy an array', () => {
+  it('배열을 깊게 복사해야 합니다', () => {
     const originArray = [1, 2, [3, 4]];
     const copiedArray = cloneDeep(originArray);
 
@@ -17,7 +17,7 @@ describe('cloneDeep', () => {
     expect(copiedArray).not.toBe(originArray);
   });
 
-  it('should also copy the array circular references deeply.', () => {
+  it('배열의 순환 참조도 깊게 복사해야 합니다', () => {
     const originArray: any[] = [];
     originArray.push(originArray);
 
@@ -28,7 +28,7 @@ describe('cloneDeep', () => {
     expect(copiedArr).not.toBe(originArray[0]);
   });
 
-  it('should also copy the object circular references deeply.', () => {
+  it('객체의 순환 참조도 깊게 복사해야 합니다', () => {
     const originObject = { origin: {} };
     originObject.origin = originObject;
 
@@ -39,7 +39,7 @@ describe('cloneDeep', () => {
     expect(copiedObject).not.toBe(originObject.origin);
   });
 
-  it('should deeply copy an object', () => {
+  it('객체를 깊게 복사해야 합니다', () => {
     const originObj = { a: 1, b: { c: 2, d: [0, 1] } };
     const copiedObj = cloneDeep(originObj);
 
@@ -48,7 +48,7 @@ describe('cloneDeep', () => {
     expect(copiedObj.b.d).not.toBe(originObj.b.d);
   });
 
-  it('should deeply copy a set', () => {
+  it('Set을 깊게 복사해야 합니다', () => {
     const originSet = new Set([1, 2, 3]);
     const copiedSet = cloneDeep(originSet);
 
@@ -56,7 +56,7 @@ describe('cloneDeep', () => {
     expect(copiedSet).not.toBe(originSet);
   });
 
-  it('should deeply copy a map', () => {
+  it('Map을 깊게 복사해야 합니다', () => {
     const originMap = new Map([
       ['a', 1],
       ['b', 2],
@@ -67,7 +67,7 @@ describe('cloneDeep', () => {
     expect(copiedMap).not.toBe(originMap);
   });
 
-  it('should deeply copy a date', () => {
+  it('Date를 깊게 복사해야 합니다', () => {
     const date = new Date();
     const copiedDate = cloneDeep(date);
 
@@ -75,7 +75,7 @@ describe('cloneDeep', () => {
     expect(copiedDate).not.toBe(date);
   });
 
-  it('should deeply copy a regex', () => {
+  it('정규식을 깊게 복사해야 합니다', () => {
     const regex = /test/gi;
     const copiedRegex = cloneDeep(regex);
 
