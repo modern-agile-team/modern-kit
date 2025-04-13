@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 1.9.0
+
+### Minor Changes
+
+- [#826](https://github.com/modern-agile-team/modern-kit/pull/826) [`f263b20`](https://github.com/modern-agile-team/modern-kit/commit/f263b207b3153b1961ee6ede81a183c14523f3d7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types: DeepRequired 신규 타입 추가 - @ssi02014
+
 ## 1.8.0
 
 ### Minor Changes
