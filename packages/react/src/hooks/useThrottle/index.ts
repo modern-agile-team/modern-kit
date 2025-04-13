@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { throttle } from 'lodash-es';
+import throttle from 'lodash-es/throttle';
 import { useUnmount } from '../useUnmount';
 import { usePreservedState } from '../usePreservedState';
 import { usePreservedCallback } from '../usePreservedCallback';
