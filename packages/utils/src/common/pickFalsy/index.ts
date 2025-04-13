@@ -1,50 +1,77 @@
-import { FALSY_MAPPER } from './internal';
+import { isNil, isBoolean, isNumber } from '../../validator';
+import { FALSY_CHECK_MAPPER } from './pickFalsy.utils';
 
-type FalsyMapperKeys = keyof typeof FALSY_MAPPER;
-type PickFalsyProps = Exclude<
-  FalsyMapperKeys,
-  'null' | 'undefined' | 'boolean'
->;
+type FalsyCheckKey = keyof typeof FALSY_CHECK_MAPPER;
 
 /**
  * @description 선택한 타입에 대한 falsy 체크 함수를 반환합니다.
  *
- * 필요하다면 `숫자 0`, `빈 문자열("")`, `빈 객체({})`, `빈 배열([])`에 대해 판단할 수 있습니다.
+ * `숫자 0`, `빈 문자열("")`, `빈 배열([])`, `빈 객체({})`를 falsy로 판단하고 싶지 않을 수 있습니다.
+ * 이때, 타입 인자를 설정해서 판단하고자 하는 타입을 지정할 수 있습니다.
  *
- * 인자가 없다면, 기본적으로 `boolean`, `null`, `undefined`에 대해서만 falsy 값 체크를 수행합니다.
+ * - 'number'를 지정하면 `숫자 0`을 falsy로 판단하지 않습니다.
+ * - 'string'을 지정하면 `빈 문자열("")`을 falsy로 판단하지 않습니다.
+ * - 'array'를 지정하면 `빈 배열([])`을 falsy로 판단하지 않습니다.
+ * - 'object'를 지정하면 `빈 객체({})`을 falsy로 판단하지 않습니다.
  *
- * @param arr - falsy를 체크하고자 하는 타입을 받습니다.
- * @returns {(value: unknown) => boolean} - 선택한 타입에 대한 falsy함수를 반환합니다. falsy를 체크하는 함수이기때문에 해당 함수로부터의 반환값이 true라면 falsy, false라면 truthy입니다.
+ * 기본적으로 `false`, `null`, `undefined`, `NaN`에 대해서만 falsy 체크를 수행합니다.
+ *
+ * @param {FalsyCheckKey[]} falsyCheckList - falsy를 체크하고자 하는 타입을 받습니다.
+ * @returns {(value: unknown) => boolean} - 선택한 타입에 대한 falsy함수를 반환합니다.
  *
  * @example
- * const isInvalidValue = pickFalsy()
+ * const isInvalidValue = pickFalsy();
  *
  * isInvalidValue(null) // true
- * isInvalidValue(undeinfed) // true
+ * isInvalidValue(undefined) // true
  * isInvalidValue(false) // true
+ * isInvalidValue(NaN) // true
+ *
  * isInvalidValue(0) // false
+ * isInvalidValue(-0) // false
  * isInvalidValue('') // false
  * isInvalidValue([]) // false
  * isInvalidValue({}) // false
  *
- * const isInvalidValue = pickFalsy('number', 'string', 'array', 'object')
+ * @example
+ * const isInvalidValue = pickFalsy('number');
  *
- * isInvalidValue(null) // true
- * isInvalidValue(undeinfed) // true
- * isInvalidValue(false) // true
  * isInvalidValue(0) // true
+ * isInvalidValue(-0) // true
+ *
+ * @example
+ * const isInvalidValue = pickFalsy('string');
+ *
  * isInvalidValue('') // true
+ *
+ * @example
+ * const isInvalidValue = pickFalsy('array');
+ *
  * isInvalidValue([]) // true
+ *
+ * @example
+ * const isInvalidValue = pickFalsy('object');
+ *
  * isInvalidValue({}) // true
  */
-
 export function pickFalsy(
-  ...arr: PickFalsyProps[]
-): (value: unknown) => boolean {
-  const defaultCheckList = ['null', 'undefined', 'boolean'];
+  ...falsyCheckList: FalsyCheckKey[]
+): <T>(value: T) => boolean {
   return function (value: unknown) {
-    const falsyCheckList = [...defaultCheckList, ...arr] as FalsyMapperKeys[];
+    if (isNil(value)) {
+      return true;
+    }
 
-    return falsyCheckList.some((falsyProp) => !!FALSY_MAPPER[falsyProp](value));
+    if (isNumber(value) && isNaN(value)) {
+      return true;
+    }
+
+    if (isBoolean(value) && value === false) {
+      return true;
+    }
+
+    return falsyCheckList.some(
+      (falsyProp) => !!FALSY_CHECK_MAPPER[falsyProp](value)
+    );
   };
 }
