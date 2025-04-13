@@ -1,5 +1,22 @@
 # @modern-kit/react
 
+## 2.2.0
+
+### Minor Changes
+
+- [#808](https://github.com/modern-agile-team/modern-kit/pull/808) [`1181db8`](https://github.com/modern-agile-team/modern-kit/commit/1181db88c9642582bfa26427738ca14d4bb79e00) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useIsClient 신규 후 추가 - @ssi02014
+
+- [#836](https://github.com/modern-agile-team/modern-kit/pull/836) [`08ca2a8`](https://github.com/modern-agile-team/modern-kit/commit/08ca2a88ce7b37365c1993224cc96005acfdd89d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useScrollEvent 훅 추가 - @ssi02014
+
+- [#801](https://github.com/modern-agile-team/modern-kit/pull/801) [`24cd332`](https://github.com/modern-agile-team/modern-kit/commit/24cd332c4f029754c5d0bd7bd70475d992a81b38) Thanks [@rhehfl](https://github.com/rhehfl)! - feat(react): useCallbackOnce 신규 훅 추가 - @rhehfl
+
+- [#810](https://github.com/modern-agile-team/modern-kit/pull/810) [`519804c`](https://github.com/modern-agile-team/modern-kit/commit/519804cbacd84367051341508da087fae4ec5621) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(react): useInputState 신규 훅 추가 - @zzzRYT
+
+### Patch Changes
+
+- Updated dependencies [[`f990cc2`](https://github.com/modern-agile-team/modern-kit/commit/f990cc209c74701e6ec17f187efd3986c71029af), [`6ef1107`](https://github.com/modern-agile-team/modern-kit/commit/6ef1107dc96b046f1f20ab11bd45850d3427fa6a), [`f263b20`](https://github.com/modern-agile-team/modern-kit/commit/f263b207b3153b1961ee6ede81a183c14523f3d7), [`a758f05`](https://github.com/modern-agile-team/modern-kit/commit/a758f05505faebc1a5309a7a751600092821bdaa), [`f263b20`](https://github.com/modern-agile-team/modern-kit/commit/f263b207b3153b1961ee6ede81a183c14523f3d7)]:
+  - @modern-kit/utils@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes

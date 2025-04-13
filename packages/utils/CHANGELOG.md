@@ -1,5 +1,21 @@
 # @modern-kit/utils
 
+## 2.2.0
+
+### Minor Changes
+
+- [#837](https://github.com/modern-agile-team/modern-kit/pull/837) [`6ef1107`](https://github.com/modern-agile-team/modern-kit/commit/6ef1107dc96b046f1f20ab11bd45850d3427fa6a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isOdd, isEven 유틸 함수 추가 - @ssi02014
+
+- [#826](https://github.com/modern-agile-team/modern-kit/pull/826) [`f263b20`](https://github.com/modern-agile-team/modern-kit/commit/f263b207b3153b1961ee6ede81a183c14523f3d7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): percentage 신규 유틸 함수 추가 - @ssi02014
+
+- [#824](https://github.com/modern-agile-team/modern-kit/pull/824) [`a758f05`](https://github.com/modern-agile-team/modern-kit/commit/a758f05505faebc1a5309a7a751600092821bdaa) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): number pacakge 생성 - @ssi02014
+
+- [#826](https://github.com/modern-agile-team/modern-kit/pull/826) [`f263b20`](https://github.com/modern-agile-team/modern-kit/commit/f263b207b3153b1961ee6ede81a183c14523f3d7) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): subtract 신규 함수 추가 - @ssi02014
+
+### Patch Changes
+
+- [#795](https://github.com/modern-agile-team/modern-kit/pull/795) [`f990cc2`](https://github.com/modern-agile-team/modern-kit/commit/f990cc209c74701e6ec17f187efd3986c71029af) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): flat, range, isReference 타입 개선 - @ssi02014
+
 ## 2.1.0
 
 ### Minor Changes
