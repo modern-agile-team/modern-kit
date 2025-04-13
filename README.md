@@ -159,6 +159,8 @@ type Result = Merge<A, B>
 - `@modern-kit/react`, `@modern-kit/utils`는 `SubPath`를 사용하여 개별 모듈을 불러올 수 있습니다.
 - 전체 모듈을 불러오는 것이 아닌 필요한 모듈만 직접 가져오기 때문에 `불 필요한 코드를 불러오는 것을 방지`할 수 있으며, `번들러가 모듈을 읽고, 식별하는 과정`을 최적화 할 수 있습니다.
 - 번들러가 개별 모듈을 더 잘 식별할 수 있기 때문에, `Tree-shaking`이 더욱 효과적으로 동작하도록 개선 할 수 있습니다. 이는 결과적으로 최종 번들 크기를 줄이는데 도움이 됩니다.
+- 버전 호환성 문제를 해결할 수 있습니다.
+  - 예를 들어, `useSyncExternalStore`의 경우 React v18 이상에서만 사용 가능합니다. 만약 React v17 이하에서 `modern-kit/react`을 사용하는 경우 `useSyncExternalStore`을 사용하지 않는 모듈을 가져오더라도 번들러가 전체 모듈을 불러오기 때문에 사용에 제한적입니다. 이때는 `SubPath`로 특정 모듈을 직접 가져오는 것으로 해결할 수 있습니다.
 
 ```tsx
 // tsconfig moduleResolution 옵션이 `node`일 경우
