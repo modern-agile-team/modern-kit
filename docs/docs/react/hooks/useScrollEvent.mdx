@@ -1,0 +1,153 @@
+import { useState } from 'react';
+import { useScrollEvent } from '@modern-kit/react';
+
+# useScrollEvent
+
+`useScrollEvent`는 특정 요소나 window의 스크롤 위치를 추적하는 React 커스텀 훅입니다. 스크롤 방향, 진행도, 위치 등 스크롤 관련 정보를 제공합니다.
+
+스크롤 이벤트 throttle 딜레이, 시작 시점 이벤트 무시 여부(leading), 마지막 이벤트 무시 여부(trailing), 스크롤 추적 기능 활성화 여부(enabled)를 설정할 수 있습니다.
+
+- `throttleDelay` 옵션을 통해 스크롤 이벤트 쓰로틀링 딜레이를 설정할 수 있습니다.
+- `throttleLeading` 옵션을 통해 스크롤 이벤트 쓰로틀링 시작 시점 이벤트 무시 여부를 설정할 수 있습니다.
+- `throttleTrailing` 옵션을 통해 스크롤 이벤트 쓰로틀링 마지막 이벤트 무시 여부를 설정할 수 있습니다.
+- `enabled` 옵션을 통해 스크롤 추적 기능을 활성화/비활성화할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollEvent/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseScrollProps {
+  throttleDelay?: number; // default: 0
+  throttleLeading?: boolean; // default: true
+  throttleTrailing?: boolean; // default: true
+  enabled?: boolean; // default: true
+}
+
+interface ScrollState {
+  scrollX: number;
+  scrollY: number;
+  scrollWidth: number;
+  scrollHeight: number;
+  direction: {
+    y: 'up' | 'down' | 'none'; // default: 'none'
+    x: 'left' | 'right' | 'none'; // default: 'none'
+  };
+  progress: {
+    y: number;
+    x: number;
+  };
+}
+```
+
+```ts title="typescript"
+function useScrollEvent<T extends HTMLElement>({
+  throttleDelay, // default: 0
+  throttleLeading, // default: true
+  throttleTrailing, // default: true
+  enabled, // default: true
+}: UseScrollProps = {}): {
+  ref: React.RefObject<T>;
+  scrollState: ScrollState;
+};
+```
+
+## Usage
+```tsx title="typescript"
+import { useScrollEvent } from '@modern-kit/react';
+
+const Example = () => {
+  const [enabled, setEnabled] = useState(true);
+  const { scrollState } = useScrollEvent({ enabled });
+  
+  // 특정 요소의 스크롤 위치 추적
+  const { ref, scrollState: containerScrollState } = useScrollEvent<HTMLDivElement>({
+    throttleDelay: 300,
+    enabled: true,
+  });
+  
+  return (
+    <div>
+      <button onClick={() => setEnabled(!enabled)}>
+        {enabled ? '스크롤 추적 비활성화' : '스크롤 추적 활성화'}
+      </button>
+      
+      <div style={{ marginTop: '20px' }}>
+        <h3>Window 스크롤 정보</h3>
+        <p>Scroll Y: {scrollState.scrollY}px</p>
+        <p>Direction Y: {scrollState.direction.y}</p>
+        <p>Progress Y: {Math.round(scrollState.progress.y * 100)}%</p>
+      </div>
+      
+      <div 
+        ref={ref} 
+        style={{ 
+          height: '200px', 
+          overflow: 'auto',
+          border: '1px solid #ccc',
+          marginTop: '20px',
+          padding: '10px'
+        }}
+      >
+        <div style={{ height: '500px', background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)' }}>
+          <h3>Container 스크롤 정보</h3>
+          <p>Scroll Y: {containerScrollState.scrollY}px</p>
+          <p>Direction Y: {containerScrollState.direction.y}</p>
+          <p>Progress Y: {containerScrollState.progress.y}%</p>
+          <p>스크롤을 움직여보세요</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [enabled, setEnabled] = useState(true);
+  const { scrollState } = useScrollEvent({ enabled });
+  
+  const { ref, scrollState: containerScrollState } = useScrollEvent({
+    throttleDelay: 300,
+    enabled,
+  });
+  
+  return (
+    <div>
+      <button onClick={() => setEnabled(!enabled)}>
+        {enabled ? '스크롤 추적 비활성화' : '스크롤 추적 활성화'}
+      </button>
+      
+      <div style={{ marginTop: '20px' }}>
+        <h3>Window 스크롤 정보</h3>
+        <p>Scroll Y: {scrollState.scrollY}px</p>
+        <p>Direction Y: {scrollState.direction.y}</p>
+        <p>Progress Y: {scrollState.progress.y}%</p>
+      </div>
+      
+      <div 
+        ref={ref} 
+        style={{ 
+          height: '200px', 
+          overflow: 'auto',
+          border: '1px solid #ccc',
+          marginTop: '20px',
+          padding: '10px'
+        }}
+      >
+        <div style={{ height: '500px', background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)' }}>
+          <h3>Container 스크롤 정보</h3>
+          <p>Scroll Y: {containerScrollState.scrollY}px</p>
+          <p>Direction Y: {containerScrollState.direction.y}</p>
+          <p>Progress Y: {containerScrollState.progress.y}%</p>
+          <p>스크롤을 움직여보세요</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+<Example />

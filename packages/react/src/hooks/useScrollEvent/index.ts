@@ -35,13 +35,17 @@ interface ScrollState {
 
 /**
  * @description 특정 요소나 window의 스크롤 위치를 추적하는 React 커스텀 훅입니다.
+ * 스크롤 방향, 진행도, 위치 등 스크롤 관련 정보를 제공합니다.
  *
  * @template T - HTMLElement를 상속하는 제네릭 타입
  * @param {UseScrollProps} props - 훅의 설정 객체
+ * @param {boolean} [props.enabled=true] - 스크롤 이벤트 활성화 여부
  * @param {number} [props.throttleDelay=0] - 스크롤 이벤트 쓰로틀링 딜레이(밀리초)
+ * @param {boolean} [props.throttleLeading=true] - 스크롤 이벤트 쓰로틀링 시작 시점 이벤트 무시 여부
+ * @param {boolean} [props.throttleTrailing=true] - 스크롤 이벤트 쓰로틀링 마지막 이벤트 무시 여부
  * @returns {{
- * ref: React.RefObject<T>;
- * scrollState: ScrollState;
+ *  ref: React.RefObject<T>;
+ *  scrollState: ScrollState;
  * }} 스크롤 관련 데이터와 ref
  * - `ref`: 스크롤을 추적할 요소에 연결할 ref 객체
  * - `scrollState.scrollX`: 현재 스크롤 위치의 X좌표
