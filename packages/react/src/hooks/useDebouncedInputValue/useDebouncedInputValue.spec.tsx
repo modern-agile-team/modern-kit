@@ -6,9 +6,11 @@ import { delay } from '@modern-kit/utils';
 
 const DELAY = 200;
 
-const TestComponent = () => {
-  const { value, debouncedValue, onChange, onReset } =
-    useDebouncedInputValue(DELAY);
+const TestComponent = ({ initialValue }: { initialValue?: string }) => {
+  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(
+    initialValue ?? '',
+    DELAY
+  );
   return (
     <>
       <input type="text" onChange={onChange} />
@@ -44,6 +46,33 @@ describe('useDebouncedInputValue', () => {
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
       expect(debouncedValue).toHaveTextContent('test');
+    });
+  });
+
+  it('initialValue이 제공되면 기본 값과 디바운스된 값이 초기화되야합니다.', async () => {
+    const { user } = renderSetup(<TestComponent initialValue="initial" />);
+
+    const input = screen.getByRole('textbox');
+    const defaultValue = screen.getByTestId('default-value');
+    const debouncedValue = screen.getByTestId('debounced-value');
+
+    expect(defaultValue).toHaveTextContent('initial');
+    expect(debouncedValue).toHaveTextContent('initial');
+
+    await user.type(input, 'initial test');
+
+    await delay(DELAY / 2);
+
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('initial');
+      expect(debouncedValue).toHaveTextContent('initial');
+    });
+
+    await delay(DELAY / 2);
+
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('initial test');
+      expect(debouncedValue).toHaveTextContent('initial test');
     });
   });
 
