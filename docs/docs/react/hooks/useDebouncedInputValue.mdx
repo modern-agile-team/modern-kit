@@ -18,6 +18,7 @@ type DebounceParameters = Parameters<typeof debounce>;
 ```
 ```ts title="typescript"
 function useDebouncedInputValue(
+  initialValue: string,
   wait: DebounceParameters[1],
   options?: DebounceParameters[2]
 ): {
@@ -54,7 +55,7 @@ const Example = () => {
 ## Example
 
 export const Example = () => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(500);
+  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue("initial", 500);
 
   return (
     <div>
