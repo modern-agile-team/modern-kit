@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@changesets/changelog-github", "npm:0.5.0"],\
-          ["@changesets/cli", "npm:2.28.0"],\
+          ["@changesets/cli", "npm:2.29.0"],\
           ["@eslint/js", "npm:9.23.0"],\
           ["@types/node", "npm:22.14.0"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.23.0"],\
@@ -5429,11 +5429,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@changesets/apply-release-plan", [\
-      ["npm:7.0.9", {\
-        "packageLocation": "./.yarn/cache/@changesets-apply-release-plan-npm-7.0.9-6700205923-6b1d91b8d6.zip/node_modules/@changesets/apply-release-plan/",\
+      ["npm:7.0.10", {\
+        "packageLocation": "./.yarn/cache/@changesets-apply-release-plan-npm-7.0.10-e2570993de-4ee5951448.zip/node_modules/@changesets/apply-release-plan/",\
         "packageDependencies": [\
-          ["@changesets/apply-release-plan", "npm:7.0.9"],\
-          ["@changesets/config", "npm:3.1.0"],\
+          ["@changesets/apply-release-plan", "npm:7.0.10"],\
+          ["@changesets/config", "npm:3.1.1"],\
           ["@changesets/get-version-range-type", "npm:0.4.0"],\
           ["@changesets/git", "npm:3.0.2"],\
           ["@changesets/should-skip-package", "npm:0.1.2"],\
@@ -5488,17 +5488,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@changesets/cli", [\
-      ["npm:2.28.0", {\
-        "packageLocation": "./.yarn/cache/@changesets-cli-npm-2.28.0-c6ad981a2c-46f56b2ebe.zip/node_modules/@changesets/cli/",\
+      ["npm:2.29.0", {\
+        "packageLocation": "./.yarn/cache/@changesets-cli-npm-2.29.0-b3630abdb6-2e70b63007.zip/node_modules/@changesets/cli/",\
         "packageDependencies": [\
-          ["@changesets/cli", "npm:2.28.0"],\
-          ["@changesets/apply-release-plan", "npm:7.0.9"],\
+          ["@changesets/cli", "npm:2.29.0"],\
+          ["@changesets/apply-release-plan", "npm:7.0.10"],\
           ["@changesets/assemble-release-plan", "npm:6.0.6"],\
           ["@changesets/changelog-git", "npm:0.2.1"],\
-          ["@changesets/config", "npm:3.1.0"],\
+          ["@changesets/config", "npm:3.1.1"],\
           ["@changesets/errors", "npm:0.2.0"],\
           ["@changesets/get-dependents-graph", "npm:2.1.3"],\
-          ["@changesets/get-release-plan", "npm:4.0.7"],\
+          ["@changesets/get-release-plan", "npm:4.0.8"],\
           ["@changesets/git", "npm:3.0.2"],\
           ["@changesets/logger", "npm:0.1.1"],\
           ["@changesets/pre", "npm:2.0.2"],\
@@ -5525,10 +5525,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@changesets/config", [\
-      ["npm:3.1.0", {\
-        "packageLocation": "./.yarn/cache/@changesets-config-npm-3.1.0-214a0361e7-5d382f37df.zip/node_modules/@changesets/config/",\
+      ["npm:3.1.1", {\
+        "packageLocation": "./.yarn/cache/@changesets-config-npm-3.1.1-a98dadf748-e6e529ca95.zip/node_modules/@changesets/config/",\
         "packageDependencies": [\
-          ["@changesets/config", "npm:3.1.0"],\
+          ["@changesets/config", "npm:3.1.1"],\
           ["@changesets/errors", "npm:0.2.0"],\
           ["@changesets/get-dependents-graph", "npm:2.1.3"],\
           ["@changesets/logger", "npm:0.1.1"],\
@@ -5575,12 +5575,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@changesets/get-release-plan", [\
-      ["npm:4.0.7", {\
-        "packageLocation": "./.yarn/cache/@changesets-get-release-plan-npm-4.0.7-44c6d8f921-ad3dbf6b1f.zip/node_modules/@changesets/get-release-plan/",\
+      ["npm:4.0.8", {\
+        "packageLocation": "./.yarn/cache/@changesets-get-release-plan-npm-4.0.8-cd2af5bcca-b638f83683.zip/node_modules/@changesets/get-release-plan/",\
         "packageDependencies": [\
-          ["@changesets/get-release-plan", "npm:4.0.7"],\
+          ["@changesets/get-release-plan", "npm:4.0.8"],\
           ["@changesets/assemble-release-plan", "npm:6.0.6"],\
-          ["@changesets/config", "npm:3.1.0"],\
+          ["@changesets/config", "npm:3.1.1"],\
           ["@changesets/pre", "npm:2.0.2"],\
           ["@changesets/read", "npm:0.6.3"],\
           ["@changesets/types", "npm:6.1.0"],\
@@ -21950,7 +21950,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["modern-kit", "workspace:."],\
           ["@changesets/changelog-github", "npm:0.5.0"],\
-          ["@changesets/cli", "npm:2.28.0"],\
+          ["@changesets/cli", "npm:2.29.0"],\
           ["@eslint/js", "npm:9.23.0"],\
           ["@types/node", "npm:22.14.0"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.23.0"],\
