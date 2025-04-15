@@ -53,7 +53,7 @@ export function useDebouncedInputValue(
   const onReset = useCallback(() => {
     setValue(initialValue);
     setDebouncedValue(initialValue);
-  }, [setDebouncedValue]);
+  }, [setDebouncedValue, initialValue]);
 
   return { value, debouncedValue, onChange, onReset };
 }
