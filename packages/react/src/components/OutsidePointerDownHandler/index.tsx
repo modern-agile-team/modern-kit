@@ -86,9 +86,12 @@ export const OutsidePointerDownHandler = polymorphicForwardRef<
     },
     ref
   ) => {
-    const targetRef = useOutsidePointerDown<HTMLElement>(onPointerDown, {
-      excludeRefs,
-    });
+    const { ref: targetRef } = useOutsidePointerDown<HTMLElement>(
+      onPointerDown,
+      {
+        excludeRefs,
+      }
+    );
 
     const Wrapper = asChild ? Slot : as;
 
