@@ -6,7 +6,7 @@ import { useRef } from 'react';
 
 const TestComponent = ({ onAction }: { onAction: () => void }) => {
   const excludeRef = useRef<HTMLDivElement>(null);
-  const targetRef = useOutsidePointerDown<HTMLDivElement>(onAction, {
+  const { ref: targetRef } = useOutsidePointerDown<HTMLDivElement>(onAction, {
     excludeRefs: [excludeRef],
   });
 
