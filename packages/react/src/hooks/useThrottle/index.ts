@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import throttle from 'lodash-es/throttle';
 import { useUnmount } from '../useUnmount';
-import { usePreservedState } from '../usePreservedState';
 import { usePreservedCallback } from '../usePreservedCallback';
 
 export type ThrottleParameters = Parameters<typeof throttle>;
@@ -29,11 +28,11 @@ export function useThrottle<T extends ThrottleParameters[0]>(
   options: ThrottleParameters[2] = {}
 ): ThrottleReturnType<T> {
   const callbackAction = usePreservedCallback(callback);
-  const preservedOptions = usePreservedState(options);
+  const { leading = true, trailing = true } = options ?? {};
 
   const throttled = useMemo(() => {
-    return throttle(callbackAction, wait, preservedOptions);
-  }, [callbackAction, wait, preservedOptions]);
+    return throttle(callbackAction, wait, { leading, trailing });
+  }, [callbackAction, wait, leading, trailing]);
 
   // 언마운트 시 쓰로틀 된 함수의 보류 중인 호출을 모두 버립니다.
   useUnmount(() => throttled.cancel());

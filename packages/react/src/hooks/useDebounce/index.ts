@@ -2,7 +2,6 @@ import debounce from 'lodash-es/debounce';
 import { useMemo } from 'react';
 import { useUnmount } from '../useUnmount';
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
-import { usePreservedState } from '../../hooks/usePreservedState';
 
 export type DebounceParameters = Parameters<typeof debounce>;
 export type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
@@ -27,14 +26,14 @@ export type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
 export function useDebounce<T extends DebounceParameters[0]>(
   callback: T,
   wait: DebounceParameters[1],
-  options?: DebounceParameters[2]
+  options: DebounceParameters[2] = {}
 ): DebounceReturnType<T> {
   const callbackAction = usePreservedCallback(callback);
-  const preservedOptions = usePreservedState(options);
+  const { leading = false, trailing = true, maxWait } = options ?? {};
 
   const debounced = useMemo(() => {
-    return debounce(callbackAction, wait, preservedOptions);
-  }, [callbackAction, wait, preservedOptions]);
+    return debounce(callbackAction, wait, { leading, trailing, maxWait });
+  }, [callbackAction, wait, leading, trailing, maxWait]);
 
   // 언마운트 시 디바운스 된 함수의 보류 중인 호출을 모두 버립니다.
   useUnmount(() => debounced.cancel());
