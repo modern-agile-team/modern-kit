@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 2.2.1
+
+### Patch Changes
+
+- [#845](https://github.com/modern-agile-team/modern-kit/pull/845) [`9c979b8`](https://github.com/modern-agile-team/modern-kit/commit/9c979b8c6a2a853789fa8145f868f545fb7182ba) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useDebouncedInputValue 옵션 개선 - @ssi02014
+
+- [#845](https://github.com/modern-agile-team/modern-kit/pull/845) [`9c979b8`](https://github.com/modern-agile-team/modern-kit/commit/9c979b8c6a2a853789fa8145f868f545fb7182ba) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useDebouncedInputValue initialValue prop 추가 및 onClear 함수 추가 - @ssi02014
+
 ## 2.2.0
 
 ### Minor Changes
