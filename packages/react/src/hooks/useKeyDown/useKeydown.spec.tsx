@@ -10,7 +10,7 @@ const WindowComponent = (props: Parameters<typeof useKeyDown>[0]) => {
 };
 
 const TargetTestComponent = (props: Parameters<typeof useKeyDown>[0]) => {
-  const targetRef = useKeyDown<HTMLButtonElement>(props);
+  const { ref: targetRef } = useKeyDown<HTMLButtonElement>(props);
 
   return <button ref={targetRef}>버튼</button>;
 };
