@@ -26,6 +26,7 @@ function useDebouncedInputValue(
   debouncedValue: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onReset: () => void;
+  onClear: () => void;
 };
 ```
 
@@ -35,7 +36,7 @@ import { useState } from 'react';
 import { useDebouncedInputValue } from '@modern-kit/react';
 
 const Example = () => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(500);
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue(500);
 
   return (
     <div>
@@ -46,6 +47,7 @@ const Example = () => {
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
+        <button onClick={onClear}>Clear 버튼</button>
       </div>
     </div>
   );
@@ -55,7 +57,7 @@ const Example = () => {
 ## Example
 
 export const Example = () => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue("initial", 500);
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue("initial", 500);
 
   return (
     <div>
@@ -66,6 +68,7 @@ export const Example = () => {
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
+        <button onClick={onClear}>Clear 버튼</button>
       </div>
     </div>
   );
