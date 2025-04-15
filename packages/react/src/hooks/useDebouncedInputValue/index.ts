@@ -5,7 +5,7 @@ import { useDebouncedState } from '../../hooks/useDebouncedState';
 interface UseDebouncedInputValueReturnType {
   value: string;
   debouncedValue: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   onReset: () => void;
   onClear: () => void;
 }
@@ -47,8 +47,7 @@ export function useDebouncedInputValue(
   );
 
   const onChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+    (value: string) => {
       setValue(value);
       setDebouncedValue(value);
     },

@@ -24,7 +24,7 @@ function useDebouncedInputValue(
 ): {
   value: string;
   debouncedValue: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   onReset: () => void;
   onClear: () => void;
 };
@@ -43,7 +43,7 @@ const Example = () => {
       <p>현재 입력 값: {value}</p>
       <p>디바운싱 입력 값: {debouncedValue}</p>
       <div>
-        <input type='text' onChange={onChange} value={value} />
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
@@ -64,7 +64,7 @@ export const Example = () => {
       <p>현재 입력 값: {value}</p>
       <p>디바운싱 입력 값: {debouncedValue}</p>
       <div>
-        <input type='text' onChange={onChange} value={value} />
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
