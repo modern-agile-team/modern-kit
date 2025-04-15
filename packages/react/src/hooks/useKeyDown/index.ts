@@ -35,7 +35,7 @@ interface UseKeyDownProps {
  * @example
  * ```tsx
  * // 특정 요소에 이벤트 바인딩
- * const inputRef = useKeyDown<HTMLInputElement>({
+ * const { ref: inputRef } = useKeyDown<HTMLInputElement>({
  *   enabled: true,
  *   keyDownCallbackMap: {
  *     Enter: (event) => console.log('Enter', event),
