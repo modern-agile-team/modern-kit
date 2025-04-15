@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { type DebounceParameters } from '../../hooks/useDebounce';
 import { useDebouncedState } from '../../hooks/useDebouncedState';
 
