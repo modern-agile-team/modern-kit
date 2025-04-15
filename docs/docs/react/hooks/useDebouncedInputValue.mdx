@@ -24,8 +24,9 @@ function useDebouncedInputValue(
 ): {
   value: string;
   debouncedValue: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   onReset: () => void;
+  onClear: () => void;
 };
 ```
 
@@ -35,17 +36,18 @@ import { useState } from 'react';
 import { useDebouncedInputValue } from '@modern-kit/react';
 
 const Example = () => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(500);
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue(500);
 
   return (
     <div>
       <p>현재 입력 값: {value}</p>
       <p>디바운싱 입력 값: {debouncedValue}</p>
       <div>
-        <input type='text' onChange={onChange} value={value} />
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
+        <button onClick={onClear}>Clear 버튼</button>
       </div>
     </div>
   );
@@ -55,17 +57,18 @@ const Example = () => {
 ## Example
 
 export const Example = () => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue("initial", 500);
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue("initial", 500);
 
   return (
     <div>
       <p>현재 입력 값: {value}</p>
       <p>디바운싱 입력 값: {debouncedValue}</p>
       <div>
-        <input type='text' onChange={onChange} value={value} />
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
       </div>
       <div>
         <button onClick={onReset}>Reset 버튼</button>
+        <button onClick={onClear}>Clear 버튼</button>
       </div>
     </div>
   );

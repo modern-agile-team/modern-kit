@@ -4,17 +4,16 @@ import { useDebouncedInputValue } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { delay } from '@modern-kit/utils';
 
-const DELAY = 200;
+const DELAY = 100;
 
 const TestComponent = ({ initialValue }: { initialValue?: string }) => {
-  const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(
-    initialValue ?? '',
-    DELAY
-  );
+  const { value, debouncedValue, onChange, onReset, onClear } =
+    useDebouncedInputValue(initialValue ?? '', DELAY);
   return (
     <>
-      <input type="text" onChange={onChange} />
+      <input type="text" onChange={(e) => onChange(e.target.value)} />
       <button onClick={onReset}>reset</button>
+      <button onClick={onClear}>clear</button>
       <p data-testId="default-value">{value}</p>
       <p data-testId="debounced-value">{debouncedValue}</p>
     </>
@@ -59,33 +58,32 @@ describe('useDebouncedInputValue', () => {
     expect(defaultValue).toHaveTextContent('initial');
     expect(debouncedValue).toHaveTextContent('initial');
 
-    await user.type(input, 'initial test');
-
+    await user.type(input, 'test');
     await delay(DELAY / 2);
 
     await waitFor(() => {
-      expect(defaultValue).toHaveTextContent('initial');
+      expect(defaultValue).toHaveTextContent('test');
       expect(debouncedValue).toHaveTextContent('initial');
     });
 
     await delay(DELAY / 2);
 
     await waitFor(() => {
-      expect(defaultValue).toHaveTextContent('initial test');
-      expect(debouncedValue).toHaveTextContent('initial test');
+      expect(defaultValue).toHaveTextContent('test');
+      expect(debouncedValue).toHaveTextContent('test');
     });
   });
 
   it('reset 함수가 호출되면 기본 값과 디바운스된 값이 모두 초기화되야합니다.', async () => {
-    const { user } = renderSetup(<TestComponent />);
+    const { user } = renderSetup(<TestComponent initialValue="initial" />);
 
     const input = screen.getByRole('textbox');
-    const resetButton = screen.getByRole('button');
+    const resetButton = screen.getByRole('button', { name: 'reset' });
     const defaultValue = screen.getByTestId('default-value');
     const debouncedValue = screen.getByTestId('debounced-value');
 
-    expect(defaultValue).toHaveTextContent('');
-    expect(debouncedValue).toHaveTextContent('');
+    expect(defaultValue).toHaveTextContent('initial');
+    expect(debouncedValue).toHaveTextContent('initial');
 
     await user.type(input, 'test');
     await delay(DELAY);
@@ -96,7 +94,33 @@ describe('useDebouncedInputValue', () => {
     });
 
     await user.click(resetButton);
+
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('initial');
+      expect(debouncedValue).toHaveTextContent('initial');
+    });
+  });
+
+  it('clear 함수가 호출되면 기본 값과 디바운스된 값이 모두 초기화되야합니다.', async () => {
+    const { user } = renderSetup(<TestComponent initialValue="initial" />);
+
+    const input = screen.getByRole('textbox');
+    const clearButton = screen.getByRole('button', { name: 'clear' });
+    const defaultValue = screen.getByTestId('default-value');
+    const debouncedValue = screen.getByTestId('debounced-value');
+
+    expect(defaultValue).toHaveTextContent('initial');
+    expect(debouncedValue).toHaveTextContent('initial');
+
+    await user.type(input, 'test');
     await delay(DELAY);
+
+    await waitFor(() => {
+      expect(defaultValue).toHaveTextContent('test');
+      expect(debouncedValue).toHaveTextContent('test');
+    });
+
+    await user.click(clearButton);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('');

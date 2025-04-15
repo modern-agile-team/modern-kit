@@ -1,12 +1,13 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { type DebounceParameters } from '../../hooks/useDebounce';
 import { useDebouncedState } from '../../hooks/useDebouncedState';
 
 interface UseDebouncedInputValueReturnType {
   value: string;
   debouncedValue: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   onReset: () => void;
+  onClear: () => void;
 }
 
 /**
@@ -18,11 +19,15 @@ interface UseDebouncedInputValueReturnType {
  * @param {DebounceParameters[1]} [wait] - 입력 값에 디바운싱을 적용할 때의 지연 시간(밀리초)입니다.
  * @param {DebounceParameters[2]} [options={}] - 디바운스 동작에 대한 선택적 구성 옵션입니다.
  *
- * @returns {UseDebouncedInputValueReturnType} - 현재 입력 값(`value`), 디바운싱된 입력 값(`debouncedValue`),
- * 입력 값을 업데이트하는 함수(`onChange`), 그리고 두 값을 모두 리셋하는 함수(`onReset`)을 포함하는 객체를 반환합니다.
+ * @returns {UseDebouncedInputValueReturnType}
+ * - `value`: 현재 입력 값
+ * - `debouncedValue`: 디바운싱된 입력 값
+ * - `onChange`: 입력 값을 업데이트하는 함수
+ * - `onReset`: 두 값을 초기값(initialValue)으로 초기화하는 함수
+ * - `onClear`: 두 값을 빈 문자열('')로 초기화하는 함수
  *
  * @example
- * const { value, debouncedValue, onChange, onReset } = useDebouncedInputValue(300);
+ * const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue(300);
  *
  * onChange('test');
  *
@@ -42,8 +47,7 @@ export function useDebouncedInputValue(
   );
 
   const onChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+    (value: string) => {
       setValue(value);
       setDebouncedValue(value);
     },
@@ -53,7 +57,12 @@ export function useDebouncedInputValue(
   const onReset = useCallback(() => {
     setValue(initialValue);
     setDebouncedValue(initialValue);
+  }, [setDebouncedValue, initialValue]);
+
+  const onClear = useCallback(() => {
+    setValue('');
+    setDebouncedValue('');
   }, [setDebouncedValue]);
 
-  return { value, debouncedValue, onChange, onReset };
+  return { value, debouncedValue, onChange, onReset, onClear };
 }
