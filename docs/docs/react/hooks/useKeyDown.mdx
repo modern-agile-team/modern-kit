@@ -30,23 +30,18 @@ interface UseKeyDownProps {
 }
 ```
 ```ts title="typescript"
+// 함수 오버로딩
 function useKeyDown({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): RefObject<Window>;
+}: UseKeyDownProps): { ref: RefObject<Window> };
 
 function useKeyDown<T extends HTMLElement>({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): RefObject<T>;
-
-function useKeyDown<T extends HTMLElement>({
-  enabled,
-  keyDownCallbackMap,
-  allKeyDownCallback,
-}: UseKeyDownProps): RefObject<Window | T> 
+}: UseKeyDownProps): { ref: RefObject<T> };
 ```
 
 ## Usage

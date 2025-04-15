@@ -51,19 +51,19 @@ export function useKeyDown({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): RefObject<Window>;
+}: UseKeyDownProps): { ref: RefObject<Window> };
 
 export function useKeyDown<T extends HTMLElement>({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): RefObject<T>;
+}: UseKeyDownProps): { ref: RefObject<T> };
 
 export function useKeyDown<T extends HTMLElement>({
   enabled = true,
   keyDownCallbackMap = {},
   allKeyDownCallback,
-}: UseKeyDownProps): RefObject<Window | T> {
+}: UseKeyDownProps): { ref: RefObject<Window | T> } {
   const targetRef = useRef<T | null | Window>(null);
 
   const onKeyDown = usePreservedCallback((event: KeyboardEvent) => {
@@ -103,5 +103,5 @@ export function useKeyDown<T extends HTMLElement>({
       );
   }, [enabled, onKeyDown]);
 
-  return targetRef;
+  return { ref: targetRef };
 }

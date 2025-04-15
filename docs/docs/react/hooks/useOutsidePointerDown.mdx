@@ -22,7 +22,7 @@ function useOutsidePointerDown<T extends HTMLElement>(
   options?: {
     excludeRefs: React.RefObject<HTMLElement>[];
   }
-): React.RefObject<T>;
+): { ref: React.RefObject<T> };
 ```
 
 ## Usage

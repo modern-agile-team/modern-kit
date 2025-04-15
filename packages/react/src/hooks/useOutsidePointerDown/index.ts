@@ -56,7 +56,7 @@ import { useEventListener } from '../useEventListener';
 export function useOutsidePointerDown<T extends HTMLElement>(
   callback: (targetElement: T) => void,
   options?: { excludeRefs: React.RefObject<HTMLElement>[] }
-): React.RefObject<T> {
+): { ref: React.RefObject<T> } {
   const { excludeRefs } = options ?? {};
   const targetRef = useRef<T>(null);
   const eventType = useMemo(
@@ -85,5 +85,5 @@ export function useOutsidePointerDown<T extends HTMLElement>(
     handleOutsidePointerDown
   );
 
-  return targetRef;
+  return { ref: targetRef };
 }
