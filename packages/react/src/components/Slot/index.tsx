@@ -1,10 +1,10 @@
-import { mergeRefs } from '../../hooks/useMergeRefs';
+import { useMergeRefs } from '../../hooks/useMergeRefs';
 import { mergeProps, getElementRef } from './Slot.utils';
 import React from 'react';
 
-export type SlotProps = React.PropsWithChildren<
-  React.HTMLAttributes<HTMLElement>
->;
+export interface SlotProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+}
 
 /**
  * @description 주어진 Props를 직계 자식 컴포넌트에 병합하고, 자식 컴포넌트를 렌더링하는 컴포넌트입니다.
@@ -85,34 +85,46 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
 
 Slot.displayName = 'Slot';
 
+interface SlotCloneProps {
+  children: React.ReactNode;
+}
+
 /**
  * @description Slot의 자식 요소를 복제하고, slotProps와 자식 요소의 props를 병합한다.
  */
-const SlotClone = React.forwardRef<HTMLElement, React.PropsWithChildren>(
+const SlotClone = React.forwardRef<HTMLElement, SlotCloneProps>(
   (props, forwardedRef) => {
     const { children, ...slotProps } = props;
 
-    if (React.isValidElement(children)) {
-      const childrenRef = getElementRef(children);
-      return React.cloneElement(children, {
-        ...mergeProps(slotProps, children.props), // props 병합
-        // @ts-expect-error NOTE: 에러 무시
-        ref: forwardedRef ? mergeRefs(forwardedRef, childrenRef) : childrenRef, // ref 병합
-      });
+    const childRef = React.isValidElement(children)
+      ? getElementRef(children)
+      : null;
+    const mergedRef = useMergeRefs(forwardedRef, childRef);
+
+    if (!React.isValidElement(children)) {
+      return React.Children.count(children) > 1
+        ? React.Children.only(null)
+        : null;
     }
 
-    return React.Children.count(children) > 1
-      ? React.Children.only(null)
-      : null;
+    return React.cloneElement(children, {
+      ...mergeProps(slotProps, children.props as Record<string, any>),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      ref: forwardedRef ? mergedRef : childRef,
+    });
   }
 );
 
 SlotClone.displayName = 'SlotClone';
 
+interface SlottableProps {
+  children: React.ReactNode;
+}
 /**
  * @description Slot 컴포넌트의 자식 요소로 사용되며, Slot이 렌더링할 대상이다.
  */
-export const Slottable = ({ children }: React.PropsWithChildren) => {
+export const Slottable = ({ children }: SlottableProps) => {
   return <>{children}</>;
 };
 

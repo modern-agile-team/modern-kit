@@ -4,7 +4,7 @@ import {
   UseIntersectionObserverProps,
 } from '../../hooks/useIntersectionObserver';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
-import { mergeRefs } from '../../utils/mergeRefs';
+import { useMergeRefs } from '../../hooks/useMergeRefs';
 import { Slot } from '../../components/Slot';
 
 interface InViewProps extends UseIntersectionObserverProps {
@@ -107,7 +107,7 @@ export const InView = polymorphicForwardRef<'div', InViewProps>(
 
     return (
       <InViewWrapper
-        ref={mergeRefs(ref, intersectionObserverRef)}
+        ref={useMergeRefs(ref, intersectionObserverRef)}
         {...restProps}>
         {children}
       </InViewWrapper>
