@@ -3,7 +3,7 @@ import { mergeProps, getElementRef } from './Slot.utils';
 import React from 'react';
 
 export interface SlotProps extends React.HTMLAttributes<HTMLElement> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 /**
@@ -119,8 +119,9 @@ const SlotClone = React.forwardRef<HTMLElement, SlotCloneProps>(
 SlotClone.displayName = 'SlotClone';
 
 interface SlottableProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
+
 /**
  * @description Slot 컴포넌트의 자식 요소로 사용되며, Slot이 렌더링할 대상이다.
  */
