@@ -20,6 +20,18 @@ describe('formatCurrencyKRWWithUnits', () => {
     expect(formatCurrencyKRWWithUnits('123456789')).toBe('1억 2,345만 6,789원');
   });
 
+  it('commas 옵션을 통해 쉼표를 사용할 수 있어야 합니다.', () => {
+    expect(formatCurrencyKRWWithUnits(123456789, { commas: false })).toBe(
+      '1억 2345만 6789원'
+    );
+  });
+
+  it('decimal 옵션을 통해 소수점을 허용할 수 있어야 합니다.', () => {
+    expect(formatCurrencyKRWWithUnits(123456789.12, { decimal: 2 })).toBe(
+      '1억 2,345만 6,789.12원'
+    );
+  });
+
   it('유효하지 않은 입력에 대해 에러를 발생시켜야 합니다', () => {
     expect(() => formatCurrencyKRWWithUnits('invalid')).toThrow(
       'value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.'

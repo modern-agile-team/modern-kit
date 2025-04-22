@@ -1,6 +1,11 @@
 import { formatValueWithSymbol } from '../formatValueWithSymbol';
 import { formatNumberWithUnits } from '../formatNumberWithUnits';
 
+type FormatCurrencyKRWWithUnitsOptions = Omit<
+  Parameters<typeof formatNumberWithUnits>[1],
+  'units'
+>;
+
 const KRW_UNITS = [
   { unit: '조', value: 1_000_000_000_000 },
   { unit: '억', value: 100_000_000 },
@@ -24,10 +29,21 @@ const KRW_SYMBOL_OPTIONS = {
  *
  * formatCurrencyKRWWithUnits(123456789);
  * // '1억 2,345만 6,789원'
+ *
+ * @example
+ * formatCurrencyKRWWithUnits(123456789, { commas: false });
+ * // '1억 2345만 6789원'
+ *
+ * @example
+ * formatCurrencyKRWWithUnits(123456789.12, { decimal: 2 });
+ * // '1억 2,345만 6,789.12원'
  */
-export function formatCurrencyKRWWithUnits(value: number | string): string {
+export function formatCurrencyKRWWithUnits(
+  value: number | string,
+  options?: FormatCurrencyKRWWithUnitsOptions
+): string {
   return formatValueWithSymbol(
-    formatNumberWithUnits(value, { units: KRW_UNITS }),
+    formatNumberWithUnits(value, { units: KRW_UNITS, ...options }),
     KRW_SYMBOL_OPTIONS
   );
 }

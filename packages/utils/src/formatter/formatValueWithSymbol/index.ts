@@ -1,8 +1,13 @@
+interface FormatValueWithSymbolOptions {
+  symbol: string;
+  position?: 'prefix' | 'suffix' | 'both';
+}
+
 /**
  * @description 주어진 숫자 또는 문자열에 주어진 기호를 추가하고, 기호의 위치를 지정합니다.
  *
  * @param {number | string} value - 기호를 추가할 숫자 또는 문자열
- * @param {Object} options - 기호와 위치 옵션
+ * @param {FormatValueWithSymbolOptions} options - 기호와 위치 옵션
  * @param {string} options.symbol - 기호
  * @param {'prefix' | 'suffix' | 'both'} [options.position='suffix'] - 기호의 위치
  * @returns {string} 기호가 추가된 문자열
@@ -19,7 +24,7 @@
  */
 export function formatValueWithSymbol(
   value: number | string,
-  options: { symbol: string; position?: 'prefix' | 'suffix' | 'both' }
+  options: FormatValueWithSymbolOptions
 ): string {
   const { symbol, position = 'suffix' } = options;
 

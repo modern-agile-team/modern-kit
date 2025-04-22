@@ -9,12 +9,16 @@ interface Unit {
 interface FormatNumberWithUnitsOptions {
   units: Unit[] | readonly Unit[];
   commas?: boolean;
+  decimal?: number;
 }
 
 /**
  * @description 쉼표 사용 여부에 따라 숫자를 포맷팅하는 함수
  */
-const formatNumberWithConditionalCommas = (value: number, commas: boolean) => {
+const formatNumberWithConditionalCommas = (
+  value: number | string,
+  commas: boolean
+) => {
   return commas ? formatNumberWithCommas(value) : value;
 };
 
@@ -25,16 +29,19 @@ const getFormattedNumberWithUnits = (
   value: number,
   options: FormatNumberWithUnitsOptions
 ) => {
-  const { units, commas = true } = options;
+  const { units, commas = true, decimal = 0 } = options;
   const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
+  const absoluteValue = Math.abs(value);
+  const isNegative = value < 0;
+
   let formattedResult = '';
-  let remainingValue = value;
+  let remainingValue = absoluteValue;
 
   // unit 별로 나누기
   for (let i = 0; i < sortedUnits.length; i++) {
-    const { unit, value } = units[i];
-    const quotient = Math.floor(remainingValue / value);
+    const { unit, value: unitValue } = units[i];
+    const quotient = Math.floor(remainingValue / unitValue);
     const space = ' ';
 
     if (quotient <= 0) continue;
@@ -43,18 +50,18 @@ const getFormattedNumberWithUnits = (
       quotient,
       commas
     )}${unit}${space}`;
-    remainingValue %= value;
+    remainingValue %= unitValue;
   }
 
   // 남은 값이 있으면 추가
   if (remainingValue > 0) {
     formattedResult += `${formatNumberWithConditionalCommas(
-      remainingValue,
+      remainingValue.toFixed(decimal),
       commas
     )}`;
   }
 
-  return formattedResult.trim();
+  return isNegative ? `-${formattedResult.trim()}` : formattedResult.trim();
 };
 
 /**
@@ -64,6 +71,7 @@ const getFormattedNumberWithUnits = (
  * @param {FormatNumberWithUnitsOptions} options - 포맷팅 옵션
  * @param {Unit[]} options.units - 사용할 단위 배열
  * @param {boolean} [options.commas=true] - 쉼표 사용 여부
+ * @param {number} [options.decimal=0] - 소수점 자리수
  * @returns {string} 포맷팅된 문자열
  * @throws 주어진 숫자가 숫자 혹은 숫자로 이뤄진 문자열이 아닐 경우 에러 발생
  *
@@ -73,15 +81,25 @@ const getFormattedNumberWithUnits = (
  *   { unit: '만', value: 10_000 },
  * ] as const;
  *
- * formatNumberWithUnits(123456789, {
- *   units: KRW_UNITS,
- * }) // "1억 2,345만 6,789"
+ * formatNumberWithUnits(123456789, { units: KRW_UNITS })
+ * // "1억 2,345만 6,789"
+ *
+ * formatNumberWithUnits(-123456789, { units: KRW_UNITS })
+ * // "-1억 2,345만 6,789"
  *
  * @example
+ * // 콤마 사용 여부
  * formatNumberWithUnits(123456789, {
  *   units: KRW_UNITS,
  *   commas: false,
  * }) // "1억 2345만 6789"
+ *
+ * @example
+ * // 소수점 허용 여부
+ * formatNumberWithUnits(123456789.12, {
+ *   units: KRW_UNITS,
+ *   decimal: 2,
+ * }) // "1억 2,345만 6,789.12"
  */
 export function formatNumberWithUnits(
   value: number | string,
