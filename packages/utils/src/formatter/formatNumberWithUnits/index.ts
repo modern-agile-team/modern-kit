@@ -91,17 +91,15 @@ const getFormattedNumberWithUnits = (
  *
  * @example
  * // 콤마 사용 여부
- * formatNumberWithUnits(123456789, {
- *   units: KRW_UNITS,
- *   commas: false,
- * }) // "1억 2345만 6789"
+ * formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: false })
+ * formatNumberWithUnits('123456789', { units: KRW_UNITS, commas: false })
+ * // "1억 2345만 6789"
  *
  * @example
  * // 소수점 허용 여부
- * formatNumberWithUnits(123456789.12, {
- *   units: KRW_UNITS,
- *   decimal: 2,
- * }) // "1억 2,345만 6,789.12"
+ * formatNumberWithUnits(123456789.12, { units: KRW_UNITS, decimal: 2 })
+ * formatNumberWithUnits('123456789.12', { units: KRW_UNITS, decimal: 2 })
+ * // "1억 2,345만 6,789.12"
  */
 export function formatNumberWithUnits(
   value: number | string,
