@@ -38,12 +38,16 @@ const KRW_UNITS = [
 ] as const;
 
 formatNumberWithUnits(1234567, { units: KRW_UNITS }) // "123만 4,567"
+formatNumberWithUnits('1234567', { units: KRW_UNITS }) // "123만 4,567"
+
 formatNumberWithUnits(-1234567, { units: KRW_UNITS }) // "-123만 4,567", 음수 처리
-formatNumberWithUnits('1234567', { units: KRW_UNITS }) // "123만 4,567", 숫자로 이루어진 문자열 허용
+formatNumberWithUnits('-1234567', { units: KRW_UNITS }) // "-123만 4,567", 음수 처리
 
 // 쉼표 사용 여부
 formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
+formatNumberWithUnits('1234567', { units: KRW_UNITS, commas: false }) // "123만 4567"
 
 // 소수점 허용 여부
 formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
+formatNumberWithUnits('1234567.123', { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
 ```

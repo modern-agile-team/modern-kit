@@ -82,9 +82,11 @@ const getFormattedNumberWithUnits = (
  * ] as const;
  *
  * formatNumberWithUnits(123456789, { units: KRW_UNITS })
+ * formatNumberWithUnits('123456789', { units: KRW_UNITS })
  * // "1억 2,345만 6,789"
  *
  * formatNumberWithUnits(-123456789, { units: KRW_UNITS })
+ * formatNumberWithUnits('-123456789', { units: KRW_UNITS })
  * // "-1억 2,345만 6,789"
  *
  * @example

@@ -25,10 +25,16 @@ describe('formatCurrencyKRWWithUnits', () => {
     expect(formatCurrencyKRWWithUnits(123456789, { commas: false })).toBe(
       '1억 2345만 6789원'
     );
+    expect(formatCurrencyKRWWithUnits('123456789', { commas: false })).toBe(
+      '1억 2345만 6789원'
+    );
   });
 
   it('decimal 옵션을 통해 소수점을 허용할 수 있어야 합니다.', () => {
     expect(formatCurrencyKRWWithUnits(123456789.12, { decimal: 2 })).toBe(
+      '1억 2,345만 6,789.12원'
+    );
+    expect(formatCurrencyKRWWithUnits('123456789.12', { decimal: 2 })).toBe(
       '1억 2,345만 6,789.12원'
     );
   });

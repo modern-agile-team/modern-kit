@@ -25,17 +25,21 @@ const KRW_SYMBOL_OPTIONS = {
  *
  * @example
  * formatCurrencyKRWWithUnits(1234567890123);
+ * formatCurrencyKRWWithUnits('1234567890123');
  * // '1조 2,345억 6,789만 123원'
  *
  * formatCurrencyKRWWithUnits(123456789);
+ * formatCurrencyKRWWithUnits('123456789');
  * // '1억 2,345만 6,789원'
  *
  * @example
  * formatCurrencyKRWWithUnits(123456789, { commas: false });
+ * formatCurrencyKRWWithUnits('123456789', { commas: false });
  * // '1억 2345만 6789원'
  *
  * @example
  * formatCurrencyKRWWithUnits(123456789.12, { decimal: 2 });
+ * formatCurrencyKRWWithUnits('123456789.12', { decimal: 2 });
  * // '1억 2,345만 6,789.12원'
  */
 export function formatCurrencyKRWWithUnits(
