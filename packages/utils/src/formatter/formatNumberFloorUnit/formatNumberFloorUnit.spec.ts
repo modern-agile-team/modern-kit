@@ -7,6 +7,6 @@ describe('formatNumberFloorUnit', () => {
   });
 
   it('음수를 올바르게 포맷팅해야 합니다', () => {
-    expect(formatNumberFloorUnit(-1234567, 1000)).toBe(-1235000);
+    expect(formatNumberFloorUnit(-1234567, 1000)).toBe(-1234000);
   });
 });

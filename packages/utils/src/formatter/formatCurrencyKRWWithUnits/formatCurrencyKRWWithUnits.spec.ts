@@ -6,18 +6,19 @@ describe('formatCurrencyKRWWithUnits', () => {
     expect(formatCurrencyKRWWithUnits(1_234_567_890_123)).toBe(
       '1조 2,345억 6,789만 123원'
     );
+    expect(formatCurrencyKRWWithUnits('1234567890123')).toBe(
+      '1조 2,345억 6,789만 123원'
+    );
   });
 
   it('숫자를 단위와 통화 기호로 올바르게 포맷팅해야 합니다', () => {
     expect(formatCurrencyKRWWithUnits(123_456_789)).toBe('1억 2,345만 6,789원');
+    expect(formatCurrencyKRWWithUnits('123456789')).toBe('1억 2,345만 6,789원');
   });
 
   it('작은 숫자를 통화 기호로 올바르게 포맷팅해야 합니다', () => {
     expect(formatCurrencyKRWWithUnits(999)).toBe('999원');
-  });
-
-  it('문자열 숫자를 올바르게 포맷팅해야 합니다', () => {
-    expect(formatCurrencyKRWWithUnits('123456789')).toBe('1억 2,345만 6,789원');
+    expect(formatCurrencyKRWWithUnits('999')).toBe('999원');
   });
 
   it('commas 옵션을 통해 쉼표를 사용할 수 있어야 합니다.', () => {

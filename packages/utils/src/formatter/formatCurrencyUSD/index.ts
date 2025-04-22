@@ -14,24 +14,31 @@ const USD_SYMBOL_OPTIONS = {
  * @returns {string} 달러($) 기호가 추가된 문자열.
  *
  * @example
+ * formatCurrencyUSD(1234567);
+ * formatCurrencyUSD('1234567');
+ * // '$1,234,567'
+ *
  * formatCurrencyUSD(1234567.89112);
+ * formatCurrencyUSD('1234567.89112');
  * // '$1,234,567.89112'
  *
  * formatCurrencyUSD(-1234567.89112);
+ * formatCurrencyUSD('-1234567.89112');
  * // '-$1,234,567.89112'
  */
 export function formatCurrencyUSD(value: number | string): string {
-  const isNegative = isNumber(value) && value < 0;
+  const valueToUse = isNumber(value) ? value : Number(value);
+  const isNegative = valueToUse < 0;
 
   if (isNegative) {
     return `-${formatValueWithSymbol(
-      formatNumberWithCommas(Math.abs(value)),
+      formatNumberWithCommas(Math.abs(valueToUse)),
       USD_SYMBOL_OPTIONS
     )}`;
   }
 
   return formatValueWithSymbol(
-    formatNumberWithCommas(value),
+    formatNumberWithCommas(valueToUse),
     USD_SYMBOL_OPTIONS
   );
 }

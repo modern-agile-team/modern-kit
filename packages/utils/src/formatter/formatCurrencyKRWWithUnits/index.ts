@@ -1,10 +1,10 @@
 import { formatValueWithSymbol } from '../formatValueWithSymbol';
 import { formatNumberWithUnits } from '../formatNumberWithUnits';
 
-type FormatCurrencyKRWWithUnitsOptions = Omit<
-  Parameters<typeof formatNumberWithUnits>[1],
-  'units'
->;
+type FormatCurrencyKRWWithUnitsOptions = {
+  commas?: boolean;
+  decimal?: number;
+};
 
 const KRW_UNITS = [
   { unit: '조', value: 1_000_000_000_000 },
@@ -18,10 +18,10 @@ const KRW_SYMBOL_OPTIONS = {
 } as const;
 
 /**
- * @description 주어진 숫자 또는 문자열을 단위와 통화 기호로 포맷팅한 문자열을 반환합니다.
+ * @description 주어진 숫자 또는 문자열을 단위(조, 억, 만)로 나누고, "원" 문자열이 추가된 포맷팅한 문자열을 반환합니다.
  *
  * @param {number | string} value - 포맷팅할 숫자 또는 문자열
- * @returns {string} 단위와 통화 기호가 추가된 포맷팅된 문자열
+ * @returns {string} 단위(조, 억, 만)로 나누고, "원" 문자열이 추가된 포맷팅된 문자열
  *
  * @example
  * formatCurrencyKRWWithUnits(1234567890123);
