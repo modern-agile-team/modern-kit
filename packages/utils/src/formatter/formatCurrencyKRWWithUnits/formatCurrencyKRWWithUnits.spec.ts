@@ -1,0 +1,28 @@
+import { describe, it, expect } from 'vitest';
+import { formatCurrencyKRWWithUnits } from '.';
+
+describe('formatCurrencyKRWWithUnits', () => {
+  it('큰 숫자를 단위와 통화 기호로 올바르게 포맷팅해야 합니다', () => {
+    expect(formatCurrencyKRWWithUnits(1_234_567_890_123)).toBe(
+      '1조 2,345억 6,789만 123원'
+    );
+  });
+
+  it('숫자를 단위와 통화 기호로 올바르게 포맷팅해야 합니다', () => {
+    expect(formatCurrencyKRWWithUnits(123_456_789)).toBe('1억 2,345만 6,789원');
+  });
+
+  it('작은 숫자를 통화 기호로 올바르게 포맷팅해야 합니다', () => {
+    expect(formatCurrencyKRWWithUnits(999)).toBe('999원');
+  });
+
+  it('문자열 숫자를 올바르게 포맷팅해야 합니다', () => {
+    expect(formatCurrencyKRWWithUnits('123456789')).toBe('1억 2,345만 6,789원');
+  });
+
+  it('유효하지 않은 입력에 대해 에러를 발생시켜야 합니다', () => {
+    expect(() => formatCurrencyKRWWithUnits('invalid')).toThrow(
+      'value는 숫자 혹은 숫자로 이뤄진 문자열이여야 합니다.'
+    );
+  });
+});
