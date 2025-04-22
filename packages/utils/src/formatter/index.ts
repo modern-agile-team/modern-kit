@@ -1,3 +1,4 @@
+export * from './formatNumberFloorUnit';
 export * from './formatNumberWithCommas';
 export * from './formatNumberWithUnits';
 export * from './formatPhoneNumber';
