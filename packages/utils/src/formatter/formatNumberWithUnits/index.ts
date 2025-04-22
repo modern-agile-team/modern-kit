@@ -67,6 +67,9 @@ const getFormattedNumberWithUnits = (
 /**
  * @description `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
  *
+ * - 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
+ * - 소수점 허용 여부(`decimal`)를 선택할 수 있습니다.
+ *
  * @param {number | string} value - 포맷팅할 숫자 또는 숫자로 이루어진 문자열
  * @param {FormatNumberWithUnitsOptions} options - 포맷팅 옵션
  * @param {Unit[]} options.units - 사용할 단위 배열
