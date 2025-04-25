@@ -37,7 +37,12 @@ formatCurrencyKRW('-1234567');
 formatCurrencyKRW(1234567.1234, { decimal: 2 });
 // '1,234,567.12원'
 
+formatCurrencyKRW(-1234567.1234, { decimal: 2 });
+// '-1,234,567.12원'
 
 formatCurrencyKRW(1234567, { isSymbol: true });
 // '₩1,234,567'
+
+formatCurrencyKRW(-1234567, { isSymbol: true });
+// '-₩1,234,567'
 ```

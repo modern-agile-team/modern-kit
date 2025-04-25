@@ -32,12 +32,18 @@ const getKRWSymbolOptions = (isSymbol: boolean) => {
  * // '-1,234,567원'
  *
  * @example
- * formatCurrencyKRW('1234567.1234', { decimal: 2 });
+ * formatCurrencyKRW(1234567.1234, { decimal: 2 });
  * // '1,234,567.12원'
+ *
+ * formatCurrencyKRW(-1234567.1234, { decimal: 2 });
+ * // '-1,234,567.12원'
  *
  * @example
  * formatCurrencyKRW(1234567, { isSymbol: true });
  * // '₩1,234,567'
+ *
+ * formatCurrencyKRW(-1234567, { isSymbol: true });
+ * // '-₩1,234,567'
  */
 export function formatCurrencyKRW(
   value: number | string,

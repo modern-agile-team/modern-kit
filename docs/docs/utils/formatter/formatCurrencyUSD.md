@@ -30,6 +30,8 @@ formatCurrencyUSD('-1234567');
 // '-$1,234,567'
 
 formatCurrencyUSD(1234567.1234, { decimal: 2 });
-formatCurrencyUSD('1234567.1234', { decimal: 2 });
 // '$1,234,567.12'
+
+formatCurrencyUSD(-1234567.1234, { decimal: 2 });
+// '-$1,234,567.12'
 ```
