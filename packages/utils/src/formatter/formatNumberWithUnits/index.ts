@@ -33,7 +33,7 @@ const getFormattedNumberWithUnits = (
   const sortedUnits = [...units].sort((a, b) => b.value - a.value);
 
   const absoluteValue = Math.abs(value);
-  const isNegative = value < 0;
+  const negativeSign = value < 0 ? '-' : '';
 
   let formattedResult = '';
   let remainingValue = absoluteValue;
@@ -61,21 +61,22 @@ const getFormattedNumberWithUnits = (
     )}`;
   }
 
-  return isNegative ? `-${formattedResult.trim()}` : formattedResult.trim();
+  return `${negativeSign}${formattedResult.trim()}`;
 };
 
 /**
  * @description `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
  *
- * - 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
- * - 소수점 허용 여부(`decimal`)를 선택할 수 있습니다.
+ * - 천 단위마다 쉼표 사용 여부(`commas`)를 선택할 수 있습니다. 기본값은 `true`입니다.
+ * - 허용 할 소수점 자리수(`decimal`)를 선택할 수 있습니다. 기본값은 `0`입니다.
  *
  * @param {number | string} value - 포맷팅할 숫자 또는 숫자로 이루어진 문자열
  * @param {FormatNumberWithUnitsOptions} options - 포맷팅 옵션
- * @param {Unit[]} options.units - 사용할 단위 배열
+ * @param {Unit[] | readonly Unit[]} options.units - 사용할 단위 배열
  * @param {boolean} [options.commas=true] - 쉼표 사용 여부
  * @param {number} [options.decimal=0] - 소수점 자리수
- * @returns {string} 포맷팅된 문자열
+ * @returns {string} 단위 별로 나눠져 포맷팅된 문자열
+ *
  * @throws 주어진 숫자가 숫자 혹은 숫자로 이뤄진 문자열이 아닐 경우 에러 발생
  *
  * @example
@@ -84,24 +85,26 @@ const getFormattedNumberWithUnits = (
  *   { unit: '만', value: 10_000 },
  * ] as const;
  *
- * formatNumberWithUnits(123456789, { units: KRW_UNITS })
- * formatNumberWithUnits('123456789', { units: KRW_UNITS })
+ * formatNumberWithUnits(123456789, { units: KRW_UNITS });
+ * formatNumberWithUnits('123456789', { units: KRW_UNITS });
  * // "1억 2,345만 6,789"
  *
- * formatNumberWithUnits(-123456789, { units: KRW_UNITS })
- * formatNumberWithUnits('-123456789', { units: KRW_UNITS })
+ * formatNumberWithUnits(-123456789, { units: KRW_UNITS });
+ * formatNumberWithUnits('-123456789', { units: KRW_UNITS });
  * // "-1억 2,345만 6,789"
  *
  * @example
  * // 콤마 사용 여부
- * formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: false })
- * formatNumberWithUnits('123456789', { units: KRW_UNITS, commas: false })
+ * formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: false });
  * // "1억 2345만 6789"
+ * formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: true });
+ * // "1억 2,345만 6,789"
  *
  * @example
  * // 소수점 허용 여부
- * formatNumberWithUnits(123456789.12, { units: KRW_UNITS, decimal: 2 })
- * formatNumberWithUnits('123456789.12', { units: KRW_UNITS, decimal: 2 })
+ * formatNumberWithUnits(123456789.12, { units: KRW_UNITS, decimal: 0 });
+ * // "1억 2,345만 6,789"
+ * formatNumberWithUnits(123456789.12, { units: KRW_UNITS, decimal: 2 });
  * // "1억 2,345만 6,789.12"
  */
 export function formatNumberWithUnits(

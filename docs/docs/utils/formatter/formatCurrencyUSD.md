@@ -9,23 +9,27 @@
 
 ## Interface
 ```ts title="typescript"
-function formatCurrencyUSD(value: number | string): string
+function formatCurrencyUSD(
+  value: number | string,
+  options?: {
+    decimal?: number;
+  }
+): string;
 ```
 
 ## Usage
 ```ts title="typescript"
 import { formatCurrencyUSD } from '@modern-kit/utils';
 
-// 숫자
 formatCurrencyUSD(1234567);
 formatCurrencyUSD('1234567');
 // '$1,234,567'
 
-formatCurrencyUSD(1234567.89112);
-formatCurrencyUSD('1234567.89112');
-// '$1,234,567.89112'
+formatCurrencyUSD(-1234567);
+formatCurrencyUSD('-1234567');
+// '-$1,234,567'
 
-formatCurrencyUSD(-1234567.89112);
-formatCurrencyUSD('-1234567.89112');
-// '-$1,234,567.89112'
+formatCurrencyUSD(1234567.1234, { decimal: 2 });
+formatCurrencyUSD('1234567.1234', { decimal: 2 });
+// '$1,234,567.12'
 ```

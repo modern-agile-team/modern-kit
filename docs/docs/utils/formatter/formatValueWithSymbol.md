@@ -9,26 +9,22 @@
 
 ## Interface
 ```ts title="typescript"
-interface FormatValueWithSymbolOptions {
-  symbol?: string;
-  position?: 'prefix' | 'suffix';
-  space?: boolean;
-}
-```
-```ts title="typescript"
-function formatValueWithSymbol(value: number | string, options: FormatValueWithSymbolOptions): string
+function formatValueWithSymbol(value: number | string, options: {
+  prefix?: string;
+  suffix?: string;
+}): string
 ```
 
 ## Usage
 ```ts title="typescript"
 import { formatValueWithSymbol } from '@modern-kit/utils';
 
-formatValueWithSymbol(1234567, { symbol: '원', position: 'suffix' });
+formatValueWithSymbol(1234567, { suffix: '원' });
 // '1234567원'
 
-formatValueWithSymbol(1234567, { symbol: '$', position: 'prefix' });
+formatValueWithSymbol(1234567, { prefix: '$' });
 // '$1234567'
 
-formatValueWithSymbol(1234567, { symbol: '*', position: 'both' });
-// '*1234567*'
+formatValueWithSymbol(1234567, { prefix: '*', suffix: '@' });
+// '*1234567@'
 ```

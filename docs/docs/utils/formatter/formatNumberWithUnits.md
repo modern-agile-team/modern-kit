@@ -1,8 +1,9 @@
 # formatNumberWithUnits
 
 `숫자` 혹은 `숫자로 이루어진 문자열`을 주어진 `단위` 별로 포맷팅하는 함수입니다.
-- 쉼표 사용 여부(`commas`)를 선택할 수 있습니다.
-- 소수점 허용 여부(`decimal`)를 선택할 수 있습니다.
+
+- 천 단위마다 쉼표 사용 여부(`commas`)를 선택할 수 있습니다. 기본값은 `true`입니다.
+- 허용 할 소수점 자리수(`decimal`)를 선택할 수 있습니다. 기본값은 `0`입니다.
 
 <br />
 
@@ -37,17 +38,26 @@ const KRW_UNITS = [
   { unit: '만', value: 10_000 },
 ] as const;
 
-formatNumberWithUnits(1234567, { units: KRW_UNITS }) // "123만 4,567"
-formatNumberWithUnits('1234567', { units: KRW_UNITS }) // "123만 4,567"
+formatNumberWithUnits(123456789, { units: KRW_UNITS });
+formatNumberWithUnits('123456789', { units: KRW_UNITS });
+// "1억 2,345만 6,789"
 
-formatNumberWithUnits(-1234567, { units: KRW_UNITS }) // "-123만 4,567", 음수 처리
-formatNumberWithUnits('-1234567', { units: KRW_UNITS }) // "-123만 4,567", 음수 처리
+formatNumberWithUnits(-123456789, { units: KRW_UNITS });
+formatNumberWithUnits('-123456789', { units: KRW_UNITS });
+// "-1억 2,345만 6,789"
+```
+```ts title="typescript"
+// 콤마 사용 여부
+formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: false });
+// "1억 2345만 6789"
+formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: true });
+// "1억 2,345만 6,789"
 
-// 쉼표 사용 여부
-formatNumberWithUnits(1234567, { units: KRW_UNITS, commas: false }) // "123만 4567"
-formatNumberWithUnits('1234567', { units: KRW_UNITS, commas: false }) // "123만 4567"
-
+```
+```ts title="typescript"
 // 소수점 허용 여부
-formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
-formatNumberWithUnits('1234567.123', { units: KRW_UNITS, decimal: 2 }) // "123만 4,567.12"
+formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 });
+// "1억 2,345만 6,789.12"
+formatNumberWithUnits('-1234567.123', { units: KRW_UNITS, decimal: 2 });
+// "-1억 2,345만 6,789.12"
 ```

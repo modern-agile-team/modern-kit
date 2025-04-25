@@ -9,15 +9,11 @@
 
 ## Interface
 ```ts title="typescript"
-type formatCurrencyKRWWithUnitsWithUnitsOptions = {
-  commas?: boolean;
-  decimal?: number;
-};
-```
-```ts title="typescript"
-function formatCurrencyKRWWithUnitsWithUnits(
+function formatCurrencyKRWWithUnits(
   value: number | string,
-  options?: formatCurrencyKRWWithUnitsWithUnitsOptions
+  options?: {
+    decimal?: number;
+  }
 ): string;
 ```
 
@@ -31,17 +27,14 @@ const KRW_UNITS = [
   { unit: '만', value: 10_000 },
 ];
 
-formatCurrencyKRWWithUnits(1234567890123);
-formatCurrencyKRWWithUnits('1234567890123');
-// '1조 2,345억 6,789만 123원'
+formatCurrencyKRWWithUnits(1234567891234);
+formatCurrencyKRWWithUnits('1234567891234');
+// '1조 2,345억 6,789만 1,234원'
 
-// 쉼표 사용 여부
-formatCurrencyKRWWithUnits(1234567890123, { commas: false });
-formatCurrencyKRWWithUnits('1234567890123', { commas: false });
-// '1조 2345억 6789만 123원'
+formatCurrencyKRWWithUnits(-123456789);
+formatCurrencyKRWWithUnits('-123456789');
+// '-1억 2,345만 6,789원'
 
-// 소수점 자리수
-formatCurrencyKRWWithUnits(123456789.12, { decimal: 2 });
-formatCurrencyKRWWithUnits('123456789.12', { decimal: 2 });
-// '1억 2,345만 6,789.12원'
+formatCurrencyKRWWithUnits(123456789.1234, { decimal: 2 });
+// '1조 2,345억 6,789만 1,234.12원'
 ```
