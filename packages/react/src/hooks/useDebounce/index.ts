@@ -32,7 +32,11 @@ export function useDebounce<T extends DebounceParameters[0]>(
   const { leading = false, trailing = true, maxWait } = options ?? {};
 
   const debounced = useMemo(() => {
-    return debounce(callbackAction, wait, { leading, trailing, maxWait });
+    return debounce(callbackAction, wait, {
+      leading,
+      trailing,
+      ...(typeof maxWait === 'number' && { maxWait }),
+    });
   }, [callbackAction, wait, leading, trailing, maxWait]);
 
   // 언마운트 시 디바운스 된 함수의 보류 중인 호출을 모두 버립니다.
