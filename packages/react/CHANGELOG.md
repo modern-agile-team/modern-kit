@@ -1,5 +1,14 @@
 # @modern-kit/react
 
+## 2.2.3
+
+### Patch Changes
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useDebounce 버그 수정 - @ssi02014
+
+- Updated dependencies [[`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20), [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20), [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20), [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20), [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20)]:
+  - @modern-kit/utils@2.3.0
+
 ## 2.2.2
 
 ### Patch Changes
