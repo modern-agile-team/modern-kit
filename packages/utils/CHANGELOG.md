@@ -1,5 +1,19 @@
 # @modern-kit/utils
 
+## 2.3.0
+
+### Minor Changes
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): formatNumberWithUnits/formatValueWithSymbol 관심사 분리 및 재정비 - @ssi02014
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatCurrencyUSD 신규 함수 추가 - @ssi02014
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatNumberTruncate 신규 함수 추가 - @ssi02014
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatCurrencyKRW 신규 함수 추가 - @ssi00214
+
+- [#856](https://github.com/modern-agile-team/modern-kit/pull/856) [`13b9eef`](https://github.com/modern-agile-team/modern-kit/commit/13b9eef77b23ba5e863dc57b35b08857ca7fab20) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): formatCurrencyKRWWithUnits 신규 함수 추가 - @ssi02014
+
 ## 2.2.0
 
 ### Minor Changes
