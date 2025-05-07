@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": [
     "docs",
-    "packages/**/*"
+    "packages/*"
   ],
   "author": "ssi02014 <ssi02014@naver.com>",
   "scripts": {
@@ -15,7 +15,7 @@
     "start:docs": "lerna run start",
     "build:docs": "lerna run build:docs",
     "publish:docs": "lerna run publish:docs",
-    "changeset:publish": "changeset publish",
+    "changeset:publish": "node ./scripts/replace-workspace-versions.js && changeset publish",
     "changeset:version": "changeset version"
   },
   "homepage": "https://github.com/modern-agile-team/modern-kit",
