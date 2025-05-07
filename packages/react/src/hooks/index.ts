@@ -43,6 +43,7 @@ export * from './useScrollEvent';
 export * from './useScrollLock';
 export * from './useScrollTo';
 export * from './useSessionStorage';
+export * from './useStateWithHistory';
 export * from './useStep';
 export * from './useStepState';
 export * from './useThrottle';
