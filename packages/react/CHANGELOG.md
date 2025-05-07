@@ -1,5 +1,18 @@
 # @modern-kit/react
 
+## 2.3.0
+
+### Minor Changes
+
+- [#865](https://github.com/modern-agile-team/modern-kit/pull/865) [`f896963`](https://github.com/modern-agile-team/modern-kit/commit/f896963f7f1c19a7efc40289e0ba73353e481210) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useStateWithHistory 신규 훅 추가 - @ssi02014
+
+- [#864](https://github.com/modern-agile-team/modern-kit/pull/864) [`897fb9f`](https://github.com/modern-agile-team/modern-kit/commit/897fb9ff8a86c9f02264bbe69339de98f03b1ba8) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: add script to replace workspace versions - @ssi02014
+
+### Patch Changes
+
+- Updated dependencies [[`c88d511`](https://github.com/modern-agile-team/modern-kit/commit/c88d5116961e468b887ef3569eb796fd588f732e)]:
+  - @modern-kit/utils@2.3.1
+
 ## 2.2.3
 
 ### Patch Changes

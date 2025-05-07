@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.3.1
+
+### Patch Changes
+
+- [#866](https://github.com/modern-agile-team/modern-kit/pull/866) [`c88d511`](https://github.com/modern-agile-team/modern-kit/commit/c88d5116961e468b887ef3569eb796fd588f732e) Thanks [@ssi02014](https://github.com/ssi02014)! - docs(utils): at 주석 수정 - @ssi02014
+
 ## 2.3.0
 
 ### Minor Changes
