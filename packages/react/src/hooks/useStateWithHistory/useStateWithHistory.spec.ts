@@ -3,153 +3,119 @@ import { useStateWithHistory } from '.';
 import { renderHook, waitFor } from '@testing-library/react';
 
 describe('useStateWithHistory', () => {
-  describe('기본 기능', () => {
-    it('기본 기능이 정상적으로 동작해야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
+  it('기본 기능이 정상적으로 동작해야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(0));
 
-      const { push, undo, redo, goToIndex } = result.current;
+    const { setState, back, forward, goToIndex } = result.current;
 
-      expect(result.current.state).toBe(0);
+    expect(result.current.state).toBe(0);
 
-      // history: [0, 1]
-      await waitFor(() => push(1));
-      // history: [0, 1, 2]
-      await waitFor(() => push(2));
-      // history: [0, 1, 2, 3]
-      await waitFor(() => push(3));
+    // history: [0, 1]
+    await waitFor(() => setState(1));
+    // history: [0, 1, 2]
+    await waitFor(() => setState(2));
+    // history: [0, 1, 2, 3]
+    await waitFor(() => setState(3));
 
-      expect(result.current.state).toBe(3);
+    expect(result.current.state).toBe(3);
 
-      await waitFor(() => undo());
-      expect(result.current.state).toBe(2);
+    await waitFor(() => back());
+    expect(result.current.state).toBe(2);
 
-      await waitFor(() => redo());
-      expect(result.current.state).toBe(3);
+    await waitFor(() => forward());
+    expect(result.current.state).toBe(3);
 
-      await waitFor(() => goToIndex(0));
-      expect(result.current.state).toBe(0);
-    });
+    await waitFor(() => goToIndex(0));
+    expect(result.current.state).toBe(0);
 
-    it('capacity를 설정할 수 있어야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(0, 3));
-
-      const { push, goToIndex } = result.current;
-
-      // history: [0, 1]
-      await waitFor(() => push(1));
-      // history: [0, 1, 2]
-      await waitFor(() => push(2));
-      // history: [1, 2, 3]
-      await waitFor(() => push(3));
-
-      expect(result.current.state).toBe(3);
-
-      await waitFor(() => goToIndex(0));
-
-      expect(result.current.state).toBe(1);
-
-      await waitFor(() => goToIndex(2));
-
-      expect(result.current.state).toBe(3);
-    });
-
-    it('스냅샷을 저장할 수 있어야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
-
-      const { push, undo, redo, saveSnapshot, restoreSnapshot } =
-        result.current;
-
-      // history: [0, 1]
-      await waitFor(() => push(1));
-      // history: [0, 1, 2]
-      await waitFor(() => push(2));
-
-      // history: [0, 1, 2]
-      expect(result.current.state).toBe(2);
-
-      saveSnapshot(); // snapshot: 2
-
-      // history: [0, 1, 2, 3]
-      await waitFor(() => push(3));
-
-      // history: [0, 1, 2, 3, 2]
-      await waitFor(() => restoreSnapshot());
-
-      expect(result.current.state).toBe(2);
-
-      await waitFor(() => undo());
-      expect(result.current.state).toBe(3);
-
-      await waitFor(() => redo());
-      expect(result.current.state).toBe(2);
-    });
-
-    it('초기 상태 및 상태 변경 함수를 함수로 전달할 수 있어야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(() => 0));
-
-      const { push } = result.current;
-
-      expect(result.current.state).toBe(0);
-
-      // history: [0, 1]
-      await waitFor(() => push((prev) => prev + 1));
-
-      expect(result.current.state).toBe(1);
-    });
+    await waitFor(() => goToIndex(-1));
+    expect(result.current.state).toBe(3);
   });
 
-  describe('에러 케이스', () => {
-    it('더 이상 실행 취소할 수 없을 때 에러가 발생해야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
+  it('capacity를 설정할 수 있어야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(0, 3));
 
-      const { push, undo } = result.current;
+    const { setState, goToIndex } = result.current;
 
-      // history: [0, 1]
-      await waitFor(() => push(1));
+    // history: [0, 1]
+    await waitFor(() => setState(1));
+    // history: [0, 1, 2]
+    await waitFor(() => setState(2));
+    // history: [1, 2, 3]
+    await waitFor(() => setState(3));
 
-      expect(result.current.state).toBe(1);
+    expect(result.current.state).toBe(3);
 
-      await waitFor(() => undo());
+    await waitFor(() => goToIndex(0));
 
-      expect(result.current.state).toBe(0);
+    expect(result.current.state).toBe(1);
 
-      expect(() => undo()).toThrow('더 이상 실행 취소할 수 없습니다');
-    });
+    await waitFor(() => goToIndex(2));
 
-    it('더 이상 다시 실행할 수 없을 때 에러가 발생해야 합니다', async () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
+    expect(result.current.state).toBe(3);
+  });
 
-      const { push, redo, undo } = result.current;
+  it('초기 상태 및 상태 변경 함수를 함수로 전달할 수 있어야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(() => 0));
 
-      // history: [0, 1]
-      await waitFor(() => push(1));
+    const { setState } = result.current;
 
-      expect(result.current.state).toBe(1);
+    expect(result.current.state).toBe(0);
 
-      await waitFor(() => undo());
+    // history: [0, 1]
+    await waitFor(() => setState((prev) => prev + 1));
 
-      expect(result.current.state).toBe(0);
+    expect(result.current.state).toBe(1);
+  });
 
-      await waitFor(() => redo());
+  it('더 이상 실행 취소할 수 없을 때 아무것도 하지 않아야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(0));
 
-      expect(result.current.state).toBe(1);
+    const { setState, back } = result.current;
 
-      expect(() => redo()).toThrow('더 이상 다시 실행할 수 없습니다');
-    });
+    // history: [0, 1]
+    await waitFor(() => setState(1));
 
-    it('유효하지 않은 인덱스로 이동 시 에러가 발생해야 합니다', () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
+    expect(result.current.state).toBe(1);
 
-      // history: [0]
-      expect(() => result.current.goToIndex(1)).toThrow();
-    });
+    await waitFor(() => back());
 
-    it('스냅샷이 없을 때 복원 시 에러가 발생해야 합니다', () => {
-      const { result } = renderHook(() => useStateWithHistory(0));
+    expect(result.current.state).toBe(0);
 
-      const { restoreSnapshot } = result.current;
+    await waitFor(() => back());
 
-      expect(() => restoreSnapshot()).toThrow('저장된 스냅샷이 없습니다');
-    });
+    expect(result.current.state).toBe(0);
+  });
+
+  it('더 이상 다시 실행할 수 없을 때 아무것도 하지 않아야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(0));
+
+    const { setState, forward, back } = result.current;
+
+    // history: [0, 1]
+    await waitFor(() => setState(1));
+
+    expect(result.current.state).toBe(1);
+
+    await waitFor(() => back());
+
+    expect(result.current.state).toBe(0);
+
+    await waitFor(() => forward());
+
+    expect(result.current.state).toBe(1);
+
+    await waitFor(() => forward());
+
+    expect(result.current.state).toBe(1);
+  });
+
+  it('유효하지 않은 인덱스로 이동 시 아무것도 하지 않아야 합니다', async () => {
+    const { result } = renderHook(() => useStateWithHistory(0));
+
+    // history: [0]
+    await waitFor(() => result.current.goToIndex(1));
+
+    expect(result.current.state).toBe(0);
   });
 });

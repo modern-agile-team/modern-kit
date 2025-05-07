@@ -91,14 +91,6 @@ export const Example = () => {
     setArray.push(Math.floor(Math.random() * 100));
   };
 
-  const removeItem = (index) => {
-    setArray.remove(index);
-  };
-
-  const clear = () => {
-    setArray.clear();
-  };
-
   return (
     <div>
       <button onClick={addItem}>랜덤 숫자 추가</button>
@@ -114,6 +106,5 @@ export const Example = () => {
     </div>
   );
 };
-
 
 <Example />
