@@ -99,7 +99,7 @@ const SlotClone = React.forwardRef<HTMLElement, SlotCloneProps>(
     const childRef = React.isValidElement(children)
       ? getElementRef(children)
       : null;
-    const mergedRef = useMergeRefs(forwardedRef, childRef);
+    const mergedRefs = useMergeRefs(forwardedRef, childRef);
 
     if (!React.isValidElement(children)) {
       return React.Children.count(children) > 1
@@ -111,7 +111,7 @@ const SlotClone = React.forwardRef<HTMLElement, SlotCloneProps>(
       ...mergeProps(slotProps, children.props as Record<string, any>),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      ref: forwardedRef ? mergedRef : childRef,
+      ref: forwardedRef ? mergedRefs : childRef,
     });
   }
 );
