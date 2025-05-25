@@ -1,9 +1,9 @@
+import React from 'react';
 import { ReactNode } from 'react';
 import { useOutsidePointerDown } from '../../hooks/useOutsidePointerDown';
-import { mergeRefs } from '../../utils/mergeRefs';
+import { useMergeRefs } from '../../hooks/useMergeRefs';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { Slot } from '../Slot';
-import React from 'react';
 
 interface OutsidePointerDownHandlerProps {
   children: ReactNode;
@@ -100,7 +100,7 @@ export const OutsidePointerDownHandler = polymorphicForwardRef<
     }
 
     return (
-      <Wrapper ref={mergeRefs(targetRef, ref)} {...props}>
+      <Wrapper ref={useMergeRefs(targetRef, ref)} {...props}>
         {children}
       </Wrapper>
     );
