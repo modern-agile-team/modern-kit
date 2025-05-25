@@ -1,0 +1,106 @@
+import { useManualTimeout } from '@modern-kit/react';
+import { useState, useEffect } from 'react';
+
+# useManualTimeout
+
+수동으로 타임아웃을 설정하고, 초기화할 수 있는 훅입니다.
+
+`useTimeout` 훅과 다르게 초기 자동 실행이 없으며, 명시적으로 타임아웃을 설정해야 합니다.
+모든 타임아웃은 해당 훅 언마운트 시 자동으로 초기화됩니다.
+
+`useTimeout`은 hooks rule에 따라 중첩 타임아웃 등 복잡한 타임아웃 설정에 적절하지 않습니다.
+`useManualTimeout`은 병렬/중첩된 타임아웃을 실행하고, 한번에 초기화 해야 될 때 유용합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useManualTimeout/index.ts)
+
+## Interface
+```ts title="typescript"
+const useManualTimeout: () => {
+  set: (callback: () => void, delay: number) => number;
+  clearAll: () => void;
+}
+```
+
+## Usage
+```tsx title="typescript"
+import { useManualTimeout } from '@modern-kit/react';
+
+const DELAY_TIME = 1500;
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set } = useManualTimeout();
+
+  const handleSetTimeout = () => {
+    set(() => {
+      setNumber(number + 1);
+    }, DELAY_TIME);
+  }
+
+  useEffect(() => {
+    set(() => {
+      setNumber((prev) => prev + 1);
+
+      set(() => {
+        setNumber((prev) => prev + 2);
+
+        set(() => {
+          setNumber((prev) => prev + 3);
+        }, DELAY_TIME);
+      }, DELAY_TIME);
+    }, DELAY_TIME);
+  }, [set]);
+
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={handleSetTimeout}>set</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set } = useManualTimeout();
+
+  const handleSetTimeout = () => {
+    set(() => {
+      setNumber(number + 1);
+    }, 1500);
+  }
+  
+  useEffect(() => {
+    set(() => {
+      setNumber((prev) => prev + 1);
+
+      set(() => {
+        setNumber((prev) => prev + 2);
+
+        set(() => {
+          setNumber((prev) => prev + 3);
+        }, 1500);
+      }, 1500);
+    }, 1500);
+  }, [set]);
+
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={handleSetTimeout}>set</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />
