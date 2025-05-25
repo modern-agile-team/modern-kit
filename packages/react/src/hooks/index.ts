@@ -29,6 +29,7 @@ export * from './useIsMounted';
 export * from './useIsomorphicLayoutEffect';
 export * from './useKeyDown';
 export * from './useLocalStorage';
+export * from './useManualTimeout';
 export * from './useMediaQuery';
 export * from './useMergeRefs';
 export * from './useMouse';
