@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 2.4.0
+
+### Minor Changes
+
+- [#871](https://github.com/modern-agile-team/modern-kit/pull/871) [`ac1fbbb`](https://github.com/modern-agile-team/modern-kit/commit/ac1fbbba1c41a0445a420bc48776f1aeac06b3cc) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): mergeEventHandlers 추가 - @ssi02014
+
+- [#874](https://github.com/modern-agile-team/modern-kit/pull/874) [`b1c142a`](https://github.com/modern-agile-team/modern-kit/commit/b1c142a76dc184e69dca5e3af97e02461c35f24a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useManualTimeout 신규 훅 추가 - @ssi02014
+
 ## 2.3.0
 
 ### Minor Changes
