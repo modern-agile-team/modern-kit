@@ -9,3 +9,4 @@ export * from './serialize';
 export * from './trim';
 export * from './trimStart';
 export * from './trimEnd';
+export * from './truncate';
