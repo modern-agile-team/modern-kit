@@ -18,6 +18,7 @@ export * from './ObjectEntries';
 export * from './ObjectKeys';
 export * from './Primitive';
 export * from './Promiseable';
+export * from './Range';
 export * from './ReadonlyArray';
 export * from './Reference';
 export * from './WholeNumber';
