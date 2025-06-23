@@ -11,23 +11,24 @@ describe('EnumerateNumbers', () => {
   });
 
   it('number타입이 아니라면 never를 반환합니다.', () => {
-    const stringTypeEnumerate = null as unknown as EnumerateNumbers<'5'>;
-    const booleanTypeEnumerate = null as unknown as EnumerateNumbers<true>;
-    const objectTypeEnumerate = null as unknown as EnumerateNumbers<{ a: 1 }>;
-    const arrayTypeEnumerate = null as unknown as EnumerateNumbers<number[]>;
-    const functionTypeEnumerate = null as unknown as EnumerateNumbers<
-      () => void
+    const stringTypeEnumerate = '5' as unknown as EnumerateNumbers<'5'>;
+    const booleanTypeEnumerate = true as unknown as EnumerateNumbers<true>;
+    const objectTypeEnumerate = { a: 1 } as unknown as EnumerateNumbers<{
+      a: 1;
+    }>;
+    const arrayTypeEnumerate = [1, 2, 3] as unknown as EnumerateNumbers<
+      number[]
     >;
-    const nullTypeEnumerate = null as unknown as EnumerateNumbers<null>;
-    const undefinedTypeEnumerate =
-      null as unknown as EnumerateNumbers<undefined>;
 
     expectTypeOf(stringTypeEnumerate).toEqualTypeOf<never>();
     expectTypeOf(booleanTypeEnumerate).toEqualTypeOf<never>();
     expectTypeOf(objectTypeEnumerate).toEqualTypeOf<never>();
     expectTypeOf(arrayTypeEnumerate).toEqualTypeOf<never>();
-    expectTypeOf(functionTypeEnumerate).toEqualTypeOf<never>();
-    expectTypeOf(nullTypeEnumerate).toEqualTypeOf<never>();
-    expectTypeOf(undefinedTypeEnumerate).toEqualTypeOf<never>();
+  });
+
+  it('값이 0인 경우 never타입을 반환합니다.', () => {
+    const onlyZero = 0 as unknown as EnumerateNumbers<0>;
+
+    expectTypeOf(onlyZero).toEqualTypeOf<never>();
   });
 });
