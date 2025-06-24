@@ -2,6 +2,7 @@ export * from './Arrayable';
 export * from './DeepPartial';
 export * from './DeepRequired';
 export * from './DistributiveOmit';
+export * from './EnumerateNumbers';
 export * from './ExcludeNullish';
 export * from './ExtractMapType';
 export * from './ExtractNestedArrayType';
