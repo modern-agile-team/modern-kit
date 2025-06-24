@@ -8,7 +8,10 @@
  * type zeroToFive = EnumerateNumbers<6>; // 0 | 1 | 2 | 3 | 4 | 5
  * type otherTypeEnumerate = EnumerateNumbers<'6'>; // never
  */
-export type EnumerateNumbers<N, Acc extends number[] = []> = N extends number
+export type EnumerateNumbers<
+  N extends number,
+  Acc extends number[] = []
+> = N extends number
   ? Acc['length'] extends N
     ? Acc[number]
     : EnumerateNumbers<N, [...Acc, Acc['length']]>
