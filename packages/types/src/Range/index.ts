@@ -1,3 +1,5 @@
+import { EnumerateNumbers } from '../EnumerateNumbers';
+
 /**
  * @description 숫자 범위를 생성하는 타입입니다.
  *
@@ -9,15 +11,8 @@
  * type RangeExample = Range<1, 5>; // 1 | 2 | 3 | 4
  *
  */
-type Enumerate<
-  N extends number,
-  Acc extends number[] = []
-> = Acc['length'] extends N
-  ? Acc[number]
-  : Enumerate<N, [...Acc, Acc['length']]>;
-
-export type Range<F, T> = F extends number
-  ? T extends number
-    ? Exclude<Enumerate<T>, Enumerate<F>>
+export type Range<T, F> = T extends number
+  ? F extends number
+    ? Exclude<EnumerateNumbers<F>, EnumerateNumbers<T>>
     : never
   : never;

@@ -3,10 +3,10 @@ import { Range } from '.';
 
 describe('Range', () => {
   it('범위 내 숫자라면 정상 출력하고, 범위 밖 숫자라면 타입에러를 발생시킵니다.', () => {
-    const intraRangeIntegers: Range<1, 5> = 3;
+    const inRangeInteger: Range<1, 5> = 4;
     const outOfRangeInteger = 6 as unknown as Range<1, 5>;
 
-    expectTypeOf(intraRangeIntegers).toEqualTypeOf<3>();
+    expectTypeOf(inRangeInteger).toEqualTypeOf<4>();
     expectTypeOf(outOfRangeInteger).not.toMatchTypeOf<6>();
   });
 
