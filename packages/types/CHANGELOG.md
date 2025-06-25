@@ -1,5 +1,13 @@
 # @modern-kit/types
 
+## 1.10.0
+
+### Minor Changes
+
+- [#894](https://github.com/modern-agile-team/modern-kit/pull/894) [`8c34718`](https://github.com/modern-agile-team/modern-kit/commit/8c34718051c83379328e29c7f6131c45fff3b919) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(types): EnumerateNumbers type추가 - @zzzRYT
+
+- [#892](https://github.com/modern-agile-team/modern-kit/pull/892) [`e93b439`](https://github.com/modern-agile-team/modern-kit/commit/e93b439c964b6725da02f4197d2bf926b6b74e39) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(types): Range type추가 - @zzzRYT
+
 ## 1.9.0
 
 ### Minor Changes
