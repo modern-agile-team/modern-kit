@@ -5,8 +5,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
-    "skipLibCheck": true,
-    "emitDeclarationOnly": true,
-    "noEmit": false
+    "skipLibCheck": true
   },
 }
