@@ -2,7 +2,7 @@ import { describe, it, expectTypeOf } from 'vitest';
 import { Primitive } from '.';
 
 describe('Primitive', () => {
-  it('should properly infer the type', () => {
+  it('원시 타입이 올바르게 추론되어야 합니다', () => {
     const value = 1 as Primitive;
 
     if (typeof value === 'number') {

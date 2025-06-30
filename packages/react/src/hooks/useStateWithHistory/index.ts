@@ -57,7 +57,7 @@ export function useStateWithHistory<T>(
       pointer.current = history.current.length - 1;
       innerSetState(newStateToUse);
     },
-    [capacity]
+    [capacity, state]
   );
 
   const back = useCallback(() => {
@@ -66,7 +66,7 @@ export function useStateWithHistory<T>(
     }
     pointer.current--;
     innerSetState(history.current[pointer.current]);
-  }, [capacity]);
+  }, []);
 
   const forward = useCallback(() => {
     if (pointer.current >= history.current.length - 1) {
@@ -74,18 +74,15 @@ export function useStateWithHistory<T>(
     }
     pointer.current++;
     innerSetState(history.current[pointer.current]);
-  }, [capacity]);
+  }, []);
 
-  const goToIndex = useCallback(
-    (index: number) => {
-      if (at(history.current, index) == null) {
-        return;
-      }
-      pointer.current = index;
-      innerSetState(at(history.current, pointer.current) as T);
-    },
-    [capacity]
-  );
+  const goToIndex = useCallback((index: number) => {
+    if (at(history.current, index) == null) {
+      return;
+    }
+    pointer.current = index;
+    innerSetState(at(history.current, pointer.current) as T);
+  }, []);
 
   return { state, setState, forward, back, goToIndex };
 }
