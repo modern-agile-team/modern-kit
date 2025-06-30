@@ -1,18 +1,18 @@
 import { describe, it, expectTypeOf } from 'vitest';
 import { ObjectEntries } from '.';
 
-describe('ObjectKeys', () => {
+describe('ObjectEntries', () => {
   it('Object.entries의 반환 타입을 명확하게 합니다. symbol은 제외합니다.', () => {
     const test = {
       foo: 'foo',
       bar: 'bar',
+      [Symbol('test')]: 'test',
     } as const;
 
-    const defaultEntries = Object.entries(test);
-    const AppliedEntries = Object.entries(test) as ObjectEntries<typeof test>;
-
-    expectTypeOf(defaultEntries).toEqualTypeOf<[string, 'foo' | 'bar'][]>();
-    expectTypeOf(AppliedEntries).toEqualTypeOf<
+    expectTypeOf(Object.entries(test)).toEqualTypeOf<
+      [string, 'foo' | 'bar'][]
+    >();
+    expectTypeOf<ObjectEntries<typeof test>>().toEqualTypeOf<
       ['foo' | 'bar', 'foo' | 'bar'][]
     >();
   });

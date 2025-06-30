@@ -6,6 +6,8 @@
  *
  * @example
  * type ValidInteger = Integer<1>; // 1
+ *
+ * @example
  * type InvalidInteger = Integer<1.5>; // never
  */
 export type Integer<T extends number> = `${T}` extends `${string}.${string}`

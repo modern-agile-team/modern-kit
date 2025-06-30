@@ -6,12 +6,10 @@ describe('ObjectKeys', () => {
     const test = {
       foo: 'foo',
       bar: 'bar',
+      [Symbol('test')]: 'test',
     } as const;
 
-    const defaultKeys = Object.keys(test);
-    const AppliedKeys = Object.keys(test) as ObjectKeys<typeof test>[];
-
-    expectTypeOf(defaultKeys).toEqualTypeOf<string[]>();
-    expectTypeOf(AppliedKeys).toEqualTypeOf<('foo' | 'bar')[]>();
+    expectTypeOf(Object.keys(test)).toEqualTypeOf<string[]>();
+    expectTypeOf<ObjectKeys<typeof test>>().toEqualTypeOf<'foo' | 'bar'>();
   });
 });

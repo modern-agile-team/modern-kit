@@ -9,7 +9,6 @@ import { EnumerateNumbers } from '../EnumerateNumbers';
  *
  * @example
  * type RangeExample = Range<1, 5>; // 1 | 2 | 3 | 4
- *
  */
 export type Range<T, F> = T extends number
   ? F extends number

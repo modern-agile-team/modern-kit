@@ -4,7 +4,10 @@
  * @template T - 검사할 숫자 타입
  * @returns 입력된 숫자 T가 자연수인 경우 해당 타입을 반환하고,유효하지 않은 자연수인 경우 never를 반환합니다.
  * @example
- * type ValidNaturalNumber = NaturalNumber<1>; // 1
+ * type ValidNaturalNumber1 = NaturalNumber<1>; // 1
+ * type ValidNaturalNumber2 = NaturalNumber<10>; // 10
+ *
+ * @example
  * type InvalidNaturalNumber1 = NaturalNumber<0>; // never
  * type InvalidNaturalNumber2 = NaturalNumber<-1>; // never
  * type InvalidNaturalNumber3 = NaturalNumber<1.5>; // never
