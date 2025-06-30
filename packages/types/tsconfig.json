@@ -6,6 +6,7 @@
     "baseUrl": "./src",
     "outDir": "./dist",
     "skipLibCheck": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "noEmit": false
   },
 }
