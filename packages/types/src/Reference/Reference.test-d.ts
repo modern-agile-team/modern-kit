@@ -16,7 +16,9 @@ describe('Reference', () => {
     }
 
     if (typeof value === 'function') {
-      expectTypeOf(value).toEqualTypeOf<Function | ((...args: any[]) => any)>();
+      expectTypeOf(value as (...args: any[]) => any).toEqualTypeOf<
+        (...args: any[]) => any
+      >();
     }
 
     if (value instanceof Set) {
