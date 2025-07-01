@@ -1,4 +1,4 @@
-import debounce from 'lodash-es/debounce';
+import { debounce } from '@modern-kit/utils';
 import { useMemo } from 'react';
 import { useUnmount } from '../useUnmount';
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';

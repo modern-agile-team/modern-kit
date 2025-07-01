@@ -1,6 +1,7 @@
 export * from './abRandom';
 export * from './asyncNoop';
 export * from './cloneDeep';
+export * from './debounce';
 export * from './delay';
 export * from './getUniqId';
 export * from './getUniqTime';
