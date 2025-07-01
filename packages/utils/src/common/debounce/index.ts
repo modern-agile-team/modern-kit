@@ -164,6 +164,7 @@ export function debounce<F extends (...args: any[]) => void>(
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     pendingThis = this;
     pendingArgs = args;
 
