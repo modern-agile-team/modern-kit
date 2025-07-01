@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import throttle from 'lodash-es/throttle';
+import { throttle } from '@modern-kit/utils';
 import { getScrollDirection, getScrollProgress } from './useScrollEvent.utils';
 
 interface UseScrollProps {

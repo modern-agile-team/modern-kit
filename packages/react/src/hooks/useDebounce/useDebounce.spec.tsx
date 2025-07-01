@@ -98,4 +98,31 @@ describe('useDebounce', () => {
     vi.advanceTimersByTime(DELAY_TIME / 2);
     expect(mockFn).toBeCalledTimes(0);
   });
+
+  it('leading 옵션이 true로 설정된 경우 초기 호출을 실행해야 합니다', () => {
+    const mockFn = vi.fn();
+    const { result } = renderHook(() =>
+      useDebounce(mockFn, DELAY_TIME, { leading: true })
+    );
+
+    result.current(); // 즉시 호출
+    expect(mockFn).toBeCalledTimes(1);
+  });
+
+  it('AbortController을 통해 초기 호출을 중단할 수 있어야 한다', () => {
+    const mockFn = vi.fn();
+    const controller = new AbortController();
+
+    controller.abort();
+
+    const { result } = renderHook(() =>
+      useDebounce(mockFn, DELAY_TIME, { signal: controller.signal })
+    );
+
+    result.current();
+    expect(mockFn).toBeCalledTimes(0);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(mockFn).toBeCalledTimes(0);
+  });
 });

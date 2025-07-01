@@ -1,6 +1,7 @@
 export * from './abRandom';
 export * from './asyncNoop';
 export * from './cloneDeep';
+export * from './debounce';
 export * from './delay';
 export * from './getUniqId';
 export * from './getUniqTime';
@@ -14,4 +15,5 @@ export * from './parseJSON';
 export * from './pickFalsy';
 export * from './range';
 export * from './retry';
+export * from './throttle';
 export * from './wrapInArray';
