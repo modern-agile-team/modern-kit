@@ -8,7 +8,6 @@ export type ThrottleReturnType<T extends ThrottleParameters[0]> = ReturnType<
   typeof throttle<T>
 >;
 
-throttle;
 /**
  * @description 주어진 콜백 함수를 지정된 시간 동안 쓰로틀링 처리하여 특정 시간 동안 반복 호출을 방지하는 훅입니다.
  *
