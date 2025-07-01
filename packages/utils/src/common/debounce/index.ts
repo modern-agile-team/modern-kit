@@ -12,8 +12,10 @@ interface DebouncedFunction<F extends (...args: any[]) => void> {
 }
 
 /**
- * @description 디바운스된 함수를 생성합니다. 디바운스된 함수는 마지막으로 호출된 시점으로부터 `wait` 밀리초가 경과할 때까지
- * 제공된 함수의 실행을 지연시킵니다. 디바운스된 함수는 대기 중인 실행을 취소할 수 있는 `cancel` 메서드도 함께 제공됩니다.
+ * @description 디바운스된 함수를 생성합니다.
+ *
+ * 디바운스된 함수는 마지막으로 호출된 시점으로부터 `wait` 밀리초가 경과할 때까지 제공된 함수의 실행을 지연시킵니다.
+ * - 연속 호출 시 이전 호출은 취소되고 새로운 타이머가 시작됩니다.
  *
  * @template F - 함수의 타입입니다.
  * @param {F} func - 디바운스할 함수입니다.
@@ -29,19 +31,14 @@ interface DebouncedFunction<F extends (...args: any[]) => void> {
  * - `flush` 메서드는 대기 중인 실행이 있는 경우 디바운스된 함수를 즉시 실행합니다.
  *
  * @example
- * const debouncedFunction = debounce(() => {
- *   console.log('함수가 실행되었습니다');
- * }, 1000);
- *
+ * const debouncedFunction = debounce(func, 1000);
  * debouncedFunction(); // 1초 후에 함수가 실행됩니다
  *
  * @example
  * // AbortSignal 사용 예시
  * const controller = new AbortController();
  * const signal = controller.signal;
- * const debouncedWithSignal = debounce(() => {
- *   console.log('함수가 실행되었습니다');
- * }, 1000, { signal });
+ * const debouncedWithSignal = debounce(func, 1000, { signal });
  *
  * debouncedWithSignal();
  *

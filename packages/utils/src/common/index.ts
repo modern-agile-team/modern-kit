@@ -15,4 +15,5 @@ export * from './parseJSON';
 export * from './pickFalsy';
 export * from './range';
 export * from './retry';
+export * from './throttle';
 export * from './wrapInArray';

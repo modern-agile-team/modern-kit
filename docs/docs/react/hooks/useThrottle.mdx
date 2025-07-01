@@ -13,14 +13,15 @@ import { useThrottle } from '@modern-kit/react'
 ## Interface
 ```ts title="typescript"
 interface ThrottleSettings {
-  leading?: boolean | undefined;
-  trailing?: boolean | undefined;
+  signal?: AbortSignal;
+  leading?: boolean;
+  trailing?: boolean;
 }
 
 type ThrottleParameters = Parameters<typeof throttle>;
 ```
 ```ts title="typescript"
-function useThrottle<T extends (...args: any) => any>(
+function useThrottle<T extends ThrottleParameters[0]>(
   callback: T,
   wait: ThrottleParameters[1],
   options?: ThrottleParameters[2]

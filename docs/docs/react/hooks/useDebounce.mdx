@@ -12,15 +12,15 @@ import { useDebounce } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-// lodash-es DebounceSettings
-// https://www.geeksforgeeks.org/lodash-_-debounce-method/
 interface DebounceSettings {
-  leading?: boolean | undefined;
-  maxWait?: number | undefined;
-  trailing?: boolean | undefined;
+  signal?: AbortSignal;
+  leading?: boolean;
+  maxWait?: number;
+  trailing?: boolean;
 }
 
 type DebounceParameters = Parameters<typeof debounce>;
+
 type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
   typeof debounce<T>
 >;
