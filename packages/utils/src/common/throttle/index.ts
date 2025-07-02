@@ -53,11 +53,13 @@ export function throttle<F extends (...args: any[]) => void>(
   let pendingAt: number | null = null;
 
   const throttled = function (...args: Parameters<F>) {
+    const now = Date.now();
+
     if (pendingAt == null) {
-      pendingAt = Date.now();
+      pendingAt = now;
     } else {
-      if (Date.now() - pendingAt >= wait) {
-        pendingAt = Date.now();
+      if (now - pendingAt >= wait) {
+        pendingAt = now;
         debounced.cancel();
       }
     }
