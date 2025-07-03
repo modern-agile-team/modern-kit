@@ -118,7 +118,18 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('이미 AbortSignal에 의해 중단된 경우 디바운스된 함수를 호출하지 않아야 한다', async () => {
+  it('leading 옵션을 true로 설정하면 첫 번째 호출을 실행할 수 있어야 한다', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DELAY_TIME, { leading: true });
+
+    debouncedFunc();
+    expect(func).toHaveBeenCalledTimes(1);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('AbortSignal에 의해 중단된 경우 디바운스된 함수를 호출하지 않아야 한다', async () => {
     const func = vi.fn();
     const controller = new AbortController();
     const signal = controller.signal;
@@ -134,7 +145,7 @@ describe('debounce', () => {
     expect(func).not.toHaveBeenCalled();
   });
 
-  it('abort 이벤트 리스너가 중복으로 추가되지 않아야 한다', async () => {
+  it('AbortSignal 이벤트 리스너가 중복으로 추가되지 않아야 한다', async () => {
     const func = vi.fn();
     const controller = new AbortController();
     const signal = controller.signal;
