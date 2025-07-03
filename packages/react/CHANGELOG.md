@@ -1,5 +1,20 @@
 # @modern-kit/react
 
+## 2.5.0
+
+### Minor Changes
+
+- [#903](https://github.com/modern-agile-team/modern-kit/pull/903) [`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): lodash 제거 및 debounce/throttle @modern-kit/utils 에서 사용 - @ssi02014
+
+### Patch Changes
+
+- [#899](https://github.com/modern-agile-team/modern-kit/pull/899) [`2130768`](https://github.com/modern-agile-team/modern-kit/commit/21307681a51bfdf1ed25daf2c8e9ca117fe0138c) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: useStateWithHistory 커스텀 훅 의존성 배열 수정 - @ssi02014
+
+- [#903](https://github.com/modern-agile-team/modern-kit/pull/903) [`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: useStateWithHistory 의존성 배열 값 수정 - @ssi02014
+
+- Updated dependencies [[`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2)]:
+  - @modern-kit/utils@2.4.0
+
 ## 2.4.0
 
 ### Minor Changes

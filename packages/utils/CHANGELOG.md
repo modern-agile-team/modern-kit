@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.4.0
+
+### Minor Changes
+
+- [#903](https://github.com/modern-agile-team/modern-kit/pull/903) [`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): debounce, throttle 신규 유틸 함수 추가 - @ssi02014
+
 ## 2.3.1
 
 ### Patch Changes
