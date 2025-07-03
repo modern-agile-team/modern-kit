@@ -22,6 +22,7 @@ interface DebouncedFunction<F extends (...args: any[]) => void> {
  * @param {number} wait - 지연시킬 시간(밀리초)입니다.
  * @param {DebounceOptions} options - 옵션 객체입니다.
  * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
+ * debounce는 기본적으로 호출되면 대기 시간이 초기화됩니다. maxWait 옵션은 연속적인 호출이 발생하더라도 첫 호출 기준으로 최대 대기 시간이 지나면 강제로 함수가 실행됩니다.
  * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
  * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
  * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
@@ -67,6 +68,7 @@ export function debounce<F extends (...args: any[]) => void>(
       func.apply(pendingThis, pendingArgs);
       pendingThis = undefined;
       pendingArgs = null;
+      pendingAt = null;
     }
   };
 
@@ -83,16 +85,14 @@ export function debounce<F extends (...args: any[]) => void>(
   };
 
   /**
-   * @description 다음 디바운스 실행까지의 대기 시간을 계산합니다.
+   * @description 다음 디바운스 실행까지의 대기 시간을 계산하고 반환합니다.
    *
    * maxWait 옵션은 함수가 실행되지 않고 대기할 수 있는 최대 시간을 제한합니다.
    * 예를 들어, wait이 100ms이고 maxWait이 300ms인 경우:
    * - 연속적인 호출이 발생하더라도 첫 호출로부터 300ms가 지나면 강제로 함수가 실행됩니다
    * - 이는 함수가 너무 오랫동안 실행되지 않는 것을 방지합니다
-   *
-   * @returns {number | undefined} 다음 실행까지 대기할 시간(ms) 또는 undefined
    */
-  const getWaitTime = (): number | undefined => {
+  const getWaitTime = () => {
     if (typeof maxWait === 'number' && pendingAt != null) {
       const timeSinceFirstCall = Date.now() - pendingAt;
       const remainingMaxWait = maxWait - timeSinceFirstCall;
