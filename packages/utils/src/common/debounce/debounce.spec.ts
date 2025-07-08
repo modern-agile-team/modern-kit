@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from '.';
 
 beforeEach(() => {
-  // https://github.com/testing-library/user-event/issues/833#issuecomment-1725364780
   vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
