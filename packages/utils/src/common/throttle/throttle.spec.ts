@@ -15,7 +15,6 @@ const DELAY_TIME = 50;
 describe('throttle', () => {
   it('함수 호출을 스로틀링해야 한다', () => {
     const func = vi.fn();
-
     const throttledFunc = throttle(func, DELAY_TIME);
 
     throttledFunc(); // 첫 호출은 즉시 실행
@@ -75,6 +74,58 @@ describe('throttle', () => {
 
     throttledFunc();
     expect(func).toBeCalledTimes(1);
+  });
+
+  it('leading: false 옵션을 사용할 때는 첫 호출이 트리거되지 않아야 한다', async () => {
+    const func = vi.fn();
+    const throttled = throttle(func, DELAY_TIME, { leading: false });
+
+    throttled();
+    expect(func).toBeCalledTimes(0);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(func).toBeCalledTimes(1);
+  });
+
+  it('trailing: false 옵션을 사용할 때는 마지막 호출이 트리거되지 않아야 한다', async () => {
+    const func = vi.fn();
+    const throttled = throttle(func, DELAY_TIME, { trailing: false });
+
+    throttled();
+    expect(func).toBeCalledTimes(1);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(func).toBeCalledTimes(1);
+  });
+
+  it('leading: true, trailing: true 옵션을 사용할 때는 첫 호출과 마지막 호출이 트리거되어야 한다', async () => {
+    const func = vi.fn();
+    const throttled = throttle(func, DELAY_TIME, {
+      leading: true,
+      trailing: true,
+    });
+
+    throttled();
+    expect(func).toBeCalledTimes(1);
+
+    throttled();
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(func).toBeCalledTimes(2);
+  });
+
+  it('leading: false 와 trailing: false 옵션을 사용할 때는 첫 호출과 마지막 호출이 모두 트리거되지 않아야 한다', async () => {
+    const func = vi.fn();
+    const throttled = throttle(func, DELAY_TIME, {
+      leading: false,
+      trailing: false,
+    });
+
+    throttled();
+    expect(func).toBeCalledTimes(0);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+    expect(func).toBeCalledTimes(0);
   });
 
   it('AbortController을 통해 초기 호출을 중단할 수 있어야 한다', async () => {
