@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { debounce } from '.';
 
 beforeEach(() => {
+  // https://github.com/testing-library/user-event/issues/833#issuecomment-1725364780
   vi.useFakeTimers({ shouldAdvanceTime: true });
 });
 
@@ -19,6 +20,8 @@ describe('debounce', () => {
     debouncedFunc();
     debouncedFunc();
     debouncedFunc();
+
+    expect(func).not.toHaveBeenCalled();
 
     vi.advanceTimersByTime(DELAY_TIME);
 
@@ -81,20 +84,6 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledWith('test', 123);
   });
 
-  it('AbortSignal을 통해 중단되면 디바운스된 함수 호출을 취소해야 한다', async () => {
-    const func = vi.fn();
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const debouncedFunc = debounce(func, DELAY_TIME, { signal });
-
-    debouncedFunc();
-    controller.abort();
-
-    vi.advanceTimersByTime(DELAY_TIME);
-
-    expect(func).not.toHaveBeenCalled();
-  });
-
   it('maxWait 옵션을 사용해 최대 대기 시간을 설정할 수 있어야 한다', async () => {
     const func = vi.fn();
     const debouncedFunc = debounce(func, DELAY_TIME, {
@@ -117,15 +106,67 @@ describe('debounce', () => {
     expect(func).toHaveBeenCalledTimes(1);
   });
 
-  it('leading 옵션을 true로 설정하면 첫 번째 호출을 실행할 수 있어야 한다', async () => {
+  it('leading: true, trailing: true 일 때 처음 호출과 마지막 호출을 모두 실행해야 한다', async () => {
     const func = vi.fn();
-    const debouncedFunc = debounce(func, DELAY_TIME, { leading: true });
+    const debouncedFunc = debounce(func, DELAY_TIME, {
+      leading: true,
+      trailing: true,
+    });
 
     debouncedFunc();
     expect(func).toHaveBeenCalledTimes(1);
 
+    debouncedFunc(); // 대기 시간 내 호출, trailing: true 이므로 후행 호출
     vi.advanceTimersByTime(DELAY_TIME);
+
+    expect(func).toHaveBeenCalledTimes(2);
+  });
+
+  it('leading: true, trailing: false 일 때 처음 호출을 실행하고 마지막 호출을 실행하지 않아야 한다', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DELAY_TIME, {
+      leading: true,
+      trailing: false,
+    });
+
+    debouncedFunc();
     expect(func).toHaveBeenCalledTimes(1);
+
+    debouncedFunc(); // 대기 시간 내 호출, trailing: false 이므로 후행 호출되지 않음
+    vi.advanceTimersByTime(DELAY_TIME);
+
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('leading: false, trailing: true 일 때 처음 호출을 실행하지 않고 마지막 호출을 실행해야 한다', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DELAY_TIME, {
+      leading: false,
+      trailing: true,
+    });
+
+    debouncedFunc(); // leading: false 이므로 대기 시간 이후 후행 호출
+    expect(func).toHaveBeenCalledTimes(0);
+
+    vi.advanceTimersByTime(DELAY_TIME);
+
+    expect(func).toHaveBeenCalledTimes(1);
+  });
+
+  it('leading: false, trailing: false 일 때 처음 호출과 마지막 호출을 모두 실행하지 않아야 한다', async () => {
+    const func = vi.fn();
+    const debouncedFunc = debounce(func, DELAY_TIME, {
+      leading: false,
+      trailing: false,
+    });
+
+    debouncedFunc();
+    expect(func).toHaveBeenCalledTimes(0);
+
+    debouncedFunc();
+    vi.advanceTimersByTime(DELAY_TIME);
+
+    expect(func).toHaveBeenCalledTimes(0);
   });
 
   it('AbortSignal에 의해 중단된 경우 디바운스된 함수를 호출하지 않아야 한다', async () => {
