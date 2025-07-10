@@ -133,3 +133,9 @@ main {
     text-align: center;
   }
 }
+
+.npmLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
