@@ -62,19 +62,14 @@ export default function Home(): JSX.Element {
       <main>
         <div className={styles.mainContentWrapper}>
           <h2 className={styles.mainContentHead}>
-            <p>@modern-kit/react</p>
+            <p style={{ marginRight: 6 }}>@modern-kit/react</p>
             <div>
               <a
+                className={styles.npmLink}
                 href="https://www.npmjs.com/package/@modern-kit/react"
                 target="_blank"
                 rel="noreferrer">
                 <img src="https://img.shields.io/npm/v/@modern-kit/react.svg" />
-              </a>
-              <a
-                href="https://bundlephobia.com/package/@modern-kit/react"
-                target="_blank"
-                rel="noreferrer">
-                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/react/latest" />
               </a>
             </div>
           </h2>
@@ -83,19 +78,14 @@ export default function Home(): JSX.Element {
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            <p>@modern-kit/utils</p>
+            <p style={{ marginRight: 6 }}>@modern-kit/utils</p>
             <div>
               <a
+                className={styles.npmLink}
                 href="https://www.npmjs.com/package/@modern-kit/utils"
                 target="_blank"
                 rel="noreferrer">
                 <img src="https://img.shields.io/npm/v/@modern-kit/utils.svg" />
-              </a>
-              <a
-                href="https://bundlephobia.com/package/@modern-kit/utils"
-                target="_blank"
-                rel="noreferrer">
-                <img src="https://img.shields.io/bundlephobia/minzip/@modern-kit/utils/latest" />
               </a>
             </div>
           </h2>
@@ -104,9 +94,10 @@ export default function Home(): JSX.Element {
             라이브러리입니다.
           </p>
           <h2 className={styles.mainContentHead}>
-            <p>@modern-kit/types</p>
+            <p style={{ marginRight: 6 }}>@modern-kit/types</p>
             <div>
               <a
+                className={styles.npmLink}
                 href="https://www.npmjs.com/package/@modern-kit/types"
                 target="_blank"
                 rel="noreferrer">

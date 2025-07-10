@@ -1,6 +1,10 @@
+import { useVisibilityChange } from '@modern-kit/react';
+
 # useVisibilityChange
 
-`visibilitychange` 이벤트가 발생할 때 즉, 브라우저 탭의 콘텐츠가 보여지면 `onShow` 콜백 함수를 실행하며, 콘텐츠가 숨겨지면 `onHide` 콜백 함수를 실행하는 커스텀 훅입니다.
+문서의 가시성(visibility) 상태 변경 시 실행할 콜백 함수를 등록하는 커스텀 훅입니다.
+
+`document.visibilityState`가 문서가 보이는 상태가 되면(`visible`) `onShow` 콜백이 호출되며, 보이지 않는 상태가 되면(`hidden`) `onHide` 콜백이 호출됩니다.
 
 <br />
 
@@ -17,12 +21,14 @@ type VisibilityChangeCallbackAction = (
 interface useVisibilityChangeProps {
   onShow?: VisibilityChangeCallbackAction;
   onHide?: VisibilityChangeCallbackAction;
+  enabled?: boolean; // default: true
 }
 ```
 ```ts title="typescript"
 function useVisibilityChange({
   onShow,
   onHide,
+  enabled = true,
 }: UseVisibilityChangeProps = {}): void;
 ```
 
@@ -31,7 +37,7 @@ function useVisibilityChange({
 import { useVisibilityChange } from '@modern-kit/react';
 
 const Example = () => {
-  useVisibilityEvent({
+  useVisibilityChange({
     onShow: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */},
     onHide: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */}
   });
@@ -41,3 +47,18 @@ const Example = () => {
   )
 };
 ```
+
+## Example
+export const Example = () => {
+  useVisibilityChange({
+    onShow: () => {
+      window.alert('페이지에 다시 돌아오셨군요!');
+    },
+  });
+
+  return (
+    <div>탭을 벗어난 후 다시 돌아와보세요!</div>
+  )
+};
+
+<Example />
