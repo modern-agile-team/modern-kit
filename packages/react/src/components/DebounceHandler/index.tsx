@@ -1,12 +1,12 @@
 import { Children, cloneElement } from 'react';
-import { DebounceParameters, useDebounce } from '../../hooks/useDebounce';
+import { useDebounce } from '../../hooks/useDebounce';
 import { isFunction } from '@modern-kit/utils';
 
 interface DebounceHandlerProps {
   children: JSX.Element;
   capture: string;
-  wait: DebounceParameters[1];
-  options?: DebounceParameters[2];
+  wait: Parameters<typeof useDebounce>[1];
+  options?: Parameters<typeof useDebounce>[2];
 }
 
 /**

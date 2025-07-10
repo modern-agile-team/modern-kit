@@ -3,8 +3,8 @@ import { throttle } from '@modern-kit/utils';
 import { useUnmount } from '../useUnmount';
 import { usePreservedCallback } from '../usePreservedCallback';
 
-export type ThrottleParameters = Parameters<typeof throttle>;
-export type ThrottleReturnType<T extends ThrottleParameters[0]> = ReturnType<
+type ThrottleParameters = Parameters<typeof throttle>;
+type ThrottleReturnType<T extends (...args: any) => any> = ReturnType<
   typeof throttle<T>
 >;
 

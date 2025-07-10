@@ -3,37 +3,45 @@ import { useMemo } from 'react';
 import { useUnmount } from '../useUnmount';
 import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 
-export type DebounceParameters = Parameters<typeof debounce>;
-export type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
+type DebounceParameters = Parameters<typeof debounce>;
+type DebounceReturnType<T extends (...args: any) => any> = ReturnType<
   typeof debounce<T>
 >;
 
 /**
  * @description 주어진 콜백 함수를 `디바운스(지연)` 처리하여 특정 시간 동안 반복 호출을 방지하는 훅입니다.
- * 디바운스는 마지막 함수 호출 후 일정 시간이 지나면 콜백이 실행되도록 합니다.
  *
- * @template T - 콜백 함수의 타입입니다.
- * @param {T} callback - 디바운스 처리할 콜백 함수입니다.
- * @param {DebounceParameters[1]} wait - 디바운스가 적용될 시간(ms)입니다. 이 시간이 지나면 콜백이 실행됩니다.
- * @param {DebounceParameters[2]} [options] - 디바운스 동작에 영향을 주는 추가 옵션입니다.
- * - `signal` 옵션을 통해 디바운스 된 함수를 중단할 수 있습니다.
- * - `leading` 옵션을 통해 초기 호출을 실행할지 여부를 설정할 수 있습니다.
- * - `trailing` 옵션을 통해 마지막 호출을 실행할지 여부를 설정할 수 있습니다.
- * - `maxWait` 옵션을 통해 최대 대기 시간을 설정할 수 있습니다.
+ * 콜백 함수는 마지막으로 호출된 시점으로부터 `wait` 밀리초가 경과할 때까지 실행이 지연됩니다.
+ * - 연속 호출 시 이전 호출은 취소되고 새로운 타이머가 시작됩니다.
  *
- * @returns {DebounceReturnType<T>} 디바운스 처리된 콜백 함수를 반환합니다.
+ * @template T - 콜백 함수 타입입니다.
+ * @param {DebounceParameters[0]} callback - 디바운스할 콜백 함수입니다.
+ * @param {DebounceParameters[1]} wait - 지연시킬 시간(밀리초)입니다.
+ * @param {DebounceParameters[2]} options - 디바운스 동작과 관련된 옵션 객체입니다.
+ * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
+ * debounce는 기본적으로 호출되면 대기 시간이 초기화됩니다. maxWait 옵션은 연속적인 호출이 발생하더라도 첫 호출 기준으로 최대 대기 시간이 지나면 강제로 함수가 실행됩니다.
+ * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
+ * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
+ * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
+ *
+ * @returns {DebouncedFunction<F>} `cancel` 메서드가 포함된 새로운 디바운스된 함수를 반환합니다.
+ * - `cancel` 메서드는 디바운스된 함수의 대기 중인 실행을 취소합니다.
+ * - `flush` 메서드는 대기 중인 실행이 있는 경우 디바운스된 함수를 즉시 실행합니다.
  *
  * @example
- * const debouncedFunction = useDebounce(callback, 300);
- * debouncedFunction(); // 디바운스 된 콜백이 실행됩니다.
+ * const debouncedFunction = useDebounce(callback, 1000);
+ * debouncedFunction(); // 1초 후에 함수가 실행됩니다
  *
  * @example
  * // AbortSignal 사용 예시
  * const controller = new AbortController();
- * controller.abort(); // 디바운스된 함수 호출을 취소합니다.
+ * const signal = controller.signal;
+ * const debouncedWithSignal = useDebounce(callback, 1000, { signal });
  *
- * const debounced = useDebounce(callback, 300, { signal: controller.signal });
- * debounced(); // 호출되지 않습니다.
+ * debouncedWithSignal();
+ *
+ * // 디바운스된 함수 호출을 즉시 실행합니다
+ * controller.abort();
  */
 export function useDebounce<T extends DebounceParameters[0]>(
   callback: T,
@@ -48,7 +56,7 @@ export function useDebounce<T extends DebounceParameters[0]>(
       signal,
       leading,
       trailing,
-      maxWait,
+      ...(typeof maxWait === 'number' && { maxWait }),
     });
   }, [callbackAction, wait, signal, leading, trailing, maxWait]);
 

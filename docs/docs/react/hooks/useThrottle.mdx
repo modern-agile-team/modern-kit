@@ -3,7 +3,7 @@ import { useThrottle } from '@modern-kit/react'
 
 # useThrottle
 
-`throttle`을 쉽게 사용할 수 있는 커스텀 훅입니다.
+주어진 콜백 함수를 지정된 시간 동안 `쓰로틀링` 처리하여 특정 시간 동안 반복 호출을 방지하는 훅입니다.
 
 <br />
 
@@ -12,16 +12,30 @@ import { useThrottle } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-interface ThrottleSettings {
-  signal?: AbortSignal;
-  leading?: boolean;
-  trailing?: boolean;
-}
-
+/**
+ * @interface ThrottleParameters
+ * @template T - 콜백 함수 타입입니다.  
+ * @param {ThrottleParameters[0]} callback - 스로틀링할 콜백 함수입니다.
+ * @param {ThrottleParameters[1]} wait - 스로틀링 시간(밀리초)입니다.
+ * @param {ThrottleParameters[2]} options - 옵션 객체입니다.
+ * @param {AbortSignal} options.signal - 스로틀링된 함수를 취소하기 위한 선택적 AbortSignal입니다.
+ * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
+ * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
+ */
 type ThrottleParameters = Parameters<typeof throttle>;
+
+/**
+ * @interface ThrottleReturnType
+ * @template T - 콜백 함수 타입입니다.
+ * @param {() => void} cancel - 스로틀링된 함수의 대기 중인 실행을 취소합니다.
+ * @param {() => void} flush - 대기 중인 실행이 있는 경우 스로틀링된 함수를 즉시 실행합니다.
+ */
+type ThrottleReturnType<T extends (...args: any) => any> = ReturnType<
+  typeof throttle<T>
+>;
 ```
 ```ts title="typescript"
-function useThrottle<T extends ThrottleParameters[0]>(
+function useThrottle<T extends (...args: any) => any>(
   callback: T,
   wait: ThrottleParameters[1],
   options?: ThrottleParameters[2]
