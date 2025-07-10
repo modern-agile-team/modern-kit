@@ -4,7 +4,7 @@ import { renderSetup } from '../../_internal/test/renderSetup';
 import { useDebouncedState } from '.';
 import { delay } from '@modern-kit/utils';
 
-const DELAY_TIME = 300;
+const DELAY_TIME = 50;
 
 const TestComponent = () => {
   const [debouncedState, setDebouncedState] = useDebouncedState('', DELAY_TIME);
@@ -25,10 +25,10 @@ describe('useDebouncedState', () => {
 
     await user.type(input, 'test');
 
-    await delay(100);
+    await delay(DELAY_TIME / 2);
     expect(debouncedState).toHaveTextContent('');
 
-    await delay(200);
+    await delay(DELAY_TIME / 2);
     expect(debouncedState).toHaveTextContent('test');
   });
 
@@ -42,10 +42,10 @@ describe('useDebouncedState', () => {
     await user.type(input, '1234');
     await user.type(input, 'bgzt');
 
-    await delay(100);
+    await delay(DELAY_TIME / 2);
     expect(debouncedState).toHaveTextContent('');
 
-    await delay(200);
+    await delay(DELAY_TIME / 2);
     expect(debouncedState).toHaveTextContent('bgzt');
   });
 });

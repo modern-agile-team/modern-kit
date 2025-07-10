@@ -14,7 +14,18 @@ import { useDebouncedInputValue } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-type DebounceParameters = Parameters<typeof debounce>;
+/**
+ * @interface DebounceParameters
+ * @template T - 콜백 함수 타입입니다.
+ * @param {DebounceParameters[0]} callback - 디바운스할 콜백 함수입니다.
+ * @param {DebounceParameters[1]} wait - 지연시킬 시간(밀리초)입니다.
+ * @param {DebounceParameters[2]} options - 디바운스 동작과 관련된 옵션 객체입니다.
+ * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
+ * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
+ * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
+ * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
+ */
+type DebounceParameters = Parameters<typeof useDebounce>;
 ```
 ```ts title="typescript"
 function useDebouncedInputValue(

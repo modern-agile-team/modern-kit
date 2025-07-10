@@ -3,7 +3,7 @@ import { useDebounce } from '@modern-kit/react'
 
 # useDebounce
 
-`debounce`를 쉽게 사용할 수 있는 커스텀 훅입니다.
+주어진 콜백 함수를 `디바운스(지연)` 처리하여 특정 시간 동안 반복 호출을 방지하는 훅입니다.
 
 <br />
 
@@ -12,24 +12,33 @@ import { useDebounce } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-interface DebounceSettings {
-  signal?: AbortSignal;
-  leading?: boolean;
-  maxWait?: number;
-  trailing?: boolean;
-}
-
+/**
+ * @interface DebounceParameters
+ * @template T - 콜백 함수 타입입니다.
+ * @param {DebounceParameters[0]} callback - 디바운스할 콜백 함수입니다.
+ * @param {DebounceParameters[1]} wait - 지연시킬 시간(밀리초)입니다.
+ * @param {DebounceParameters[2]} options - 옵션 객체입니다.
+ * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
+ * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
+ * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
+ * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
+ */
 type DebounceParameters = Parameters<typeof debounce>;
 
-type DebounceReturnType<T extends DebounceParameters[0]> = ReturnType<
+/**
+ * @interface DebounceReturnType
+ * @param {() => void} cancel - 디바운스된 함수의 대기 중인 실행을 취소합니다.
+ * @param {() => void} flush - 대기 중인 실행이 있는 경우 디바운스된 함수를 즉시 실행합니다.
+ */
+type DebounceReturnType<T extends (...args: any) => any> = ReturnType<
   typeof debounce<T>
 >;
 ```
 ```ts title="typescript"
 function useDebounce<T extends (...args: any) => any>(
   callback: T,
-  wait: DebounceParameters[1], // number
-  options?: DebounceParameters[2] // DebounceSettings
+  wait: DebounceParameters[1],
+  options?: DebounceParameters[2]
 ): DebounceReturnType<T>;
 ```
 

@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
-import { type DebounceParameters } from '../../hooks/useDebounce';
-import { useDebouncedState } from '../../hooks/useDebouncedState';
+import { useDebouncedState } from '../useDebouncedState';
+import { useDebounce } from '../useDebounce';
+
+type DebounceParameters = Parameters<typeof useDebounce>;
 
 interface UseDebouncedInputValueReturnType {
   value: string;
@@ -16,8 +18,12 @@ interface UseDebouncedInputValueReturnType {
  * 현재 입력 값과 디바운싱된 값을 제공하며, 값을 업데이트하고 리셋할 수 있는 함수도 함께 제공합니다.
  *
  * @param {string} initialValue - 초기 입력 값입니다.
- * @param {DebounceParameters[1]} [wait] - 입력 값에 디바운싱을 적용할 때의 지연 시간(밀리초)입니다.
- * @param {DebounceParameters[2]} [options={}] - 디바운스 동작에 대한 선택적 구성 옵션입니다.
+ * @param {DebounceParameters[1]} wait - 입력 값에 디바운싱을 적용할 때의 지연 시간(밀리초)입니다.
+ * @param {DebounceParameters[2]} options - 디바운스 동작과 관련된 옵션 객체입니다.
+ * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
+ * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
+ * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
+ * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
  *
  * @returns {UseDebouncedInputValueReturnType}
  * - `value`: 현재 입력 값
