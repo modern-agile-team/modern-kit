@@ -1,8 +1,8 @@
 /**
  * @description 두 객체 타입을 병합하는 타입입니다. 이때, 겹치는 프로퍼티는 두 번째 타입의 타입으로 대체됩니다.
  *
- * @template A - 첫 번째 타입
- * @template B - 두 번째 타입
+ * @template A - 첫 번째 객체 타입
+ * @template B - 두 번째 객체 타입
  *
  * @example
  * type A = { a: string, b: number }

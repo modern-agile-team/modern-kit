@@ -6,7 +6,6 @@ export * from './EnumerateNumbers';
 export * from './ExtractMapType';
 export * from './ExtractNestedArrayType';
 export * from './ExtractSetType';
-export * from './IndexSignature';
 export * from './Integer';
 export * from './Invert';
 export * from './Merge';

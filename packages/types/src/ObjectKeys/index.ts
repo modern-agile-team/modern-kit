@@ -1,10 +1,7 @@
 /**
- * @description Object.keys 함수의 반환 타입을 명확하게 정의하기 위해 사용 할 수 있습니다.
- *
- * symbol 타입의 키는 제외됩니다.
+ * @description Object.keys 함수의 반환 타입을 명확하게 정의하기 위해 사용 할 수 있습니다. `symbol` 타입의 키는 제외됩니다.
  *
  * @template T - 타입을 추출할 객체 타입
- * @returns 객체의 키를 타입으로 추출한 타입을 반환합니다
  *
  * @example
  * type MyObject = { a: string, b: number };
