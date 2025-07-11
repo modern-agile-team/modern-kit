@@ -1,8 +1,8 @@
 /**
- * @description 자연수를 나타내는 타입입니다 (0보다 큰 양의 정수).
+ * @description 자연수를 나타내는 타입입니다. (0보다 큰 양의 정수)
  *
- * @template T - 검사할 숫자 타입
- * @returns 입력된 숫자 T가 자연수인 경우 해당 타입을 반환하고,유효하지 않은 자연수인 경우 never를 반환합니다.
+ * @template T - 숫자 타입 매개변수
+ *
  * @example
  * type ValidNaturalNumber1 = NaturalNumber<1>; // 1
  * type ValidNaturalNumber2 = NaturalNumber<10>; // 10

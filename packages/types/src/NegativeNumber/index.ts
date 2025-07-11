@@ -1,8 +1,7 @@
 /**
- * @description 주어진 숫자 타입이 음수인지 확인하는 타입
+ * @description 주어진 숫자 타입이 `음수`인지 확인하는 타입입니다. 음수가 아닐 경우 `never`를 반환합니다.
  *
- * @template T - 검사할 숫자 타입
- * @returns 입력된 타입 T가 음수인 경우 T를 반환하고, 그렇지 않으면 never를 반환
+ * @template T - 숫자 타입 매개변수
  *
  * @example
  * type ValidNegativeNumber1 = NegativeNumber<-1>; // -1

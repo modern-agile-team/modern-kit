@@ -1,8 +1,7 @@
 /**
- * @description 숫자 타입이 정수인지 확인하는 타입
+ * @description 숫자 타입이 `정수`인지 확인하는 타입입니다. 정수가 아닐 경우 `never`를 반환합니다.
  *
- * @template T - 검사할 숫자 타입
- * @returns 입력된 숫자가 정수이면 해당 타입을 반환하고, 소수점이 있으면 never를 반환
+ * @template T - 숫자 타입 매개변수
  *
  * @example
  * type ValidInteger = Integer<1>; // 1
