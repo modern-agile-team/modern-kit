@@ -15,6 +15,7 @@ export * from './NonEmptyArray';
 export * from './Nullable';
 export * from './ObjectEntries';
 export * from './ObjectKeys';
+export * from './ObjectPath';
 export * from './Primitive';
 export * from './Promiseable';
 export * from './Range';
