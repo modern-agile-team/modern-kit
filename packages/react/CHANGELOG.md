@@ -1,5 +1,26 @@
 # @modern-kit/react
 
+## 2.5.0
+
+### Minor Changes
+
+- [#912](https://github.com/modern-agile-team/modern-kit/pull/912) [`5be6084`](https://github.com/modern-agile-team/modern-kit/commit/5be6084e26d6cbc0c37d0937ff8d9b462b9d4cd1) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useVisibilityChange enabled 옵션 추가 - @ssi02014
+
+- [#915](https://github.com/modern-agile-team/modern-kit/pull/915) [`98623e0`](https://github.com/modern-agile-team/modern-kit/commit/98623e01f4afbc401577df4512b1aa2a2dc62a72) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useLocalStorage visibilityChange 옵션 추가 - @ssi02014
+
+- [#903](https://github.com/modern-agile-team/modern-kit/pull/903) [`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): lodash 제거 및 debounce/throttle @modern-kit/utils 에서 사용 - @ssi02014
+
+### Patch Changes
+
+- [#899](https://github.com/modern-agile-team/modern-kit/pull/899) [`2130768`](https://github.com/modern-agile-team/modern-kit/commit/21307681a51bfdf1ed25daf2c8e9ca117fe0138c) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: useStateWithHistory 커스텀 훅 의존성 배열 수정 - @ssi02014
+
+- [#911](https://github.com/modern-agile-team/modern-kit/pull/911) [`72a31f1`](https://github.com/modern-agile-team/modern-kit/commit/72a31f12a3feecb259bac0d6d0d9d50d28135619) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): debounce 관련 훅 타입 및 주석 개선 - @ssi02014
+
+- [#903](https://github.com/modern-agile-team/modern-kit/pull/903) [`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2) Thanks [@ssi02014](https://github.com/ssi02014)! - fix: useStateWithHistory 의존성 배열 값 수정 - @ssi02014
+
+- Updated dependencies [[`132f2df`](https://github.com/modern-agile-team/modern-kit/commit/132f2df6e474a209087b49f24b05b3fe54309dd2)]:
+  - @modern-kit/utils@2.4.0
+
 ## 2.4.0
 
 ### Minor Changes
