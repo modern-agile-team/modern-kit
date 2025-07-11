@@ -1,5 +1,19 @@
 # @modern-kit/types
 
+## 2.0.0
+
+### Major Changes
+
+- [#899](https://github.com/modern-agile-team/modern-kit/pull/899) [`2130768`](https://github.com/modern-agile-team/modern-kit/commit/21307681a51bfdf1ed25daf2c8e9ca117fe0138c) Thanks [@ssi02014](https://github.com/ssi02014)! - @modern-kit/types release v2.0.0 - @ssi02014
+
+### Minor Changes
+
+- [#894](https://github.com/modern-agile-team/modern-kit/pull/894) [`8c34718`](https://github.com/modern-agile-team/modern-kit/commit/8c34718051c83379328e29c7f6131c45fff3b919) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(types): EnumerateNumbers type추가 - @zzzRYT
+
+- [#914](https://github.com/modern-agile-team/modern-kit/pull/914) [`d86b0db`](https://github.com/modern-agile-team/modern-kit/commit/d86b0db45b4bfb796529600217127256e0e0f0c5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(types): ObjectPath 추가 - @ssi02014
+
+- [#892](https://github.com/modern-agile-team/modern-kit/pull/892) [`e93b439`](https://github.com/modern-agile-team/modern-kit/commit/e93b439c964b6725da02f4197d2bf926b6b74e39) Thanks [@zzzRYT](https://github.com/zzzRYT)! - feat(types): Range type추가 - @zzzRYT
+
 ## 1.9.0
 
 ### Minor Changes
