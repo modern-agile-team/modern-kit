@@ -18,3 +18,5 @@ export type Range<T, F> = T extends number
     ? Exclude<EnumerateNumbers<F>, EnumerateNumbers<T>>
     : never
   : never;
+
+type test = Range<3, 1>;
