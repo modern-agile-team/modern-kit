@@ -45,6 +45,16 @@ setState(state => {
 });
 ```
 
+`visibilityChange` 옵션을 통해 브라우저 탭의 가시성 변경 이벤트를 감지하여 가시성 상태가 되면 `state`를 동기화합니다. 사용 케이스로 `sessionStorage`와 다르게 탭 간 공유되는 저장소이기 때문에 탭 간 동기화가 필요할 때 사용합니다.
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [1, 2],
+  visibilityChange: true,
+});
+```
+
 <br />
 
 ## Code
@@ -54,11 +64,13 @@ setState(state => {
 ```ts title="typescript"
 interface UseLocalStorageWithoutInitialValueProps {
   key: string;
+  visibilityChange?: boolean;
 }
 
 interface UseLocalStorageWithInitialValueProps<T> {
   key: string;
   initialValue: T | (() => T);
+  visibilityChange?: boolean;
 }
 
 type UseLocalStorageProps<T> =
