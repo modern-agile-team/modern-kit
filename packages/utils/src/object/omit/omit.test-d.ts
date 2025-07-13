@@ -13,7 +13,16 @@ describe('omit 함수', () => {
     const obj = { a: 1, b: 2, c: 3 };
     const result = omit(obj, ['a', 'b', 'c']);
 
-    expectTypeOf(result).toEqualTypeOf<{}>();
+    expectTypeOf(result).toEqualTypeOf<
+      Omit<
+        {
+          a: number;
+          b: number;
+          c: number;
+        },
+        'b' | 'c' | 'a'
+      >
+    >();
   });
 
   it('제외할 키가 없으면 동일한 객체 타입으로 추론되어야 합니다.', () => {
