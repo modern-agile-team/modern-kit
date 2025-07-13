@@ -8,8 +8,8 @@ import { identity } from '../../common/identity';
  * @returns {Record<T[number], number>} 배열의 각 요소의 개수를 담은 객체
  *
  * @example
- * countBy([1, 2, 3]);
- * // { 1: 1, 2: 1, 3: 1 }
+ * countBy([1, 2, 3, 2, 1]);
+ * // { 1: 2, 2: 2, 3: 1 }
  */
 export function countBy<T extends readonly any[]>(
   arr: T
