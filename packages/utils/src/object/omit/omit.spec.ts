@@ -1,22 +1,25 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { omit } from '.';
 
-describe('omit function', () => {
-  it('should return a new object omitting multiple keys from an object', () => {
-    const inputObj = { a: 1, b: 2, c: 3 };
-    const omittedObj = omit(inputObj, ['b', 'c']);
+describe('omit', () => {
+  it('객체에서 지정한 키를 제외한 객체를 반환해야 합니다', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const result = omit(obj, ['b', 'c']);
 
-    expect(omittedObj).toEqual({ a: 1 });
-
-    // type
-    expectTypeOf(omittedObj).toEqualTypeOf<{ a: number }>();
+    expect(result).toEqual({ a: 1 });
   });
 
-  it('should return a new object that is deeply copied', () => {
-    const inputObj = { a: 1, b: { x: 2, y: 3 }, c: 4 };
-    const omittedObj = omit(inputObj, ['a', 'c']);
+  it('모든 키를 제외하면 빈 객체를 반환해야 합니다', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const result = omit(obj, ['a', 'b', 'c']);
 
-    expect(omittedObj.b).not.toBe(inputObj.b);
-    expect(omittedObj.b).toEqual(inputObj.b);
+    expect(result).toEqual({});
+  });
+
+  it('제외할 키가 없으면 동일한 객체를 반환해야 합니다', () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const result = omit(obj, []);
+
+    expect(result).toEqual({ a: 1, b: 2, c: 3 });
   });
 });

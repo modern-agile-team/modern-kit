@@ -1,4 +1,4 @@
-import { type ObjectKeys } from '../../object/objectKeys';
+import { type ObjectKeys } from '../objectKeys';
 
 /**
  * @description `Object.values()`와 동일하게 동작하는 함수입니다.
