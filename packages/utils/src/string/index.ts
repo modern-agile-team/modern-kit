@@ -1,3 +1,4 @@
+export * from './capitalize';
 export * from './countSubstringOccurrences';
 export * from './extractLetters';
 export * from './extractNumber';

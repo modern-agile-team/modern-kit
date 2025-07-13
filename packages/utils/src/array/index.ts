@@ -2,7 +2,7 @@ export * from './at';
 export * from './chunk';
 export * from './compact';
 export * from './contains';
-export * from './countOccurrencesInArray';
+export * from './countBy';
 export * from './difference';
 export * from './drop';
 export * from './excludeElements';
