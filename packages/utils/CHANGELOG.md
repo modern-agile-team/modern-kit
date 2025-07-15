@@ -1,5 +1,13 @@
 # @modern-kit/utils
 
+## 2.5.0
+
+### Minor Changes
+
+- [#916](https://github.com/modern-agile-team/modern-kit/pull/916) [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): capitalize 신규 함수 추가 - @ssi02014
+
+- [#916](https://github.com/modern-agile-team/modern-kit/pull/916) [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): [Breaking Changes] countOccurrencesInArray -> countBy 변환- @ssi02014
+
 ## 2.4.0
 
 ### Minor Changes
