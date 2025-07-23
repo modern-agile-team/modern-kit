@@ -1,5 +1,21 @@
 # @modern-kit/utils
 
+## 2.5.0
+
+### Minor Changes
+
+- [#923](https://github.com/modern-agile-team/modern-kit/pull/923) [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isHangul/isHangulAlphanumeric/isAlphabet 신규 함수 추가 - @ssi02014
+
+- [#923](https://github.com/modern-agile-team/modern-kit/pull/923) [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): parseDateString 신규 함수 추가 - @ssi02014
+
+- [#923](https://github.com/modern-agile-team/modern-kit/pull/923) [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getInValue 신규 함수 추가 - @ssi02014
+
+- [#923](https://github.com/modern-agile-team/modern-kit/pull/923) [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isAOS/isIOS 함수 추가 - @ssi02014
+
+- [#916](https://github.com/modern-agile-team/modern-kit/pull/916) [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): capitalize 신규 함수 추가 - @ssi02014
+
+- [#916](https://github.com/modern-agile-team/modern-kit/pull/916) [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): [Breaking Changes] countOccurrencesInArray -> countBy 변환- @ssi02014
+
 ## 2.4.0
 
 ### Minor Changes
