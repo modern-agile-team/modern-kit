@@ -89,5 +89,8 @@
     "hooks",
     "custom hooks"
   ],
+  "overrides": {
+    "stylus": "github:stylus/stylus#0.62.0"
+  },
   "gitHead": "f451da4fef108695b343911200ec95ee34da4e97"
 }
