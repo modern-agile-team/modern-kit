@@ -1,4 +1,4 @@
-import { isNumericString } from '../../validator/isNumericString';
+import { isNumeric } from '../../validator/isNumeric';
 
 interface ParsedFormatDateReturnType {
   year: number;
@@ -124,7 +124,7 @@ export function isBirthDate(birthDate: string): boolean {
     birthDateToUse = birthDateToUse.replace(/[-/.]/g, '');
   }
 
-  if (!isNumericString(birthDateToUse)) {
+  if (!isNumeric(birthDateToUse)) {
     return false;
   }
 
