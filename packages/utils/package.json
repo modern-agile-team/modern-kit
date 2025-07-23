@@ -62,6 +62,9 @@
   "engines": {
     "node": ">=18"
   },
+  "overrides": {
+    "stylus": "github:stylus/stylus#0.64.0"
+  },
   "keywords": [
     "react",
     "next",
