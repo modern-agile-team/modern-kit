@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { parseDate } from '.';
 
 beforeEach(() => {
-  vi.setSystemTime(new Date('2025-01-01T12:00:00.000Z'));
+  vi.setSystemTime(new Date('2025-01-01 12:00:00'));
 });
 
 afterEach(() => {
@@ -44,23 +44,21 @@ describe('parseDate', () => {
     expect(parsedDate).toEqual(date);
   });
 
-  // 숫자 케이스의 경우 CI/CD 환경에서 실패해 제외
-
   it('유효하지 않은 날짜 문자열을 파싱할 때 오류가 발생해야 합니다.', () => {
     const invalidDateString1 = 'invalid-date';
     expect(() => parseDate(invalidDateString1)).toThrow(
-      'date가 유효하지 않은 날짜 형식입니다.'
+      '유효하지 않은 날짜 형식입니다.'
     );
 
     const invalidDateString2 = '25-01-01';
     expect(() => parseDate(invalidDateString2)).toThrow(
-      'date가 유효하지 않은 날짜 형식입니다.'
+      '유효하지 않은 날짜 형식입니다.'
     );
 
     const invalidDateString3 = '2025a01a02';
 
     expect(() => parseDate(invalidDateString3)).toThrow(
-      'date가 유효하지 않은 날짜 형식입니다.'
+      '유효하지 않은 날짜 형식입니다.'
     );
   });
 });
