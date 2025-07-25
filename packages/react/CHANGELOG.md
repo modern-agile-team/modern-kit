@@ -1,5 +1,12 @@
 # @modern-kit/react
 
+## 2.5.1
+
+### Patch Changes
+
+- Updated dependencies [[`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22), [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22), [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22), [`9da0e09`](https://github.com/modern-agile-team/modern-kit/commit/9da0e090149256ab7975cd1b404f790073102b22), [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3), [`bc9261e`](https://github.com/modern-agile-team/modern-kit/commit/bc9261ef6e83bc25b2d035f0ae80cf2e3b0e43f3)]:
+  - @modern-kit/utils@2.5.0
+
 ## 2.5.0
 
 ### Minor Changes
