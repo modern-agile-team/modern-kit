@@ -47,10 +47,9 @@ type PropertyPath<
  *
  * 주어진 객체 타입에 옵셔널 키가 있는 경우, 옵셔널(?) 경로로 접근해야 합니다.
  *
- * @param {T} obj - 객체
- * @param {P} path - 점 표기법으로 구성된 키 경로
- * @param {isUndefinable} isUndefinable - 경로에 해당하는 값이 존재하지 않을 경우 undefined를 반환할지 여부
- * @returns {GetReturnType<T, P, isUndefinable>} 경로에 해당하는 값
+ * @template T - 조회하고자 하는 객체 타입
+ * @template P - 점 표기법으로 구성된 키 경로
+ * @template isUndefinable - 경로에 해당하는 값이 존재하지 않을 경우 undefined를 반환할지 여부
  *
  * @example
  * GetReturnType<{ a: { b: { c: 1 } } }, 'a'> // { b: { c: 1 } }
