@@ -1,6 +1,7 @@
 export * from './deleteFalsyProperties';
 export * from './findKey';
 export * from './findLastKey';
+export * from './get';
 export * from './invert';
 export * from './mapKeys';
 export * from './mapValues';

@@ -8923,6 +8923,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/utils/",\
         "packageDependencies": [\
           ["@modern-kit/utils", "workspace:packages/utils"],\
+          ["@modern-kit/types", "workspace:packages/types"],\
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:16.0.0"],\
           ["@types/lodash-es", "npm:4.17.12"],\
@@ -11447,7 +11448,7 @@ const RAW_RUNTIME_STATE =
           ["@vitest/coverage-istanbul", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:3.2.0"],\
           ["@istanbuljs/schema", "npm:0.1.3"],\
           ["@types/vitest", null],\
-          ["debug", "virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1"],\
+          ["debug", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1"],\
           ["istanbul-lib-coverage", "npm:3.2.2"],\
           ["istanbul-lib-instrument", "npm:6.0.3"],\
           ["istanbul-lib-report", "npm:3.0.1"],\
@@ -11487,10 +11488,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c4c9e02a2bd4453a972ff55cdf3a47db12d31806055d81ba15fa7fbbdaf5312ceebb334c82b5d85fdc76dc7f24c3fbc2d0fedcc719ca5ca9ba38e4debc93a23c#npm:3.2.2", {\
-        "packageLocation": "./.yarn/__virtual__/@vitest-mocker-virtual-a2e47a20bf/0/cache/@vitest-mocker-npm-3.2.2-6d3f2ce5f1-3be2a90c01.zip/node_modules/@vitest/mocker/",\
+      ["virtual:e343c89e3bfb0300f55e90d10596d6228050bcefdfb229ebc45ddf158aadfc3f77ee14dc20a92f19bbb3709f56612dd2968c686b92d1c7fb2e949c5a3edb014e#npm:3.2.2", {\
+        "packageLocation": "./.yarn/__virtual__/@vitest-mocker-virtual-856ed6031f/0/cache/@vitest-mocker-npm-3.2.2-6d3f2ce5f1-3be2a90c01.zip/node_modules/@vitest/mocker/",\
         "packageDependencies": [\
-          ["@vitest/mocker", "virtual:c4c9e02a2bd4453a972ff55cdf3a47db12d31806055d81ba15fa7fbbdaf5312ceebb334c82b5d85fdc76dc7f24c3fbc2d0fedcc719ca5ca9ba38e4debc93a23c#npm:3.2.2"],\
+          ["@vitest/mocker", "virtual:e343c89e3bfb0300f55e90d10596d6228050bcefdfb229ebc45ddf158aadfc3f77ee14dc20a92f19bbb3709f56612dd2968c686b92d1c7fb2e949c5a3edb014e#npm:3.2.2"],\
           ["@types/msw", null],\
           ["@types/vite", null],\
           ["@vitest/spy", "npm:3.2.2"],\
@@ -15337,6 +15338,20 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1", {\
+        "packageLocation": "./.yarn/__virtual__/debug-virtual-b2e6f6df46/0/cache/debug-npm-4.4.1-6eab84b9f7-d2b44bc1af.zip/node_modules/debug/",\
+        "packageDependencies": [\
+          ["debug", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1"],\
+          ["@types/supports-color", null],\
+          ["ms", "npm:2.1.3"],\
+          ["supports-color", null]\
+        ],\
+        "packagePeers": [\
+          "@types/supports-color",\
+          "supports-color"\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["virtual:2a426afc4b2eef43db12a540d29c2b5476640459bfcd5c24f86bb401cf8cce97e63bd81794d206a5643057e7f662643afd5ce3dfc4d4bfd8e706006c6309c5fa#npm:3.2.7", {\
         "packageLocation": "./.yarn/__virtual__/debug-virtual-d2345003b7/0/cache/debug-npm-3.2.7-754e818c7a-37d96ae42c.zip/node_modules/debug/",\
         "packageDependencies": [\
@@ -15385,20 +15400,6 @@ const RAW_RUNTIME_STATE =
           ["debug", "virtual:e0cd6afa69db469de21c754be1546e018ea723a8653bf7c1fdbb52b3d67b9c4065461f2d7632852c8644c3b36b5304269483ba2eb51ad39f9eae03847036d7a9#npm:2.6.9"],\
           ["@types/supports-color", null],\
           ["ms", "npm:2.0.0"],\
-          ["supports-color", null]\
-        ],\
-        "packagePeers": [\
-          "@types/supports-color",\
-          "supports-color"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1", {\
-        "packageLocation": "./.yarn/__virtual__/debug-virtual-90b82fb558/0/cache/debug-npm-4.4.1-6eab84b9f7-d2b44bc1af.zip/node_modules/debug/",\
-        "packageDependencies": [\
-          ["debug", "virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1"],\
-          ["@types/supports-color", null],\
-          ["ms", "npm:2.1.3"],\
           ["supports-color", null]\
         ],\
         "packagePeers": [\
@@ -31452,7 +31453,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["vite-node", "npm:3.2.2"],\
           ["cac", "npm:6.7.14"],\
-          ["debug", "virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1"],\
+          ["debug", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1"],\
           ["es-module-lexer", "npm:1.7.0"],\
           ["pathe", "npm:2.0.3"],\
           ["vite", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:7.0.0-beta.0"]\
@@ -31483,7 +31484,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vitest__ui", null],\
           ["@vitest/browser", null],\
           ["@vitest/expect", "npm:3.2.2"],\
-          ["@vitest/mocker", "virtual:c4c9e02a2bd4453a972ff55cdf3a47db12d31806055d81ba15fa7fbbdaf5312ceebb334c82b5d85fdc76dc7f24c3fbc2d0fedcc719ca5ca9ba38e4debc93a23c#npm:3.2.2"],\
+          ["@vitest/mocker", "virtual:e343c89e3bfb0300f55e90d10596d6228050bcefdfb229ebc45ddf158aadfc3f77ee14dc20a92f19bbb3709f56612dd2968c686b92d1c7fb2e949c5a3edb014e#npm:3.2.2"],\
           ["@vitest/pretty-format", "npm:3.2.2"],\
           ["@vitest/runner", "npm:3.2.2"],\
           ["@vitest/snapshot", "npm:3.2.2"],\
@@ -31491,7 +31492,7 @@ const RAW_RUNTIME_STATE =
           ["@vitest/ui", null],\
           ["@vitest/utils", "npm:3.2.2"],\
           ["chai", "npm:5.2.0"],\
-          ["debug", "virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1"],\
+          ["debug", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1"],\
           ["expect-type", "npm:1.2.1"],\
           ["happy-dom", null],\
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:26.1.0"],\
@@ -31539,7 +31540,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vitest__ui", null],\
           ["@vitest/browser", null],\
           ["@vitest/expect", "npm:3.2.2"],\
-          ["@vitest/mocker", "virtual:c4c9e02a2bd4453a972ff55cdf3a47db12d31806055d81ba15fa7fbbdaf5312ceebb334c82b5d85fdc76dc7f24c3fbc2d0fedcc719ca5ca9ba38e4debc93a23c#npm:3.2.2"],\
+          ["@vitest/mocker", "virtual:e343c89e3bfb0300f55e90d10596d6228050bcefdfb229ebc45ddf158aadfc3f77ee14dc20a92f19bbb3709f56612dd2968c686b92d1c7fb2e949c5a3edb014e#npm:3.2.2"],\
           ["@vitest/pretty-format", "npm:3.2.2"],\
           ["@vitest/runner", "npm:3.2.2"],\
           ["@vitest/snapshot", "npm:3.2.2"],\
@@ -31547,7 +31548,7 @@ const RAW_RUNTIME_STATE =
           ["@vitest/ui", null],\
           ["@vitest/utils", "npm:3.2.2"],\
           ["chai", "npm:5.2.0"],\
-          ["debug", "virtual:f3fcffe9036059ac0b8202a0a5ac941f94d27aeff3129629f75a87e3e3a317aabd3672aa4349c1740cd901cd48d4b29007c56b2afa569b653ed8d84b1689cf87#npm:4.4.1"],\
+          ["debug", "virtual:103a683a91ce8a43bb3f05c09ad78add931cc7c449ba2bcf5e89c63d452d79ee4d7482360344999782fd991a5abfbf8ef4cd0e4dfe9a522f76a289d992301602#npm:4.4.1"],\
           ["expect-type", "npm:1.2.1"],\
           ["happy-dom", null],\
           ["jsdom", null],\

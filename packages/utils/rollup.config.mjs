@@ -52,6 +52,10 @@ export default [
         chunkFileNames: `_chunk/[name]-[hash:6].d.ts`,
       },
     ],
-    plugins: [dts()],
+    plugins: [
+      dts({
+        respectExternal: true,
+      }),
+    ],
   },
 ];
