@@ -23099,8 +23099,8 @@ __metadata:
   linkType: hard
 
 "typescript-plugin-css-modules@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "typescript-plugin-css-modules@npm:5.1.0"
+  version: 5.2.0
+  resolution: "typescript-plugin-css-modules@npm:5.2.0"
   dependencies:
     "@types/postcss-modules-local-by-default": "npm:^4.0.2"
     "@types/postcss-modules-scope": "npm:^3.0.4"
@@ -23120,7 +23120,10 @@ __metadata:
     tsconfig-paths: "npm:^4.2.0"
   peerDependencies:
     typescript: ">=4.0.0"
-  checksum: a578e9055d015e932e1d42c5329d80d44d7dcaca5990c1d32aed62ea3d7ba49424f18c60cc654e96d1865e509f929359a9e571330ea2f5a7be7c1dd79e25ead3
+  dependenciesMeta:
+    stylus:
+      optional: true
+  checksum: 7cd024f7145c0a29d9b78f2fb49c42cdf1747b50a43391f9993132ba42a727266f9b544fd868d905d5352e0a8676a19ae7a9aa56d516cc819c3ab39d66aa25e4
   languageName: node
   linkType: hard
 
