@@ -6,6 +6,7 @@
  * - 모든 프로퍼티에 대해 옵셔널/논옵셔널 경로를 모두 포함
  *
  * @template T - 대상 객체 타입
+ *
  * @example
  * type AllPaths = PropertyAllPath<{ a: string; b: { c: number; d: string } }>;
  * // "a" | "b" | "b.c" | "b.d" | "b?.c" | "b?.d"

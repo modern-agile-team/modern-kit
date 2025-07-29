@@ -6,8 +6,7 @@
  * - 깊이 제한 (10레벨)
  * - 실제 옵셔널 프로퍼티에만 옵셔널 경로 포함
  *
- * @param {T} obj - 유효한 경로를 찾을 객체
- * @returns {PropertyPath<T>} 키 경로
+ * @template T - 대상 객체 타입
  *
  * @example
  * PropertyPath<{ a: { b: { c: 1 } } }> // 'a' | 'a.b' | 'a.b.c'
