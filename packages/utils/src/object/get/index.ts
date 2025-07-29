@@ -1,5 +1,5 @@
-import { PropertyPath } from '@modern-kit/types';
-import { isNil } from '../../validator';
+import type { PropertyPath } from '@modern-kit/types';
+import { isNil } from '../../validator/isNil';
 
 /**
  * @description 주어진 객체 타입에서 지정된 경로에 해당하는 값의 타입을 반환합니다.
@@ -43,8 +43,9 @@ type GetReturnType<
  * @description 주어진 객체에서 주어진 경로에 해당하는 값을 반환합니다.
  * 주어진 객체의 타입에 옵셔널 프로퍼티가 있는 경우, 옵셔널(?) 경로로 접근해야 합니다.
  *
- * @param {T} obj - 객체
+ * @param {T} obj - 프로퍼티 값을 조회하고자 하는 객체입니다.
  * @param {K} path - 점 표기법으로 구성된 키 경로
+ * @param {GetReturnType<T, K>} defaultValue - 경로에 해당하는 값이 존재하지 않을 경우 반환할 기본값입니다.
  * @returns {GetReturnType<T, K>} 경로에 해당하는 값
  *
  * @example
