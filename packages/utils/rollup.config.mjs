@@ -44,6 +44,7 @@ export default [
   {
     // d.ts 파일 직접 생성
     input,
+    // external: [], 필요 시 추가
     output: [
       {
         dir: 'dist',
