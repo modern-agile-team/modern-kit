@@ -129,9 +129,9 @@ export function useLocalStorage<T>(options: UseLocalStorageOptions<T>) {
 
         window.localStorage.setItem(key, JSON.stringify(valueToUse));
         localStorageEventHandler.dispatchEvent();
-      } catch {
+      } catch (err) {
         throw new Error(
-          `로컬 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다`
+          `로컬 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
         );
       }
     },

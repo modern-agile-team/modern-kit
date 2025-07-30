@@ -121,9 +121,9 @@ export function useSessionStorage<T>(options: UseSessionStorageOptions<T>) {
 
         window.sessionStorage.setItem(key, JSON.stringify(valueToUse));
         sessionStorageEventHandler.dispatchEvent();
-      } catch {
+      } catch (err) {
         throw new Error(
-          `세션 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다`
+          `세션 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
         );
       }
     },
