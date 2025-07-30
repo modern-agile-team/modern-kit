@@ -1,4 +1,4 @@
-import { isFunction, parseJSON } from '@modern-kit/utils';
+import { isFunction } from '@modern-kit/utils';
 import {
   Dispatch,
   SetStateAction,
