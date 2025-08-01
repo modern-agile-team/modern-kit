@@ -23,16 +23,16 @@ interface UseSafeContextOptions {
  * ```tsx
  * const ThemeContext = createContext<{ theme: string } | null>(null);
  *
- * function useThemeContext() {
- *   return useSafeContext(ThemeContext, {
+ * function MyComponent() {
+ *   const context = useSafeContext(ThemeContext, {
  *     errorMessage: 'useThemeContext는 ThemeProvider 내부에서 사용되어야 합니다'
  *   });
+ *   return <div>현재 테마: {context.theme}</div>;
  * }
  *
- * function MyComponent() {
- *   const { theme } = useThemeContext();
- *   return <div>현재 테마: {theme}</div>;
- * }
+ * <ThemeContext.Provider value={{ theme: 'dark' }}>
+ *   <MyComponent />
+ * </ThemeContext.Provider>
  * ```
  */
 export function useSafeContext<T>(
