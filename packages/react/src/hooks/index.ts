@@ -40,6 +40,7 @@ export * from './usePreservedCallback';
 export * from './usePreservedState';
 export * from './usePrevious';
 export * from './useResizeObserver';
+export * from './useSafeContext';
 export * from './useScrollEvent';
 export * from './useScrollLock';
 export * from './useScrollTo';

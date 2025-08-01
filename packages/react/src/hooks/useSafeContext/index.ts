@@ -7,9 +7,7 @@ interface UseSafeContextOptions {
 /**
  * @description React Context에 안전하게 접근하기 위한 훅입니다.
  *
- * Provider 내부에서 사용되지 않았을 때 에러를 발생시킵니다.
- *
- * 에러가 발생하지 않으면 안전하게 접근했기 때문에 NonNullable한 Context 값을 반환합니다.
+ * Provider 내부에서 사용되지 않았을 때 에러를 발생시키며, 에러가 발생하지 않으면 안전하게 접근했기 때문에 NonNullable한 Context 값을 반환합니다.
  *
  * @template T - Context 타입
  *
