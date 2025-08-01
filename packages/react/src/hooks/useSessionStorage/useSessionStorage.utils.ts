@@ -1,3 +1,5 @@
+import { parseJSON } from '@modern-kit/utils';
+
 const CUSTOM_EVENT_KEYS = 'modern-kit-session-storage';
 
 export const sessionStorageEventHandler = {
@@ -14,7 +16,11 @@ export const sessionStorageEventHandler = {
 };
 
 export const getSnapshot = (key: string) => {
-  return window.sessionStorage.getItem(key);
+  try {
+    return window.sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
 };
 
 // SSR 환경에서 initialValue를 반환
@@ -27,4 +33,14 @@ export const subscribe = (callback: () => void) => {
   return () => {
     sessionStorageEventHandler.unsubscribe(callback);
   };
+};
+
+export const getParsedState = <T>(
+  state: string | null,
+  fallbackValue: T | null
+) => {
+  if (state == null) {
+    return fallbackValue;
+  }
+  return parseJSON<T>(state);
 };
