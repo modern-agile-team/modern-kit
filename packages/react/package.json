@@ -48,7 +48,6 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.5.1",
-    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@vitest/coverage-istanbul": "^3.0.3",
@@ -69,8 +68,7 @@
   },
   "dependencies": {
     "@modern-kit/utils": "workspace:^",
-    "classnames": "^2.5.1",
-    "lodash-es": "^4.17.21"
+    "classnames": "^2.5.1"
   },
   "peerDependencies": {
     "react": ">=18",
