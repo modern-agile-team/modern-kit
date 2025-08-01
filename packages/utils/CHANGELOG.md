@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.6.0
+
+### Minor Changes
+
+- [#929](https://github.com/modern-agile-team/modern-kit/pull/929) [`794515b`](https://github.com/modern-agile-team/modern-kit/commit/794515ba521f04f79e99756b566ee427756f9eac) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getInValue -> get 네이밍 변경 - @ssi02014
+
 ## 2.5.0
 
 ### Minor Changes
