@@ -4,7 +4,7 @@ export * from './DeepRequired';
 export * from './DistributiveOmit';
 export * from './EnumerateNumbers';
 export * from './ExtractMapType';
-export * from './ExtractNestedArrayType';
+export * from './ExtractArrayElement';
 export * from './ExtractSetType';
 export * from './Integer';
 export * from './Invert';
