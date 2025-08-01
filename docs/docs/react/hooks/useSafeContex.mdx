@@ -1,0 +1,69 @@
+import { useSafeContext } from '@modern-kit/react'
+import { createContext } from 'react'
+
+# useSafeContext
+
+React Context에 `안전하게 접근`하기 위한 커스텀 훅입니다.
+
+Provider 내부에서 사용되지 않았을 때 에러를 발생시키며, 에러가 발생하지 않으면 안전하게 접근했기 때문에 `NonNullable`한 Context 값을 반환합니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useSafeContext/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseSafeContextOptions {
+  errorMessage?: string;
+}
+```
+
+```ts title="typescript"
+function useSafeContext<T>(
+  context: Context<T>,
+  options?: UseSafeContextOptions
+): NonNullable<T>
+```
+
+## Usage
+```tsx title="typescript"
+import { useSafeContext } from '@modern-kit/react'
+import { createContext } from 'react'
+
+const ThemeContext = createContext<{ theme: string } | null>(null);
+
+function MyComponent() {
+  // 안전하게 접근했기 때문에 NonNullable한 Context 값을 반환합니다.
+  // context: { theme: 'dark' }
+  const context = useSafeContext(ThemeContext, {
+    errorMessage: 'useThemeContext는 ThemeProvider 내부에서 사용되어야 합니다'
+  });
+  return <div>현재 테마: {context.theme}</div>;
+}
+
+<ThemeContext.Provider value={{ theme: 'dark' }}>
+  <MyComponent />
+</ThemeContext.Provider>
+```
+
+## Example
+
+export const Example = () => {
+  const ThemeContext = createContext(null);
+
+  const MyComponent = () => {
+    const context = useSafeContext(ThemeContext, {
+      errorMessage: 'useThemeContext는 ThemeProvider 내부에서 사용되어야 합니다'
+    });
+    return <div>현재 테마: {context.theme}</div>;
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme: 'dark' }}>
+      <MyComponent />
+    </ThemeContext.Provider>
+  );
+};
+
+<Example />

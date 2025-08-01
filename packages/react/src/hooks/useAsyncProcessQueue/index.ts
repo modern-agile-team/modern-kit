@@ -6,6 +6,9 @@ interface UseAsyncProcessQueueOptions {
   keepPreviousData?: boolean;
 }
 
+/**
+ * @experimental 실험적인 훅으로 추후 변경될 수 있습니다.
+ */
 export function useAsyncProcessQueue<T = unknown, E = unknown>({
   keepPreviousData = false,
 }: UseAsyncProcessQueueOptions = {}) {
