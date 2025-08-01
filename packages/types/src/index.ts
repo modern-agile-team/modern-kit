@@ -6,6 +6,7 @@ export * from './EnumerateNumbers';
 export * from './ExtractMapType';
 export * from './ExtractArrayElement';
 export * from './ExtractSetType';
+export * from './GetByPath';
 export * from './Integer';
 export * from './Invert';
 export * from './Merge';
