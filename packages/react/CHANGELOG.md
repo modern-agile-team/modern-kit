@@ -1,5 +1,16 @@
 # @modern-kit/react
 
+## 2.6.0
+
+### Minor Changes
+
+- [#934](https://github.com/modern-agile-team/modern-kit/pull/934) [`4cb35f3`](https://github.com/modern-agile-team/modern-kit/commit/4cb35f3d7a328f70129893f1c0fb9e5c58835d03) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useSafeContext 신규 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- Updated dependencies [[`c703587`](https://github.com/modern-agile-team/modern-kit/commit/c703587ee3b71d93a073371bdb8121fe0a38fd6a), [`794515b`](https://github.com/modern-agile-team/modern-kit/commit/794515ba521f04f79e99756b566ee427756f9eac)]:
+  - @modern-kit/utils@2.6.0
+
 ## 2.5.1
 
 ### Patch Changes
