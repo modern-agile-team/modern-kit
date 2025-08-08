@@ -20,7 +20,7 @@ afterEach(() => {
 });
 
 describe('getOS', () => {
-  it('should return the OS corresponding to the useragent value', () => {
+  it('User Agent 값에 해당하는 OS를 반환해야 한다', () => {
     const USER_AGENTS_OBJ = {
       ios: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)',
       android: 'Mozilla/5.0 (Linux; Android 11; Pixel 5)',
@@ -41,7 +41,7 @@ describe('getOS', () => {
     });
   });
 
-  it('should return "server" for server environment', () => {
+  it('서버 환경에서는 "server"를 반환해야 한다', () => {
     windowSpy.mockImplementation(() => undefined);
     expect(getOS()).toBe('server');
   });

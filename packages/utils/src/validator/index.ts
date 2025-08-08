@@ -1,4 +1,5 @@
 export * from './hasProperty';
+export * from './hasRepeatingChars';
 export * from './isAlphabet';
 export * from './isAlphanumeric';
 export * from './isArray';

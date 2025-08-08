@@ -10,7 +10,7 @@ type Test2 = {
 type Test3 = ['foo', { bar: 'baz' }];
 
 describe('parseJSON', () => {
-  it('should return original value for falsy value', () => {
+  it('falsy 값이 주어졌을 때 원본 값을 반환해야 합니다', () => {
     const falseValue = parseJSON(false);
     const zeroNumberValue = parseJSON(0);
     const nullValue = parseJSON(null);
@@ -24,13 +24,13 @@ describe('parseJSON', () => {
     expect(NaNValue).toBeNaN();
   });
 
-  it('should correctly parse stringified value', () => {
+  it('문자열화된 값을 올바르게 파싱해야 합니다', () => {
     const result = parseJSON<Test1>(`{ "a": 1, "b": 2 }`);
 
     expect(result).toEqual({ a: 1, b: 2 });
   });
 
-  it('should correctly parse complex JSON objects', () => {
+  it('복잡한 JSON 객체를 올바르게 파싱해야 합니다', () => {
     const complexJson = `{
       "a": 1,
       "b": [2, 3, {"c": 4}],
@@ -45,14 +45,14 @@ describe('parseJSON', () => {
     });
   });
 
-  it('should correctly parse JSON arrays', () => {
+  it('JSON 배열을 올바르게 파싱해야 합니다', () => {
     const jsonArray = `["foo", {"bar": "baz"}]`;
     const result = parseJSON<Test3>(jsonArray);
 
     expect(result).toEqual(['foo', { bar: 'baz' }]);
   });
 
-  it('should return null for incorrect JSON format', () => {
+  it('잘못된 JSON 형식이 주어졌을 때 에러를 발생시켜야 합니다', () => {
     expect(() => parseJSON('')).toThrowError();
     expect(() => parseJSON(`{a: 1, b: 2}`)).toThrowError();
   });

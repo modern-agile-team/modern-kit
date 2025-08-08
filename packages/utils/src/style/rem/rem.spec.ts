@@ -23,14 +23,14 @@ afterEach(() => {
 });
 
 describe('rem', () => {
-  it('should convert pixels to rem without any options. (Root FontSize: 16px)', () => {
+  it('옵션 없이 픽셀을 rem으로 변환해야 한다. (루트 폰트 크기: 16px)', () => {
     expect(rem(16)).toBe('1rem');
     expect(rem(20)).toBe('1.25rem');
     expect(rem(32)).toBe('2rem');
     expect(rem(32)).toBe('2rem'); // cached
   });
 
-  it('should convert pixels to rem without any options. (Root FontSize: 24px)', () => {
+  it('옵션 없이 픽셀을 rem으로 변환해야 한다. (루트 폰트 크기: 24px)', () => {
     getComputedStyleSpy.mockReturnValue({ fontSize: '24px' });
 
     expect(rem(24)).toBe('1rem');
@@ -38,13 +38,13 @@ describe('rem', () => {
     expect(rem(36)).toBe('1.5rem');
   });
 
-  it('should convert pixels to rem and remove "rem" suffix. (Root FontSize: 16px)', () => {
+  it('픽셀을 rem으로 변환하고 "rem" 접미사를 제거해야 한다. (루트 폰트 크기: 16px)', () => {
     expect(rem(16, { suffix: false })).toBe(1);
     expect(rem(24, { suffix: false })).toBe(1.5);
     expect(rem(32, { suffix: false })).toBe(2);
   });
 
-  it('should convert pixels to rem with fixed decimal places. (Root FontSize: 16px)', () => {
+  it('픽셀을 rem으로 변환하고 소수점 자릿수를 고정해야 한다. (루트 폰트 크기: 16px)', () => {
     expect(rem(17)).toBe('1.0625rem');
 
     expect(rem(17, { toFixedDigits: NaN })).toBe('1rem');
@@ -56,12 +56,12 @@ describe('rem', () => {
     expect(rem(17, { toFixedDigits: 10 })).toBe('1.0625rem');
   });
 
-  it('should throw an error if toFixedDigits is out of range.', () => {
+  it('toFixedDigits가 범위를 벗어나면 에러를 발생시켜야 한다.', () => {
     expect(() => rem(16, { toFixedDigits: -1 })).toThrowError();
     expect(() => rem(16, { toFixedDigits: 101 })).toThrowError();
   });
 
-  it('should throw an error if not executed in a client environment.', () => {
+  it('클라이언트 환경이 아닐 경우 에러를 발생시켜야 한다.', () => {
     globalThis.window = undefined as any;
 
     expect(() => rem(16)).toThrowError();

@@ -20,7 +20,7 @@ afterEach(() => {
 });
 
 describe('isMobile', () => {
-  it('should return true for mobile user agents', () => {
+  it('모바일 User Agent에 대해 true를 반환해야 한다', () => {
     // [iPhone, iPad, iPod, Android, Windows Phone, BlackBerry, IEMobile, Opera Mini]
     const USER_AGENTS = [
       'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)',
@@ -46,7 +46,7 @@ describe('isMobile', () => {
     });
   });
 
-  it('should return false for server environment', () => {
+  it('서버 환경에서는 false를 반환해야 한다', () => {
     windowSpy.mockImplementation(() => undefined);
     expect(isMobile()).toBe(false);
   });

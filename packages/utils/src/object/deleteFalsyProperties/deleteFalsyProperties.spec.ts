@@ -2,7 +2,7 @@ import { describe, it, expect, expectTypeOf } from 'vitest';
 import { deleteFalsyProperties } from '.';
 
 describe('deleteFalsyProperties', () => {
-  it('should remove object properties with falsy values other than boolean', () => {
+  it('boolean을 제외한 falsy 값을 가진 객체의 속성을 제거해야 한다', () => {
     const originObj = {
       prop1: 1,
       prop2: 0,
@@ -26,7 +26,7 @@ describe('deleteFalsyProperties', () => {
     expect(deleteFalsyProperties(originObj)).toEqual(expectedObj);
   });
 
-  it('should remove falsy values(exclude booleans) from nested objects and nested array elements', () => {
+  it('중첩된 객체와 배열 요소에서 boolean을 제외한 falsy 값을 제거해야 한다', () => {
     const originObj = {
       prop1: [
         { prop1: null, prop2: {}, prop3: 0, prop4: false, prop5: '1' },
@@ -81,7 +81,7 @@ describe('deleteFalsyProperties', () => {
     expect(deleteFalsyProperties(originObj)).toEqual(expectedObj);
   });
 
-  it('should return an empty object if all properties are falsy(exclude booleans)', () => {
+  it('모든 속성이 falsy(boolean 제외)인 경우 빈 객체를 반환해야 한다', () => {
     const originObj = {
       prop1: {
         prop1_2: {
@@ -96,7 +96,7 @@ describe('deleteFalsyProperties', () => {
     expect(deleteFalsyProperties(originObj)).toEqual(expectedObj);
   });
 
-  it('should not modify the original array when calling the deleteFalsyProperties function', () => {
+  it('deleteFalsyProperties 함수를 호출할 때 원본 객체를 수정하지 않아야 한다', () => {
     const originObj = {
       prop1: 1,
       prop2: 0,
@@ -122,7 +122,7 @@ describe('deleteFalsyProperties', () => {
     });
   });
 
-  it('should allow specifying desired types through generics', () => {
+  it('제네릭을 통해 원하는 타입을 지정할 수 있어야 한다', () => {
     const originObj = {
       prop1: 1,
       prop2: 0,

@@ -1,4 +1,3 @@
-export * from './containsConsecutiveCharacters';
 export * from './containsHangul';
 export * from './containsHangulConsonantsAndVowel';
 export * from './containsHangulSyllables';
