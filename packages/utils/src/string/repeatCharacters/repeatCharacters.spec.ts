@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { repeatCharacters } from '.';
 
 describe('repeatCharacters', () => {
-  it('should return a new string with each character repeated the repetition count times', () => {
+  it('각 문자를 반복 횟수만큼 반복한 새로운 문자열을 반환해야 합니다', () => {
     const str1 = 'A!B@C';
     const repeatedStr1 = repeatCharacters(str1, 2);
 
@@ -14,7 +14,7 @@ describe('repeatCharacters', () => {
     expect(repeatedStr2).toBe('GGGrrraaaccceee');
   });
 
-  it('should return the input value if the repetition count is equal to or less than 1', () => {
+  it('반복 횟수가 1 이하인 경우 입력 값을 그대로 반환해야 합니다', () => {
     const str1 = 'Hello';
     const repeatedStr1 = repeatCharacters(str1, 1);
 
@@ -31,7 +31,7 @@ describe('repeatCharacters', () => {
     expect(repeatedStr3).toBe(str3);
   });
 
-  it('should return an empty string if the input string is empty', () => {
+  it('입력 문자열이 빈 문자열인 경우 빈 문자열을 반환해야 합니다', () => {
     const str = '';
     const repeatedStr = repeatCharacters(str, 3);
 
