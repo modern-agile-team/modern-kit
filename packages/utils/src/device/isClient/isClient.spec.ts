@@ -20,14 +20,14 @@ afterEach(() => {
 });
 
 describe('isClient', () => {
-  it('should return "true" in client environment', () => {
+  it('클라이언트 환경에서는 true를 반환해야 한다', () => {
     windowSpy.mockImplementation(() => ({}));
-    expect(isClient()).toBe(true);
+    expect(isClient()).toBeTruthy();
   });
 
-  it('should return "false" in server environment', () => {
+  it('서버 환경에서는 false를 반환해야 한다', () => {
     windowSpy.mockImplementation(() => undefined);
 
-    expect(isClient()).toBe(false);
+    expect(isClient()).toBeFalsy();
   });
 });

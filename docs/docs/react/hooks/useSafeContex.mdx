@@ -5,7 +5,10 @@ import { createContext } from 'react'
 
 React Context에 `안전하게 접근`하기 위한 커스텀 훅입니다.
 
-Provider 내부에서 사용되지 않았을 때 에러를 발생시키며, 에러가 발생하지 않으면 안전하게 접근했기 때문에 `NonNullable`한 Context 값을 반환합니다.
+Context에 기본값이 없다면(null/undefined) Provider 내부에서 사용되지 않았을 때 에러를 발생시킵니다.
+Context에 기본값이 있다면 Provider 내부에서 사용되지 않았을 때 에러가 발생하지 않고 기본값을 반환합니다.
+
+에러가 발생하지 않으면 안전하게 접근했기 때문에 `NonNullable`한 Context 값을 반환합니다.
 
 <br />
 
@@ -14,16 +17,7 @@ Provider 내부에서 사용되지 않았을 때 에러를 발생시키며, 에�
 
 ## Interface
 ```ts title="typescript"
-interface UseSafeContextOptions {
-  errorMessage?: string;
-}
-```
-
-```ts title="typescript"
-function useSafeContext<T>(
-  context: Context<T>,
-  options?: UseSafeContextOptions
-): NonNullable<T>
+function useSafeContext<T>(context: Context<T>): NonNullable<T>
 ```
 
 ## Usage
@@ -32,13 +26,12 @@ import { useSafeContext } from '@modern-kit/react'
 import { createContext } from 'react'
 
 const ThemeContext = createContext<{ theme: string } | null>(null);
+ThemeContext.displayName = 'ThemeContext';
 
 function MyComponent() {
   // 안전하게 접근했기 때문에 NonNullable한 Context 값을 반환합니다.
   // context: { theme: 'dark' }
-  const context = useSafeContext(ThemeContext, {
-    errorMessage: 'useThemeContext는 ThemeProvider 내부에서 사용되어야 합니다'
-  });
+  const context = useSafeContext(ThemeContext);
   return <div>현재 테마: {context.theme}</div>;
 }
 
@@ -51,11 +44,10 @@ function MyComponent() {
 
 export const Example = () => {
   const ThemeContext = createContext(null);
+  ThemeContext.displayName = 'ThemeContext';
 
   const MyComponent = () => {
-    const context = useSafeContext(ThemeContext, {
-      errorMessage: 'useThemeContext는 ThemeProvider 내부에서 사용되어야 합니다'
-    });
+    const context = useSafeContext(ThemeContext);
     return <div>현재 테마: {context.theme}</div>;
   };
 

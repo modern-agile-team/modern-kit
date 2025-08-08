@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { containsSpecialCharacters } from '.';
 
 describe('containsSpecialCharacter', () => {
-  it('should return true for a string containing special characters', () => {
+  it('특수문자가 포함된 문자열이면 true를 반환해야 합니다', () => {
     expect(containsSpecialCharacters('hello!')).toBeTruthy();
     expect(containsSpecialCharacters('@home')).toBeTruthy();
     expect(containsSpecialCharacters('123$')).toBeTruthy();
@@ -10,7 +10,7 @@ describe('containsSpecialCharacter', () => {
     expect(containsSpecialCharacters('special_characters%')).toBeTruthy();
   });
 
-  it('should return false for a string without special characters', () => {
+  it('특수문자가 포함되지 않은 문자열이면 false를 반환해야 합니다', () => {
     expect(containsSpecialCharacters('')).toBeFalsy();
     expect(containsSpecialCharacters('hello')).toBeFalsy();
     expect(containsSpecialCharacters('12345')).toBeFalsy();

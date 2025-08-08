@@ -1,5 +1,4 @@
 import {
-  containsConsecutiveCharacters,
   containsHangul,
   containsLowerCase,
   containsNumber,
@@ -8,6 +7,7 @@ import {
   containsWhiteSpace,
 } from '../../regex';
 import { contains } from '../../array';
+import { hasRepeatingChars } from '../hasRepeatingChars';
 
 interface ContainsOptions {
   lowerCase?: boolean;
@@ -90,7 +90,7 @@ export function isValidPassword(
   }
 
   // Check for consecutive characters
-  if (containsConsecutiveCharacters(password, maxRepeatChars)) {
+  if (hasRepeatingChars(password, maxRepeatChars)) {
     return { isValid: false, errorReason: 'consecutiveCharacters' };
   }
 

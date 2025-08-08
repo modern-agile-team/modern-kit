@@ -12,6 +12,8 @@ import { isFunction } from '@modern-kit/utils';
  * const ref1 = useRef<HTMLDivElement>(null);
  * const ref2 = useRef<HTMLDivElement>(null);
  * const mergedRef = mergeRefs(ref1, ref2);
+ *
+ * <div ref={mergedRef} />
  * ```
  */
 export const mergeRefs = <T = unknown>(

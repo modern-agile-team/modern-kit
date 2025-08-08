@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { serialize } from '.';
 
 describe('serialize', () => {
-  it('should return the correct string for a valid value', () => {
+  it('유효한 값이 주어지면 올바른 문자열을 반환해야 합니다', () => {
     const value = {
       str: 123,
       foo: 'boo',
@@ -11,7 +11,7 @@ describe('serialize', () => {
     expect(serialize(value)).toBe('str=123&foo=boo');
   });
 
-  it('should return the correct string for a valid input with valid array', () => {
+  it('유효한 배열이 주어지면 올바른 문자열을 반환해야 합니다', () => {
     const value = {
       str: 123,
       foo: 'boo',
@@ -21,7 +21,7 @@ describe('serialize', () => {
     expect(serialize(value)).toBe('str=123&foo=boo&bar=1&bar=2&bar=3');
   });
 
-  it('should return the correct string for a valid input with invalid array', () => {
+  it('유효하지 않은 배열이 주어지면 올바른 문자열을 반환해야 합니다', () => {
     const value = {
       str: 123,
       foo: 'boo',
@@ -31,7 +31,7 @@ describe('serialize', () => {
     expect(serialize(value)).toBe('str=123&foo=boo');
   });
 
-  it('should return the correct string for a input with options', () => {
+  it('옵션이 주어지면 올바른 문자열을 반환해야 합니다', () => {
     const value = {
       str: null,
       bar: '',

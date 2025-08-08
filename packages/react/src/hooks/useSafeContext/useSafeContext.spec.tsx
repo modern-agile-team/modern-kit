@@ -9,11 +9,10 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+ThemeContext.displayName = 'ThemeContext';
 
-const TestComponent = ({ errorMessage }: { errorMessage?: string }) => {
-  const context = useSafeContext(ThemeContext, {
-    errorMessage,
-  });
+const TestComponent = () => {
+  const context = useSafeContext(ThemeContext);
   return <div>Theme: {context.theme}</div>;
 };
 
@@ -30,15 +29,7 @@ describe('useSafeContext', () => {
 
   it('Context가 Provider 내부에서 사용되지 않았을 때 에러를 발생시켜야 합니다.', () => {
     expect(() => renderSetup(<TestComponent />)).toThrow(
-      '[SafeContext]: Provider 내부에서 사용되어야 합니다.'
+      '[ThemeContext]: Provider 내부에서 사용되어야 합니다.'
     );
-  });
-
-  it('커스텀 에러 메시지를 전달하면 해당 메시지와 함께 에러를 발생시켜야 합니다.', () => {
-    expect(() =>
-      renderSetup(
-        <TestComponent errorMessage="[ThemeContext]: ThemeProvider 내부에서 사용되어야 합니다." />
-      )
-    ).toThrow('[ThemeContext]: ThemeProvider 내부에서 사용되어야 합니다.');
   });
 });
