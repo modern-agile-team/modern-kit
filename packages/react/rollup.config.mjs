@@ -56,14 +56,6 @@ export default [
   {
     // d.ts 파일 직접 생성
     input,
-    external: [
-      ...Object.keys(pkg.dependencies),
-      ...Object.keys(pkg.peerDependencies),
-      'react/jsx-runtime',
-      '@types/react',
-      '@types/react-dom',
-      '@modern-kit/types',
-    ],
     output: [
       {
         dir: 'dist',
@@ -72,10 +64,6 @@ export default [
         chunkFileNames: `_chunk/[name]-[hash:6].d.ts`,
       },
     ],
-    plugins: [
-      dts({
-        respectExternal: true,
-      }),
-    ],
+    plugins: [dts()],
   },
 ];
