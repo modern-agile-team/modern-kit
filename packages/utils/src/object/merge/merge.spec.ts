@@ -19,11 +19,13 @@ describe('merge', () => {
   });
 
   it('배열을 깊이 병합해야 합니다.', () => {
-    const target = { a: [1, { name: 'bgzt' }] };
+    const target = { a: [1, { name: 'modern-kit' }] };
     const source = { a: [3, { address: 'seocho' }] };
     const result = merge(target, source);
 
-    expect(result).toEqual({ a: [3, { name: 'bgzt', address: 'seocho' }] });
+    expect(result).toEqual({
+      a: [3, { name: 'modern-kit', address: 'seocho' }],
+    });
   });
 
   it('배열 혹은 순수 객체의 경우 병합 처리 시 깊은 복사되야 합니다.', () => {

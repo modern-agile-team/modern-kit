@@ -40,12 +40,12 @@ describe('useDebouncedState', () => {
 
     await user.type(input, 'test');
     await user.type(input, '1234');
-    await user.type(input, 'bgzt');
+    await user.type(input, 'modern-kit');
 
     await delay(DELAY_TIME / 2);
     expect(debouncedState).toHaveTextContent('');
 
     await delay(DELAY_TIME / 2);
-    expect(debouncedState).toHaveTextContent('bgzt');
+    expect(debouncedState).toHaveTextContent('modern-kit');
   });
 });
