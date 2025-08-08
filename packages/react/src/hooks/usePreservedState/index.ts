@@ -16,13 +16,13 @@ import { isEqual } from '@modern-kit/utils';
  * @example
  * // default comparator
  * const preservedState = usePreservedState({
- *   group: 'bgzt',
+ *   group: 'modern-kit',
  * });
  *
  * @example
  * // custom comparator
  * const preservedState = usePreservedState({
- *   group: 'bgzt',
+ *   group: 'modern-kit',
  * }, (a, b) => a.group === b.group);
  */
 export function usePreservedState<T>(

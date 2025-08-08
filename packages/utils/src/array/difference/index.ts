@@ -25,7 +25,7 @@
  * ];
  * const activeUserIds = [
  *   { id: 1, name: 'john' },
- *   { id: 3, name: 'bgzt' },
+ *   { id: 3, name: 'modern-kit' },
  * ];
  *
  * difference(users, activeUserIds, user => user.id));
