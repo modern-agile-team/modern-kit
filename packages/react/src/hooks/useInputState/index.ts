@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import { usePreservedCallback } from '../usePreservedCallback';
+import { noop } from '@modern-kit/utils';
 
 interface UseInputStateOptions {
   validate?: (value: string) => string | null | undefined;
@@ -15,14 +16,11 @@ interface UseInputStateReturn {
 }
 
 /**
- * @description 입력 필드의 상태를 관리하는 커스텀 훅
- *
- * 단일 입력 필드와 다중 입력 필드를 지원합니다.
- * - 다중 입력 필드는 객체 형태로 입력 필드의 `name` 속성을 `key`로 사용합니다.
+ * @description input 필드의 상태를 관리하는 커스텀 훅
  *
  * @param {string | undefined} initialValue - 초기값 (선택사항)
  * @param {UseInputStateOptions} options - 옵션
- * @param {UseInputStateOptions['validate']} options.validate - 유효성 검증 함수
+ * @param {(value: string) => string | null | undefined} options.validate - 유효성 검증 함수, 문자열을 반환하면 error 상태의 값으로 처리됩니다.
  * @returns {UseInputStateReturn} 입력 상태와 관련된 객체
  * - `value`: 현재 입력값
  * - `error`: 값 검증 오류 메시지
@@ -54,7 +52,7 @@ export function useInputState(
   const [value, setValue] = useState<string>(initialValue);
   const [error, setError] = useState<string | null>(null);
 
-  const preservedValidate = usePreservedCallback(validate ?? (() => {}));
+  const preservedValidate = usePreservedCallback(validate ?? noop);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,11 +61,10 @@ export function useInputState(
       const validationError = preservedValidate(value);
       if (validationError) {
         setError(validationError);
-        return;
+      } else {
+        setError(null);
       }
-
       setValue(value);
-      setError(null);
     },
     [preservedValidate]
   );
