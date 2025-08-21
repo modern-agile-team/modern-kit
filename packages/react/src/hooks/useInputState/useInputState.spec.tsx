@@ -1,156 +1,115 @@
 import { describe } from 'node:test';
 import { useInputState } from '.';
 import { expect, it } from 'vitest';
-import { renderHook, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 
 const TestComponent = ({
-  initial,
-  isObject,
-  isName,
+  initial = '',
+  validate,
 }: {
-  initial: any;
-  isObject: boolean;
-  isName: boolean;
+  initial?: any;
+  validate?: (value: string) => string | undefined | null;
 }) => {
-  const { value, onChange, reset } = useInputState(initial);
+  const { value, error, onChange, reset, resetValue, resetError } =
+    useInputState(initial, { validate });
 
   return (
     <>
-      <h1 role="test-value">{isObject ? value.test : value}</h1>
-      {isName ? (
-        <input
-          type="text"
-          name="test"
-          onChange={onChange}
-          value={isObject ? value.test : value}
-        />
-      ) : (
-        <input
-          type="text"
-          onChange={onChange}
-          value={isObject ? value.test : value}
-        />
-      )}
+      <h1 role="test-value">{value}</h1>
+      <h1 role="test-error">{error}</h1>
+
+      <input type="text" onChange={onChange} value={value} />
+
       <button onClick={reset}>reset</button>
+      <button onClick={resetValue}>resetValue</button>
+      <button onClick={resetError}>resetError</button>
     </>
   );
 };
 
 describe('useInputState', () => {
-  it('value값이 단일 값일 때, name이 없어도 값이 변경됩니다.', async () => {
-    const { user } = renderSetup(
-      <TestComponent
-        initial={'initial value'}
-        isObject={false}
-        isName={false}
-      />
-    );
+  it('단일 값일 때, 값이 변경됩니다.', async () => {
+    const { user } = renderSetup(<TestComponent initial={''} />);
 
     const value = screen.getByRole('test-value');
     const input = screen.getByRole('textbox');
+
+    await user.type(input, 'changed');
+
+    expect(value).toHaveTextContent('changed');
+  });
+
+  it('validate 함수를 통해 에러 메시지를 반환할 수 있습니다.', async () => {
+    const { user } = renderSetup(
+      <TestComponent
+        validate={(value) => (value.length > 10 ? 'error' : undefined)}
+      />
+    );
+
+    const input = screen.getByRole('textbox');
+    const error = screen.getByRole('test-error');
+
+    await user.type(input, '123456789ab');
+
+    expect(error).toHaveTextContent('error');
+  });
+
+  it('resetValue 버튼을 누르면 변경된 값이 초기값으로 재설정 됩니다.', async () => {
+    const { user } = renderSetup(<TestComponent initial={'initial value'} />);
+
+    const input = screen.getByRole('textbox');
+    const value = screen.getByRole('test-value');
 
     await user.type(input, ' changed');
 
     expect(value).toHaveTextContent('initial value changed');
-  });
 
-  it('value값이 단일 값이 아니라면 name이 없을 때 값이 변경되지 않습니다.', async () => {
-    const { user } = renderSetup(
-      <TestComponent
-        initial={{ test: 'initial value' }}
-        isObject={true}
-        isName={false}
-      />
-    );
-
-    const value = screen.getByRole('test-value');
-    const input = screen.getByRole('textbox');
-
-    await user.type(input, ' changed');
+    await user.click(screen.getByRole('button', { name: 'resetValue' }));
 
     expect(value).toHaveTextContent('initial value');
   });
 
-  it('초기값으로 string을 넣으면 string으로 초기화 됩니다.', () => {
-    const { result } = renderHook(() => useInputState('initial value'));
-    const { value } = result.current;
-
-    expect(value).toEqual('initial value');
-  });
-
-  it('초기값으로 object를 넣으면 object로 초기화 됩니다.', () => {
-    const { result } = renderHook(() =>
-      useInputState({
-        title: 'initial title',
-        description: 'initial description',
-      })
-    );
-
-    const { value } = result.current;
-
-    expect(value).toEqual({
-      title: 'initial title',
-      description: 'initial description',
-    });
-  });
-
-  it('단일 값에 onChange를 사용하면 value 값이 변경됩니다.', async () => {
+  it('resetError 버튼을 누르면 에러 메시지가 초기화 됩니다.', async () => {
     const { user } = renderSetup(
       <TestComponent
-        initial={'initial value'}
-        isObject={false}
-        isName={false}
+        initial={''}
+        validate={(value) => (value.length > 10 ? 'error' : undefined)}
       />
     );
 
-    const value = screen.getByRole('test-value');
+    const error = screen.getByRole('test-error');
     const input = screen.getByRole('textbox');
 
-    expect(value).toHaveTextContent('initial value');
+    await user.type(input, '123456789ab');
 
-    await user.type(input, ' changed');
+    expect(error).toHaveTextContent('error');
 
-    expect(value).toHaveTextContent('initial value changed');
+    await user.click(screen.getByRole('button', { name: 'resetError' }));
+
+    expect(error).toHaveTextContent('');
   });
 
-  it('다중 값에 onChange를 사용하면 값이 변경됩니다.', async () => {
+  it('reset 버튼을 누르면 값과 에러 메시지가 초기화 됩니다.', async () => {
     const { user } = renderSetup(
       <TestComponent
-        initial={{ test: 'initial value' }}
-        isObject={true}
-        isName={true}
+        initial={''}
+        validate={(value) => (value.length > 10 ? 'error' : undefined)}
       />
     );
 
     const input = screen.getByRole('textbox');
     const value = screen.getByRole('test-value');
+    const error = screen.getByRole('test-error');
 
-    expect(value).toHaveTextContent('initial value');
+    await user.type(input, '123456789ab');
 
-    await user.type(input, ' changed');
-
-    expect(value).toHaveTextContent('initial value changed');
-  });
-
-  it('reset 버튼을 누르면 변경된 값이 초기값으로 재설정 됩니다.', async () => {
-    const { user } = renderSetup(
-      <TestComponent
-        initial={'initial value'}
-        isObject={false}
-        isName={false}
-      />
-    );
-
-    const input = screen.getByRole('textbox');
-    const value = screen.getByRole('test-value');
-
-    await user.type(input, ' changed');
-
-    expect(value).toHaveTextContent('initial value changed');
+    expect(value).toHaveTextContent('123456789a');
+    expect(error).toHaveTextContent('error');
 
     await user.click(screen.getByRole('button', { name: 'reset' }));
 
-    expect(value).toHaveTextContent('initial value');
+    expect(value).toHaveTextContent('');
+    expect(error).toHaveTextContent('');
   });
 });
