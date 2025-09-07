@@ -1,0 +1,141 @@
+import { useState } from 'react';
+import { useControllableState } from '@modern-kit/react'
+
+# useControllableState
+
+제어된 상태와 비제어된 상태를 관리하는 커스텀 훅입니다. 
+
+`value`가 제공되면 `제어 모드(controlled mode)`로 처리되며, 제공되지 않으면 `비제어 모드(uncontrolled mode)`로 처리됩니다.
+
+- controlled mode에서는 value는 외부에서 제어되며, 해당 훅이 반환하는 setValue 함수를 통해 내부 value를 변경할 수 없습니다.
+
+- uncontrolled mode에서는 defaultValue가 초기값으로 사용되며, 해당 훅이 반환하는 setValue 함수를 통해 내부 value를 변경할 수 있습니다.
+
+<br />
+
+### Note
+주요 사용처로는 `checkbox`, `radio` 등의 요소들의 체크 상태를 제어/비제어로 분리하여 관리할 때 사용될 수 있습니다.
+- props로 value를 제공하면 제어 모드로 동작하고, 제공하지 않으면 비제어 모드로 동작하는 방식으로 구현할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useControllableState/index.ts)
+
+## Interface
+```ts title="typescript"
+interface ControlledStateOptions<T> {
+  value: T;
+  defaultValue?: T;
+}
+
+interface UncontrolledStateOptions<T> {
+  value?: T;
+  defaultValue: T;
+}
+
+type UseControllableStateReturn<T> = [
+  T | undefined,
+  (nextValue: SetStateAction<T | undefined>) => void
+];
+```
+```ts title="typescript"
+function useControllableState<T>({
+  value,
+  defaultValue,
+}: ControlledStateOptions<T>): UseControllableStateReturn<T>
+
+function useControllableState<T>({
+  value,
+  defaultValue,
+}: UncontrolledStateOptions<T>): UseControllableStateReturn<T>
+```
+
+## Usage
+
+### 비제어 모드 (Uncontrolled Mode)
+- `value`가 제공되지 않거나 `undefined`인 경우 비제어 모드(uncontrolled mode)로 동작합니다. 
+- 이때 `defaultValue`가 초기값으로 사용되며, `setValue` 함수를 통해 값을 변경할 수 있습니다.
+
+```tsx title="typescript"
+import { useControllableState } from '@modern-kit/react';
+
+const UncontrolledExample = () => {
+  const [value, setValue] = useControllableState({ defaultValue: 0 });
+
+  return (
+    <div>
+      <p>현재 값: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        증가
+      </button>
+      <button onClick={() => setValue(0)}>리셋</button>
+    </div>
+  );
+};
+```
+
+### 제어 모드 (Controlled Mode)
+- `value`가 제공된 경우 제어 모드(controlled mode)로 동작합니다. 
+-이때 상태는 외부에서 제어되며, `useControllableState`에서 반환된 `setValue` 함수로는 값을 변경할 수 없습니다.
+
+```tsx title="typescript"
+import { useState } from 'react';
+import { useControllableState } from '@modern-kit/react';
+
+const ControlledExample = () => {
+  const [externalValue, setExternalValue] = useState(10);
+  const [value, setValue] = useControllableState({ value: externalValue });
+
+  return (
+    <div>
+      <p>현재 값: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        내부에서 증가 (작동하지 않음)
+      </button>
+      <button onClick={() => setExternalValue((prev) => prev + 1)}>
+        외부에서 증가 (작동함)
+      </button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const UncontrolledExample = () => {
+  const [value, setValue] = useControllableState({ defaultValue: 0 });
+
+  return (
+    <div>
+      <p>비제어 모드 - 현재 값: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        증가
+      </button>
+      <button onClick={() => setValue(0)}>리셋</button>
+    </div>
+  );
+};
+
+export const ControlledExample = () => {
+  const [externalValue, setExternalValue] = useState(10);
+  const [value, setValue] = useControllableState({ value: externalValue });
+
+  return (
+    <div>
+      <p>제어 모드 - 현재 값: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        내부에서 증가 (작동하지 않음)
+      </button>
+      <button onClick={() => setExternalValue((prev) => prev + 1)}>
+        외부에서 증가
+      </button>
+    </div>
+  );
+};
+
+### 비제어 모드 (Uncontrolled Mode)
+<UncontrolledExample />
+
+### 제어 모드 (Controlled Mode)  
+<ControlledExample />
