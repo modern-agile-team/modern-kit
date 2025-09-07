@@ -24,31 +24,16 @@ import { useControllableState } from '@modern-kit/react'
 
 ## Interface
 ```ts title="typescript"
-interface ControlledStateOptions<T> {
-  value: T;
-  defaultValue?: T;
-}
-
-interface UncontrolledStateOptions<T> {
-  value?: T;
+interface UseControllableStateOptions<T> {
+  value?: T | undefined;
   defaultValue: T;
 }
-
-type UseControllableStateReturn<T> = [
-  T | undefined,
-  (nextValue: SetStateAction<T | undefined>) => void
-];
 ```
 ```ts title="typescript"
 function useControllableState<T>({
   value,
   defaultValue,
-}: ControlledStateOptions<T>): UseControllableStateReturn<T>
-
-function useControllableState<T>({
-  value,
-  defaultValue,
-}: UncontrolledStateOptions<T>): UseControllableStateReturn<T>
+}: UseControllableStateOptions<T>): [T, (nextValue: SetStateAction<T>) => void];
 ```
 
 ## Usage
@@ -85,7 +70,7 @@ import { useControllableState } from '@modern-kit/react';
 
 const ControlledExample = () => {
   const [externalValue, setExternalValue] = useState(10);
-  const [value, setValue] = useControllableState({ value: externalValue });
+  const [value, setValue] = useControllableState({ value: externalValue, defaultValue: 0 });
 
   return (
     <div>
@@ -119,7 +104,7 @@ export const UncontrolledExample = () => {
 
 export const ControlledExample = () => {
   const [externalValue, setExternalValue] = useState(10);
-  const [value, setValue] = useControllableState({ value: externalValue });
+  const [value, setValue] = useControllableState({ value: externalValue, defaultValue: 0 });
 
   return (
     <div>
