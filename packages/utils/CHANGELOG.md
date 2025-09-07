@@ -1,5 +1,15 @@
 # @modern-kit/utils
 
+## 2.6.0
+
+### Minor Changes
+
+- [#931](https://github.com/modern-agile-team/modern-kit/pull/931) [`03b4c9d`](https://github.com/modern-agile-team/modern-kit/commit/03b4c9d8869b35c41aa020b67042cff41f026979) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): set 신규 함수 추가 - @ssi02014
+
+- [#941](https://github.com/modern-agile-team/modern-kit/pull/941) [`c703587`](https://github.com/modern-agile-team/modern-kit/commit/c703587ee3b71d93a073371bdb8121fe0a38fd6a) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): hasRepeatingChars 신규 함수 추가 - @ssi02014
+
+- [#929](https://github.com/modern-agile-team/modern-kit/pull/929) [`794515b`](https://github.com/modern-agile-team/modern-kit/commit/794515ba521f04f79e99756b566ee427756f9eac) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getInValue -> get 네이밍 변경 - @ssi02014
+
 ## 2.5.0
 
 ### Minor Changes
