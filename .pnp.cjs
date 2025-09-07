@@ -8836,7 +8836,7 @@ const RAW_RUNTIME_STATE =
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:16.0.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
-          ["@testing-library/jest-dom", "npm:6.6.2"],\
+          ["@testing-library/jest-dom", "npm:6.8.0"],\
           ["@testing-library/react", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:16.3.0"],\
           ["@testing-library/user-event", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:14.6.0"],\
           ["@types/react", "npm:18.3.1"],\
@@ -8874,7 +8874,7 @@ const RAW_RUNTIME_STATE =
           ["@rollup/plugin-commonjs", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:28.0.0"],\
           ["@rollup/plugin-node-resolve", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:16.0.0"],\
           ["@testing-library/dom", "npm:10.4.0"],\
-          ["@testing-library/jest-dom", "npm:6.6.2"],\
+          ["@testing-library/jest-dom", "npm:6.8.0"],\
           ["@testing-library/react", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:16.3.0"],\
           ["@testing-library/user-event", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:14.6.0"],\
           ["@types/react", "npm:18.3.1"],\
@@ -10380,16 +10380,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@testing-library/jest-dom", [\
-      ["npm:6.6.2", {\
-        "packageLocation": "./.yarn/cache/@testing-library-jest-dom-npm-6.6.2-58f67a3727-1c51390f97.zip/node_modules/@testing-library/jest-dom/",\
+      ["npm:6.8.0", {\
+        "packageLocation": "./.yarn/cache/@testing-library-jest-dom-npm-6.8.0-a309cef3b4-4c5b8b433e.zip/node_modules/@testing-library/jest-dom/",\
         "packageDependencies": [\
-          ["@testing-library/jest-dom", "npm:6.6.2"],\
+          ["@testing-library/jest-dom", "npm:6.8.0"],\
           ["@adobe/css-tools", "npm:4.4.0"],\
           ["aria-query", "npm:5.3.0"],\
-          ["chalk", "npm:3.0.0"],\
           ["css.escape", "npm:1.5.1"],\
           ["dom-accessibility-api", "npm:0.6.3"],\
-          ["lodash", "npm:4.17.21"],\
+          ["picocolors", "npm:1.1.1"],\
           ["redent", "npm:3.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -13531,15 +13530,6 @@ const RAW_RUNTIME_STATE =
           ["ansi-styles", "npm:3.2.1"],\
           ["escape-string-regexp", "npm:1.0.5"],\
           ["supports-color", "npm:5.5.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:3.0.0", {\
-        "packageLocation": "./.yarn/cache/chalk-npm-3.0.0-e813208025-ee650b0a06.zip/node_modules/chalk/",\
-        "packageDependencies": [\
-          ["chalk", "npm:3.0.0"],\
-          ["ansi-styles", "npm:4.3.0"],\
-          ["supports-color", "npm:7.2.0"]\
         ],\
         "linkType": "HARD"\
       }],\
