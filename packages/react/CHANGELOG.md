@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 2.6.1
+
+### Patch Changes
+
+- [#951](https://github.com/modern-agile-team/modern-kit/pull/951) [`7491591`](https://github.com/modern-agile-team/modern-kit/commit/7491591b3a08847e5c16001dbdafec43a2475334) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useControllableState 타입 수정 - @ssi02014
+
 ## 2.6.0
 
 ### Minor Changes
