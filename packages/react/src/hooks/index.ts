@@ -7,6 +7,7 @@ export * from './useCallbackOnce';
 export * from './useClipboard';
 export * from './useColorScheme';
 export * from './useComputedStyleObserver';
+export * from './useControllableState';
 export * from './useCounter';
 export * from './useCycleList';
 export * from './useDebounce';
