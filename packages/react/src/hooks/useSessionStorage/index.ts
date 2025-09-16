@@ -14,6 +14,10 @@ import {
   getParsedState,
 } from './useSessionStorage.utils';
 
+import { StorageManager } from '@modern-kit/utils';
+
+const storageManager = new StorageManager('sessionStorage');
+
 interface UseSessionStorageWithoutInitialValueOptions {
   key: string;
 }
@@ -119,7 +123,7 @@ export function useSessionStorage<T>(options: UseSessionStorageOptions<T>) {
         const prevState = getParsedState<T>(prevStateString, initialValueToUse);
         const valueToUse = isFunction(value) ? value(prevState) : value;
 
-        window.sessionStorage.setItem(key, JSON.stringify(valueToUse));
+        storageManager.setItem(key, valueToUse);
         sessionStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
@@ -132,7 +136,7 @@ export function useSessionStorage<T>(options: UseSessionStorageOptions<T>) {
 
   const removeState = useCallback(() => {
     try {
-      window.sessionStorage.removeItem(key);
+      storageManager.removeItem(key);
       sessionStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(

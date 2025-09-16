@@ -1,8 +1,4 @@
-import {
-  isFunction,
-  removeStorageItem,
-  setStorageItem,
-} from '@modern-kit/utils';
+import { isFunction, StorageManager } from '@modern-kit/utils';
 import { UseStepProps, useStep } from '../useStep';
 import { SetStateAction, useCallback, useState } from 'react';
 
@@ -47,26 +43,28 @@ export function useStepState<T>(props: UseStepStateProps<T>) {
 
   const [_state, _setState] = useState<T | null>(initialState);
 
+  const storageManager = type ? new StorageManager(type) : null;
+
   const setState = useCallback(
     (newState: SetStateAction<T | null>) => {
       _setState((prev) => {
         const newStateToUse = isFunction(newState) ? newState(prev) : newState;
 
-        if (type && key) {
-          setStorageItem(type, key, newStateToUse);
+        if (storageManager && type && key) {
+          storageManager.setItem(key, newStateToUse);
         }
         return newStateToUse;
       });
     },
-    [type, key]
+    [storageManager, type, key]
   );
 
   const clearState = useCallback(() => {
-    if (type && key) {
-      removeStorageItem(type, key);
+    if (storageManager && type && key) {
+      storageManager.removeItem(key);
     }
     _setState(null);
-  }, [type, key]);
+  }, [storageManager, type, key]);
 
   return { state: _state, setState, clearState, ...useStep(props) };
 }
