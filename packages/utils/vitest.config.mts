@@ -12,7 +12,6 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       exclude: [
-        'src/storage',
         'src/clipboard',
         'src/file',
         'src/**/internal.ts',

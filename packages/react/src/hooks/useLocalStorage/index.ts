@@ -14,6 +14,9 @@ import {
   subscribe,
 } from './useLocalStorage.utils';
 import { useVisibilityChange } from '../useVisibilityChange';
+import { StorageManager } from '@modern-kit/utils';
+
+const storageManager = new StorageManager('localStorage');
 
 interface UseLocalStorageWithoutInitialValueOptions {
   key: string;
@@ -127,7 +130,7 @@ export function useLocalStorage<T>(options: UseLocalStorageOptions<T>) {
         const prevState = getParsedState<T>(prevStateString, initialValueToUse);
         const valueToUse = isFunction(value) ? value(prevState) : value;
 
-        window.localStorage.setItem(key, JSON.stringify(valueToUse));
+        storageManager.setItem(key, valueToUse);
         localStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
@@ -140,7 +143,7 @@ export function useLocalStorage<T>(options: UseLocalStorageOptions<T>) {
 
   const removeState = useCallback(() => {
     try {
-      window.localStorage.removeItem(key);
+      storageManager.removeItem(key);
       localStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
