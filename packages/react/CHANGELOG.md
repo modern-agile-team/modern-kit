@@ -1,5 +1,12 @@
 # @modern-kit/react
 
+## 2.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`1ba6e57`](https://github.com/modern-agile-team/modern-kit/commit/1ba6e5732ab621f4c52a19e1030b14d93c3d139d)]:
+  - @modern-kit/utils@2.7.0
+
 ## 2.6.1
 
 ### Patch Changes
