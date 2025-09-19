@@ -6,12 +6,29 @@ interface StorageData<T> {
 }
 
 /**
- * @description 타입 안전성을 제공하는 브라우저 스토리지 관리 클래스입니다.
- * `localStorage`와 `sessionStorage`를 지원하며, 제네릭 타입을 통해 데이터의 타입을 보장합니다.
+ * @description 스토리지 관리 클래스
  *
  * @template T - 스토리지에 저장할 데이터의 타입
- *
  * @param {'localStorage' | 'sessionStorage'} type - 스토리지 타입 (localStorage 또는 sessionStorage)
+ *
+ * @method setItem - 스토리지에 단일 데이터를 저장합니다.
+ * @method getItem - 스토리지에서 단일 데이터를 가져옵니다.
+ * @method setItems - 스토리지에 여러 데이터를 한번에 저장합니다.
+ * @method getItems - 스토리지에서 여러 데이터를 한번에 가져옵니다.
+ * @method removeItem - 스토리지에서 단일 데이터를 삭제합니다.
+ * @method removeItems - 스토리지에서 여러 데이터를 한번에 삭제합니다.
+ *
+ * @method keys - 스토리지에 저장된 모든 키를 반환합니다.
+ * @method values - 스토리지에 저장된 모든 값을 반환합니다.
+ * @method entries - 스토리지에 저장된 모든 키-값 쌍을 반환합니다.
+ * @method clear - 스토리지의 모든 데이터를 삭제합니다.
+ * @method size - 스토리지에 저장된 데이터의 개수를 반환합니다.
+ *
+ * @method ownKeys - 현재 인스턴스가 관리하는 키를 반환합니다.
+ * @method ownValues - 현재 인스턴스가 관리하는 값을 반환합니다.
+ * @method ownEntries - 현재 인스턴스가 관리하는 키-값 쌍을 반환합니다.
+ * @method ownClear - 현재 인스턴스가 관리하는 데이터를 스토리지에서 삭제합니다.
+ * @method ownSize - 현재 인스턴스가 관리하는 데이터의 개수를 반환합니다.
  *
  * @example
  * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
@@ -22,9 +39,11 @@ interface StorageData<T> {
  */
 export class StorageManager<T extends Record<string, any>> {
   private storageType: 'localStorage' | 'sessionStorage';
+  private managedKeys: Set<keyof T>;
 
   constructor(type: 'localStorage' | 'sessionStorage') {
     this.storageType = type;
+    this.managedKeys = new Set();
   }
 
   private get storage(): Window['localStorage'] | Window['sessionStorage'] {
@@ -45,11 +64,16 @@ export class StorageManager<T extends Record<string, any>> {
    * storage.setItem('name', 'John');
    */
   setItem<K extends keyof T>(key: K, value: T[K]): void {
+    if (value == null) {
+      return;
+    }
+
     this.storage.setItem(key as string, JSON.stringify(value));
+    this.managedKeys.add(key);
   }
 
   /**
-   * @description 여러 데이터를 한번에 저장합니다.
+   * @description 스토리지에 여러 데이터를 한번에 저장합니다.
    *
    * key가 같은 경우 뒤에 오는 데이터가 덮어씁니다.
    *
@@ -61,14 +85,12 @@ export class StorageManager<T extends Record<string, any>> {
    */
   setItems(data: StorageData<T>[]): void {
     data.forEach(({ key, value }) => {
-      if (value != null) {
-        this.setItem(key, value);
-      }
+      this.setItem(key, value);
     });
   }
 
   /**
-   * @description 스토리지에서 단일 데이터를 가져옵니다.
+   * @description 스토리지에 저장된 단일 데이터를 가져옵니다.
    *
    * @param {keyof T} key - 가져올 데이터의 키
    *
@@ -98,7 +120,7 @@ export class StorageManager<T extends Record<string, any>> {
   }
 
   /**
-   * @description 여러 데이터를 한번에 가져옵니다.
+   * @description 스토리지에 저장된 여러 데이터를 한번에 가져옵니다.
    *
    * @template K - 가져올 데이터의 키 타입
    * @param {K[]} keys - 가져올 데이터의 키 배열
@@ -123,7 +145,7 @@ export class StorageManager<T extends Record<string, any>> {
   }
 
   /**
-   * @description 스토리지에서 데이터를 삭제합니다.
+   * @description 스토리지에 저장된 데이터를 삭제합니다.
    *
    * @param {keyof T} key - 삭제할 데이터의 키
    *
@@ -133,10 +155,11 @@ export class StorageManager<T extends Record<string, any>> {
    */
   removeItem<K extends keyof T>(key: K): void {
     this.storage.removeItem(key as string);
+    this.managedKeys.delete(key);
   }
 
   /**
-   * @description 여러 데이터를 한번에 삭제합니다.
+   * @description 스토리지에 저장된 여러 데이터를 한번에 삭제합니다.
    *
    * @param {keyof T[]} keys - 삭제할 데이터의 키 배열
    *
@@ -151,13 +174,37 @@ export class StorageManager<T extends Record<string, any>> {
   }
 
   /**
-   * @description 스토리지에 저장된 모든 키를 반환합니다.
+   * @description 스토리지에 저장된 데이터가 있는지 확인합니다.
    *
-   * @returns {keyof T[]} - 스토리지에 저장된 모든 키의 배열
+   * @param {keyof T} key - 확인할 데이터의 키
+   *
+   * @returns {boolean} - 데이터가 있으면 true, 없으면 false
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
-   * storage.keys(); // ['name', 'age']
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.hasItem('name'); // true, 스토리지에 저장된 데이터가 있음
+   * storage.hasItem('age'); // true, 스토리지에 저장된 데이터가 있음
+   */
+  hasItem<K extends keyof T>(key: K): boolean {
+    return this.getItem(key) != null;
+  }
+
+  /**
+   * @description 스토리지에 저장된 모든 키를 반환합니다.
+   *
+   * @returns {keyof T[]} - StorageManager 인스턴스에 관리하는 모든 키의 배열
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.keys(); // ['name', 'age'], 스토리지에 저장된 모든 키 2개
    */
   keys(): (keyof T)[] {
     const keys: (keyof T)[] = [];
@@ -178,7 +225,11 @@ export class StorageManager<T extends Record<string, any>> {
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
-   * storage.values(); // ['John', '30']
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.values(); // ['John', 30], 스토리지에 저장된 모든 값 2개
    */
   values(): (T[keyof T] | null)[] {
     const keys = this.keys();
@@ -186,13 +237,17 @@ export class StorageManager<T extends Record<string, any>> {
   }
 
   /**
-   * @description 스토리지에 저장된 모든 키-값 쌍을 반환합니다.
+   * @description 스토리지에 저장된 모든 키-값 쌍(entries)을 반환합니다.
    *
    * @returns {[keyof T, T[keyof T] | null][]} - 스토리지에 저장된 모든 키-값 쌍의 배열
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
-   * storage.entries(); // [['name', 'John'], ['age', '30']]
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.entries(); // [['name', 'John'], ['age', 30]], 스토리지에 저장된 모든 키-값 쌍 2개
    */
   entries(): [keyof T, T[keyof T] | null][] {
     const keys = this.keys();
@@ -200,10 +255,14 @@ export class StorageManager<T extends Record<string, any>> {
   }
 
   /**
-   * @description 스토리지를 초기화합니다.
+   * @description 스토리지에 저장된 모든 데이터를 스토리지에서 삭제합니다.
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
    * storage.clear();
    */
   clear(): void {
@@ -217,9 +276,104 @@ export class StorageManager<T extends Record<string, any>> {
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
-   * storage.size; // 2
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.size; // 2, 스토리지에 저장된 모든 데이터의 수 2개
    */
   size(): number {
     return this.storage.length;
+  }
+
+  /**
+   * @description 현재 인스턴스가 관리하는 키들만 반환합니다.
+   *
+   * @returns {(keyof T)[]} - 현재 인스턴스가 관리하는 키의 배열
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.ownKeys(); // ['name'], 인스턴스가 관리하는 키 1개
+   * storage.keys(); // ['name', 'age'], 스토리지에 저장된 모든 키 2개
+   */
+  ownKeys(): (keyof T)[] {
+    return Array.from(this.managedKeys);
+  }
+
+  /**
+   * @description 현재 인스턴스가 관리하는 값들만 반환합니다.
+   *
+   * @returns {(T[keyof T] | null)[]} - 현재 인스턴스가 관리하는 값의 배열
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.ownValues(); // ['John'], 인스턴스가 관리하는 값 1개
+   * storage.values(); // ['John', 30], 스토리지에 저장된 모든 값 2개
+   */
+  ownValues(): (T[keyof T] | null)[] {
+    return Array.from(this.managedKeys).map((key) => this.getItem(key));
+  }
+
+  /**
+   * @description 현재 인스턴스가 관리하는 키-값 쌍들만 반환합니다.
+   *
+   * @returns {[keyof T, T[keyof T] | null][]} - 현재 인스턴스가 관리하는 키-값 쌍의 배열
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.ownEntries(); // [['name', 'John']], 인스턴스가 관리하는 키-값 쌍 1개
+   */
+  ownEntries(): [keyof T, T[keyof T] | null][] {
+    return Array.from(this.managedKeys).map((key) => [key, this.getItem(key)]);
+  }
+
+  /**
+   * @description 현재 인스턴스가 관리하는 데이터를 스토리지에서 삭제합니다.
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.ownClear();
+   *
+   * storage.ownKeys(); // []
+   * storage.keys(); // ['age']
+   */
+  ownClear(): void {
+    const keys = this.ownKeys();
+    keys.forEach((key) => {
+      this.storage.removeItem(key as string);
+    });
+    this.managedKeys.clear();
+  }
+
+  /**
+   * @description 현재 인스턴스가 관리하는 데이터의 수를 반환합니다.
+   *
+   * @returns {number} - 현재 인스턴스가 관리하는 데이터의 수
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   *
+   * storage.setItem('name', 'John');
+   * localStorage.setItem('age', '30');
+   *
+   * storage.ownSize(); // 1, 인스턴스가 관리하는 데이터의 수 1개
+   * storage.size(); // 2, 스토리지에 저장된 모든 데이터의 수 2개
+   */
+  ownSize(): number {
+    return this.managedKeys.size;
   }
 }

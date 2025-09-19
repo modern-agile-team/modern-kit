@@ -28,6 +28,11 @@ class StorageManager<T extends Record<string, any>> {
   entries(): [keyof T, T[keyof T] | null][];
   clear(): void;
   size(): number;
+  ownKeys(): (keyof T)[];
+  ownValues(): (T[keyof T] | null)[];
+  ownEntries(): [keyof T, T[keyof T] | null][];
+  ownClear(): void;
+  ownSize(): number;
 }
 ```
 
@@ -90,33 +95,50 @@ const items = localStorage.getItems(['name', 'age']);
 localStorage.removeItems(['name', 'age']);
 ```
 
-### 스토리지 탐색
+### 스토리지 전체 데이터 탐색 및 초기화
 ```ts title="typescript"
-// * name, age, preferences 저장되어 있는 상태 가정
+const storage = new StorageManager<UserData>('localStorage');
 
-// 모든 키 조회
-const keys = localStorage.keys(); 
-// value: ['name', 'age', 'preferences']
-// type: (keyof UserData)[]
+storage.setItem('name', 'Jane'); // 인스턴스가 관리하는 데이터1
+storage.setItem('age', 25); // 인스턴스가 관리하는 데이터2
+localStorage.setItem('preferences', { theme: 'dark', language: 'ko' }); // 인스턴스가 관리하지 않는 데이터
 
-// 모든 값 조회
-const values = localStorage.values(); 
-// value: ['John', 30, { theme: 'dark', language: 'ko' }]
-// (string | number | { theme: 'light' | 'dark'; language: string; } | null)[]
+// 스토리지 전체 키 조회
+const keys = storage.keys(); // ['name', 'age', 'preferences']
 
-// 모든 키-값 쌍 조회
-const entries = localStorage.entries();
-// value: [['name', 'John'], ['age', 30], ['preferences', { theme: 'dark', language: 'ko' }]]
-// type: [keyof UserData, string | number | { theme: 'light' | 'dark'; language: string; } | null][]
+// 스토리지 전체 값 조회
+const values = storage.values(); // ['Jane', 25, { theme: 'dark', language: 'ko' }]
 
-// 저장된 데이터 수
-const count = localStorage.size(); 
-// value: 3
-// type: number
+// 스토리지 전체 키-값 쌍 조회
+const entries = storage.entries(); // [['name', 'Jane'], ['age', 25], ['preferences', { theme: 'dark', language: 'ko' }]]
+
+// 스토리지 전체 저장된 데이터 수
+const count = storage.size(); // 3
+
+// 스토리지 전체 데이터 삭제
+storage.clear();
 ```
 
-### 스토리지 초기화
+### 인스턴스가 관리하는 스토리지 데이터 탐색 및 초기화
 ```ts title="typescript"
-// 모든 데이터 삭제
-localStorage.clear();
+const storage = new StorageManager<UserData>('localStorage');
+
+storage.setItem('name', 'Jane'); // 인스턴스가 관리하는 데이터1
+storage.setItem('age', 25); // 인스턴스가 관리하는 데이터2
+localStorage.setItem('preferences', { theme: 'dark', language: 'ko' }); // 인스턴스가 관리하지 않는 데이터
+
+// 인스턴스가 관리하는 모든 키 조회
+const keys = storage.ownKeys(); // ['name', 'age']
+
+// 인스턴스가 관리하는 모든 값 조회
+const values = storage.ownValues(); // ['Jane', 25]
+
+// 인스턴스가 관리하는 모든 키-값 쌍 조회
+const entries = storage.ownEntries(); // [['name', 'Jane'], ['age', 25]]
+
+// 인스턴스가 관리하는 저장된 데이터 수
+const count = storage.ownSize(); // 2
+
+// 인스턴스가 관리하는 모든 데이터 삭제
+storage.ownClear();
 ```
