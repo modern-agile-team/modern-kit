@@ -20,6 +20,9 @@ type UseStepStateProps<T> =
   | UseStepWithInitialState<T>
   | UseStepWithoutInitialState;
 
+const localStorageManager = new StorageManager('localStorage');
+const sessionStorageManager = new StorageManager('sessionStorage');
+
 export function useStepState<T>({
   initialState,
   ...props
@@ -43,28 +46,32 @@ export function useStepState<T>(props: UseStepStateProps<T>) {
 
   const [_state, _setState] = useState<T | null>(initialState);
 
-  const storageManager = type ? new StorageManager(type) : null;
-
   const setState = useCallback(
     (newState: SetStateAction<T | null>) => {
       _setState((prev) => {
         const newStateToUse = isFunction(newState) ? newState(prev) : newState;
 
-        if (storageManager && type && key) {
+        if (type && key) {
+          const storageManager =
+            type === 'localStorage'
+              ? localStorageManager
+              : sessionStorageManager;
           storageManager.setItem(key, newStateToUse);
         }
         return newStateToUse;
       });
     },
-    [storageManager, type, key]
+    [type, key]
   );
 
   const clearState = useCallback(() => {
-    if (storageManager && type && key) {
+    if (type && key) {
+      const storageManager =
+        type === 'localStorage' ? localStorageManager : sessionStorageManager;
       storageManager.removeItem(key);
     }
     _setState(null);
-  }, [storageManager, type, key]);
+  }, [type, key]);
 
   return { state: _state, setState, clearState, ...useStep(props) };
 }
