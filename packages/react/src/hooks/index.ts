@@ -21,6 +21,7 @@ export * from './useFileReader';
 export * from './useFocus';
 export * from './useForceUpdate';
 export * from './useHover';
+export * from './useIdle';
 export * from './useImageStatus';
 export * from './useInputState';
 export * from './useIntersectionObserver';

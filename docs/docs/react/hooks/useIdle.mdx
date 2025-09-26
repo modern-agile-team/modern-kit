@@ -1,0 +1,137 @@
+import { useState } from 'react';
+import { useIdle } from '@modern-kit/react';
+
+# useIdle
+
+사용자의 `비활성(idle)` 상태를 감지하는 커스텀 훅입니다.
+
+지정된 시간 동안 사용자 활동이 없으면 `idle` 상태로 판단하며, 마우스 움직임, 키보드 입력, 터치 이벤트 등 다양한 사용자 활동을 감지합니다. 페이지 visibility 변경도 감지하여 탭이 다시 활성화되면 `active` 상태로 전환됩니다.
+
+<br />
+
+### 감지되는 사용자 활동
+
+`useIdle`은 다음 이벤트들을 통해 사용자 활동을 감지합니다:
+
+- `mousemove` - 마우스 움직임
+- `mousedown` - 마우스 클릭
+- `resize` - 창 크기 변경
+- `keydown` - 키보드 입력
+- `touchstart` - 터치 시작
+- `wheel` - 마우스 휠/스크롤
+- `visibilitychange` - 탭 전환 (페이지가 다시 보일 때)
+
+모든 이벤트는 `300ms`로 스로틀링되어 불필요한 이벤트 호출을 방지합니다.
+
+<br />
+
+### 활용 사례
+
+- 자동 로그아웃 기능
+- 화면 보호기 활성화
+- 사용자 활동 모니터링
+- 리소스 절약 (비활성 시 API 호출 중지)
+- 알림 시스템 (사용자가 돌아왔을 때 알림 표시)
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIdle/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseIdleProps {
+  timeout: number; // 비활성 상태로 간주되기까지의 시간(밀리초)
+  onIdle?: () => void; // idle 상태 진입 시 콜백
+  onActive?: () => void; // active 상태 진입 시 콜백
+}
+```
+```ts title="typescript"
+function useIdle({ timeout, onIdle, onActive }: UseIdleProps): boolean
+```
+
+## Usage
+```tsx title="typescript"
+import { useIdle } from '@modern-kit/react';
+
+const Example = () => {
+  const isIdle = useIdle({
+    timeout: 5000, // 5초 후 idle 상태
+    onIdle: () => {
+      console.log('사용자가 비활성 상태입니다');
+    },
+    onActive: () => {
+      console.log('사용자가 다시 활성 상태입니다');
+    }
+  });
+
+  return (
+    <div>
+      <p>현재 상태: {isIdle ? '😴 Idle' : '🟢 Active'}</p>
+      <p>5초간 마우스나 키보드 사용을 멈춰보세요!</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [idleCount, setIdleCount] = useState(0);
+  const [activeCount, setActiveCount] = useState(0);
+
+  const isIdle = useIdle({
+    timeout: 3000, // 3초
+    onIdle: () => {
+      setIdleCount(prev => prev + 1);
+    },
+    onActive: () => {
+      setActiveCount(prev => prev + 1);
+    }
+  });
+
+  const resetCounts = () => {
+    setIdleCount(0);
+    setActiveCount(0);
+  };
+
+  return (
+    <div style={{
+      padding: '20px',
+      borderRadius: '8px',
+      backgroundColor: isIdle ? '#ffeaa7' : '#d1f2eb'
+    }}>
+      <div style={{
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '16px',
+        color: isIdle ? '#e17055' : '#00b894'
+      }}>
+        현재 상태: {isIdle ? '😴 Idle (3초 비활성)' : '🟢 Active'}
+      </div>
+
+      <div style={{ marginBottom: '16px' }}>
+        <p><strong>Idle 전환 횟수:</strong> {idleCount}</p>
+        <p><strong>Active 전환 횟수:</strong> {activeCount}</p>
+      </div>
+
+      <div style={{ marginBottom: '16px', fontSize: '14px', color: '#666' }}>
+        <p>✨ 마우스 움직임, 키보드 입력, 스크롤 등으로 활동을 감지합니다</p>
+        <p>⏰ 3초간 아무 활동이 없으면 Idle 상태가 됩니다</p>
+        <p>🔄 탭을 바꿨다가 돌아와도 Active 상태로 전환됩니다</p>
+      </div>
+
+      <button
+        onClick={resetCounts}
+        style={{
+          padding: '8px 16px',
+          borderRadius: '4px',
+        }}
+      >
+        카운트 초기화
+      </button>
+    </div>
+  );
+};
+
+<Example />
