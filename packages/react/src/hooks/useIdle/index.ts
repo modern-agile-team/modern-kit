@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useEventListener } from '../useEventListener';
 import { useTimeout } from '../useTimeout';
 import { useVisibilityChange } from '../useVisibilityChange';
-import { noop } from '@modern-kit/utils';
 import { useThrottle } from '../useThrottle';
 
 interface UseIdleProps {
