@@ -1,4 +1,5 @@
 export * from './getAge';
+export * from './getDateStartOf';
 export * from './getDDay';
 export * from './getUTCTime';
 export * from './isAfterDate';
