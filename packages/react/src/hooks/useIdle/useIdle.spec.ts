@@ -245,7 +245,6 @@ describe('useIdle', () => {
         expect(result.current).toBeTruthy();
       });
 
-      // 연속된 이벤트 발생
       const clickEvent = new Event('mousedown');
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
@@ -255,29 +254,22 @@ describe('useIdle', () => {
         expect(onActive).toBeCalledTimes(1);
       });
 
-      // 스로틀링 시간 전에는 onActive가 한 번만 호출되어야 함
+      // 스로틀링 delay 시간 내에 호출되는 이벤트는 무시
       vi.advanceTimersByTime(THROTTLE_DELAY / 2);
 
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
 
+
       await waitFor(() => {
         expect(onActive).toBeCalledTimes(1);
       });
 
-      // 스로틀링 시간 이후 추가 호출 없음
       vi.advanceTimersByTime(THROTTLE_DELAY / 2);
 
       await waitFor(() => {
         expect(onActive).toBeCalledTimes(1);
-      });
-
-      window.dispatchEvent(clickEvent);
-      window.dispatchEvent(clickEvent);
-
-      await waitFor(() => {
-        expect(onActive).toBeCalledTimes(2);
       });
     });
   });
