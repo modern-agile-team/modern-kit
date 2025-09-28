@@ -16,7 +16,7 @@ interface UseIdleProps {
  * 지정된 시간 동안 사용자 활동이 없으면 `idle` 상태로 판단하며, 마우스 움직임, 키보드 입력, 터치 이벤트 등 사용자 활동을 감지합니다.
  * 페이지 visibility 변경도 감지하여 탭이 다시 활성화되면 `active` 상태로 전환됩니다.
  *
- * 모든 이벤트는 `300ms`로 스로틀링되어 불필요한 이벤트 호출을 방지합니다.
+ * 모든 이벤트는 `500ms`로 스로틀링되어 불필요한 이벤트 호출을 방지합니다.
  *
  * @param {UseIdleProps} props - idle 감지 설정을 위한 객체입니다.
  * @param {number} props.timeout - 비활성 상태로 간주되기까지의 시간(밀리초)
@@ -46,7 +46,7 @@ export function useIdle({ timeout, onIdle, onActive }: UseIdleProps): boolean {
       onActive?.();
     }
     resetTimer();
-  }, 300);
+  }, 500, { trailing: false });
 
   const windowElement = typeof window !== 'undefined' ? window : null;
 

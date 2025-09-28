@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useIdle } from '.';
 
 const TIMEOUT_DELAY = 50;
-const THROTTLE_DELAY = 300;
+const THROTTLE_DELAY = 500;
 
 // window 이벤트 스파이들
 const windowAddEventListenerSpy = vi.spyOn(window, 'addEventListener');
@@ -245,35 +245,31 @@ describe('useIdle', () => {
         expect(result.current).toBeTruthy();
       });
 
-      // 연속된 이벤트 발생
       const clickEvent = new Event('mousedown');
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
 
-      // 스로틀링 시간 전에는 onActive가 한 번만 호출되어야 함
+      await waitFor(() => {
+        expect(onActive).toBeCalledTimes(1);
+      });
+
+      // 스로틀링 delay 시간 내에 호출되는 이벤트는 무시
       vi.advanceTimersByTime(THROTTLE_DELAY / 2);
+
+      window.dispatchEvent(clickEvent);
+      window.dispatchEvent(clickEvent);
+      window.dispatchEvent(clickEvent);
+
 
       await waitFor(() => {
         expect(onActive).toBeCalledTimes(1);
       });
 
-      window.dispatchEvent(clickEvent);
-      window.dispatchEvent(clickEvent);
-      window.dispatchEvent(clickEvent);
-
-      // 스로틀링 시간 이후 추가 호출 없음
       vi.advanceTimersByTime(THROTTLE_DELAY / 2);
 
       await waitFor(() => {
-        expect(onActive).toBeCalledTimes(2);
-      });
-
-      window.dispatchEvent(clickEvent);
-      window.dispatchEvent(clickEvent);
-
-      await waitFor(() => {
-        expect(onActive).toBeCalledTimes(2);
+        expect(onActive).toBeCalledTimes(1);
       });
     });
   });
