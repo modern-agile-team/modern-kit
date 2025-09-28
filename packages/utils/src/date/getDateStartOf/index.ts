@@ -41,6 +41,10 @@ type DateStartOfUnit =
  * date.getMonth(); // 0
  * date.getDate(); // 1
  * date.getDay(); // 3
+ * date.getHours(); // 0
+ * date.getMinutes(); // 0
+ * date.getSeconds(); // 0
+ * date.getMilliseconds(); // 0
  *
  * @example
  * // UTC 타임존 기준
@@ -55,6 +59,10 @@ type DateStartOfUnit =
  * utcDate.getMonth(); // 0
  * utcDate.getDate(); // 1
  * utcDate.getDay(); // 3
+ * utcDate.getHours(); // 0
+ * utcDate.getMinutes(); // 0
+ * utcDate.getSeconds(); // 0
+ * utcDate.getMilliseconds(); // 0
  */
 export function getDateStartOf(
   date: string | Date | number,
@@ -62,7 +70,6 @@ export function getDateStartOf(
 ): Date {
   const parsedDate = parseDate(date);
 
-  // UTC 단위인지 확인
   const isUTC = unit.startsWith('utc');
   const baseUnit = isUTC ? unit.slice(3).toLowerCase() : unit;
 

@@ -43,7 +43,9 @@ function getDateStartOf(
 ```ts title="typescript"
 import { getDateStartOf } from '@modern-kit/utils';
 
-const targetDate = '2025-03-15T14:30:45.123Z'; // 2025-03-15 14:30:45 (토요일)
+const targetDate = '2025-03-15T14:30:45.123Z'; 
+// 2025-03-15 23:30:45 (KST 기준 토요일)
+// 2025-03-15 14:30:45 (UTC 기준 토요일)
 
 // 연도 시작점 - 2025년 1월 1일 00:00:00 (수요일)
 const yearStart = getDateStartOf(targetDate, 'year');
@@ -52,6 +54,10 @@ yearStart.getFullYear(); // 2025
 yearStart.getMonth(); // 0 (1월)
 yearStart.getDate(); // 1
 yearStart.getDay(); // 3 (수요일)
+yearStart.getHours(); // 0
+yearStart.getMinutes(); // 0
+yearStart.getSeconds(); // 0
+yearStart.getMilliseconds(); // 0
 
 // 월 시작점 - 2025년 3월 1일 00:00:00 (토요일)
 const monthStart = getDateStartOf(targetDate, 'month');
@@ -60,6 +66,10 @@ monthStart.getFullYear(); // 2025
 monthStart.getMonth(); // 2 (3월)
 monthStart.getDate(); // 1
 monthStart.getDay(); // 6 (토요일)
+monthStart.getHours(); // 0
+monthStart.getMinutes(); // 0
+monthStart.getSeconds(); // 0
+monthStart.getMilliseconds(); // 0
 
 // 주 시작점 - 2025년 3월 9일 00:00:00 (일요일)
 // 2025-03-15는 토요일이므로, 해당 주 일요일은 2025-03-09
@@ -69,6 +79,10 @@ weekStart.getFullYear(); // 2025
 weekStart.getMonth(); // 2 (3월)
 weekStart.getDate(); // 9
 weekStart.getDay(); // 0 (일요일)
+weekStart.getHours(); // 0
+weekStart.getMinutes(); // 0
+weekStart.getSeconds(); // 0
+weekStart.getMilliseconds(); // 0
 
 // 날짜 시작점 - 2025년 3월 15일 00:00:00 (토요일)
 const dateStart = getDateStartOf(targetDate, 'date');
@@ -77,6 +91,10 @@ dateStart.getFullYear(); // 2025
 dateStart.getMonth(); // 2 (3월)
 dateStart.getDate(); // 15
 dateStart.getDay(); // 6 (토요일)
+dateStart.getHours(); // 0
+dateStart.getMinutes(); // 0
+dateStart.getSeconds(); // 0
+dateStart.getMilliseconds(); // 0
 ```
 
 ### UTC 기준
@@ -94,6 +112,10 @@ utcYearStart.getUTCFullYear(); // 2025
 utcYearStart.getUTCMonth(); // 0 (1월)
 utcYearStart.getUTCDate(); // 1
 utcYearStart.getUTCDay(); // 3 (수요일)
+utcYearStart.getUTCHours(); // 0
+utcYearStart.getUTCMinutes(); // 0
+utcYearStart.getUTCSeconds(); // 0
+utcYearStart.getUTCMilliseconds(); // 0
 
 // UTC 월 시작점 - 2025년 3월 1일 00:00:00 (토요일)
 const utcMonthStart = getDateStartOf(targetDate, 'utcMonth');
@@ -102,6 +124,10 @@ utcMonthStart.getUTCFullYear(); // 2025
 utcMonthStart.getUTCMonth(); // 2 (3월)
 utcMonthStart.getUTCDate(); // 1
 utcMonthStart.getUTCDay(); // 6 (토요일)
+utcMonthStart.getUTCHours(); // 0
+utcMonthStart.getUTCMinutes(); // 0
+utcMonthStart.getUTCSeconds(); // 0
+utcMonthStart.getUTCMilliseconds(); // 0
 
 // UTC 주 시작점 - 2025년 3월 9일 00:00:00 (일요일)
 // 2025-03-15는 토요일이므로, 해당 주 일요일은 2025-03-09
@@ -111,6 +137,10 @@ utcWeekStart.getUTCFullYear(); // 2025
 utcWeekStart.getUTCMonth(); // 2 (3월)
 utcWeekStart.getUTCDate(); // 9
 utcWeekStart.getUTCDay(); // 0 (일요일)
+utcWeekStart.getUTCHours(); // 0
+utcWeekStart.getUTCMinutes(); // 0
+utcWeekStart.getUTCSeconds(); // 0
+utcWeekStart.getUTCMilliseconds(); // 0
 
 // UTC 날짜 시작점 - 2025년 3월 15일 00:00:00 (토요일)
 const utcDateStart = getDateStartOf(targetDate, 'utcDate');
@@ -119,6 +149,10 @@ utcDateStart.getUTCFullYear(); // 2025
 utcDateStart.getUTCMonth(); // 2 (3월)
 utcDateStart.getUTCDate(); // 15
 utcDateStart.getUTCDay(); // 6 (토요일)
+utcDateStart.getUTCHours(); // 0
+utcDateStart.getUTCMinutes(); // 0
+utcDateStart.getUTCSeconds(); // 0
+utcDateStart.getUTCMilliseconds(); // 0
 ```
 
 ### 주의 시작점 계산 예시
