@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isAOS: () => boolean
+function isAOS(): boolean
 ```
 
 ## Usage
