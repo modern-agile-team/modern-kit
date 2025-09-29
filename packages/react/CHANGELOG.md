@@ -1,5 +1,18 @@
 # @modern-kit/react
 
+## 2.7.0
+
+### Minor Changes
+
+- [#966](https://github.com/modern-agile-team/modern-kit/pull/966) [`40861f6`](https://github.com/modern-agile-team/modern-kit/commit/40861f6da24964a1afc2c4996229a8d88d8d759c) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useIdle 신규 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- [#965](https://github.com/modern-agile-team/modern-kit/pull/965) [`3561cf3`](https://github.com/modern-agile-team/modern-kit/commit/3561cf3f503e06e6add94ab5e68906ab2c5363f0) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useStepState storageManager 위치 변경 - @ssi02014
+
+- Updated dependencies [[`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30), [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30), [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30), [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30), [`1ba6e57`](https://github.com/modern-agile-team/modern-kit/commit/1ba6e5732ab621f4c52a19e1030b14d93c3d139d)]:
+  - @modern-kit/utils@2.7.0
+
 ## 2.6.1
 
 ### Patch Changes
