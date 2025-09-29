@@ -6,6 +6,8 @@ on:
 jobs:
   packages-release:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v4

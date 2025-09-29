@@ -11,6 +11,8 @@ concurrency:
 jobs:
   codecov:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
     steps:
       - name: Checkout 🔔
         uses: actions/checkout@v4
