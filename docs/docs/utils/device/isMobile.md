@@ -9,7 +9,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isMobile: () => boolean
+function isMobile(): boolean
 ```
 
 ## Usage

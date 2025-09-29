@@ -11,7 +11,7 @@
 
 ## Interface
 ```ts title="typescript"
-const isClient: () => boolean
+function isClient(): boolean
 ```
 
 ## Usage

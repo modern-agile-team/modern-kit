@@ -15,7 +15,7 @@
 
 ## Interface
 ```ts title="typescript"
-const getOS: () => "server" | "ios" | "android" | "otherMobile" | "web"
+function getOS(): "server" | "ios" | "android" | "otherMobile" | "web"
 ```
 
 ## Usage
