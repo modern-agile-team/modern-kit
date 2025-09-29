@@ -1,5 +1,19 @@
 # @modern-kit/utils
 
+## 2.7.0
+
+### Minor Changes
+
+- [#968](https://github.com/modern-agile-team/modern-kit/pull/968) [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getSafeWindow 신규 유틸 함수 추가 - @ssi02014
+
+- [#968](https://github.com/modern-agile-team/modern-kit/pull/968) [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getDateStartOf 신규 유틸 함수 추가 - @ssi02014
+
+- [#968](https://github.com/modern-agile-team/modern-kit/pull/968) [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getDateEndOf 신규 유틸 함수 추가 - @ssi02014
+
+- [#968](https://github.com/modern-agile-team/modern-kit/pull/968) [`8ef2d9a`](https://github.com/modern-agile-team/modern-kit/commit/8ef2d9ab349ea5ce7f26fc1468e3d74eaf145a30) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): getDateRange 유틸 함수 추가 - @ssi02014
+
+- [#959](https://github.com/modern-agile-team/modern-kit/pull/959) [`1ba6e57`](https://github.com/modern-agile-team/modern-kit/commit/1ba6e5732ab621f4c52a19e1030b14d93c3d139d) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): storageManager 신규 유틸 함수 추가 - @ssi02014
+
 ## 2.6.0
 
 ### Minor Changes
