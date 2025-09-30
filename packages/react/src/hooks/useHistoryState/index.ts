@@ -33,7 +33,7 @@ interface HistoryState<T> {
  * - `canForward`: 다음 상태로 이동할 수 있는지 여부
  * - `canBack`: 이전 상태로 이동할 수 있는지 여부
  * - `setState`: 상태 히스토리에 상태를 추가하고 새로운 상태로 업데이트합니다.
- * - `replaceState`: 상태 히스토리에 현재 상태를 대체하고 새로운 상태로 업데이트합니다.
+ * - `replaceState`: 상태 히스토리의 현재 상태를 대체합니다.
  * - `back`: 상태 히스토리에서 이전 상태로 되돌리는 함수
  * - `forward`: 상태 히스토리에서 다음 상태로 이동하는 함수
  * - `go`: 상태 히스토리에서 특정 인덱스의 상태로 이동하는 함수
@@ -82,9 +82,9 @@ export function useHistoryState<T>(
         }
 
         history.push(newStateToUse);
-        prev.pointer = history.length - 1;
+        const pointer = history.length - 1;
 
-        return { history, current: newStateToUse, pointer: prev.pointer };
+        return { history, current: newStateToUse, pointer };
       });
     },
     [capacity]

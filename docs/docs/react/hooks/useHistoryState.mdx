@@ -21,7 +21,7 @@ interface UseHistoryStateReturn<T> {
   setState: (newState: T | ((prevState: T) => T)) => void; 
   // 상태 히스토리에 상태를 추가하고 새로운 상태로 업데이트합니다.
   replaceState: (newState: T | ((prevState: T) => T)) => void;
-  // 상태 히스토리에 현재 상태를 대체하고 새로운 상태로 업데이트합니다.
+  // 상태 히스토리의 현재 상태를 대체합니다.
   back: () => void; // 상태 히스토리에서 이전 상태로 되돌리는 함수
   forward: () => void; // 상태 히스토리에서 다음 상태로 이동하는 함수
   go: (index: number) => void; // 상태 히스토리에서 특정 인덱스의 상태로 이동하는 함수
