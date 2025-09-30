@@ -1,6 +1,5 @@
-import { isFunction } from '@modern-kit/utils';
+import { isFunction, at } from '@modern-kit/utils';
 import { useCallback, useMemo, useState } from 'react';
-import { at } from '@modern-kit/utils';
 
 interface UseHistoryStateReturn<T> {
   state: T;
