@@ -1,0 +1,175 @@
+import { useHistoryState } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useHistoryState
+
+상태와 상태 변경 이력을 관리하는 훅입니다.
+
+상태 변경 시마다 이력이 저장되며, 상태 히스토리를 이전(`back`)과 다음(`forward`)으로 이동할 수 있습니다. 또한 특정 시점의 상태로 이동(`go`)할 수 있으며, 현재 상태를 대체(`replaceState`)할 수 있습니다. 
+
+저장되는 이력의 최대 개수(`capacity`)를 제한할 수 있습니다.
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHistoryState/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseHistoryStateReturn<T> {
+  state: T; // 현재 상태 값
+  canForward: boolean; // 다음 상태로 이동할 수 있는지 여부
+  canBack: boolean; // 이전 상태로 이동할 수 있는지 여부
+  setState: (newState: T | ((prevState: T) => T)) => void; 
+  // 상태 히스토리에 상태를 추가하고 새로운 상태로 업데이트합니다.
+  replaceState: (newState: T | ((prevState: T) => T)) => void;
+  // 상태 히스토리의 현재 상태를 대체합니다.
+  back: () => void; // 상태 히스토리에서 이전 상태로 되돌리는 함수
+  forward: () => void; // 상태 히스토리에서 다음 상태로 이동하는 함수
+  go: (index: number) => void; // 상태 히스토리에서 특정 인덱스의 상태로 이동하는 함수
+}
+```
+```ts title="typescript"
+function useHistoryState<T>(
+  initialValue: T | (() => T),
+  capacity?: number): UseHistoryStateReturn<T>;
+```
+
+## Usage
+```tsx title="typescript"
+import { useHistoryState } from '@modern-kit/react'
+
+const Example = () => {
+  const {
+    state,
+    canBack,
+    canForward,
+    setState,
+    replaceState,
+    back,
+    forward,
+    go
+  } = useHistoryState(0, 5);
+
+  return (
+    <div>
+      <p>{state}</p>
+      <button onClick={() => setState(state + 1)}>+1 (새 히스토리)</button>
+      <button onClick={() => replaceState(state + 10)}>+10 (히스토리 교체)</button>
+      <button onClick={back}>← 이전</button>
+      <button onClick={forward}>다음 →</button>
+      <button onClick={() => go(0)}>처음으로</button>
+      <button onClick={() => go(-1)}>마지막으로</button>
+    </div>
+  )
+}
+```
+
+## Example
+
+export const Example = () => {
+  const {
+    state,
+    canBack,
+    canForward,
+    setState,
+    replaceState,
+    back,
+    forward,
+    go
+  } = useHistoryState(0, 5);
+
+  // 공통 버튼 스타일
+  const buttonBaseStyle = {
+    padding: '10px 12px',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '14px',
+    cursor: 'pointer'
+  };
+
+  const getButtonStyle = (bgColor, textColor = 'white', disabled = false) => ({
+    ...buttonBaseStyle,
+    backgroundColor: disabled ? '#e9ecef' : bgColor,
+    color: disabled ? '#6c757d' : textColor,
+    cursor: disabled ? 'not-allowed' : 'pointer'
+  });
+
+  const containerStyle = {
+    padding: '20px',
+    border: '1px solid #e2e2e2',
+    borderRadius: '8px',
+    backgroundColor: '#fafafa',
+    maxWidth: '500px'
+  };
+
+  const gridStyle = {
+    display: 'grid',
+    gap: '8px'
+  };
+
+  return (
+    <div style={containerStyle}>
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <h3 style={{ fontSize: '24px', color: '#333', margin: '0 0 8px 0' }}>
+          현재 값: <span style={{ color: '#007acc' }}>{state}</span>
+        </h3>
+        <p style={{ fontSize: '14px', color: '#666', margin: '0' }}>
+          뒤로가기 <strong>{canBack ? '가능' : '불가능'}</strong> |
+          앞으로가기 <strong>{canForward ? '가능' : '불가능'}</strong>
+        </p>
+      </div>
+
+      <div style={{
+        ...gridStyle,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+        marginBottom: '16px'
+      }}>
+        <button
+          onClick={() => setState(state + 1)}
+          style={getButtonStyle('#007acc')}
+        >
+          +1 (새 히스토리)
+        </button>
+        <button
+          onClick={() => replaceState(state + 10)}
+          style={getButtonStyle('#28a745')}
+        >
+          +10 (히스토리 교체)
+        </button>
+      </div>
+
+      <div style={{
+        ...gridStyle,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))'
+      }}>
+        <button
+          onClick={back}
+          disabled={!canBack}
+          style={getButtonStyle('#6c757d', 'white', !canBack)}
+        >
+          ← 이전
+        </button>
+        <button
+          onClick={forward}
+          disabled={!canForward}
+          style={getButtonStyle('#6c757d', 'white', !canForward)}
+        >
+          다음 →
+        </button>
+        <button
+          onClick={() => go(0)}
+          style={getButtonStyle('#17a2b8')}
+        >
+          처음으로
+        </button>
+        <button
+          onClick={() => go(-1)}
+          style={getButtonStyle('#ffc107', '#212529')}
+        >
+          마지막으로
+        </button>
+      </div>
+    </div>
+  )
+};
+
+<Example />

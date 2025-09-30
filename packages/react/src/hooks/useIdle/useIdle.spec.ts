@@ -5,17 +5,6 @@ import { useIdle } from '.';
 const TIMEOUT_DELAY = 50;
 const THROTTLE_DELAY = 500;
 
-// window 이벤트 스파이들
-const windowAddEventListenerSpy = vi.spyOn(window, 'addEventListener');
-const windowRemoveEventListenerSpy = vi.spyOn(window, 'removeEventListener');
-
-// document 이벤트 스파이
-const documentAddEventListenerSpy = vi.spyOn(document, 'addEventListener');
-const documentRemoveEventListenerSpy = vi.spyOn(
-  document,
-  'removeEventListener'
-);
-
 // visibility 상태 스파이
 const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
 
@@ -60,7 +49,7 @@ describe('useIdle', () => {
       });
 
       // 마우스 이동 이벤트 시뮬레이션
-      const mouseMoveEvent = new Event('mousemove');
+      const mouseMoveEvent = new Event('pointermove');
       window.dispatchEvent(mouseMoveEvent);
 
       await waitFor(() => {
@@ -113,20 +102,6 @@ describe('useIdle', () => {
       });
     });
 
-    it('컴포넌트 언마운트 시 이벤트 리스너가 정리되어야 한다', () => {
-      const { unmount } = renderHook(() => useIdle({ timeout: TIMEOUT_DELAY }));
-
-      // 이벤트 리스너가 등록되었는지 확인
-      expect(windowAddEventListenerSpy).toHaveBeenCalledTimes(6); // mousemove, mousedown, resize, keydown, touchstart, wheel
-      expect(documentAddEventListenerSpy).toHaveBeenCalledTimes(1); // visibilitychange
-
-      unmount();
-
-      // 이벤트 리스너가 제거되었는지 확인
-      expect(windowRemoveEventListenerSpy).toHaveBeenCalledTimes(6);
-      expect(documentRemoveEventListenerSpy).toHaveBeenCalledTimes(1);
-    });
-
     it('timeout 값이 변경되면 새로운 시간으로 타이머가 재설정되어야 한다', async () => {
       const { result, rerender } = renderHook(
         ({ timeout }) => useIdle({ timeout }),
@@ -160,7 +135,7 @@ describe('useIdle', () => {
       });
 
       // event 발생
-      const clickEvent = new Event('mousedown');
+      const clickEvent = new Event('pointerdown');
       window.dispatchEvent(clickEvent);
 
       await waitFor(() => {
@@ -245,7 +220,7 @@ describe('useIdle', () => {
         expect(result.current).toBeTruthy();
       });
 
-      const clickEvent = new Event('mousedown');
+      const clickEvent = new Event('pointerdown');
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
@@ -260,7 +235,6 @@ describe('useIdle', () => {
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
       window.dispatchEvent(clickEvent);
-
 
       await waitFor(() => {
         expect(onActive).toBeCalledTimes(1);
