@@ -1,5 +1,11 @@
 # @modern-kit/react
 
+## 2.7.1
+
+### Patch Changes
+
+- [#973](https://github.com/modern-agile-team/modern-kit/pull/973) [`3073d3a`](https://github.com/modern-agile-team/modern-kit/commit/3073d3a597519c71929191504e2988f8715cad54) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useHistoryState 개편 - @ssi02014
+
 ## 2.7.0
 
 ### Minor Changes
