@@ -40,21 +40,24 @@ export function useIdle({ timeout, onIdle, onActive }: UseIdleProps): boolean {
     onIdle?.();
   }, timeout);
 
-  const handleActive = useThrottle(() => {
-    if (isIdle) {
-      setIsIdle(false);
-      onActive?.();
-    }
-    resetTimer();
-  }, 500, { trailing: false });
+  const handleActive = useThrottle(
+    () => {
+      if (isIdle) {
+        setIsIdle(false);
+        onActive?.();
+      }
+      resetTimer();
+    },
+    500,
+    { trailing: false }
+  );
 
   const windowElement = typeof window !== 'undefined' ? window : null;
 
-  useEventListener(windowElement, 'mousemove', handleActive);
-  useEventListener(windowElement, 'mousedown', handleActive);
+  useEventListener(windowElement, 'pointermove', handleActive);
+  useEventListener(windowElement, 'pointerdown', handleActive);
   useEventListener(windowElement, 'resize', handleActive);
   useEventListener(windowElement, 'keydown', handleActive);
-  useEventListener(windowElement, 'touchstart', handleActive);
   useEventListener(windowElement, 'wheel', handleActive);
   useVisibilityChange({ onShow: handleActive });
 
