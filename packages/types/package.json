@@ -25,12 +25,14 @@
     "test": "vitest --typecheck",
     "test:run": "vitest run --typecheck",
     "typecheck": "tsc",
-    "build": "rm -rf dist && yarn typecheck --emitDeclarationOnly"
+    "build": "rm -rf dist && yarn typecheck --emitDeclarationOnly",
+    "eslint": "eslint"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
+    "eslint": "^9.37.0",
     "typescript": "^5.1.6",
     "vitest": "^3.2.2"
   },

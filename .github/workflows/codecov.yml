@@ -25,7 +25,7 @@ jobs:
       - name: install 🔨
         run: yarn install --immutable
       - name: build 🔨
-        run: lerna run build
+        run: yarn build:all
       - name: testing 🚀
         run: yarn test
       - uses: codecov/codecov-action@v4

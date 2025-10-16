@@ -21,9 +21,11 @@ jobs:
       - name: install 🔨
         run: yarn install --immutable
       - name: build 🔨
-        run: lerna run build
+        run: yarn build:all
       - name: eslint 🚀
-        run: yarn eslint packages
+        run: yarn eslint
+      - name: typecheck 🚀
+        run: yarn typecheck
       - name: testing 🚀
         run: yarn test
       - name: document build 🔨

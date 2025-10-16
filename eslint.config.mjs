@@ -1,8 +1,6 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tsEslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import hooksPlugin from 'eslint-plugin-react-hooks';
 import eslintImport from 'eslint-plugin-import';
 
 const ignores = [
@@ -18,9 +16,7 @@ const ignores = [
   'docusaurus.config.js',
 ];
 
-const rules = {
-  ...hooksPlugin.configs.recommended.rules,
-  ...pluginReact.configs.recommended.rules,
+export const baseRules = {
   '@typescript-eslint/no-var-requires': 'off',
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -28,9 +24,7 @@ const rules = {
   '@typescript-eslint/no-unnecessary-type-constraint': 'off',
   'import/no-anonymous-default-export': 'off',
   'no-useless-escape': 'off',
-  'react/react-in-jsx-scope': 'off',
   '@typescript-eslint/no-restricted-types': 'warn',
-  'react/prop-types': 'off',
 };
 
 export default [
@@ -42,17 +36,15 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tsEslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
     plugins: {
       import: eslintImport,
-      'react-hooks': hooksPlugin,
     },
   },
   {
     ignores,
   },
   {
-    rules,
+    rules: baseRules,
   },
 ];
