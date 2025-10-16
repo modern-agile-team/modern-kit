@@ -21,7 +21,7 @@ jobs:
       - name: install 🔨
         run: yarn install --immutable
       - name: packages build 🔨
-        run: lerna run build
+        run: yarn build:all
       - name: document build 🔨
         run: yarn build:docs
       - name: Deploy 🚀
