@@ -1,29 +1,29 @@
-import { useDidUpdate } from '@modern-kit/react'
+import { useDidUpdateEffect } from '@modern-kit/react'
 import { useState } from 'react'
 
-# useDidUpdate
+# useDidUpdateEffect
 
-`useDidUpdate`는 최초 마운트 시에는 실행되지 않고, 의존성 배열(`deps`)의 값이 업데이트되었을 때만 effect를 실행시키는 커스텀 훅입니다.
+최초 마운트 시에는 실행되지 않고, 의존성 배열(`deps`)의 값이 업데이트되었을 때만 effect를 실행시키는 커스텀 훅입니다.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDidUpdate/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDidUpdateEffect/index.ts)
 
 ## Interface
 ```ts title="typescript"
-function useDidUpdate(effect: () => void, deps: DependencyList): void
+function useDidUpdateEffect(effect: EffectCallback, deps: DependencyList): void
 ```
 
 ## Usage
 ```tsx title="typescript"
-import { useDidUpdate } from '@modern-kit/react'
+import { useDidUpdateEffect } from '@modern-kit/react'
 
 const Example = () => {
   const [count, setCount] = useState(0);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  useDidUpdate(() => {
+  useDidUpdateEffect(() => {
     setIsUpdated(true);
   }, [count]);
 
@@ -43,7 +43,7 @@ export const Example = () => {
   const [count, setCount] = useState(0);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  useDidUpdate(() => {
+  useDidUpdateEffect(() => {
     setIsUpdated(true);
   }, [count]);
 
