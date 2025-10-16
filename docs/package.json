@@ -17,8 +17,8 @@
     "mkdir:ko": "mkdir ./i18n/ko/docusaurus-plugin-content-docs/current"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.1",
-    "@docusaurus/preset-classic": "^3.8.1",
+    "@docusaurus/core": "^3.9.1",
+    "@docusaurus/preset-classic": "^3.9.1",
     "@mdx-js/react": "^3.1.0",
     "@modern-kit/react": "workspace:*",
     "@modern-kit/utils": "workspace:*",
@@ -28,10 +28,10 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.8.1",
-    "@docusaurus/theme-classic": "^3.8.1",
-    "@docusaurus/types": "^3.8.1",
-    "@tsconfig/docusaurus": "^2.0.3",
+    "@docusaurus/module-type-aliases": "^3.9.1",
+    "@docusaurus/theme-classic": "^3.9.1",
+    "@docusaurus/types": "^3.9.1",
+    "@tsconfig/docusaurus": "^2.0.4",
     "@types/node": "^24.0.3",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
