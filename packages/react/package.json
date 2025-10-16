@@ -39,7 +39,8 @@
     "test": "vitest --typecheck",
     "test:run": "vitest run --coverage --typecheck",
     "build": "rm -rf dist && rollup -c",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "eslint": "eslint"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.0",
@@ -53,6 +54,9 @@
     "@vitest/coverage-istanbul": "^3.0.3",
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.25.0",
+    "eslint": "^9.37.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.0",
     "jsdom": "^27.0.0",
     "postcss": "^8.4.41",
     "react": "^18.2.0",

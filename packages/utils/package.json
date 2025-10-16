@@ -40,7 +40,8 @@
     "test:run": "vitest run --coverage --typecheck",
     "test:bench": "vitest bench",
     "build": "rm -rf dist && rollup -c",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "eslint": "eslint"
   },
   "publishConfig": {
     "access": "public"
@@ -52,6 +53,7 @@
     "@types/lodash-es": "^4.17.12",
     "@vitest/coverage-istanbul": "^3.0.3",
     "esbuild": "^0.25.0",
+    "eslint": "^9.37.0",
     "jsdom": "^27.0.0",
     "lodash-es": "^4.17.21",
     "rollup": "^4.24.0",
