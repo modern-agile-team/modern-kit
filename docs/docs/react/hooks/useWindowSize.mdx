@@ -14,16 +14,18 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Interface
 ```ts title="typescript"
 interface WindowSize {
-  width: number | null;
-  height: number | null;
+  width: number;
+  height: number;
 }
 
-interface useWindowSizeProps {
+interface useWindowSizeOptions {
   debounceWait?: number; // debounce delay time, default: 300
 }
 ```
 ```ts title="typescript"
-function useWindowSize({ debounceWait }: useWindowSizeProps = {}): WindowSize
+function useWindowSize({ debounceWait }: useWindowSizeOptions = {}): WindowSize | null
+
+// SSR 환경에서는 null을 반환합니다.
 ```
 
 ## Usage

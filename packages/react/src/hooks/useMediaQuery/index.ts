@@ -30,10 +30,7 @@ export function useMediaQuery(
     getMatchMedia(mediaQueryString, defaultValue)
   );
 
-  const handleChange = useCallback(
-    (e: MediaQueryListEvent) => setIsMatch(e.matches),
-    []
-  );
+  const handleChange = (e: MediaQueryListEvent) => setIsMatch(e.matches);
 
   useEventListener(
     typeof window !== 'undefined' ? window.matchMedia(mediaQueryString) : null,

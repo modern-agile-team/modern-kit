@@ -129,7 +129,7 @@ export function useStep({
         setCurrentStep(step);
         return;
       }
-      throw new Error('Step not valid');
+      throw new Error('유효하지 않은 step입니다.');
     },
     [currentStep, maxStep]
   );

@@ -37,38 +37,33 @@ export const useDropZone = <T extends HTMLElement>(
   const counter = useRef(0);
   const [isDragOver, setIsDragOver] = useState(false);
 
-  const preservedDropCallback = usePreservedCallback(onDrop);
-
-  const handleDragOver = useCallback((e: DragEvent) => {
+  const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
-  }, []);
+  };
 
-  const handleDragEnter = useCallback((e: DragEvent) => {
+  const handleDragEnter = (e: DragEvent) => {
     e.preventDefault();
 
     counter.current += 1;
     setIsDragOver(true);
-  }, []);
+  };
 
-  const handleDragLeave = useCallback((e: DragEvent) => {
+  const handleDragLeave = (e: DragEvent) => {
     e.preventDefault();
 
     counter.current -= 1;
     if (counter.current === 0) {
       setIsDragOver(false);
     }
-  }, []);
+  };
 
-  const handleDrop = useCallback(
-    (e: DragEvent) => {
-      e.preventDefault();
-      setIsDragOver(false);
+  const handleDrop = (e: DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
 
-      const files = e.dataTransfer?.files;
-      preservedDropCallback(Array.from(files || []));
-    },
-    [preservedDropCallback]
-  );
+    const files = e.dataTransfer?.files;
+    onDrop(Array.from(files || []));
+  };
 
   useEventListener(ref, 'dragover', handleDragOver);
   useEventListener(ref, 'dragenter', handleDragEnter);

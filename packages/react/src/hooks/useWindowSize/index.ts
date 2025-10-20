@@ -4,26 +4,25 @@ import { useEventListener } from '../../hooks/useEventListener';
 import { isNumber, isServer } from '@modern-kit/utils';
 
 interface WindowSize {
-  width: number | null;
-  height: number | null;
+  width: number;
+  height: number;
 }
 
-interface useWindowSizeProps {
+interface useWindowSizeOptions {
   debounceWait?: number;
+  initialSize?: WindowSize;
 }
 
-const initialSize = {
-  width: null,
-  height: null,
-};
+const DEFAULT_SIZE: WindowSize = { width: 0, height: 0 }; // SSR 환경에서 사용할 기본 크기
 
 /**
  * @description 현재 브라우저 창의 너비와 높이 정보를 추적하고, 반환하는 커스텀 훅입니다.
  *
- * 또한, 불 필요한 호출을 방지하기위한 `debounce` 기능을 제공합니다.
+ * 또한, resize 이벤트가 발생할 때 불 필요한 호출을 방지하기위한 `debounce` 기능을 제공합니다.
  *
- * @param {useWindowSizeProps} props - 선택적인 설정 객체입니다.
- * - `debounceWait`: 해당 값이 있으면 디바운싱이 적용되며, 이벤트를 디바운싱 대기 시간(ms)입니다.
+ * @param {useWindowSizeOptions} options - 옵션 객체
+ * @param {number} [options.debounceWait=300] - 이벤트를 디바운싱 대기 시간(ms), 값이 없다면 디바운스가 적용되지 않습니다.
+ * @param {WindowSize} [options.initialSize={width: 0, height: 0}] - SSR 환경에서 사용할 기본 크기
  *
  * @returns {WindowSize} 현재 브라우저 창의 `width`와 `height`를 포함한 객체를 반환합니다.
  *
@@ -34,8 +33,9 @@ const initialSize = {
  * const { width, height } = useWindowSize({ debounceWait: 300 });
  */
 export function useWindowSize({
-  debounceWait = 0,
-}: useWindowSizeProps = {}): WindowSize {
+  debounceWait,
+  initialSize = DEFAULT_SIZE,
+}: useWindowSizeOptions = {}): WindowSize {
   const [windowSize, setWindowSize] = useState<WindowSize>(() => {
     if (isServer()) return initialSize;
 
@@ -45,7 +45,7 @@ export function useWindowSize({
     };
   });
 
-  const debouncedResize = useDebounce(setWindowSize, debounceWait);
+  const debouncedResize = useDebounce(setWindowSize, debounceWait ?? 0);
 
   const handleResize = useCallback(() => {
     const setSize = isNumber(debounceWait) ? debouncedResize : setWindowSize;
@@ -56,11 +56,7 @@ export function useWindowSize({
     });
   }, [debounceWait, debouncedResize]);
 
-  useEventListener(
-    typeof window !== 'undefined' ? window : null,
-    'resize',
-    handleResize
-  );
+  useEventListener(!isServer() ? window : null, 'resize', handleResize);
 
   return windowSize;
 }
