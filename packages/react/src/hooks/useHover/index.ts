@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
-import { noop } from '@modern-kit/utils';
 import { useEventListener } from '../../hooks/useEventListener';
-import { usePreservedCallback } from '../../hooks/usePreservedCallback';
 
 interface UseHoverProps {
   onEnter?: (event: MouseEvent) => void;
@@ -37,25 +35,25 @@ interface UseHoverReturnType<T extends HTMLElement> {
  * return <div ref={ref}> {isHovered ? 'Hovered' : 'Not Hovered'} </div>;
  */
 export function useHover<T extends HTMLElement>({
-  onEnter = noop,
-  onLeave = noop,
+  onEnter,
+  onLeave,
 }: UseHoverProps = {}): UseHoverReturnType<T> {
   const [isHovered, setIsHovered] = useState(false);
 
   const targetRef = useRef<T>(null);
 
-  const preservedEnterAction = usePreservedCallback((event: MouseEvent) => {
+  const enterAction = (event: MouseEvent) => {
     setIsHovered(true);
-    onEnter(event);
-  });
+    onEnter?.(event);
+  };
 
-  const preservedLeaveAction = usePreservedCallback((event: MouseEvent) => {
+  const leaveAction = (event: MouseEvent) => {
     setIsHovered(false);
-    onLeave(event);
-  });
+    onLeave?.(event);
+  };
 
-  useEventListener(targetRef, 'mouseenter', preservedEnterAction);
-  useEventListener(targetRef, 'mouseleave', preservedLeaveAction);
+  useEventListener(targetRef, 'mouseenter', enterAction);
+  useEventListener(targetRef, 'mouseleave', leaveAction);
 
   return { ref: targetRef, isHovered };
 }

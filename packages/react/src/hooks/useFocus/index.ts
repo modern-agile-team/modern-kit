@@ -1,7 +1,5 @@
-import { noop } from '@modern-kit/utils';
-import { RefObject, useCallback, useRef, useState } from 'react';
+import { type RefObject, useCallback, useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/useEventListener';
-import { usePreservedCallback } from '../usePreservedCallback';
 
 interface UseFocusProps {
   onFocus?: (event: FocusEvent) => void;
@@ -43,22 +41,22 @@ interface UseFocusReturnType<T extends HTMLElement> {
  * ```
  */
 export function useFocus<T extends HTMLElement>({
-  onFocus = noop,
-  onBlur = noop,
+  onFocus,
+  onBlur,
 }: UseFocusProps = {}): UseFocusReturnType<T> {
   const [isFocus, setIsFocus] = useState(false);
 
   const ref = useRef<T>(null);
 
-  const preservedFocusAction = usePreservedCallback((event: FocusEvent) => {
+  const focusAction = (event: FocusEvent) => {
     setIsFocus(true);
-    onFocus(event);
-  });
+    onFocus?.(event);
+  };
 
-  const preservedBlurAction = usePreservedCallback((event: FocusEvent) => {
+  const blurAction = (event: FocusEvent) => {
     setIsFocus(false);
-    onBlur(event);
-  });
+    onBlur?.(event);
+  };
 
   const setFocus = useCallback(() => {
     if (!ref.current) return;
@@ -67,8 +65,8 @@ export function useFocus<T extends HTMLElement>({
     setIsFocus(true);
   }, []);
 
-  useEventListener(ref, 'focus', preservedFocusAction);
-  useEventListener(ref, 'blur', preservedBlurAction);
+  useEventListener(ref, 'focus', focusAction);
+  useEventListener(ref, 'blur', blurAction);
 
   return { ref, isFocus, setFocus };
 }

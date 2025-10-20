@@ -168,7 +168,9 @@ describe('useStep', () => {
     const { result } = renderHook(() => useStep({ maxStep: 3 }));
 
     await waitFor(() => {
-      expect(() => result.current.setStep(4)).toThrow('Step not valid');
+      expect(() => result.current.setStep(4)).toThrow(
+        '유효하지 않은 step입니다.'
+      );
     });
   });
 });
