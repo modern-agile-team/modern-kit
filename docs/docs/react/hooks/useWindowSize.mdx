@@ -4,7 +4,11 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useWindowSize
 
-현재 브라우저 창의 너비와 높이 정보를 추적하고, 반환하는 커스텀 훅입니다. 또한, 불 필요한 호출을 방지하기위한 `debounce` 기능을 제공합니다.
+현재 브라우저 창의 너비와 높이 정보를 추적하고, 반환하는 커스텀 훅입니다.
+
+SSR 환경에서 hydration 불일치를 방지하며, resize 이벤트가 발생할 때 불 필요한 호출을 방지하기위한 `debounce` 기능을 제공합니다.
+
+디바운스 대기 시간(debounceWait)을 설정하면 debounce로 동작하며, 설정하지 않으면 즉시 업데이트됩니다.
 
 <br />
 
@@ -20,12 +24,11 @@ interface WindowSize {
 
 interface useWindowSizeOptions {
   debounceWait?: number; // debounce delay time, default: 300
+  initialSize?: WindowSize; // SSR 환경에서 사용할 기본 크기
 }
 ```
 ```ts title="typescript"
-function useWindowSize({ debounceWait }: useWindowSizeOptions = {}): WindowSize | null
-
-// SSR 환경에서는 null을 반환합니다.
+function useWindowSize({ debounceWait, initialSize }: useWindowSizeOptions): WindowSize
 ```
 
 ## Usage
@@ -73,9 +76,7 @@ export const DefaultExample = () => {
   );
 };
 
-<BrowserOnly>
-  {() => <DefaultExample />}
-</BrowserOnly>
+<DefaultExample />
 
 <br />
 
@@ -123,8 +124,6 @@ export const DebounceExample = () => {
   );
 };
 
-<BrowserOnly>
-  {() => <DebounceExample />}
-</BrowserOnly>
+<DebounceExample />
 
 <br />

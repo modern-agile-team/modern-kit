@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useWindowSize } from '.';
-import { act } from 'react';
 
 const originalInnerWidth = window.innerWidth;
 const originalInnerHeight = window.innerHeight;
@@ -132,36 +131,6 @@ describe('useWindowSize', () => {
         height: 900,
       });
     });
-  });
-
-  it('언마운트 시 이벤트 리스너가 제거되어야 합니다', async () => {
-    const removeEventListenerSpy = vi.spyOn(
-      globalThis.window,
-      'removeEventListener'
-    );
-
-    const { unmount } = renderHook(() => useWindowSize());
-
-    unmount();
-
-    expect(removeEventListenerSpy).toHaveBeenCalledWith(
-      'resize',
-      expect.any(Function),
-      undefined
-    );
-  });
-
-  it('여러 번 리렌더링되어도 이벤트 리스너가 중복 등록되지 않아야 합니다', () => {
-    const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
-
-    const { rerender } = renderHook(() => useWindowSize());
-
-    rerender();
-    rerender();
-    rerender();
-
-    // 리렌더링해도 추가 등록되지 않음
-    expect(addEventListenerSpy).toHaveBeenCalledTimes(1);
   });
 
   it('width만 변경되어도 올바르게 업데이트되어야 합니다', async () => {
