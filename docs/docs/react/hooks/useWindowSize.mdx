@@ -20,13 +20,9 @@ interface WindowSize {
   width: number;
   height: number;
 }
-
-interface useWindowSizeOptions {
-  debounceWait?: number; // debounce delay time, default: 300
-}
 ```
 ```ts title="typescript"
-function useWindowSize({ debounceWait }: useWindowSizeOptions = {}): WindowSize
+function useWindowSize(debounceWait?: number): WindowSize
 ```
 
 ## Usage
@@ -83,7 +79,7 @@ export const DefaultExample = () => {
 import { useWindowSize } from '@modern-kit/react';
 
 const DebounceExample = () => {
-  const windowSize = useWindowSize({ debounceWait: 300 });
+  const windowSize = useWindowSize(300);
   const boxStyle = useMemo(() => {
     return {
       width: '100%', 
@@ -104,7 +100,7 @@ const DebounceExample = () => {
 ```
 
 export const DebounceExample = () => {
-  const windowSize = useWindowSize({ debounceWait: 300 });
+  const windowSize = useWindowSize(300);
   const boxStyle = useMemo(() => {
     return {
       width: '100%', 

@@ -6,11 +6,6 @@ interface WindowSize {
   height: number;
 }
 
-interface useWindowSizeOptions {
-  debounceWait?: number;
-  initialSize?: WindowSize;
-}
-
 const DEFAULT_SIZE: WindowSize = { width: 0, height: 0 }; // SSR 환경에서 사용할 기본 크기
 
 const subscribe = (callback: () => void, wait?: number) => {
@@ -31,8 +26,8 @@ const getSnapshot = () => {
   });
 };
 
-const getServerSnapshot = (initialSize: WindowSize) => {
-  return JSON.stringify(initialSize);
+const getServerSnapshot = () => {
+  return JSON.stringify(DEFAULT_SIZE);
 };
 
 /**
@@ -52,16 +47,13 @@ const getServerSnapshot = (initialSize: WindowSize) => {
  * const { width, height } = useWindowSize();
  *
  * @example
- * const { width, height } = useWindowSize({ debounceWait: 300 });
+ * const { width, height } = useWindowSize(300);
  */
-export function useWindowSize({
-  debounceWait,
-  initialSize = DEFAULT_SIZE,
-}: useWindowSizeOptions = {}): WindowSize {
+export function useWindowSize(debounceWait?: number): WindowSize {
   const windowSize = useSyncExternalStore(
     (callback) => subscribe(callback, debounceWait),
     getSnapshot,
-    () => getServerSnapshot(initialSize)
+    getServerSnapshot
   );
 
   return JSON.parse(windowSize);
