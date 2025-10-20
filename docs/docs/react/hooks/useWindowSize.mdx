@@ -23,11 +23,10 @@ interface WindowSize {
 
 interface useWindowSizeOptions {
   debounceWait?: number; // debounce delay time, default: 300
-  initialSize?: WindowSize; // SSR 환경에서 사용할 기본 크기
 }
 ```
 ```ts title="typescript"
-function useWindowSize({ debounceWait, initialSize }: useWindowSizeOptions): WindowSize
+function useWindowSize({ debounceWait }: useWindowSizeOptions = {}): WindowSize
 ```
 
 ## Usage
@@ -124,5 +123,3 @@ export const DebounceExample = () => {
 };
 
 <DebounceExample />
-
-<br />
