@@ -1,6 +1,5 @@
 import { noop } from '@modern-kit/utils';
 import { useEventListener } from '../useEventListener';
-import { usePreservedCallback } from '../usePreservedCallback';
 
 type VisibilityChangeCallbackAction = (
   event: Event,

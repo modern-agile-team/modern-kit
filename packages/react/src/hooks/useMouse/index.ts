@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/useEventListener';
 
 interface CursorPosition {

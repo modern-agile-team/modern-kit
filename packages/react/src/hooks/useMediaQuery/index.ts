@@ -1,6 +1,6 @@
 import { isClient } from '@modern-kit/utils';
 import { useEventListener } from '../../hooks/useEventListener';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 const getMatchMedia = (mediaQueryString: string, defaultValue?: boolean) => {
   if (isClient()) {

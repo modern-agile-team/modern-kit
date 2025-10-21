@@ -1,6 +1,5 @@
 import { useEventListener } from '../useEventListener';
-import { usePreservedCallback } from '../usePreservedCallback';
-import { RefObject, useCallback, useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 
 /**
  * @description `드래그 앤 드롭 이벤트`를 처리하여 `파일`을 수신할 수 있는 영역을 생성하는 커스텀 훅입니다.
