@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useWindowSize } from '.';
+import { renderToString } from 'react-dom/server';
 
 const originalInnerWidth = window.innerWidth;
 const originalInnerHeight = window.innerHeight;
@@ -62,9 +63,7 @@ describe('useWindowSize', () => {
 
   it('debounceWait이 설정되면 디바운스된 업데이트가 적용되어야 합니다', async () => {
     const DEBOUNCE_WAIT = 300;
-    const { result } = renderHook(() =>
-      useWindowSize({ debounceWait: DEBOUNCE_WAIT })
-    );
+    const { result } = renderHook(() => useWindowSize(DEBOUNCE_WAIT));
 
     const initialSize = result.current;
 
@@ -86,9 +85,7 @@ describe('useWindowSize', () => {
 
   it('debounceWait 시간 내에 여러 번 resize 이벤트가 발생하면 마지막 값만 적용되어야 합니다', async () => {
     const DEBOUNCE_WAIT = 300;
-    const { result } = renderHook(() =>
-      useWindowSize({ debounceWait: DEBOUNCE_WAIT })
-    );
+    const { result } = renderHook(() => useWindowSize(DEBOUNCE_WAIT));
 
     setMockWindowSize(800, 600);
 
@@ -119,7 +116,7 @@ describe('useWindowSize', () => {
   });
 
   it('debounceWait을 0으로 설정하면 즉시 업데이트되어야 합니다', async () => {
-    const { result } = renderHook(() => useWindowSize({ debounceWait: 0 }));
+    const { result } = renderHook(() => useWindowSize(0));
 
     setMockWindowSize(1440, 900);
 
@@ -159,5 +156,16 @@ describe('useWindowSize', () => {
       expect(result.current.width).toBe(initialWidth);
       expect(result.current.height).toBe(720);
     });
+  });
+
+  it('서버 사이드 렌더링 중에는 초기값(width: 0, height: 0)이 렌더링되어야 합니다', async () => {
+    const TestComponent = () => {
+      const { width, height } = useWindowSize();
+      return <span>{`${width}/${height}`}</span>;
+    };
+
+    const html = renderToString(<TestComponent />); // server side rendering
+
+    expect(html).toContain('0/0');
   });
 });
