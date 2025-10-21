@@ -117,4 +117,21 @@ describe('useEventListener', () => {
       options
     );
   });
+
+  it('언마운트 시 이벤트 리스너가 제거되어야 합니다', () => {
+    const eventName = 'click';
+    const handler = vi.fn();
+
+    const { unmount } = renderHook(() => {
+      useEventListener(window, eventName, handler);
+    });
+
+    unmount();
+
+    expect(windowRemoveEventListenerSpy).toHaveBeenCalledWith(
+      eventName,
+      expect.any(Function),
+      undefined
+    );
+  });
 });

@@ -1,6 +1,5 @@
 import { noop } from '@modern-kit/utils';
 import { useEventListener } from '../useEventListener';
-import { usePreservedCallback } from '../usePreservedCallback';
 
 type VisibilityChangeCallbackAction = (
   event: Event,
@@ -36,12 +35,12 @@ export function useVisibilityChange({
   onHide = noop,
   enabled = true,
 }: UseVisibilityChangeProps = {}): void {
-  const handleVisibilityChange = usePreservedCallback((event: Event) => {
+  const handleVisibilityChange = (event: Event) => {
     const isVisible = document.visibilityState === 'visible';
     const callbackAction = isVisible ? onShow : onHide;
 
     callbackAction(event, document.visibilityState);
-  });
+  };
 
   useEventListener(
     typeof document !== 'undefined' && enabled ? document : null,

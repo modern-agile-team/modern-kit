@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEventListener } from '../../hooks/useEventListener';
 
 interface CursorPosition {
@@ -33,7 +33,7 @@ export function useMouse<T extends HTMLElement>() {
     initialCursorPosition
   );
 
-  const handleMouseMove = useCallback((event: MouseEvent) => {
+  const handleMouseMove = (event: MouseEvent) => {
     const { screenX, screenY, clientX, clientY, pageX, pageY } = event;
 
     let elementRelativeX = null;
@@ -62,7 +62,7 @@ export function useMouse<T extends HTMLElement>() {
       elementPositionX,
       elementPositionY,
     });
-  }, []);
+  };
 
   useEventListener(
     typeof document !== 'undefined' ? document : null,

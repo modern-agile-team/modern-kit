@@ -1,6 +1,6 @@
 import { isClient } from '@modern-kit/utils';
 import { useEventListener } from '../../hooks/useEventListener';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 const getMatchMedia = (mediaQueryString: string, defaultValue?: boolean) => {
   if (isClient()) {
@@ -30,10 +30,7 @@ export function useMediaQuery(
     getMatchMedia(mediaQueryString, defaultValue)
   );
 
-  const handleChange = useCallback(
-    (e: MediaQueryListEvent) => setIsMatch(e.matches),
-    []
-  );
+  const handleChange = (e: MediaQueryListEvent) => setIsMatch(e.matches);
 
   useEventListener(
     typeof window !== 'undefined' ? window.matchMedia(mediaQueryString) : null,
