@@ -52,7 +52,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:24.3.0"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.38.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.2.0"],\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
           ["globals", "npm:16.4.0"],\
           ["lerna", "npm:8.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
@@ -17232,17 +17232,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["eslint-plugin-unused-imports", [\
-      ["npm:4.2.0", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-unused-imports-npm-4.2.0-5c733da2d3-b629332367.zip/node_modules/eslint-plugin-unused-imports/",\
+      ["npm:4.3.0", {\
+        "packageLocation": "./.yarn/cache/eslint-plugin-unused-imports-npm-4.3.0-ce364f8c79-aa4d8ebd8b.zip/node_modules/eslint-plugin-unused-imports/",\
         "packageDependencies": [\
-          ["eslint-plugin-unused-imports", "npm:4.2.0"]\
+          ["eslint-plugin-unused-imports", "npm:4.3.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.2.0", {\
-        "packageLocation": "./.yarn/__virtual__/eslint-plugin-unused-imports-virtual-8a7f1bfc4a/0/cache/eslint-plugin-unused-imports-npm-4.2.0-5c733da2d3-b629332367.zip/node_modules/eslint-plugin-unused-imports/",\
+      ["virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-plugin-unused-imports-virtual-0483baafbb/0/cache/eslint-plugin-unused-imports-npm-4.3.0-ce364f8c79-aa4d8ebd8b.zip/node_modules/eslint-plugin-unused-imports/",\
         "packageDependencies": [\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.2.0"],\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
           ["@types/eslint", null],\
           ["@types/typescript-eslint__eslint-plugin", null],\
           ["@typescript-eslint/eslint-plugin", null],\
@@ -23142,7 +23142,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:24.3.0"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.38.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.2.0"],\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
           ["globals", "npm:16.4.0"],\
           ["lerna", "npm:8.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
