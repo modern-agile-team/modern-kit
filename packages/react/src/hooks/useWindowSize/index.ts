@@ -37,19 +37,17 @@ const getServerSnapshot = () => {
  *
  * 디바운스 대기 시간(debounceWait)을 설정하면 debounce로 동작하며, 설정하지 않으면 즉시 업데이트됩니다.
  *
- * @param {useWindowSizeOptions} options - 옵션 객체
- * @param {number} options.debounceWait - 이벤트를 디바운싱 대기 시간(ms), 값이 없다면 디바운스가 적용되지 않습니다.
- * @param {WindowSize} [options.initialSize={ width: 0, height: 0 }] - SSR 환경에서 사용할 기본 크기
- *
+ * @param {number} debounceWait - 이벤트를 디바운싱 대기 시간(ms), 값이 없다면 디바운스가 적용되지 않습니다.
  * @returns {WindowSize} 현재 브라우저 창의 `width`와 `height`를 포함한 객체를 반환합니다.
  *
- * @example
- * const { width, height } = useWindowSize();
+ * @example const { width, height } = useWindowSize();
  *
- * @example
- * const { width, height } = useWindowSize(300);
+ * @example const { width, height } = useWindowSize(300);
  */
-export function useWindowSize(debounceWait?: number): WindowSize {
+export function useWindowSize(debounceWait?: number): {
+  width: number;
+  height: number;
+} {
   const windowSize = useSyncExternalStore(
     (callback) => subscribe(callback, debounceWait),
     getSnapshot,

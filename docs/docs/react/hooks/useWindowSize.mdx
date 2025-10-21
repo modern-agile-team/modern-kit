@@ -16,13 +16,10 @@ SSR 환경에서 hydration 불일치를 방지하며, resize 이벤트가 발생
 
 ## Interface
 ```ts title="typescript"
-interface WindowSize {
+function useWindowSize(debounceWait?: number): {
   width: number;
   height: number;
 }
-```
-```ts title="typescript"
-function useWindowSize(debounceWait?: number): WindowSize
 ```
 
 ## Usage
