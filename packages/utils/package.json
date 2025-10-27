@@ -60,7 +60,7 @@
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-esbuild": "^6.1.1",
     "typescript": "^5.1.6",
-    "vitest": "^3.2.2"
+    "vitest": "^4.0.4"
   },
   "engines": {
     "node": ">=18"

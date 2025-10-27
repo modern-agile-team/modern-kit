@@ -34,7 +34,7 @@
   "devDependencies": {
     "eslint": "^9.37.0",
     "typescript": "^5.1.6",
-    "vitest": "^3.2.2"
+    "vitest": "^4.0.4"
   },
   "engines": {
     "node": ">=18"
