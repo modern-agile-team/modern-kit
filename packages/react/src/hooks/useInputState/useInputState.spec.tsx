@@ -1,6 +1,5 @@
-import { describe } from 'node:test';
 import { useInputState } from '.';
-import { expect, it } from 'vitest';
+import { expect, it, describe } from 'vitest';
 import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 
