@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { useRef, useState } from 'react';
 import { useMergeRefs } from '.';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 
 const TestComponent = () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { delay } from '@modern-kit/utils';
 import { EventExtender } from '.';
 
