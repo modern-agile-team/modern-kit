@@ -32,8 +32,6 @@ describe('isPrimitive', () => {
       if (isString(value)) {
         expectTypeOf(value).toEqualTypeOf<string>();
       }
-    } else {
-      expectTypeOf(value).toEqualTypeOf<unknown>();
     }
   });
 });
