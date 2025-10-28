@@ -1,11 +1,14 @@
+import { createRequire } from 'node:module';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import pkg from './package.json' assert { type: 'json' };
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import { dts } from 'rollup-plugin-dts';
+
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 import { getAllEntries, getFormatEntryFileNames } from './build.utils.mjs';
 

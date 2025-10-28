@@ -16,7 +16,7 @@ Issue를 생성해서 제안하는 것 외에도 `@modern-kit`을 `fork`하고 �
 ### 작업 전에 아래 사항들을 확인해주세요. 🙏
 - 새로운 기능을 추가하는 경우 이슈를 열어 미리 논의해 주세요.
 - 패키지 매니저 `yarn(berry)`을 사용해주세요.
-- 개발에 필요한 Node version은 `v20`입니다. `nvm install`, `nvm use` 명령어를 통해 쉽게 노드 버전을 맞출 수 있습니다.
+- 개발에 필요한 Node version은 `v24(LTS)`입니다. `nvm install`, `nvm use` 명령어를 통해 쉽게 노드 버전을 맞출 수 있습니다.
   - `nvm`이 설치되어 있지 않다면 설치해주세요.
 
 ```shell
