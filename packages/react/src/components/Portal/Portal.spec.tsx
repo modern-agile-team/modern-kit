@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { useRef, useState } from 'react';
 import { Portal } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
@@ -82,33 +82,25 @@ describe('Default Portal Component', () => {
 
     const getChildElement = () => documentPortal?.querySelector('.child');
 
-    await waitFor(() => {
-      user.click(plusButton);
+    await user.click(plusButton);
 
-      expect(getChildElement()).toBeInTheDocument();
-      expect(getChildElement()).toHaveTextContent('1');
-    });
+    expect(getChildElement()).toBeInTheDocument();
+    expect(getChildElement()).toHaveTextContent('1');
 
-    await waitFor(() => {
-      user.click(toggleButton);
-      user.click(plusButton);
+    await user.click(toggleButton);
+    await user.click(plusButton);
 
-      expect(getChildElement()).not.toBeInTheDocument();
-    });
+    expect(getChildElement()).not.toBeInTheDocument();
 
-    await waitFor(() => {
-      user.click(toggleButton);
-      user.click(plusButton);
+    await user.click(toggleButton);
+    await user.click(plusButton);
 
-      expect(getChildElement()).toBeInTheDocument();
-      expect(getChildElement()).toHaveTextContent('3');
-    });
+    expect(getChildElement()).toBeInTheDocument();
+    expect(getChildElement()).toHaveTextContent('3');
 
-    await waitFor(() => {
-      user.click(toggleButton);
+    await user.click(toggleButton);
 
-      expect(getChildElement()).not.toBeInTheDocument();
-    });
+    expect(getChildElement()).not.toBeInTheDocument();
   });
 
   it('언마운트 시 portalElement가 제거되어야 합니다', () => {

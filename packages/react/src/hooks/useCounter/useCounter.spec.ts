@@ -15,9 +15,7 @@ describe('useCounter', () => {
       result.current.increment();
     });
 
-    await waitFor(() => {
-      expect(result.current.counter).toBe(1);
-    });
+    expect(result.current.counter).toBe(1);
   });
 
   it('카운터 값이 감소해야 합니다.', async () => {
@@ -27,9 +25,7 @@ describe('useCounter', () => {
       result.current.decrement();
     });
 
-    await waitFor(() => {
-      expect(result.current.counter).toBe(-1);
-    });
+    expect(result.current.counter).toBe(-1);
   });
 
   it('카운터 값이 초기값으로 리셋되어야 합니다.', async () => {
@@ -40,8 +36,6 @@ describe('useCounter', () => {
       result.current.reset();
     });
 
-    await waitFor(() => {
-      expect(result.current.counter).toBe(5);
-    });
+    expect(result.current.counter).toBe(5);
   });
 });

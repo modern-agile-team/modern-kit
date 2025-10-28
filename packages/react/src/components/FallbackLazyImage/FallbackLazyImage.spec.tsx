@@ -69,9 +69,7 @@ describe('FallbackLazyImage', () => {
       img1.dispatchEvent(new Event('load'));
     });
 
-    await waitFor(() => {
-      expect(screen.queryByText('Fallback')).not.toBeInTheDocument();
-      expect(onLoadMockFn).toBeCalled();
-    });
+    expect(screen.queryByText('Fallback')).not.toBeInTheDocument();
+    expect(onLoadMockFn).toBeCalled();
   });
 });

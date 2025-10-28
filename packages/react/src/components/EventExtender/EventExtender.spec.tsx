@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { delay } from '@modern-kit/utils';
 import { EventExtender } from '.';
 
@@ -67,14 +67,14 @@ describe('EventExtender', () => {
       const button = screen.getByRole('button');
       await user.click(button);
 
-      vi.advanceTimersByTime(DELAY);
-      await waitFor(() => expect(array).toEqual(['before']));
+      await vi.advanceTimersByTimeAsync(DELAY);
+      expect(array).toEqual(['before']);
 
-      vi.advanceTimersByTime(DELAY);
-      await waitFor(() => expect(array).toEqual(['before', 'origin']));
+      await vi.advanceTimersByTimeAsync(DELAY);
+      expect(array).toEqual(['before', 'origin']);
 
-      vi.advanceTimersByTime(DELAY);
-      await waitFor(() => expect(array).toEqual(['before', 'origin', 'after']));
+      await vi.advanceTimersByTimeAsync(DELAY);
+      expect(array).toEqual(['before', 'origin', 'after']);
     });
 
     it('afterEvent가 정의되지 않았을 경우에도 정상적으로 동작해야 합니다.', async () => {

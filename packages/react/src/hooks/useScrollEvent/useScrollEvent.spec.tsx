@@ -157,14 +157,12 @@ describe('useScrollEvent', () => {
       fireEvent.scroll(container);
     });
 
-    await waitFor(() => {
-      expect(screen.getByRole('scroll-position')).toHaveTextContent(
-        'x: 50, y: 100'
-      );
-      expect(screen.getByRole('scroll-dimensions')).toHaveTextContent(
-        'w: 200, h: 1000'
-      );
-    });
+    expect(screen.getByRole('scroll-position')).toHaveTextContent(
+      'x: 50, y: 100'
+    );
+    expect(screen.getByRole('scroll-dimensions')).toHaveTextContent(
+      'w: 200, h: 1000'
+    );
   });
 
   describe('throttle 옵션', () => {

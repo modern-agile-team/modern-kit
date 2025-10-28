@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { Delay } from '.';
 
@@ -28,11 +28,9 @@ describe('Delay', () => {
 
     expect(screen.getByText('fallback')).toBeInTheDocument();
 
-    vi.advanceTimersByTime(DELAY_TIME);
+    await vi.advanceTimersByTimeAsync(DELAY_TIME);
 
-    await waitFor(() => {
-      expect(screen.getByText('children')).toBeInTheDocument();
-    });
+    expect(screen.getByText('children')).toBeInTheDocument();
   });
 
   it('delay가 0이면 자식 컴포넌트가 바로 렌더링되어야 합니다.', () => {

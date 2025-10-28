@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { useComputedStyleObserver } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
 
@@ -38,8 +38,6 @@ describe('useComputedStyleObserver', () => {
 
     await user.click(screen.getByRole('button', { name: 'setProperty 변경' }));
 
-    await waitFor(() => {
-      expect(screen.getByRole('paragraph')).toHaveTextContent('200px');
-    });
+    expect(screen.getByRole('paragraph')).toHaveTextContent('200px');
   });
 });

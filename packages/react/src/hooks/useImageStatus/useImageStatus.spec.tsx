@@ -30,9 +30,8 @@ describe('useImageStatus', () => {
     await waitFor(() => {
       result.current.ref(img);
       img.dispatchEvent(loadEvent);
-
-      expect(result.current.imageStatus).toBe('complete');
     });
+    expect(result.current.imageStatus).toBe('complete');
   });
 
   it('이미지 로딩이 실패하면 상태가 "error"로 변경되어야 합니다', async () => {
@@ -45,9 +44,8 @@ describe('useImageStatus', () => {
     await waitFor(() => {
       result.current.ref(img);
       img.dispatchEvent(errorEvent);
-
-      expect(result.current.imageStatus).toBe('error');
     });
+    expect(result.current.imageStatus).toBe('error');
   });
 
   it('ref에 null 값이 전달되면 상태가 변경되지 않아야 합니다', async () => {
@@ -55,8 +53,7 @@ describe('useImageStatus', () => {
 
     await waitFor(() => {
       result.current.ref(null as any);
-
-      expect(result.current.imageStatus).toBe('pending');
     });
+    expect(result.current.imageStatus).toBe('pending');
   });
 });
