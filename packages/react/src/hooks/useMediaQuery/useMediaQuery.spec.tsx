@@ -1,20 +1,26 @@
-import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 
 import { useMediaQuery } from '.';
 import { renderHook } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 
-let windowMatchMediaSpy: MockInstance;
+const originalMatchMedia = window.matchMedia;
 
 beforeEach(() => {
-  windowMatchMediaSpy = vi.spyOn(window, 'matchMedia');
+  Object.defineProperty(window, 'matchMedia', {
+    value: vi.fn().mockImplementation((query) => {
+      return {
+        matches: query === '(min-width: 600px)',
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      };
+    }),
+  });
+});
 
-  windowMatchMediaSpy.mockImplementation((query) => {
-    return {
-      matches: query === '(min-width: 600px)',
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-    };
+afterEach(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    value: originalMatchMedia,
   });
 });
 

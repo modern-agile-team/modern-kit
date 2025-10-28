@@ -1,19 +1,25 @@
-import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useColorScheme } from '.';
 
 const TEST_KEY = 'test-key';
-let windowMatchMediaSpy: MockInstance;
+const originalMatchMedia = window.matchMedia;
 
 beforeEach(() => {
-  windowMatchMediaSpy = vi.spyOn(window, 'matchMedia');
+  Object.defineProperty(window, 'matchMedia', {
+    value: vi.fn().mockImplementation((query) => {
+      return {
+        matches: query === '(prefers-color-scheme: dark)',
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      };
+    }),
+  });
+});
 
-  windowMatchMediaSpy.mockImplementation((query) => {
-    return {
-      matches: query === '(prefers-color-scheme: dark)',
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-    };
+afterEach(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    value: originalMatchMedia,
   });
 });
 
