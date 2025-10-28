@@ -1,21 +1,16 @@
 import { useSyncExternalStore } from 'react';
 import { isNumber, debounce } from '@modern-kit/utils';
 
-interface WindowSize {
-  width: number;
-  height: number;
-}
+const DEFAULT_SIZE = { width: 0, height: 0 }; // SSR 환경에서 사용할 기본 크기
 
-const DEFAULT_SIZE: WindowSize = { width: 0, height: 0 }; // SSR 환경에서 사용할 기본 크기
+const subscribe = (onStoreChange: () => void, wait?: number) => {
+  const debouncedCallback = debounce(onStoreChange, wait ?? 0);
+  const handleStoreChange = isNumber(wait) ? debouncedCallback : onStoreChange;
 
-const subscribe = (callback: () => void, wait?: number) => {
-  const debouncedCallback = debounce(callback, wait ?? 0);
-  const callbackToUse = isNumber(wait) ? debouncedCallback : callback;
-
-  window.addEventListener('resize', callbackToUse);
+  window.addEventListener('resize', handleStoreChange);
 
   return () => {
-    window.removeEventListener('resize', callbackToUse);
+    window.removeEventListener('resize', handleStoreChange);
   };
 };
 
@@ -49,7 +44,7 @@ export function useWindowSize(debounceWait?: number): {
   height: number;
 } {
   const windowSize = useSyncExternalStore(
-    (callback) => subscribe(callback, debounceWait),
+    (onStoreChange) => subscribe(onStoreChange, debounceWait),
     getSnapshot,
     getServerSnapshot
   );

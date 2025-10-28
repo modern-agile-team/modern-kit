@@ -1,6 +1,5 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi, beforeEach } from 'vitest';
 import { getUniqId } from '.';
-import { beforeEach } from 'node:test';
 
 beforeEach(() => {
   vi.useFakeTimers();
