@@ -1,10 +1,17 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { screen, waitFor } from '@testing-library/react';
 import { useDebouncedInputValue } from '.';
 import { renderSetup } from '../../_internal/test/renderSetup';
-import { delay } from '@modern-kit/utils';
 
 const DELAY = 100;
+
+beforeEach(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 const TestComponent = ({ initialValue }: { initialValue?: string }) => {
   const { value, debouncedValue, onChange, onReset, onClear } =
@@ -33,14 +40,14 @@ describe('useDebouncedInputValue', () => {
 
     await user.type(input, 'test');
 
-    await delay(DELAY / 2);
+    await vi.advanceTimersByTimeAsync(DELAY / 2);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
       expect(debouncedValue).toHaveTextContent('');
     });
 
-    await delay(DELAY / 2);
+    await vi.advanceTimersByTimeAsync(DELAY / 2);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
@@ -59,14 +66,14 @@ describe('useDebouncedInputValue', () => {
     expect(debouncedValue).toHaveTextContent('initial');
 
     await user.type(input, 'test');
-    await delay(DELAY / 2);
+    await vi.advanceTimersByTimeAsync(DELAY / 2);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
       expect(debouncedValue).toHaveTextContent('initial');
     });
 
-    await delay(DELAY / 2);
+    await vi.advanceTimersByTimeAsync(DELAY / 2);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
@@ -86,7 +93,7 @@ describe('useDebouncedInputValue', () => {
     expect(debouncedValue).toHaveTextContent('initial');
 
     await user.type(input, 'test');
-    await delay(DELAY);
+    await vi.advanceTimersByTimeAsync(DELAY);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');
@@ -113,7 +120,7 @@ describe('useDebouncedInputValue', () => {
     expect(debouncedValue).toHaveTextContent('initial');
 
     await user.type(input, 'test');
-    await delay(DELAY);
+    vi.advanceTimersByTime(DELAY);
 
     await waitFor(() => {
       expect(defaultValue).toHaveTextContent('test');

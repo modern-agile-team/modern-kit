@@ -37,16 +37,15 @@ describe('useFileReader', () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [getSuccessFileContent(testFile1)];
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: testFile1,
-          readType: 'readAsText',
-        });
-
-        expect(result.current.isLoading).toBeTruthy();
-        expect(fileContents).toEqual(expectedSuccessFileContents);
+      const fileContents = await result.current.readFile({
+        file: testFile1,
+        readType: 'readAsText',
       });
 
+      expect(result.current.isLoading).toBeTruthy();
+      expect(fileContents).toEqual(expectedSuccessFileContents);
+
+      // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
         expect(result.current.isLoading).toBeFalsy();
         expect(result.current.fileContents).toEqual(
@@ -62,16 +61,15 @@ describe('useFileReader', () => {
         getSuccessFileContent(testFile2),
       ];
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: testFileList,
-          readType: 'readAsText',
-        });
-
-        expect(result.current.isLoading).toBeTruthy();
-        expect(fileContents).toEqual(expectedSuccessFileContents);
+      const fileContents = await result.current.readFile({
+        file: testFileList,
+        readType: 'readAsText',
       });
 
+      expect(result.current.isLoading).toBeTruthy();
+      expect(fileContents).toEqual(expectedSuccessFileContents);
+
+      // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
         expect(result.current.isLoading).toBeFalsy();
         expect(result.current.fileContents).toEqual(
@@ -84,16 +82,15 @@ describe('useFileReader', () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [getSuccessFileContent(testFile2)];
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: testFileList,
-          readType: 'readAsText',
-          accepts: ['text/csv'],
-        });
-        expect(result.current.isLoading).toBeTruthy();
-        expect(fileContents).toEqual(expectedSuccessFileContents);
+      const fileContents = await result.current.readFile({
+        file: testFileList,
+        readType: 'readAsText',
+        accepts: ['text/csv'],
       });
+      expect(result.current.isLoading).toBeTruthy();
+      expect(fileContents).toEqual(expectedSuccessFileContents);
 
+      // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
         expect(result.current.isLoading).toBeFalsy();
         expect(result.current.fileContents).toEqual(
@@ -131,15 +128,13 @@ describe('useFileReader', () => {
 
       vi.stubGlobal('FileReader', MockFileReaderThrowError);
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: testFile1,
-          readType: 'readAsText',
-        });
-
-        expect(fileContents).toEqual(failedExpectedFileContents);
+      const fileContents = await result.current.readFile({
+        file: testFile1,
+        readType: 'readAsText',
       });
+      expect(fileContents).toEqual(failedExpectedFileContents);
 
+      // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
         expect(result.current.fileContents).toEqual(failedExpectedFileContents);
       });
@@ -149,14 +144,13 @@ describe('useFileReader', () => {
     it('"readFile"의 인자가 "File" 또는 "FileList" 타입이 아닌 경우 "fileContents"에 빈 배열을 반환해야 합니다.', async () => {
       const { result } = renderHook(() => useFileReader());
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: errorTestFile,
-          readType: 'readAsText',
-        });
-        expect(fileContents).toEqual([]);
+      const fileContents = await result.current.readFile({
+        file: errorTestFile,
+        readType: 'readAsText',
       });
+      expect(fileContents).toEqual([]);
 
+      // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
         expect(result.current.fileContents).toEqual([]);
       });

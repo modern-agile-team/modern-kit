@@ -35,9 +35,7 @@ describe('useMergeRefs', () => {
 
     expect(screen.getByRole('paragraph')).toHaveTextContent('false');
 
-    await waitFor(() => {
-      user.click(button);
-      expect(screen.getByRole('paragraph')).toHaveTextContent('true');
-    });
+    await user.click(button);
+    expect(screen.getByRole('paragraph')).toHaveTextContent('true');
   });
 });

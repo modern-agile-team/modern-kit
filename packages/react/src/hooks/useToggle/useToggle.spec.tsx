@@ -16,14 +16,11 @@ describe('useToggle', () => {
 
     expect(result.current[0]).toBeFalsy();
 
-    await waitFor(() => {
-      toggle();
-      expect(result.current[0]).toBeTruthy();
-    });
+    await waitFor(() => toggle());
 
-    await waitFor(() => {
-      toggle();
-      expect(result.current[0]).toBeFalsy();
-    });
+    expect(result.current[0]).toBeTruthy();
+
+    await waitFor(() => toggle());
+    expect(result.current[0]).toBeFalsy();
   });
 });

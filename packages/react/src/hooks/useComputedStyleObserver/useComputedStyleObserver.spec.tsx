@@ -38,8 +38,6 @@ describe('useComputedStyleObserver', () => {
 
     await user.click(screen.getByRole('button', { name: 'setProperty 변경' }));
 
-    await waitFor(() => {
-      expect(screen.getByRole('paragraph')).toHaveTextContent('200px');
-    });
+    expect(screen.getByRole('paragraph')).toHaveTextContent('200px');
   });
 });
