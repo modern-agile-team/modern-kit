@@ -1,0 +1,118 @@
+import { useDeepCompareEffect } from '@modern-kit/react'
+import { useState, useEffect } from 'react'
+
+# useDeepCompareEffect
+
+의존성 배열을 `깊은 비교(deep comparison)`를 통해 판단하여 effect를 실행하는 커스텀 훅입니다.
+
+React의 기본 `useEffect`는 의존성 배열을 얕은 비교(`shallow comparison`)로 검사하기 때문에 객체나 배열의 참조가 변경되면 내용이 같아도 effect가 재실행됩니다. 
+
+`useDeepCompareEffect`는 깊은 비교를 수행하여 실제 값이 변경되었을 때만 effect를 실행합니다.
+
+:::caution
+⚠️ 깊은 비교를 수행하기 때문에 성능 이슈가 발생할 수 있어 사용 시 주의가 필요합니다. 복잡한 객체나 큰 배열에는 사용을 지양하세요.
+:::
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDeepCompareEffect/index.ts)
+
+## Interface
+```ts title="typescript"
+function useDeepCompareEffect(
+  effectCallback: EffectCallback,
+  deps: DependencyList
+): void
+```
+
+## Usage
+```tsx title="typescript"
+import { useDeepCompareEffect } from '@modern-kit/react'
+
+const Example = () => {
+  const [user, setUser] = useState({ name: 'John', age: 30 });
+
+  // 일반 useEffect는 객체 참조가 변경될 때마다 실행됩니다
+  useEffect(() => {
+    console.log('useEffect 실행');
+  }, [user]);
+
+  // useDeepCompareEffect는 객체의 실제 값이 변경될 때만 실행됩니다
+  useDeepCompareEffect(() => {
+    console.log('useDeepCompareEffect 실행: 값이 실제로 변경되었습니다');
+  }, [user]);
+
+  return (
+    <div>
+      <p>Name: {user.name}, Age: {user.age}</p>
+      <button onClick={() => setUser({ name: 'John', age: 30 })}>
+        John으로 업데이트
+      </button>
+      <button onClick={() => setUser({ name: 'Jane', age: 25 })}>
+        Jane으로 업데이트
+      </button>
+      <button onClick={() => setUser({ name: 'Bob', age: 35 })}>
+        Bob으로 업데이트
+      </button>
+      <div>
+        <p>useEffect 실행 횟수: {effectCount}회</p>
+        <p>useDeepCompareEffect 실행 횟수: {deepEffectCount}회</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [user, setUser] = useState({ name: 'John', age: 30 });
+  const [effectCount, setEffectCount] = useState(0);
+  const [deepEffectCount, setDeepEffectCount] = useState(0);
+
+  // 일반 useEffect - 객체 참조가 변경될 때마다 실행
+  useEffect(() => {
+    setEffectCount(prev => prev + 1);
+  }, [user]);
+
+  // useDeepCompareEffect - 객체의 실제 값이 변경될 때만 실행
+  useDeepCompareEffect(() => {
+    setDeepEffectCount(prev => prev + 1);
+  }, [user]);
+
+  return (
+    <div>
+      <div style={{ marginBottom: '20px' }}>
+        <p><strong>현재 사용자:</strong> {user.name}, {user.age}세</p>
+      </div>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+        <button onClick={() => setUser({ name: 'John', age: 30 })}>
+          John으로 업데이트
+        </button>
+        <button onClick={() => setUser({ name: 'Jane', age: 25 })}>
+          Jane으로 업데이트
+        </button>
+        <button onClick={() => setUser({ name: 'Bob', age: 35 })}>
+          Bob으로 업데이트
+        </button>
+      </div>
+      <div style={{ padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+        <p style={{ fontSize: '14px', margin: '5px 0' }}>
+          <strong>useEffect 실행 횟수:</strong> {effectCount}회 
+          <span style={{ color: '#666', fontSize: '12px' }}> (객체 참조가 변경될 때마다)</span>
+        </p>
+        <p style={{ fontSize: '14px', margin: '5px 0' }}>
+          <strong>useDeepCompareEffect 실행 횟수:</strong> {deepEffectCount}회 
+          <span style={{ color: '#666', fontSize: '12px' }}> (실제 값이 변경될 때만)</span>
+        </p>
+        <p style={{ fontSize: '12px', color: '#0066cc', marginTop: '10px' }}>
+          💡 "같은 값으로 업데이트" 버튼을 클릭하면 useEffect는 실행되지만, useDeepCompareEffect는 실행되지 않습니다.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+<Example />
+
