@@ -1,0 +1,77 @@
+import { useConditionalEffect } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useConditionalEffect
+
+주어진 조건이 `true`일 때만 effect를 실행하는 커스텀 훅입니다.
+
+의존성 배열이 변경될 때마다 주어진 조건을 확인하고 `true`일 때 effectCallback 함수를 실행합니다.
+
+조건은 불리언 값 또는 함수로 전달할 수 있으며, 함수인 경우 이전 의존성 배열(`prevDeps`)과 현재 의존성 배열(`currentDeps`)을 인자로 받아 더 세밀한 조건 판단을 할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useConditionalEffect/index.ts)
+
+## Interface
+```ts title="typescript"
+function useConditionalEffect<D extends DependencyList>(
+  effectCallback: EffectCallback,
+  deps: D,
+  condition: boolean | ((prevDeps: D | undefined, currentDeps: D) => boolean)
+): void
+```
+
+## Usage
+```tsx title="typescript"
+import { useConditionalEffect } from '@modern-kit/react'
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useConditionalEffect(() => {
+    setMessage(`count가 5보다 큽니다! (현재: ${count})`);
+  }, [count], count > 5);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>증가</button>
+      <button onClick={() => setCount(count - 1)}>감소</button>
+      <p>{message}</p>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useConditionalEffect(() => {
+    setMessage(`count가 5보다 큽니다! (현재: ${count})`);
+  }, [count], count > 5);
+
+  return (
+    <div>
+      <div>
+        <p>Count: {count}</p>
+        <button onClick={() => setCount(count + 1)}>증가</button>
+        <button onClick={() => setCount(count - 1)}>감소</button>
+        <button onClick={() => setCount(0)}>초기화</button>
+      </div>
+      <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+        <p style={{ fontSize: '14px', color: '#666', margin: '5px 0' }}>
+          {count > 5 ? `✅ ${message}` : '⏳ count가 5 이하입니다'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+<Example />
+
