@@ -1,0 +1,74 @@
+import { useOnceEffect } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useOnceEffect
+
+컴포넌트가 마운트될 때 한 번만 실행되는 커스텀 훅입니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOnceEffec/index.ts)
+
+## Interface
+```ts title="typescript"
+function useOnceEffect(effect: EffectCallback): void
+```
+
+## Usage
+```tsx title="typescript"
+import { useOnceEffect } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+
+  useOnceEffect(() => {
+    console.log('컴포넌트가 마운트되었습니다.');
+  });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>증가</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+
+  useOnceEffect(() => {
+    console.log('컴포넌트가 마운트되었습니다.');
+  });
+
+  return (
+    <div style={{ padding: '20px', border: '1px solid #eee', borderRadius: '8px', maxWidth: '340px', background: '#fafbfc' }}>
+      <p style={{ fontWeight: 'bold', fontSize: '18px', margin: '0 0 8px 0' }}>Count: {count}</p>
+      <button
+        style={{
+          padding: '6px 16px',
+          borderRadius: '4px',
+          border: 'none',
+          background: '#3e82f7',
+          color: '#fff',
+          fontWeight: 500,
+          cursor: 'pointer',
+          fontSize: '15px',
+          marginBottom: '10px'
+        }}
+        onClick={() => setCount(count + 1)}
+      >
+        증가
+      </button>
+      <p style={{ fontSize: '12px', color: '#666', marginTop: 0 }}>
+        상태를 변경해 리렌더링을 발생시켜도 effect는 한 번만 호출됩니다.
+      </p>
+    </div>
+  );
+};
+
+<Example />
+

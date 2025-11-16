@@ -35,6 +35,7 @@ export * from './useMediaQuery';
 export * from './useMergeRefs';
 export * from './useMouse';
 export * from './useNetwork';
+export * from './useOnceEffect';
 export * from './useOutsidePointerDown';
 export * from './usePreferredColorScheme';
 export * from './usePreservedCallback';
