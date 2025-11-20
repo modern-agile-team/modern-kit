@@ -52,7 +52,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@types/lodash-es": "^4.17.12",
     "@vitest/coverage-istanbul": "^4.0.4",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.27.0",
     "eslint": "^9.37.0",
     "jsdom": "^27.0.0",
     "lodash-es": "^4.17.21",
