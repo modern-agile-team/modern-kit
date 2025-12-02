@@ -9421,7 +9421,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["rollup", "npm:4.53.3"],\
-          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.1"],\
+          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.3.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["rollup-plugin-postcss", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:4.0.2"],\
@@ -9460,7 +9460,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:18.3.1"],\
           ["rollup", "npm:4.53.3"],\
-          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.1"],\
+          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.3.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["rollup-plugin-postcss", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:4.0.2"],\
@@ -9498,7 +9498,7 @@ const RAW_RUNTIME_STATE =
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:27.2.0"],\
           ["lodash-es", "npm:4.17.21"],\
           ["rollup", "npm:4.53.3"],\
-          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.1"],\
+          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.3.0"],\
           ["rollup-plugin-esbuild", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:4.0.4"]\
@@ -21864,14 +21864,6 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.30.17", {\
-        "packageLocation": "./.yarn/cache/magic-string-npm-0.30.17-da1b7593b1-16826e415d.zip/node_modules/magic-string/",\
-        "packageDependencies": [\
-          ["@jridgewell/sourcemap-codec", "npm:1.5.0"],\
-          ["magic-string", "npm:0.30.17"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:0.30.21", {\
         "packageLocation": "./.yarn/cache/magic-string-npm-0.30.21-9a226cb21e-299378e38f.zip/node_modules/magic-string/",\
         "packageDependencies": [\
@@ -29068,22 +29060,22 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["rollup-plugin-dts", [\
-      ["npm:6.2.1", {\
-        "packageLocation": "./.yarn/cache/rollup-plugin-dts-npm-6.2.1-d396d346e5-f21c872647.zip/node_modules/rollup-plugin-dts/",\
+      ["npm:6.3.0", {\
+        "packageLocation": "./.yarn/cache/rollup-plugin-dts-npm-6.3.0-3f53d13bcb-7eae726f0a.zip/node_modules/rollup-plugin-dts/",\
         "packageDependencies": [\
-          ["rollup-plugin-dts", "npm:6.2.1"]\
+          ["rollup-plugin-dts", "npm:6.3.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.1", {\
-        "packageLocation": "./.yarn/__virtual__/rollup-plugin-dts-virtual-07e74c5a5d/0/cache/rollup-plugin-dts-npm-6.2.1-d396d346e5-f21c872647.zip/node_modules/rollup-plugin-dts/",\
+      ["virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/rollup-plugin-dts-virtual-92cb3470c6/0/cache/rollup-plugin-dts-npm-6.3.0-3f53d13bcb-7eae726f0a.zip/node_modules/rollup-plugin-dts/",\
         "packageDependencies": [\
-          ["@babel/code-frame", "npm:7.26.2"],\
+          ["@babel/code-frame", "npm:7.27.1"],\
           ["@types/rollup", null],\
           ["@types/typescript", null],\
-          ["magic-string", "npm:0.30.17"],\
+          ["magic-string", "npm:0.30.21"],\
           ["rollup", "npm:4.53.3"],\
-          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.2.1"],\
+          ["rollup-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:6.3.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"]\
         ],\
         "packagePeers": [\
