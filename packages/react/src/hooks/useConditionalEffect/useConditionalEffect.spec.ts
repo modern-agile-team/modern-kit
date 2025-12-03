@@ -36,6 +36,41 @@ describe('useConditionalEffect', () => {
     expect(effect).toHaveBeenCalledTimes(1);
   });
 
+  it('새로운 effect가 호출될 때 이전 cleanup 함수가 실행되어야 한다', () => {
+    const cleanup = vi.fn();
+    const effect = vi.fn(() => cleanup);
+
+    const { rerender } = renderHook(
+      ({ deps, condition }) => useConditionalEffect(effect, deps, condition),
+      {
+        initialProps: { deps: [1], condition: false },
+      }
+    );
+
+    expect(effect).not.toHaveBeenCalled();
+    expect(cleanup).not.toHaveBeenCalled();
+
+    rerender({ deps: [2], condition: false });
+    expect(effect).not.toHaveBeenCalled();
+    expect(cleanup).not.toHaveBeenCalled();
+
+    rerender({ deps: [2], condition: true });
+    expect(effect).toHaveBeenCalledTimes(1);
+    expect(cleanup).not.toHaveBeenCalled();
+
+    rerender({ deps: [3], condition: true });
+    expect(effect).toHaveBeenCalledTimes(2);
+    expect(cleanup).toHaveBeenCalledTimes(1);
+
+    rerender({ deps: [3], condition: false });
+    expect(effect).toHaveBeenCalledTimes(2);
+    expect(cleanup).toHaveBeenCalledTimes(1);
+
+    rerender({ deps: [4], condition: false });
+    expect(effect).toHaveBeenCalledTimes(2);
+    expect(cleanup).toHaveBeenCalledTimes(1);
+  });
+
   it('의존성 배열이 변경되고, 조건이 false일 때 effect가 실행되지 않아야 한다', () => {
     const effect = vi.fn();
 

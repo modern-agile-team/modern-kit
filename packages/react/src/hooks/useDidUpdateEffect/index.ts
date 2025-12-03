@@ -1,5 +1,9 @@
-import { useConditionalEffect } from '../useConditionalEffect';
-import { type DependencyList, type EffectCallback } from 'react';
+import {
+  useEffect,
+  useRef,
+  type DependencyList,
+  type EffectCallback,
+} from 'react';
 
 /**
  * @description 최초 마운트 시에는 실행되지 않고, 의존성 배열(`deps`)의 값이 업데이트되었을 때만 effect를 실행시키는 커스텀 훅입니다.
@@ -18,9 +22,15 @@ export function useDidUpdateEffect(
   effectCallback: EffectCallback,
   deps: DependencyList
 ): void {
-  useConditionalEffect(
-    effectCallback,
-    deps,
-    (prevDeps) => prevDeps !== undefined
-  );
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    return effectCallback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
 }

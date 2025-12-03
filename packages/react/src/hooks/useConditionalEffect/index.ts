@@ -33,18 +33,20 @@ export function useConditionalEffect<D extends DependencyList>(
   condition: boolean | ((prevDeps: D | undefined, currentDeps: D) => boolean)
 ) {
   const prevDeps = useRef<D | undefined>(undefined);
+  const signal = useRef(0);
+  const shouldRunEffect = isFunction(condition)
+    ? condition(prevDeps.current, deps)
+    : condition;
 
-  useEffect(() => {
-    const conditionToUse = isFunction(condition)
-      ? condition(prevDeps.current, deps)
-      : condition;
+  useEffect(
+    () => {
+      if (!shouldRunEffect) return;
 
-    if (conditionToUse) {
-      const cleanup = effectCallback();
-      prevDeps.current = deps;
-      return cleanup;
-    }
-    prevDeps.current = deps;
+      return effectCallback();
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+    [shouldRunEffect ? ++signal.current : signal.current]
+  );
+
+  prevDeps.current = deps;
 }
