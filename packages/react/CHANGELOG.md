@@ -1,5 +1,21 @@
 # @modern-kit/react
 
+## 2.8.0
+
+### Minor Changes
+
+- [#1003](https://github.com/modern-agile-team/modern-kit/pull/1003) [`8741be1`](https://github.com/modern-agile-team/modern-kit/commit/8741be15942d5bc03bedc1524f491ecf92f133ea) Thanks [@ssi02014](https://github.com/ssi02014)! - feact(react): useDeepCompareEffect 신규 훅 추가 - @ssi02014
+
+- [#983](https://github.com/modern-agile-team/modern-kit/pull/983) [`006fbeb`](https://github.com/modern-agile-team/modern-kit/commit/006fbeb62500378c6f244e4c098b4708437f91a3) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useWindowSize hydration 이슈 및 코드 개선 - @ssi02014
+
+- [#978](https://github.com/modern-agile-team/modern-kit/pull/978) [`ef0682c`](https://github.com/modern-agile-team/modern-kit/commit/ef0682cb597ee7103d061d6e5a11375617b2f3f6) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): useDidUpdate -> useDidUpdateEffect 네이밍 변경 - @ssi02014
+
+- [#983](https://github.com/modern-agile-team/modern-kit/pull/983) [`006fbeb`](https://github.com/modern-agile-team/modern-kit/commit/006fbeb62500378c6f244e4c098b4708437f91a3) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(react): 과도한 추상화 훅 제거 - @ssi02014
+
+- [#1003](https://github.com/modern-agile-team/modern-kit/pull/1003) [`8741be1`](https://github.com/modern-agile-team/modern-kit/commit/8741be15942d5bc03bedc1524f491ecf92f133ea) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useOnceEffect 신규 훅 추가 - @ssi02014
+
+- [#1003](https://github.com/modern-agile-team/modern-kit/pull/1003) [`8741be1`](https://github.com/modern-agile-team/modern-kit/commit/8741be15942d5bc03bedc1524f491ecf92f133ea) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useConditionalEffect 신규 훅 추가 - @ssi02014
+
 ## 2.7.1
 
 ### Patch Changes
