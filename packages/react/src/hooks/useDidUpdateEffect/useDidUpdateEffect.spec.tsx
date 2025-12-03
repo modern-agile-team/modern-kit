@@ -18,6 +18,8 @@ describe('useDidUpdateEffect', () => {
       }
     );
 
+    expect(effect).toHaveBeenCalledTimes(0);
+
     rerender({ deps: [2] });
     expect(effect).toHaveBeenCalledTimes(1);
 
