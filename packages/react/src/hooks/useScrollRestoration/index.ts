@@ -1,7 +1,7 @@
-import { useIsomorphicLayoutEffect } from '@modern-kit/react';
+import { useIsomorphicLayoutEffect } from '../useIsomorphicLayoutEffect';
 import { useRef } from 'react';
 import { StorageManager, isWindow } from '@modern-kit/utils';
-import { getHistoryKey } from './useScrollRestoration.util';
+import { getHistoryKey } from './useScrollRestoration.utils';
 
 interface UseScrollRestorationProps {
   enabled?: boolean;
