@@ -1,0 +1,108 @@
+import { useScrollRestoration } from '@modern-kit/react';
+import * as ModernKit from '@modern-kit/react';
+
+# useScrollRestoration
+
+브라우저의 뒤로가기/앞으로가기 탐색 시, 이전 스크롤 위치를 저장하고 복원하는 커스텀 훅입니다.
+
+기본적으로 window의 스크롤을 관리하며, `ref`를 사용하여 특정 스크롤 영역을 관리할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollRestoration/index.ts)
+
+## Interface
+```ts title="typescript"
+interface UseScrollRestorationProps {
+  enabled?: boolean;
+}
+
+const useScrollRestoration: <T extends HTMLElement>({
+  enabled,
+}?: UseScrollRestorationProps) => {
+  ref: React.RefObject<T>;
+};
+```
+## Usage
+
+### Window Scroll
+
+```ts title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const Page = () => {
+  useScrollRestoration(); // 비활성화 하려면 { enabled: true } 로 세팅하세요.
+
+  return (
+    <div>
+      {/* 긴 컨텐츠... */}
+    </div>
+  );
+};
+```
+<br />
+
+### Specific element
+
+```ts title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const ScrollBox = () => {
+  const { ref } = useScrollRestoration<HTMLDivElement>();
+
+  return (
+    <div 
+      ref={ref} 
+      style={{ height: '500px', overflowY: 'auto' }}
+    >
+      {/* 내부 스크롤이 발생하는 컨텐츠 */}
+    </div>
+  );
+};
+```
+<br />
+
+### Example
+
+export const Example = () => {
+  const { ref } = useScrollRestoration(); 
+
+  return (
+    <div>
+      <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
+      <p>2. 브라우저의 <strong>'뒤로 가기'</strong> 버튼을 누르세요.</p>
+      <p>3. 스크롤 위치가 유지되어 있는지 확인하세요.</p>
+
+      <div 
+        ref={ref} 
+        style={{ 
+          height: '300px',      
+          overflowY: 'scroll',   
+          border: '2px solid #333', 
+          padding: '20px',
+          borderRadius: '8px'
+        }}
+      >
+       
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div 
+            key={i} 
+            style={{ 
+              height: '80px', 
+              background: i % 2 === 0 ? '#e0e7ff' : '#f3f4f6',
+              marginBottom: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            데이터 {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+<Example />
