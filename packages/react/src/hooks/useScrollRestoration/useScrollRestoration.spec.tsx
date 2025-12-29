@@ -1,9 +1,9 @@
 import { render, renderHook, cleanup } from '@testing-library/react';
-import { useScrollRestoration } from '.'; // 경로 확인
+import { useScrollRestoration } from '.';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { getHistoryKey } from './useScrollRestoration.util';
+import { getHistoryKey } from './useScrollRestoration.utils';
 
-vi.mock('./useScrollRestoration.util', () => ({
+vi.mock('./useScrollRestoration.utils', () => ({
   getHistoryKey: vi.fn(),
 }));
 
