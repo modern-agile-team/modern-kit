@@ -47,6 +47,7 @@ export * from './useResizeObserver';
 export * from './useSafeContext';
 export * from './useScrollEvent';
 export * from './useScrollLock';
+export * from './useScrollRestoration';
 export * from './useScrollTo';
 export * from './useSessionStorage';
 export * from './useHistoryState';
