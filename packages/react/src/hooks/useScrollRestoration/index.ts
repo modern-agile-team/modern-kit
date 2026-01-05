@@ -5,7 +5,6 @@ import {
   cleanupOldScrollData,
   getHistoryKey,
 } from './useScrollRestoration.utils';
-import { useEventListener } from '../useEventListener';
 import { usePreventBrowserScrollRestoration } from '../usePreventBrowserScrollRestoration';
 
 interface UseScrollRestorationOptions {
@@ -156,16 +155,27 @@ export function useScrollRestoration<T extends HTMLElement>({
     };
   }, [saveScrollPosition, resetRetry, restoreScrollPosition]);
 
-  const saveWindow = typeof window !== 'undefined' ? window : null;
+  useIsomorphicLayoutEffect(() => {
+    if (!enabled) return;
 
-  useEventListener(saveWindow, 'popstate', () => {
-    saveScrollPosition();
+    const handleBeforeUnload = () => saveScrollPosition();
+    const handlePopstate = () => {
+      saveScrollPosition();
 
-    ensureHistoryKey(true);
-    isRestoredRef.current = false;
+      ensureHistoryKey(true);
+      isRestoredRef.current = false;
 
-    restoreScrollPosition();
-  });
+      restoreScrollPosition();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopstate);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, [saveScrollPosition, ensureHistoryKey, restoreScrollPosition, enabled]);
 
   usePreventBrowserScrollRestoration();
 
