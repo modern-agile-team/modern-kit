@@ -341,6 +341,51 @@ describe('useScrollRestoration', () => {
     });
   });
 
+  describe('Beforeunload 이벤트 처리', () => {
+    it('beforeunload 이벤트 발생 시 현재 스크롤 위치를 저장해야 한다', () => {
+      const testKey = 'test-history-key';
+      const scrollPosition = 2000;
+
+      vi.mocked(getHistoryKey).mockReturnValue(testKey);
+      vi.mocked(cleanupOldScrollData).mockReturnValue({});
+
+      renderHook(() => useScrollRestoration());
+
+      window.scrollY = scrollPosition;
+
+      const beforeunloadEvent = new Event('beforeunload');
+      window.dispatchEvent(beforeunloadEvent);
+
+      const savedData = JSON.parse(
+        window.sessionStorage.getItem(STORAGE_KEY) || '{}'
+      );
+      expect(savedData[testKey]).toBe(scrollPosition);
+    });
+
+    it('새로고침 후 저장된 스크롤 위치로 복원되어야 한다', () => {
+      const testKey = 'test-history-key';
+      const savedScrollPosition = 1800;
+
+      // 새로고침 전 저장된 데이터 시뮬레이션
+      const preSavedData = {
+        [testKey]: savedScrollPosition,
+      };
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(preSavedData));
+
+      vi.mocked(getHistoryKey).mockReturnValue(testKey);
+      vi.mocked(cleanupOldScrollData).mockReturnValue(preSavedData);
+
+      // 새로고침 후 마운트 (새 컴포넌트 인스턴스)
+      renderHook(() => useScrollRestoration());
+
+      // 저장된 위치로 복원되었는지 확인
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: savedScrollPosition,
+        behavior: 'instant',
+      });
+    });
+  });
+
   describe('Popstate 이벤트 처리', () => {
     it('popstate 이벤트 발생 시 현재 페이지를 저장하고 이전 페이지로 복원해야 한다', () => {
       const keyA = 'history-key-A';

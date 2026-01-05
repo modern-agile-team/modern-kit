@@ -1,5 +1,5 @@
 import { useScrollRestoration } from '@modern-kit/react';
-import * as ModernKit from '@modern-kit/react';
+import { useState, useEffect } from 'react';
 
 # useScrollRestoration
 
@@ -63,11 +63,11 @@ const ScrollBox = () => {
 ```
 <br />
 
-### Example
+### Example1
 
-export const Example = () => {
-  const { ref } = useScrollRestoration(); 
-  
+export const Example1 = () => {
+  const { ref } = useScrollRestoration({ behavior: 'smooth' }); 
+
   return (
     <div>
       <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
@@ -85,7 +85,7 @@ export const Example = () => {
         }}
       >
        
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 20 }, (_, i) => i).map((i) => (
           <div 
             key={i} 
             style={{ 
@@ -105,4 +105,60 @@ export const Example = () => {
   );
 };
 
-<Example />
+<Example1 />
+
+<br />
+
+### Example2 (데이터 로딩 후 스크롤 위치 복원)
+
+export const Example2 = () => {
+  const { ref } = useScrollRestoration({ behavior: 'smooth' }); 
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setList(Array.from({ length: 20 }, (_, i) => i));
+    }, 1000)
+  }, []);
+
+  return (
+    <div>
+      <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
+      <p>2. 브라우저의 <strong>'뒤로 가기'</strong> 버튼을 누르세요.</p>
+      <p>3. 스크롤 위치가 유지되어 있는지 확인하세요.</p>
+
+      <div 
+        ref={ref} 
+        style={{ 
+          height: '300px',      
+          overflowY: 'scroll',   
+          border: '2px solid #333', 
+          padding: '20px',
+          borderRadius: '8px'
+        }}
+      >
+       
+        {list.map((i) => (
+          <div 
+            key={i} 
+            style={{ 
+              height: '80px', 
+              background: i % 2 === 0 ? '#e0e7ff' : '#f3f4f6',
+              marginBottom: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            데이터 {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+<Example2 />
+
+<br />

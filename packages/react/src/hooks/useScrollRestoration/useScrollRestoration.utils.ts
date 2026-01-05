@@ -9,16 +9,16 @@ import { getUniqId } from '@modern-kit/utils';
  *
  * @returns {string} 현재 히스토리 스택의 고유 Key
  */
-export const getHistoryKey = () => {
+export const getHistoryKey = (): string => {
   if (typeof window === 'undefined') return '';
 
   const state = window.history.state;
-  const historyKey = state?.key || state?.__scroll_key;
+  const historyKey = state?.key || state?.scroll_key;
 
   if (historyKey) return historyKey;
 
   const newKey = getUniqId('scroll_key_');
-  window.history.replaceState({ ...state, __scroll_key: newKey }, '');
+  window.history.replaceState({ ...state, scroll_key: newKey }, '');
   return newKey;
 };
 
