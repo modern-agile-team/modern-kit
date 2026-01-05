@@ -42,6 +42,7 @@ export * from './useOutsidePointerDown';
 export * from './usePreferredColorScheme';
 export * from './usePreservedCallback';
 export * from './usePreservedState';
+export * from './usePreventBrowserScrollRestoration';
 export * from './usePrevious';
 export * from './useResizeObserver';
 export * from './useSafeContext';

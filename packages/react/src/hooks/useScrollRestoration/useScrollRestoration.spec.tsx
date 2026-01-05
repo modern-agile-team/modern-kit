@@ -11,7 +11,7 @@ vi.mock('./useScrollRestoration.utils', () => ({
   cleanupOldScrollData: vi.fn(),
 }));
 
-const STORAGE_KEY = '__modern_kit_scroll_restoration_map__';
+const STORAGE_KEY = '@modern-kit/scroll-restoration';
 const TEST_HISTORY_KEY = 'test_history_key_123';
 const SAVED_SCROLL_Y = 1500;
 
@@ -263,7 +263,7 @@ describe('useScrollRestoration', () => {
       vi.advanceTimersByTime(400); // 3회
 
       // 최대 횟수 도달로 중단
-      vi.advanceTimersByTime(800); // 더 이상 호출 안 됨
+      vi.advanceTimersByTime(800);
       vi.advanceTimersByTime(5000);
 
       expect(window.scrollTo).not.toHaveBeenCalled();
@@ -476,20 +476,6 @@ describe('useScrollRestoration', () => {
       unmount();
 
       expect(clearTimeoutSpy).toHaveBeenCalled();
-    });
-  });
-
-  describe('History.scrollRestoration 설정', () => {
-    it('history.scrollRestoration를 manual로 설정하고, unmount 시 원래대로 복원해야 한다', () => {
-      window.history.scrollRestoration = 'auto';
-
-      const { unmount } = renderHook(() => useScrollRestoration());
-
-      expect(window.history.scrollRestoration).toBe('manual');
-
-      unmount();
-
-      expect(window.history.scrollRestoration).toBe('auto');
     });
   });
 });
