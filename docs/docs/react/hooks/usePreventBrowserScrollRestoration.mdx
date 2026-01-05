@@ -1,0 +1,46 @@
+import { usePreventBrowserScrollRestoration } from '@modern-kit/react';
+
+# usePreventBrowserScrollRestoration
+
+브라우저의 기본 스크롤 복원 기능을 방지하는 훅입니다.
+
+컴포넌트가 마운트될 때 `window.history.scrollRestoration`을 `'manual'`로 설정하여 브라우저의 자동 스크롤 복원 기능을 비활성화합니다. 컴포넌트가 언마운트될 때는 원래 값으로 복원합니다.
+
+이 훅은 커스텀 스크롤 복원 로직을 구현할 때 브라우저의 기본 동작과 충돌을 방지하기 위해 사용됩니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreventBrowserScrollRestoration/index.ts)
+
+## Interface
+```ts title="typescript"
+const usePreventBrowserScrollRestoration: () => void;
+```
+
+## Usage
+```tsx title="typescript"
+import { usePreventBrowserScrollRestoration } from '@modern-kit/react';
+
+const MyComponent = () => {
+  usePreventBrowserScrollRestoration();
+
+  return <div>window.history.scrollRestoration: {window.history.scrollRestoration}</div>;
+};
+```
+
+## Example
+
+export const Example = () => {
+  usePreventBrowserScrollRestoration();
+
+  return (
+    <div>
+      <p>window.history.scrollRestoration: {window.history.scrollRestoration}</p>
+      <p>이 페이지에서 뒤로가기를 해도 브라우저가 자동으로 스크롤 위치를 복원하지 않습니다.</p>
+    </div>
+  );
+};
+
+<Example />
+

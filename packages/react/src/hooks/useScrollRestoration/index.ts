@@ -5,6 +5,9 @@ import {
   cleanupOldScrollData,
   getHistoryKey,
 } from './useScrollRestoration.utils';
+import { useEventListener } from '../useEventListener';
+import { usePreventBrowserScrollRestoration } from '../usePreventBrowserScrollRestoration';
+
 interface UseScrollRestorationOptions {
   enabled?: boolean;
   behavior?: ScrollOptions['behavior'];
@@ -14,8 +17,8 @@ interface UseScrollRestorationReturnType<T extends HTMLElement> {
   ref: React.RefObject<T>;
 }
 
-const STORAGE_KEY = '__modern_kit_scroll_restoration_map__';
-const MAX_RETRY_COUNT = 3;
+const STORAGE_KEY = '@modern-kit/scroll-restoration';
+const MAX_RETRY_COUNT = 5;
 const MAX_ENTRIES = 50;
 const RETRY_TIME_INTERVAL = 100;
 
@@ -23,10 +26,10 @@ const sessionStorage = new StorageManager<{
   [STORAGE_KEY]: Record<string, number>;
 }>('sessionStorage');
 
-export const useScrollRestoration = <T extends HTMLElement>({
+export function useScrollRestoration<T extends HTMLElement>({
   enabled = true,
   behavior = 'instant',
-}: UseScrollRestorationOptions = {}): UseScrollRestorationReturnType<T> => {
+}: UseScrollRestorationOptions = {}): UseScrollRestorationReturnType<T> {
   const isRestoredRef = useRef(false);
 
   const ref = useRef<T | null>(null);
@@ -34,7 +37,6 @@ export const useScrollRestoration = <T extends HTMLElement>({
   const retryCountRef = useRef(0);
   const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // timeout 리셋
   const resetRetry = useCallback(() => {
     retryCountRef.current = 0;
 
@@ -44,15 +46,12 @@ export const useScrollRestoration = <T extends HTMLElement>({
     retryTimeoutRef.current = null;
   }, []);
 
-  // historyKey 처리 함수
-  // force가 true이면 강제 처리
   const ensureHistoryKey = useCallback((force = false) => {
     if (force || !historyKeyRef.current) {
       historyKeyRef.current = getHistoryKey();
     }
   }, []);
 
-  // 스크롤 저장 로직 분리
   const saveScrollPosition = useCallback(() => {
     const historyKey = historyKeyRef.current;
     if (!historyKey) return;
@@ -71,7 +70,6 @@ export const useScrollRestoration = <T extends HTMLElement>({
     });
   }, []);
 
-  // 현재 스크롤 높이 가져오기
   const getCurrentScrollHeight = useCallback(() => {
     const scrollTarget = ref.current || window;
     return isWindow(scrollTarget)
@@ -79,7 +77,6 @@ export const useScrollRestoration = <T extends HTMLElement>({
       : scrollTarget.scrollHeight;
   }, []);
 
-  // 실제 스크롤 실행
   const executeScroll = useCallback(
     (position: number) => {
       const scrollTarget = ref.current || window;
@@ -97,7 +94,6 @@ export const useScrollRestoration = <T extends HTMLElement>({
     [behavior]
   );
 
-  // 저장된 스크롤 위치 가져오기
   const getSavedPosition = useCallback(() => {
     const storageMap = sessionStorage.getItem(STORAGE_KEY);
     if (!storageMap) return null;
@@ -105,9 +101,7 @@ export const useScrollRestoration = <T extends HTMLElement>({
     return storageMap[historyKeyRef.current] ?? null;
   }, []);
 
-  // 스크롤 위치 복원
   const restoreScrollPosition = useCallback(() => {
-    // retry 스케쥴링
     const scheduleRetry = () => {
       if (retryCountRef.current >= MAX_RETRY_COUNT) {
         resetRetry();
@@ -131,7 +125,7 @@ export const useScrollRestoration = <T extends HTMLElement>({
     ensureHistoryKey();
     const savedPos = getSavedPosition();
 
-    if (savedPos === null) {
+    if (savedPos == null) {
       resetRetry();
       return;
     }
@@ -153,7 +147,6 @@ export const useScrollRestoration = <T extends HTMLElement>({
     executeScroll,
   ]);
 
-  // 언마운트 시 현재 스크롤 위치를 저장하고, timeout 리셋
   useIsomorphicLayoutEffect(() => {
     restoreScrollPosition();
 
@@ -163,32 +156,18 @@ export const useScrollRestoration = <T extends HTMLElement>({
     };
   }, [saveScrollPosition, resetRetry, restoreScrollPosition]);
 
-  // popState 핸들러 등록
-  useIsomorphicLayoutEffect(() => {
-    const handlePopState = () => {
-      saveScrollPosition();
+  const saveWindow = typeof window !== 'undefined' ? window : null;
 
-      ensureHistoryKey(true);
-      isRestoredRef.current = false;
+  useEventListener(saveWindow, 'popstate', () => {
+    saveScrollPosition();
 
-      restoreScrollPosition();
-    };
+    ensureHistoryKey(true);
+    isRestoredRef.current = false;
 
-    window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [ensureHistoryKey, saveScrollPosition, restoreScrollPosition]);
+    restoreScrollPosition();
+  });
 
-  useIsomorphicLayoutEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      const original = window.history.scrollRestoration;
-      window.history.scrollRestoration = 'manual';
-      return () => {
-        window.history.scrollRestoration = original;
-      };
-    }
-  }, []);
+  usePreventBrowserScrollRestoration();
 
   return { ref };
-};
+}

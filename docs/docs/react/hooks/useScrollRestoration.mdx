@@ -18,9 +18,9 @@ interface UseScrollRestorationProps {
   enabled?: boolean;
 }
 
-const useScrollRestoration: <T extends HTMLElement>({
+function useScrollRestoration<T extends HTMLElement>({
   enabled,
-}?: UseScrollRestorationProps) => {
+}?: UseScrollRestorationProps): {
   ref: React.RefObject<T>;
 };
 ```
@@ -67,7 +67,7 @@ const ScrollBox = () => {
 
 export const Example = () => {
   const { ref } = useScrollRestoration(); 
-
+  
   return (
     <div>
       <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
