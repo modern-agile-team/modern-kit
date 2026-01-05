@@ -1,4 +1,5 @@
 import { usePreventBrowserScrollRestoration } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # usePreventBrowserScrollRestoration
 
@@ -37,10 +38,10 @@ export const Example = () => {
   return (
     <div>
       <p>window.history.scrollRestoration: {window.history.scrollRestoration}</p>
-      <p>이 페이지에서 뒤로가기를 해도 브라우저가 자동으로 스크롤 위치를 복원하지 않습니다.</p>
     </div>
   );
 };
 
-<Example />
-
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
