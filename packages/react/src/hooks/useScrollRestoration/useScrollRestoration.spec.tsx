@@ -2,27 +2,51 @@ import { render, renderHook, cleanup } from '@testing-library/react';
 import { useScrollRestoration } from '.';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  cleanupOldScrollData,
+  pruneScrollPositionMap,
   getHistoryKey,
 } from './useScrollRestoration.utils';
 
 vi.mock('./useScrollRestoration.utils', () => ({
   getHistoryKey: vi.fn(),
-  cleanupOldScrollData: vi.fn(),
+  pruneScrollPositionMap: vi.fn(),
 }));
 
-const STORAGE_KEY = '@modern-kit/scroll-restoration';
-const TEST_HISTORY_KEY = 'test_history_key_123';
+const STORAGE_KEY = 'mk-scroll-restoration';
+const TEST_HISTORY_KEY = 'test-history-key-123';
 const SAVED_SCROLL_Y = 1500;
 
-const initSaveData = () => {
-  const preSavedData = {
-    [TEST_HISTORY_KEY]: SAVED_SCROLL_Y,
-  };
-  window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(preSavedData));
+// 자주 사용되는 스크롤 맵 상수
+const DEFAULT_WINDOW_SCROLL_MAP = {
+  [`${TEST_HISTORY_KEY}-window`]: SAVED_SCROLL_Y,
+};
+const DEFAULT_ELEMENT_SCROLL_MAP = {
+  [`${TEST_HISTORY_KEY}-element`]: SAVED_SCROLL_Y,
+};
 
-  vi.mocked(getHistoryKey).mockReturnValue(TEST_HISTORY_KEY);
-  vi.mocked(cleanupOldScrollData).mockReturnValue(preSavedData);
+const getStorageItem = (key: string) => {
+  const rawData = sessionStorage.getItem(STORAGE_KEY);
+  const savedData = rawData ? JSON.parse(rawData) : {};
+  return savedData[key];
+};
+
+/**
+ * mock 데이터를 설정하는 헬퍼 함수
+ */
+const setupMocks = ({
+  historyKey = TEST_HISTORY_KEY,
+  scrollMap = {},
+  setStorage = true,
+}: {
+  historyKey?: string;
+  scrollMap?: Record<string, number>;
+  setStorage?: boolean;
+} = {}) => {
+  vi.mocked(getHistoryKey).mockReturnValue(historyKey);
+  vi.mocked(pruneScrollPositionMap).mockReturnValue(scrollMap);
+
+  if (setStorage && Object.keys(scrollMap).length > 0) {
+    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(scrollMap));
+  }
 };
 
 const TestComponent = () => {
@@ -66,7 +90,7 @@ afterEach(() => {
 
 describe('useScrollRestoration', () => {
   it('언마운트 시점에 스크롤 위치를 저장한다.', () => {
-    initSaveData();
+    setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
     const { unmount } = renderHook(() => useScrollRestoration());
     window.scrollY = SAVED_SCROLL_Y;
@@ -75,11 +99,13 @@ describe('useScrollRestoration', () => {
 
     const rawData = sessionStorage.getItem(STORAGE_KEY);
     const savedData = rawData ? JSON.parse(rawData) : {};
-    expect(savedData[TEST_HISTORY_KEY]).toBe(SAVED_SCROLL_Y);
+    const storageKey = `${TEST_HISTORY_KEY}-window`;
+
+    expect(savedData[storageKey]).toBe(SAVED_SCROLL_Y);
   });
 
   it('마운트 시점에 저장된 스크롤 위치로 복구한다.', () => {
-    initSaveData();
+    setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
     renderHook(() => useScrollRestoration());
 
@@ -107,7 +133,7 @@ describe('useScrollRestoration', () => {
   });
 
   it('마운트 시 특정 요소(ref)의 스크롤 위치를 복원해야 한다', () => {
-    initSaveData();
+    setupMocks({ scrollMap: DEFAULT_ELEMENT_SCROLL_MAP });
 
     const scrollToSpy = vi.spyOn(HTMLElement.prototype, 'scrollTo');
 
@@ -120,52 +146,50 @@ describe('useScrollRestoration', () => {
   });
 
   it('여러 페이지 이동 시 각각의 key를 저장하고 복구해야 한다.', () => {
-    const keyA_FirstVisit = 'history-key-A-1';
-    const keyA_SecondVisit = 'history-key-A-2';
+    const firstVisitKey = 'history_first_visit';
+    const secondVisitKey = 'history_second_visit';
+
+    const firstVisitScrollMap = { [`${firstVisitKey}-window`]: 100 };
+    const combinedScrollMap = {
+      ...firstVisitScrollMap,
+      [`${secondVisitKey}-window`]: 800,
+    };
 
     // 1. [A 첫 방문] 스크롤 100px 이동 후 이탈(저장)
-    vi.mocked(getHistoryKey).mockReturnValue(keyA_FirstVisit);
-    vi.mocked(cleanupOldScrollData).mockReturnValue({
-      [keyA_FirstVisit]: 100,
-    });
-    const render1 = renderHook(() => useScrollRestoration());
+    setupMocks({ historyKey: firstVisitKey, scrollMap: firstVisitScrollMap });
+    const firstRender = renderHook(() => useScrollRestoration());
 
     window.scrollY = 100;
-    render1.unmount(); // 저장 트리거
+    firstRender.unmount(); // 저장 트리거
 
-    // 검증: 첫 방문 키에 100 저장됨
-    const storageAfterFirstA = JSON.parse(
-      sessionStorage.getItem(STORAGE_KEY) || '{}'
-    );
-    expect(storageAfterFirstA[keyA_FirstVisit]).toBe(100);
+    // 검증: 첫 방문 A 키에 100 저장됨
+    const storageItem1 = getStorageItem(`${firstVisitKey}-window`);
+    expect(storageItem1).toBe(100);
 
-    // 2. [A 재방문 (새 링크)] 새 키 생성 -> 스크롤 0에서 시작
-    vi.mocked(getHistoryKey).mockReturnValue(keyA_SecondVisit);
-    vi.mocked(cleanupOldScrollData).mockReturnValue({
-      [keyA_FirstVisit]: 100,
-      [keyA_SecondVisit]: 800,
+    // 2. [방문 B (새 링크)] 새 키 생성 -> 스크롤 0에서 시작
+    setupMocks({
+      historyKey: secondVisitKey,
+      scrollMap: combinedScrollMap,
+      setStorage: false,
     });
     window.scrollTo = vi.fn(); // 호출 기록 초기화
-    const render2 = renderHook(() => useScrollRestoration());
+    const secondRender = renderHook(() => useScrollRestoration());
 
     expect(window.scrollTo).not.toHaveBeenCalled(); // 새 방문이니 복원 안 함
 
     // 스크롤 800px 이동 후 이탈
     window.scrollY = 800;
-    render2.unmount();
+    secondRender.unmount();
 
     // 검증: 키 1(100)과 키 2(800)가 따로 저장되어야 함
-    const storageAfterSecondA = JSON.parse(
-      sessionStorage.getItem(STORAGE_KEY) || '{}'
-    );
-    expect(storageAfterSecondA[keyA_SecondVisit]).toBe(800);
-    expect(storageAfterSecondA[keyA_FirstVisit]).toBe(100);
+    const storageItem2 = getStorageItem(`${secondVisitKey}-window`);
+    expect(storageItem2).toBe(800);
 
     // 3. [뒤로가기로 A 복귀] 첫 방문 키(Key 1)로 복원 시도
-    vi.mocked(getHistoryKey).mockReturnValue(keyA_FirstVisit);
-    vi.mocked(cleanupOldScrollData).mockReturnValue({
-      [keyA_FirstVisit]: 100,
-      [keyA_SecondVisit]: 800,
+    setupMocks({
+      historyKey: firstVisitKey,
+      scrollMap: combinedScrollMap,
+      setStorage: false,
     });
     window.scrollTo = vi.fn();
     renderHook(() => useScrollRestoration());
@@ -176,12 +200,13 @@ describe('useScrollRestoration', () => {
       behavior: 'instant',
     });
   });
+
   it('시나리오: 페이지 A(0px) -> 페이지 B(1000px) -> 뒤로가기(Page A) 시 실제 scrollY가 0으로 변해야 함', () => {
     const pageAKey = 'page-a-key';
+    const scrollMap = { [`${pageAKey}-window`]: 0 };
 
     // 1. Setup
-    vi.mocked(getHistoryKey).mockReturnValue(pageAKey);
-    vi.mocked(cleanupOldScrollData).mockReturnValue({ [pageAKey]: 0 });
+    setupMocks({ historyKey: pageAKey, scrollMap });
 
     const { unmount } = renderHook(() => useScrollRestoration());
     unmount(); // 저장 완료 (0)
@@ -191,7 +216,7 @@ describe('useScrollRestoration', () => {
     Object.defineProperty(window, 'scrollY', {
       value: 1000,
       configurable: true,
-      writable: true, // 값을 바꿀 수 있게 허용
+      writable: true,
     });
 
     // 3. [핵심] scrollTo가 호출되면 실제로 scrollY 값을 갱신하도록 Mock 구현
@@ -203,7 +228,7 @@ describe('useScrollRestoration', () => {
     });
 
     // 4. 훅 재실행 (복원 시도)
-    vi.mocked(getHistoryKey).mockReturnValue(pageAKey);
+    setupMocks({ historyKey: pageAKey, scrollMap, setStorage: false });
     renderHook(() => useScrollRestoration());
 
     // 5. 검증: "호출했냐?"가 아니라 "결과가 0이냐?"를 확인
@@ -216,7 +241,7 @@ describe('useScrollRestoration', () => {
     it('높이가 부족하면 재시도해야 한다', async () => {
       let currentHeight = 1000;
 
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       Object.defineProperty(document.documentElement, 'scrollHeight', {
         configurable: true,
@@ -270,7 +295,7 @@ describe('useScrollRestoration', () => {
     });
 
     it('지수 백오프가 올바르게 작동해야 한다', () => {
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       Object.defineProperty(document.documentElement, 'scrollHeight', {
         configurable: true,
@@ -293,7 +318,7 @@ describe('useScrollRestoration', () => {
     });
 
     it('복원 성공 시 타이머를 정리해야 한다', () => {
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
       let currentHeight = 1000;
@@ -346,8 +371,7 @@ describe('useScrollRestoration', () => {
       const testKey = 'test-history-key';
       const scrollPosition = 2000;
 
-      vi.mocked(getHistoryKey).mockReturnValue(testKey);
-      vi.mocked(cleanupOldScrollData).mockReturnValue({});
+      setupMocks({ historyKey: testKey, scrollMap: {} });
 
       renderHook(() => useScrollRestoration());
 
@@ -356,24 +380,17 @@ describe('useScrollRestoration', () => {
       const beforeunloadEvent = new Event('beforeunload');
       window.dispatchEvent(beforeunloadEvent);
 
-      const savedData = JSON.parse(
-        window.sessionStorage.getItem(STORAGE_KEY) || '{}'
-      );
-      expect(savedData[testKey]).toBe(scrollPosition);
+      const savedData = getStorageItem(`${testKey}-window`);
+      expect(savedData).toBe(scrollPosition);
     });
 
     it('새로고침 후 저장된 스크롤 위치로 복원되어야 한다', () => {
       const testKey = 'test-history-key';
       const savedScrollPosition = 1800;
+      const scrollMap = { [`${testKey}-window`]: savedScrollPosition };
 
       // 새로고침 전 저장된 데이터 시뮬레이션
-      const preSavedData = {
-        [testKey]: savedScrollPosition,
-      };
-      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(preSavedData));
-
-      vi.mocked(getHistoryKey).mockReturnValue(testKey);
-      vi.mocked(cleanupOldScrollData).mockReturnValue(preSavedData);
+      setupMocks({ historyKey: testKey, scrollMap });
 
       // 새로고침 후 마운트 (새 컴포넌트 인스턴스)
       renderHook(() => useScrollRestoration());
@@ -391,15 +408,14 @@ describe('useScrollRestoration', () => {
       const keyA = 'history-key-A';
       const keyB = 'history-key-B';
 
+      const pageAScrollMap = { [`${keyA}-window`]: 1000 };
+      const combinedScrollMap = {
+        [`${keyA}-window`]: 1000,
+        [`${keyB}-window`]: 2500,
+      };
+
       // 1. PageA mount
-      vi.mocked(getHistoryKey).mockReturnValue(keyA);
-      window.sessionStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ [keyA]: 1000 }) // PageA는 이전에 1000 위치에서 떠남
-      );
-      vi.mocked(cleanupOldScrollData).mockReturnValue({
-        [keyA]: 1000,
-      });
+      setupMocks({ historyKey: keyA, scrollMap: pageAScrollMap });
 
       const { unmount } = renderHook(() => useScrollRestoration());
 
@@ -413,15 +429,11 @@ describe('useScrollRestoration', () => {
       unmount(); // PageA unmount
 
       // 4. PageB mount (새 컴포넌트 인스턴스)
-      vi.mocked(getHistoryKey).mockReturnValue(keyB);
+      setupMocks({ historyKey: keyB, scrollMap: combinedScrollMap });
       window.sessionStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ [keyA]: 1000 }) // PageA 데이터는 유지
-      );
-      vi.mocked(cleanupOldScrollData).mockReturnValue({
-        [keyA]: 1000,
-        [keyB]: 2500,
-      });
+        JSON.stringify(pageAScrollMap)
+      ); // PageA 데이터만 유지
 
       vi.mocked(window.scrollTo).mockClear();
       renderHook(() => useScrollRestoration());
@@ -436,17 +448,19 @@ describe('useScrollRestoration', () => {
       vi.mocked(window.scrollTo).mockClear();
 
       // Popstate 발생 시 getHistoryKey는 돌아갈 페이지(keyA)를 반환
-      vi.mocked(getHistoryKey).mockReturnValue(keyA);
+      setupMocks({
+        historyKey: keyA,
+        scrollMap: combinedScrollMap,
+        setStorage: false,
+      });
 
       const popstateEvent = new PopStateEvent('popstate');
       window.dispatchEvent(popstateEvent);
 
       // 7. 검증
       // (1) PageB의 스크롤 위치(2500)가 저장되었는지 확인
-      const savedData = JSON.parse(
-        window.sessionStorage.getItem(STORAGE_KEY) || '{}'
-      );
-      expect(savedData[keyB]).toBe(2500);
+      const savedData = getStorageItem(`${keyB}-window`);
+      expect(savedData).toBe(2500);
 
       // (2) PageA의 스크롤 위치(1000)로 복원되었는지 확인
       expect(window.scrollTo).toHaveBeenCalledWith({
@@ -458,7 +472,7 @@ describe('useScrollRestoration', () => {
 
   describe('Behavior 옵션', () => {
     it('behavior를 smooth로 설정할 수 있어야 한다', () => {
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       renderHook(() => useScrollRestoration({ behavior: 'smooth' }));
 
@@ -469,7 +483,7 @@ describe('useScrollRestoration', () => {
     });
 
     it('behavior를 auto로 설정할 수 있어야 한다', () => {
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       renderHook(() => useScrollRestoration({ behavior: 'auto' }));
 
@@ -482,32 +496,38 @@ describe('useScrollRestoration', () => {
 
   describe('SessionStorage 정리', () => {
     it('maxEntries를 초과하면 오래된 데이터를 정리해야 한다', () => {
-      initSaveData();
-
-      const entries: Record<string, number> = {};
+      // 60개 엔트리 생성
+      const scrollMap: Record<string, number> = {};
       for (let i = 0; i < 60; i++) {
-        entries[`key_${i}`] = i * 100;
+        scrollMap[`key_${i}`] = i * 100;
       }
 
-      vi.mocked(cleanupOldScrollData).mockReturnValue(entries);
+      // pruneScrollPositionMap이 50개만 반환하도록 설정 (오래된 10개 제거)
+      const prunedMap: Record<string, number> = {};
+      for (let i = 10; i < 60; i++) {
+        prunedMap[`key_${i}`] = i * 100;
+      }
+
+      setupMocks({ scrollMap });
+      vi.mocked(pruneScrollPositionMap).mockReturnValue(prunedMap);
 
       const { unmount } = renderHook(() => useScrollRestoration());
-
       window.scrollY = 1000;
       unmount();
 
-      // cleanupOldScrollData가 호출되었는지 확인
-      expect(cleanupOldScrollData).toHaveBeenCalled();
+      // sessionStorage에 정리된 결과 + 새로 저장된 1개가 있는지 확인
+      const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
+      expect(Object.keys(savedData).length).toBe(51);
     });
   });
 
   describe('Unmount 시 정리', () => {
     it('unmount 시 진행 중인 타이머를 정리해야 한다', () => {
-      initSaveData();
+      setupMocks({ scrollMap: DEFAULT_WINDOW_SCROLL_MAP });
 
       Object.defineProperty(document.documentElement, 'scrollHeight', {
         configurable: true,
-        value: 1000, // 재시도 유발
+        value: 1000, // retry 유발
       });
 
       const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
@@ -517,7 +537,6 @@ describe('useScrollRestoration', () => {
       // 재시도 진행 중
       vi.advanceTimersByTime(100);
 
-      // unmount 시 타이머 정리
       unmount();
 
       expect(clearTimeoutSpy).toHaveBeenCalled();
