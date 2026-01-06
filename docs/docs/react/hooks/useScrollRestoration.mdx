@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 # useScrollRestoration
 
-브라우저의 뒤로가기/앞으로가기 탐색 시, 이전 스크롤 위치를 저장하고 복원하는 커스텀 훅입니다.
+브라우저 또는 특정 엘리먼트의 이전 스크롤 위치를 저장하고 복원하는 커스텀 훅입니다.
 
 기본적으로 window의 스크롤을 관리하며, `ref`를 사용하여 특정 스크롤 영역을 관리할 수 있습니다.
 
@@ -12,27 +12,58 @@ import { useState, useEffect } from 'react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollRestoration/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
-interface UseScrollRestorationProps {
+interface UseScrollRestorationOptions {
+  id?: string;
   enabled?: boolean;
+  behavior?: ScrollOptions['behavior'];
 }
 
 function useScrollRestoration<T extends HTMLElement>({
+  id,
   enabled,
-}?: UseScrollRestorationProps): {
+  behavior,
+}?: UseScrollRestorationOptions): {
   ref: React.RefObject<T>;
 };
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | `'window'` 또는 `'element'` | 스크롤 복원 식별자 (다중 인스턴스 사용 시 필수)|
+| `enabled` | `boolean` | `true` | 스크롤 복원 활성화 여부 |
+| `behavior` | `ScrollOptions['behavior']` | `'instant'` | 스크롤 복원 동작 방식 (`'auto'`, `'instant'`, `'smooth'`) |
+
+<br />
+
+## Remarks
+
+:::caution 주의사항
+- 한 컴포넌트 내에서 여러 번 훅을 사용할 경우, 각 인스턴스를 구분하려면 `id` 옵션을 명시적으로 부여하세요.
+- 별도의 `id`를 지정하지 않으면, `ref`가 있는 경우 `'element'`, 없는 경우는 `'window'`로 기본값이 설정됩니다.
+- id를 부여하지 않은 경우, 중복 key로 인해 스크롤 복원 동작이 정상적으로 동작하지 않을 수 있으니 주의가 필요합니다.
+- 스크롤 위치 저장은 새로고침, 페이지 이동(뒤로/앞으로가기), 훅의 언마운트 시점에 이루어집니다.
+- 따라서, 컴포넌트가 언마운트되지 않고 유지되는 구조에서 해당 훅을 호출 시 스크롤 복원 동작이 정상적으로 동작하지 않을 수 있으니 주의가 필요합니다. (예: Layout 컴포넌트)
+:::
+
+<br />
+
 ## Usage
 
 ### Window Scroll
 
-```ts title="typescript"
+```tsx title="typescript"
 import { useScrollRestoration } from '@modern-kit/react';
 
 const Page = () => {
-  useScrollRestoration(); // 비활성화 하려면 { enabled: true } 로 세팅하세요.
+  useScrollRestoration();
 
   return (
     <div>
@@ -41,11 +72,12 @@ const Page = () => {
   );
 };
 ```
+
 <br />
 
-### Specific element
+### Specific Element
 
-```ts title="typescript"
+```tsx title="typescript"
 import { useScrollRestoration } from '@modern-kit/react';
 
 const ScrollBox = () => {
@@ -61,12 +93,40 @@ const ScrollBox = () => {
   );
 };
 ```
+
+<br />
+
+### Multiple Instances
+
+한 컴포넌트에서 여러 스크롤 영역을 관리할 때는 `id`를 명시적으로 부여해야 합니다.
+
+```tsx title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const MultiScrollPage = () => {
+  useScrollRestoration(); // window 스크롤 (기본 id: 'window')
+  const { ref: sidebarRef } = useScrollRestoration<HTMLDivElement>({ id: 'sidebar' });
+  const { ref: contentRef } = useScrollRestoration<HTMLDivElement>({ id: 'content' });
+
+  return (
+    <div>
+      <aside ref={sidebarRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* 사이드바 컨텐츠 */}
+      </aside>
+      <main ref={contentRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* 메인 컨텐츠 */}
+      </main>
+    </div>
+  );
+};
+```
+
 <br />
 
 ### Example1
 
 export const Example1 = () => {
-  const { ref } = useScrollRestoration({ behavior: 'smooth' }); 
+  const { ref } = useScrollRestoration({ id: 'example1', behavior: 'smooth' }); 
 
   return (
     <div>
@@ -112,7 +172,7 @@ export const Example1 = () => {
 ### Example2 (데이터 로딩 후 스크롤 위치 복원)
 
 export const Example2 = () => {
-  const { ref } = useScrollRestoration({ behavior: 'smooth' }); 
+  const { ref } = useScrollRestoration({ id: 'example2', behavior: 'smooth' }); 
 
   const [list, setList] = useState([]);
 
@@ -162,3 +222,78 @@ export const Example2 = () => {
 <Example2 />
 
 <br />
+
+### Example3 (다중 인스턴스 사용)
+
+export const Example3 = () => {
+  const { ref: sidebarRef } = useScrollRestoration({ id: 'sidebar', behavior: 'smooth' }); 
+  const { ref: contentRef } = useScrollRestoration({ id: 'content', behavior: 'smooth' });
+
+  return (
+    <div>
+      <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
+      <p>2. 브라우저의 <strong>'뒤로 가기'</strong> 버튼을 누르세요.</p>
+      <p>3. 스크롤 위치가 유지되어 있는지 확인하세요.</p>
+
+      <div 
+        ref={contentRef} 
+        style={{ 
+          height: '300px',      
+          overflowY: 'scroll',   
+          border: '2px solid #333', 
+          padding: '20px',
+          borderRadius: '8px'
+        }}
+      >
+       
+        {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+          <div 
+            key={i} 
+            style={{ 
+              height: '80px', 
+              background: i % 2 === 0 ? '#e0e7ff' : '#f3f4f6',
+              marginBottom: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            데이터(1번째 영역) {i + 1}
+          </div>
+        ))}
+      </div>
+
+      <br />
+
+      <div 
+        ref={sidebarRef} 
+        style={{ 
+          height: '300px',      
+          overflowY: 'scroll',   
+          border: '2px solid #333', 
+          padding: '20px',
+          borderRadius: '8px'
+        }}
+      >
+       
+        {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+          <div 
+            key={i} 
+            style={{ 
+              height: '80px', 
+              background: i % 2 === 0 ? '#e0e7ff' : '#f3f4f6',
+              marginBottom: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            데이터(2번째 영역) {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+<Example3 />
