@@ -1,6 +1,7 @@
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+For coding style and rules, refer to `.cursorrules`.
 
 ## Project Overview
 
@@ -72,17 +73,53 @@ import { useInterval } from '@modern-kit/react/dist/hooks/useInterval';
 
 ## Code Standards
 
-- **TypeScript 5.1+** with strict configuration
+- **TypeScript 5.1+** with strict mode enabled
 - **ESLint** with React and TypeScript rules
-- **No React.FC** usage (per ESLint config)
+- **No React.FC** usage (ESLint rule enforced)
+- **No default exports** - use named exports
 - **CSS Modules** support in React package
-- Korean documentation and comments preferred
-- Node 18+ and React 18+ requirements
+- **Korean language** for documentation, comments, and commit messages
+- **Node 24+**, **Yarn 4+**, and **React 18+** requirements
+- Always use `yarn` commands (not npm) due to Yarn Berry setup
 
 ## Key Development Notes
 
 - Packages use workspace protocol (`workspace:^`) for internal dependencies
-- All packages build to `dist/` with dual CJS/ESM exports
+- All packages build to `dist/` with dual CJS/ESM exports using Rollup
 - Tests are excluded from builds via Lerna ignoreChanges
-- Documentation uses Docusaurus with automatic API generation
-- Use `yarn` commands consistently (not npm) due to Yarn Berry setup
+- Test files: `*.spec.ts` (general), `*.spec.tsx` (with React components)
+- Documentation uses Docusaurus (`.md` for utils, `.mdx` for React with interactive examples)
+- JSDoc comments with tags: @param, @returns, @example, @throws, etc.
+- AAA pattern for tests: Arrange-Act-Assert
+
+## File Structure Convention
+
+```
+packages/[package-name]/
+  src/
+    [category]/
+      [feature]/
+        index.ts              # Main implementation
+        [feature].spec.ts     # Tests
+        [feature].utils.ts    # Utilities (if needed)
+```
+
+## Naming Conventions
+
+- Files: camelCase or PascalCase (PascalCase for components)
+- Variables/Functions: camelCase
+- Types/Interfaces: PascalCase
+- Constants: UPPER_SNAKE_CASE
+- Custom Hooks: `use` prefix
+- Test descriptions: Korean language without "should"
+
+## AI Assistant Guidelines
+
+When generating code:
+- Maintain consistency with existing patterns
+- Generate tests alongside implementation code
+- Prioritize type safety (avoid `any`, prefer `unknown` or generics)
+- Use `export type` for type-only exports
+- Consider tree-shaking in code structure
+- Handle SSR environments when using browser APIs
+- Write all documentation and comments in Korean

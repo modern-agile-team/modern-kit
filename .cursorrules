@@ -1,0 +1,167 @@
+# Modern-kit Cursor Rules
+
+This file helps Cursor IDE understand the project's coding style and rules.
+For detailed project architecture and development workflow, refer to `CLAUDE.md`.
+
+## Project Overview
+- TypeScript monorepo (Lerna + Yarn Berry v4)
+- @modern-kit/react, @modern-kit/utils, @modern-kit/types packages
+- Node 24+, Yarn 4+, React 18+
+- CJS/ESM dual format, Next.js SSR compatible
+
+## Coding Style
+
+### TypeScript
+- Use TypeScript 5.1+ with strict mode enabled
+- Write clear and specific type definitions
+- Avoid `any` type, prefer `unknown` or generics
+- Use `export type` for type-only exports
+
+### React
+- Based on React 18+ environment
+- **No React.FC usage** (ESLint rule)
+- Function components must have explicit props types and return types
+- Custom hooks must use `use` prefix
+- Separate directories for components and hooks
+
+### Naming Conventions
+- File names: camelCase or PascalCase (PascalCase for components)
+- Variables/Functions: camelCase
+- Types/Interfaces: PascalCase
+- Constants: UPPER_SNAKE_CASE
+- Test files: `*.spec.ts` for general cases, `*.spec.tsx` when using React components internally
+
+## File Structure
+
+### Package Structure
+```
+packages/[package-name]/
+  src/
+    [category]/
+      [feature]/
+        index.ts          # Main implementation
+        [feature].spec.ts # Tests
+        [feature].utils.ts # Utilities (if needed)
+```
+
+### Export Strategy
+- Each feature in independent directory
+- SubPath imports support required
+- Use named exports in index.ts (avoid default exports)
+
+## Testing
+
+### Basic Principles
+- Use Vitest with --typecheck flag
+- Use React Testing Library for React code
+- Test browser APIs in jsdom environment
+- Use Istanbul for coverage reporting
+
+### Test Structure
+```typescript
+import { describe, it, expect } from 'vitest';
+
+describe('[feature name]', () => {
+  it('[expected behavior]', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+});
+```
+
+### Test Coverage
+- All public APIs must have tests
+- Include edge cases and error cases
+- Write type tests when necessary
+
+## Documentation
+
+### Comments and Documentation
+- **Write in Korean** (code comments, documentation, commit messages)
+- Use JSDoc style comments for functions/types
+  - Use tags: description, param, returns, example, see, throws, since, version, remarks, template, throws, etc.
+- Add inline comments for complex logic
+
+### Documentation Structure
+- Docusaurus-based documentation
+- Each feature has independent .md or .mdx file
+  - Use .md files for utils (no visual examples needed)
+  - Use .mdx files for react (interactive examples needed)
+- Must include usage examples
+
+### Writing Documentation
+- Write in Korean
+- Include practical, usable examples
+- Write with good readability and UI/UX design
+- Explain main options and return values
+- Format options as tables
+- Use tags: caution, tip, warning, info, etc.
+
+## Development Commands
+
+### Build
+- Use Rollup for simultaneous CJS and ESM generation
+- Output build results to dist/ directory
+- Generate type definition (.d.ts) files
+
+### Dependencies
+- Use `workspace:^` protocol for internal package dependencies
+- Set peerDependencies carefully
+- Clearly distinguish between devDependencies and dependencies
+
+## Command Usage
+
+### Root Level
+- `yarn build` - Full build (includes lint, typecheck, test)
+- `yarn test` - Run all tests
+- `yarn typecheck` - Type checking
+- `yarn eslint packages` - Linting
+
+### Package Level
+- `yarn test:run` - Test + coverage + typecheck
+- `yarn build` - Build specific package
+
+### Important Notes
+- **Must use yarn** (do not use npm)
+- Install to appropriate workspace when adding packages
+
+## Code Quality
+
+### ESLint
+- All code must comply with ESLint rules
+- React and TypeScript rules enabled
+- Fix lint errors before committing
+
+### Git Commits
+- Write commit messages in Korean
+- Commit in meaningful units
+- Commit after tests and type checks pass
+
+### Compatibility
+- Based on Node 24+ environment
+- Based on Yarn 4+ environment
+- Based on React 18+ environment
+- Consider SSR environment when using browser APIs
+
+### Performance
+- Write code considering tree-shaking
+- Prevent unnecessary re-renders (React)
+- Consider memoization for heavy computations
+
+### Security
+- Validate user input
+- Prevent XSS
+- Prevent exposure of sensitive information
+
+## AI Coding Assistant Usage
+
+### Code Generation
+- Maintain consistency with existing project patterns
+- Generate test code together
+- Prioritize type safety
+
+### Refactoring
+- Ensure existing tests don't break
+- Clearly understand scope of changes
+- Recommend gradual refactoring
