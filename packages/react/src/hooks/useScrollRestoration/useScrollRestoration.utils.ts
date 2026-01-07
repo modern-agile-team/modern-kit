@@ -1,6 +1,16 @@
 import { getUniqId } from '@modern-kit/utils';
 
 /**
+ * @description 현재 URL에 hash가 있는지 확인합니다.
+ *
+ * @returns {boolean} hash 존재 여부
+ */
+export const hasHash = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return Boolean(window.location.hash);
+};
+
+/**
  * @description 현재 window.history의 고유 식별자(Key)를 가져오거나 생성합니다.
  *
  * history.state에 이미 key가 존재하면 해당 값을 반환하고,
