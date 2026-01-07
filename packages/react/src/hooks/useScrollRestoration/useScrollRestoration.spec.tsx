@@ -10,16 +10,10 @@ const getParsedStorageItem = () => {
   return rawData ? JSON.parse(rawData) : {};
 };
 
-/**
- * history.state를 설정하여 특정 historyKey를 가진 상태로 만드는 헬퍼 함수
- */
 const setHistoryState = (key: string) => {
   window.history.replaceState({ 'mk-scroll-key': key }, '');
 };
 
-/**
- * 저장된 스크롤 데이터를 sessionStorage에 미리 설정하는 헬퍼 함수
- */
 const setStorageData = (scrollMap: Record<string, number>) => {
   window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(scrollMap));
 };
@@ -42,6 +36,12 @@ beforeEach(() => {
 
   cleanup();
   vi.useFakeTimers();
+
+  // requestAnimationFrame 모킹 (즉시 실행)
+  globalThis.requestAnimationFrame = vi.fn((cb) => {
+    cb(0);
+    return 0;
+  }) as any;
 
   window.scrollTo = vi.fn();
   HTMLElement.prototype.scrollTo = vi.fn();
@@ -68,7 +68,7 @@ afterEach(() => {
 });
 
 describe('useScrollRestoration', () => {
-  it('언마운트 시점에 스크롤 위치를 저장한다.', () => {
+  it('언마운트 시점에 스크롤 위치를 저장한다.', async () => {
     const testKey = 'test-history-key';
     setHistoryState(testKey);
 
@@ -259,7 +259,7 @@ describe('useScrollRestoration', () => {
         value: 1000, // 계속 부족
       });
 
-      renderHook(() => useScrollRestoration());
+      renderHook(() => useScrollRestoration({ retry: 5 }));
 
       expect(window.scrollTo).not.toHaveBeenCalled();
 
@@ -445,9 +445,9 @@ describe('useScrollRestoration', () => {
       const testKey = 'test-history-key';
       setHistoryState(testKey);
 
-      // 60개 엔트리 생성 (최대 50개를 초과)
+      // 120개 엔트리 생성 (최대 100개를 초과)
       const scrollMap: Record<string, number> = {};
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 120; i++) {
         scrollMap[`key_${i}`] = i * 100;
       }
 
@@ -458,9 +458,9 @@ describe('useScrollRestoration', () => {
       unmount();
 
       // sessionStorage에 정리된 결과 확인
-      // pruneScrollPositionMap은 실제로 실행되어 최대 50개만 유지 + 새로 저장된 1개
+      // pruneScrollPositionMap은 실제로 실행되어 최대 100개만 유지 + 새로 저장된 1개
       const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
-      expect(Object.keys(savedData).length).toBeLessThanOrEqual(51);
+      expect(Object.keys(savedData).length).toBeLessThanOrEqual(101);
     });
   });
 
