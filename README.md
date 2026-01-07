@@ -30,7 +30,7 @@
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 ```shell
 npm i @modern-kit/react
 ```
@@ -82,7 +82,7 @@ const App = () => {
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 
 ```shell
 npm i @modern-kit/utils
@@ -125,7 +125,7 @@ const result = flatten(arr); // [1, 2, 3, 4, 5]
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 
 ```shell
 npm i @modern-kit/types

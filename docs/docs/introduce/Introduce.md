@@ -16,7 +16,7 @@
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 
 ```shell
 npm i @modern-kit/react
@@ -64,7 +64,7 @@ const result = flatten(arr); // [1, 2, 3, 4, 5]
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 
 ```shell
 npm i @modern-kit/utils
@@ -107,18 +107,18 @@ const result = flatten(arr); // [1, 2, 3, 4, 5]
 
 <br />
 
-<b>Download</b>
+<b>Install</b>
 
 ```shell
-npm i @modern-kit/types
+npm i -D @modern-kit/types
 ```
 
 ```shell
-yarn add @modern-kit/types
+yarn add -D @modern-kit/types
 ```
 
 ```shell
-pnpm i @modern-kit/types
+pnpm i -D @modern-kit/types
 ```
 
 <br />
