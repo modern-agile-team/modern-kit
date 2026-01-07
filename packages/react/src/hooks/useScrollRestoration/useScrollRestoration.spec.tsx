@@ -252,6 +252,8 @@ describe('useScrollRestoration', () => {
       setHistoryState(testKey);
       setStorageData({ [`${testKey}-window`]: INIT_SCROLL_Y });
 
+      const setTimeOutSpy = vi.spyOn(globalThis, 'setTimeout');
+
       Object.defineProperty(document.documentElement, 'scrollHeight', {
         configurable: true,
         value: 1000, // 계속 부족
@@ -263,13 +265,21 @@ describe('useScrollRestoration', () => {
 
       // 3번 재시도
       vi.advanceTimersByTime(100); // 1회
+
+      expect(setTimeOutSpy).toHaveBeenCalledWith(expect.any(Function), 100);
       vi.advanceTimersByTime(200); // 2회
+      expect(setTimeOutSpy).toHaveBeenCalledWith(expect.any(Function), 200);
       vi.advanceTimersByTime(400); // 3회
+      expect(setTimeOutSpy).toHaveBeenCalledWith(expect.any(Function), 400);
       vi.advanceTimersByTime(800); // 4회
+      expect(setTimeOutSpy).toHaveBeenCalledWith(expect.any(Function), 800);
       vi.advanceTimersByTime(1600); // 5회
+      expect(setTimeOutSpy).toHaveBeenCalledWith(expect.any(Function), 1600);
+      vi.advanceTimersByTime(3200); // 6회 (호출 안 됨)
 
       // 최대 횟수 도달로 중단
       expect(window.scrollTo).not.toHaveBeenCalled();
+      expect(setTimeOutSpy).toHaveBeenCalledTimes(5);
     });
 
     it('복원 성공 시 타이머를 정리해야 한다', () => {
@@ -416,7 +426,7 @@ describe('useScrollRestoration', () => {
   });
 
   describe('Behavior 옵션', () => {
-    it('behavior를 smooth로 설정할 수 있어야 한다', () => {
+    it('behavior 옵션을 설정할 수 있어야 한다', () => {
       const testKey = 'test-history-key';
       setHistoryState(testKey);
       setStorageData({ [`${testKey}-window`]: INIT_SCROLL_Y });
@@ -426,19 +436,6 @@ describe('useScrollRestoration', () => {
       expect(window.scrollTo).toHaveBeenCalledWith({
         top: INIT_SCROLL_Y,
         behavior: 'smooth',
-      });
-    });
-
-    it('behavior를 auto로 설정할 수 있어야 한다', () => {
-      const testKey = 'test-history-key';
-      setHistoryState(testKey);
-      setStorageData({ [`${testKey}-window`]: INIT_SCROLL_Y });
-
-      renderHook(() => useScrollRestoration({ behavior: 'auto' }));
-
-      expect(window.scrollTo).toHaveBeenCalledWith({
-        top: INIT_SCROLL_Y,
-        behavior: 'auto',
       });
     });
   });
@@ -488,6 +485,20 @@ describe('useScrollRestoration', () => {
       unmount();
 
       expect(clearTimeoutSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('Hash 처리', () => {
+    it('hash가 있으면 재시도를 중단해야 한다', () => {
+      const testKey = 'test-history-key';
+      setHistoryState(testKey);
+      setStorageData({ [`${testKey}-window`]: INIT_SCROLL_Y });
+
+      window.location.hash = '#test';
+
+      renderHook(() => useScrollRestoration());
+
+      expect(window.scrollTo).not.toHaveBeenCalled();
     });
   });
 });

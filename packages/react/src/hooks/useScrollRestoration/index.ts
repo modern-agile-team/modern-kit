@@ -4,6 +4,7 @@ import { StorageManager, isWindow } from '@modern-kit/utils';
 import {
   pruneScrollPositionMap,
   getHistoryKey,
+  hasHash,
 } from './useScrollRestoration.utils';
 import { usePreventBrowserScrollRestoration } from '../usePreventBrowserScrollRestoration';
 
@@ -154,6 +155,11 @@ export function useScrollRestoration<T extends HTMLElement>({
   }, [getStorageKey]);
 
   const restoreScrollPosition = useCallback(() => {
+    if (hasHash()) {
+      resetRetry();
+      return;
+    }
+
     const scheduleRetry = () => {
       if (retryCountRef.current >= MAX_RETRY_COUNT) {
         resetRetry();
