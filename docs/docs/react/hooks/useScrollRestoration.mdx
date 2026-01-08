@@ -1,9 +1,9 @@
 import { useScrollRestoration } from '@modern-kit/react';
-import * as ModernKit from '@modern-kit/react';
+import { useState, useEffect } from 'react';
 
 # useScrollRestoration
 
-브라우저의 뒤로가기/앞으로가기 탐색 시, 이전 스크롤 위치를 저장하고 복원하는 커스텀 훅입니다.
+브라우저 또는 특정 엘리먼트의 이전 스크롤 위치를 저장하고 복원하는 커스텀 훅입니다.
 
 기본적으로 window의 스크롤을 관리하며, `ref`를 사용하여 특정 스크롤 영역을 관리할 수 있습니다.
 
@@ -12,27 +12,74 @@ import * as ModernKit from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollRestoration/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
-interface UseScrollRestorationProps {
+interface UseScrollRestorationOptions {
+  id?: string;
   enabled?: boolean;
+  behavior?: ScrollOptions['behavior'];
+  retry?: number;
 }
 
-const useScrollRestoration: <T extends HTMLElement>({
+function useScrollRestoration<T extends HTMLElement>({
+  id,
   enabled,
-}?: UseScrollRestorationProps) => {
+  behavior,
+}?: UseScrollRestorationOptions): {
   ref: React.RefObject<T>;
 };
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | `'window'` 또는 `'element'` | 스크롤 복원 식별자 (다중 인스턴스 사용 시 필수)|
+| `enabled` | `boolean` | `true` | 스크롤 복원 활성화 여부 |
+| `behavior` | `ScrollOptions['behavior']` | `'instant'` | 스크롤 복원 동작 방식 (`'auto'`, `'instant'`, `'smooth'`) |
+| `retry` | `number` | `5` | 스크롤 복원 재시도 횟수 (지수 백오프 적용) |
+
+<br />
+
+## Remarks
+
+:::caution 주의사항
+- 콘텐츠가 비동기적으로 로드되는 경우 혹은 이미지 로드로 인해 저장된 스크롤 위치보다 페이지 높이가 작을 수 있습니다.
+  - 이런 경우 자동으로 재시도하며, `지수 백오프(exponential backoff)` 방식으로 재시도 간격이 증가합니다.
+  - 재시도 간격: 100ms → 200ms → 400ms → 800ms → 1600ms
+  - 기본 최대 재시도 횟수는 `5회`이며, `retry` 옵션으로 조정할 수 있습니다.
+- 한 컴포넌트 내에서 여러 번 훅을 사용할 경우, 각 인스턴스를 구분하려면 `id` 옵션을 명시적으로 부여하세요.
+  - 별도의 `id`를 지정하지 않으면, `ref`가 있는 경우 `'element'`, 없는 경우는 `'window'`로 기본값이 설정됩니다.
+  - id를 부여하지 않은 경우, `중복 key`로 인해 스크롤 복원 동작이 정상적으로 동작하지 않을 수 있으니 주의가 필요합니다.
+- 스크롤 위치 저장은 `새로고침`, `페이지 이동(뒤로/앞으로가기)`, `훅의 언마운트` 시점에 이루어집니다.
+  - 따라서, 컴포넌트가 언마운트되지 않고 유지되는 구조에서 해당 훅을 호출 시 스크롤 복원 동작이 정상적으로 동작하지 않을 수 있으니 주의가 필요합니다. (예: Layout 컴포넌트)
+- URL에 `hash fragment(#section)`가 있는 경우 스크롤 복원을 하지 않습니다.
+  - 이는 hash 스크롤이라는 명확한 사용자 의도를 존중하고, 브라우저의 표준 동작과 충돌을 방지하기 위함입니다.
+:::
+
+<br />
+
+:::tip React Router 사용 시
+- React Router는 자체적으로 `location.key`를 제공합니다.
+- `useScrollRestoration`은 자동으로 이를 감지하여 사용합니다.
+- 별도 설정 없이도 페이지별 스크롤 위치가 정확히 복원됩니다.
+:::
+
+<br />
+
 ## Usage
 
 ### Window Scroll
 
-```ts title="typescript"
+```tsx title="typescript"
 import { useScrollRestoration } from '@modern-kit/react';
 
 const Page = () => {
-  useScrollRestoration(); // 비활성화 하려면 { enabled: true } 로 세팅하세요.
+  useScrollRestoration();
 
   return (
     <div>
@@ -41,11 +88,12 @@ const Page = () => {
   );
 };
 ```
+
 <br />
 
-### Specific element
+### Specific Element
 
-```ts title="typescript"
+```tsx title="typescript"
 import { useScrollRestoration } from '@modern-kit/react';
 
 const ScrollBox = () => {
@@ -61,48 +109,357 @@ const ScrollBox = () => {
   );
 };
 ```
+
 <br />
 
-### Example
+### Multiple Instances
 
-export const Example = () => {
-  const { ref } = useScrollRestoration(); 
+한 컴포넌트에서 여러 스크롤 영역을 관리할 때는 `id`를 명시적으로 부여해야 합니다.
+
+```tsx title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const MultiScrollPage = () => {
+  useScrollRestoration(); // window 스크롤 (기본 id: 'window')
+  const { ref: sidebarRef } = useScrollRestoration<HTMLDivElement>({ id: 'sidebar' });
+  const { ref: contentRef } = useScrollRestoration<HTMLDivElement>({ id: 'content' });
 
   return (
     <div>
-      <p>1. 아래 파란 박스 안에서 <strong>스크롤을 중간쯤 내리세요.</strong></p>
+      <aside ref={sidebarRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* 사이드바 컨텐츠 */}
+      </aside>
+      <main ref={contentRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* 메인 컨텐츠 */}
+      </main>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example (Window Scroll)
+
+export const Example = () => {
+  useScrollRestoration();
+
+  return (
+    <div>
+      <p>1. 전체 페이지 스크롤을 중간쯤 내리세요.</p>
       <p>2. 브라우저의 <strong>'뒤로 가기'</strong> 버튼을 누르세요.</p>
       <p>3. 스크롤 위치가 유지되어 있는지 확인하세요.</p>
+    </div>
+  );
+}
+
+<Example />
+
+<br />
+
+### Example1 (특정 요소의 스크롤 복원)
+
+특정 영역(예: 스크롤 가능한 컨테이너)의 스크롤 위치를 관리하는 기본 예제입니다.
+
+`ref`를 사용하여 스크롤 위치를 복원할 요소를 지정합니다.
+
+export const Example1 = () => {
+  const { ref } = useScrollRestoration({ id: 'example1', behavior: 'smooth' }); 
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 테스트 방법</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>아래 <strong>스크롤 박스를 중간쯤</strong> 내리세요 (예: "항목 10" 정도까지)</li>
+          <li>브라우저의 <strong>'뒤로 가기'</strong> 버튼을 클릭하세요</li>
+          <li>다시 돌아오면 스크롤 위치가 <strong>정확히 복원</strong>됩니다! ✨</li>
+        </ol>
+      </div>
 
       <div 
         ref={ref} 
         style={{ 
           height: '300px',      
           overflowY: 'scroll',   
-          border: '2px solid #333', 
+          border: '2px solid #6366f1', 
           padding: '20px',
-          borderRadius: '8px'
+          borderRadius: '8px',
+          backgroundColor: '#f8f9ff'
         }}
       >
-       
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 20 }, (_, i) => i).map((i) => (
           <div 
             key={i} 
             style={{ 
               height: '80px', 
-              background: i % 2 === 0 ? '#e0e7ff' : '#f3f4f6',
+              background: i % 2 === 0 ? '#e0e7ff' : '#c7d2fe',
               marginBottom: '10px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              borderRadius: '4px',
+              fontWeight: '500',
+              fontSize: '14px'
             }}
           >
-            데이터 {i + 1}
+            📌 항목 {i + 1}
           </div>
         ))}
+      </div>
+
+      <div style={{ 
+        marginTop: '15px', 
+        padding: '12px', 
+        backgroundColor: '#f0f9ff', 
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 핵심:</strong> <code>ref</code>를 통해 특정 요소의 스크롤 위치를 추적합니다. 
+        <code>behavior: 'smooth'</code> 옵션으로 부드러운 복원 애니메이션을 적용했습니다.
       </div>
     </div>
   );
 };
 
-<Example />
+<Example1 />
+
+<br />
+
+### Example2 (비동기 데이터 로딩 후 스크롤 복원)
+
+실제 애플리케이션에서는 데이터가 비동기로 로드되는 경우가 많습니다.
+
+이 예제는 **데이터 로딩 중**에도 스크롤 위치가 정확히 복원되는 것을 보여줍니다.
+
+내부적으로 **재시도 메커니즘**(최대 5회, 지수 백오프)을 통해 콘텐츠가 완전히 로드될 때까지 기다립니다.
+
+export const Example2 = () => {
+
+  const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { ref } = useScrollRestoration({ id: 'example2', behavior: 'smooth' }); 
+
+  useEffect(() => {
+    // API 호출 시뮬레이션 (1초 딜레이)
+    setTimeout(() => {
+      setList(Array.from({ length: 20 }, (_, i) => i));
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 테스트 방법</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>데이터가 로딩될 때까지 기다리세요 (1초)</li>
+          <li>아래 <strong>스크롤 박스를 중간쯤</strong> 내리세요</li>
+          <li>브라우저의 <strong>'뒤로 가기'</strong> 버튼을 클릭하세요</li>
+          <li>다시 돌아오면:
+            <ul style={{ marginTop: '5px' }}>
+              <li>"Loading..." 표시 → 데이터 로딩 완료</li>
+              <li>자동으로 <strong>이전 스크롤 위치로 복원</strong>됩니다! 🎯</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div 
+        ref={ref} 
+        style={{ 
+          height: '300px',      
+          overflowY: 'scroll',   
+          border: '2px solid #f59e0b', 
+          padding: '20px',
+          borderRadius: '8px',
+          backgroundColor: '#fffbeb'
+        }}
+      >
+        {isLoading ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '200px',
+            fontSize: '16px',
+            color: '#f59e0b',
+            fontWeight: '500'
+          }}>
+            ⏳ Loading...
+          </div>
+        ) : (
+          list.map((i) => (
+            <div 
+              key={i} 
+              style={{ 
+                height: '80px', 
+                background: i % 2 === 0 ? '#fef3c7' : '#fde68a',
+                marginBottom: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '4px',
+                fontWeight: '500',
+                fontSize: '14px'
+              }}
+            >
+              🔄 데이터 항목 {i + 1}
+            </div>
+          ))
+        )}
+      </div>
+
+      <div style={{ 
+        marginTop: '15px', 
+        padding: '12px', 
+        backgroundColor: '#fef3c7', 
+        borderLeft: '3px solid #f59e0b',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 핵심:</strong> 콘텐츠 높이가 부족하면 자동으로 <strong>재시도</strong>합니다.
+        <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
+          <li>재시도 간격: 100ms → 200ms → 400ms → 800ms → 1600ms</li>
+          <li>최대 재시도: 5회 (기본값, <code>retry</code> 옵션으로 변경 가능)</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+<Example2 />
+
+<br />
+
+### Example3 (다중 인스턴스 사용)
+
+한 페이지에서 여러 스크롤 영역을 독립적으로 관리해야 하는 경우, 각 인스턴스에 고유한 `id`를 부여해야 합니다.
+
+예를 들어, 사이드바와 메인 콘텐츠 영역이 각각 독립적인 스크롤을 가지는 경우:
+
+export const Example3 = () => {
+  // 각 스크롤 영역에 고유한 id를 부여
+  const { ref: contentRef } = useScrollRestoration({ id: 'main-content', behavior: 'smooth' });
+  const { ref: sidebarRef } = useScrollRestoration({ id: 'sidebar-menu', behavior: 'smooth' });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '20px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 테스트 방법</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px' }}>
+          <li><strong>파란색 영역(메인 콘텐츠)</strong>을 절반 정도 스크롤하세요.</li>
+          <li><strong>초록색 영역(사이드바)</strong>도 절반 정도 스크롤하세요.</li>
+          <li>브라우저의 <strong>'뒤로 가기'</strong> 버튼을 누르세요.</li>
+          <li>다시 돌아오면 <strong>두 영역 모두</strong> 스크롤 위치가 정확히 복원됩니다! ✨</li>
+        </ol>
+      </div>
+
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '20px',
+        '@media (max-width: 768px)': {
+          gridTemplateColumns: '1fr'
+        }
+      }}>
+        {/* 메인 콘텐츠 영역 (파란색) */}
+        <div>
+          <div style={{ 
+            fontSize: '14px', 
+            fontWeight: 'bold', 
+            marginBottom: '8px',
+            color: '#4f46e5'
+          }}>
+            📄 메인 콘텐츠 (id: "main-content")
+          </div>
+          <div 
+            ref={contentRef} 
+            style={{ 
+              height: '300px',      
+              overflowY: 'scroll',   
+              border: '2px solid #4f46e5', 
+              padding: '20px',
+              borderRadius: '8px',
+              backgroundColor: '#f5f5ff'
+            }}
+          >
+            {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+              <div 
+                key={i} 
+                style={{ 
+                  height: '80px', 
+                  background: i % 2 === 0 ? '#e0e7ff' : '#c7d2fe',
+                  marginBottom: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '4px',
+                  fontWeight: '500'
+                }}
+              >
+                콘텐츠 항목 {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 사이드바 영역 (초록색) */}
+        <div>
+          <div style={{ 
+            fontSize: '14px', 
+            fontWeight: 'bold', 
+            marginBottom: '8px',
+            color: '#16a34a'
+          }}>
+            📑 사이드바 메뉴 (id: "sidebar-menu")
+          </div>
+          <div 
+            ref={sidebarRef} 
+            style={{ 
+              height: '300px',      
+              overflowY: 'scroll',   
+              border: '2px solid #16a34a', 
+              padding: '20px',
+              borderRadius: '8px',
+              backgroundColor: '#f0fdf4'
+            }}
+          >
+            {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+              <div 
+                key={i} 
+                style={{ 
+                  height: '80px', 
+                  background: i % 2 === 0 ? '#bbf7d0' : '#86efac',
+                  marginBottom: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '4px',
+                  fontWeight: '500'
+                }}
+              >
+                메뉴 항목 {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ 
+        marginTop: '20px', 
+        padding: '15px', 
+        backgroundColor: '#f3f4f6', 
+        borderRadius: '8px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 포인트:</strong> 각 영역의 스크롤 위치가 <strong>독립적으로</strong> 저장되고 복원됩니다. 
+        이는 <code>id</code> 옵션을 통해 각 인스턴스를 구분하기 때문입니다.
+      </div>
+    </div>
+  );
+};
+
+<Example3 />
