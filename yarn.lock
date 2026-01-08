@@ -5988,12 +5988,12 @@ __metadata:
     "@modern-kit/utils": "workspace:*"
     "@tsconfig/docusaurus": "npm:^2.0.4"
     "@types/node": "npm:^25.0.3"
-    "@types/react": "npm:^18.2.20"
+    "@types/react": "npm:^19.2.7"
     "@types/react-dom": "npm:^18.2.7"
     clsx: "npm:^2.1.1"
     gh-pages: "npm:^6.0.0"
     prism-react-renderer: "npm:^2.4.1"
-    react: "npm:^18.2.0"
+    react: "npm:^19.2.3"
     react-dom: "npm:^18.2.0"
     typescript: "npm:^5.1.6"
   languageName: unknown
@@ -6010,7 +6010,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.5.0"
     "@testing-library/react": "npm:^16.2.0"
     "@testing-library/user-event": "npm:^14.5.1"
-    "@types/react": "npm:^18.2.20"
+    "@types/react": "npm:^19.2.7"
     "@types/react-dom": "npm:^18.2.7"
     "@vitest/coverage-istanbul": "npm:^4.0.4"
     autoprefixer: "npm:^10.4.20"
@@ -6021,7 +6021,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.0"
     jsdom: "npm:^27.0.0"
     postcss: "npm:^8.4.41"
-    react: "npm:^18.2.0"
+    react: "npm:^19.2.3"
     react-dom: "npm:^18.2.0"
     rollup: "npm:^4.24.0"
     rollup-plugin-dts: "npm:^6.1.1"
@@ -7733,13 +7733,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.20":
+"@types/react@npm:*":
   version: 18.3.1
   resolution: "@types/react@npm:18.3.1"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/18d856c12a4ec93f3cda2d58ef3d77a9480818afd3af895f812896fb82cfca1f35a692ab1add4ce826a4eb58a071624c7d1c8c6c4ccfb81c100d2916dc607614
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^19.2.7":
+  version: 19.2.7
+  resolution: "@types/react@npm:19.2.7"
+  dependencies:
+    csstype: "npm:^3.2.2"
+  checksum: 10c0/a7b75f1f9fcb34badd6f84098be5e35a0aeca614bc91f93d2698664c0b2ba5ad128422bd470ada598238cebe4f9e604a752aead7dc6f5a92261d0c7f9b27cfd1
   languageName: node
   linkType: hard
 
@@ -10990,6 +10999,13 @@ __metadata:
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: 10c0/32c038af259897c807ac738d9eab16b3d86747c72b09d5c740978e06f067f9b7b1737e1b75e407c7ab1fe1543dc95f20e202b4786aeb1b8d3bdf5d5ce655e6c6
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.2.2":
+  version: 3.2.3
+  resolution: "csstype@npm:3.2.3"
+  checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce
   languageName: node
   linkType: hard
 
@@ -21079,12 +21095,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
+"react@npm:^19.2.3":
+  version: 19.2.3
+  resolution: "react@npm:19.2.3"
+  checksum: 10c0/094220b3ba3a76c1b668f972ace1dd15509b157aead1b40391d1c8e657e720c201d9719537375eff08f5e0514748c0319063392a6f000e31303aafc4471f1436
   languageName: node
   linkType: hard
 
