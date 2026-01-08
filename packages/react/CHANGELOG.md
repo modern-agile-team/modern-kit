@@ -1,5 +1,13 @@
 # @modern-kit/react
 
+## 2.9.0
+
+### Minor Changes
+
+- [#1027](https://github.com/modern-agile-team/modern-kit/pull/1027) [`4976c32`](https://github.com/modern-agile-team/modern-kit/commit/4976c32569c64a90846c21e7ff0f719189a6dd36) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): usePreventBrowserScrollRestoration 신규 훅 추가 - @ssi02014
+
+- [#1027](https://github.com/modern-agile-team/modern-kit/pull/1027) [`4976c32`](https://github.com/modern-agile-team/modern-kit/commit/4976c32569c64a90846c21e7ff0f719189a6dd36) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useScrollRestoration 신규 훅 추가 - @rhehfl
+
 ## 2.8.0
 
 ### Minor Changes
