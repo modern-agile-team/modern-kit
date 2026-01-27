@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.39.1"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
-          ["globals", "npm:17.0.0"],\
+          ["globals", "npm:17.1.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
@@ -19425,10 +19425,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:17.0.0", {\
-        "packageLocation": "./.yarn/cache/globals-npm-17.0.0-cd88395af3-e3c169fdcb.zip/node_modules/globals/",\
+      ["npm:17.1.0", {\
+        "packageLocation": "./.yarn/cache/globals-npm-17.1.0-baf660f37b-4a4a178476.zip/node_modules/globals/",\
         "packageDependencies": [\
-          ["globals", "npm:17.0.0"]\
+          ["globals", "npm:17.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -23923,7 +23923,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:9.39.1"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
-          ["globals", "npm:17.0.0"],\
+          ["globals", "npm:17.1.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
