@@ -70,10 +70,12 @@ export function useScrollTo<T extends HTMLElement>(): UseScrollToReturnType<T> {
 
       const scrollElement = containerRef.current ?? window;
 
-      scrollElement.scrollTo({
-        left,
-        top,
-        behavior,
+      requestAnimationFrame(() => {
+        scrollElement.scrollTo({
+          left,
+          top,
+          behavior,
+        });
       });
     },
     []
@@ -98,10 +100,12 @@ export function useScrollTo<T extends HTMLElement>(): UseScrollToReturnType<T> {
         scrollToElementOptions
       );
 
-      scrollElement.scrollTo({
-        top,
-        left,
-        behavior,
+      requestAnimationFrame(() => {
+        scrollElement.scrollTo({
+          top,
+          left,
+          behavior,
+        });
       });
     },
     []

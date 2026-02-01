@@ -21,6 +21,7 @@ export * from './useEventListener';
 export * from './useFileReader';
 export * from './useFocus';
 export * from './useForceUpdate';
+export * from './useGeolocation';
 export * from './useHover';
 export * from './useIdle';
 export * from './useImageStatus';
