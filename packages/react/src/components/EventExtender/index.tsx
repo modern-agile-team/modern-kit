@@ -4,7 +4,7 @@ import React from 'react';
 /**
  * @description HTML 요소들의 태그 이름 타입 (예: "div", "span", "input" 등)
  */
-type HTMLElementType = keyof JSX.IntrinsicElements;
+type HTMLElementType = keyof React.JSX.IntrinsicElements;
 
 /**
  * @description React.DOMAttributes<HTMLElement>에 정의된 이벤트
@@ -25,12 +25,12 @@ type EventNames = keyof React.DOMAttributes<HTMLElement> & `on${string}`;
 type ElementEventType<
   K extends HTMLElementType,
   E extends EventNames
-> = JSX.IntrinsicElements[K][E] extends ((e: infer Event) => void) | undefined
+> = React.JSX.IntrinsicElements[K][E] extends ((e: infer Event) => void) | undefined
   ? Event
   : never;
 
 interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
-  children: JSX.Element;
+  children: React.JSX.Element;
   capture: E;
   shouldAwait?: boolean;
   beforeEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
@@ -109,7 +109,7 @@ export const EventExtender = <K extends HTMLElementType, E extends EventNames>({
   shouldAwait = false,
   beforeEvent,
   afterEvent,
-}: EventExtenderProps<K, E>): JSX.Element => {
+}: EventExtenderProps<K, E>): React.JSX.Element => {
   const child = React.Children.only(children);
 
   const asyncEvent = async (eventType: ElementEventType<K, E>) => {

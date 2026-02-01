@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 export interface IteratorProps<T> {
   items: T[] | readonly T[];
   itemKey?: T extends Record<PropertyKey, any> ? keyof T : string;
-  renderItem: (item: T, index: number) => JSX.Element;
+  renderItem: (item: T, index: number) => React.JSX.Element;
 }
 
 /**
@@ -18,7 +18,7 @@ export interface IteratorProps<T> {
  * @param {IteratorProps<T>} props - Iterator 컴포넌트 props
  * @param {T[] | readonly T[]} props.items - 반복할 아이템의 배열
  * @param {string} [props.itemKey] - 아이템의 고유 키
- * @param {(item: T, index: number) => JSX.Element} props.renderItem - 각 아이템을 렌더링할 함수
+ * @param {(item: T, index: number) => React.JSX.Element} props.renderItem - 각 아이템을 렌더링할 함수
  *
  * @example
  * ```tsx

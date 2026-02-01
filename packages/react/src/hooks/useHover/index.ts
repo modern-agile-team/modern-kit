@@ -7,7 +7,7 @@ interface UseHoverProps {
 }
 
 interface UseHoverReturnType<T extends HTMLElement> {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   isHovered: boolean;
 }
 
@@ -55,5 +55,5 @@ export function useHover<T extends HTMLElement>({
   useEventListener(targetRef, 'mouseenter', enterAction);
   useEventListener(targetRef, 'mouseleave', leaveAction);
 
-  return { ref: targetRef, isHovered };
+  return { ref: targetRef as React.RefObject<T>, isHovered };
 }

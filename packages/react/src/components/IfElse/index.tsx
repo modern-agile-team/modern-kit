@@ -19,7 +19,7 @@ const getConditionResult = (condition: Condition) => {
  * @param {Condition} props.condition - 렌더링 조건 (boolean 또는 boolean을 반환하는 함수)
  * @param {React.ReactNode} props.truthyComponent - condition이 true일 때 렌더링될 컴포넌트
  * @param {React.ReactNode} props.falsyComponent - condition이 false일 때 렌더링될 컴포넌트
- * @returns {JSX.Element} 조건에 따라 trueComponent 또는 falseComponent를 렌더링
+ * @returns {React.JSX.Element} 조건에 따라 trueComponent 또는 falseComponent를 렌더링
  *
  * @example
  * <IfElse
@@ -32,7 +32,7 @@ export const IfElse = ({
   condition,
   truthyComponent,
   falsyComponent,
-}: IfElseProps): JSX.Element => {
+}: IfElseProps): React.JSX.Element => {
   const conditionResult = getConditionResult(condition);
   return <>{conditionResult ? truthyComponent : falsyComponent}</>;
 };

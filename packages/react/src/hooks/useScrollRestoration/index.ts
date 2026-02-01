@@ -16,7 +16,7 @@ interface UseScrollRestorationOptions {
 }
 
 interface UseScrollRestorationReturnType<T extends HTMLElement> {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
 }
 
 const STORAGE_KEY = 'mk-scroll-restoration';

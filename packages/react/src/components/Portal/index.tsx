@@ -6,7 +6,7 @@ import { useIsomorphicLayoutEffect } from '../../hooks/useIsomorphicLayoutEffect
 interface PortalProps {
   children: React.ReactNode;
   className?: string;
-  containerRef?: React.RefObject<HTMLElement>;
+  containerRef?: React.RefObject<HTMLElement | null>;
 }
 
 const PortalContext = createContext<{

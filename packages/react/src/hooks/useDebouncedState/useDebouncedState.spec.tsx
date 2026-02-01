@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { useDebouncedState } from '.';
 import { delay } from '@modern-kit/utils';
@@ -26,10 +26,14 @@ describe('useDebouncedState', () => {
     await user.type(input, 'test');
 
     await delay(DELAY_TIME / 2);
-    expect(debouncedState).toHaveTextContent('');
+    await waitFor(() => {
+      expect(debouncedState).toHaveTextContent('');
+    });
 
     await delay(DELAY_TIME / 2);
-    expect(debouncedState).toHaveTextContent('test');
+    await waitFor(() => {
+      expect(debouncedState).toHaveTextContent('test');
+    });
   });
 
   it('지연 시간 내에 setDebouncedState가 여러 번 호출되어도 한 번만 업데이트되어야 합니다', async () => {
@@ -43,9 +47,13 @@ describe('useDebouncedState', () => {
     await user.type(input, 'modern-kit');
 
     await delay(DELAY_TIME / 2);
-    expect(debouncedState).toHaveTextContent('');
+    await waitFor(() => {
+      expect(debouncedState).toHaveTextContent('');
+    });
 
     await delay(DELAY_TIME / 2);
-    expect(debouncedState).toHaveTextContent('modern-kit');
+    await waitFor(() => {
+      expect(debouncedState).toHaveTextContent('modern-kit');
+    });
   });
 });

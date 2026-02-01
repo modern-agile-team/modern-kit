@@ -40,6 +40,7 @@ export function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
   return { ...slotProps, ...overrideProps };
 }
 
+type ElementWithRef = React.ReactElement<React.RefAttributes<HTMLElement>>;
 // React 19 이전 버전에서 `element.props.ref`에 접근하면 경고가 표시되고, `element.ref` 사용을 제안합니다.
 // React 19 부터는 `element.ref`에 액세스하면 그 반대가 됩니다.
 // https://github.com/facebook/react/pull/28348
@@ -57,9 +58,9 @@ export function getElementRef(element: React.ReactElement) {
   getter = Object.getOwnPropertyDescriptor(element, 'ref')?.get;
   mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning;
   if (mayWarn) {
-    return element.props.ref;
+    return (element as ElementWithRef).props.ref;
   }
 
   // Not DEV
-  return element.props.ref || (element as any).ref;
+  return (element as ElementWithRef).props.ref || (element as any).ref;
 }

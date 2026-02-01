@@ -30,10 +30,11 @@ describe('useStep', () => {
     });
 
     // nextStep
-    result.current.goToNextStep();
+    result.current.goToNextStep(goToNextStepActionMockFn);
     await waitFor(() => {
       expect(result.current.currentStep).toBe(2);
       expect(result.current.hasNextStep).toBe(false);
+      expect(goToNextStepActionMockFn).toBeCalledTimes(1);
     });
   });
 
@@ -109,19 +110,16 @@ describe('useStep', () => {
       useStep({ maxStep: 3, initialStep: 2 })
     );
 
-    // nextStep
-    await waitFor(() => {
-      result.current.goToNextStep();
-    });
-    expect(result.current.currentStep).toBe(3);
+    result.current.goToNextStep();
+    await waitFor(() => expect(result.current.currentStep).toBe(3));
 
-    // resetStep
+    result.current.resetStep(resetStepActionMockFn);
     await waitFor(() => {
-      result.current.resetStep(resetStepActionMockFn);
+      expect(result.current.currentStep).toBe(2);
+      expect(resetStepActionMockFn).toBeCalledTimes(1);
     });
 
-    expect(result.current.currentStep).toBe(2);
-    expect(resetStepActionMockFn).toBeCalledTimes(1);
+
   });
 
   it('유효하지 않은 step 일 시 에러를 던져야 합니다.', async () => {

@@ -16,7 +16,7 @@ import { useState } from 'react';
 ## Interface
 ```ts title="typescript"
 interface UseComputedStyleObserverReturnType<T extends HTMLElement> {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   value: string;
   setValue: (value: string) => void;
 }

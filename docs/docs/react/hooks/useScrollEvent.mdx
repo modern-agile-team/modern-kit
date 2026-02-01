@@ -49,7 +49,7 @@ function useScrollEvent<T extends HTMLElement>({
   throttleTrailing, // default: true
   enabled, // default: true
 }: UseScrollProps = {}): {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   scrollState: ScrollState;
 };
 ```

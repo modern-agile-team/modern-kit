@@ -13,7 +13,7 @@ import { useState } from 'react';
 ## Interface
 ```ts title="typescript"
 const useDropZone: <T extends HTMLElement>(onDrop: (files: File[]) => void) => {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   isDragOver: boolean;
 }
 ```

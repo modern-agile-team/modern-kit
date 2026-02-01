@@ -36,7 +36,7 @@ export const When = ({
   children,
   condition,
   fallback,
-}: WhenProps): JSX.Element => {
+}: WhenProps): React.JSX.Element => {
   const conditionResult = getConditionResult(condition);
 
   if (!conditionResult) return <>{fallback}</>;

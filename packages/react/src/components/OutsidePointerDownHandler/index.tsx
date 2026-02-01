@@ -8,7 +8,7 @@ import { Slot } from '../Slot';
 interface OutsidePointerDownHandlerProps {
   children: ReactNode;
   onPointerDown: (targetElement: HTMLElement) => void;
-  excludeRefs?: React.RefObject<HTMLElement>[];
+  excludeRefs?: React.RefObject<HTMLElement | null>[];
   asChild?: boolean;
 }
 

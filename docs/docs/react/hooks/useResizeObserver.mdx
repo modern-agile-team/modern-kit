@@ -28,7 +28,7 @@ type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
 const useResizeObserver: <T extends HTMLElement>(
   action?: (entry: ResizeObserverEntry) => void
 ) => {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   contentRect: ContentRect;
 };
 ```

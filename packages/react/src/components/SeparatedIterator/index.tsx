@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Iterator, IteratorProps } from '../Iterator';
 
 interface SeparatedIteratorProps<T> extends IteratorProps<T> {
-  separator: JSX.Element;
+  separator: React.JSX.Element;
   separatorInterval?: number;
   includeLastSeparator?: boolean;
 }

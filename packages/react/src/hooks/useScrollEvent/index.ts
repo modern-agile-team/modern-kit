@@ -81,7 +81,7 @@ export function useScrollEvent<T extends HTMLElement>({
   throttleTrailing = true,
   enabled = true,
 }: UseScrollProps = {}): {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   scrollState: ScrollState;
 } {
   const ref = useRef<T>(null);
@@ -192,7 +192,7 @@ export function useScrollEvent<T extends HTMLElement>({
   ]);
 
   return {
-    ref: ref as React.RefObject<T>,
+    ref,
     scrollState,
   };
 }

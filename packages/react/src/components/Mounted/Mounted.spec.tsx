@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
-
+import React from 'react';
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { renderToString } from 'react-dom/server';
 
 import { Mounted } from '.';
 
-const TestComponent = ({ fallback }: { fallback?: JSX.Element }) => {
+const TestComponent = ({ fallback }: { fallback?: React.JSX.Element }) => {
   return (
     <Mounted fallback={fallback}>
       <div>children component</div>

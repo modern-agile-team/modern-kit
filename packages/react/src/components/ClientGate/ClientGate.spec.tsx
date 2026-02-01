@@ -1,12 +1,12 @@
+import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
-
 import { renderSetup } from '../../_internal/test/renderSetup';
 import { renderToString } from 'react-dom/server';
 
 import { ClientGate } from '.';
 
-const TestComponent = ({ fallback }: { fallback?: JSX.Element }) => {
+const TestComponent = ({ fallback }: { fallback?: React.JSX.Element }) => {
   return (
     <ClientGate fallback={fallback}>
       <div>children component</div>

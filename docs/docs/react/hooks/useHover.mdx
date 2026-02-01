@@ -16,7 +16,7 @@ const useHover: <T extends HTMLElement>({
   onEnter?: (event: MouseEvent) => void,
   onLeave?: (event: MouseEvent) => void,
 }) => {
-  ref: T,
+  ref: React.RefObject<T | null>,
   isHovered: boolean
 }
 ```
