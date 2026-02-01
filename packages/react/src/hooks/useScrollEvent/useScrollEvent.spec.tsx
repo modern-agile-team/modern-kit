@@ -90,26 +90,25 @@ describe('useScrollEvent', () => {
 
     expect(result.current.scrollState).toEqual(windowInitialData);
 
+    Object.defineProperty(window, 'scrollX', { value: 100 });
+    Object.defineProperty(window, 'scrollY', { value: 200 });
+    window.dispatchEvent(new Event('scroll'));
     await waitFor(() => {
-      Object.defineProperty(window, 'scrollX', { value: 100 });
-      Object.defineProperty(window, 'scrollY', { value: 200 });
-      window.dispatchEvent(new Event('scroll'));
-    });
-
-    expect(result.current.scrollState).toEqual({
-      scrollX: 100,
-      scrollY: 200,
-      scrollWidth: 1000,
-      scrollHeight: 2000,
-      direction: {
-        y: 'down',
-        x: 'right',
-      },
-      progress: {
-        y: 13, // (200 / 1500) * 100
-        x: 20, // (100 / 500) * 100
-      },
-    });
+      expect(result.current.scrollState).toEqual({
+        scrollX: 100,
+        scrollY: 200,
+        scrollWidth: 1000,
+        scrollHeight: 2000,
+        direction: {
+          y: 'down',
+          x: 'right',
+        },
+        progress: {
+          y: 13, // (200 / 1500) * 100
+          x: 20, // (100 / 500) * 100
+        },
+      });
+    })
   });
 
   it('enabled 옵션으로 스크롤 이벤트를 제어해야 합니다.', async () => {

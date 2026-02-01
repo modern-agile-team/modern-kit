@@ -6293,8 +6293,8 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.5.0"
     "@testing-library/react": "npm:^16.2.0"
     "@testing-library/user-event": "npm:^14.5.1"
-    "@types/react": "npm:^18.2.20"
-    "@types/react-dom": "npm:^18.2.7"
+    "@types/react": "npm:^19.2.10"
+    "@types/react-dom": "npm:^19.2.3"
     "@vitest/coverage-istanbul": "npm:^4.0.4"
     autoprefixer: "npm:^10.4.20"
     classnames: "npm:^2.5.1"
@@ -6304,8 +6304,8 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.0"
     jsdom: "npm:^27.0.0"
     postcss: "npm:^8.4.41"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
+    react: "npm:^19.2.4"
+    react-dom: "npm:^19.2.4"
     rollup: "npm:^4.24.0"
     rollup-plugin-dts: "npm:^6.1.1"
     rollup-plugin-esbuild: "npm:^6.1.1"
@@ -8052,6 +8052,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-dom@npm:^19.2.3":
+  version: 19.2.3
+  resolution: "@types/react-dom@npm:19.2.3"
+  peerDependencies:
+    "@types/react": ^19.2.0
+  checksum: 10c0/b486ebe0f4e2fb35e2e108df1d8fc0927ca5d6002d5771e8a739de11239fe62d0e207c50886185253c99eb9dedfeeb956ea7429e5ba17f6693c7acb4c02f8cd1
+  languageName: node
+  linkType: hard
+
 "@types/react-router-config@npm:*, @types/react-router-config@npm:^5.0.7":
   version: 5.0.10
   resolution: "@types/react-router-config@npm:5.0.10"
@@ -8091,6 +8100,15 @@ __metadata:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/18d856c12a4ec93f3cda2d58ef3d77a9480818afd3af895f812896fb82cfca1f35a692ab1add4ce826a4eb58a071624c7d1c8c6c4ccfb81c100d2916dc607614
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^19.2.10":
+  version: 19.2.10
+  resolution: "@types/react@npm:19.2.10"
+  dependencies:
+    csstype: "npm:^3.2.2"
+  checksum: 10c0/17b96203a79ad3fa3cee8f1f1f324b93f005bc125755e29ac149402807275feaf3f00a4e65b8405f633923ac993da5737fd9800d27ee49911f3ed51dc27478f9
   languageName: node
   linkType: hard
 
@@ -11367,6 +11385,13 @@ __metadata:
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: 10c0/32c038af259897c807ac738d9eab16b3d86747c72b09d5c740978e06f067f9b7b1737e1b75e407c7ab1fe1543dc95f20e202b4786aeb1b8d3bdf5d5ce655e6c6
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.2.2":
+  version: 3.2.3
+  resolution: "csstype@npm:3.2.3"
+  checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce
   languageName: node
   linkType: hard
 
@@ -21436,6 +21461,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:^19.2.4":
+  version: 19.2.4
+  resolution: "react-dom@npm:19.2.4"
+  dependencies:
+    scheduler: "npm:^0.27.0"
+  peerDependencies:
+    react: ^19.2.4
+  checksum: 10c0/f0c63f1794dedb154136d4d0f59af00b41907f4859571c155940296808f4b94bf9c0c20633db75b5b2112ec13d8d7dd4f9bf57362ed48782f317b11d05a44f35
+  languageName: node
+  linkType: hard
+
 "react-fast-compare@npm:^3.2.0":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
@@ -21566,6 +21602,13 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
+  languageName: node
+  linkType: hard
+
+"react@npm:^19.2.4":
+  version: 19.2.4
+  resolution: "react@npm:19.2.4"
+  checksum: 10c0/cd2c9ff67a720799cc3b38a516009986f7fc4cb8d3e15716c6211cf098d1357ee3e348ab05ad0600042bbb0fd888530ba92e329198c92eafa0994f5213396596
   languageName: node
   linkType: hard
 
@@ -22540,6 +22583,13 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10c0/26383305e249651d4c58e6705d5f8425f153211aef95f15161c151f7b8de885f24751b377e4a0b3dd42cce09aad3f87a61dab7636859c0d89b7daf1a1e2a5c78
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.27.0":
+  version: 0.27.0
+  resolution: "scheduler@npm:0.27.0"
+  checksum: 10c0/4f03048cb05a3c8fddc45813052251eca00688f413a3cee236d984a161da28db28ba71bd11e7a3dd02f7af84ab28d39fb311431d3b3772fed557945beb00c452
   languageName: node
   linkType: hard
 

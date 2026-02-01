@@ -13,11 +13,8 @@ describe('useImageStatus', () => {
     const img = document.createElement('img');
     img.setAttribute('src', 'imgUrl');
 
-    await waitFor(() => {
-      result.current.ref(img);
-
-      expect(result.current.imageStatus).toBe('loading');
-    });
+    result.current.ref(img);
+    await waitFor(() => expect(result.current.imageStatus).toBe('loading'));
   });
 
   it('이미지 로딩이 성공하면 상태가 "complete"로 변경되어야 합니다', async () => {
@@ -27,11 +24,9 @@ describe('useImageStatus', () => {
     const img = document.createElement('img');
     img.setAttribute('src', 'imgUrl');
 
-    await waitFor(() => {
-      result.current.ref(img);
-      img.dispatchEvent(loadEvent);
-    });
-    expect(result.current.imageStatus).toBe('complete');
+    result.current.ref(img);
+    img.dispatchEvent(loadEvent);
+    await waitFor(() => expect(result.current.imageStatus).toBe('complete'));
   });
 
   it('이미지 로딩이 실패하면 상태가 "error"로 변경되어야 합니다', async () => {
@@ -41,19 +36,15 @@ describe('useImageStatus', () => {
     const img = document.createElement('img');
     img.setAttribute('src', 'imgUrl');
 
-    await waitFor(() => {
-      result.current.ref(img);
-      img.dispatchEvent(errorEvent);
-    });
-    expect(result.current.imageStatus).toBe('error');
+    result.current.ref(img);
+    img.dispatchEvent(errorEvent);
+    await waitFor(() => expect(result.current.imageStatus).toBe('error'));
   });
 
   it('ref에 null 값이 전달되면 상태가 변경되지 않아야 합니다', async () => {
     const { result } = renderHook(() => useImageStatus());
 
-    await waitFor(() => {
-      result.current.ref(null as any);
-    });
-    expect(result.current.imageStatus).toBe('pending');
+    result.current.ref(null as any);
+    await waitFor(() => expect(result.current.imageStatus).toBe('pending'));
   });
 });

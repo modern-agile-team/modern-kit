@@ -12,7 +12,7 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-const DELAY_TIME = 1000;
+const DELAY_TIME = 200;
 
 describe('useBlockMultipleAsyncCalls', () => {
   it('비동기 작업 완료 전 중복 호출 시 한 번만 실행되어야 합니다', async () => {
@@ -31,7 +31,7 @@ describe('useBlockMultipleAsyncCalls', () => {
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
-    vi.advanceTimersByTime(DELAY_TIME);
+    await vi.advanceTimersByTimeAsync(DELAY_TIME);
 
     await waitFor(async () => {
       expect(result.current.isLoading).toBeFalsy();
@@ -56,13 +56,17 @@ describe('useBlockMultipleAsyncCalls', () => {
     await user.click(button);
     await user.click(button);
 
-    expect(result.current.isLoading).toBeTruthy();
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBeTruthy();
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
 
     await vi.advanceTimersByTimeAsync(DELAY_TIME);
 
-    expect(result.current.isLoading).toBeFalsy();
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBeFalsy();
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('비동기 함수 호출 중 에러가 발생하면 isError가 true가 되고, 이후 정상적인 비동기 함수 호출 시 isError가 false로 초기화되어야 합니다.', async () => {
@@ -97,8 +101,10 @@ describe('useBlockMultipleAsyncCalls', () => {
 
     await vi.advanceTimersByTimeAsync(DELAY_TIME);
 
-    expect(result.current.isLoading).toBeFalsy();
-    expect(result.current.isError).toBeFalsy();
-    expect(defaultMockFn).toHaveBeenCalledTimes(1);
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.isError).toBeFalsy();
+      expect(defaultMockFn).toHaveBeenCalledTimes(1);
+    });
   });
 });

@@ -91,11 +91,8 @@ describe('useGeolocation', () => {
         success(mockPosition);
       });
 
-      await waitFor(() => {
-        result.current.get();
-      });
-
-      expect(result.current.data).toEqual(expectedMockPosition);
+      result.current.get();
+      await waitFor(() => expect(result.current.data).toEqual(expectedMockPosition));
     });
 
     it('watch 함수를 호출하면 현재 위치 정보를 실시간으로 업데이트해야 하며 isWatching이 true가 되어야 합니다.', async () => {
@@ -106,12 +103,11 @@ describe('useGeolocation', () => {
         return 123;
       });
 
+      result.current.watch();
       await waitFor(() => {
-        result.current.watch();
+        expect(result.current.data).toEqual(expectedMockPosition)
+        expect(result.current.isWatching).toBeTruthy();
       });
-
-      expect(result.current.data).toEqual(expectedMockPosition);
-      expect(result.current.isWatching).toBeTruthy();
     });
 
     it('stopWatch 함수를 호출하면 위치 정보 실시간 업데이트를 중단하고 isWatching이 false가 되어야 합니다.', async () => {
@@ -122,17 +118,16 @@ describe('useGeolocation', () => {
 
       const { result } = renderHook(() => useGeolocation());
 
+      result.current.watch();
+
+      result.current.watch();
       await waitFor(() => {
-        result.current.watch();
+        expect(result.current.data).toEqual(expectedMockPosition);
+        expect(result.current.isWatching).toBeTruthy();
       });
 
-      expect(result.current.isWatching).toBeTruthy();
-
-      await waitFor(() => {
-        result.current.stopWatch();
-      });
-
-      expect(result.current.isWatching).toBeFalsy();
+      result.current.stopWatch();
+      await waitFor(() => expect(result.current.isWatching).toBeFalsy());
     });
   });
 
@@ -185,14 +180,13 @@ describe('useGeolocation', () => {
 
       const { result } = renderHook(() => useGeolocation(), { hydrate: true });
 
+      result.current.get();
       await waitFor(() => {
-        result.current.get();
+        expect(result.current.error).toEqual(
+          new Error('Geolocation을 지원하는 환경이 아닙니다.')
+        );
+        expect(result.current.loading).toBeFalsy();
       });
-
-      expect(result.current.error).toEqual(
-        new Error('Geolocation을 지원하는 환경이 아닙니다.')
-      );
-      expect(result.current.loading).toBeFalsy();
     });
   });
 });
