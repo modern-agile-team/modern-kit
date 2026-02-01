@@ -20,7 +20,7 @@ export interface LazyImageProps
  * @param {number | number[]} [params.threshold=0] - Observer가 콜백을 호출하는 임계값을 나타냅니다.
  * @param {string} [params.rootMargin='100px 0px'] - 루트 요소에 대한 마진을 지정합니다. 이는 뷰포트 또는 루트 요소의 경계를 확장하거나 축소하는데 사용됩니다.
  *
- * @returns {JSX.Element} 지연 로딩을 지원하는 이미지 컴포넌트를 반환합니다.
+ * @returns {React.JSX.Element} 지연 로딩을 지원하는 이미지 컴포넌트를 반환합니다.
  *
  * @example
  * ```tsx
@@ -32,7 +32,7 @@ export interface LazyImageProps
  * ```
  */
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
-  ({ src, threshold, root, rootMargin, ...restProps }, ref): JSX.Element => {
+  ({ src, threshold, root, rootMargin, ...restProps }, ref): React.JSX.Element => {
     const { ref: imgRef } = useIntersectionObserver<HTMLImageElement>({
       onIntersectStart: (entry) => {
         const targetImgElement = entry.target as HTMLImageElement;

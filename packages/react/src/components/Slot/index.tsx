@@ -59,7 +59,7 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>(
             return React.Children.only(null);
           }
           return React.isValidElement(newElement)
-            ? (newElement.props.children as React.ReactNode)
+            ? ((newElement as React.ReactElement<React.PropsWithChildren>).props.children)
             : null;
         }
         return child;

@@ -1,11 +1,11 @@
-import { CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { Slot } from '../../components/Slot';
 import styles from './AspectRatio.modules.css';
 import classNames from 'classnames';
 
 interface AspectRatioProps {
-  children: JSX.Element;
+  children: React.JSX.Element;
   ratio: number;
   asChild?: boolean;
   style?: CSSProperties;

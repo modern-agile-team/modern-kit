@@ -46,7 +46,7 @@ export function useInterval(
   callback: () => void,
   options: number | IntervalOptions
 ): UseIntervalReturnType {
-  const intervalRef = useRef<number | null>();
+  const intervalRef = useRef<number | null>(null);
 
   const preservedCallback = usePreservedCallback(callback);
 

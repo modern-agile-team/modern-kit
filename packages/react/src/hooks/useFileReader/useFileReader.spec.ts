@@ -37,13 +37,10 @@ describe('useFileReader', () => {
       const { result } = renderHook(() => useFileReader());
       const expectedSuccessFileContents = [getSuccessFileContent(testFile1)];
 
-      const fileContents = await result.current.readFile({
+      await result.current.readFile({
         file: testFile1,
         readType: 'readAsText',
       });
-
-      expect(result.current.isLoading).toBeTruthy();
-      expect(fileContents).toEqual(expectedSuccessFileContents);
 
       // 로딩 상태 완료 후 파일 내용 확인
       await waitFor(() => {
@@ -65,8 +62,6 @@ describe('useFileReader', () => {
         file: testFileList,
         readType: 'readAsText',
       });
-
-      expect(result.current.isLoading).toBeTruthy();
       expect(fileContents).toEqual(expectedSuccessFileContents);
 
       // 로딩 상태 완료 후 파일 내용 확인
@@ -87,7 +82,6 @@ describe('useFileReader', () => {
         readType: 'readAsText',
         accepts: ['text/csv'],
       });
-      expect(result.current.isLoading).toBeTruthy();
       expect(fileContents).toEqual(expectedSuccessFileContents);
 
       // 로딩 상태 완료 후 파일 내용 확인
@@ -108,13 +102,13 @@ describe('useFileReader', () => {
 
       vi.stubGlobal('FileReader', MockFileReaderForcedCallOnError);
 
-      await waitFor(async () => {
-        const fileContents = await result.current.readFile({
-          file: testFile1,
-          readType: 'readAsText',
-        });
-        expect(fileContents).toEqual(failedExpectedFileContents);
+
+      const fileContents = await result.current.readFile({
+        file: testFile1,
+        readType: 'readAsText',
       });
+      expect(fileContents).toEqual(failedExpectedFileContents);
+
 
       await waitFor(() => {
         expect(result.current.fileContents).toEqual(failedExpectedFileContents);

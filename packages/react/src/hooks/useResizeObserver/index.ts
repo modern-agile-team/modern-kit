@@ -3,7 +3,7 @@ import { usePreservedCallback } from '../usePreservedCallback';
 import { useEffect, useRef, useState } from 'react';
 
 interface UseResizeObserver<T extends HTMLElement> {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   contentRect: ContentRect;
 }
 

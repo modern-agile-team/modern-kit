@@ -35,13 +35,13 @@ function useKeyDown({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): { ref: RefObject<Window> };
+}: UseKeyDownProps): { ref: React.RefObject<Window | null> };
 
 function useKeyDown<T extends HTMLElement>({
   enabled,
   keyDownCallbackMap,
   allKeyDownCallback,
-}: UseKeyDownProps): { ref: RefObject<T> };
+}: UseKeyDownProps): { ref: React.RefObject<T | null> };
 ```
 
 ## Usage

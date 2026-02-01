@@ -30,7 +30,7 @@ export const SwitchCase = <Case extends PropertyKey>({
   caseBy,
   value,
   defaultComponent = null,
-}: SwitchCaseProps<Case>): JSX.Element => {
+}: SwitchCaseProps<Case>): React.JSX.Element => {
   if (isNil(value)) {
     return <>{defaultComponent}</>;
   }

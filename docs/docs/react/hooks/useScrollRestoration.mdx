@@ -28,7 +28,7 @@ function useScrollRestoration<T extends HTMLElement>({
   enabled,
   behavior,
 }?: UseScrollRestorationOptions): {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
 };
 ```
 

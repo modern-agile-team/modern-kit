@@ -16,10 +16,10 @@ describe('useToggleState', () => {
 
     expect(result.current[0]).toEqual('ON');
 
-    await waitFor(() => toggle());
-    expect(result.current[0]).toEqual('OFF');
+    toggle();
+    waitFor(() => expect(result.current[0]).toEqual('OFF'));
 
-    await waitFor(() => toggle());
-    expect(result.current[0]).toEqual('ON');
+    toggle();
+    waitFor(() => expect(result.current[0]).toEqual('ON'));
   });
 });

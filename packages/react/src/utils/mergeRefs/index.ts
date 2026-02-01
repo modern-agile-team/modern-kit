@@ -24,7 +24,7 @@ export const mergeRefs = <T = unknown>(
       if (isFunction(ref)) {
         ref(node);
       } else if (ref != null) {
-        const refToUse = ref as React.MutableRefObject<T>;
+        const refToUse = ref as React.RefObject<T>;
         refToUse.current = node;
       }
     });

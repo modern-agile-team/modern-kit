@@ -8,7 +8,7 @@ import React, {
 import { LazyImage, LazyImageProps } from '../LazyImage';
 
 interface FallbackLazyImageProps extends LazyImageProps {
-  fallback: JSX.Element;
+  fallback: React.JSX.Element;
   width: string | number;
   height: string | number;
   duration?: CSSProperties['transitionDuration'];

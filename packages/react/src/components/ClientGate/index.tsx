@@ -1,3 +1,4 @@
+import React from 'react';
 import { useIsClient } from '../../hooks/useIsClient';
 
 interface ClientGateProps {
@@ -32,7 +33,7 @@ interface ClientGateProps {
 export function ClientGate({
   fallback,
   children,
-}: ClientGateProps): JSX.Element {
+}: ClientGateProps): React.JSX.Element {
   const isClient = useIsClient();
 
   return <>{isClient ? children : fallback}</>;

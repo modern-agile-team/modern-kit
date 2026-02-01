@@ -1,5 +1,5 @@
 import { useEventListener } from '../useEventListener';
-import { RefObject, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 /**
  * @description `드래그 앤 드롭 이벤트`를 처리하여 `파일`을 수신할 수 있는 영역을 생성하는 커스텀 훅입니다.
@@ -9,7 +9,7 @@ import { RefObject, useRef, useState } from 'react';
  * 드롭된 파일들의 배열을 인자로 받습니다.
  *
  * @returns {{
- *   ref: RefObject<T>;
+ *   ref: RefObject<T | null>;
  *   isDragOver: boolean;
  * }} `ref`와 `isDragOver`를 포함한 객체를 반환합니다.
  * - `ref`: 드롭 영역으로 사용할 대상 요소의 참조입니다.
@@ -29,7 +29,7 @@ import { RefObject, useRef, useState } from 'react';
 export const useDropZone = <T extends HTMLElement>(
   onDrop: (files: File[]) => void
 ): {
-  ref: RefObject<T>;
+  ref: React.RefObject<T | null>;
   isDragOver: boolean;
 } => {
   const ref = useRef<T>(null);

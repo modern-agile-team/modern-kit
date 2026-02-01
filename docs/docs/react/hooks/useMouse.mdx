@@ -32,7 +32,7 @@ interface CursorPosition {
 }
 
 function useMouse<T extends HTMLElement>(): {
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   position: CursorPosition;
 }
 ```

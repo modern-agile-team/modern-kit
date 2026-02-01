@@ -27,7 +27,10 @@ const initialCursorPosition: CursorPosition = {
   elementPositionY: null,
 };
 
-export function useMouse<T extends HTMLElement>() {
+export function useMouse<T extends HTMLElement>(): {
+  ref: React.RefObject<T | null>;
+  position: CursorPosition;
+} {
   const targetRef = useRef<T>(null);
   const [cursorPosition, setCursorPosition] = useState<CursorPosition>(
     initialCursorPosition

@@ -30,7 +30,7 @@ export interface InfiniteScrollProps
  * @param {string} [props.rootMargin='150px 0px'] - 루트 요소에 대한 마진을 지정합니다. 이는 뷰포트 또는 루트 요소의 경계를 확장하거나 축소하는데 사용됩니다. (기본값: '150px 0px')
  * @param {boolean} props.enabled - Observer를 활성화할지 여부를 나타냅니다. `false`일 경우 Observer가 작동하지 않습니다.
  *
- * @returns {JSX.Element} 자식 컴포넌트와 Intersection Observer 트리거 요소를 포함한 컴포넌트입니다.
+ * @returns {React.JSX.Element} 자식 컴포넌트와 Intersection Observer 트리거 요소를 포함한 컴포넌트입니다.
  *
  * @example
  * ```tsx
@@ -58,7 +58,7 @@ export const InfiniteScroll = ({
   enabled,
   triggerPosition = 'after',
   rootMargin = '150px 0px',
-}: PropsWithChildren<InfiniteScrollProps>): JSX.Element => {
+}: PropsWithChildren<InfiniteScrollProps>): React.JSX.Element => {
   const { ref: observedRef } = useIntersectionObserver({
     onIntersectStart: onScrollAction,
     root,

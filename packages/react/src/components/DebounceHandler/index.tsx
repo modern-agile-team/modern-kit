@@ -1,9 +1,9 @@
-import { Children, cloneElement } from 'react';
+import React, { Children, cloneElement } from 'react';
 import { useDebounce } from '../../hooks/useDebounce';
 import { isFunction } from '@modern-kit/utils';
 
 interface DebounceHandlerProps {
-  children: JSX.Element;
+  children: React.JSX.Element;
   capture: string;
   wait: Parameters<typeof useDebounce>[1];
   options?: Parameters<typeof useDebounce>[2];
@@ -59,7 +59,7 @@ export const DebounceHandler = ({
   capture,
   wait,
   options,
-}: DebounceHandlerProps): JSX.Element => {
+}: DebounceHandlerProps): React.JSX.Element => {
   const child = Children.only(children);
 
   const debouncedCallback = useDebounce(

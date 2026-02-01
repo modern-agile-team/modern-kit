@@ -7,7 +7,7 @@ interface UseFocusProps {
 }
 
 interface UseFocusReturnType<T extends HTMLElement> {
-  ref: RefObject<T>;
+  ref: RefObject<T | null>;
   isFocus: boolean;
   setFocus: () => void;
 }

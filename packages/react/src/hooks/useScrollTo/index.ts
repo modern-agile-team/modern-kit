@@ -5,7 +5,7 @@ import {
 } from './useScrollTo.utils';
 
 interface UseScrollToReturnType<T extends HTMLElement> {
-  containerRef: React.RefObject<T>;
+  containerRef: React.RefObject<T | null>;
   scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
   scrollToElement: <E extends HTMLElement>(
     target: E,
