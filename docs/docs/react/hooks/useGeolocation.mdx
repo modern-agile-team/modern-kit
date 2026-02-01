@@ -1,0 +1,393 @@
+import { useGeolocation } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useGeolocation
+
+브라우저의 Geolocation API를 활용하여 사용자의 현재 위치 정보를 가져오는 커스텀 훅입니다.
+
+위치 정보를 한 번만 가져오거나(`get`), 실시간으로 추적(`watch`)할 수 있습니다.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useGeolocation/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseGeolocationOptions extends PositionOptions {
+  mountBehavior?: 'watch' | 'get';
+}
+
+interface UseGeolocationReturn {
+  data: GeolocationData | null;
+  error: GeolocationPositionError | Error | null;
+  loading: boolean;
+  isWatching: boolean;
+  get: () => void;
+  watch: () => void;
+  stopWatch: () => void;
+}
+
+type GeolocationData = GeolocationPosition['coords'] & { timestamp: number };
+
+function useGeolocation(options?: UseGeolocationOptions): UseGeolocationReturn;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `enableHighAccuracy` | `boolean` | `false` | 높은 정확도의 위치 정보를 요청할지 여부 (GPS 사용, 배터리 소모 증가) |
+| `timeout` | `number` | `Infinity` | 위치 정보를 가져오는 데 허용되는 최대 시간 (밀리초) |
+| `maximumAge` | `number` | `0` | 캐시된 위치 정보의 최대 수명 (밀리초) |
+| `mountBehavior` | `'watch' \| 'get'` | `'get'` | 훅이 마운트될 때 위치 정보를 가져오는 방식 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `data` | `GeolocationData \| null` | 위치 정보 데이터 (위도, 경도, 정확도, 고도, 타임스탬프 등) |
+| `error` | `GeolocationPositionError \| Error \| null` | 에러 정보 |
+| `loading` | `boolean` | 위치 정보를 가져오는 중인지 여부 |
+| `isWatching` | `boolean` | 현재 위치를 실시간으로 추적 중인지 여부 |
+| `get` | `() => void` | 현재 위치를 한 번 가져오는 함수 |
+| `watch` | `() => void` | 위치 변화를 실시간으로 추적하기 시작하는 함수 |
+| `stopWatch` | `() => void` | 실시간 위치 추적을 중지하는 함수 |
+
+<br />
+
+### GeolocationData
+
+| Name | Type | Description |
+|------|------|-------------|
+| `latitude` | `number` | 위도 |
+| `longitude` | `number` | 경도 |
+| `accuracy` | `number` | 위치 정확도 (미터) |
+| `altitude` | `number \| null` | 고도 (미터) |
+| `altitudeAccuracy` | `number \| null` | 고도 정확도 (미터) |
+| `heading` | `number \| null` | 이동 방향 (0°~360°, 북쪽 기준) |
+| `speed` | `number \| null` | 이동 속도 (m/s) |
+| `timestamp` | `number` | 위치 정보가 획득된 시간 |
+
+<br />
+
+## Remarks
+
+:::caution 주의사항
+- **HTTPS 필수**: Geolocation API는 보안상의 이유로 `HTTPS` 환경에서만 동작합니다. (`localhost`는 예외)
+- **사용자 권한 필요**: 위치 정보에 접근하기 전에 브라우저에서 사용자에게 권한 요청 팝업이 표시됩니다. 사용자가 거부하면 에러가 반환됩니다.
+- **SSR 환경**: 서버 사이드 렌더링 환경에서는 `navigator.geolocation`이 존재하지 않으므로, 훅 내부에서 이를 감지하여 에러를 반환합니다.
+- **배터리 소모**: `enableHighAccuracy: true` 옵션을 사용하면 GPS를 활용하여 더 정확한 위치를 제공하지만, 배터리 소모가 증가합니다.
+- **watch 모드**: 실시간 추적(`watch`) 모드 사용 시 컴포넌트 언마운트 시 자동으로 추적이 중지됩니다.
+:::
+
+<br />
+
+:::tip 에러 핸들링
+Geolocation API에서 발생할 수 있는 주요 에러:
+- `PERMISSION_DENIED` (code: 1): 사용자가 위치 정보 접근을 거부함
+- `POSITION_UNAVAILABLE` (code: 2): 위치 정보를 사용할 수 없음
+- `TIMEOUT` (code: 3): 지정된 시간 내에 위치 정보를 가져오지 못함
+:::
+
+<br />
+
+## Usage
+
+### 기본 사용법 (한 번만 위치 가져오기)
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const LocationComponent = () => {
+  const { data, error, loading } = useGeolocation();
+
+  if (loading) return <div>위치 정보를 가져오는 중...</div>;
+  if (error) return <div>에러: {error.message}</div>;
+  if (!data) return null;
+
+  return (
+    <div>
+      <p>위도: {data.latitude}</p>
+      <p>경도: {data.longitude}</p>
+      <p>정확도: {data.accuracy}m</p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### 실시간 위치 추적
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const RealTimeLocation = () => {
+  const { data, isWatching, watch, stopWatch } = useGeolocation({ 
+    mountBehavior: 'watch',
+    enableHighAccuracy: true 
+  });
+
+  return (
+    <div>
+      <p>추적 상태: {isWatching ? '추적 중' : '중지'}</p>
+      {data && (
+        <>
+          <p>위도: {data.latitude}</p>
+          <p>경도: {data.longitude}</p>
+        </>
+      )}
+      <button onClick={isWatching ? stopWatch : watch}>
+        {isWatching ? '추적 중지' : '추적 시작'}
+      </button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### 수동으로 위치 가져오기
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const ManualLocation = () => {
+  // mountBehavior를 undefined로 설정하면 마운트 시 자동으로 위치를 가져오지 않음
+  const { data, loading, get } = useGeolocation({ 
+    mountBehavior: undefined 
+  });
+
+  return (
+    <div>
+      <button onClick={get} disabled={loading}>
+        {loading ? '로딩 중...' : '현재 위치 가져오기'}
+      </button>
+      {data && (
+        <p>위도: {data.latitude}, 경도: {data.longitude}</p>
+      )}
+    </div>
+  );
+};
+```
+
+<br />
+
+### 타임아웃과 높은 정확도 옵션 설정
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const PreciseLocation = () => {
+  const { data, error } = useGeolocation({
+    enableHighAccuracy: true,  // GPS 사용
+    timeout: 10000,            // 10초 타임아웃
+    maximumAge: 60000,         // 1분간 캐시된 위치 사용 허용
+  });
+
+  if (error) {
+    return <div>위치를 가져올 수 없습니다: {error.message}</div>;
+  }
+
+  return data ? (
+    <div>정확한 위치: {data.latitude}, {data.longitude}</div>
+  ) : null;
+};
+```
+
+<br />
+
+## Example
+
+export const Example = () => {
+  const { data, error, loading, isWatching, get, watch, stopWatch } = useGeolocation({
+    enableHighAccuracy: true,
+    timeout: 10000,
+  });
+
+  const formatCoord = (num) => num?.toFixed(6) ?? '-';
+  const formatAccuracy = (num) => num?.toFixed(1) ?? '-';
+  const formatTimestamp = (ts) => ts ? new Date(ts).toLocaleTimeString('ko-KR') : '-';
+
+  return (
+    <div>
+      <div style={{ marginBottom: '20px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 테스트 방법</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>브라우저에서 <strong>위치 정보 접근을 허용</strong>하세요</li>
+          <li><strong>'현재 위치 가져오기'</strong> 버튼을 클릭하여 위치를 확인하세요</li>
+          <li><strong>'실시간 추적 시작'</strong> 버튼으로 위치 변화를 추적해 보세요</li>
+        </ol>
+      </div>
+
+      {/* 상태 표시 */}
+      <div style={{
+        display: 'flex',
+        gap: '10px',
+        marginBottom: '15px',
+        flexWrap: 'wrap'
+      }}>
+        <span style={{
+          padding: '4px 12px',
+          borderRadius: '20px',
+          fontSize: '13px',
+          fontWeight: '500',
+          backgroundColor: loading ? '#fef3c7' : '#e5e7eb',
+          color: loading ? '#d97706' : '#6b7280'
+        }}>
+          {loading ? '⏳ 로딩 중...' : '✓ 대기 중'}
+        </span>
+        <span style={{
+          padding: '4px 12px',
+          borderRadius: '20px',
+          fontSize: '13px',
+          fontWeight: '500',
+          backgroundColor: isWatching ? '#dcfce7' : '#e5e7eb',
+          color: isWatching ? '#16a34a' : '#6b7280'
+        }}>
+          {isWatching ? '📡 실시간 추적 중' : '⏸ 추적 중지'}
+        </span>
+      </div>
+
+      {/* 버튼 그룹 */}
+      <div style={{ 
+        display: 'flex', 
+        gap: '10px', 
+        marginBottom: '20px',
+        flexWrap: 'wrap'
+      }}>
+        <button 
+          onClick={get}
+          disabled={loading}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            fontWeight: '500',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.6 : 1
+          }}
+        >
+          📍 현재 위치 가져오기
+        </button>
+        <button 
+          onClick={isWatching ? stopWatch : watch}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: isWatching ? '#ef4444' : '#22c55e',
+            color: 'white',
+            fontWeight: '500',
+            cursor: 'pointer'
+          }}
+        >
+          {isWatching ? '⏹ 추적 중지' : '▶️ 실시간 추적 시작'}
+        </button>
+      </div>
+
+      {/* 에러 표시 */}
+      {error && (
+        <div style={{
+          padding: '15px',
+          backgroundColor: '#fef2f2',
+          border: '1px solid #fecaca',
+          borderRadius: '8px',
+          marginBottom: '15px',
+          color: '#dc2626'
+        }}>
+          <strong>❌ 에러:</strong> {error.message}
+        </div>
+      )}
+
+      {/* 위치 정보 표시 */}
+      {data && (
+        <div style={{
+          border: '2px solid #3b82f6',
+          borderRadius: '12px',
+          padding: '20px',
+          backgroundColor: '#f8fafc'
+        }}>
+          <h4 style={{ margin: '0 0 15px 0', color: '#1e40af' }}>📍 위치 정보</h4>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '12px'
+          }}>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>위도 (Latitude)</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatCoord(data.latitude)}</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>경도 (Longitude)</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatCoord(data.longitude)}</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>정확도 (Accuracy)</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatAccuracy(data.accuracy)}m</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>타임스탬프</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatTimestamp(data.timestamp)}</div>
+            </div>
+          </div>
+
+          {/* 고도 정보 (있는 경우) */}
+          {data.altitude != null && (
+            <div style={{ marginTop: '15px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '8px' }}>
+              <div style={{ fontSize: '12px', color: '#0369a1', marginBottom: '4px' }}>고도 (Altitude)</div>
+              <div style={{ fontSize: '16px', fontWeight: '600', color: '#0c4a6e' }}>
+                {data.altitude.toFixed(1)}m (정확도: {data.altitudeAccuracy?.toFixed(1) ?? '-'}m)
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 안내 메시지 */}
+      <div style={{ 
+        marginTop: '20px', 
+        padding: '12px', 
+        backgroundColor: '#f0f9ff', 
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 참고:</strong> 위치 정보는 브라우저와 기기에 따라 정확도가 다를 수 있습니다. 
+        <code style={{ backgroundColor: '#e0e7ff', padding: '2px 6px', borderRadius: '4px', margin: '0 4px' }}>enableHighAccuracy: true</code> 
+        옵션을 사용하면 GPS를 활용하여 더 정확한 위치를 얻을 수 있습니다.
+      </div>
+    </div>
+  );
+};
+
+<Example />
