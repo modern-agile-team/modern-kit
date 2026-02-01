@@ -1,5 +1,15 @@
 # @modern-kit/react
 
+## 2.9.0
+
+### Minor Changes
+
+- [#1027](https://github.com/modern-agile-team/modern-kit/pull/1027) [`4976c32`](https://github.com/modern-agile-team/modern-kit/commit/4976c32569c64a90846c21e7ff0f719189a6dd36) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): usePreventBrowserScrollRestoration 신규 훅 추가 - @ssi02014
+
+- [#1027](https://github.com/modern-agile-team/modern-kit/pull/1027) [`4976c32`](https://github.com/modern-agile-team/modern-kit/commit/4976c32569c64a90846c21e7ff0f719189a6dd36) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useScrollRestoration 신규 훅 추가 - @rhehfl
+
+- [#1040](https://github.com/modern-agile-team/modern-kit/pull/1040) [`568617e`](https://github.com/modern-agile-team/modern-kit/commit/568617e1e56328e171ec3d11f10de4fed3d598c5) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useGeolocation 신규 훅 추가 - @ssi02014
+
 ## 2.8.0
 
 ### Minor Changes
