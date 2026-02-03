@@ -6271,12 +6271,12 @@ __metadata:
     "@modern-kit/utils": "workspace:*"
     "@tsconfig/docusaurus": "npm:^2.0.4"
     "@types/node": "npm:^25.0.3"
-    "@types/react": "npm:^18.2.20"
+    "@types/react": "npm:^19.2.10"
     "@types/react-dom": "npm:^18.2.7"
     clsx: "npm:^2.1.1"
     gh-pages: "npm:^6.0.0"
     prism-react-renderer: "npm:^2.4.1"
-    react: "npm:^18.2.0"
+    react: "npm:^19.2.4"
     react-dom: "npm:^18.2.0"
     typescript: "npm:^5.1.6"
   languageName: unknown
@@ -8093,7 +8093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.20":
+"@types/react@npm:*":
   version: 18.3.1
   resolution: "@types/react@npm:18.3.1"
   dependencies:
@@ -21593,15 +21593,6 @@ __metadata:
   peerDependencies:
     react: ">=15"
   checksum: 10c0/e15c00dfef199249b4c6e6d98e5e76cc352ce66f3270f13df37cc069ddf7c05e43281e8c308fc407e4435d72924373baef1d2890e0f6b0b1eb423cf47315a053
-  languageName: node
-  linkType: hard
-
-"react@npm:^18.2.0":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
   languageName: node
   linkType: hard
 
