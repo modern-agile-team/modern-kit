@@ -382,7 +382,7 @@ pre {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 30px;
 }
 
@@ -392,6 +392,8 @@ pre {
   border-radius: 20px;
   padding: 40px 30px;
   transition: all 0.3s ease;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .stepCard:hover {
@@ -468,6 +470,8 @@ pre {
   border-radius: 8px;
   overflow-x: auto;
   border: 1px solid #e8e6e3 !important;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .stepCodeBlock code {
@@ -479,7 +483,9 @@ pre {
   line-height: 1.6;
   color: #3c2f26;
   background: transparent !important;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 /* SubPath Section */
@@ -759,6 +765,28 @@ pre {
 
   .quickStartSteps {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .stepCard {
+    padding: 32px 20px;
+    min-width: 0;
+  }
+
+  .stepTitle {
+    font-size: 1.3rem;
+  }
+
+  .stepCodeBlock {
+    padding: 14px 12px !important;
+    max-width: 100%;
+  }
+
+  .stepCodeBlock code {
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: break-word;
   }
 
   .comparisonContainer {
@@ -906,7 +934,44 @@ pre {
   }
 
   .stepCard {
-    padding: 30px 20px;
+    padding: 20px 12px;
+  }
+
+  .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  .stepTitle {
+    font-size: 1.1rem;
+  }
+
+  .stepDescription {
+    font-size: 0.9rem;
+  }
+
+  .stepCodeBlock {
+    padding: 12px 8px !important;
+    margin: 0 !important;
+  }
+
+  .stepCodeBlock code {
+    font-size: 0.7rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+
+  .installTabs {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .installTabLabel {
+    font-size: 0.75rem;
   }
 
   .comparisonHeader {
