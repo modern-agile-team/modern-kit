@@ -54,7 +54,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:25.2.1"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
           ["globals", "npm:17.3.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
@@ -18119,21 +18119,21 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["eslint-plugin-unused-imports", [\
-      ["npm:4.3.0", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-unused-imports-npm-4.3.0-ce364f8c79-aa4d8ebd8b.zip/node_modules/eslint-plugin-unused-imports/",\
+      ["npm:4.4.1", {\
+        "packageLocation": "./.yarn/cache/eslint-plugin-unused-imports-npm-4.4.1-7c8660f71a-bef630eedc.zip/node_modules/eslint-plugin-unused-imports/",\
         "packageDependencies": [\
-          ["eslint-plugin-unused-imports", "npm:4.3.0"]\
+          ["eslint-plugin-unused-imports", "npm:4.4.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0", {\
-        "packageLocation": "./.yarn/__virtual__/eslint-plugin-unused-imports-virtual-0483baafbb/0/cache/eslint-plugin-unused-imports-npm-4.3.0-ce364f8c79-aa4d8ebd8b.zip/node_modules/eslint-plugin-unused-imports/",\
+      ["virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-plugin-unused-imports-virtual-0822b38abe/0/cache/eslint-plugin-unused-imports-npm-4.4.1-7c8660f71a-bef630eedc.zip/node_modules/eslint-plugin-unused-imports/",\
         "packageDependencies": [\
           ["@types/eslint", null],\
           ["@types/typescript-eslint__eslint-plugin", null],\
           ["@typescript-eslint/eslint-plugin", null],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.0"],\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"]\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"]\
         ],\
         "packagePeers": [\
           "@types/eslint",\
@@ -24051,7 +24051,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:25.2.1"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
-          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.3.0"],\
+          ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
           ["globals", "npm:17.3.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
