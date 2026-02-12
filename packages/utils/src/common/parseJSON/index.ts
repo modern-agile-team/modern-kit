@@ -7,6 +7,8 @@ export function parseJSON<T>(value: string): T {
   try {
     return JSON.parse(value) as T;
   } catch (err) {
-    throw new Error(`Failed to parse data: ${err}`);
+    throw new Error(`데이터 파싱에 실패했습니다.`, {
+      cause: err,
+    });
   }
 }

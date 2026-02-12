@@ -134,7 +134,9 @@ export function useLocalStorage<T>(options: UseLocalStorageOptions<T>) {
         localStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
-          `로컬 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
+          `로컬 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다"`, {
+          cause: err,
+        }
         );
       }
     },
@@ -147,8 +149,9 @@ export function useLocalStorage<T>(options: UseLocalStorageOptions<T>) {
       localStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
-        `로컬 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다: ${err}`
-      );
+        `로컬 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다"`, {
+        cause: err,
+      });
     }
   }, [key]);
 
