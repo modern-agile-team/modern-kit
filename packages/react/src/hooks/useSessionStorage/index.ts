@@ -127,8 +127,9 @@ export function useSessionStorage<T>(options: UseSessionStorageOptions<T>) {
         sessionStorageEventHandler.dispatchEvent();
       } catch (err) {
         throw new Error(
-          `세션 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다: ${err}`
-        );
+          `세션 스토리지 "${key}" key에 데이터를 저장하는데 실패했습니다"`, {
+          cause: err,
+        });
       }
     },
     [key, initialValueToUse]
@@ -140,8 +141,9 @@ export function useSessionStorage<T>(options: UseSessionStorageOptions<T>) {
       sessionStorageEventHandler.dispatchEvent();
     } catch (err) {
       throw new Error(
-        `세션 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다: ${err}`
-      );
+        `세션 스토리지 "${key}" key의 데이터를 삭제하는데 실패했습니다"`, {
+        cause: err,
+      });
     }
   }, [key]);
 

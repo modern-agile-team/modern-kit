@@ -113,9 +113,9 @@ export class StorageManager<T extends Record<string, any>> {
 
       return parseJSON(getItem);
     } catch (err) {
-      throw new Error(
-        `"${String(key)}" 아이템을 가져오는데 실패했습니다: ${err}`
-      );
+      throw new Error(`"${String(key)}" 아이템을 가져오는데 실패했습니다"`, {
+        cause: err,
+      });
     }
   }
 
