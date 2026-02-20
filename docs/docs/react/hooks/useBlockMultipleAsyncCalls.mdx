@@ -13,9 +13,7 @@ import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
 3. `즉각적인 반응`을 원하는 경우: `debounce/throttle`는 호출을 지연시키기 때문에 사용자에게 `즉각적인 반응`을 보여주기에 제한적입니다.
 4. `debounce/throttle`은 `시간`을 기반으로 동작하기 때문에 `얼마나 자주 실행`되는지가 중요하지 `중복 호출 여부`를 파악하기 어렵습니다.
 
-위와 같은 한계점을 대응하고자 한다면 `useSingleRequest`를 사용할 수 있습니다.
-
-@tanstack/react-query와 함께 사용 할 때와 같이 `상태 관리`가 필요하지 않다면 [`useSingleRequest`](/docs/react/hooks/useSingleRequest)를 사용하세요.
+위와 같은 한계점을 대응하고자 한다면 `useBlockMultipleAsyncCalls`를 사용할 수 있습니다.
 
 <br />
 

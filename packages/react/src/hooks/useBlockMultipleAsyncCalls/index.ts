@@ -1,4 +1,5 @@
-import { useCallback, useRef, useState } from 'react';
+import { createSingleRequest } from '@modern-kit/utils';
+import { useCallback, useId, useRef, useState } from 'react';
 
 interface UseBlockMultipleAsyncCallsReturnType {
   isError: boolean;
@@ -50,14 +51,13 @@ interface UseBlockMultipleAsyncCallsReturnType {
 export function useBlockMultipleAsyncCalls(): UseBlockMultipleAsyncCallsReturnType {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const calledRef = useRef(false);
+
+  const id = useId();
+  const singleRequestRef = useRef(createSingleRequest(id));
 
   const blockMultipleAsyncCalls = useCallback(
     <T, Args extends unknown[]>(callback: (...args: Args) => Promise<T>) => {
-      return async (...args: Args) => {
-        if (calledRef.current) return;
-
-        calledRef.current = true;
+      return singleRequestRef.current(async (...args: Args) => {
         setIsLoading(true);
         setIsError(false);
         try {
@@ -67,9 +67,8 @@ export function useBlockMultipleAsyncCalls(): UseBlockMultipleAsyncCallsReturnTy
           throw error;
         } finally {
           setIsLoading(false);
-          calledRef.current = false;
         }
-      };
+      });
     },
     []
   );

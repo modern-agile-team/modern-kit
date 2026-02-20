@@ -1,4 +1,5 @@
 export * from './abRandom';
+export * from './createSingleRequest';
 export * from './asyncNoop';
 export * from './cloneDeep';
 export * from './debounce';

@@ -79,6 +79,27 @@ describe('useBlockMultipleAsyncCalls', () => {
     });
   });
 
+  it('비동기 작업 진행 중 리렌더링 후에도 중복 호출이 차단되어야 합니다', async () => {
+    const mockFn = vi.fn(async () => await delay(DELAY_TIME));
+    const { result } = renderHook(useBlockMultipleAsyncCalls);
+
+    result.current.blockMultipleAsyncCalls(mockFn)();
+
+    await waitFor(() => expect(result.current.isLoading).toBeTruthy());
+
+    // 리렌더링 이후 재호출
+    result.current.blockMultipleAsyncCalls(mockFn)();
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
+
+    await vi.advanceTimersByTimeAsync(DELAY_TIME);
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBeFalsy();
+      expect(mockFn).toHaveBeenCalledTimes(1);
+    });
+  });
+
   it('콜백에 전달된 인자가 올바르게 전달되어야 합니다', async () => {
     const mockFn = vi.fn(async (id: number) => {
       await delay(DELAY_TIME);
