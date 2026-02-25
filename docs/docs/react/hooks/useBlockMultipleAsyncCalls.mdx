@@ -3,114 +3,403 @@ import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
 
 # useBlockMultipleAsyncCalls
 
-`useBlockMultipleAsyncCalls` 훅은 진행 중인 비동기 호출이 있을 때 중복 호출을 방지하기 위한 커스텀 훅입니다.
+진행 중인 비동기 호출이 있을 때 중복 호출을 방지하며, `isLoading`과 `isError` 상태를 함께 제공하는 커스텀 훅입니다.
 
-`debounce`는 함수의 중복 호출을 방지하는 데 대부분의 경우에 효과적입니다.
-하지만, `debounce`는 비동기 작업의 완료를 보장하지 않기 때문에 다음과 같은 한계가 있습니다:
+`debounce/throttle`는 함수의 중복 호출을 방지하는 데 대부분의 경우에 효과적입니다.
+하지만, `debounce/throttle`는 비동기 작업의 완료를 보장하지 않기 때문에 다음과 같은 한계가 있습니다:
 
-1. `debounce` 시간이 API 응답 시간보다 짧을 경우: 비동기 작업이 완료되지 않은 상태에서 `다시 호출`될 수 있습니다.
-2. `debounce` 시간이 API 응답 시간보다 길 경우: 비동기 작업이 완료되었지만 `버튼`과 같은 요소가 여전히 `비활성화`되어 있을 수 있습니다.
-3. `즉각적인 반응`을 원하는 경우: `debounce`는 호출을 지연시키기 때문에 사용자에게 `즉각적인 반응`을 보여주기에 제한적입니다.
+1. `debounce/throttle` 시간이 API 응답 시간보다 짧을 경우: 비동기 작업이 완료되지 않은 상태에서 `다시 호출`될 수 있습니다.
+2. `debounce/throttle` 시간이 API 응답 시간보다 길 경우: 비동기 작업이 완료되었지만 `버튼`과 같은 요소가 여전히 `비활성화`되어 있을 수 있습니다.
+3. `즉각적인 반응`을 원하는 경우: `debounce/throttle`는 호출을 지연시키기 때문에 사용자에게 `즉각적인 반응`을 보여주기에 제한적입니다.
+4. `debounce/throttle`은 `시간`을 기반으로 동작하기 때문에 `얼마나 자주 실행`되는지가 중요하지 `중복 호출 여부`를 파악하기 어렵습니다.
 
-대부분의 경우에 `debounce`만으로 충분하지만, 위와 같은 한계점을 대응하고자 한다면 `useBlockMultipleAsyncCalls`를 사용할 수 있습니다.
-
-- [useDebounce](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebounce/index.ts)
+위와 같은 한계점을 대응하고자 한다면 `useBlockMultipleAsyncCalls`를 사용할 수 있습니다.
 
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBlockMultipleAsyncCalls/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface UseBlockMultipleAsyncCallsReturnType {
   isError: boolean;
   isLoading: boolean;
-  blockMultipleAsyncCalls: <T>(
-    callback: () => Promise<T>
-  ) => Promise<T | undefined>;
+  blockMultipleAsyncCalls: <T, Args extends unknown[]>(
+    callback: (...args: Args) => Promise<T>
+  ) => (...args: Args) => Promise<T | undefined>;
 }
 ```
 ```ts title="typescript"
 function useBlockMultipleAsyncCalls(): UseBlockMultipleAsyncCallsReturnType
 ```
 
+<br />
+
 ## Usage
 
+### 기본 사용법
+
+`blockMultipleAsyncCalls(callback)`은 래핑된 비동기 함수를 반환합니다. 반환된 함수를 이벤트 핸들러로 직접 사용할 수 있습니다.
+
 ```tsx title="typescript"
-import React, { useState } from 'react';
 import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
 
-interface Value {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+const Component = () => {
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
 
-const Example = () => {
-  const [blockingCount, setBlockingCount] = useState(1);
-  const [nonBlockingCount, setNonBlockingCount] = useState(1);
-  const [value, setValue] = useState<Value | null>(null);
-
-  const { isError, isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
-
-  const fetchApi = async () => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
-    ).then((response) => response.json());
-
-    setValue(res);
-    setBlockingCount(blockingCount + 1);
+  const fetchData = async () => {
+    const data = await fetch('/api/data').then((res) => res.json());
+    // 데이터 처리
   };
 
-  const handleClick = () => {
-    setNonBlockingCount(nonBlockingCount + 1);
-    blockMultipleAsyncCalls(fetchApi); // (*) Promise 반환하는 함수를 인자로 넣어주세요.
-  };
+  const handleClick = blockMultipleAsyncCalls(fetchData);
 
   return (
     <div>
-      <button onClick={handleClick}>버튼 클릭</button>
-      <div>
-        <p>BlockingCount: {blockingCount}</p>
-        <p>NonBlockingCount: {nonBlockingCount}</p>
-      </div>
-      {isLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
-      {isError && <p>에러 발생</p>}
+      <button onClick={handleClick} disabled={isLoading}>
+        {isLoading ? '로딩 중...' : '데이터 불러오기'}
+      </button>
+      {isError && <p>에러가 발생했습니다.</p>}
     </div>
   );
 };
 ```
 
+<br />
+
+### 인자 전달
+
+콜백 함수에 인자를 전달할 수 있습니다.
+
+```tsx title="typescript"
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+
+const Component = () => {
+  const { isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchUser = async (userId: number) => {
+    const user = await fetch(`/api/users/${userId}`).then((res) => res.json());
+    // 사용자 정보 처리
+  };
+
+  return (
+    <button onClick={() => blockMultipleAsyncCalls(fetchUser)(42)} disabled={isLoading}>
+      사용자 불러오기
+    </button>
+  );
+};
+```
+
+<br />
+
+### @tanstack/react-query와 함께 사용하기
+```tsx title="typescript"
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+import { useQuery } from '@tanstack/react-query';
+
+const Component = () => {
+  const { blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchUser = async ({ id }: { id: number }) => {
+    const user = await fetch(`/api/users/${id}`).then((res) => res.json());
+    return user;
+  };
+
+  const mutation = useMutation({
+    mutationFn: blockMultipleAsyncCalls(fetchUser),
+  });
+
+  return <button onClick={() => mutation.mutate({ id: 42 })}>사용자 불러오기</button>;
+};
+```
+
+<br />
+
 ## Example
 
-export const Example = () => {
-  const [blockingCount, setBlockingCount] = useState(1);
-  const [nonBlockingCount, setNonBlockingCount] = useState(1);
-  const [value, setValue] = useState(null);
-  const { isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
-  const fetchApi = async () => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/${blockingCount}`
-    ).then((response) => response.json());
-    setValue(res);
-    setBlockingCount(blockingCount + 1);
+### Example1 (기본 사용 예제)
+
+버튼을 빠르게 여러 번 클릭해보세요. `isLoading`이 `true`인 동안에는 중복 요청이 차단되며, 버튼이 비활성화됩니다.
+
+export const Example1 = () => {
+  const [fetchCount, setFetchCount] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
+  const [lastResult, setLastResult] = useState(null);
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchTodo = async (id) => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((r) => r.json());
+    setLastResult(res.title);
+    setFetchCount((c) => c + 1);
+    return res;
   };
-  const handleClick = () => {
-    setNonBlockingCount(nonBlockingCount + 1);
-    blockMultipleAsyncCalls(fetchApi);
-  };
+
+  const handleClick = blockMultipleAsyncCalls(fetchTodo);
+
   return (
-    <div>
-      <button onClick={handleClick}>버튼 클릭</button>
-      <div>
-        <p>BlockingCount: {blockingCount}</p>
-        <p>NonBlockingCount: {nonBlockingCount}</p>
+    <div style={{ fontFamily: 'sans-serif' }}>
+      <p style={{ fontSize: '14px', color: '#555', marginBottom: '16px' }}>
+        버튼을 빠르게 여러 번 클릭해도 진행 중인 요청이 완료되기 전까지 한 번만 실행됩니다.
+      </p>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+        <button
+          onClick={() => {
+            setClickCount((c) => c + 1);
+            handleClick(fetchCount + 1);
+          }}
+          disabled={isLoading}
+          style={{
+            padding: '8px 20px',
+            backgroundColor: isLoading ? '#9ca3af' : '#6366f1',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+            transition: 'background-color 0.2s',
+          }}
+        >
+          {isLoading ? '로딩 중...' : `Todo #${fetchCount + 1} 불러오기`}
+        </button>
+        {isLoading && (
+          <span style={{ fontSize: '13px', color: '#6366f1' }}>⏳ 요청 진행 중</span>
+        )}
       </div>
-      {isLoading ? <p>로딩중</p> : <p>{value?.title}</p>}
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '12px',
+          marginBottom: '16px',
+        }}
+      >
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#f0f9ff',
+            border: '1px solid #bae6fd',
+            borderRadius: '8px',
+          }}
+        >
+          <div style={{ fontSize: '12px', color: '#0284c7', marginBottom: '4px' }}>버튼 클릭 횟수</div>
+          <div style={{ fontSize: '24px', fontWeight: '700', color: '#0369a1' }}>{clickCount}</div>
+        </div>
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#f0fdf4',
+            border: '1px solid #bbf7d0',
+            borderRadius: '8px',
+          }}
+        >
+          <div style={{ fontSize: '12px', color: '#16a34a', marginBottom: '4px' }}>실제 API 호출 횟수</div>
+          <div style={{ fontSize: '24px', fontWeight: '700', color: '#15803d' }}>{fetchCount}</div>
+        </div>
+      </div>
+
+      {lastResult && (
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#fafafa',
+            border: '1px solid #e5e7eb',
+            borderRadius: '8px',
+            fontSize: '14px',
+          }}
+        >
+          <strong>마지막 응답:</strong> {lastResult}
+        </div>
+      )}
+
+      {isError && (
+        <div
+          style={{
+            marginTop: '12px',
+            padding: '12px 16px',
+            backgroundColor: '#fef2f2',
+            border: '1px solid #fecaca',
+            borderRadius: '8px',
+            color: '#dc2626',
+            fontSize: '14px',
+          }}
+        >
+          에러가 발생했습니다.
+        </div>
+      )}
     </div>
   );
 };
 
-<Example />
+<Example1 />
+
+<br />
+
+### Example2 (isError 처리 예제)
+
+에러가 발생하면 `isError`가 `true`로 변경되고, 다음 정상 호출 시 `false`로 초기화됩니다.
+
+export const Example2 = () => {
+  const [log, setLog] = useState([]);
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const addLog = (msg, type = 'info') => {
+    setLog((prev) => [...prev, { msg, type }]);
+  };
+
+  const successFetch = async () => {
+    addLog('정상 요청 시작...', 'info');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    addLog('정상 요청 완료 ✅', 'success');
+  };
+
+  const errorFetch = async () => {
+    addLog('에러 요청 시작...', 'info');
+    await new Promise((_, reject) => setTimeout(() => reject(new Error('서버 에러 발생')), 800));
+  };
+
+  const handleSuccess = blockMultipleAsyncCalls(successFetch);
+  const handleError = blockMultipleAsyncCalls(errorFetch);
+
+  return (
+    <div style={{ fontFamily: 'sans-serif' }}>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
+        <button
+          onClick={handleSuccess}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#2563eb', // 보기 좋은 blue 계열 (blue-600)
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          지속 요청
+        </button>
+        <button
+          onClick={handleSuccess}
+          disabled={isLoading}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: isLoading ? '#9ca3af' : '#16a34a',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          정상 요청
+        </button>
+        <button
+          onClick={() => {
+            handleError().catch(() => addLog('에러 catch됨 ❌', 'error'));
+          }}
+          disabled={isLoading}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: isLoading ? '#9ca3af' : '#dc2626',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          에러 요청
+        </button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
+        <div
+          style={{
+            padding: '8px 14px',
+            borderRadius: '6px',
+            fontSize: '13px',
+            fontWeight: '600',
+            backgroundColor: isLoading ? '#eff6ff' : '#f3f4f6',
+            color: isLoading ? '#2563eb' : '#6b7280',
+            border: `1px solid ${isLoading ? '#bfdbfe' : '#e5e7eb'}`,
+          }}
+        >
+          isLoading: {String(isLoading)}
+        </div>
+        <div
+          style={{
+            padding: '8px 14px',
+            borderRadius: '6px',
+            fontSize: '13px',
+            fontWeight: '600',
+            backgroundColor: isError ? '#fef2f2' : '#f3f4f6',
+            color: isError ? '#dc2626' : '#6b7280',
+            border: `1px solid ${isError ? '#fecaca' : '#e5e7eb'}`,
+          }}
+        >
+          isError: {String(isError)}
+        </div>
+      </div>
+
+      <div
+        style={{
+          minHeight: '100px',
+          maxHeight: '160px',
+          overflowY: 'auto',
+          border: '1px solid #e5e7eb',
+          borderRadius: '8px',
+          padding: '12px 16px',
+          backgroundColor: '#f9fafb',
+        }}
+      >
+        {log.length === 0 ? (
+          <p style={{ color: '#9ca3af', fontSize: '13px', margin: 0 }}>
+            버튼을 클릭하면 로그가 표시됩니다.
+          </p>
+        ) : (
+          log.map((entry, i) => (
+            <div
+              key={i}
+              style={{
+                fontSize: '13px',
+                color: entry.type === 'success' ? '#16a34a' : entry.type === 'error' ? '#dc2626' : '#374151',
+                padding: '2px 0',
+                fontFamily: 'monospace',
+              }}
+            >
+              {entry.msg}
+            </div>
+          ))
+        )}
+      </div>
+
+      {log.length > 0 && (
+        <button
+          onClick={() => setLog([])}
+          style={{
+            marginTop: '8px',
+            padding: '4px 12px',
+            fontSize: '12px',
+            color: '#6b7280',
+            backgroundColor: 'transparent',
+            border: '1px solid #d1d5db',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          로그 초기화
+        </button>
+      )}
+    </div>
+  );
+};
+
+<Example2 />
