@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 2.8.0
+
+### Minor Changes
+
+- [#1056](https://github.com/modern-agile-team/modern-kit/pull/1056) [`ad32ae4`](https://github.com/modern-agile-team/modern-kit/commit/ad32ae452da53f612fa41355a4ac9935b86967f6) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): createSingleRequest 함수 추가 - @ssi02014
+
 ## 2.7.0
 
 ### Minor Changes
