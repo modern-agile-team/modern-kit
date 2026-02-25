@@ -2,7 +2,7 @@
 
 단일 비동기 실행만 허용하는 함수 래퍼를 생성하는 팩토리 함수입니다.
 
-반환된 함수로 래핑한 비동기 함수는 진행 중인 호출이 있을 때 중복 실행되지 않고, 완료 후에는 다시 호출할 수 있습니다. 
+반환된 함수로 래핑한 비동기 함수는 진행 중인 호출이 있을 때 중복 실행되지 않고, 완료 후에는 다시 호출할 수 있습니다.
 
 `debounce/throttle`는 함수의 중복 호출을 방지하는 데 대부분의 경우에 효과적입니다.
 하지만, `debounce/throttle`는 비동기 작업의 완료를 보장하지 않기 때문에 다음과 같은 한계가 있습니다:
@@ -17,17 +17,23 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/createSingleRequest/index.ts)
 
 ## Interface
+
 ```ts title="typescript"
-function createSingleRequest(key?: string): <T, Args extends unknown[]>(
+function createSingleRequest(
+  key?: string
+): <T, Args extends unknown[]>(
   callback: (...args: Args) => Promise<T>
 ) => (...args: Args) => Promise<T | undefined>;
 ```
 
 ## Usage
+
 ### 기본 사용법
+
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 
@@ -41,6 +47,7 @@ wrappedFetch(); // 진행 중이므로 무시됨 (undefined 반환)
 ```
 
 ### 여러 비동기 함수가 하나의 잠금 공유
+
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 
@@ -54,6 +61,7 @@ wrappedSync(); // undefined 반환, 실행되지 않음
 ```
 
 ### 인자 전달
+
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 
