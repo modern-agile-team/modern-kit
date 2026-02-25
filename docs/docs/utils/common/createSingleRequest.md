@@ -26,11 +26,6 @@ function createSingleRequest(key?: string): <T, Args extends unknown[]>(
 ) => (...args: Args) => Promise<T | undefined>;
 ```
 
-## Parameters
-| Name | Type | Description | Required |
-|------|------|-------------|----------|
-| key | string | 고유한 식별자 | No | 
-
 ## Usage
 ### 기본 사용법
 ```ts title="typescript"
@@ -56,17 +51,6 @@ const wrappedSync = singleRequest(syncData);
 // wrappedSubmit이 진행 중이면 wrappedSync 호출도 블록됨 (같은 잠금 공유)
 wrappedSubmit();
 wrappedSync(); // undefined 반환, 실행되지 않음
-```
-
-### 다중 인스턴스 사용(key 전달 권장)
-```ts title="typescript"
-import { createSingleRequest } from '@modern-kit/utils';
-
-const singleRequest1 = createSingleRequest('test1');
-const singleRequest2 = createSingleRequest('test2');
-
-const wrappedSubmit1 = singleRequest1(submitForm);
-const wrappedSubmit2 = singleRequest2(submitForm);
 ```
 
 ### 인자 전달
