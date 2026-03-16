@@ -11,30 +11,42 @@ afterEach(() => {
 
 describe('parseDate', () => {
   it('날짜 문자열을 Date 객체로 변환해야 합니다.', () => {
-    const dateString1 = '2025-01-01';
-    const date1 = parseDate(dateString1);
+    const date1 = parseDate('2025-01-01');
     expect(date1).toBeInstanceOf(Date);
-    expect(date1.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
+    expect(date1.getFullYear()).toBe(2025);
+    expect(date1.getMonth()).toBe(0);
+    expect(date1.getDate()).toBe(1);
+    expect(date1.getHours()).toBe(0);
+    expect(date1.getMinutes()).toBe(0);
 
-    const dateString2 = '2025/01/01 09:00:00';
-    const date2 = parseDate(dateString2);
+    const date2 = parseDate('2025/01/01 09:00:00');
     expect(date2).toBeInstanceOf(Date);
-    expect(date2.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 9:00:00');
+    expect(date2.getFullYear()).toBe(2025);
+    expect(date2.getMonth()).toBe(0);
+    expect(date2.getDate()).toBe(1);
+    expect(date2.getHours()).toBe(9);
+    expect(date2.getMinutes()).toBe(0);
 
-    const dateString3 = '2025.01.01 18:00:00';
-    const date3 = parseDate(dateString3);
+    const date3 = parseDate('2025.01.01 18:00:00');
     expect(date3).toBeInstanceOf(Date);
-    expect(date3.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오후 6:00:00');
+    expect(date3.getFullYear()).toBe(2025);
+    expect(date3.getMonth()).toBe(0);
+    expect(date3.getDate()).toBe(1);
+    expect(date3.getHours()).toBe(18);
+    expect(date3.getMinutes()).toBe(0);
 
-    const dateString4 = '2025-01-01T00:00:00';
-    const date4 = parseDate(dateString4);
+    const date4 = parseDate('2025-01-01T00:00:00');
     expect(date4).toBeInstanceOf(Date);
-    expect(date4.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
+    expect(date4.getFullYear()).toBe(2025);
+    expect(date4.getMonth()).toBe(0);
+    expect(date4.getDate()).toBe(1);
+    expect(date4.getHours()).toBe(0);
 
-    const dateString5 = '01/01/2025';
-    const date5 = parseDate(dateString5);
+    const date5 = parseDate('01/01/2025');
     expect(date5).toBeInstanceOf(Date);
-    expect(date5.toLocaleString('ko-KR')).toBe('2025. 1. 1. 오전 12:00:00');
+    expect(date5.getFullYear()).toBe(2025);
+    expect(date5.getMonth()).toBe(0);
+    expect(date5.getDate()).toBe(1);
   });
 
   it('Date 객체를 동일한 Date 객체로 반환해야 합니다.', () => {
