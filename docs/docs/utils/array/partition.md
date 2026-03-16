@@ -7,7 +7,10 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/partition/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 const partition: <T>(
   arr: T[] | readonly T[],
@@ -15,7 +18,12 @@ const partition: <T>(
 ) => [truthyArray: T[], falsyArray: T[]];
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { partition } from '@modern-kit/utils';
 
@@ -27,6 +35,10 @@ const [evens, odds] = partition(numberList, (num) => num % 2 === 0);
   odds: [1, 3, 5]
 */
 ```
+
+<br />
+
+### 객체 배열 분류
 
 ```ts title="typescript"
 import { partition } from '@modern-kit/utils';

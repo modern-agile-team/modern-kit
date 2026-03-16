@@ -12,6 +12,8 @@
 function isPromise<T = any>(value: unknown): value is Promise<T>;
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isPromise } from '@modern-kit/utils';

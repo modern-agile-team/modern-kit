@@ -1,0 +1,189 @@
+import { useState } from 'react';
+import { EventExtender } from '@modern-kit/react';
+import { delay } from '@modern-kit/utils';
+
+# EventExtender
+
+A component that extends the event handlers of child components to enable pre/post processing.
+
+Behavior depends on the `shouldAwait` option:
+
+`shouldAwait: false` (default)
+- **Does not await** async functions.
+- Executes in the order `beforeEvent → original event → afterEvent`, but does not wait for each step to complete.
+- Maintains the normal event call order.
+  - Example: `mouseDown → mouseUp → click` call order is preserved.
+
+`shouldAwait: true`
+- **Awaits** async functions.
+- Guarantees execution in the order `beforeEvent → original event → afterEvent`, waiting for each step to complete.
+- Note: The normal event call order may change.
+  - Example: Normally `mouseUp` fires before `click`, but when capturing `onMouseUp`, the `mouseUp` event fires after `click`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/EventExtender/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+/**
+ * @description HTML element tag name type (e.g., "div", "span", "input")
+ */
+type HTMLElementType = keyof JSX.IntrinsicElements;
+
+/**
+ * @description Events defined in `React.DOMAttributes<HTMLElement>`
+ * - Only includes event handler names starting with "on" (e.g., "onClick", "onChange", "onSubmit")
+ */
+type EventNames = keyof React.DOMAttributes<HTMLElement> & `on${string}`;
+
+/**
+ * @description Generic type that infers the event object type for a specific event on a specific HTML element
+ * @template K - HTML element type (e.g., "button", "input")
+ * @template E - Event handler name (e.g., "onClick", "onChange")
+ * @returns The event object type for that event, or `never`
+ */
+type ElementEventType<
+  K extends HTMLElementType,
+  E extends EventNames
+> = JSX.IntrinsicElements[K][E] extends ((e: infer Event) => void) | undefined
+  ? Event
+  : never;
+```
+```tsx title="typescript"
+interface EventExtenderProps<K extends HTMLElementType, E extends EventNames> {
+  children: JSX.Element;
+  capture: E;
+  shouldAwait?: boolean; // default: false
+  beforeEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
+  afterEvent?: (e: ElementEventType<K, E>) => void | Promise<void>;
+}
+
+const EventExtender: <
+  K extends keyof JSX.IntrinsicElements,
+  E extends EventNames
+>({
+  children,
+  capture,
+  shouldAwait,
+  beforeEvent,
+  afterEvent,
+}: EventExtenderProps<K, E>) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `JSX.Element` | - | The child element whose event handler will be extended |
+| `capture` | `EventNames` | - | The event handler name to capture (e.g., `"onClick"`) |
+| `shouldAwait` | `boolean` | `false` | Whether to await async event handlers |
+| `beforeEvent` | `(e: Event) => void \| Promise<void>` | `undefined` | Function called before the original event |
+| `afterEvent` | `(e: Event) => void \| Promise<void>` | `undefined` | Function called after the original event |
+
+## Usage
+### Basic Usage
+```tsx title="typescript"
+import { EventExtender } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <EventExtender
+      capture="onClick"
+      beforeEvent={(e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('before click', e);
+      }}
+      afterEvent={(e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('after click', e);
+      }}>
+      <button onClick={(e) => console.log('click', e)}>Sync Button</button>
+    </EventExtender>
+  );
+};
+```
+
+export const SyncExample = () => {
+  return (
+    <>
+      <p>Check the browser developer console.</p>
+      <EventExtender
+        capture="onClick"
+        beforeEvent={(e) => {
+          console.log('before click', e);
+        }}
+        afterEvent={(e) => {
+          console.log('after click', e);
+        }}>
+        <button onClick={(e) => console.log('click', e)}>Sync Button</button>
+      </EventExtender>
+    </>
+  );
+};
+
+<SyncExample />
+
+<br />
+
+### Async Event Handling
+```tsx title="typescript"
+import { EventExtender } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <EventExtender
+      shouldAwait={true} // (*)
+      capture="onClick"
+      beforeEvent={async (e: React.MouseEvent<HTMLButtonElement>) => {
+        await delay(500);
+        console.log('before click', e);
+      }}
+      afterEvent={async (e: React.MouseEvent<HTMLButtonElement>) => {
+        await delay(500);
+        console.log('after click', e);
+      }}>
+      <button
+        onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+          await delay(500);
+          console.log('click', e);
+        }}>
+        Async Button
+      </button>
+    </EventExtender>
+  );
+};
+```
+
+export const AsyncExample = () => {
+  return (
+    <>
+      <p>Check the browser developer console.</p>
+      <EventExtender
+        shouldAwait={true} // (*)
+        capture="onClick"
+        beforeEvent={async (e) => {
+          await delay(500);
+          console.log('before click', e);
+        }}
+        afterEvent={async (e) => {
+          await delay(500);
+          console.log('after click', e);
+        }}>
+        <button
+          onClick={async (e) => {
+            await delay(500);
+            console.log('click', e);
+          }}>
+          Async Button
+        </button>
+      </EventExtender>
+    </>
+  );
+};
+
+<AsyncExample />
+

@@ -1,0 +1,148 @@
+import { useState } from 'react';
+import { useControllableState } from '@modern-kit/react'
+
+# useControllableState
+
+A custom hook for managing both controlled and uncontrolled state.
+
+If `value` is provided, it operates in `controlled mode`; if not provided, it operates in `uncontrolled mode`.
+
+- In controlled mode, `value` is managed externally, and the `setValue` function returned by this hook cannot change the internal value.
+
+- In uncontrolled mode, `defaultValue` is used as the initial value, and the `setValue` function returned by this hook can change the internal value.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useControllableState/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseControllableStateOptions<T> {
+  value?: T | undefined;
+  defaultValue: T;
+}
+```
+```ts title="typescript"
+function useControllableState<T>({
+  value,
+  defaultValue,
+}: UseControllableStateOptions<T>): [T, (nextValue: SetStateAction<T>) => void];
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `T \| undefined` | `undefined` | The external state value for controlled mode. When provided, the hook operates in controlled mode. |
+| `defaultValue` | `T` | - | The initial value for uncontrolled mode. |
+
+<br />
+
+## Remarks
+
+:::tip Primary Use Cases
+This hook is ideal for managing the checked state of elements like `checkbox` and `radio` in a controlled/uncontrolled split.
+- Provide `value` via props for controlled mode; omit it for uncontrolled mode.
+:::
+
+<br />
+
+## Usage
+
+### Uncontrolled Mode
+
+- When `value` is not provided or is `undefined`, the hook operates in uncontrolled mode.
+- `defaultValue` is used as the initial value, and the value can be changed via `setValue`.
+
+```tsx title="typescript"
+import { useControllableState } from '@modern-kit/react';
+
+const UncontrolledExample = () => {
+  const [value, setValue] = useControllableState({ defaultValue: 0 });
+
+  return (
+    <div>
+      <p>Current value: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        Increment
+      </button>
+      <button onClick={() => setValue(0)}>Reset</button>
+    </div>
+  );
+};
+```
+
+### Controlled Mode
+
+- When `value` is provided, the hook operates in controlled mode.
+- The state is managed externally and cannot be changed via the `setValue` returned from `useControllableState`.
+
+```tsx title="typescript"
+import { useState } from 'react';
+import { useControllableState } from '@modern-kit/react';
+
+const ControlledExample = () => {
+  const [externalValue, setExternalValue] = useState(10);
+  const [value, setValue] = useControllableState({ value: externalValue, defaultValue: 0 });
+
+  return (
+    <div>
+      <p>Current value: {value}</p>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        Increment internally (does not work)
+      </button>
+      <button onClick={() => setExternalValue((prev) => prev + 1)}>
+        Increment externally (works)
+      </button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const UncontrolledExample = () => {
+  const [value, setValue] = useControllableState({ defaultValue: 0 });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Uncontrolled mode - Current value: {value}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+          Increment
+        </button>
+        <button onClick={() => setValue(0)}>Reset</button>
+      </div>
+    </div>
+  );
+};
+
+export const ControlledExample = () => {
+  const [externalValue, setExternalValue] = useState(10);
+  const [value, setValue] = useControllableState({ value: externalValue, defaultValue: 0 });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Controlled mode - Current value: {value}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+          Increment internally (does not work)
+        </button>
+        <button onClick={() => setExternalValue((prev) => prev + 1)}>
+          Increment externally (works)
+        </button>
+      </div>
+    </div>
+  );
+};
+
+### Uncontrolled Mode
+<UncontrolledExample />
+
+### Controlled Mode
+<ControlledExample />

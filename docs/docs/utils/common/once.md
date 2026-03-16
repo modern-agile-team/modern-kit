@@ -7,12 +7,17 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/once/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function once<T extends (...args: any[]) => any>(callback: T): T
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { once } from '@modern-kit/utils';
 
@@ -25,6 +30,9 @@ initialize(); // '초기화 완료'가 출력되며, true를 반환합니다.
 initialize(); // 아무 것도 출력되지 않으며, 이전 결과인 true를 반환합니다.
 ```
 
+<br />
+
+### 인자가 있는 함수
 ```ts title="typescript"
 import { once } from '@modern-kit/utils';
 

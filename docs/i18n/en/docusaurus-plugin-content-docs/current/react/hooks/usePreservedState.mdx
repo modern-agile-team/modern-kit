@@ -1,0 +1,73 @@
+# usePreservedState
+
+A custom hook that preserves state using a given `value` and a `comparator` function.
+
+If no `comparator` is provided, the `isEqual` function from `@modern-kit/utils` is used by default.
+  - [isEqual](https://modern-agile-team.github.io/modern-kit/docs/utils/validator/isEqual)
+
+Whenever the given value changes, the hook compares the previous state with the new value using the comparator, and only updates the state when they are determined to be different.
+
+This prevents unnecessary state updates.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreservedState/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function usePreservedState<T>(
+  value: T,
+  comparator?: (source: T, target: T) => boolean
+): T;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `T` | `-` | The value to preserve |
+| `comparator` | `(source: T, target: T) => boolean` | `isEqual` | Function to compare the previous state with the new value. Should return `true` if the two values are equal |
+
+<br />
+
+## Usage
+
+### `Default Comparator` Usage
+
+```tsx title="typescript"
+import React, { useEffect, useState } from "react";
+import { usePreservedState } from "@modern-kit/react";
+
+const Example = () => {
+  const preservedState = usePreservedState({ exampleId: 1 }); // The reference of preservedState is maintained even when the component re-renders.
+
+  return  <>{/* ... */}</>;
+}
+```
+
+<br />
+
+### `Custom Comparator` Usage
+
+```tsx title="typescript"
+import React, { useEffect, useState } from 'react';
+import { usePreservedState } from '@modern-kit/react';
+
+const Example = () => {
+  const comparator = (
+    source: { exampleId: number },
+    target: { exampleId: number }
+  ) => source.exampleId === target.exampleId;
+
+  const preservedState = usePreservedState({ exampleId: 1 }, comparator);
+
+  return <>{/* ... */}</>;
+};
+```

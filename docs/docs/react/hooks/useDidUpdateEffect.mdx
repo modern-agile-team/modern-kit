@@ -10,10 +10,23 @@ import { useState } from 'react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDidUpdateEffect/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useDidUpdateEffect(effect: EffectCallback, deps: DependencyList): void
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | 실행할 effect 함수 |
+| `deps` | `DependencyList` | effect를 다시 실행할 의존성 배열 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

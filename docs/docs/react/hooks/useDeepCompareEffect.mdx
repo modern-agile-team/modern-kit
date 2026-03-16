@@ -18,6 +18,8 @@ React의 기본 `useEffect`는 의존성 배열을 얕은 비교(`shallow compar
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDeepCompareEffect/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useDeepCompareEffect(
@@ -25,6 +27,17 @@ function useDeepCompareEffect(
   deps: DependencyList
 ): void
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | 실행할 effect 함수 |
+| `deps` | `DependencyList` | 깊은 비교로 감시할 의존성 배열 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

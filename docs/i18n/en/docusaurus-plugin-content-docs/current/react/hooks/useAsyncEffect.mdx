@@ -1,0 +1,91 @@
+import { useAsyncEffect, DebounceHandler } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useAsyncEffect
+
+In general, the callback function passed to `useEffect` cannot be an async function.
+
+`useAsyncEffect` is a custom hook for using `async functions` with `useEffect`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useAsyncEffect/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useAsyncEffect(effectCallback: () => Promise<void>, deps?: DependencyList): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `() => Promise<void>` | The async function to execute |
+| `deps` | `DependencyList` | Dependency array that re-runs the effect when changed |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useAsyncEffect, DebounceHandler } from '@modern-kit/react'
+
+const Example = () => {
+  const [data, setData] = useState(null)
+  const [id, setId] = useState(1);
+
+  const fetchData = async () => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const data = await res.json()
+    setData(data)
+  }
+
+  useAsyncEffect(fetchData, [id]);
+
+  return (
+    <div>
+      {/* Use DebounceHandler to debounce the button click event. */}
+      <DebounceHandler wait={500} capture={'onClick'}>
+        <button onClick={() => setId(id + 1)}>ID Change: {id}</button>
+      </DebounceHandler>
+      <p>ID: {data?.id}</p>
+      <p>TITLE: {data?.title}</p>
+      <p>BODY: {data?.body}</p>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [data, setData] = useState(null)
+  const [id, setId] = useState(1);
+
+  const fetchData = async () => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const data = await res.json()
+    setData(data)
+  }
+
+  useAsyncEffect(fetchData, [id]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <DebounceHandler wait={500} capture={'onClick'}>
+          <button onClick={() => setId(id + 1)}>ID Change: {id}</button>
+        </DebounceHandler>
+      </div>
+      <p>ID: {data?.id}</p>
+      <p>TITLE: {data?.title}</p>
+      <p>BODY: {data?.body}</p>
+    </div>
+  );
+}
+
+<Example />

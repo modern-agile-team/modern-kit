@@ -1,6 +1,8 @@
 # Invert
 
-객체의 key와 value을 서로 바꾸는 타입입니다.
+객체의 키(key)와 값(value)을 서로 바꾸는 타입입니다.
+
+<br />
 
 ## Interface
 
@@ -10,9 +12,13 @@ type Invert<T extends Record<PropertyKey, PropertyKey>> = {
 };
 ```
 
+<br />
+
 ## Usage
 
 ```ts title="typescript"
-type originObj = { a: "x", b: "y" };
-type invertedObj = Invert<originObj>; // { x: "a", y: "b" }
-``` 
+import { Invert } from '@modern-kit/types';
+
+type OriginObj = { a: 'x', b: 'y' };
+type InvertedObj = Invert<OriginObj>; // { x: 'a', y: 'b' }
+```

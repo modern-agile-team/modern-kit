@@ -1,0 +1,96 @@
+import { useState } from 'react';
+import { SwitchCase } from '@modern-kit/react';
+
+# SwitchCase
+
+A component that allows you to use a `switch` statement in component form.
+
+Pass an object with `key(condition):value(component)` properties to `caseBy`, and it renders the matching component based on the `value` prop.
+
+A `defaultComponent` prop can be provided to display when no matching value is found in `caseBy`.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/SwitchCase/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface SwitchCaseProps<Case extends PropertyKey> {
+  value: Case | null | undefined;
+  caseBy: Record<Case, React.ReactNode>;
+  defaultComponent?: React.ReactNode;
+}
+```
+```ts title="typescript"
+const SwitchCase: <Case extends PropertyKey>({
+  value,
+  caseBy,
+  defaultComponent,
+}: SwitchCaseProps<Case>) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `Case \| null \| undefined` | - | Value to match against |
+| `caseBy` | `Record<Case, React.ReactNode>` | - | Object mapping conditions (keys) to components (values) |
+| `defaultComponent` | `React.ReactNode` | `undefined` | Component rendered when no matching case is found |
+
+## Usage
+```tsx title="typescript"
+import { SwitchCase } from '@modern-kit/react';
+
+
+const Example = () => {
+  const [condition, setCondition] = useState(1);
+
+  return (
+    <div>
+      <div>
+        <button onClick={() => setCondition(1)}>Change to case 1</button>
+        <button onClick={() => setCondition(2)}>Change to case 2</button>
+        <button onClick={() => setCondition(3)}>Change to case 3</button>
+      </div>
+
+      <SwitchCase
+        value={condition}
+        caseBy={{
+          1: <h3>Case No.1</h3>,
+          2: <h3>Case No.2</h3>,
+          3: <h3>Case No.3</h3>,
+        }}
+      />
+    </div>
+  );
+};
+```
+
+export const Example = () => {
+  const [condition, setCondition] = useState(1);
+  return (
+    <div>
+      <div>
+        <button onClick={() => setCondition(1)}>Change to case 1</button>
+        <button onClick={() => setCondition(2)}>Change to case 2</button>
+        <button onClick={() => setCondition(3)}>Change to case 3</button>
+      </div>
+
+      <SwitchCase
+        value={condition}
+        caseBy={{
+          1: <h3>Case No.1</h3>,
+          2: <h3>Case No.2</h3>,
+          3: <h3>Case No.3</h3>,
+        }}
+      />
+    </div>
+  );
+};
+
+<Example />

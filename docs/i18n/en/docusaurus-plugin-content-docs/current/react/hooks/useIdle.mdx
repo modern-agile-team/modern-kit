@@ -1,0 +1,151 @@
+import { useState } from 'react';
+import { useIdle } from '@modern-kit/react';
+
+# useIdle
+
+A custom hook that detects the user's `idle` state.
+
+If there is no user activity for the specified duration, the state is considered `idle`. It detects various user activities such as mouse movements, keyboard input, and touch events. Page visibility changes are also detected, transitioning to `active` when the tab becomes visible again.
+
+<br />
+
+### Detected User Activities
+
+`useIdle` detects user activity through the following events:
+
+- `mousemove` - Mouse movement
+- `mousedown` - Mouse click
+- `resize` - Window resize
+- `keydown` - Keyboard input
+- `touchstart` - Touch start
+- `wheel` - Mouse wheel / scroll
+- `visibilitychange` - Tab switch (when the page becomes visible again)
+
+All events are throttled to `500ms` to prevent unnecessary event calls.
+
+<br />
+
+### Use Cases
+
+- Auto logout functionality
+- Screensaver activation
+- User activity monitoring
+- Resource saving (stop API calls when idle)
+- Notification system (show notifications when user returns)
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIdle/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseIdleProps {
+  timeout: number; // time in milliseconds before considered idle
+  onIdle?: () => void; // callback when entering idle state
+  onActive?: () => void; // callback when entering active state
+}
+```
+```ts title="typescript"
+function useIdle({ timeout, onIdle, onActive }: UseIdleProps): boolean
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `timeout` | `number` | - | Time in milliseconds before the user is considered idle |
+| `onIdle` | `() => void` | - | Callback invoked when entering idle state |
+| `onActive` | `() => void` | - | Callback invoked when entering active state |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useIdle } from '@modern-kit/react';
+
+const Example = () => {
+  const isIdle = useIdle({
+    timeout: 5000, // idle after 5 seconds
+    onIdle: () => {
+      console.log('User is idle');
+    },
+    onActive: () => {
+      console.log('User is active again');
+    }
+  });
+
+  return (
+    <div>
+      <p>Current status: {isIdle ? '😴 Idle' : '🟢 Active'}</p>
+      <p>Stop using the mouse or keyboard for 5 seconds!</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [idleCount, setIdleCount] = useState(0);
+  const [activeCount, setActiveCount] = useState(0);
+
+  const isIdle = useIdle({
+    timeout: 3000, // 3 seconds
+    onIdle: () => {
+      setIdleCount(prev => prev + 1);
+    },
+    onActive: () => {
+      setActiveCount(prev => prev + 1);
+    }
+  });
+
+  const resetCounts = () => {
+    setIdleCount(0);
+    setActiveCount(0);
+  };
+
+  return (
+    <div style={{
+      padding: '20px',
+      borderRadius: '8px',
+      backgroundColor: isIdle ? '#ffeaa7' : '#d1f2eb'
+    }}>
+      <div style={{
+        fontSize: '24px',
+        fontWeight: 'bold',
+        marginBottom: '16px',
+        color: isIdle ? '#e17055' : '#00b894'
+      }}>
+        Current status: {isIdle ? '😴 Idle (3s inactive)' : '🟢 Active'}
+      </div>
+
+      <div style={{ marginBottom: '16px' }}>
+        <p><strong>Idle transitions:</strong> {idleCount}</p>
+        <p><strong>Active transitions:</strong> {activeCount}</p>
+      </div>
+
+      <div style={{ marginBottom: '16px', fontSize: '14px', color: '#666' }}>
+        <p>✨ Detects activity from mouse movements, keyboard input, scroll, and more</p>
+        <p>⏰ Becomes Idle after 3 seconds of inactivity</p>
+        <p>🔄 Switching tabs and returning also triggers Active state</p>
+      </div>
+
+      <button
+        onClick={resetCounts}
+        style={{
+          padding: '8px 16px',
+          borderRadius: '4px',
+        }}
+      >
+        Reset counts
+      </button>
+    </div>
+  );
+};
+
+<Example />

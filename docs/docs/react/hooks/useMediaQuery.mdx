@@ -3,19 +3,37 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # useMediaQuery
 
-미디어 쿼리 문자열의 분석 결과를 쉽게 확인 할 수 있는 커스텀 훅입니다. 
+미디어 쿼리 문자열의 분석 결과를 쉽게 확인할 수 있는 커스텀 훅입니다.
+
+주어진 미디어 쿼리 조건을 현재 viewport가 만족하는지 여부를 `boolean` 값으로 반환합니다. `defaultValue`를 통해 미디어 쿼리 결과를 확인할 수 없는 환경(예: SSR)에서 사용할 기본값을 지정할 수 있습니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMediaQuery/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function useMediaQuery(mediaQueryString: string, defaultValue?: boolean): boolean
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `mediaQueryString` | `string` | `-` | 미디어 쿼리 조건을 나타내는 문자열 (예: `'(min-width: 768px)'`) |
+| `defaultValue` | `boolean` | `false` | 미디어 쿼리 결과를 확인할 수 없을 때 사용할 기본값 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useMediaQuery } from '@modern-kit/react';
 
@@ -34,6 +52,10 @@ const Example = () => {
 };
 ```
 
+<br />
+
+### Example
+
 export const Example = () => {
   const isMatch = useMediaQuery('(min-width: 768px)');
   return (
@@ -47,7 +69,6 @@ export const Example = () => {
     </div>
   );
 };
-
 
 <BrowserOnly>
   {() => <Example />}

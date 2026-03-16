@@ -1,0 +1,80 @@
+import { useState } from 'react';
+import { IfElse } from '@modern-kit/react';
+
+# IfElse
+
+The `IfElse` component is a simple utility that renders one of two components based on a given condition.
+It accepts a `condition` prop to specify the condition — renders `truthyComponent` when the condition is `true`, and `falsyComponent` when it is `false`.
+
+The `condition` prop accepts not only a plain `boolean` value, but also a function that returns a `boolean`.
+In that case, the component calls the function to evaluate the condition.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/IfElse/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type Condition = boolean | (() => boolean);
+
+interface IfElseProps {
+  condition: Condition;
+  truthyComponent: React.ReactNode;
+  falsyComponent: React.ReactNode;
+}
+
+const IfElse: ({
+  condition,
+  truthyComponent,
+  falsyComponent,
+}: IfElseProps) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `condition` | `boolean \| (() => boolean)` | - | The condition for rendering |
+| `truthyComponent` | `React.ReactNode` | - | Component rendered when condition is true |
+| `falsyComponent` | `React.ReactNode` | - | Component rendered when condition is false |
+
+## Usage
+```tsx title="typescript"
+import { IfElse } from '@modern-kit/react';
+
+const Example = () => {
+  const [state, setState] = useState<boolean>(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+      <IfElse
+        condition={state}
+        truthyComponent={<h1>true component</h1>}
+        falsyComponent={<h1>false component</h1>}
+      />
+    </>
+  );
+}
+```
+
+## Example
+export const Example = () => {
+  const [state, setState] = useState(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+      <IfElse
+        condition={state}
+        truthyComponent={<h1>true component</h1>}
+        falsyComponent={<h1>false component</h1>}
+      />
+    </>
+  );
+}
+
+<Example />

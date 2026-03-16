@@ -12,25 +12,33 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/size/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/size|868,075.34|0.0012|`fastest`|
-|lodash/size|232,384.63|0.0043|`slowest`|
+| 이름 | hz | mean | 성능 |
+| ---- | ------------ | ------ | --------- |
+| modern-kit/size | 868,075.34 | 0.0012 | `fastest` |
+| lodash/size | 232,384.63 | 0.0043 | `slowest` |
 
 - **modern-kit/size**
   - `3.74x` faster than lodash/size
+
+<br />
 
 ## Interface
 ```ts title="typescript"
 function size(value: string | Record<PropertyKey, any>): number
 ```
 
+<br />
+
 ## Usage
-```ts
+```ts title="typescript"
+import { size } from '@modern-kit/utils';
+
 size('12345'); // 5
 
 size([1, 2, 3, 4, 5]); // 5

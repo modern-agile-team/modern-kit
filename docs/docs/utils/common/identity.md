@@ -7,10 +7,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/identity/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const identity: <T>(value: T) => T;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

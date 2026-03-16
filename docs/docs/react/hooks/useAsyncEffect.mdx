@@ -12,10 +12,23 @@ import { useState } from 'react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useAsyncEffect/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useAsyncEffect(effectCallback: () => Promise<void>, deps?: DependencyList): void
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `() => Promise<void>` | 실행할 비동기 함수 |
+| `deps` | `DependencyList` | effect를 다시 실행할 의존성 배열 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

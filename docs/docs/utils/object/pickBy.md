@@ -11,13 +11,15 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/pickBy|7,602,665.15|0.0001|`fastest`|
-|lodash/pickBy|1,768,814.92|0.0006|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/pickBy | 7,602,665.15 | 0.0001 | `fastest` |
+| lodash/pickBy | 1,768,814.92 | 0.0006 | `slowest` |
 
 - **modern-kit/pickBy**
   - `4.30x` faster than lodash/pickBy
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -26,6 +28,8 @@ function pickBy<T extends Record<PropertyKey, any>>(
   predicate: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T>;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

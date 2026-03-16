@@ -11,6 +11,8 @@ Hex 값은 `3자리(단축형)` 또는 `6자리`의 16진수 값이어야 합니
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/hexToRgba/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const hexToRgba: (hex: string, alpha?: number) => {
@@ -21,6 +23,8 @@ const hexToRgba: (hex: string, alpha?: number) => {
   stringifiedValue: string;
 } | null
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

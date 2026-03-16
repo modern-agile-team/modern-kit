@@ -9,9 +9,13 @@ import { useVisibilityChange } from '@modern-kit/react';
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useVisibilityChange/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 type VisibilityChangeCallbackAction = (
   event: Event,
@@ -32,7 +36,20 @@ function useVisibilityChange({
 }: UseVisibilityChangeProps = {}): void;
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onShow` | `VisibilityChangeCallbackAction` | - | 문서가 보이는 상태(`visible`)가 됐을 때 호출되는 콜백 |
+| `onHide` | `VisibilityChangeCallbackAction` | - | 문서가 숨겨진 상태(`hidden`)가 됐을 때 호출되는 콜백 |
+| `enabled` | `boolean` | `true` | 가시성 변경 감지 활성화 여부 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useVisibilityChange } from '@modern-kit/react';
 
@@ -48,7 +65,10 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
+
 export const Example = () => {
   useVisibilityChange({
     onShow: () => {

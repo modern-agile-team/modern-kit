@@ -47,6 +47,8 @@ export type MIMEType = (typeof MIME_TYPES)[number];
 const isMIMEType: (arg: unknown) => arg is MIMEType
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isMIMEType } from '@modern-kit/utils';
@@ -60,5 +62,5 @@ isMIMEType([]); // false
 isMIMEType({}); // false
 ```
 
-## Note
+## 참고
 - [Common MIME types - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)

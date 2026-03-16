@@ -1,0 +1,98 @@
+import { useState, useEffect } from 'react';
+import { useIsClient } from '@modern-kit/react';
+
+# useIsClient
+
+현재 렌더링 환경이 클라이언트인지 여부를 반환하는 커스텀 훅입니다.
+
+`useSyncExternalStore`를 기반으로 구현되어, 일반적인 `useEffect` 방식과 달리 초기 렌더링부터 클라이언트 환경을 정확하게 감지합니다. `useEffect` 방식은 초기 렌더링 시 `false`를 반환하고 이후 `true`로 업데이트되어 이중 렌더링이 발생할 수 있지만, 이 훅은 그런 문제가 없습니다.
+
+:::tip useIsMounted와의 차이
+- `useIsClient`: 현재 **렌더링 환경**이 클라이언트인지를 확인합니다. SSR 없이 순수 CSR 환경에서도 즉시 `true`를 반환합니다.
+- `useIsMounted`: 컴포넌트가 실제로 **마운트된 상태**인지를 확인합니다. `useEffect` 기반으로 동작합니다.
+:::
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsClient/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useIsClient(): boolean;
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `isClient` | `boolean` | 클라이언트 환경이면 `true`, 서버 환경이면 `false` |
+
+<br />
+
+## Usage
+
+### 기본 사용법
+
+```tsx title="typescript"
+import { useIsClient } from '@modern-kit/react';
+
+const Component = () => {
+  const isClient = useIsClient();
+
+  return <div>{isClient ? '클라이언트' : '서버'}</div>;
+};
+```
+
+<br />
+
+### 클라이언트 전용 API 사용
+
+서버에서 접근할 수 없는 `window`, `navigator` 등의 API를 안전하게 사용할 때 활용합니다.
+
+```tsx title="typescript"
+import { useIsClient } from '@modern-kit/react';
+
+const Component = () => {
+  const isClient = useIsClient();
+
+  const userAgent = isClient ? navigator.userAgent : null;
+
+  return <div>{userAgent ?? '서버 렌더링 중...'}</div>;
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const isClient = useIsClient();
+
+  return (
+    <div>
+      <p>🧪 테스트 방법: 현재 렌더링 환경을 확인하세요.</p>
+      <div
+        style={{
+          marginTop: '12px',
+          padding: '16px',
+          borderRadius: '8px',
+          background: isClient ? '#e6f4ea' : '#fce8e6',
+          color: isClient ? '#1e7e34' : '#c0392b',
+          fontWeight: 'bold',
+        }}>
+        현재 환경: {isClient ? '✅ 클라이언트' : '⚠️ 서버'}
+      </div>
+      <p style={{ marginTop: '8px', fontSize: '0.9em', color: '#555' }}>
+        💡 핵심: <code>useSyncExternalStore</code>를 사용하므로 이중 렌더링 없이 초기 렌더링부터 정확한 환경을 반환합니다.
+      </p>
+    </div>
+  );
+};
+
+<Example />

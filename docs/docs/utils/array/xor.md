@@ -7,9 +7,13 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/xor/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 // 함수 오버로딩
 function xor<T>(arr1: T[] | readonly T[], arr2: T[] | readonly T[]): T[];
@@ -21,18 +25,24 @@ function xor<T, U>(
 ): T[];
 ```
 
+<br />
+
 ## Usage
-### Default
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';
 
 xor([1, 2], [2, 3]); // [1, 3]
 ```
 
-### Iteratee
+<br />
+
+### `iteratee` 함수 사용법
+
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';
 
-xor([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x) => x.id); // [{ id: 1 },  id: 3 }]
+xor([{ id: 1 }, { id: 2 }], [{ id: 2 }, { id: 3 }], (x) => x.id); // [{ id: 1 }, { id: 3 }]
 ```
-

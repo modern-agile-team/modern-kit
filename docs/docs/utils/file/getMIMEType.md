@@ -11,12 +11,17 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/file/getMIMEType/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const getMIMEType: (data: string | File | Response) => Promise<string>
 ```
 
+<br />
+
 ## Usage
+
 ```ts title="typescript"
 import { getMIMEType, isMIMEType } from '@modern-kit/utils';
 
@@ -30,6 +35,3 @@ if (isMIMEType(mimeType1)) {
   mimeType1; // type: string
 }
 ```
-
-## Note
-- [Common MIME types - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)

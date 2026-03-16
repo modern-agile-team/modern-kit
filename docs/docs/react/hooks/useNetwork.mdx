@@ -2,14 +2,17 @@ import { useNetwork } from '@modern-kit/react';
 
 # useNetwork
 
-`useSyncExternalStore`을 사용해 브라우저 네트워크 연결 상태를 구독 후 online 상태 여부를 반환하는 커스텀 훅입니다.
+`useSyncExternalStore`를 사용해 브라우저 네트워크 연결 상태를 구독하고, 온라인 상태 여부를 반환하는 커스텀 훅입니다.
 
-`onlineCallback`, `offlineCallback`을 통해 네트워크 상태가 변경 될 때 원하는 함수를 호출 할 수 있습니다.
+`onlineCallback`, `offlineCallback`을 통해 네트워크 상태가 변경될 때 원하는 함수를 호출할 수 있습니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useNetwork/index.ts)
+
+<br />
 
 ## Interface
 
@@ -23,6 +26,36 @@ const useNetwork: ({ onlineCallback, offlineCallback }?: UseNetworkProps) => {
   isOnline: boolean;
 };
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onlineCallback` | `(event: Event) => void` | `-` | 네트워크가 온라인 상태로 변경될 때 호출되는 콜백 함수 |
+| `offlineCallback` | `(event: Event) => void` | `-` | 네트워크가 오프라인 상태로 변경될 때 호출되는 콜백 함수 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `isOnline` | `boolean` | 현재 네트워크가 온라인 상태인지 여부 |
+
+<br />
+
+## Remarks
+
+:::tip 참고 자료
+
+- [useSyncExternalStore(en) - react.dev](https://react.dev/reference/react/useSyncExternalStore)
+- [useSyncExternalStore(ko) - react.dev](https://ko.react.dev/reference/react/useSyncExternalStore)
+
+:::
+
+<br />
 
 ## Usage
 
@@ -48,7 +81,9 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const { isOnline } = useNetwork({
@@ -69,7 +104,3 @@ export const Example = () => {
 };
 
 <Example />
-
-## Note
-- [useSyncExternalStore(en) - react.dev](https://react.dev/reference/react/useSyncExternalStore)
-- [useSyncExternalStore(ko) - react.dev](https://ko.react.dev/reference/react/useSyncExternalStore)

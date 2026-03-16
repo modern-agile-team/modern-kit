@@ -13,6 +13,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/file/convertImageToBase64/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type CanvasImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
@@ -23,12 +25,12 @@ const convertImageToBase64: (
 ) => Promise<string>;
 ```
 
-## Usages
+<br />
+
+## Usage
+
 ```ts title="typescript"
 import { convertImageToBase64 } from '@modern-kit/utils';
 
 const imageBase64 = await convertImageToBase64("이미지 src", 'png');
 ```
-
-## Note
-- [HTMLCanvasElement: toDataURL() - MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL)

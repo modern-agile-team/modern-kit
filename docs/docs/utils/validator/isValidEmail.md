@@ -11,10 +11,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isValidEmail/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const isValidEmail: (email: string) => boolean
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"
@@ -24,6 +28,7 @@ const isEmail1 = isValidEmail('example@email.com'); // true
 const isEmail2 = isValidEmail('invalid-email'); // false
 ```
 
-## Note
+## References
+
 - [RFC 5322](https://www.ietf.org/rfc/rfc5322.txt)
 - [emailregex](https://emailregex.com/)

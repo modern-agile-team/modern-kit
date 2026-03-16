@@ -1,0 +1,145 @@
+import { useState } from 'react';
+import { AspectRatio } from '@modern-kit/react';
+
+# AspectRatio
+
+A utility component for declaratively matching a given **[aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)**.
+
+Effectively prevents `Layout Shift` by reserving space in advance.
+
+<br />
+
+### Polymorphism
+The `AspectRatio` component supports the `as` prop for polymorphism.
+
+- By default, it wraps children in a `div`, and the `as` prop allows changing the wrapper element tag (e.g., div → article).
+- The `aspect-ratio` CSS property is applied to the wrapper element to reserve space.
+
+### Composition & Rendering Delegation
+The `AspectRatio` component supports the Composition and Rendering Delegation patterns via the `asChild` prop.
+
+- When `asChild` is `true`, it renders the child element directly via **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)**.
+- The `aspect-ratio` CSS property is applied directly to the child element.
+  - Slot only accepts a single child element.
+  - If a component is passed as a child to Slot, it must support `forwardRef` and spread `props`. Otherwise it will not work correctly.
+  - When using the `asChild` prop, please refer to the **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** documentation.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/AspectRatio/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface AspectRatioProps {
+  children: JSX.Element;
+  ratio: number;
+  asChild?: boolean;
+  style?: CSSProperties;
+  className?: string;
+}
+```
+```tsx title="typescript"
+const AspectRatio: PolyForwardComponent<"div", AspectRatioProps, React.ElementType>
+```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `JSX.Element` | - | Child element |
+| `ratio` | `number` | - | The aspect ratio value |
+| `asChild` | `boolean` | `false` | When true, renders the child element via Slot |
+| `style` | `CSSProperties` | - | Inline style |
+| `className` | `string` | - | CSS class name |
+
+<br />
+
+## Usage
+### Basic Usage
+- By default, wraps children in a `div` and applies the `aspect-ratio` CSS property to reserve space.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
+  const imgUrl = 'https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9';
+
+  return (
+    <div style={{ width: '500px' }}>
+      <AspectRatio ratio={427 / 640}>
+        <img src={imgUrl} />
+      </AspectRatio>
+    </div>
+  );
+};
+```
+
+### `as` Prop Usage
+- The `as` prop allows rendering with a specific element instead of `div`, applying `aspect-ratio` to that element to reserve space.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
+  const imgUrl = 'https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9';
+
+  return (
+    <div style={{ width: '500px' }}>
+      <AspectRatio as="article" ratio={427 / 640}>
+        <img src={imgUrl} />
+      </AspectRatio>
+    </div>
+  );
+};
+```
+
+### `asChild` Prop Usage
+- When `asChild` is `true`, it renders the child element as-is via Slot and applies `aspect-ratio` directly to the child element.
+```tsx title="typescript"
+import { AspectRatio } from '@modern-kit/react'
+
+const Example = () => {
+  const imgUrl = 'https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9';
+
+  return (
+    <div style={{ width: '500px' }}>
+      <AspectRatio asChild ratio={427 / 640}>
+        <img src={imgUrl} style={{ width: '100%' }} />
+      </AspectRatio>
+    </div>
+  );
+};
+```
+
+export const Example = () => {
+  const imgUrl = 'https://github.com/user-attachments/assets/dd60ec12-afd7-44c9-bd6b-0069e16bf2c9';
+  return (
+    <div style={{ width: '500px' }}>
+      <h3>Default</h3>
+      <AspectRatio ratio={427 / 640}>
+        <img src={imgUrl} />
+      </AspectRatio>
+
+      <br />
+
+      <h3>as article</h3>
+      <AspectRatio as="article" ratio={427 / 640}>
+        <img src={imgUrl} />
+      </AspectRatio>
+
+      <br />
+
+      <h3>asChild</h3>
+      <AspectRatio asChild ratio={427 / 640}>
+        <img src={imgUrl} style={{ width: '100%' }} />
+      </AspectRatio>
+    </div>
+  );
+};
+
+## Example
+
+<Example />
+
+

@@ -1,0 +1,82 @@
+# useFileReader
+
+A custom hook that reads a `File` object using the desired read method (`readAsText`, `readAsDataURL`, `readAsArrayBuffer`) and returns the read file contents.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useFileReader/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type ReadType = 'readAsText' | 'readAsDataURL' | 'readAsArrayBuffer';
+
+interface FileContent {
+  status: 'fulfilled' | 'rejected';
+  readValue: string | ArrayBuffer;
+  originFile: Nullable<File>;
+}
+
+interface ReadFileOptions {
+  file: FileList | File;
+  readType: ReadType;
+  accepts?: string[];
+}
+```
+```ts title="typescript"
+function useFileReader(): {
+  readFile: ({
+    file,
+    readType,
+    accepts,
+  }: ReadFileOptions) => Promise<FileContent[]>;
+  fileContents: FileContent[];
+  isLoading: boolean;
+};
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `readFile` | `(options: ReadFileOptions) => Promise<FileContent[]>` | Async function that reads the given file(s) |
+| `fileContents` | `FileContent[]` | Array of read file contents |
+| `isLoading` | `boolean` | Whether file reading is in progress |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import React, { useState } from 'react';
+import { useFileReader } from '@modern-kit/react';
+
+const Example = () => {
+  const { readFile, fileContents, isLoading } = useFileReader()
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!e.target.files) return;
+
+    const data = await readFile({ file: e.target.files, readType: 'readAsText' });
+    // process data
+
+    /*
+     * 1. readFile returns Promise<FileContent[]>. This value is identical to fileContents.
+     * ex) const data = await readFile(e.target.files, 'readAsDataURL');
+     *
+     * 2. You can filter accepted file types using the accepts option.
+     * If accepts is not provided, all file types are allowed.
+     * ex) readFile({ file: e.target.files, readType: 'readAsText', accepts: ['text/plain'] });
+     */
+  }
+
+  return (
+    <div>
+      <input multiple type="file" onChange={handleChange} />
+    </div>
+  );
+};
+```

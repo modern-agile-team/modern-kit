@@ -15,7 +15,9 @@ import { IfElse } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/IfElse/index.tsx)
 
-## Interface 
+<br />
+
+## Interface
 ```ts title="typescript"
 type Condition = boolean | (() => boolean);
 
@@ -31,6 +33,16 @@ const IfElse: ({
   falsyComponent,
 }: IfElseProps) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `condition` | `boolean \| (() => boolean)` | - | 렌더링 조건 |
+| `truthyComponent` | `React.ReactNode` | - | 조건이 true일 때 렌더링할 컴포넌트 |
+| `falsyComponent` | `React.ReactNode` | - | 조건이 false일 때 렌더링할 컴포넌트 |
 
 ## Usage
 ```tsx title="typescript"

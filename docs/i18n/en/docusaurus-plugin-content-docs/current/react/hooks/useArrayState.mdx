@@ -1,0 +1,124 @@
+import { useArrayState } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useArrayState
+
+A custom hook for conveniently managing array state while maintaining `immutability`.
+
+- `setArray`: A function that updates the array state, bundled with array mutation methods.
+  - `setArray.push`: Adds items to the end of the array
+  - `setArray.unshift`: Adds items to the beginning of the array
+  - `setArray.shift`: Removes the first item of the array
+  - `setArray.pop`: Removes the last item of the array
+  - `setArray.splice`: Removes items at a specific position and optionally inserts new items
+  - `setArray.remove`: Removes items at the given indexes
+  - `setArray.removeAt`: Removes the item at the given index
+  - `setArray.removeBy`: Removes items for which the predicate function returns `true`
+  - `setArray.updateAt`: Updates the item at the given index
+  - `setArray.updateBy`: Updates each item in the array via an iteratee function
+  - `setArray.insertAt`: Inserts an item at the given index
+  - `setArray.clear`: Clears the array
+
+```ts title="Example"
+const [array, setArray] = useArrayState<number>([]);
+
+setArray([1, 2, 3]);
+setArray.push(4);
+setArray.pop();
+// ...
+```
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useArrayState/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface ArrayStateSetters<T> extends Dispatch<SetStateAction<T[]>> {
+  push: (...items: T[]) => void;
+  unshift: (...items: T[]) => void;
+  shift: () => void;
+  pop: () => void;
+  splice: (start: number, deleteCount: number, ...items: T[]) => void;
+  remove: (...indexes: number[]) => void;
+  removeAt: (index: number) => void;
+  removeBy: (predicate: (item: T, index: number) => boolean) => void;
+  updateAt: (index: number, item: T) => void;
+  updateBy: (iteratee: (item: T, index: number) => T) => void;
+  insertAt: (index: number, item: T) => void;
+  clear: () => void;
+}
+```
+```ts title="typescript"
+function useArrayState<T>(initialValue: T[]): [T[], ArrayStateSetters<T>]
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `T[] \| (() => T[])` | The initial array value or a function that returns the initial value |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useArrayState } from '@modern-kit/react'
+
+const Example = () => {
+  const [array, setArray] = useArrayState<number>([]);
+
+  const addItem = () => {
+    setArray.push(Math.floor(Math.random() * 100));
+  };
+
+  return (
+    <div>
+      <button onClick={addItem}>Add random number</button>
+      <button onClick={() => setArray.clear()}>Clear all</button>
+      <button onClick={() => setArray([1, 2, 3])}>Set array directly</button>
+      <ul>
+        {array.map((item, index) => (
+          <li key={index}>
+            {item} <button onClick={() => setArray.removeAt(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [array, setArray] = useArrayState([]);
+
+  const addItem = () => {
+    setArray.push(Math.floor(Math.random() * 100));
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={addItem}>Add random number</button>
+        <button onClick={() => setArray.clear()}>Clear all</button>
+        <button onClick={() => setArray([1, 2, 3])}>Set to [1, 2, 3]</button>
+      </div>
+      <ul>
+        {array.map((item, index) => (
+          <li key={index}>
+            {item} <button onClick={() => setArray.removeAt(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+<Example />

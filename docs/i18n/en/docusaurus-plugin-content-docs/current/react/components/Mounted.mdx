@@ -1,0 +1,60 @@
+import { useState } from 'react';
+import { Mounted } from '@modern-kit/react';
+
+# Mounted
+
+A component that shows `children` only after the component has been mounted in the browser. This guarantees that the rendering environment for `children` is the client. Before mounting, it shows the `fallback` component.
+
+Useful in `SSR` environments for handling components before and after they mount in the browser.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Mounted/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+
+interface MountedProps {
+  fallback?: JSX.Element;
+}
+
+const Mounted: ({
+  fallback = <></>
+}: PropsWithChildren<MountedProps>) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Child component rendered after mounting |
+| `fallback` | `JSX.Element` | `<></>` | Fallback component rendered before mounting |
+
+## Usage
+```tsx title="typescript"
+import { Mounted } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <Mounted fallback={<div>Before component mounts.</div>}>
+      <div>Component has mounted.</div>
+    </Mounted>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  return (
+    <Mounted fallback={<div>Before component mounts.</div>}>
+      <div>Component has mounted.</div>
+    </Mounted>
+  );
+};
+
+<Example />

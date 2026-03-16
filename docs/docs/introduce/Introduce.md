@@ -1,6 +1,6 @@
 # @modern-kit
 
-`@modern-kit`는 클라이언트 개발에 유용한 `리액트 컴포넌트`, `커스텀 훅` 및 `유틸리티 함수`, `타입`을 제공하는 라이브러리입니다. 
+`@modern-kit`는 클라이언트 개발에 유용한 `리액트 컴포넌트`, `커스텀 훅` 및 `유틸리티 함수`, `타입`을 제공하는 라이브러리입니다.
 
 클라이언트 개발에 필요한 모듈을 제공하는 것 뿐만아니라, 코드적으로 `다양한 레퍼런스를 제공` 하기 위한 목적을 갖고 있습니다.
 
@@ -9,6 +9,8 @@
 <br />
 
 ## Library
+
+<br />
 
 ### @modern-kit/react <a href="https://www.npmjs.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/react.svg" /></a>
 
@@ -43,17 +45,23 @@ const App = () => {
   }, 300);
 
   return <div>Modern Kit</div>;
-}
+};
 ```
+
 ```ts
 // SubPath 사용 예시
 // tsconfig moduleResolution 옵션이 `bundler`일 경우
-import { flatten } from '@modern-kit/utils/array/flatten';
+import { useInterval } from '@modern-kit/react/hooks/useInterval';
 // tsconfig moduleResolution 옵션이 `node`일 경우
-import { flatten } from '@modern-kit/utils/dist/array/flatten';
+import { useInterval } from '@modern-kit/react/dist/hooks/useInterval';
 
-const arr = [1, [2, [3, 4], 5]];
-const result = flatten(arr); // [1, 2, 3, 4, 5]
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+}
 ```
 
 <br />
@@ -88,6 +96,7 @@ import { flatten } from '@modern-kit/utils';
 const arr = [1, [2, [3, 4], 5]];
 const result = flatten(arr); // [1, 2, 3, 4, 5]
 ```
+
 ```ts
 // SubPath 사용 예시
 // tsconfig moduleResolution 옵션이 `bundler`일 경우
@@ -128,9 +137,8 @@ pnpm i -D @modern-kit/types
 ```ts
 import { Merge } from '@modern-kit/types';
 
-type A = { a: string, b: number }
-type B = { b: string, c: boolean }
-type Result = Merge<A, B>
+type A = { a: string; b: number };
+type B = { b: string; c: boolean };
+type Result = Merge<A, B>;
 // { a: string, b: string, c: boolean }
 ```
-

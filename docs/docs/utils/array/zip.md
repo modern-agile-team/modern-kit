@@ -6,11 +6,15 @@
 
 누락된 요소에 대해서는 undefined 값이 사용됩니다.
 
+<br />
+
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/zip/index.ts)
 
+<br />
 
 ## Interface
+
 ```ts title="typescript"
 function zip<T extends (readonly unknown[])[]>(
   ...arrs: T
@@ -19,7 +23,10 @@ function zip<T extends (readonly unknown[])[]>(
 }>;
 ```
 
+<br />
+
 ## Usage
+
 ```ts title="typescript"
 import { zip } from '@modern-kit/utils';
 

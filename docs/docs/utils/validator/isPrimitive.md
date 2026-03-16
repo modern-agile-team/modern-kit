@@ -21,6 +21,8 @@ type Primitive =
 const isPrimitive: (value: unknown) => value is Primitive
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isPrimitive } from '@modern-kit/utils';

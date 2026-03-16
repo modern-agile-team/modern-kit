@@ -48,9 +48,13 @@ setState(state => {
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useSessionStorage/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 interface UseSessionStorageWithoutInitialValueProps {
   key: string;
@@ -65,7 +69,7 @@ type UseSessionStorageProps<T> =
   | UseSessionStorageWithoutInitialValueProps
   | UseSessionStorageWithInitialValueProps<T>;
 ```
-```ts
+```ts title="typescript"
 // 함수 오버로딩
 function useSessionStorage<T>({
   key,
@@ -85,7 +89,29 @@ function useSessionStorage<T = unknown>({
 };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `key` | `string` | - | 세션 스토리지에서 구독할 키 |
+| `initialValue` | `T \| (() => T)` | `null` | 키가 존재하지 않거나 SSR 환경에서 반환할 초기값 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `state` | `T` 또는 `T \| null` | 세션 스토리지의 현재 값. `initialValue`가 없으면 `null`이 될 수 있습니다. |
+| `setState` | `Dispatch<SetStateAction<T>>` | 세션 스토리지 값을 업데이트하는 함수 |
+| `removeState` | `() => void` | 세션 스토리지에서 해당 키를 삭제하는 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useSessionStorage } from '@modern-kit/react';
 
@@ -113,7 +139,9 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const { state, setState, removeState } = useSessionStorage({

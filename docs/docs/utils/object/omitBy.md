@@ -11,13 +11,15 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/omitBy|9,108,836.71|0.0001|`fastest`|
-|lodash/omitBy|1,876,976.55|0.0005|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/omitBy | 9,108,836.71 | 0.0001 | `fastest` |
+| lodash/omitBy | 1,876,976.55 | 0.0005 | `slowest` |
 
 - **modern-kit/omitBy**
   - `4.85x` faster than lodash/omitBy
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -26,6 +28,8 @@ function omitBy<T extends Record<PropertyKey, any>>(
   predicate: (value: T[keyof T], key: keyof T) => boolean
 ): Partial<T>;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -16,6 +16,8 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIntersectionObserver/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface IntersectionObserverInit {
@@ -48,6 +50,32 @@ function useIntersectionObserver<T extends HTMLElement>({
   rootMargin, // default: '0px 0px 0px 0px'
   }: UseIntersectionObserverProps = {}): UseIntersectionObserverReturnType<T>;
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onIntersectStart` | `(entry: IntersectionObserverEntry) => void` | - | 타겟이 뷰포트에 진입할 때 호출되는 콜백 |
+| `onIntersectEnd` | `(entry: IntersectionObserverEntry) => void` | - | 타겟이 뷰포트를 벗어날 때 호출되는 콜백 |
+| `calledOnce` | `boolean` | `false` | `true`이면 각 콜백을 한 번씩만 호출합니다 |
+| `enabled` | `boolean` | `true` | 옵저버 콜백 활성화 여부 |
+| `root` | `Element \| Document \| null` | `null` | 뷰포트로 사용할 요소 |
+| `threshold` | `number \| number[]` | `0` | 콜백을 트리거할 가시성 비율 임계값 |
+| `rootMargin` | `string` | `'0px 0px 0px 0px'` | 루트 요소 주변의 여백 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefCallback<T>` | 타겟 요소에 연결할 ref 콜백 |
+| `isIntersecting` | `boolean` | 타겟이 현재 뷰포트와 교차하는지 여부 |
+| `hasIntersected` | `boolean` | 타겟이 뷰포트와 한 번이라도 교차했는지 여부 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"
@@ -129,5 +157,8 @@ export const Example = () => {
 
 <Example />
 
-## Note
+## Remarks
+
+:::tip 참고
 - [Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)
+:::

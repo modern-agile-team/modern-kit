@@ -4,25 +4,19 @@ import { useResizeObserver } from '@modern-kit/react';
 
 `ref`를 할당한 타겟 엘리먼트의 DOM 크기 변화를 감지하는 커스텀 훅입니다.
 
+`ResizeObserver` API를 사용하여 요소의 크기가 변경될 때마다 `action` 콜백을 호출하고, 현재 크기 정보를 `contentRect`로 반환합니다.
+
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useResizeObserver/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
-/*
- * type ContentRect = {
-    readonly bottom: number;
-    readonly height: number;
-    readonly left: number;
-    readonly right: number;
-    readonly top: number;
-    readonly width: number;
-    readonly x: number;
-    readonly y: number;
-  }
- */
 type ContentRect = Omit<DOMRectReadOnly, 'toJSON'>;
 
 const useResizeObserver: <T extends HTMLElement>(
@@ -33,9 +27,38 @@ const useResizeObserver: <T extends HTMLElement>(
 };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `action` | `(entry: ResizeObserverEntry) => void` | `noop` | 요소의 크기가 변경될 때마다 호출되는 콜백 함수 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 크기 변화를 감지할 타겟 엘리먼트에 연결하는 ref |
+| `contentRect` | `ContentRect` | 타겟 엘리먼트의 현재 크기 정보 (`width`, `height`, `top`, `left`, `right`, `bottom`, `x`, `y`) |
+
+<br />
+
+## Remarks
+
+:::tip 참고 자료
+
+- [ResizeObserver API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
+
+:::
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
-import React, { forwardRef, useRef } from 'react';
 import { useResizeObserver } from '@modern-kit/react';
 
 const Example = () => {
@@ -45,9 +68,9 @@ const Example = () => {
 
   const boxStyle = useMemo(() => {
     return {
-      width: '100%', 
-      height: '400px', 
-      background: '#439966', 
+      width: '100%',
+      height: '400px',
+      background: '#439966',
       fontSize: '2rem',
       color: '#fff',
     }
@@ -64,6 +87,8 @@ const Example = () => {
 };
 ```
 
+<br />
+
 export const ResizeObserver = () => {
   const { ref, contentRect } = useResizeObserver((entry) => {
     console.log('resize', entry);
@@ -79,9 +104,3 @@ export const ResizeObserver = () => {
 };
 
 <ResizeObserver />
-
-<br />
-
-## Note
-- [ResizeObserver API](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
-

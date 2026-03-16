@@ -1,0 +1,56 @@
+import { useBeforeUnload } from '@modern-kit/react'
+
+# useBeforeUnload
+
+A hook for easily handling the **[beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event)** event in React.
+
+The `beforeunload` event fires when the user is about to leave the page.
+
+The primary use case for the `beforeunload` event is to display a confirmation dialog asking the user whether they really want to leave the page.
+
+If the user clicks the confirm button, the browser navigates to the new page; otherwise, navigation is cancelled and the user stays on the current page.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBeforeUnload/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useBeforeUnload(enabled?: boolean | (() => boolean) = true): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `enabled` | `boolean \| (() => boolean)` | Whether to activate the hook. When `false`, the event listener is not registered. Defaults to `true` |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useBeforeUnload } from '@modern-kit/react'
+
+const Example = () => {
+  useBeforeUnload();
+  return <div>Try leaving the page.</div>;
+};
+```
+
+## Example
+
+export const Example = () => {
+  useBeforeUnload();
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Try leaving the page.</p>
+    </div>
+  );
+};
+
+<Example />

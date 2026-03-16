@@ -1,0 +1,205 @@
+import { useHistoryState } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useHistoryState
+
+A hook that manages state and its change history.
+
+Each state change is recorded in history, and you can navigate the history backward (`back`) or forward (`forward`). You can also jump to a specific point in history (`go`) or replace the current state (`replaceState`).
+
+The maximum number of history entries to store can be limited with a `capacity` parameter.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHistoryState/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseHistoryStateReturn<T> {
+  state: T; // current state value
+  canForward: boolean; // whether forward navigation is possible
+  canBack: boolean; // whether backward navigation is possible
+  setState: (newState: T | ((prevState: T) => T)) => void;
+  // adds the state to history and updates to the new state
+  replaceState: (newState: T | ((prevState: T) => T)) => void;
+  // replaces the current state in history
+  back: () => void; // navigates to the previous state in history
+  forward: () => void; // navigates to the next state in history
+  go: (index: number) => void; // navigates to the state at a specific index in history
+}
+```
+```ts title="typescript"
+function useHistoryState<T>(
+  initialValue: T | (() => T),
+  capacity?: number): UseHistoryStateReturn<T>;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `T \| (() => T)` | Initial state value or a function that returns the initial value |
+| `capacity` | `number` | Maximum number of history entries to store |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `state` | `T` | Current state value |
+| `canForward` | `boolean` | Whether forward navigation is possible |
+| `canBack` | `boolean` | Whether backward navigation is possible |
+| `setState` | `(newState: T \| ((prevState: T) => T)) => void` | Adds a new entry to history and updates the state |
+| `replaceState` | `(newState: T \| ((prevState: T) => T)) => void` | Replaces the current history entry |
+| `back` | `() => void` | Navigates to the previous state in history |
+| `forward` | `() => void` | Navigates to the next state in history |
+| `go` | `(index: number) => void` | Navigates to the state at the specified index in history |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useHistoryState } from '@modern-kit/react'
+
+const Example = () => {
+  const {
+    state,
+    canBack,
+    canForward,
+    setState,
+    replaceState,
+    back,
+    forward,
+    go
+  } = useHistoryState(0, 5);
+
+  return (
+    <div>
+      <p>{state}</p>
+      <button onClick={() => setState(state + 1)}>+1 (new history)</button>
+      <button onClick={() => replaceState(state + 10)}>+10 (replace history)</button>
+      <button onClick={back}>← Back</button>
+      <button onClick={forward}>Forward →</button>
+      <button onClick={() => go(0)}>Go to first</button>
+      <button onClick={() => go(-1)}>Go to last</button>
+    </div>
+  )
+}
+```
+
+## Example
+
+export const Example = () => {
+  const {
+    state,
+    canBack,
+    canForward,
+    setState,
+    replaceState,
+    back,
+    forward,
+    go
+  } = useHistoryState(0, 5);
+
+  // Common button styles
+  const buttonBaseStyle = {
+    padding: '10px 12px',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '14px',
+    cursor: 'pointer'
+  };
+
+  const getButtonStyle = (bgColor, textColor = 'white', disabled = false) => ({
+    ...buttonBaseStyle,
+    backgroundColor: disabled ? '#e9ecef' : bgColor,
+    color: disabled ? '#6c757d' : textColor,
+    cursor: disabled ? 'not-allowed' : 'pointer'
+  });
+
+  const containerStyle = {
+    padding: '20px',
+    border: '1px solid #e2e2e2',
+    borderRadius: '8px',
+    backgroundColor: '#fafafa',
+    maxWidth: '500px'
+  };
+
+  const gridStyle = {
+    display: 'grid',
+    gap: '8px'
+  };
+
+  return (
+    <div style={containerStyle}>
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <h3 style={{ fontSize: '24px', color: '#333', margin: '0 0 8px 0' }}>
+          Current value: <span style={{ color: '#007acc' }}>{state}</span>
+        </h3>
+        <p style={{ fontSize: '14px', color: '#666', margin: '0' }}>
+          Back <strong>{canBack ? 'available' : 'unavailable'}</strong> |
+          Forward <strong>{canForward ? 'available' : 'unavailable'}</strong>
+        </p>
+      </div>
+
+      <div style={{
+        ...gridStyle,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+        marginBottom: '16px'
+      }}>
+        <button
+          onClick={() => setState(state + 1)}
+          style={getButtonStyle('#007acc')}
+        >
+          +1 (new history)
+        </button>
+        <button
+          onClick={() => replaceState(state + 10)}
+          style={getButtonStyle('#28a745')}
+        >
+          +10 (replace history)
+        </button>
+      </div>
+
+      <div style={{
+        ...gridStyle,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))'
+      }}>
+        <button
+          onClick={back}
+          disabled={!canBack}
+          style={getButtonStyle('#6c757d', 'white', !canBack)}
+        >
+          ← Back
+        </button>
+        <button
+          onClick={forward}
+          disabled={!canForward}
+          style={getButtonStyle('#6c757d', 'white', !canForward)}
+        >
+          Forward →
+        </button>
+        <button
+          onClick={() => go(0)}
+          style={getButtonStyle('#17a2b8')}
+        >
+          Go to first
+        </button>
+        <button
+          onClick={() => go(-1)}
+          style={getButtonStyle('#ffc107', '#212529')}
+        >
+          Go to last
+        </button>
+      </div>
+    </div>
+  )
+};
+
+<Example />

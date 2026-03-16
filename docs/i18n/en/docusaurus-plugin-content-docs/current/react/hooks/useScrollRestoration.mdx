@@ -1,0 +1,467 @@
+import { useScrollRestoration } from '@modern-kit/react';
+import { useState, useEffect } from 'react';
+
+# useScrollRestoration
+
+A custom hook that saves and restores the previous scroll position of the browser or a specific element.
+
+By default, it manages the window scroll, and you can use `ref` to manage a specific scrollable area.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollRestoration/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseScrollRestorationOptions {
+  id?: string;
+  enabled?: boolean;
+  behavior?: ScrollOptions['behavior'];
+  retry?: number;
+}
+
+function useScrollRestoration<T extends HTMLElement>({
+  id,
+  enabled,
+  behavior,
+}?: UseScrollRestorationOptions): {
+  ref: React.RefObject<T | null>;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | `'window'` or `'element'` | Scroll restoration identifier (required when using multiple instances) |
+| `enabled` | `boolean` | `true` | Whether scroll restoration is enabled |
+| `behavior` | `ScrollOptions['behavior']` | `'instant'` | Scroll restoration behavior (`'auto'`, `'instant'`, `'smooth'`) |
+| `retry` | `number` | `5` | Number of scroll restoration retries (with exponential backoff) |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+- When content is loaded asynchronously or due to image loading, the page height may be smaller than the saved scroll position.
+  - In such cases, it automatically retries using `exponential backoff`, increasing the retry interval each time.
+  - Retry intervals: 100ms → 200ms → 400ms → 800ms → 1600ms
+  - The default maximum number of retries is `5`, which can be adjusted with the `retry` option.
+- When using the hook multiple times within a single component, assign explicit `id` options to distinguish each instance.
+  - If no `id` is specified, the default is `'element'` when a `ref` is present, or `'window'` otherwise.
+  - Without an `id`, duplicate keys may cause scroll restoration to malfunction — use with caution.
+- Scroll position is saved on `refresh`, `page navigation (back/forward)`, and `hook unmount`.
+  - Therefore, if this hook is called in a component that remains mounted without unmounting (e.g., a Layout component), scroll restoration may not work correctly.
+- If the URL has a `hash fragment (#section)`, scroll restoration is skipped.
+  - This is to respect the user's clear intent for hash scrolling and to avoid conflicts with standard browser behavior.
+:::
+
+<br />
+
+:::tip When using React Router
+- React Router provides its own `location.key`.
+- `useScrollRestoration` automatically detects and uses it.
+- Per-page scroll positions are accurately restored without any additional configuration.
+:::
+
+<br />
+
+## Usage
+
+### Window Scroll
+
+```tsx title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const Page = () => {
+  useScrollRestoration();
+
+  return (
+    <div>
+      {/* Long content... */}
+    </div>
+  );
+};
+```
+
+<br />
+
+### Specific Element
+
+```tsx title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const ScrollBox = () => {
+  const { ref } = useScrollRestoration<HTMLDivElement>();
+
+  return (
+    <div
+      ref={ref}
+      style={{ height: '500px', overflowY: 'auto' }}
+    >
+      {/* Content with internal scrolling */}
+    </div>
+  );
+};
+```
+
+<br />
+
+### Multiple Instances
+
+When managing multiple scroll areas in a single component, assign a unique `id` to each instance.
+
+```tsx title="typescript"
+import { useScrollRestoration } from '@modern-kit/react';
+
+const MultiScrollPage = () => {
+  useScrollRestoration(); // window scroll (default id: 'window')
+  const { ref: sidebarRef } = useScrollRestoration<HTMLDivElement>({ id: 'sidebar' });
+  const { ref: contentRef } = useScrollRestoration<HTMLDivElement>({ id: 'content' });
+
+  return (
+    <div>
+      <aside ref={sidebarRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* Sidebar content */}
+      </aside>
+      <main ref={contentRef} style={{ height: '100vh', overflowY: 'auto' }}>
+        {/* Main content */}
+      </main>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example (Window Scroll)
+
+export const Example = () => {
+  useScrollRestoration();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>1. Scroll the page about halfway down.</p>
+      <p>2. Click the browser's <strong>'Back'</strong> button.</p>
+      <p>3. Check that the scroll position is preserved.</p>
+    </div>
+  );
+}
+
+<Example />
+
+<br />
+
+### Example1 (Scroll Restoration for a Specific Element)
+
+A basic example for managing the scroll position of a specific area (e.g., a scrollable container).
+
+Use `ref` to specify the element whose scroll position should be restored.
+
+export const Example1 = () => {
+  const { ref } = useScrollRestoration({ id: 'example1', behavior: 'smooth' });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Scroll the <strong>scroll box below about halfway</strong> (e.g., to around "Item 10")</li>
+          <li>Click the browser's <strong>'Back'</strong> button</li>
+          <li>When you return, the scroll position is <strong>exactly restored</strong>! ✨</li>
+        </ol>
+      </div>
+
+      <div
+        ref={ref}
+        style={{
+          height: '300px',
+          overflowY: 'scroll',
+          border: '2px solid #6366f1',
+          padding: '20px',
+          borderRadius: '8px',
+          backgroundColor: '#f8f9ff'
+        }}
+      >
+        {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+          <div
+            key={i}
+            style={{
+              height: '80px',
+              background: i % 2 === 0 ? '#e0e7ff' : '#c7d2fe',
+              marginBottom: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '4px',
+              fontWeight: '500',
+              fontSize: '14px'
+            }}
+          >
+            📌 Item {i + 1}
+          </div>
+        ))}
+      </div>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 Key point:</strong> The scroll position of a specific element is tracked via <code>ref</code>.
+        The <code>behavior: 'smooth'</code> option applies a smooth restoration animation.
+      </div>
+    </div>
+  );
+};
+
+<Example1 />
+
+<br />
+
+### Example2 (Scroll Restoration After Async Data Loading)
+
+In real applications, data is often loaded asynchronously.
+
+This example demonstrates that the scroll position is accurately restored **even during data loading**.
+
+Internally, a **retry mechanism** (up to 5 times, with exponential backoff) waits until the content is fully loaded.
+
+export const Example2 = () => {
+
+  const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { ref } = useScrollRestoration({ id: 'example2', behavior: 'smooth' });
+
+  useEffect(() => {
+    // Simulated API call (1 second delay)
+    setTimeout(() => {
+      setList(Array.from({ length: 20 }, (_, i) => i));
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Wait for the data to load (1 second)</li>
+          <li>Scroll the <strong>scroll box about halfway</strong></li>
+          <li>Click the browser's <strong>'Back'</strong> button</li>
+          <li>When you return:
+            <ul style={{ marginTop: '5px' }}>
+              <li>"Loading..." is shown → data finishes loading</li>
+              <li>The scroll position is automatically <strong>restored to the previous position</strong>! 🎯</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div
+        ref={ref}
+        style={{
+          height: '300px',
+          overflowY: 'scroll',
+          border: '2px solid #f59e0b',
+          padding: '20px',
+          borderRadius: '8px',
+          backgroundColor: '#fffbeb'
+        }}
+      >
+        {isLoading ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '200px',
+            fontSize: '16px',
+            color: '#f59e0b',
+            fontWeight: '500'
+          }}>
+            ⏳ Loading...
+          </div>
+        ) : (
+          list.map((i) => (
+            <div
+              key={i}
+              style={{
+                height: '80px',
+                background: i % 2 === 0 ? '#fef3c7' : '#fde68a',
+                marginBottom: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '4px',
+                fontWeight: '500',
+                fontSize: '14px'
+              }}
+            >
+              🔄 Data Item {i + 1}
+            </div>
+          ))
+        )}
+      </div>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#fef3c7',
+        borderLeft: '3px solid #f59e0b',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 Key point:</strong> If the content height is insufficient, it automatically <strong>retries</strong>.
+        <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
+          <li>Retry intervals: 100ms → 200ms → 400ms → 800ms → 1600ms</li>
+          <li>Max retries: 5 (default, configurable via the <code>retry</code> option)</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+<Example2 />
+
+<br />
+
+### Example3 (Multiple Instances)
+
+When multiple scroll areas need to be managed independently on a single page, assign a unique `id` to each instance.
+
+For example, when a sidebar and a main content area each have independent scrolling:
+
+export const Example3 = () => {
+  // Assign a unique id to each scroll area
+  const { ref: contentRef } = useScrollRestoration({ id: 'main-content', behavior: 'smooth' });
+  const { ref: sidebarRef } = useScrollRestoration({ id: 'sidebar-menu', behavior: 'smooth' });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '20px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px' }}>
+          <li>Scroll the <strong>blue area (main content)</strong> about halfway.</li>
+          <li>Scroll the <strong>green area (sidebar)</strong> about halfway.</li>
+          <li>Click the browser's <strong>'Back'</strong> button.</li>
+          <li>When you return, <strong>both areas</strong> have their scroll positions accurately restored! ✨</li>
+        </ol>
+      </div>
+
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '20px',
+        '@media (max-width: 768px)': {
+          gridTemplateColumns: '1fr'
+        }
+      }}>
+        {/* Main content area (blue) */}
+        <div>
+          <div style={{
+            fontSize: '14px',
+            fontWeight: 'bold',
+            marginBottom: '8px',
+            color: '#4f46e5'
+          }}>
+            📄 Main Content (id: "main-content")
+          </div>
+          <div
+            ref={contentRef}
+            style={{
+              height: '300px',
+              overflowY: 'scroll',
+              border: '2px solid #4f46e5',
+              padding: '20px',
+              borderRadius: '8px',
+              backgroundColor: '#f5f5ff'
+            }}
+          >
+            {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+              <div
+                key={i}
+                style={{
+                  height: '80px',
+                  background: i % 2 === 0 ? '#e0e7ff' : '#c7d2fe',
+                  marginBottom: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '4px',
+                  fontWeight: '500'
+                }}
+              >
+                Content Item {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sidebar area (green) */}
+        <div>
+          <div style={{
+            fontSize: '14px',
+            fontWeight: 'bold',
+            marginBottom: '8px',
+            color: '#16a34a'
+          }}>
+            📑 Sidebar Menu (id: "sidebar-menu")
+          </div>
+          <div
+            ref={sidebarRef}
+            style={{
+              height: '300px',
+              overflowY: 'scroll',
+              border: '2px solid #16a34a',
+              padding: '20px',
+              borderRadius: '8px',
+              backgroundColor: '#f0fdf4'
+            }}
+          >
+            {Array.from({ length: 20 }, (_, i) => i).map((i) => (
+              <div
+                key={i}
+                style={{
+                  height: '80px',
+                  background: i % 2 === 0 ? '#bbf7d0' : '#86efac',
+                  marginBottom: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '4px',
+                  fontWeight: '500'
+                }}
+              >
+                Menu Item {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        marginTop: '20px',
+        padding: '15px',
+        backgroundColor: '#f3f4f6',
+        borderRadius: '8px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 Key point:</strong> Each area's scroll position is saved and restored <strong>independently</strong>.
+        This is because the <code>id</code> option distinguishes each instance.
+      </div>
+    </div>
+  );
+};
+
+<Example3 />

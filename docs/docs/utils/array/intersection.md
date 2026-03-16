@@ -9,31 +9,40 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/intersection/index.ts)
 
+<br />
+
 ## Benchmark
+
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
 ### Default
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/intersection|8,649,185.29|0.0001|`fastest`|
-|lodash/intersection|3,722,050.21|0.0003|`slowest`|
+
+| 이름                    | hz           | mean   | 성능      |
+| ----------------------- | ------------ | ------ | --------- |
+| modern-kit/intersection | 8,649,185.29 | 0.0001 | `fastest` |
+| lodash/intersection     | 3,722,050.21 | 0.0003 | `slowest` |
 
 - **modern-kit/intersection**
   - `2.32x` faster than **lodash/intersection**
 
 ### with iteratee
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/intersection|10,210,296.98|0.0001|`fastest`|
-|lodash/intersectionBy|1,278,057.73|0.0002|`slowest`|
+
+| 이름                    | hz            | mean   | 성능      |
+| ----------------------- | ------------- | ------ | --------- |
+| modern-kit/intersection | 10,210,296.98 | 0.0001 | `fastest` |
+| lodash/intersectionBy   | 1,278,057.73  | 0.0002 | `slowest` |
 
 - **modern-kit/intersection**
   - `7.99x` faster than **lodash/intersectionBy**
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function intersection<T, U>(
   firstArr: T[] | readonly T[],
@@ -42,15 +51,22 @@ function intersection<T, U>(
 ): T[];
 ```
 
+<br />
+
 ## Usage
-### Default
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { intersection } from '@modern-kit/utils';
 
-intersection([1, 2, 3, 5, 7], [1, 2, 4, 5, 8]); // [1, 2, 5] 
+intersection([1, 2, 3, 5, 7], [1, 2, 4, 5, 8]); // [1, 2, 5]
 ```
 
-### Iteratee
+<br />
+
+### `iteratee` 함수 사용법
+
 ```ts title="typescript"
 import { intersection } from '@modern-kit/utils';
 

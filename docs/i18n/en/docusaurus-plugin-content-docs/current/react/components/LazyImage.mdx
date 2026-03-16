@@ -1,0 +1,110 @@
+import { LazyImage } from '@modern-kit/react';
+
+# LazyImage
+
+An image component that uses **[@modern-kit/react/useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** to lazy load images when they enter the viewport.
+
+Intersection Observer options can be configured (see `Note` below).
+
+If you want to display a specific fallback component while an image is loading, use the **[FallbackLazyImage component](https://modern-agile-team.github.io/modern-kit/docs/react/components/FallbackLazyImage)**, which extends `LazyImage` for declarative use.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/LazyImage/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface IntersectionObserverInit {
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+```
+```tsx title="typescript"
+interface LazyImageProps
+  extends React.ComponentProps<'img'>,
+    IntersectionObserverInit {
+  src: string;
+}
+
+const LazyImage: React.ForwardRefExoticComponent<
+  Omit<LazyImageProps, 'ref'> & React.RefAttributes<HTMLImageElement>
+>;
+```
+
+## Usage
+```tsx title="typescript"
+import { LazyImage } from '@modern-kit/react';
+import img1 from '../assets/img1.png';
+import img2 from '../assets/img2.png';
+
+const Example = () => {
+  return (
+    <div>
+      {/* ... */}
+      <LazyImage width={400} height={400} src={img1} alt="img1" />
+      {/* ... */}
+      <LazyImage width={400} height={400} src={img2} alt="img2" />
+      {/* ... */}
+    </div>
+  );
+};
+```
+
+<br />
+
+## Example
+
+export const Example = () => {
+  return (
+    <div style={{ background: '#f8f8f8', width: '500px' }}>
+      <div
+        style={{
+          height: '500px',
+          textAlign: 'center',
+          fontSize: '2rem',
+        }}>
+        Scroll down.
+      </div>
+      <LazyImage
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/b5640bec-2abc-4205-afbf-ccfd9876a90b'
+        }
+        alt="img1"
+        width={500}
+        height={500}
+      />
+
+      <div style={{ width: '100%', height: '150px' }} />
+
+      <LazyImage
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/207743a7-b29f-4826-bc08-8df0d67e568b'
+        }
+        alt="img2"
+        width={500}
+        height={500}
+      />
+
+      <div style={{ width: '100%', height: '150px' }} />
+
+      <LazyImage
+        src={
+          'https://github.com/Team-Grace/devgrace/assets/64779472/d1957ec8-fe87-406e-bfda-fb4ee505b152'
+        }
+        alt="img3"
+        width={500}
+        height={500}
+      />
+    </div>
+  );
+};
+
+<Example />
+
+
+## Note
+- [Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)

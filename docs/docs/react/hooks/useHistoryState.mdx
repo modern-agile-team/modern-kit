@@ -9,8 +9,12 @@ import { useState } from 'react'
 
 저장되는 이력의 최대 개수(`capacity`)를 제한할 수 있습니다.
 
+<br />
+
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHistoryState/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -32,6 +36,32 @@ function useHistoryState<T>(
   initialValue: T | (() => T),
   capacity?: number): UseHistoryStateReturn<T>;
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `T \| (() => T)` | 상태의 초기값 또는 초기값을 반환하는 함수 |
+| `capacity` | `number` | 저장할 최대 이력 개수 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `state` | `T` | 현재 상태 값 |
+| `canForward` | `boolean` | 다음 상태로 이동할 수 있는지 여부 |
+| `canBack` | `boolean` | 이전 상태로 이동할 수 있는지 여부 |
+| `setState` | `(newState: T \| ((prevState: T) => T)) => void` | 상태 히스토리에 추가하고 새 상태로 업데이트하는 함수 |
+| `replaceState` | `(newState: T \| ((prevState: T) => T)) => void` | 현재 히스토리 항목을 대체하는 함수 |
+| `back` | `() => void` | 이전 상태로 되돌리는 함수 |
+| `forward` | `() => void` | 다음 상태로 이동하는 함수 |
+| `go` | `(index: number) => void` | 특정 인덱스의 상태로 이동하는 함수 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

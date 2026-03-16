@@ -1,0 +1,124 @@
+import { useTimeout } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useTimeout
+
+A custom hook that makes it convenient to use `window.setTimeout`.
+
+The option value can be passed as a number or as an object. When passed as an object, you can provide `delay` and `enabled` properties.
+
+Returns `set`, `reset`, and `clear` functions to manually control the timeout.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimeout/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface TimeoutOptions {
+  delay: number;
+  enabled?: boolean;
+}
+```
+```ts title="typescript"
+function useTimeout(
+  callback: () => void,
+  options: number
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
+
+function useTimeout(
+  callback: () => void,
+  options: TimeoutOptions
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `options` | `number \| TimeoutOptions` | - | Delay in milliseconds, or a `{ delay, enabled }` object |
+| `options.delay` | `number` | - | Timeout delay in milliseconds |
+| `options.enabled` | `boolean` | `true` | Whether the timeout is enabled |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `set` | `() => void` | Function to start the timeout |
+| `clear` | `() => void` | Function to cancel the timeout |
+| `reset` | `() => void` | Function to reset and restart the timeout |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useTimeout } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set, reset, clear } = useTimeout(() => {
+    setNumber(number + 1);
+  }, 1000);
+
+  /*
+   * useTimeout(() => {
+   *   setNumber(number + 1);
+   * }, { delay: 1000, enabled: true });
+   */
+
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set, reset, clear } = useTimeout(() => {
+    setNumber(number + 1);
+  }, 1000);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>{number}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

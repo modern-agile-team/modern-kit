@@ -7,26 +7,43 @@
   - 모든 프로퍼티에 대해 옵셔널/논옵셔널 경로를 모두 포함
   - 깊이 제한 없음
 
+<br />
+
 ## Interface
 
 ```ts title="typescript"
-type PropertyAllPath<T> = T extends Record<PropertyKey, any>
-  ? {
-      [K in keyof T]-?: K extends string
-        ? T[K] extends Record<PropertyKey, any> | undefined
-          ?
-              | `${K}`
-              | `${K}.${PropertyAllPath<T[K]>}`
-              | `${K}?.${PropertyAllPath<T[K]>}`
-          : `${K}`
-        : never;
-    }[keyof T]
-  : never;
+type PropertyAllPath<T extends Record<PropertyKey, any>> = {
+  [K in keyof T]-?: K extends string
+    ? T[K] extends Record<PropertyKey, any> | undefined
+      ?
+          | `${K}`
+          | `${K}.${PropertyAllPath<T[K]>}`
+          | `${K}?.${PropertyAllPath<T[K]>}`
+      : `${K}`
+    : never;
+}[keyof T];
 ```
+
+<br />
 
 ## Usage
 
+### 기본 케이스
+
 ```ts title="typescript"
+import { PropertyAllPath } from '@modern-kit/types';
+
 type Paths = PropertyAllPath<{ a: string; b: { c: number; d: string } }>;
 // "a" | "b" | "b.c" | "b.d" | "b?.c" | "b?.d"
-``` 
+```
+
+<br />
+
+### 비객체 타입 케이스
+
+```ts title="typescript"
+import { PropertyAllPath } from '@modern-kit/types';
+
+type Paths = PropertyAllPath<string>;
+// never
+```

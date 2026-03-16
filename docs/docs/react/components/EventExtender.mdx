@@ -25,6 +25,8 @@ import { delay } from '@modern-kit/utils';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/EventExtender/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 /**
@@ -71,6 +73,18 @@ const EventExtender: <
   afterEvent,
 }: EventExtenderProps<K, E>) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `JSX.Element` | - | 이벤트 핸들러를 확장할 자식 요소 |
+| `capture` | `EventNames` | - | 캡처할 이벤트 핸들러 이름 (예: `"onClick"`) |
+| `shouldAwait` | `boolean` | `false` | 비동기 이벤트를 await 할지 여부 |
+| `beforeEvent` | `(e: Event) => void \| Promise<void>` | `undefined` | 원본 이벤트 실행 전 호출되는 함수 |
+| `afterEvent` | `(e: Event) => void \| Promise<void>` | `undefined` | 원본 이벤트 실행 후 호출되는 함수 |
 
 ## Usage
 ### 기본 사용법

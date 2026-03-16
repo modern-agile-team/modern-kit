@@ -1,0 +1,124 @@
+import { useManualTimeout } from '@modern-kit/react';
+import { useState, useEffect } from 'react';
+
+# useManualTimeout
+
+A hook that lets you manually set and clear timeouts.
+
+Unlike `useTimeout`, there is no automatic initial execution — timeouts must be set explicitly.
+All pending timeouts are automatically cleared when the hook unmounts.
+
+`useTimeout` is not well-suited for complex timeout scenarios such as nested timeouts due to hooks rules.
+`useManualTimeout` is useful when you need to run parallel or nested timeouts and clear them all at once.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useManualTimeout/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+const useManualTimeout: () => {
+  set: (callback: () => void, delay: number) => number;
+  clearAll: () => void;
+}
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `set` | `(callback: () => void, delay: number) => number` | Function to set a timeout. Returns the timeout ID |
+| `clearAll` | `() => void` | Function to clear all pending timeouts |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useManualTimeout } from '@modern-kit/react';
+
+const DELAY_TIME = 1500;
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set } = useManualTimeout();
+
+  const handleSetTimeout = () => {
+    set(() => {
+      setNumber(number + 1);
+    }, DELAY_TIME);
+  }
+
+  useEffect(() => {
+    set(() => {
+      setNumber((prev) => prev + 1);
+
+      set(() => {
+        setNumber((prev) => prev + 2);
+
+        set(() => {
+          setNumber((prev) => prev + 3);
+        }, DELAY_TIME);
+      }, DELAY_TIME);
+    }, DELAY_TIME);
+  }, [set]);
+
+  return (
+    <div>
+      <p>{number}</p>
+      <div>
+        <button onClick={handleSetTimeout}>set</button>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set } = useManualTimeout();
+
+  const handleSetTimeout = () => {
+    set(() => {
+      setNumber(number + 1);
+    }, 1500);
+  }
+
+  useEffect(() => {
+    set(() => {
+      setNumber((prev) => prev + 1);
+
+      set(() => {
+        setNumber((prev) => prev + 2);
+
+        set(() => {
+          setNumber((prev) => prev + 3);
+        }, 1500);
+      }, 1500);
+    }, 1500);
+  }, [set]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Count: {number}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleSetTimeout}>set</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

@@ -1,18 +1,33 @@
-# useUnMount
+# useUnmount
 
 컴포넌트가 `언마운트`될 때 콜백 함수를 호출하는 커스텀 훅입니다.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useUnMount/index.ts)
+
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useUnmount/index.ts)
+
+<br />
 
 ## Interface
+
 ```ts title="typescript"
 function useUnmount(callback: () => void): void
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `() => void` | 언마운트 시 호출될 콜백 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useUnmount } from '@modern-kit/react';
 
@@ -21,3 +36,4 @@ const Example = () => {
 
   return <>{/* ... */}</>;
 };
+```

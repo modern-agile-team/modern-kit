@@ -10,6 +10,8 @@ import { DebounceHandler } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/DebounceHandler/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type DebounceParameters = Parameters<typeof debounce>;
@@ -23,6 +25,17 @@ interface DebounceHandlerProps {
 
 const DebounceHandler: ({ children, capture, wait, options, }: DebounceHandlerProps) => JSX.Element
 ```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `JSX.Element` | - | 디바운스를 적용할 자식 요소 |
+| `capture` | `string` | - | 디바운스를 적용할 이벤트 핸들러 이름 (예: `"onClick"`) |
+| `wait` | `number` | - | 디바운스 대기 시간 (ms) |
+| `options` | `DebounceOptions` | `undefined` | 디바운스 옵션 |
+
+<br />
 
 ## Usage
 ### Button Click Case

@@ -1,0 +1,106 @@
+import { useNetwork } from '@modern-kit/react';
+
+# useNetwork
+
+A custom hook that subscribes to the browser's network connection status using `useSyncExternalStore` and returns whether the device is online.
+
+You can provide `onlineCallback` and `offlineCallback` to invoke custom functions when the network status changes.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useNetwork/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseNetworkProps {
+  onlineCallback?: (event: Event) => void;
+  offlineCallback?: (event: Event) => void;
+}
+
+const useNetwork: ({ onlineCallback, offlineCallback }?: UseNetworkProps) => {
+  isOnline: boolean;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onlineCallback` | `(event: Event) => void` | `-` | Callback invoked when the network transitions to an online state |
+| `offlineCallback` | `(event: Event) => void` | `-` | Callback invoked when the network transitions to an offline state |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `isOnline` | `boolean` | Whether the network is currently online |
+
+<br />
+
+## Remarks
+
+:::tip References
+
+- [useSyncExternalStore(en) - react.dev](https://react.dev/reference/react/useSyncExternalStore)
+- [useSyncExternalStore(ko) - react.dev](https://ko.react.dev/reference/react/useSyncExternalStore)
+
+:::
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useNetwork } from '@modern-kit/react';
+
+const Example = () => {
+  const { isOnline } = useNetwork({
+    onlineCallback: () => {
+      alert('online');
+    },
+    offlineCallback: () => {
+      alert('offline');
+    },
+  });
+
+  return (
+    <div>
+      <p>Try toggling the network in the Network tab of your browser's DevTools.</p>
+      <p>{isOnline ? '🟢 online' : '❌ offline'}</p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { isOnline } = useNetwork({
+    onlineCallback: () => {
+      alert('online');
+    },
+    offlineCallback: () => {
+      alert('offline');
+    },
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Try toggling the network in the Network tab of your browser's DevTools.</p>
+      <p style={{ margin: 0 }}>{isOnline ? '🟢 Online' : '❌ Offline'}</p>
+    </div>
+  );
+};
+
+<Example />

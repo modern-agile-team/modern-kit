@@ -6,8 +6,6 @@
 
 <br />
 
-
-
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isSubset/index.ts)
 
@@ -20,7 +18,11 @@ const isSubset = <T, U>(
 ) => boolean;
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
+
 ```ts title="typescript"
 import { isSubset } from '@modern-kit/utils';
 
@@ -31,6 +33,10 @@ const subset2 = [1, 5];
 isSubset(superset, subset1); // true
 isSubset(superset, subset2); // false
 ```
+
+<br />
+
+### 혼합 타입 배열
 
 ```ts title="typescript"
 import { isSubset } from '@modern-kit/utils';
@@ -43,8 +49,11 @@ isSubset(superset, subset1); // true
 isSubset(superset, subset2); // false
 ```
 
+<br />
+
+### 요소 타입이 배열인 경우 (iteratee 사용)
+
 ```ts title="typescript"
-// 요소 타입이 배열인 경우
 import { isSubset } from '@modern-kit/utils';
 
 const superset = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9]];
@@ -56,9 +65,13 @@ isSubset(superset, subset2, (arr) => arr[2]); // true  ([2,7], [7])
 isSubset(superset, subset2, (arr) => arr[3]); // false ([3,8], [4])
 ```
 
-```ts title="typescript
-// 깊이가 2 이상의 오브젝트
+<br />
+
+### 요소 타입이 객체인 경우 (iteratee 사용)
+
+```ts title="typescript"
 import { isSubset } from '@modern-kit/utils';
+
 const superset = [
   {
     name: 'Peter',

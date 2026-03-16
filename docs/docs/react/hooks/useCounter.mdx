@@ -10,6 +10,8 @@ import { useCounter } from '@modern-kit/react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useCounter/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useCounter(initialValue: number = 0): {
@@ -20,6 +22,28 @@ function useCounter(initialValue: number = 0): {
   reset: () => void;
 }
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `number` | 카운터의 초기값. 기본값은 `0` |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `counter` | `number` | 현재 카운터 값입니다. |
+| `setCounter` | `React.Dispatch<React.SetStateAction<number>>` | 카운터 값을 직접 설정하는 함수입니다. |
+| `increment` | `() => void` | 카운터를 1 증가시키는 함수입니다. |
+| `decrement` | `() => void` | 카운터를 1 감소시키는 함수입니다. |
+| `reset` | `() => void` | 카운터를 초기값으로 리셋하는 함수입니다. |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

@@ -7,7 +7,9 @@ input 필드의 상태를 관리하는 커스텀 훅 입니다.
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/uesInputState/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useInputState/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -24,12 +26,44 @@ interface UseInputStateReturn {
   reset: () => void;
 }
 ```
-```ts title="typescript
+```ts title="typescript"
 function useInputState(
   initialValue?: string,
   options?: UseInputStateOptions
 ): UseInputStateReturn;
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `string` | 초기 입력 값 |
+| `options` | `UseInputStateOptions` | 옵션 객체 |
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `validate` | `(value: string) => string \| null \| undefined` | - | 유효성 검사 함수. 유효하지 않으면 에러 메시지 문자열을 반환하고, 유효하면 `null` 또는 `undefined`를 반환합니다 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `value` | `string` | 현재 입력 값 |
+| `error` | `string \| null` | 유효성 검사 에러 메시지, 에러가 없으면 `null` |
+| `onChange` | `(e: ChangeEvent<HTMLInputElement>) => void` | input의 change 이벤트 핸들러 |
+| `resetError` | `() => void` | 에러 상태만 초기화하는 함수 |
+| `resetValue` | `() => void` | 값 상태만 초기화하는 함수 |
+| `reset` | `() => void` | 값과 에러 상태를 모두 초기화하는 함수 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

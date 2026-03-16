@@ -9,14 +9,18 @@ import { useState, useEffect } from 'react';
 모든 타임아웃은 해당 훅 언마운트 시 자동으로 초기화됩니다.
 
 `useTimeout`은 hooks rule에 따라 중첩 타임아웃 등 복잡한 타임아웃 설정에 적절하지 않습니다.
-`useManualTimeout`은 병렬/중첩된 타임아웃을 실행하고, 한번에 초기화 해야 될 때 유용합니다.
+`useManualTimeout`은 병렬/중첩된 타임아웃을 실행하고, 한번에 초기화해야 될 때 유용합니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useManualTimeout/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 const useManualTimeout: () => {
   set: (callback: () => void, delay: number) => number;
@@ -24,7 +28,19 @@ const useManualTimeout: () => {
 }
 ```
 
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `set` | `(callback: () => void, delay: number) => number` | 타임아웃을 설정하는 함수. 타임아웃 ID를 반환함 |
+| `clearAll` | `() => void` | 모든 타임아웃을 초기화하는 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useManualTimeout } from '@modern-kit/react';
 
@@ -66,7 +82,9 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [number, setNumber] = useState(0);
@@ -78,7 +96,7 @@ export const Example = () => {
       setNumber(number + 1);
     }, 1500);
   }
-  
+
   useEffect(() => {
     set(() => {
       setNumber((prev) => prev + 1);

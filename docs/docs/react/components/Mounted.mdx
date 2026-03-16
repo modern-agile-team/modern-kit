@@ -12,6 +12,8 @@ import { Mounted } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Mounted/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 
@@ -23,6 +25,15 @@ const Mounted: ({
   fallback = <></>
 }: PropsWithChildren<MountedProps>) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | 마운트 후 렌더링할 자식 컴포넌트 |
+| `fallback` | `JSX.Element` | `<></>` | 마운트 전 렌더링할 Fallback 컴포넌트 |
 
 ## Usage
 ```tsx title="typescript"

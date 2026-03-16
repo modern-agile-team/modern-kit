@@ -1,0 +1,250 @@
+import { useStep } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useStep
+
+A custom hook that manages and tracks the `step` of a `multi-step process`.
+
+Steps start from `0` to be compatible with array indices.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useStep/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseStepProps {
+  maxStep: number;
+  initialStep?: number; // default: 0
+  infinite?: boolean; // default: false
+}
+
+type StepAction = ({ prev, next }: {
+  prev: number;
+  next: number;
+}) => void;
+```
+```ts title="typescript"
+const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
+  currentStep: number; // Current step
+  hasNextStep: boolean; // Whether moving to the next step is possible
+  hasPrevStep: boolean; // Whether moving to the previous step is possible
+  setStep: (
+    step: SetStateAction<number>,
+    action?: StepAction
+  ) => void; // Function to move to a specific step
+  goToNextStep: (action?: StepAction) => void; // Function to move to the next step
+  goToPrevStep: (action?: StepAction) => void; // Function to move to the previous step
+  resetStep: (action?: StepAction) => void; // Function to reset to initialValue
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `maxStep` | `number` | - | Maximum number of steps |
+| `initialStep` | `number` | `0` | Initial step value |
+| `infinite` | `boolean` | `false` | Whether to cycle when reaching the max/min value |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `currentStep` | `number` | Current step value |
+| `hasNextStep` | `boolean` | Whether it is possible to move to the next step |
+| `hasPrevStep` | `boolean` | Whether it is possible to move to the previous step |
+| `setStep` | `(step: SetStateAction<number>, action?: StepAction) => void` | Function to move to a specific step |
+| `goToNextStep` | `(action?: StepAction) => void` | Function to move to the next step |
+| `goToPrevStep` | `(action?: StepAction) => void` | Function to move to the previous step |
+| `resetStep` | `(action?: StepAction) => void` | Function to reset to the initial step |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useStep } from '@modern-kit/react';
+
+export const Example = () => {
+  const [infinite, setInfinite] = useState(true);
+  const {
+    currentStep,
+    hasNextStep,
+    hasPrevStep,
+    setStep,
+    goToNextStep,
+    goToPrevStep,
+    resetStep,
+  } = useStep({ maxStep: 3, infinite: infinite });
+
+  const handleGoToNextStep = () => {
+    goToNextStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    goToPrevStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleSetStep = () => {
+    setStep(2, ({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleResetStep = () => {
+    resetStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={handleGoToPrevStep}>Previous Step</button>
+        <button onClick={handleGoToNextStep}>Next Step</button>
+        <button onClick={handleSetStep}>Go to Step 2</button>
+        <button onClick={handleResetStep}>Reset Step</button>
+        <button onClick={() => setInfinite(!infinite)}>Toggle infinite</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>hasNextStep: {`${hasNextStep}`}</p>
+        <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
+      </div>
+      <div>
+        {currentStep === 0 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            Step 0 Box
+          </div>
+        )}
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            Step 1 Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
+            Step 2 Box
+          </div>
+        )}
+        {currentStep === 3 && (
+          <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
+            Step 3 Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [infinite, setInfinite] = useState(true);
+  const {
+    currentStep,
+    hasNextStep,
+    hasPrevStep,
+    setStep,
+    goToNextStep,
+    goToPrevStep,
+    resetStep,
+  } = useStep({ maxStep: 3, infinite: infinite });
+
+  const handleGoToNextStep = () => {
+    goToNextStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleGoToPrevStep = () => {
+    goToPrevStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleSetStep = () => {
+    setStep(2, ({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const handleResetStep = () => {
+    resetStep(({ prev, next }) => {
+      console.log(`Moving from ${prev} to ${next}`);
+    });
+  };
+
+  const boxStyle = {
+    width: '300px',
+    height: '120px',
+    fontSize: '21px',
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleGoToPrevStep}>Previous Step</button>
+        <button onClick={handleGoToNextStep}>Next Step</button>
+        <button onClick={handleSetStep}>Go to Step 2</button>
+        <button onClick={handleResetStep}>Reset Step</button>
+        <button onClick={() => setInfinite(!infinite)}>Toggle infinite</button>
+      </div>
+      <div>
+        <p>currentStep: {currentStep}</p>
+        <p>hasNextStep: {`${hasNextStep}`}</p>
+        <p>hasPrevStep: {`${hasPrevStep}`}</p>
+        <p>infinite: {`${infinite}`}</p>
+      </div>
+      <div>
+        {currentStep === 0 && (
+          <div style={{ ...boxStyle, backgroundColor: 'red' }}>
+            Step 0 Box
+          </div>
+        )}
+        {currentStep === 1 && (
+          <div style={{ ...boxStyle, backgroundColor: 'green' }}>
+            Step 1 Box
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div style={{ ...boxStyle, backgroundColor: 'blue' }}>
+            Step 2 Box
+          </div>
+        )}
+        {currentStep === 3 && (
+          <div style={{ ...boxStyle, backgroundColor: 'yellow' }}>
+            Step 3 Box
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+
+<Example />

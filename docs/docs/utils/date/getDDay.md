@@ -9,6 +9,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getDDay/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function getDDay(date: string | number | Date): {
@@ -19,7 +21,10 @@ function getDDay(date: string | number | Date): {
 }
 ```
 
+<br />
+
 ## Usage
+
 ```ts title="typescript"
 import { getDDay } from '@modern-kit/utils';
 

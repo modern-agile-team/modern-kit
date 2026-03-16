@@ -11,6 +11,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/debounce/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface DebounceOptions {
@@ -33,6 +35,8 @@ const debounce: <F extends (...args: any[]) => void>(
 ) => DebouncedFunction<F>;
 ```
 
+<br />
+
 ## Usage
 ### 기본 사용법
 ```ts title="typescript"
@@ -47,6 +51,7 @@ const debouncedLog = debounce(logMessage, 1000);
 debouncedLog('첫 번째 호출'); // 지연 시간(1초) 이후에 실행됩니다.
 ```
 
+<br />
 
 ### AbortSignal 사용법
 ```ts title="typescript"

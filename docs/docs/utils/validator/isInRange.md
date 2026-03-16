@@ -21,6 +21,8 @@
 - **modern-kit/isInRange**
   - `2.61x` faster than lodash/inRange
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface IsInRangeProps {
@@ -39,6 +41,8 @@ function isInRange({
   inclusiveMax,
 }: IsInRangeProps): boolean;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -1,0 +1,97 @@
+import { useMemo } from 'react';
+import { useVhProperty } from '@modern-kit/react';
+
+# useVhProperty
+
+In iOS web environments, the address bar height causes `100vh` to be measured larger than the actual visible screen height.
+
+To address this, the `useVhProperty` hook allows you to set a CSS variable so that `100vh` is calculated as the actual screen height.
+
+In general, resize events on iOS only occur when switching between portrait and landscape orientation. However, by using the `enableResize` option, the CSS variable can be recalculated every time a `resize` event fires, even on iOS.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useVhProperty/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseVhPropertyProps {
+  name?: string;
+  enableResize?: boolean;
+}
+
+const useVhProperty: ({ name, enableResize }?: UseVhPropertyProps) => void;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `name` | `string` | `'vh'` | CSS variable name (set as `--{name}`) |
+| `enableResize` | `boolean` | `false` | Whether to recalculate the CSS variable on resize events |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useVhProperty } from '@modern-kit/react';
+
+const Example = () => {
+  useVhProperty();
+  // Resize: useVhProperty({ enableResize: true });
+
+  const style: CSSProperties = useMemo(() => {
+    return {
+      height: 'calc(var(--vh, 1vh) * 100)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'purple',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={style}>
+      <p>Configures 100vh to be calculated as the actual screen height.</p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  useVhProperty()
+
+  const style = useMemo(() => {
+    return {
+      height: 'calc(var(--vh, 1vh) * 100)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'purple',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={style}>
+      <p>Configures 100vh to be calculated as the actual screen height.</p>
+    </div>
+  );
+};
+
+<Example />

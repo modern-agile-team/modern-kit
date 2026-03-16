@@ -21,6 +21,8 @@ import img from '../../../assets/react.png';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useClipboard/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useClipboard(): {
@@ -32,6 +34,21 @@ function useClipboard(): {
   copyImage: (src: string, options?: { toText: boolean }) => Promise<boolean>;
 };
 ```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `copiedData` | `string \| Blob \| null` | 최근 클립보드에 복사된 데이터입니다. |
+| `readData` | `string \| ClipboardItems \| null` | 클립보드에서 읽어온 데이터입니다. |
+| `copyText` | `(value: string) => Promise<boolean>` | 주어진 텍스트를 클립보드에 복사하는 함수입니다. 성공 여부를 반환합니다. |
+| `copyImage` | `(src: string, options?: { toText: boolean }) => Promise<boolean>` | 주어진 이미지 URL을 클립보드에 복사하는 함수입니다. 성공 여부를 반환합니다. |
+| `readText` | `() => Promise<boolean>` | 클립보드에 저장된 텍스트 데이터를 읽어오는 함수입니다. 성공 여부를 반환합니다. |
+| `readContents` | `() => Promise<boolean>` | 클립보드에 저장된 텍스트, HTML, 이미지 등 다양한 유형의 컨텐츠를 읽어오는 함수입니다. 성공 여부를 반환합니다. |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

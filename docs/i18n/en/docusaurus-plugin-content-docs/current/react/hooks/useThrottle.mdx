@@ -1,0 +1,108 @@
+import { useState } from 'react';
+import { useThrottle } from '@modern-kit/react'
+
+# useThrottle
+
+A hook that applies `throttling` to the given callback function for a specified duration to prevent repeated calls within that time window.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useThrottle/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+type ThrottleParameters = Parameters<typeof throttle>;
+
+type ThrottleReturnType<T extends (...args: any) => any> = ReturnType<
+  typeof throttle<T>
+>;
+```
+```ts title="typescript"
+function useThrottle<T extends (...args: any) => any>(
+  callback: T,
+  wait: ThrottleParameters[1],
+  options?: ThrottleParameters[2]
+): ThrottleReturnType<T>;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `callback` | `T` | - | The callback function to throttle |
+| `wait` | `number` | - | The throttle duration in milliseconds |
+| `options.signal` | `AbortSignal` | - | An optional AbortSignal to cancel the throttled function |
+| `options.leading` | `boolean` | `true` | Whether to execute on the leading edge |
+| `options.trailing` | `boolean` | `true` | Whether to execute on the trailing edge |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useState } from 'react';
+import { useThrottle } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(1);
+  const [throttledCount, setThrottledCount] = useState(1);
+
+  const countUp = () => {
+    setCount(count + 1);
+  };
+
+  const throttledCountUp = useThrottle(() => {
+    setThrottledCount(throttledCount + 1);
+  }, 1000);
+
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <button onClick={countUp}>Click Button</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={throttledCountUp}>Click Throttled Button</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>throttledCount: {throttledCount}</p>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [count, setCount] = useState(1);
+  const [throttledCount, setThrottledCount] = useState(1);
+  const countUp = () => {
+    setCount(count + 1);
+  };
+  const throttledCountUp = useThrottle(() => {
+    setThrottledCount(throttledCount + 1);
+  }, 1000);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={countUp}>Click Button</button>
+        <button onClick={throttledCountUp}>Click Throttled Button</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>throttledCount: {throttledCount}</p>
+      </div>
+    </div>
+  );
+};
+
+<Example />

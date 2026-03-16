@@ -1,0 +1,134 @@
+import { useScrollLock } from '@modern-kit/react';
+
+# useScrollLock
+
+A custom hook that can `lock` and `unlock` the scroll of a specific element.
+
+It can be used to lock the scroll of a background element (e.g., `document.body`) when a component such as a `Modal` is rendered.
+
+By default, it automatically locks the scroll of `document.body` on mount.
+
+On `unmount`, the target element's original `overflow` value is restored.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollLock/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseScrollLockProps {
+  autoLock?: boolean;
+}
+
+const useScrollLock: <T extends HTMLElement>({
+  autoLock,
+}?: UseScrollLockProps) => {
+  ref: React.MutableRefObject<Nullable<T>>;
+  lock: () => void;
+  unlock: () => void;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `autoLock` | `boolean` | `true` | Whether to automatically lock scroll on mount |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.MutableRefObject<Nullable<T>>` | Ref to attach to the target element. If not attached, `document.body` is used as the target. |
+| `lock` | `() => void` | Function to lock scroll |
+| `unlock` | `() => void` | Function to unlock scroll |
+
+<br />
+
+## Usage
+
+### document.body
+
+```tsx title="typescript"
+import { useScrollLock } from '@modern-kit/react';
+
+const Example = () => {
+  useScrollLock(); // Set { autoLock: false } to prevent automatic locking.
+
+  return <div>{/* ... */}</div>;
+};
+```
+
+<br />
+
+### Specific element
+
+```tsx title="typescript"
+import { useScrollLock } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, lock, unlock } = useScrollLock<HTMLDivElement>({ autoLock: false });
+
+  const wrapperStyle = {
+    width: '400px',
+    maxHeight: '600px',
+    overflowY: 'scroll',
+  };
+  const boxStyle = {
+    width: '100%',
+    maxHeight: '500px',
+  };
+  return (
+    <div>
+      <button onClick={lock}>Lock Scroll</button>
+      <button onClick={unlock}>Unlock Scroll</button>
+      <div ref={ref} style={wrapperStyle}>
+        <div style={{ ...boxStyle, backgroundColor: 'red' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'green' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'blue' }} />
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { ref, lock, unlock } = useScrollLock({ autoLock: true });
+  const wrapperStyle = {
+    width: '400px',
+    maxHeight: '600px',
+    overflowY: 'scroll',
+  };
+  const boxStyle = {
+    width: '100%',
+    height: '500px',
+  };
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={lock}>Lock Scroll</button>
+        <button onClick={unlock}>Unlock Scroll</button>
+      </div>
+      <div ref={ref} style={wrapperStyle}>
+        <div style={{ ...boxStyle, backgroundColor: 'red' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'green' }} />
+        <div style={{ ...boxStyle, backgroundColor: 'blue' }} />
+      </div>
+    </div>
+  );
+};
+
+<Example />

@@ -1,0 +1,79 @@
+import { usePrevious } from '@modern-kit/react';
+import { useState } from 'react';
+
+# usePrevious
+
+A custom hook that returns the value of its argument from the previous render.
+
+It stores the previous value whenever the current value changes, and returns that previous value when the component re-renders.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePrevious/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function usePrevious<T>(value: T): T;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `value` | `T` | The current value whose previous value should be tracked |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useState } from 'react';
+import { usePrevious } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+
+  const onIncrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <div>Current Count is - {count}</div>
+      <div>Previous Count is - {previousCount}</div>
+      <button onClick={onIncrementCount}>Increment</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+  const previousCount = usePrevious(count);
+  const onIncrementCount = () => {
+    setCount(count + 1);
+  };
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div>Current Count is - {count}</div>
+      <div>Previous Count is - {previousCount}</div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={onIncrementCount}>Increment</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

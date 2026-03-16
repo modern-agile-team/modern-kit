@@ -38,6 +38,8 @@ import { useIdle } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIdle/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface UseIdleProps {
@@ -49,6 +51,18 @@ interface UseIdleProps {
 ```ts title="typescript"
 function useIdle({ timeout, onIdle, onActive }: UseIdleProps): boolean
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `timeout` | `number` | - | 비활성 상태로 간주되기까지의 시간(밀리초) |
+| `onIdle` | `() => void` | - | idle 상태 진입 시 호출되는 콜백 |
+| `onActive` | `() => void` | - | active 상태 진입 시 호출되는 콜백 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

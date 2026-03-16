@@ -1,0 +1,76 @@
+import { useState } from 'react';
+import { Delay } from '@modern-kit/react';
+
+# Delay
+
+A component that renders its children after a specified delay.
+
+During the delay, the `fallback` component is rendered.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Delay/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface DelayProps {
+  children: React.ReactNode;
+  delay: number;
+  fallback?: React.ReactNode;
+}
+```
+```tsx title="typescript"
+const Delay: ({ children, delay, fallback }: DelayProps) => JSX.Element;
+```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | The child component to render after the delay |
+| `delay` | `number` | - | Rendering delay time in milliseconds |
+| `fallback` | `React.ReactNode` | `undefined` | Component rendered during the delay |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { Delay } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <Delay
+      delay={2000}
+      fallback={
+        <div>
+          Fallback. Children will render after 2 seconds.
+        </div>
+      }>
+      <div>Children content.</div>
+    </Delay>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  return (
+    <Delay
+      delay={2000}
+      fallback={
+        <div>
+          Fallback. Children will render after 2 seconds.
+        </div>
+      }>
+      <div>Children content.</div>
+    </Delay>
+  );
+};
+
+<Example />
+
+

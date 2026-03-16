@@ -12,6 +12,8 @@
 const isHangul: (value: string) => boolean
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isHangul } from '@modern-kit/utils';

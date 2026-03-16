@@ -4,16 +4,19 @@
 
 <br />
 
+## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/asyncNoop/index.ts)
 
-## Interface
+<br />
 
+## Interface
 ```ts title="typescript"
 const asyncNoop: () => Promise<void>;
 ```
 
-## Usage
+<br />
 
+## Usage
 ```ts title="typescript"
 import { asyncNoop } from '@modern-kit/utils';
 

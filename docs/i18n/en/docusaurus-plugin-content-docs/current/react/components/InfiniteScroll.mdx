@@ -1,0 +1,99 @@
+import { useState } from 'react';
+import { InfiniteScroll } from '@modern-kit/react';
+
+# InfiniteScroll
+
+A component for declaratively implementing infinite scroll functionality.
+
+Built using the **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** hook from `@modern-kit/react`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InfiniteScroll/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+
+interface InfiniteScrollProps
+  extends Omit<
+    UseIntersectionObserverProps,
+    'onIntersectStart' | 'onIntersectEnd' | 'calledOnce'
+  > {
+  onScrollAction: (entry: IntersectionObserverEntry) => void;
+  triggerPosition?: 'before' | 'after';
+}
+```
+```ts title="typescript"
+const InfiniteScroll: ({
+  onScrollAction,
+  children,
+  root,
+  threshold,
+  enabled,
+  triggerPosition,
+  rootMargin,
+}: PropsWithChildren<InfiniteScrollProps>) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Child elements to render |
+| `onScrollAction` | `(entry: IntersectionObserverEntry) => void` | - | Callback function called when scroll trigger fires |
+| `triggerPosition` | `'before' \| 'after'` | `'after'` | Position of the trigger element |
+| `enabled` | `boolean` | `true` | Whether to enable infinite scroll |
+| `root` | `Element \| null` | `null` | IntersectionObserver root element |
+| `rootMargin` | `string` | `'0px'` | IntersectionObserver rootMargin |
+| `threshold` | `number \| number[]` | `0` | IntersectionObserver threshold |
+
+## Usage
+```tsx title="typescript"
+import { InfiniteScroll } from '@modern-kit/react'
+
+const Example = () => {
+  const [list, setList] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const onScrollAction = () => {
+    setList((prev) => [...prev, ...Array.from({ length: 10 }, (_, i) => prev.length + i + 1)]);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', height: '500px', overflow: 'scroll' }}>
+      <InfiniteScroll onScrollAction={onScrollAction} triggerPosition="after">
+        {list.map((value) => (
+          <div key={value} style={{ height: '80px', backgroundColor: '#ccccff' }}>
+            Item {value}
+          </div>
+        ))}
+        </InfiniteScroll>
+    </div>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  const [list, setList] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const onScrollAction = () => {
+    setList((prev) => [...prev, ...Array.from({ length: 10 }, (_, i) => prev.length + i + 1)]);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+      <InfiniteScroll onScrollAction={onScrollAction} triggerPosition="after">
+        {list.map((value) => (
+          <div key={value} style={{ height: '80px', backgroundColor: '#ccccff' }}>
+            Item {value}
+          </div>
+        ))}
+      </InfiniteScroll>
+    </div>
+  );
+};
+
+<Example />

@@ -1,0 +1,97 @@
+import { useState, useEffect } from 'react';
+import { useIsClient } from '@modern-kit/react';
+
+# useIsClient
+
+A custom hook that returns whether the current rendering environment is the client.
+
+Built on `useSyncExternalStore`, it accurately detects the client environment from the very first render — unlike a typical `useEffect` approach, which returns `false` on the initial render and causes a double render when it updates to `true`.
+
+:::tip Difference from useIsMounted
+- `useIsClient`: Checks whether the current **rendering environment** is the client. Returns `true` immediately even in a pure CSR environment without SSR.
+- `useIsMounted`: Checks whether the component is actually **mounted**. Operates based on `useEffect`.
+:::
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsClient/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useIsClient(): boolean;
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `isClient` | `boolean` | `true` in a client environment, `false` in a server environment |
+
+<br />
+
+## Usage
+
+### Basic Usage
+
+```tsx title="typescript"
+import { useIsClient } from '@modern-kit/react';
+
+const Component = () => {
+  const isClient = useIsClient();
+
+  return <div>{isClient ? 'Client' : 'Server'}</div>;
+};
+```
+
+<br />
+
+### Using Client-Only APIs Safely
+
+Use this hook to safely access browser-only APIs such as `window` or `navigator`.
+
+```tsx title="typescript"
+import { useIsClient } from '@modern-kit/react';
+
+const Component = () => {
+  const isClient = useIsClient();
+
+  const userAgent = isClient ? navigator.userAgent : null;
+
+  return <div>{userAgent ?? 'Server rendering...'}</div>;
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const isClient = useIsClient();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Check the current rendering environment below.</p>
+      <div
+        style={{
+          padding: '16px',
+          borderRadius: '8px',
+          background: isClient ? '#e6f4ea' : '#fce8e6',
+          color: isClient ? '#1e7e34' : '#c0392b',
+          fontWeight: 'bold',
+        }}>
+        Current environment: {isClient ? '✅ Client' : '⚠️ Server'}
+      </div>
+      <p style={{ fontSize: '0.9em', color: '#555' }}>
+        Key point: Uses <code>useSyncExternalStore</code> internally, so it returns the correct environment from the very first render without double rendering.
+      </p>
+    </div>
+  );
+};
+
+<Example />

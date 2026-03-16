@@ -1,0 +1,161 @@
+import { useMemo, useState, useRef } from 'react';
+import { useOutsidePointerDown } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useOutsidePointerDown
+
+A custom hook that registers a callback to be called when a mouse or touch event occurs outside a specific element.
+
+The provided `callback` is invoked whenever the user clicks the mouse or triggers a touch event outside the element specified by the `ref`.
+
+On mobile environments it listens for `touchstart`, and on desktop it listens for `mousedown`.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOutsidePointerDown/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useOutsidePointerDown<T extends HTMLElement>(
+  callback: (targetElement: T) => void,
+  options?: {
+    excludeRefs: React.RefObject<HTMLElement>[];
+  }
+): { ref: React.RefObject<T | null> };
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `callback` | `(targetElement: T) => void` | `-` | Callback invoked when a pointer down event occurs outside the element |
+| `options.excludeRefs` | `React.RefObject<HTMLElement>[]` | `-` | Array of refs for elements to exclude from outside click/touch detection |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the DOM element you want to monitor for outside clicks |
+
+<br />
+
+## Remarks
+
+:::tip References
+
+- [PointerEvent - MDN](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent)
+
+:::
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useMemo, useState, useRef } from 'react';
+import { useOutsidePointerDown } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const excludeRef = useRef<HTMLDivElement>(null);
+  const { ref: targetRef } = useOutsidePointerDown<HTMLDivElement>(() => {
+    setNumber(number + 1);
+  }, {
+    excludeRefs: [excludeRef], // Array of refs for elements to exclude from outside click/touch detection.
+  });
+
+  const outerBoxStyle = useMemo(() => {
+    return { /* ... */ };
+  }, []);
+
+  const InnerBoxStyle = useMemo(() => {
+    return { /* ... */ };
+  }, []);
+
+  const ExcludeBoxStyle = useMemo(() => {
+    return { /* ... */ };
+  }, []);
+
+  return (
+    <div style={outerBoxStyle}>
+      <h3>Click outside the Target Box!<br />(Exclude Box is excluded from click detection.)</h3>
+      <p>number: {number}</p>
+
+      <div ref={targetRef} style={InnerBoxStyle}>
+        <h3>Target Box</h3>
+      </div>
+
+      <div ref={excludeRef} style={ExcludeBoxStyle}>
+        <h3>Exclude Box</h3>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const excludeRef = useRef(null);
+  const { ref: targetRef } = useOutsidePointerDown(() => {
+    setNumber(number + 1);
+  }, {
+    excludeRefs: [excludeRef],
+  });
+
+  const outerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      background: 'blue',
+      color: '#fff',
+    };
+  }, []);
+
+  const InnerBoxStyle = useMemo(() => {
+    return {
+      width: '400px',
+      background: '#439966',
+      color: '#fff',
+      padding: '20px',
+    };
+  }, []);
+
+  const ExcludeBoxStyle = useMemo(() => {
+    return {
+      width: '200px',
+      background: 'red',
+      color: '#fff',
+      padding: '20px',
+    };
+  }, []);
+
+  return (
+    <div style={outerBoxStyle}>
+      <h3>Click outside the Target Box!<br />(Exclude Box is excluded from click detection.)</h3>
+      <p>number: {number}</p>
+
+      <div ref={targetRef} style={InnerBoxStyle}>
+        <h3>Target Box</h3>
+      </div>
+
+      <div ref={excludeRef} style={ExcludeBoxStyle}>
+        <h3>Exclude Box</h3>
+      </div>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

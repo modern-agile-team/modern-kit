@@ -1,0 +1,79 @@
+import { useOnceEffect } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useOnceEffect
+
+A custom hook that runs only once when the component mounts.
+
+It behaves the same as passing an empty dependency array (`[]`) to `useEffect`, but makes the intent explicit.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOnceEffect/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useOnceEffect(effectCallback: EffectCallback): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | Effect function to run once on mount |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useOnceEffect } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+
+  useOnceEffect(() => {
+    console.log('Component has mounted.');
+  });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+
+  useOnceEffect(() => {
+    console.log('Component has mounted.');
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Count: {count}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setCount(count + 1)}>Increment</button>
+      </div>
+      <p style={{ margin: 0, fontSize: '13px', color: '#666' }}>
+        Even after re-rendering by changing state, the effect is called only once.
+      </p>
+    </div>
+  );
+};
+
+<Example />

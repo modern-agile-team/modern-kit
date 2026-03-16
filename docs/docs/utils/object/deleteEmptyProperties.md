@@ -9,10 +9,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/deleteFalsyProperties/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const deleteFalsyProperties: <T extends Record<PropertyKey, any>>(source: T) => T
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

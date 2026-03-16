@@ -2,6 +2,8 @@
 
 주어진 문자열이 `-(hyphen)`을 포함한 전화번호 형식인지 확인하는 함수입니다.
 
+지원하는 전화번호 형식은 다음과 같습니다:
+
 - `XXX-YYY-ZZZZ`
 - `XXX-YYYY-ZZZZ`
 - `XX-YYY-ZZZZ`
@@ -19,6 +21,8 @@
 ```ts title="typescript"
 const isValidPhoneNumber: (value: string) => boolean
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -13,10 +13,12 @@ import { Iterator } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Iterator/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface IteratorProps<T> {
-  items: T[] | readonly T[] | undefined;
+  items: T[] | readonly T[];
   itemKey?: T extends Record<PropertyKey, any> ? keyof T : string;
   renderItem: (item: T, index: number) => JSX.Element;
 }
@@ -27,6 +29,16 @@ const Iterator: <T>({
   renderItem,
 }: IteratorProps<T>) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `T[] \| readonly T[]` | - | 렌더링할 배열 |
+| `itemKey` | `keyof T \| string` | - | 각 요소의 고유 키로 사용할 프로퍼티명 |
+| `renderItem` | `(item: T, index: number) => JSX.Element` | - | 각 항목을 렌더링하는 함수 |
 
 ## Usage
 ```tsx title="typescript"

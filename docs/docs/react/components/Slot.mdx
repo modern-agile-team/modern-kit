@@ -55,6 +55,8 @@ const MyButton = React.forwardRef((props, forwardedRef) => (
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Slot/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const Slot: React.ForwardRefExoticComponent<
@@ -68,7 +70,7 @@ const Slottable: ({ children }: React.PropsWithChildren) => JSX.Element;
 ```
 
 ## Usage
-### Default
+### 기본 사용법
 ```tsx title="typescript"
 import { Slot } from '@modern-kit/react'
 
@@ -82,7 +84,7 @@ const Button = ({
 };
 ```
 
-### With Slottable
+### `Slottable` 컴포넌트 사용법
 ```tsx title='typescript'
 const SlottableButton = ({
   asChild,
@@ -109,7 +111,7 @@ const SlottableButton = ({
 ```
 
 ## Example
-### Default
+### 기본 사용
 ```tsx title="typescript"
 // Basic Usage
 <Button onClick={() => console.log('click')}>Button</Button>
@@ -119,7 +121,7 @@ const SlottableButton = ({
 
 <br />
 
-### AsChild
+### `asChild` 속성 사용
 ```tsx title="typescript"
 // AsChild Usage
 <Button asChild onClick={() => console.log('click')}>
@@ -132,7 +134,7 @@ const SlottableButton = ({
 </Button>
 
 
-### Slottable
+### `Slottable` 컴포넌트 사용
 ```tsx title="typescript"
 <SlottableButton leftElement={<span>left</span>} rightElement={<span>right</span>}>
   <span> Slottable Button </span>

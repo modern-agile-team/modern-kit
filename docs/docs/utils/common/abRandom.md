@@ -9,10 +9,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/abRandom/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const abRandom: () => 0 | 1
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

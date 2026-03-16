@@ -14,12 +14,15 @@ sign 옵션을 통해 `"-"부호`와 `소수점`을 포함할 수 있습니다.
 interface Options {
   sign?: boolean;
 }
-```
-```ts title="typescript"
+
 function isNumeric(value: string, options?: Options): boolean
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
+
 ```ts title="typescript"
 import { isNumeric } from '@modern-kit/utils';
 
@@ -33,6 +36,11 @@ isNumeric("1[]"); // false
 isNumeric("12.00"); // false
 isNumeric(" "); // false
 ```
+
+<br />
+
+### sign 옵션 사용
+
 ```ts title="typescript"
 import { isNumeric } from '@modern-kit/utils';
 
@@ -41,5 +49,5 @@ isNumeric('-123.45', { sign: true }); // true
 
 isNumeric('12.3a45', { sign: true }); // false
 isNumeric('12-345', { sign: true }); // false, ("-" 기호는 문자열 가장 앞에만 붙일 수 있음)
-isNumeric('123.', { sign: true };) // false, (소수점 뒤에 숫자가 없음)
+isNumeric('123.', { sign: true }); // false, (소수점 뒤에 숫자가 없음)
 ```

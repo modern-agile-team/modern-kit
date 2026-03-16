@@ -13,11 +13,13 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/LazyImage/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface IntersectionObserverInit {
   root?: Element | Document | null;
-  rootMargin?: string;
+  rootMargin?: string; // default: '100px 0px'
   threshold?: number | number[];
 }
 ```

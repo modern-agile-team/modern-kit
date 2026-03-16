@@ -12,6 +12,8 @@ import { useState } from 'react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDocumentTitle/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface UseDocumentTitleOption {
@@ -23,6 +25,17 @@ const useDocumentTitle: (
   { preserveTitleOnUnmount }?: UseDocumentTitleOption
 ) => void;
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `title` | `string` | 설정할 문서의 제목 |
+| `options` | `{ preserveTitleOnUnmount?: boolean }` | 옵션 객체. `preserveTitleOnUnmount`가 `true`이면 언마운트 시 제목을 이전 상태로 복원하지 않습니다 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

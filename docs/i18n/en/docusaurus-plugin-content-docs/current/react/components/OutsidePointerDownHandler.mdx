@@ -1,0 +1,189 @@
+import { useState, useRef } from 'react';
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# OutsidePointerDownHandler
+
+A component for declaratively using the **[@modern-kit/useOutsidePointerDown](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown)** hook.
+
+Calls the `onPointerDown` function when clicking or touching outside the component area.
+
+<br />
+
+### Polymorphism
+The `OutsidePointerDownHandler` component supports the `as` prop for polymorphism.
+
+- By default, wraps children in a `div`, and the `as` prop allows changing the wrapper element tag (e.g., div → article).
+- Clicking or touching outside the wrapper element calls the `onPointerDown` callback.
+
+### Composition & Rendering Delegation
+The `OutsidePointerDownHandler` component supports Composition and Rendering Delegation patterns via the `asChild` prop.
+
+- When `asChild` is `true`, renders the child element as-is via **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** without a wrapper.
+- Clicking or touching outside the child element calls the `onPointerDown` callback.
+  - Slot only accepts a single child element.
+  - If a component is passed as a child to Slot, it must support `forwardRef` and spread `props`. Otherwise it will not work correctly.
+  - When using the `asChild` prop, please refer to the **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** documentation.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface OutsidePointerDownHandlerProps {
+  children: ReactNode;
+  onPointerDown: (targetElement: HTMLElement) => void;
+  excludeRefs?: React.RefObject<HTMLElement | null>[];
+  asChild?: boolean;
+}
+```
+```ts title="typescript"
+const OutsidePointerDown: PolyForwardComponent<
+  'div',
+  OutsidePointerDownProps,
+  React.ElementType
+>;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Child element to wrap |
+| `onPointerDown` | `(targetElement: HTMLElement) => void` | - | Callback called when clicking/touching outside |
+| `excludeRefs` | `React.RefObject<HTMLElement \| null>[]` | `[]` | Array of refs for elements to exclude from outside click detection |
+| `asChild` | `boolean` | `false` | When true, renders the child element as-is via Slot |
+
+## Usage
+### Basic Usage
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const DefaultExample = () => {
+  const excludeRef = useRef<HTMLDivElement>(null);
+  const style = {
+    // ...
+  };
+  const excludeStyle = {
+    // ...
+  };
+  return (
+    <div style={{ background: 'gray'}}>
+      <OutsidePointerDownHandler
+        style={style}
+        onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
+        excludeRefs={[excludeRef]}
+      >
+        <div>Click outside the element and check the console.</div>
+      </OutsidePointerDownHandler>
+      <div ref={excludeRef} style={excludeStyle}>ref array for elements to exclude from outside click/touch detection.</div>
+    </div>
+  );
+};
+```
+
+export const DefaultExample = () => {
+  const excludeRef = useRef(null);
+  const style = {
+    width: '500px',
+    backgroundColor: 'skyBlue',
+    padding: '20px',
+  };
+  const excludeStyle = {
+    width: '300px',
+    backgroundColor: '#439966',
+    color: 'white',
+    padding: '20px',
+  };
+  return (
+    <div style={{ background: 'gray'}}>
+      <OutsidePointerDownHandler
+        style={style}
+        onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
+        excludeRefs={[excludeRef]}
+      >
+        <div>Click outside the element and check the console.</div>
+      </OutsidePointerDownHandler>
+      <div ref={excludeRef} style={excludeStyle}>ref array for elements to exclude from outside click/touch detection.</div>
+    </div>
+  );
+};
+
+
+<BrowserOnly>
+  {() => <DefaultExample />}
+</BrowserOnly>
+
+<br />
+
+### `as` Prop Usage
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const Example = () => {
+  return (
+    <OutsidePointerDownHandler
+      as="ul"
+      placeholder="Click outside the element and check the console."
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const AsExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      as="ul"
+      placeholder="Click outside the element and check the console."
+      onPointerDown={() => console.log('As-Example Outside Clicked!')}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </OutsidePointerDownHandler>
+  );
+};
+
+<BrowserOnly>
+  {() => <AsExample />}
+</BrowserOnly>
+
+### `asChild` Prop Usage
+```tsx title="typescript"
+import { OutsidePointerDownHandler } from '@modern-kit/react';
+
+const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="Click outside the element and check the console." />
+    </OutsidePointerDownHandler>
+  );
+};
+```
+
+export const AsChildExample = () => {
+  return (
+    <OutsidePointerDownHandler
+      asChild={true}
+      onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
+    >
+      <input type="text" placeholder="Click outside the element and check the console." />
+    </OutsidePointerDownHandler>
+  );
+};
+
+<BrowserOnly>
+  {() => <AsChildExample />}
+</BrowserOnly>

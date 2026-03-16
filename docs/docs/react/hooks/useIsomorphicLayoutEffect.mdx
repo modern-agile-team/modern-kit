@@ -1,23 +1,32 @@
 # useIsomorphicLayoutEffect
 
-`useIsomorphicLayoutEffect`는 서버 사이드 렌더링 환경에서도 동기적으로 실행되도록 보장하는 커스텀 훅 입니다.
+`useIsomorphicLayoutEffect`는 서버 사이드 렌더링 환경에서도 동기적으로 실행되도록 보장하는 커스텀 훅입니다.
 
-client환경에서는 `useLayoutEffect`를 사용하고, server환경에서는 `useEffect`를 사용합니다.
+클라이언트 환경에서는 `useLayoutEffect`를 사용하고, 서버 환경에서는 `useEffect`를 사용합니다.
+
+React의 `useLayoutEffect`는 서버 사이드 렌더링 시 경고가 발생할 수 있으므로, 이를 방지하기 위해 서버에서는 `useEffect`로 대체됩니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsomorphicLayoutEffect/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 const useIsomorphicLayoutEffect: (
-  effect: React.EffectCallback, 
+  effect: React.EffectCallback,
   deps?: React.DependencyList | undefined
 ) => void;
 ```
 
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useIsomorphicLayoutEffect } from '@modern-kit/react';
 
@@ -30,3 +39,4 @@ const Example = () => {
 
   return <div>{/* ... */}</div>;
 };
+```

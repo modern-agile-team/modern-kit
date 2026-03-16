@@ -12,6 +12,8 @@
 const isAlphabet: (value: string) => boolean
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isAlphabet } from '@modern-kit/utils';

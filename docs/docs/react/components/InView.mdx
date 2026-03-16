@@ -31,6 +31,8 @@ import { InView } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InView/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface InViewProps extends UseIntersectionObserverProps {
@@ -42,8 +44,10 @@ interface InViewProps extends UseIntersectionObserverProps {
 const InView: PolyForwardComponent<"div", InViewProps, React.ElementType>
 ```
 
+<br />
+
 ## Usage
-### Default
+### 기본 사용법
 - 기본적으로 `div`로 감싸지며, 해당 `div`가 `IntersectionObserver`의 관찰 대상이 됩니다.
 - 해당 `div`가 viewport에 노출되거나 숨겨질 때 `onIntersectStart/onIntersectEnd` 콜백 함수를 호출합니다.
 ```tsx title="typescript"
@@ -61,7 +65,7 @@ const Example = () => {
 }; 
 ```
 
-### as
+### `as` 속성 사용
 - `as` 속성을 통해 특정 요소로 렌더링할 수 있으며, 해당 요소가 `IntersectionObserver`의 관찰 대상이 됩니다.
 - 해당 요소가 viewport에 노출되거나 숨겨질 때 `onIntersectStart/onIntersectEnd` 콜백 함수를 호출합니다.
 ```tsx title="typescript"

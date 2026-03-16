@@ -1,26 +1,35 @@
 # EnumerateNumbers
 
-0부터 N-1까지의 숫자 유니언 타입을 생성합니다. N이 number타입이 아닐경우 never를 반환합니다.
+0부터 N-1까지의 숫자 유니온 타입을 생성합니다. `N`이 `number` 타입이 아닐 경우 `never`를 반환합니다.
+
+<br />
 
 ## Interface
 
 ```ts title="typescript"
-type _EnumerateNumbers<
-  N extends number,
-  Acc extends number[] = []
-> = Acc['length'] extends N
-  ? Acc[number]
-  : _EnumerateNumbers<N, [...Acc, Acc['length']]>;
-
 type EnumerateNumbers<N> = N extends number
   ? _EnumerateNumbers<N>
   : never;
 ```
 
+<br />
+
 ## Usage
 
-```ts title="typescript"
-type zeroToFive = EnumerateNumbers<6>; // 0 | 1 | 2 | 3 | 4 | 5
+### 기본 케이스
 
-type otherTypeEnumerate = EnumerateNumbers<'6'>; // never
-``` 
+```ts title="typescript"
+import { EnumerateNumbers } from '@modern-kit/types';
+
+type ZeroToFive = EnumerateNumbers<6>; // 0 | 1 | 2 | 3 | 4 | 5
+```
+
+<br />
+
+### number 타입이 아닌 경우
+
+```ts title="typescript"
+import { EnumerateNumbers } from '@modern-kit/types';
+
+type OtherTypeEnumerate = EnumerateNumbers<'6'>; // never
+```

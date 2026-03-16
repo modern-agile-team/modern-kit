@@ -1,6 +1,6 @@
 # serialize
 
-객체로 들어온 값을 `query paramater로 사용할 수 있도록 직렬화`해줍니다.
+객체로 들어온 값을 `query parameter로 사용할 수 있도록 직렬화`해줍니다.
 
 `객체 내에 배열로 들어온 값`의 경우 배열 내의 값에 대해 `전부 key-value 형태로 변환하여 직렬화`해줍니다.
 
@@ -10,6 +10,8 @@
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/serialize/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -24,6 +26,8 @@ function serialize<T extends Record<PropertyKey, any>>(
   options?: SerializeOptions
 ): string;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

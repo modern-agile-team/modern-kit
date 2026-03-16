@@ -12,6 +12,8 @@ import { InfiniteScroll } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InfiniteScroll/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 
@@ -35,6 +37,20 @@ const InfiniteScroll: ({
   rootMargin,
 }: PropsWithChildren<InfiniteScrollProps>) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | 렌더링할 자식 요소 |
+| `onScrollAction` | `(entry: IntersectionObserverEntry) => void` | - | 스크롤 트리거 시 호출되는 콜백 함수 |
+| `triggerPosition` | `'before' \| 'after'` | `'after'` | 트리거 요소의 위치 |
+| `enabled` | `boolean` | `true` | 무한 스크롤 활성화 여부 |
+| `root` | `Element \| null` | `null` | IntersectionObserver root 요소 |
+| `rootMargin` | `string` | `'0px'` | IntersectionObserver rootMargin |
+| `threshold` | `number \| number[]` | `0` | IntersectionObserver threshold |
 
 ## Usage
 ```tsx title="typescript"

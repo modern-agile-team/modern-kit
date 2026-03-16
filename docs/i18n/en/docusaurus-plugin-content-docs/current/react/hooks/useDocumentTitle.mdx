@@ -1,0 +1,97 @@
+import { useDocumentTitle } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useDocumentTitle
+
+A custom hook that dynamically changes `document.title`, independent of `SEO`.
+
+If the `preserveTitleOnUnmount` option is set to `true`, the changed title will be preserved on `unmount`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDocumentTitle/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseDocumentTitleOption {
+  preserveTitleOnUnmount?: boolean; // default: false
+}
+
+const useDocumentTitle: (
+  title: string,
+  { preserveTitleOnUnmount }?: UseDocumentTitleOption
+) => void;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `preserveTitleOnUnmount` | `boolean` | `false` | If `true`, the changed title is preserved when the component unmounts instead of reverting to the previous title |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDocumentTitle } from '@modern-kit/react';
+
+const Example = () => {
+  const [title, setTitle] = useState('useDocumentTitle');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChangeTitle = () => {
+    setTitle(inputValue);
+    alert('Title has been changed.');
+  };
+
+  useDocumentTitle(title, {
+    preserveTitleOnUnmount: false, // default: false
+  });
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button onClick={handleChangeTitle}>Change Title</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [title, setTitle] = useState('useDocumentTitle');
+  const [inputValue, setInputValue] = useState('');
+  const handleChangeTitle = () => {
+    setTitle(inputValue);
+    alert('Title has been changed.');
+  };
+  useDocumentTitle(title, {
+    preserveTitleOnUnmount: false, // default: false
+  });
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          value={inputValue}
+          placeholder="Enter new title"
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={handleChangeTitle}>Change Title</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

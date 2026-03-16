@@ -9,11 +9,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/wrapInArray/index.ts)
 
+<br />
 
 ## Interface
 ```ts title="typescript"
 const wrapInArray: <T>(value: T | T[]) => T[]
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

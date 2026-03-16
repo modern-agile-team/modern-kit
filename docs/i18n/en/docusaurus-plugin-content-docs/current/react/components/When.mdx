@@ -1,0 +1,73 @@
+import { useState } from 'react';
+import { When } from '@modern-kit/react';
+
+# When
+
+A component that renders its children when the `condition` prop is `true`, and renders nothing (or a fallback) when it is `false`.
+
+The `condition` prop also accepts a function that returns a `boolean`.
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/When/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type Condition = boolean | (() => boolean);
+
+interface WhenProps {
+  children: React.ReactNode;
+  condition: Condition;
+  fallback?: React.ReactNode;
+}
+
+const When: ({ children, condition, fallback }: WhenProps) => JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Child component rendered when condition is true |
+| `condition` | `boolean \| (() => boolean)` | - | The condition for rendering |
+| `fallback` | `React.ReactNode` | `undefined` | Component rendered when condition is false |
+
+## Usage
+```tsx title="typescript"
+import { When } from '@modern-kit/react';
+
+const Example = () => {
+  const [state, setState] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+
+      <When condition={state} fallback={<p>Fallback</p>}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  const [state, setState] = useState(false);
+  return (
+    <>
+      <button onClick={() => setState(!state)}>Toggle Button</button>
+
+      <When condition={state} fallback={<p>Fallback</p>}>
+        <h1>Render</h1>
+      </When>
+    </>
+  );
+};
+
+<Example />

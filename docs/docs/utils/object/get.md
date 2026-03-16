@@ -8,6 +8,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/get/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function get<T extends Record<PropertyKey, any>, K extends PropertyPath<T>>(
@@ -18,6 +20,8 @@ function get<T extends Record<PropertyKey, any>, K extends PropertyPath<T>>(
 ```
 - [GetByPath 타입 참고](https://github.com/modern-agile-team/modern-kit/blob/main/packages/types/src/GetByPath/index.ts)
 - [PropertyPath 타입 참고](https://github.com/modern-agile-team/modern-kit/blob/main/packages/types/src/PropertyPath/index.ts)
+
+<br />
 
 ## Usage
 ### 기본 사용법
@@ -45,7 +49,7 @@ get(obj, 'a.b');
 // value: { c: 1 }
 // type: { c: 1 } | undefined
 
-get(obj, 'a.b?.c'); 
+get(obj, 'a.b?.c');
 // value: 1
 // type: 1 | undefined
 ```

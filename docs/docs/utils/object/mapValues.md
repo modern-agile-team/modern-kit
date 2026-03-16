@@ -2,6 +2,8 @@
 
 주어진 객체의 각 value를 주어진 `iteratee` 함수 결과에 따라 변환하여 새로운 객체를 반환합니다.
 
+<br />
+
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/mapValues/index.ts)
 
@@ -9,13 +11,15 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/mapValues|6,203,964.88|0.0003|`fastest`|
-|lodash/mapValues|4,557,524.77|0.0004|`slowest`|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/mapValues | 6,203,964.88 | 0.0003 | `fastest` |
+| lodash/mapValues | 4,557,524.77 | 0.0004 | `slowest` |
 
 - **modern-kit/mapValues**
   - `1.36x` faster than lodash/mapValues
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -25,8 +29,9 @@ function mapValues<T extends Record<PropertyKey, any>, V>(
 ): Record<keyof T, V>;
 ```
 
-## Usage
+<br />
 
+## Usage
 ```ts title="typescript"
 import { mapValues } from '@modern-kit/utils';
 

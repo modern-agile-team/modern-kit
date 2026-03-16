@@ -1,0 +1,42 @@
+# useIsomorphicLayoutEffect
+
+`useIsomorphicLayoutEffect` is a custom hook that ensures synchronous execution even in server-side rendering environments.
+
+In client environments, it uses `useLayoutEffect`, and in server environments, it uses `useEffect`.
+
+Since React's `useLayoutEffect` can produce warnings during server-side rendering, it falls back to `useEffect` on the server to prevent this.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsomorphicLayoutEffect/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+const useIsomorphicLayoutEffect: (
+  effect: React.EffectCallback,
+  deps?: React.DependencyList | undefined
+) => void;
+```
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useIsomorphicLayoutEffect } from '@modern-kit/react';
+
+const Example = () => {
+  useIsomorphicLayoutEffect(() => {
+    console.log(
+      "In client environments, this uses useLayoutEffect; in server environments, it uses useEffect.",
+    )
+  }, []);
+
+  return <div>{/* ... */}</div>;
+};
+```

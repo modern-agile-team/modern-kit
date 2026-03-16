@@ -12,6 +12,8 @@
 function isWindow(element: unknown): element is Window
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isWindow } from '@modern-kit/utils';

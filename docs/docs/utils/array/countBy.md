@@ -9,7 +9,10 @@ iteratee를 전달하면 각 요소를 iteratee에 전달하여 반환된 값을
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/countBy/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 // without iteratee
 export function countBy<T extends readonly any[]>(
@@ -23,7 +26,10 @@ export function countBy<T extends readonly any[], K extends PropertyKey>(
 ): Record<K, number>;
 ```
 
+<br />
+
 ## Usage
+
 ```ts title="typescript"
 import { countBy } from '@modern-kit/utils';
 

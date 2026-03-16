@@ -1,0 +1,415 @@
+import { useState } from 'react';
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+
+# useBlockMultipleAsyncCalls
+
+A custom hook that prevents duplicate async calls when one is already in progress, and provides `isLoading` and `isError` state.
+
+`debounce/throttle` is effective in most cases for preventing duplicate function calls.
+However, `debounce/throttle` does not guarantee async task completion, so it has the following limitations:
+
+1. If `debounce/throttle` time is shorter than the API response time: the async task may be **called again** before it finishes.
+2. If `debounce/throttle` time is longer than the API response time: the async task has finished, but elements like **buttons** may still be **disabled**.
+3. When you want **immediate feedback**: `debounce/throttle` delays calls, making it limited for showing **immediate responses** to the user.
+4. Because `debounce/throttle` is **time-based**, it focuses on **how often** something runs rather than **whether duplicate calls** occur.
+
+Use `useBlockMultipleAsyncCalls` to address these limitations.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useBlockMultipleAsyncCalls/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseBlockMultipleAsyncCallsReturnType {
+  isError: boolean;
+  isLoading: boolean;
+  blockMultipleAsyncCalls: <T, Args extends unknown[]>(
+    callback: (...args: Args) => Promise<T>
+  ) => (...args: Args) => Promise<T | undefined>;
+}
+```
+```ts title="typescript"
+function useBlockMultipleAsyncCalls(): UseBlockMultipleAsyncCallsReturnType
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `isLoading` | `boolean` | Whether an async call is currently in progress. |
+| `isError` | `boolean` | Whether an error occurred during the async call. Resets to `false` on the next successful call. |
+| `blockMultipleAsyncCalls` | `<T, Args>(callback: (...args: Args) => Promise<T>) => (...args: Args) => Promise<T \| undefined>` | Wraps a callback function to prevent duplicate calls while one is in progress. |
+
+<br />
+
+## Usage
+
+### Basic Usage
+
+`blockMultipleAsyncCalls(callback)` returns a wrapped async function. You can use the returned function directly as an event handler.
+
+```tsx title="typescript"
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+
+const Component = () => {
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchData = async () => {
+    const data = await fetch('/api/data').then((res) => res.json());
+    // process data
+  };
+
+  const handleClick = blockMultipleAsyncCalls(fetchData);
+
+  return (
+    <div>
+      <button onClick={handleClick} disabled={isLoading}>
+        {isLoading ? 'Loading...' : 'Fetch data'}
+      </button>
+      {isError && <p>An error occurred.</p>}
+    </div>
+  );
+};
+```
+
+<br />
+
+### Passing Arguments
+
+You can pass arguments to the callback function.
+
+```tsx title="typescript"
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+
+const Component = () => {
+  const { isLoading, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchUser = async (userId: number) => {
+    const user = await fetch(`/api/users/${userId}`).then((res) => res.json());
+    // process user data
+  };
+
+  return (
+    <button onClick={() => blockMultipleAsyncCalls(fetchUser)(42)} disabled={isLoading}>
+      Fetch user
+    </button>
+  );
+};
+```
+
+<br />
+
+### Using with @tanstack/react-query
+```tsx title="typescript"
+import { useBlockMultipleAsyncCalls } from '@modern-kit/react';
+import { useQuery } from '@tanstack/react-query';
+
+const Component = () => {
+  const { blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchUser = async ({ id }: { id: number }) => {
+    const user = await fetch(`/api/users/${id}`).then((res) => res.json());
+    return user;
+  };
+
+  const mutation = useMutation({
+    mutationFn: blockMultipleAsyncCalls(fetchUser),
+  });
+
+  return <button onClick={() => mutation.mutate({ id: 42 })}>Fetch user</button>;
+};
+```
+
+<br />
+
+## Example
+
+### Example1 (Basic usage)
+
+Try clicking the button rapidly multiple times. While `isLoading` is `true`, duplicate requests are blocked and the button is disabled.
+
+export const Example1 = () => {
+  const [fetchCount, setFetchCount] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
+  const [lastResult, setLastResult] = useState(null);
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const fetchTodo = async (id) => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((r) => r.json());
+    setLastResult(res.title);
+    setFetchCount((c) => c + 1);
+    return res;
+  };
+
+  const handleClick = blockMultipleAsyncCalls(fetchTodo);
+
+  return (
+    <div style={{ fontFamily: 'sans-serif' }}>
+      <p style={{ fontSize: '14px', color: '#555', marginBottom: '16px' }}>
+        Even if you click rapidly multiple times, the request runs only once until the in-progress request completes.
+      </p>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+        <button
+          onClick={() => {
+            setClickCount((c) => c + 1);
+            handleClick(fetchCount + 1);
+          }}
+          disabled={isLoading}
+          style={{
+            padding: '8px 20px',
+            backgroundColor: isLoading ? '#9ca3af' : '#6366f1',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+            transition: 'background-color 0.2s',
+          }}
+        >
+          {isLoading ? 'Loading...' : `Fetch Todo #${fetchCount + 1}`}
+        </button>
+        {isLoading && (
+          <span style={{ fontSize: '13px', color: '#6366f1' }}>⏳ Request in progress</span>
+        )}
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '12px',
+          marginBottom: '16px',
+        }}
+      >
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#f0f9ff',
+            border: '1px solid #bae6fd',
+            borderRadius: '8px',
+          }}
+        >
+          <div style={{ fontSize: '12px', color: '#0284c7', marginBottom: '4px' }}>Button click count</div>
+          <div style={{ fontSize: '24px', fontWeight: '700', color: '#0369a1' }}>{clickCount}</div>
+        </div>
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#f0fdf4',
+            border: '1px solid #bbf7d0',
+            borderRadius: '8px',
+          }}
+        >
+          <div style={{ fontSize: '12px', color: '#16a34a', marginBottom: '4px' }}>Actual API call count</div>
+          <div style={{ fontSize: '24px', fontWeight: '700', color: '#15803d' }}>{fetchCount}</div>
+        </div>
+      </div>
+
+      {lastResult && (
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#fafafa',
+            border: '1px solid #e5e7eb',
+            borderRadius: '8px',
+            fontSize: '14px',
+          }}
+        >
+          <strong>Last response:</strong> {lastResult}
+        </div>
+      )}
+
+      {isError && (
+        <div
+          style={{
+            marginTop: '12px',
+            padding: '12px 16px',
+            backgroundColor: '#fef2f2',
+            border: '1px solid #fecaca',
+            borderRadius: '8px',
+            color: '#dc2626',
+            fontSize: '14px',
+          }}
+        >
+          An error occurred.
+        </div>
+      )}
+    </div>
+  );
+};
+
+<Example1 />
+
+<br />
+
+### Example2 (isError handling)
+
+When an error occurs, `isError` becomes `true` and resets to `false` on the next successful call.
+
+export const Example2 = () => {
+  const [log, setLog] = useState([]);
+  const { isLoading, isError, blockMultipleAsyncCalls } = useBlockMultipleAsyncCalls();
+
+  const addLog = (msg, type = 'info') => {
+    setLog((prev) => [...prev, { msg, type }]);
+  };
+
+  const successFetch = async () => {
+    addLog('Normal request started...', 'info');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    addLog('Normal request completed ✅', 'success');
+  };
+
+  const errorFetch = async () => {
+    addLog('Error request started...', 'info');
+    await new Promise((_, reject) => setTimeout(() => reject(new Error('Server error occurred')), 800));
+  };
+
+  const handleSuccess = blockMultipleAsyncCalls(successFetch);
+  const handleError = blockMultipleAsyncCalls(errorFetch);
+
+  return (
+    <div style={{ fontFamily: 'sans-serif' }}>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
+        <button
+          onClick={handleSuccess}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#2563eb',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          Continuous request
+        </button>
+        <button
+          onClick={handleSuccess}
+          disabled={isLoading}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: isLoading ? '#9ca3af' : '#16a34a',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          Normal request
+        </button>
+        <button
+          onClick={() => {
+            handleError().catch(() => addLog('Error caught ❌', 'error'));
+          }}
+          disabled={isLoading}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: isLoading ? '#9ca3af' : '#dc2626',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}
+        >
+          Error request
+        </button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
+        <div
+          style={{
+            padding: '8px 14px',
+            borderRadius: '6px',
+            fontSize: '13px',
+            fontWeight: '600',
+            backgroundColor: isLoading ? '#eff6ff' : '#f3f4f6',
+            color: isLoading ? '#2563eb' : '#6b7280',
+            border: `1px solid ${isLoading ? '#bfdbfe' : '#e5e7eb'}`,
+          }}
+        >
+          isLoading: {String(isLoading)}
+        </div>
+        <div
+          style={{
+            padding: '8px 14px',
+            borderRadius: '6px',
+            fontSize: '13px',
+            fontWeight: '600',
+            backgroundColor: isError ? '#fef2f2' : '#f3f4f6',
+            color: isError ? '#dc2626' : '#6b7280',
+            border: `1px solid ${isError ? '#fecaca' : '#e5e7eb'}`,
+          }}
+        >
+          isError: {String(isError)}
+        </div>
+      </div>
+
+      <div
+        style={{
+          minHeight: '100px',
+          maxHeight: '160px',
+          overflowY: 'auto',
+          border: '1px solid #e5e7eb',
+          borderRadius: '8px',
+          padding: '12px 16px',
+          backgroundColor: '#f9fafb',
+        }}
+      >
+        {log.length === 0 ? (
+          <p style={{ color: '#9ca3af', fontSize: '13px', margin: 0 }}>
+            Click a button to see logs.
+          </p>
+        ) : (
+          log.map((entry, i) => (
+            <div
+              key={i}
+              style={{
+                fontSize: '13px',
+                color: entry.type === 'success' ? '#16a34a' : entry.type === 'error' ? '#dc2626' : '#374151',
+                padding: '2px 0',
+                fontFamily: 'monospace',
+              }}
+            >
+              {entry.msg}
+            </div>
+          ))
+        )}
+      </div>
+
+      {log.length > 0 && (
+        <button
+          onClick={() => setLog([])}
+          style={{
+            marginTop: '8px',
+            padding: '4px 12px',
+            fontSize: '12px',
+            color: '#6b7280',
+            backgroundColor: 'transparent',
+            border: '1px solid #d1d5db',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Clear logs
+        </button>
+      )}
+    </div>
+  );
+};
+
+<Example2 />

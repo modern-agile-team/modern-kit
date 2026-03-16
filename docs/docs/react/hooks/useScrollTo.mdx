@@ -26,9 +26,13 @@ const { containerRef } = useScrollTo<HTMLDivElement>();
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollTo/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 type ScrollBehavior = "auto" | "instant" | "smooth";
 
@@ -64,7 +68,20 @@ interface UseScrollToReturnType<T extends HTMLElement> {
 function useScrollTo<T extends HTMLElement>(): UseScrollToReturnType<T>
 ```
 
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `containerRef` | `React.RefObject<T \| null>` | 스크롤을 제어할 컨테이너 요소에 대한 ref. 설정하지 않으면 `window`가 기본값으로 사용됩니다. |
+| `scrollToPosition` | `(scrollToOptions?: ScrollToOptions) => void` | 지정된 좌표(top, left)로 스크롤하는 함수 |
+| `scrollToElement` | `(target, scrollToElementOptions?) => void` | 지정된 요소로 스크롤하는 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useScrollTo } from '@modern-kit/react';
 
@@ -137,10 +154,11 @@ const Example = () => {
     </div>
   );
 };
-
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const { containerRef, scrollToPosition, scrollToElement } = useScrollTo();

@@ -13,6 +13,8 @@ import { SeparatedIterator } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/SeparatedIterator/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface SeparatedIteratorProps<T> extends IteratorProps<T> {
@@ -30,6 +32,19 @@ const SeparatedIterator: <T>({
   includeLastSeparator,
 }: SeparatedIteratorProps<T>) => JSX.Element;
 ```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `T[] \| readonly T[] \| undefined` | - | 렌더링할 배열 |
+| `renderItem` | `(item: T, index: number) => JSX.Element` | - | 각 항목을 렌더링하는 함수 |
+| `separator` | `JSX.Element` | - | 각 항목 사이에 렌더링할 구분자 컴포넌트 |
+| `itemKey` | `keyof T \| string` | - | 각 요소의 고유 키로 사용할 프로퍼티명 |
+| `separatorInterval` | `number` | `1` | 구분자를 렌더링할 간격 |
+| `includeLastSeparator` | `boolean` | `false` | 마지막 항목 뒤에도 구분자를 포함할지 여부 |
 
 ## Usage
 ```tsx title="typescript"

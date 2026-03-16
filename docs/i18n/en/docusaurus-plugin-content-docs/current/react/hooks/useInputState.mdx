@@ -1,0 +1,107 @@
+import { useInputState } from '@modern-kit/react'
+
+# useInputState
+
+A custom hook for managing the state of an input field.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useInputState/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseInputStateOptions {
+  validate?: (value: string) => string | null | undefined;
+}
+
+interface UseInputStateReturn {
+  value: string;
+  error: string | null;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  resetError: () => void;
+  resetValue: () => void;
+  reset: () => void;
+}
+```
+```ts title="typescript"
+function useInputState(
+  initialValue?: string,
+  options?: UseInputStateOptions
+): UseInputStateReturn;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `string` | Initial input value |
+| `options` | `UseInputStateOptions` | Options object |
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `validate` | `(value: string) => string \| null \| undefined` | - | Validation function; returns an error message string if invalid, or `null`/`undefined` if valid |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `value` | `string` | Current input value |
+| `error` | `string \| null` | Validation error message, or `null` if there is no error |
+| `onChange` | `(e: ChangeEvent<HTMLInputElement>) => void` | Change event handler for the input |
+| `resetError` | `() => void` | Resets only the error state |
+| `resetValue` | `() => void` | Resets only the value state |
+| `reset` | `() => void` | Resets both value and error state |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useInputState } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, error, onChange, reset } = useInputState('', {
+    validate: (value) => value.length > 10 ? 'Value must not exceed 10 characters.' : undefined
+  });
+
+  return (
+    <>
+      <h1>{value}</h1>
+      <p>{error}</p>
+      <input type="text" name="test" onChange={onChange} value={value} />
+      <button onClick={reset}>reset</button>
+    </>
+  );
+};
+```
+
+## Example
+
+export const ExampleSingleInput = () => {
+  const { value, error, onChange, reset } = useInputState('', {
+    validate: (value) => value.length > 10 ? 'Value must not exceed 10 characters.' : undefined
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>test: {value}</p>
+      {error && <p style={{ color: 'red' }}>error: {error}</p>}
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <input type="text" name="test" onChange={onChange} value={value} placeholder="Enter text (max 10 chars)" />
+        <button onClick={reset}>reset</button>
+      </div>
+    </div>
+  );
+};
+
+<ExampleSingleInput />

@@ -13,10 +13,14 @@ delay 함수를 사용한다면 이러한 문제를 해결할 수 있습니다.
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/delay/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const delay: (time: number) => Promise<void>;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

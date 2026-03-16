@@ -7,6 +7,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "start:ko": "yarn start --locale ko",
+    "start:en": "yarn start --locale en",
     "swizzle": "docusaurus swizzle",
     "build:docs": "docusaurus build",
     "publish:docs": "gh-pages -d build",

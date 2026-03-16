@@ -1,0 +1,43 @@
+# useForceUpdate
+
+A custom hook that forces the component to `re-render` when the returned function is called.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useForceUpdate/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+// type DispatchWithoutAction = () => void;
+const useForceUpdate: () => React.DispatchWithoutAction
+```
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useForceUpdate } from '@modern-kit/react';
+
+const Example = () => {
+  const forceUpdate = useForceUpdate();
+
+  const handleForceUpdate = useCallback(() => {
+    forceUpdate();
+  }, [forceUpdate]);
+
+  return (
+    <div>
+      <button onClick={handleForceUpdate}>Button</button>;
+    </div>
+  );
+};
+```
+
+## Remarks
+
+:::tip Reference
+- https://github.com/streamich/react-use/pull/837
+:::

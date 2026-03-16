@@ -10,6 +10,8 @@ import { useState } from 'react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDropZone/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const useDropZone: <T extends HTMLElement>(onDrop: (files: File[]) => void) => {
@@ -17,6 +19,25 @@ const useDropZone: <T extends HTMLElement>(onDrop: (files: File[]) => void) => {
   isDragOver: boolean;
 }
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `onDrop` | `(files: File[]) => void` | 파일이 드롭될 때 호출될 콜백 함수 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 드롭존 요소에 연결할 ref |
+| `isDragOver` | `boolean` | 현재 드래그 중인 항목이 드롭존 위에 있는지 여부 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

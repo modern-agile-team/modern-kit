@@ -1,0 +1,87 @@
+import { useState } from 'react';
+import { useCounter } from '@modern-kit/react'
+
+# useCounter
+
+A custom hook for managing a counter, providing `increment`, `decrement`, `reset`, and other utilities.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useCounter/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useCounter(initialValue: number = 0): {
+  counter: number;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
+  increment: () => void;
+  decrement: () => void;
+  reset: () => void;
+}
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `number` | The initial counter value. Defaults to `0` |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `counter` | `number` | The current counter value. |
+| `setCounter` | `React.Dispatch<React.SetStateAction<number>>` | A function to directly set the counter value. |
+| `increment` | `() => void` | Increments the counter by 1. |
+| `decrement` | `() => void` | Decrements the counter by 1. |
+| `reset` | `() => void` | Resets the counter to its initial value. |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useCounter } from '@modern-kit/react';
+
+const Example = () => {
+  const { counter, setCounter, increment, decrement, reset } = useCounter(10);
+
+  return (
+    <div>
+      <div>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <button onClick={() => setCounter(20)}>Set to 20</button>
+        <button onClick={reset}>Reset to 10</button>
+      </div>
+      <p>counter: {counter}</p>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { counter, setCounter, increment, decrement, reset } = useCounter(10);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <button onClick={() => setCounter(20)}>Set to 20</button>
+        <button onClick={reset}>Reset</button>
+      </div>
+      <p>counter: {counter}</p>
+    </div>
+  );
+};
+
+<Example />

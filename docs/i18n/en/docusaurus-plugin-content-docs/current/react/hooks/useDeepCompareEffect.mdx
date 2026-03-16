@@ -1,0 +1,130 @@
+import { useDeepCompareEffect } from '@modern-kit/react'
+import { useState, useEffect } from 'react'
+
+# useDeepCompareEffect
+
+A custom hook that runs an effect based on `deep comparison` of the dependency array.
+
+React's built-in `useEffect` checks the dependency array using `shallow comparison`, so if an object or array reference changes, the effect re-runs even if the contents are the same.
+
+`useDeepCompareEffect` performs deep comparison and runs the effect only when the actual values have changed.
+
+:::caution
+⚠️ Because deep comparison is performed, there may be performance implications. Avoid using this with complex objects or large arrays.
+:::
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDeepCompareEffect/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useDeepCompareEffect(
+  effectCallback: EffectCallback,
+  deps: DependencyList
+): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | The effect function to execute |
+| `deps` | `DependencyList` | Dependency array to watch with deep comparison |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useDeepCompareEffect } from '@modern-kit/react'
+
+const Example = () => {
+  const [user, setUser] = useState({ name: 'John', age: 30 });
+
+  // Regular useEffect runs every time the object reference changes
+  useEffect(() => {
+    console.log('useEffect ran');
+  }, [user]);
+
+  // useDeepCompareEffect runs only when the actual values change
+  useDeepCompareEffect(() => {
+    console.log('useDeepCompareEffect ran: values actually changed');
+  }, [user]);
+
+  return (
+    <div>
+      <p>Name: {user.name}, Age: {user.age}</p>
+      <button onClick={() => setUser({ name: 'John', age: 30 })}>
+        Update to John
+      </button>
+      <button onClick={() => setUser({ name: 'Jane', age: 25 })}>
+        Update to Jane
+      </button>
+      <button onClick={() => setUser({ name: 'Bob', age: 35 })}>
+        Update to Bob
+      </button>
+      <div>
+        <p>useEffect run count: {effectCount}</p>
+        <p>useDeepCompareEffect run count: {deepEffectCount}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [user, setUser] = useState({ name: 'John', age: 30 });
+  const [effectCount, setEffectCount] = useState(0);
+  const [deepEffectCount, setDeepEffectCount] = useState(0);
+
+  // Regular useEffect - runs every time the object reference changes
+  useEffect(() => {
+    setEffectCount(prev => prev + 1);
+  }, [user]);
+
+  // useDeepCompareEffect - runs only when the actual values change
+  useDeepCompareEffect(() => {
+    setDeepEffectCount(prev => prev + 1);
+  }, [user]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div>
+        <p><strong>Current user:</strong> {user.name}, age {user.age}</p>
+      </div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setUser({ name: 'John', age: 30 })}>
+          Update to John (same value)
+        </button>
+        <button onClick={() => setUser({ name: 'Jane', age: 25 })}>
+          Update to Jane
+        </button>
+        <button onClick={() => setUser({ name: 'Bob', age: 35 })}>
+          Update to Bob
+        </button>
+      </div>
+      <div style={{ padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+        <p style={{ fontSize: '14px', margin: '5px 0' }}>
+          <strong>useEffect run count:</strong> {effectCount}
+          <span style={{ color: '#666', fontSize: '12px' }}> (every reference change)</span>
+        </p>
+        <p style={{ fontSize: '14px', margin: '5px 0' }}>
+          <strong>useDeepCompareEffect run count:</strong> {deepEffectCount}
+          <span style={{ color: '#666', fontSize: '12px' }}> (only when values change)</span>
+        </p>
+        <p style={{ fontSize: '12px', color: '#0066cc', marginTop: '10px' }}>
+          💡 Clicking "Update to John (same value)" will trigger useEffect but not useDeepCompareEffect.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+<Example />

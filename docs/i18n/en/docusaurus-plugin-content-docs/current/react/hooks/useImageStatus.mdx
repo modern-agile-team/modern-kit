@@ -1,0 +1,54 @@
+# useImageStatus
+
+A custom hook that, when the returned `ref` is assigned to an `<img />` tag, returns the image loading status as `pending`, `loading`, `complete`, or `error`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useImageStatus/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type ImageStatus = 'pending' | 'loading' | 'complete' | 'error';
+
+const useImageStatus: () => {
+  ref: (imgElement: HTMLImageElement) => void;
+  imageStatus: ImageStatus;
+}
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `ref` | `(imgElement: HTMLImageElement) => void` | Callback ref to attach to the `<img />` element |
+| `imageStatus` | `ImageStatus` | Current image loading status: `'pending'`, `'loading'`, `'complete'`, or `'error'` |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useImageStatus } from '@modern-kit/react';
+import img1 from '../assets/img1.png';
+
+const Example = () => {
+  const { ref, imageStatus } = useImageStatus();
+
+  return (
+    <div>
+      <img
+        ref={ref}
+        width={400}
+        height={400}
+        src={img1}
+        alt='img1'
+      />
+      <p>{imageStatus}</p>
+    </div>
+  );
+};
+```

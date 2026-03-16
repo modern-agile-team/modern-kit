@@ -19,6 +19,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getDateStartOf/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type DateStartOfUnit =
@@ -37,9 +39,12 @@ function getDateStartOf(
 ): Date
 ```
 
+<br />
+
 ## Usage
 
 ### 로컬 타임존 기준
+
 ```ts title="typescript"
 import { getDateStartOf } from '@modern-kit/utils';
 
@@ -97,11 +102,14 @@ dateStart.getSeconds(); // 0
 dateStart.getMilliseconds(); // 0
 ```
 
+<br />
+
 ### UTC 기준
+
 ```ts title="typescript"
 import { getDateStartOf } from '@modern-kit/utils';
 
-const targetDate = '2025-03-15T14:30:45.123Z'; 
+const targetDate = '2025-03-15T14:30:45.123Z';
 // 2025-03-15 23:30:45 (KST 기준 토요일)
 // 2025-03-15 14:30:45 (UTC 기준 토요일)
 
@@ -155,7 +163,10 @@ utcDateStart.getUTCSeconds(); // 0
 utcDateStart.getUTCMilliseconds(); // 0
 ```
 
+<br />
+
 ### 주의 시작점 계산 예시
+
 ```ts title="typescript"
 import { getDateStartOf } from '@modern-kit/utils';
 
@@ -181,7 +192,10 @@ saturdayWeekStart.getDate(); // 9
 saturdayWeekStart.getDay(); // 0 (일요일)
 ```
 
+<br />
+
 ### 월/연 경계 처리
+
 ```ts title="typescript"
 import { getDateStartOf } from '@modern-kit/utils';
 

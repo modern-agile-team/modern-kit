@@ -11,6 +11,8 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useEventListener/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type EventListenerAvailableElement =
@@ -72,7 +74,21 @@ function useEventListener<
 ): void;
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `element` | `TargetElement<T> \| Window \| Document \| MediaQueryList \| null` | 이벤트 리스너를 추가할 대상 요소 또는 ref |
+| `type` | `string` | 수신할 이벤트 유형 |
+| `listener` | `(event: Event) => void` | 이벤트 발생 시 호출될 콜백 함수 |
+| `options` | `boolean \| AddEventListenerOptions` | 이벤트 리스너 옵션 |
+
+<br />
+
 ## Usage
+### 기본 사용법
 ```tsx title="typescript"
 import { useState, useRef } from 'react';
 import { useEventListener } from '@modern-kit/react';
@@ -97,6 +113,9 @@ const Example = () => {
   );
 };
 ```
+
+<br />
+
 ### SSR 환경에서 사용
 ```tsx title="typescript"
 useEventListener(typeof window !== 'undefined' ? window : null, 'click', () => {

@@ -15,6 +15,8 @@ const hasRepeatingChars: (
 ) => boolean;
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { hasRepeatingChars } from '@modern-kit/utils';
@@ -26,4 +28,3 @@ hasRepeatingChars('123!!!123', -1); // Error
 hasRepeatingChars('123!!!123', 1.1); // Error
 hasRepeatingChars('123!!!123', Infinity); // Error
 ```
-  

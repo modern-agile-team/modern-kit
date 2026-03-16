@@ -1,0 +1,121 @@
+import { useDropZone } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useDropZone
+
+A custom hook that processes `drag and drop events` to create a zone for receiving `files`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDropZone/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+const useDropZone: <T extends HTMLElement>(onDrop: (files: File[]) => void) => {
+  ref: React.RefObject<T | null>;
+  isDragOver: boolean;
+}
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `onDrop` | `(files: File[]) => void` | Callback function called when files are dropped |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the drop zone element |
+| `isDragOver` | `boolean` | Whether a dragged item is currently over the drop zone |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDropZone } from '@modern-kit/react';
+
+const Example = () => {
+  const [fileNameList, setFileNameList] = useState<string[]>([]);
+
+  const { ref, isDragOver } = useDropZone((files) => {
+    console.log('files', files);
+    setFileNameList(files.map((file) => file.name));
+  });
+
+  const wrapperStyle = {
+    width: '400px',
+    height: '200px',
+    border: '1px solid #000',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+
+  return (
+    <div>
+      <div ref={ref} style={wrapperStyle}>
+        <p>DropZone</p>
+        <p>isDragOver: {`${isDragOver}`}</p>
+      </div>
+      <ul>
+        {fileNameList.map((fileName, index) => (
+          <li key={`${fileName}-${index}`}>{fileName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [fileNameList, setFileNameList] = useState([]);
+
+  const { ref, isDragOver } = useDropZone((files) => {
+    console.log('files', files);
+    setFileNameList(files.map((file) => file.name));
+  });
+
+  const wrapperStyle = {
+    width: '400px',
+    height: '200px',
+    border: isDragOver ? '2px dashed #3b82f6' : '2px dashed #ccc',
+    borderRadius: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: isDragOver ? '#eff6ff' : '#fafafa',
+    transition: 'all 0.2s',
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div ref={ref} style={wrapperStyle}>
+        <p>Drop files here</p>
+        <p>isDragOver: {`${isDragOver}`}</p>
+      </div>
+      {fileNameList.length > 0 && (
+        <ul>
+          {fileNameList.map((fileName, index) => (
+            <li key={`${fileName}-${index}`}>{fileName}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+<Example />

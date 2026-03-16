@@ -9,14 +9,39 @@ import { useToggleState } from '@modern-kit/react';
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useToggleState/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function useToggleState<T>(value1: T, value2: T): [T, () => void]
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `value1` | `T` | 첫 번째 토글 값 |
+| `value2` | `T` | 두 번째 토글 값 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `[0]` | `T` | 현재 선택된 값 |
+| `[1]` | `() => void` | 두 값 사이를 토글하는 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useToggleState } from '@modern-kit/react';
 
@@ -32,7 +57,9 @@ const Example = () => {
 }
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [value, toggle] = useToggleState('ON', 'OFF');

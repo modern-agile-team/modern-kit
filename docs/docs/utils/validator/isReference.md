@@ -7,7 +7,7 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/validator/isReference/index.ts)
 
-## Interface 
+## Interface
 ```ts title="typescript"
 export type Reference =
   | object
@@ -24,7 +24,9 @@ export type Reference =
 const isReference: (value: unknown) => value is Reference
 ```
 
-## Usage 
+<br />
+
+## Usage
 ```ts title="typescript"
 import { isReference } from '@modern-kit/utils';
 

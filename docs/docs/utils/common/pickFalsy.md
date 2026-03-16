@@ -15,7 +15,9 @@
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/serialize/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/pickFalsy/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -24,7 +26,10 @@ type FalsyCheckKey = "string" | "number" | "object" | "array"
 function pickFalsy(...falsyCheckList: FalsyCheckKey[]): <T>(value: T) => boolean
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { pickFalsy } from '@modern-kit/utils';
 
@@ -40,31 +45,42 @@ isInvalidValue(0) // false
 isInvalidValue([]) // false
 isInvalidValue({}) // false
 ```
-```ts title="typescript"
-const isInvalidValue = pickFalsy('string')
 
+<br />
+
+### 특정 타입을 falsy로 추가
+```ts title="typescript"
+import { pickFalsy } from '@modern-kit/utils';
+
+const isInvalidValue = pickFalsy('string')
 isInvalidValue('') // true
 isInvalidValue('a') // false
 ```
+
 ```ts title="typescript"
 const isInvalidValue = pickFalsy('number')
-
 isInvalidValue(0) // true
 isInvalidValue(1) // false
 ```
+
 ```ts title="typescript"
 const isInvalidValue = pickFalsy('array')
-
 isInvalidValue([]) // true
 isInvalidValue([1, 2, 3]) // false
 ```
+
 ```ts title="typescript"
 const isInvalidValue = pickFalsy('object')
-
 isInvalidValue({}) // true
 isInvalidValue({ a: 1 }) // false
 ```
+
+<br />
+
+### 모든 타입을 falsy로 추가
 ```ts title="typescript"
+import { pickFalsy } from '@modern-kit/utils';
+
 const isInvalidValue = pickFalsy('string', 'number', 'array', 'object')
 
 isInvalidValue(null) // true

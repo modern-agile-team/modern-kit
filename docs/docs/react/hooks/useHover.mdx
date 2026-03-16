@@ -10,6 +10,8 @@ import { useState } from 'react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHover/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const useHover: <T extends HTMLElement>({
@@ -20,6 +22,26 @@ const useHover: <T extends HTMLElement>({
   isHovered: boolean
 }
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onEnter` | `(event: MouseEvent) => void` | - | 마우스가 요소 위로 올라갈 때 호출되는 콜백 |
+| `onLeave` | `(event: MouseEvent) => void` | - | 마우스가 요소에서 벗어날 때 호출되는 콜백 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 대상 요소에 연결할 ref |
+| `isHovered` | `boolean` | 마우스가 현재 요소 위에 있는지 여부 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

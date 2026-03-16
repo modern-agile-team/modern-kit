@@ -30,6 +30,8 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface OutsidePointerDownHandlerProps {
@@ -47,8 +49,19 @@ const OutsidePointerDown: PolyForwardComponent<
 >;
 ```
 
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | 감싸는 자식 요소 |
+| `onPointerDown` | `(targetElement: HTMLElement) => void` | - | 외부 클릭/터치 시 호출되는 콜백 함수 |
+| `excludeRefs` | `React.RefObject<HTMLElement \| null>[]` | `[]` | 외부 클릭 감지를 제외할 요소의 ref 배열 |
+| `asChild` | `boolean` | `false` | true이면 Slot을 통해 자식 요소를 그대로 렌더링 |
+
 ## Usage
-### Default
+### 기본 사용법
 ```tsx title="typescript"
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 
@@ -109,7 +122,7 @@ export const DefaultExample = () => {
 
 <br />
 
-### as
+### `as` 속성 사용
 ```tsx title="typescript"
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 
@@ -144,7 +157,7 @@ export const AsExample = () => {
   {() => <AsExample />}
 </BrowserOnly>
 
-### asChild
+### `asChild` 속성 사용
 ```tsx title="typescript"
 import { OutsidePointerDownHandler } from '@modern-kit/react';
 

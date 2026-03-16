@@ -2,30 +2,33 @@ import { useKeyDown } from '@modern-kit/react';
 
 # useKeyDown
 
-`ref`를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`로 지정한 `key`에 트리거되어 콜백 함수를 호출합니다.
+`ref`를 전달한 요소가 포커싱된 상태에서 `keydown` 이벤트 발생 시 `keyDownCallbackMap`으로 지정한 `key`에 트리거되어 콜백 함수를 호출합니다.
 
 `keyDownCallbackMap`의 key는 `KeyboardEvent.key`가 반환하는 값이 들어가야 합니다.
   - 💡 **[Key values for keyboard events - MDN](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)** 을 기반으로 자주 사용되는 `KeyboardEvent.key`들은 `타입 추론`을 지원합니다. 타입 추론되지 않은 `KeyboardEvent.key`는 직접 입력하셔야 됩니다.
   - 💡 **[타입 추론을 위해 제공하는 KeyDownCallbackMap 인터페이스](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/keyDownCallbackMap.ts)**
 
-만약 `모든 KeyboardEvent.key`에 대해 콜백 함수를 호출하고 싶다면 `allKeyDownCallback` props를 이용 할 수 있습니다.
-  - 💡 **allKeyDownCallback이 존재 할 경우 keyDownCallbackMap으로 지정한 콜백 함수는 무시합니다.**
+만약 `모든 KeyboardEvent.key`에 대해 콜백 함수를 호출하고 싶다면 `allKeyDownCallback` 옵션을 이용할 수 있습니다.
+  - 💡 **allKeyDownCallback이 존재할 경우 keyDownCallbackMap으로 지정한 콜백 함수는 무시합니다.**
 
-`enabled` 옵션을 통해 원하는 조건에 keydown 이벤트를 바인딩 할 수 있습니다.
+`enabled` 옵션을 통해 원하는 조건에 keydown 이벤트를 바인딩할 수 있습니다.
 
-`targetRef`가 할당되지 않으면 기본적으로 `window`에 이벤트가 바인딩 됩니다.
-
+`targetRef`가 할당되지 않으면 기본적으로 `window`에 이벤트가 바인딩됩니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 interface UseKeyDownProps {
-  enabled?: boolean; // default: true
-  keyDownCallbackMap?: Partial<KeyDownCallbackMap>; // default: {}
+  enabled?: boolean;
+  keyDownCallbackMap?: Partial<KeyDownCallbackMap>;
   allKeyDownCallback?: (event: KeyboardEvent) => void;
 }
 ```
@@ -44,71 +47,117 @@ function useKeyDown<T extends HTMLElement>({
 }: UseKeyDownProps): { ref: React.RefObject<T | null> };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `enabled` | `boolean` | `true` | 키보드 이벤트 리스너를 활성화할지 여부 |
+| `keyDownCallbackMap` | `Partial<KeyDownCallbackMap>` | `{}` | 특정 키와 해당 키가 눌렸을 때 호출될 콜백 함수들을 매핑한 객체 |
+| `allKeyDownCallback` | `(event: KeyboardEvent) => void` | `-` | 모든 키가 눌렸을 때 호출될 공통 콜백 함수. 설정 시 `keyDownCallbackMap`보다 우선 호출됨 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 키보드 이벤트를 바인딩할 대상 요소에 연결하는 ref. 미할당 시 `window`에 바인딩됨 |
+
+<br />
+
+## Remarks
+
+:::tip keyDownCallbackMap 타입 추론
+
+자주 사용되는 `KeyboardEvent.key` 값들은 타입 추론이 지원됩니다. 지원되지 않는 키 값은 직접 문자열로 입력해야 합니다. 지원 목록은 [KeyDownCallbackMap 인터페이스](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/keyDownCallbackMap.ts)를 참고하세요.
+
+:::
+
+<br />
+
 ## Usage
+
 ### AllKeyDownCallback
--  모든 키가 눌렸을 때 호출될 공통 콜백 함수입니다.
+
+모든 키가 눌렸을 때 호출될 공통 콜백 함수입니다.
+
 ```tsx title="typescript"
 import { useKeyDown } from '@modern-kit/react';
 
 const Example = () => {
-  const targetRef = useKeyDown<HTMLButtonElement>({
+  const { ref } = useKeyDown<HTMLButtonElement>({
     enabled: true, // default: true
     allKeyDownCallback: (event) => console.log('All Key', event.key)
   });
 
-  return <button ref={targetRef}>버튼</button>;
+  return <button ref={ref}>버튼</button>;
 };
 ```
 
+<br />
+
 ### KeyDownCallbackMap
-- 특정 키에 해당하는 콜백을 매핑하고, 해당 키가 눌렸을 때 호출될 콜백 함수들을 호출합니다.
+
+특정 키에 해당하는 콜백을 매핑하고, 해당 키가 눌렸을 때 호출될 콜백 함수들을 호출합니다.
+
 ```tsx title="typescript"
 import { useKeyDown } from '@modern-kit/react';
 
 const Example = () => {
-  const targetRef = useKeyDown<HTMLButtonElement>({
+  const { ref } = useKeyDown<HTMLButtonElement>({
     enabled: true, // default: true
     keyDownCallbackMap: {
-      Enter: (event) => console.log('Enter', event.key), 
+      Enter: (event) => console.log('Enter', event.key),
       Shift: (event) => console.log('Shift', event.key),
       ' ': (event) => console.log('Space', event.key),
     }
   });
 
   return (
-    <input 
-      ref={targetRef} 
-      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요" 
-      style={{ width: '300px' }} 
+    <input
+      ref={ref}
+      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요"
+      style={{ width: '300px' }}
     />
   );
 };
 ```
 
-## Example
+<br />
+
+### Example
+
 export const Example = () => {
-  const targetRef = useKeyDown({
+  const { ref } = useKeyDown({
     enabled: true, // default: true
     keyDownCallbackMap: {
-      Enter: (event) => console.log('Enter', event.key), 
+      Enter: (event) => console.log('Enter', event.key),
       Shift: (event) => console.log('Shift', event.key),
       ' ': (event) => console.log('Space', event.key),
     }
   });
 
   return (
-    <input 
-      ref={targetRef} 
-      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요" 
-      style={{ width: '300px' }} 
+    <input
+      ref={ref}
+      placeholder="포커스를 하고, Enter, Shift, Space 눌러보세요"
+      style={{ width: '300px' }}
     />
   );
 };
 
 <Example />
 
+<br />
 
-## Note
+## Remarks
+
+:::tip 참고 자료
+
 - [Key values for keyboard events(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
 - [KeyboardEvent.key(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
 - [KeyboardEvent.key(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key)
+
+:::

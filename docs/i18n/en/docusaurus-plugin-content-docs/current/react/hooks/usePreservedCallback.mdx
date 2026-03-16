@@ -1,0 +1,83 @@
+# usePreservedCallback
+
+A custom hook that `preserves the reference` of a given callback function and allows it to be reused across component renders.
+
+This hook is especially useful when a callback function changes between renders. It prevents unnecessary function creation, improves performance, and always uses the latest version of the callback.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreservedCallback/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function usePreservedCallback<T extends (...args: any[]) => any>(
+  callback: T
+): T;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `T` | Callback function whose reference should be preserved |
+
+<br />
+
+## Usage
+
+### as-is
+
+```tsx title="typescript"
+import React, { useEffect, useState } from "react";
+
+const Example = () => {
+  const [state, setState] = useState(0);
+
+  const callback = () => {
+    setState(state + 1);
+  };
+
+  useEffect(() => {
+    callback();
+    // 1. State change causes component re-render
+    // 2. callback function is recreated on re-render
+    // 3. callback in the dependency array changes, causing useEffect to run again
+    // 4. Steps 1–3 repeat, causing an infinite loop
+  }, [callback]);
+
+  // ...
+}
+```
+
+<br />
+
+### to-be (usePreservedCallback)
+
+```tsx title="typescript"
+import React, { useEffect, useState } from "react";
+import { usePreservedCallback } from '@modern-kit/react';
+
+const Example = () => {
+  const [state, setState] = useState(0);
+
+  const preservedCallback = usePreservedCallback(() => {
+    setState(state + 1);
+  });
+
+  useEffect(() => {
+    preservedCallback();
+    // 1. State change causes component re-render
+    // 2. The reference of preservedCallback returned by usePreservedCallback does not change on re-render
+    // 3. preservedCallback in the dependency array does not change, so useEffect does not run again
+  }, [preservedCallback]);
+
+  // ...
+}
+```

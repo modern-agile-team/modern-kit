@@ -7,6 +7,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/countSubstringOccurrences/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface CountSubstringOccurrencesOptions {
@@ -19,6 +21,8 @@ function countSubstringOccurrences(
   options?: CountSubstringOccurrencesOptions
 ): number;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

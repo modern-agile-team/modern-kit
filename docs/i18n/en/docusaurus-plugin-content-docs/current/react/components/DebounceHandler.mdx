@@ -1,0 +1,126 @@
+import { useState } from 'react';
+import { DebounceHandler } from '@modern-kit/react';
+
+# DebounceHandler
+
+A component that declaratively applies debounce to event handlers of child components.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/DebounceHandler/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof debounce>;
+
+interface DebounceHandlerProps {
+  children: JSX.Element;
+  capture: string;
+  wait: DebounceParameters[1];
+  options?: DebounceParameters[2];
+}
+
+const DebounceHandler: ({ children, capture, wait, options, }: DebounceHandlerProps) => JSX.Element
+```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `JSX.Element` | - | The child element to apply debounce to |
+| `capture` | `string` | - | The event handler name to apply debounce to (e.g., `"onClick"`) |
+| `wait` | `number` | - | Debounce wait time in milliseconds |
+| `options` | `DebounceOptions` | `undefined` | Debounce options |
+
+<br />
+
+## Usage
+### Button Click Case
+```tsx title="typescript"
+import { DebounceHandler } from '@modern-kit/react'
+
+const Example = () => {
+  const onClick = () => {
+    console.log('debounce');
+  };
+
+  return (
+    <DebounceHandler capture="onClick" wait={500}>
+      <button onClick={onClick}>Button</button>
+    </DebounceHandler>
+  );
+};
+```
+
+### Input Change Case
+```tsx title="typescript"
+const Input = ({ onChange }: { onChange: (value: string) => void }) => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    onChange(e.target.value);
+  };
+
+  return <input type="text" onChange={handleChange} value={value} />;
+};
+
+const Example = () => {
+  const [text, setText] = useState('');
+
+  const onChange = (value: string) => {
+    setText(value);
+  };
+
+  return (
+    <>
+      <DebounceHandler capture={'onChange'} wait={500}>
+        <Input onChange={onChange} />
+      </DebounceHandler>
+      <p>{text}</p>
+    </>
+  );
+}
+```
+
+## Example
+### Button Click Case
+<p style={{ marginBottom: '4px' }}>Check the behavior in the browser developer console.</p>
+<DebounceHandler capture="onClick" wait={500}>
+  <button onClick={() => {
+    console.log('debounce');
+  }}>Button</button>
+</DebounceHandler>
+
+<br />
+
+export const Input = ({ onChange }) => {
+  const [value, setValue] = useState('');
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    onChange(e.target.value);
+  };
+  return <input type="text" onChange={handleChange} value={value} />;
+};
+
+export const InputExample = () => {
+  const [text, setText] = useState('');
+  const onChange = (value) => {
+    setText(value);
+  };
+  return (
+    <>
+      <DebounceHandler capture={'onChange'} wait={500}>
+        <Input onChange={onChange} />
+      </DebounceHandler>
+      <p>Text: {text}</p>
+    </>
+  );
+};
+
+### Input Change Case
+
+<InputExample />

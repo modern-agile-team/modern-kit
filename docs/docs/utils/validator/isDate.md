@@ -12,6 +12,8 @@
 function isDate(value: unknown): value is Date
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isDate } from '@modern-kit/utils';

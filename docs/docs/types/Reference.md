@@ -1,6 +1,8 @@
 # Reference
 
-JavaScript의 참조 타입(Reference Type)들을 나타내는 유니온 타입입니다. 원시 타입(Primitive)이 아닌 모든 타입을 포함합니다.
+JavaScript의 참조 타입(Reference Type)들을 나타내는 유니온 타입입니다. 원시 타입(`Primitive`)이 아닌 모든 타입을 포함합니다.
+
+<br />
 
 ## Interface
 
@@ -32,9 +34,13 @@ type Reference =
   | BigUint64Array;
 ```
 
+<br />
+
 ## Usage
 
 ```ts title="typescript"
+import { Reference } from '@modern-kit/types';
+
 // 객체 타입
 const obj: Reference = { name: 'John', age: 30 };
 
@@ -52,4 +58,4 @@ const map: Reference = new Map([['key', 'value']]);
 const date: Reference = new Date();
 const regex: Reference = /pattern/;
 const error: Reference = new Error('Something went wrong');
-``` 
+```

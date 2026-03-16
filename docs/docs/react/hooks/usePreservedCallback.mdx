@@ -1,23 +1,39 @@
 # usePreservedCallback
 
-주어진 콜백 함수의 `참조를 유지`하고, 컴포넌트 렌더링 사이에 재사용할 수 있도록 도와주는 커스텀 훅입니다. 
+주어진 콜백 함수의 `참조를 유지`하고, 컴포넌트 렌더링 사이에 재사용할 수 있도록 도와주는 커스텀 훅입니다.
 
-이 훅은 특히 콜백 함수가 렌더링 중에 변경될 때 유용합니다. 불필요한 함수 생성을 방지하고 최적화하며, 최신 버전의 콜백 함수를 사용 할 수 있습니다.
+이 훅은 특히 콜백 함수가 렌더링 중에 변경될 때 유용합니다. 불필요한 함수 생성을 방지하고 최적화하며, 최신 버전의 콜백 함수를 사용할 수 있습니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreservedCallback/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function usePreservedCallback<T extends (...args: any[]) => any>(
-  callback?: T // default: noop
+  callback: T
 ): T;
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `T` | 참조를 유지할 콜백 함수 |
+
+<br />
+
 ## Usage
+
 ### as-is
+
 ```tsx title="typescript"
 import React, { useEffect, useState } from "react";
 
@@ -40,7 +56,10 @@ const Example = () => {
 }
 ```
 
+<br />
+
 ### to-be (usePreservedCallback)
+
 ```tsx title="typescript"
 import React, { useEffect, useState } from "react";
 import { usePreservedCallback } from '@modern-kit/react';
@@ -53,7 +72,7 @@ const Example = () => {
   });
 
   useEffect(() => {
-    preservedCallback(); 
+    preservedCallback();
     // 1. state 변경으로 컴포넌트 리렌더링 발생
     // 2. 리렌더링 시 usePreservedCallback이 반환하는 preservedCallback 함수의 참조는 변경되지 않음
     // 3. useEffect의 의존성 배열에 포함된 preservedCallback이 변경되지 않아 다시 실행되지 않음

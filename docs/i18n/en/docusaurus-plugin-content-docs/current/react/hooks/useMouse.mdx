@@ -1,0 +1,143 @@
+import { useMemo } from 'react';
+import { useMouse } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useMouse
+
+A hook that tracks mouse position relative to a target element.
+
+It provides the position on the user's screen, within the viewport, within the full document, relative to the target element, and the element's own position.
+
+If no target element is assigned, the element-relative position and element position values will not be provided.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMouse/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface CursorPosition {
+  screenX: number | null;
+  screenY: number | null;
+  clientX: number | null;
+  clientY: number | null;
+  pageX: number | null;
+  pageY: number | null;
+  elementRelativeX: number | null;
+  elementRelativeY: number | null;
+  elementPositionX: number | null;
+  elementPositionY: number | null;
+}
+
+function useMouse<T extends HTMLElement>(): {
+  ref: React.RefObject<T | null>;
+  position: CursorPosition;
+}
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the target element for mouse tracking |
+| `position` | `CursorPosition` | Object containing the current mouse position data |
+| `position.screenX` | `number \| null` | X coordinate within the user's monitor |
+| `position.screenY` | `number \| null` | Y coordinate within the user's monitor |
+| `position.clientX` | `number \| null` | X coordinate within the viewport |
+| `position.clientY` | `number \| null` | Y coordinate within the viewport |
+| `position.pageX` | `number \| null` | X coordinate relative to the full document |
+| `position.pageY` | `number \| null` | Y coordinate relative to the full document |
+| `position.elementRelativeX` | `number \| null` | X coordinate relative to the target element (`null` if no element) |
+| `position.elementRelativeY` | `number \| null` | Y coordinate relative to the target element (`null` if no element) |
+| `position.elementPositionX` | `number \| null` | X coordinate of the target element (`null` if no element) |
+| `position.elementPositionY` | `number \| null` | Y coordinate of the target element (`null` if no element) |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useMouse } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, position } = useMouse<HTMLDivElement>();
+  const boxStyle = useMemo(() => {
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '500px',
+      height: '500px',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <>
+      <div ref={ref} style={boxStyle}>
+        Move your mouse here.
+      </div>
+      <p>Screen X: {position.screenX}</p>
+      <p>Screen Y: {position.screenY}</p>
+      <p>Client X: {position.clientX}</p>
+      <p>Client Y: {position.clientY}</p>
+      <p>Page X: {position.pageX}</p>
+      <p>Page Y: {position.pageY}</p>
+      <p>Element Relative X: {position.elementRelativeX}</p>
+      <p>Element Relative Y: {position.elementRelativeY}</p>
+      <p>Element Position X: {position.elementPositionX}</p>
+      <p>Element Position Y: {position.elementPositionY}</p>
+    </>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { ref, position } = useMouse();
+  const boxStyle = useMemo(() => {
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '500px',
+      height: '500px',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div ref={ref} style={boxStyle}>
+        Move your mouse here.
+      </div>
+      <p style={{ margin: 0 }}>Screen X: {position.screenX}</p>
+      <p style={{ margin: 0 }}>Screen Y: {position.screenY}</p>
+      <p style={{ margin: 0 }}>Client X: {position.clientX}</p>
+      <p style={{ margin: 0 }}>Client Y: {position.clientY}</p>
+      <p style={{ margin: 0 }}>Page X: {position.pageX}</p>
+      <p style={{ margin: 0 }}>Page Y: {position.pageY}</p>
+      <p style={{ margin: 0 }}>Element Relative X: {position.elementRelativeX}</p>
+      <p style={{ margin: 0 }}>Element Relative Y: {position.elementRelativeY}</p>
+      <p style={{ margin: 0 }}>Element Position X: {position.elementPositionX}</p>
+      <p style={{ margin: 0 }}>Element Position Y: {position.elementPositionY}</p>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
