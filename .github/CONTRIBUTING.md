@@ -1,32 +1,40 @@
 # Contributing
-`@modern-kit`은 개발자라면 누구든지 기여하실 수 있습니다. 모든 기여에 감사드립니다! 🙏
+
+<p>
+  <a href="./CONTRIBUTING.md"><b>한국어</b></a> | <a href="./CONTRIBUTING.en.md">English</a>
+</p>
+
+`@modern-kit`은 개발자라면 누구든지 기여할 수 있습니다. 모든 기여에 감사드립니다! 🙏
 
 <br />
 
 ## Issue
-`@modern-kit`의 버그 및 개선 사항에 대한 의견은 `Issue`를 통해 제안하실 수 있습니다.
+
+버그 제보나 개선 제안은 [GitHub Issue](https://github.com/modern-agile-team/modern-kit/issues)를 통해 남겨주세요.
+
+- 버그 리포트에는 **재현 방법**과 **예상 동작**을 함께 작성해주시면 빠르게 처리할 수 있습니다.
+- 새로운 기능 제안 시에는 **사용 사례**와 **기대 효과**를 함께 설명해주세요.
 
 <br />
 
 ## Pull Request
-Issue를 생성해서 제안하는 것 외에도 `@modern-kit`을 `fork`하고 직접 개선 작업을 수행한 후 `Pull Request`를 생성할 수 있습니다.
+
+Issue를 통해 제안하는 것 외에도, `@modern-kit`을 직접 fork하여 개선 작업을 수행한 후 Pull Request를 생성할 수 있습니다.
 
 <br />
 
-### 작업 전에 아래 사항들을 확인해주세요. 🙏
-- 새로운 기능을 추가하는 경우 이슈를 열어 미리 논의해 주세요.
-- 패키지 매니저 `yarn(berry)`을 사용해주세요.
-- 개발에 필요한 Node version은 `v24(LTS)`입니다. `nvm install`, `nvm use` 명령어를 통해 쉽게 노드 버전을 맞출 수 있습니다.
-  - `nvm`이 설치되어 있지 않다면 설치해주세요.
+### 작업 전 체크리스트 🙏
+
+- **새로운 기능**을 추가하는 경우, 먼저 Issue를 열어 논의해 주세요.
+- 패키지 매니저는 **`yarn` (Berry v4+)** 을 사용해주세요.
+- Node 버전은 **`v24 (LTS)`** 를 사용해주세요. `nvm`으로 쉽게 맞출 수 있습니다.
 
 ```shell
 nvm install
-```
-```shell
 nvm use
 ```
 
-- 작업 후 Pull Request 생성 전에 `eslint`, `typecheck`, `test` 를 진행해주세요. 
+- PR 생성 전에 아래 명령어로 **lint**, **typecheck**, **test**를 모두 통과했는지 확인해주세요.
 
 ```shell
 yarn eslint packages
@@ -34,7 +42,7 @@ yarn typecheck
 yarn test
 ```
 
-- 위 명령어들을 `build` 명령어를 통해 통합해서 진행할 수 있습니다.
+또는 통합 명령어 하나로 진행할 수 있습니다.
 
 ```shell
 yarn build
@@ -43,39 +51,85 @@ yarn build
 <br />
 
 ### 문서 작업 📄
-- root폴더에 `docs`폴더에서 문서들을 관리하고 있습니다.
-- `md`, `mdx` 파일을 모두 활용하고 있습니다. 실습 예제를 작성하려면 mdx 포맷을 활용해주세요.
-  - 기존에 작업된 문서들을 참고해주시고, 같은 포맷으로 작업해주세요.
-  - mdx로 문서를 생성하고 예제를 추가하기 위해서는 사전에 `packages`가 build가 되어야 합니다. 사전에 `yarn build`를 진행해주세요.
-- `yarn start:docs`명령어를 통해 `개발 서버`를 열어 작업중인 문서를 확인할 수 있습니다.
-- 작업 후 `yarn build:docs`가 정상적으로 수행되어야 합니다.
+
+문서는 루트의 `docs` 폴더에서 관리하며, [Docusaurus](https://docusaurus.io/)를 기반으로 합니다.
+
+- **한국어(기본)** 와 **영어** 두 파일을 모두 작성해야 합니다.
+
+| 종류           | 경로                                                                              |
+| -------------- | --------------------------------------------------------------------------------- |
+| 한국어 훅 문서 | `docs/docs/react/hooks/useHookName.mdx`                                           |
+| 영어 훅 문서   | `docs/i18n/en/docusaurus-plugin-content-docs/current/react/hooks/useHookName.mdx` |
+
+- 문서 포맷은 기존 파일들을 참고해주세요. `.md`는 일반 문서, `.mdx`는 인터랙티브 예제가 포함된 문서에 사용합니다.
+- MDX 예제 컴포넌트를 작성하려면 사전에 패키지 빌드가 필요합니다.
+
+```shell
+# 패키지 빌드 (MDX 예제 작성 전 필수)
+yarn build
+```
+
+- 작업 중인 문서를 개발 서버에서 미리 확인할 수 있습니다.
+
+```shell
+# 한국어 문서 개발 서버
+yarn start
+yarn start:ko
+
+# 영어 문서 개발 서버
+yarn start:en
+```
+
+- PR 생성 전에 문서 빌드가 정상적으로 완료되어야 합니다.
+
+```shell
+yarn build:docs
+```
 
 <br />
 
 ## Conventional Commits
 
-```
-<type>(<package scope>): <descriptions>
+커밋 메시지는 아래 형식을 따릅니다.
 
-ex: feat(react): Add useToggle hook
+```
+<type>(<package scope>): <description>
+
+예시:
+feat(react): Add useToggle hook
+fix(utils): Fix flatten edge case with empty arrays
+docs(react): Add useIsClient documentation
 ```
 
+<br />
 
 ### 1. Type
-커밋 타입은 다음 중 하나입니다.
-- feat: 신규 기능
-- fix: 버그 수정 및 코드 개선
-- refactor: 코드 리팩토링(신규 기능 추가 X)
-- test: 테스트 코드 추가 및 개선
-- docs: 문서 작업
+
+| Type       | 설명                                    |
+| ---------- | --------------------------------------- |
+| `feat`     | 새로운 기능 추가                        |
+| `fix`      | 버그 수정 및 코드 개선                  |
+| `refactor` | 기능 변경 없는 코드 리팩토링            |
+| `test`     | 테스트 코드 추가 및 수정                |
+| `docs`     | 문서 작업                               |
+| `chore`    | 빌드 설정, 의존성 업데이트 등 기타 작업 |
+
+<br />
 
 ### 2. Package Scope
-- 작업을 진행 한 패키지 명입니다.
-  - react
-  - utils
-  - types
 
-### 3. Descriptions
-- 작업한 변경 사항에 대한 요약 설명입니다.
+작업한 패키지 이름을 명시합니다.
+
+| Scope   | 대상             |
+| ------- | ---------------- |
+| `react` | `packages/react` |
+| `utils` | `packages/utils` |
+| `types` | `packages/types` |
+
+<br />
+
+### 3. Description
+
+변경 사항을 간결하게 요약합니다. **영어 or 한국어**로 작성하며, 명령형 현재형으로 시작합니다. (예: `Add`, `Fix`, `Update`)
 
 <br />

@@ -45,17 +45,23 @@ const App = () => {
   }, 300);
 
   return <div>Modern Kit</div>;
-}
+};
 ```
+
 ```ts
 // SubPath import example
 // When tsconfig moduleResolution is `bundler`
-import { flatten } from '@modern-kit/utils/array/flatten';
+import { flatten } from '@modern-kit/react/hooks/useInterval';
 // When tsconfig moduleResolution is `node`
-import { flatten } from '@modern-kit/utils/dist/array/flatten';
+import { flatten } from '@modern-kit/react/dist/hooks/useInterval';
 
-const arr = [1, [2, [3, 4], 5]];
-const result = flatten(arr); // [1, 2, 3, 4, 5]
+const App = () => {
+  useInterval(() => {
+    console.log('interval');
+  }, 300);
+
+  return <div>Modern Kit</div>;
+};
 ```
 
 <br />
@@ -90,6 +96,7 @@ import { flatten } from '@modern-kit/utils';
 const arr = [1, [2, [3, 4], 5]];
 const result = flatten(arr); // [1, 2, 3, 4, 5]
 ```
+
 ```ts
 // SubPath import example
 // When tsconfig moduleResolution is `bundler`
@@ -130,9 +137,8 @@ pnpm i -D @modern-kit/types
 ```ts
 import { Merge } from '@modern-kit/types';
 
-type A = { a: string, b: number }
-type B = { b: string, c: boolean }
-type Result = Merge<A, B>
+type A = { a: string; b: number };
+type B = { b: string; c: boolean };
+type Result = Merge<A, B>;
 // { a: string, b: string, c: boolean }
 ```
-
