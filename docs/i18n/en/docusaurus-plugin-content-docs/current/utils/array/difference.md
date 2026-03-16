@@ -7,30 +7,32 @@ By default, comparison is performed only for primitive values. An `iteratee` fun
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/difference/index.ts)
 
 <br />
 
 ## Benchmark
+
 - `hz`: Operations per second
 - `mean`: Average response time (ms)
 
 ### Default
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/difference | 9,251,611.33 | 0.0001 | `fastest` |
-| lodash/difference | 4,113,377.61 | 0.0002 | `slowest` |
+| Name                  | hz           | mean   | Performance |
+| --------------------- | ------------ | ------ | ----------- |
+| modern-kit/difference | 9,251,611.33 | 0.0001 | `fastest`   |
+| lodash/difference     | 4,113,377.61 | 0.0002 | `slowest`   |
 
 - **modern-kit/difference**
   - `2.25x` faster than **lodash/difference**
 
 ### with iteratee
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/difference | 11,133,900.99 | 0.0001 | `fastest` |
-| lodash/differenceBy | 3,211,808.45 | 0.0002 | `slowest` |
+| Name                  | hz            | mean   | Performance |
+| --------------------- | ------------- | ------ | ----------- |
+| modern-kit/difference | 11,133,900.99 | 0.0001 | `fastest`   |
+| lodash/differenceBy   | 3,211,808.45  | 0.0002 | `slowest`   |
 
 - **modern-kit/difference**
   - `3.47x` faster than **lodash/differenceBy**
@@ -51,7 +53,7 @@ const difference: <T, U = T>(
 
 ## Usage
 
-### Default
+### Basic Usage
 
 ```ts title="typescript"
 import { difference } from '@modern-kit/utils';
@@ -64,7 +66,7 @@ difference(arr1, arr2); // [1, 3]
 
 <br />
 
-### Iteratee
+### `Iteratee` Usage
 
 ```ts title="typescript"
 import { difference } from '@modern-kit/utils';

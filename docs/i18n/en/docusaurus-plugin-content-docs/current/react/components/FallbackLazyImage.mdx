@@ -55,7 +55,7 @@ const FallbackLazyImage: React.ForwardRefExoticComponent<
 | `duration` | `CSSProperties['transitionDuration']` | `'0.2s'` | transition-duration when switching from fallback to the actual image |
 
 ## Usage
-### Default
+### Basic Usage
 ```tsx title="typescript"
 import { FallbackLazyImage } from '@modern-kit/react';
 import img1 from '../assets/img1.png';
@@ -83,7 +83,7 @@ const Example = () => {
 };
 ```
 
-### Wrapper Styling: css
+### `Wrapper Styling: css` Styling
 - The `Image Wrapper` inside the `FallbackLazyImage` component has a default class `lazy-image-wrapper`. You can use this class to control its styling.
 ```css
 /* css stylesheet */
@@ -100,7 +100,7 @@ const Example = () => {
 <FallbackLazyImage {/* ...props */} />
 ```
 
-### Wrapper Styling: css-in-js
+### `Wrapper Styling: css-in-js` Styling
 - You can create a new styled component using the inheritance feature of `css-in-js`.
 ```tsx
 const Image = styled(FallbackLazyImage)`

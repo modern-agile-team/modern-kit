@@ -70,7 +70,7 @@ const Slottable: ({ children }: React.PropsWithChildren) => JSX.Element;
 ```
 
 ## Usage
-### Default
+### Basic Usage
 ```tsx title="typescript"
 import { Slot } from '@modern-kit/react'
 
@@ -84,7 +84,7 @@ const Button = ({
 };
 ```
 
-### With Slottable
+### `With Slottable` Usage    
 ```tsx title='typescript'
 const SlottableButton = ({
   asChild,
@@ -111,7 +111,7 @@ const SlottableButton = ({
 ```
 
 ## Example
-### Default
+### Basic Usage
 ```tsx title="typescript"
 // Basic Usage
 <Button onClick={() => console.log('click')}>Button</Button>
@@ -121,7 +121,7 @@ const SlottableButton = ({
 
 <br />
 
-### AsChild
+### `AsChild` Usage
 ```tsx title="typescript"
 // AsChild Usage
 <Button asChild onClick={() => console.log('click')}>
@@ -134,7 +134,7 @@ const SlottableButton = ({
 </Button>
 
 
-### Slottable
+### `Slottable` Usage
 ```tsx title="typescript"
 <SlottableButton leftElement={<span>left</span>} rightElement={<span>right</span>}>
   <span> Slottable Button </span>

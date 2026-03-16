@@ -7,25 +7,26 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/max/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 // 함수 오버로딩
 function max(arr: number[] | readonly number[]): number;
 
-function max<T>(
-  arr: T[] | readonly T[],
-  iteratee: (item: T) => number
-): T;
+function max<T>(arr: T[] | readonly T[], iteratee: (item: T) => number): T;
 ```
 
 <br />
 
 ## Usage
-### Default
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { max } from '@modern-kit/utils';
 
@@ -35,7 +36,8 @@ const result = max(arr); // 9
 
 <br />
 
-### Iteratee
+### `iteratee` 함수 사용법
+
 ```ts title="typescript"
 import { max } from '@modern-kit/utils';
 

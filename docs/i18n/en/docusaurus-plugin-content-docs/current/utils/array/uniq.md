@@ -7,30 +7,32 @@ By default, duplicate detection is performed only for primitive values. If the s
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/uniq/index.ts)
 
 <br />
 
 ## Benchmark
+
 - `hz`: Operations per second
 - `mean`: Average response time (ms)
 
 ### Default
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/uniq | 9,049,882.24 | 0.0001 | `fastest` |
-| lodash/uniq | 6,259,278.14 | 0.0002 | `slowest` |
+| Name            | hz           | mean   | Performance |
+| --------------- | ------------ | ------ | ----------- |
+| modern-kit/uniq | 9,049,882.24 | 0.0001 | `fastest`   |
+| lodash/uniq     | 6,259,278.14 | 0.0002 | `slowest`   |
 
 - **modern-kit/uniq**
   - `1.45x` faster than **lodash/uniq**
 
 ### with iteratee
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/uniq | 10,429,151.37 | 0.0001 | `fastest` |
-| lodash/uniqBy | 4,837,704.04 | 0.0002 | `slowest` |
+| Name            | hz            | mean   | Performance |
+| --------------- | ------------- | ------ | ----------- |
+| modern-kit/uniq | 10,429,151.37 | 0.0001 | `fastest`   |
+| lodash/uniqBy   | 4,837,704.04  | 0.0002 | `slowest`   |
 
 - **modern-kit/uniq**
   - `2.16x` faster than **lodash/uniqBy**
@@ -52,7 +54,7 @@ function uniq<T, U = T>(
 
 ## Usage
 
-### Default
+### Basic Usage
 
 ```ts title="typescript"
 import { uniq } from '@modern-kit/utils';
@@ -63,7 +65,7 @@ uniq([1, 2, 2, 2, 3]); // [1, 2, 3]
 
 <br />
 
-### Iteratee
+### `Iteratee` Usage
 
 ```ts title="typescript"
 import { uniq } from '@modern-kit/utils';

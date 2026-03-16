@@ -47,7 +47,7 @@ const InView: PolyForwardComponent<"div", InViewProps, React.ElementType>
 <br />
 
 ## Usage
-### Default
+### Basic Usage
 - By default, wrapped in a `div`, which becomes the observed target of the `IntersectionObserver`.
 - Calls the `onIntersectStart`/`onIntersectEnd` callback when the element enters or leaves the viewport.
 ```tsx title="typescript"
@@ -65,7 +65,7 @@ const Example = () => {
 };
 ```
 
-### as
+### `as` Prop Usage
 - The `as` prop allows rendering with a specific element, which becomes the observed target.
 - Calls the `onIntersectStart`/`onIntersectEnd` callback when the element enters or leaves the viewport.
 ```tsx title="typescript"
@@ -88,7 +88,7 @@ const Example = () => {
 };
 ```
 
-### asChild
+### `asChild` Prop Usage
 - When `asChild` is `true`, renders the child element as-is via Slot without a wrapper, and that element becomes the observed target.
 - Calls the `onIntersectStart`/`onIntersectEnd` callback when the child enters or leaves the viewport.
 ```tsx title="typescript"

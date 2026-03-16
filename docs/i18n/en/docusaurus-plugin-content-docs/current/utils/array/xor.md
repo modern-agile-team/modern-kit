@@ -7,6 +7,7 @@ The result consists of elements that exist in only one of the two arrays. By def
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/xor/index.ts)
 
 <br />
@@ -28,7 +29,7 @@ function xor<T, U>(
 
 ## Usage
 
-### Default
+### Basic Usage
 
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';
@@ -38,7 +39,7 @@ xor([1, 2], [2, 3]); // [1, 3]
 
 <br />
 
-### Iteratee
+### `Iteratee` Usage
 
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';

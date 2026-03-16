@@ -9,30 +9,32 @@ This function removes duplicate values based on the first array.
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/intersection/index.ts)
 
 <br />
 
 ## Benchmark
+
 - `hz`: Operations per second
 - `mean`: Average response time (ms)
 
 ### Default
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/intersection | 8,649,185.29 | 0.0001 | `fastest` |
-| lodash/intersection | 3,722,050.21 | 0.0003 | `slowest` |
+| Name                    | hz           | mean   | Performance |
+| ----------------------- | ------------ | ------ | ----------- |
+| modern-kit/intersection | 8,649,185.29 | 0.0001 | `fastest`   |
+| lodash/intersection     | 3,722,050.21 | 0.0003 | `slowest`   |
 
 - **modern-kit/intersection**
   - `2.32x` faster than **lodash/intersection**
 
 ### with iteratee
 
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/intersection | 10,210,296.98 | 0.0001 | `fastest` |
-| lodash/intersectionBy | 1,278,057.73 | 0.0002 | `slowest` |
+| Name                    | hz            | mean   | Performance |
+| ----------------------- | ------------- | ------ | ----------- |
+| modern-kit/intersection | 10,210,296.98 | 0.0001 | `fastest`   |
+| lodash/intersectionBy   | 1,278,057.73  | 0.0002 | `slowest`   |
 
 - **modern-kit/intersection**
   - `7.99x` faster than **lodash/intersectionBy**
@@ -53,7 +55,7 @@ function intersection<T, U>(
 
 ## Usage
 
-### Default
+### Basic Usage
 
 ```ts title="typescript"
 import { intersection } from '@modern-kit/utils';
@@ -63,7 +65,7 @@ intersection([1, 2, 3, 5, 7], [1, 2, 4, 5, 8]); // [1, 2, 5]
 
 <br />
 
-### Iteratee
+### `Iteratee` Usage
 
 ```ts title="typescript"
 import { intersection } from '@modern-kit/utils';

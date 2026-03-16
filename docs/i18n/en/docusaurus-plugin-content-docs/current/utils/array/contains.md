@@ -16,7 +16,7 @@ When checking whether an element is included via the `some` method, `Object.is` 
 [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) is used because it is stricter than `==` and produces results closer to developer expectations compared to `===`. For example, unlike `===`, it considers `NaN` equal to itself and treats `-0` and `+0` as different values.
 
 ```ts title="typescript"
--0 === +0 // true
+-0 === +0; // true
 Object.is(-0, +0); // false
 
 NaN === NaN; // false;
@@ -46,7 +46,7 @@ function contains<T>(
 
 ## Usage
 
-### Default
+### Basic Usage
 
 ```ts title="typescript"
 import { contains } from '@modern-kit/utils';
@@ -58,13 +58,13 @@ contains(arr, NaN); // true
 
 contains(arr, -0); // false
 contains(arr, 4); // false
-contains(arr, "3"); // false
+contains(arr, '3'); // false
 contains(arr, {}); // false
 ```
 
 <br />
 
-### Comparator
+### `Comparator` Usage
 
 ```ts title="typescript"
 const arr = [{ a: 1, b: 2 }];
@@ -79,7 +79,7 @@ contains(
 
 <br />
 
-### Narrowing types
+### `Narrowing types` Usage
 
 ```ts title="typescript"
 const arr = [2, 3, 'foo'] as const;
@@ -92,7 +92,8 @@ if (contains(arr, value)) {
 }
 ```
 
-## Note
+## References
+
 - [Object.is(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 - [Object.is(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 - [Equality comparisons and sameness(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)

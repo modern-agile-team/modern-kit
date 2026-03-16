@@ -58,7 +58,7 @@ const AspectRatio: PolyForwardComponent<"div", AspectRatioProps, React.ElementTy
 <br />
 
 ## Usage
-### Default
+### Basic Usage
 - By default, wraps children in a `div` and applies the `aspect-ratio` CSS property to reserve space.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
@@ -76,7 +76,7 @@ const Example = () => {
 };
 ```
 
-### as
+### `as` Prop Usage
 - The `as` prop allows rendering with a specific element instead of `div`, applying `aspect-ratio` to that element to reserve space.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
@@ -94,7 +94,7 @@ const Example = () => {
 };
 ```
 
-### asChild
+### `asChild` Prop Usage
 - When `asChild` is `true`, it renders the child element as-is via Slot and applies `aspect-ratio` directly to the child element.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'

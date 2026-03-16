@@ -7,30 +7,32 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/uniq/index.ts)
 
 <br />
 
 ## Benchmark
+
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
 ### Default
 
-| 이름 | hz | mean | 성능 |
-| --- | --- | --- | --- |
+| 이름            | hz           | mean   | 성능      |
+| --------------- | ------------ | ------ | --------- |
 | modern-kit/uniq | 9,049,882.24 | 0.0001 | `fastest` |
-| lodash/uniq | 6,259,278.14 | 0.0002 | `slowest` |
+| lodash/uniq     | 6,259,278.14 | 0.0002 | `slowest` |
 
 - **modern-kit/uniq**
   - `1.45x` faster than **lodash/uniq**
 
 ### with iteratee
 
-| 이름 | hz | mean | 성능 |
-| --- | --- | --- | --- |
+| 이름            | hz            | mean   | 성능      |
+| --------------- | ------------- | ------ | --------- |
 | modern-kit/uniq | 10,429,151.37 | 0.0001 | `fastest` |
-| lodash/uniqBy | 4,837,704.04 | 0.0002 | `slowest` |
+| lodash/uniqBy   | 4,837,704.04  | 0.0002 | `slowest` |
 
 - **modern-kit/uniq**
   - `2.16x` faster than **lodash/uniqBy**
@@ -52,7 +54,7 @@ function uniq<T, U = T>(
 
 ## Usage
 
-### Default
+### 기본 사용법
 
 ```ts title="typescript"
 import { uniq } from '@modern-kit/utils';
@@ -63,7 +65,7 @@ uniq([1, 2, 2, 2, 3]); // [1, 2, 3]
 
 <br />
 
-### Iteratee
+### `iteratee` 함수 사용법
 
 ```ts title="typescript"
 import { uniq } from '@modern-kit/utils';

@@ -84,7 +84,7 @@ options?: OptionsType
 
 ## Usage
 
-### 기본 사용법 제목 (단일 케이스라면 제외)
+### 기본 사용법(단일 케이스라면 제외)
 
 \`\`\`ts title="typescript"
 import { functionName } from '@modern-kit/utils';

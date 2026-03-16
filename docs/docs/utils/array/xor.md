@@ -7,6 +7,7 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/xor/index.ts)
 
 <br />
@@ -28,7 +29,7 @@ function xor<T, U>(
 
 ## Usage
 
-### Default
+### 기본 사용법
 
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';
@@ -38,7 +39,7 @@ xor([1, 2], [2, 3]); // [1, 3]
 
 <br />
 
-### Iteratee
+### `iteratee` 함수 사용법
 
 ```ts title="typescript"
 import { xor } from '@modern-kit/utils';

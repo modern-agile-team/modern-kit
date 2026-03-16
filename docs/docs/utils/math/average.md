@@ -7,11 +7,13 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/average/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 // 함수 오버로딩
 function average(arr: number[] | readonly number[]): number;
@@ -25,7 +27,9 @@ function average<T>(
 <br />
 
 ## Usage
-### Default
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { average } from '@modern-kit/utils';
 
@@ -35,7 +39,8 @@ const result = average(arr); // 3
 
 <br />
 
-### Iteratee
+### `iteratee` 함수 사용법
+
 ```ts title="typescript"
 import { average } from '@modern-kit/utils';
 

@@ -7,17 +7,20 @@ By default, it inverts the keys and values of the object. If an `iteratee` funct
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/invert/index.ts)
 
 ## Benchmark
+
 - `hz`: operations per second
 - `mean`: average response time (ms)
 
 ### Default
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/invert | 6,119,008.75 | 0.0002 | `fastest` |
-| lodash/invert | 4,459,920.52 | 0.0003 | `slowest` |
+
+| Name              | hz           | mean   | Performance |
+| ----------------- | ------------ | ------ | ----------- |
+| modern-kit/invert | 6,119,008.75 | 0.0002 | `fastest`   |
+| lodash/invert     | 4,459,920.52 | 0.0003 | `slowest`   |
 
 - **modern-kit/invert**
   - `1.37x` faster than **lodash/invert**
@@ -25,10 +28,11 @@ By default, it inverts the keys and values of the object. If an `iteratee` funct
 <br />
 
 ### with iteratee
-| Name | hz | mean | Performance |
-| --- | --- | --- | --- |
-| modern-kit/invert | 4,154,655.71 | 0.0003 | `fastest` |
-| lodash/invertBy | 2,262,596.79 | 0.0004 | `slowest` |
+
+| Name              | hz           | mean   | Performance |
+| ----------------- | ------------ | ------ | ----------- |
+| modern-kit/invert | 4,154,655.71 | 0.0003 | `fastest`   |
+| lodash/invertBy   | 2,262,596.79 | 0.0004 | `slowest`   |
 
 - **modern-kit/invert**
   - `1.84x` faster than **lodash/invertBy**
@@ -36,6 +40,7 @@ By default, it inverts the keys and values of the object. If an `iteratee` funct
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 function invert<K extends PropertyKey, V extends PropertyKey>(
   obj: Record<K, V>
@@ -50,7 +55,9 @@ function invert<K extends PropertyKey, V, TK extends PropertyKey>(
 <br />
 
 ## Usage
-### Default
+
+### Basic Usage
+
 ```ts title="typescript"
 import { invert } from '@modern-kit/utils';
 
@@ -63,7 +70,8 @@ invert(obj);
 
 <br />
 
-### with iteratee
+### `Iteratee` Usage
+
 ```ts title="typescript"
 import { invert } from '@modern-kit/utils';
 

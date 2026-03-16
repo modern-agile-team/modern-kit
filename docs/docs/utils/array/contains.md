@@ -16,7 +16,7 @@ const test = (value: number) => {
 [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)를 활용한 이유는 `==` 보다는 엄격하게 관리되며, `===`보다 조금 더 개발자가 기대하는 결과를 가져옵니다. 예를 들어 `===`과 비교했을 때, `NaN`은 같다고 판단하며, `-0과 +0`은 서로 다르다고 판단합니다.
 
 ```ts title="typescript"
--0 === +0 // true
+-0 === +0; // true
 Object.is(-0, +0); // false
 
 NaN === NaN; // false;
@@ -46,7 +46,7 @@ function contains<T>(
 
 ## Usage
 
-### Default
+### 기본 사용법
 
 ```ts title="typescript"
 import { contains } from '@modern-kit/utils';
@@ -58,13 +58,13 @@ contains(arr, NaN); // true
 
 contains(arr, -0); // false
 contains(arr, 4); // false
-contains(arr, "3"); // false
+contains(arr, '3'); // false
 contains(arr, {}); // false
 ```
 
 <br />
 
-### Comparator
+### `comparator` 함수 사용법
 
 ```ts title="typescript"
 const arr = [{ a: 1, b: 2 }];
@@ -79,7 +79,7 @@ contains(
 
 <br />
 
-### Narrowing types
+### 타입 좁히기
 
 ```ts title="typescript"
 const arr = [2, 3, 'foo'] as const;
@@ -93,6 +93,7 @@ if (contains(arr, value)) {
 ```
 
 ## Note
+
 - [Object.is(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 - [Object.is(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
 - [동등 비교 및 동일성(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)
