@@ -14,13 +14,20 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/isBirthDate/index.ts)
 
-## Function Signature
+<br />
+
+## Interface
+
 ```ts title="typescript"
 function isBirthDate(birthDate: string): boolean;
 ```
 
+<br />
+
 ## Usage
-### Without Separator
+
+### 구분자 없음
+
 ```ts title="typescript"
 import { isBirthDate } from '@modern-kit/utils';
 
@@ -28,7 +35,10 @@ isBirthDate("950913");    // true
 isBirthDate("19950913");  // true
 ```
 
-### With Separator
+<br />
+
+### 구분자 있음
+
 ```ts title="typescript"
 import { isBirthDate } from '@modern-kit/utils';
 
@@ -42,7 +52,10 @@ isBirthDate("95/09/13");   // true
 isBirthDate("1995/09/13");  // true
 ```
 
-### Invalid Inputs
+<br />
+
+### 유효하지 않은 입력
+
 ```ts title="typescript"
 import { isBirthDate } from '@modern-kit/utils';
 
@@ -52,7 +65,10 @@ isBirthDate("1995-9-13");   // false, 월 또는 일이 2자리여야 함
 isBirthDate("19950230");    // false, 존재하지 않는 날짜 (예: 2월 30일)
 ```
 
-### Additional Examples
+<br />
+
+### 추가 예시
+
 ```ts title="typescript"
 import { isBirthDate } from '@modern-kit/utils';
 

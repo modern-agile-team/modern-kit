@@ -7,6 +7,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatCurrencyUSD/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function formatCurrencyUSD(
@@ -17,7 +19,10 @@ function formatCurrencyUSD(
 ): string;
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { formatCurrencyUSD } from '@modern-kit/utils';
 
@@ -28,6 +33,13 @@ formatCurrencyUSD('1234567');
 formatCurrencyUSD(-1234567);
 formatCurrencyUSD('-1234567');
 // '-$1,234,567'
+```
+
+<br />
+
+### 소수점 자리수 지정
+```ts title="typescript"
+import { formatCurrencyUSD } from '@modern-kit/utils';
 
 formatCurrencyUSD(1234567.1234, { decimal: 2 });
 // '$1,234,567.12'

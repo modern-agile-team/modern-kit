@@ -13,13 +13,15 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/omit|1,505,400.16|0.0003|`fastest`|
-|lodash/omit|901,269.43|0.0011|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/omit | 1,505,400.16 | 0.0003 | `fastest` |
+| lodash/omit | 901,269.43 | 0.0011 | `slowest` |
 
 - **modern-kit/omit**
   - `1.67x` faster than lodash/omit
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -28,6 +30,8 @@ function omit<T extends Record<PropertyKey, any>, K extends keyof T>(
   keys: K[] | readonly K[]
 ): Omit<T, K>;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

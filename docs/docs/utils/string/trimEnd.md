@@ -19,13 +19,15 @@ chars가 배열인 경우 배열 내 문자열을 각 문자로 나누고 문자
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/trimEnd|5,487,666.27|0.0002|`fastest`|
-|lodash/trimEnd|1,131,381.14|0.0009|`slowest`|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/trimEnd | 5,487,666.27 | 0.0002 | `fastest` |
+| lodash/trimEnd | 1,131,381.14 | 0.0009 | `slowest` |
 
 - **modern-kit/trimEnd**
   - `4.85x` faster than lodash/trimEnd
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -33,6 +35,8 @@ function trimEnd(str: string): string;
 
 function trimEnd(str: string, chars: string | string[]): string;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"
@@ -52,4 +56,3 @@ const str4 = trimEnd('--abc  ', '+'); // '--abc  '
 const str5 = trimEnd('abc-_-', ['_', '-']); // 'abc'
 const str6 = trimEnd('abc+-*', ['+*', '-']); // 'abc'
 ```
-

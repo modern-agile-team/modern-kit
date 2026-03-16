@@ -7,21 +7,26 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/flatMap/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/flatMap|294,327,51|0.0034|`fastest`|
-|lodash/flatMapDepth|267,170,29|0.0037|-|
-|js built-in/map.flat|82,654,90|0.0121|`slowest`|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/flatMap | 294,327,51 | 0.0034 | `fastest` |
+| lodash/flatMapDepth | 267,170,29 | 0.0037 | - |
+| js built-in/map.flat | 82,654,90 | 0.0121 | `slowest` |
 
 - **modern-kit/flatMap**
   - `1.10x` faster than lodash/flatMapDepth
   - `3.56x` faster than js built-in/map.flat
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 type FlatArray<Arr, Depth extends number> = {
     "done": Arr,
@@ -30,6 +35,7 @@ type FlatArray<Arr, Depth extends number> = {
         : Arr
 }[Depth extends -1 ? "done" : "recur"];
 ```
+
 ```ts title="typescript"
 function flatMap<T, U, D extends number>(
   arr: T[] | readonly T[],
@@ -38,7 +44,10 @@ function flatMap<T, U, D extends number>(
 ): FlatArray<U[], D>[];
 ```
 
+<br />
+
 ## Usage
+
 ```ts title="typescript"
 import { flatMap } from '@modern-kit/utils';
 

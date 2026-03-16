@@ -19,6 +19,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getDateEndOf/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type DateEndOfUnit =
@@ -37,9 +39,12 @@ function getDateEndOf(
 ): Date
 ```
 
+<br />
+
 ## Usage
 
 ### 로컬 타임존 기준
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 
@@ -96,10 +101,11 @@ dateEnd.getMilliseconds(); // 999
 ```
 
 ### UTC 기준
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 
-const targetDate = '2025-03-15T14:30:45.123Z'; 
+const targetDate = '2025-03-15T14:30:45.123Z';
 // 2025-03-15 23:30:45 (KST 기준 토요일)
 // 2025-03-15 14:30:45 (UTC 기준 토요일)
 
@@ -153,7 +159,10 @@ utcDateEnd.getUTCSeconds(); // 59
 utcDateEnd.getUTCMilliseconds(); // 999
 ```
 
+<br />
+
 ### 다양한 입력 타입
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 
@@ -172,7 +181,10 @@ const result3 = getDateEndOf('2025-03-15', 'date');
 const result4 = getDateEndOf('2025.03.15', 'date');
 ```
 
+<br />
+
 ### 주의 끝점 계산 예시
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 
@@ -198,7 +210,10 @@ saturdayWeekEnd.getDate(); // 15
 saturdayWeekEnd.getDay(); // 6 (토요일)
 ```
 
+<br />
+
 ### 월/연 경계 처리
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 
@@ -221,7 +236,10 @@ yearWeekEnd.getDate(); // 4
 yearWeekEnd.getDay(); // 6 (토요일)
 ```
 
+<br />
+
 ### 윤년 처리
+
 ```ts title="typescript"
 import { getDateEndOf } from '@modern-kit/utils';
 

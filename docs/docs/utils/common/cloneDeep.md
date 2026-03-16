@@ -5,30 +5,33 @@
 <br />
 
 ## Code
-
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/cloneDeep/index.ts)
 
-## Benchmark
+<br />
 
+## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-| 이름                 | hz           | mean   | 성능      |
-| -------------------- | ------------ | ------ | --------- |
+| 이름 | hz | mean | 성능 |
+| ---- | ------------ | ------ | --------- |
 | modern-kit/cloneDeep | 1,529,157.20 | 0.0007 | `fastest` |
-| lodash/cloneDeep     | 650,320.39   | 0.0015 | -         |
+| lodash/cloneDeep     | 650,320.39   | 0.0015 | - |
 
 - **modern-kit/cloneDeep**
   - `2.35x` faster than lodash/cloneDeep
 
-## Interface
+<br />
 
+## Interface
 ```ts title="typescript"
 function cloneDeep<T>(value: T): T;
 ```
 
-## Usage
+<br />
 
+## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { cloneDeep } from '@modern-kit/utils';
 

@@ -11,23 +11,27 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/file/getMIMETypeFromFile/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const getMIMETypeFromFile: (file: File) => string
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { getMIMETypeFromFile, isMIMEType } from '@modern-kit/utils';
 
-const mimeType = getMIMETypeFromFile(response);
+const mimeType = getMIMETypeFromFile(file);
 
-if (isMIMEType(mimeType1)) {
+if (isMIMEType(mimeType)) {
   mimeType; // type: MIMEType
 } else {
   mimeType; // type: string
 }
 ```
-
-## Note
-- [Common MIME types - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)

@@ -14,8 +14,10 @@
 function isSet(value: unknown): value is Set<any>
 ```
 
+<br />
+
 ## Usage
-``` ts title="typescript"
+```ts title="typescript"
 import { isSet } from '@modern-kit/utils';
 
 isSet(new Set()) // true

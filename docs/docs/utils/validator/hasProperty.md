@@ -15,6 +15,8 @@ const hasProperty: <T extends Record<PropertyKey, any>, K extends PropertyKey>(
 ) => key is K & keyof T;
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { hasProperty } from '@modern-kit/utils';

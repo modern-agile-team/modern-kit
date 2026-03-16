@@ -10,6 +10,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatNumberWithUnits/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface Unit {
@@ -22,10 +24,11 @@ interface FormatNumberWithUnitsOptions {
   commas?: boolean; // default: true
   decimal?: number; // default: 0
 }
-```
-```ts title="typescript"
+
 function formatNumberWithUnits(value: number | string, options: FormatNumberWithUnitsOptions): string
 ```
+
+<br />
 
 ## Usage
 ### 기본 동작
@@ -46,16 +49,25 @@ formatNumberWithUnits(-123456789, { units: KRW_UNITS });
 formatNumberWithUnits('-123456789', { units: KRW_UNITS });
 // "-1억 2,345만 6,789"
 ```
+
+<br />
+
+### 콤마 사용 여부
 ```ts title="typescript"
-// 콤마 사용 여부
+import { formatNumberWithUnits } from '@modern-kit/utils';
+
 formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: false });
 // "1억 2345만 6789"
 formatNumberWithUnits(123456789, { units: KRW_UNITS, commas: true });
 // "1억 2,345만 6,789"
-
 ```
+
+<br />
+
+### 소수점 자리수 지정
 ```ts title="typescript"
-// 소수점 허용 여부
+import { formatNumberWithUnits } from '@modern-kit/utils';
+
 formatNumberWithUnits(1234567.123, { units: KRW_UNITS, decimal: 2 });
 // "1억 2,345만 6,789.12"
 formatNumberWithUnits('-1234567.123', { units: KRW_UNITS, decimal: 2 });

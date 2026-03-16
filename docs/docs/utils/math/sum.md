@@ -9,25 +9,29 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/sum/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/sum|21,825,119.56|0.0000|`fastest`|
-|lodash/sum|7,861,063.97|0.0001|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/sum | 21,825,119.56 | 0.0000 | `fastest` |
+| lodash/sum | 7,861,063.97 | 0.0001 | - |
 
 - **modern-kit/sum**
   - `2.78x` faster than lodash/sum
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/sum with iteratee|15,978,576.34|0.0001|`fastest`|
-|lodash/sumBy|4,471,676.86|0.0002|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/sum with iteratee | 15,978,576.34 | 0.0001 | `fastest` |
+| lodash/sumBy | 4,471,676.86 | 0.0002 | - |
 
 - **modern-kit/sum with iteratee**
   - `3.57x` faster than lodash/sumBy
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -40,6 +44,8 @@ function sum<T>(
 ): number;
 ```
 
+<br />
+
 ## Usage
 ### Default
 ```ts title="typescript"
@@ -48,6 +54,8 @@ import { sum } from '@modern-kit/utils';
 const arr = [1, 2, 3, 4, 5];
 const result = sum(arr); // 15
 ```
+
+<br />
 
 ### Iteratee
 ```ts title="typescript"

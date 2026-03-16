@@ -12,7 +12,9 @@
 function isRegExp(value: unknown): value is RegExp
 ```
 
-## Usage 
+<br />
+
+## Usage
 ```ts title="typescript"
 import { isRegExp } from '@modern-kit/utils';
 

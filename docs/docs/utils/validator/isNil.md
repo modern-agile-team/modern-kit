@@ -12,6 +12,8 @@
 const isNil: <T>(val: T | null | undefined) => val is null | undefined
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isNil } from '@modern-kit/utils';

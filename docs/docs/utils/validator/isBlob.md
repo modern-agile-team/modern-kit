@@ -12,6 +12,8 @@
 function isBlob(x: unknown): x is Blob
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isBlob } from '@modern-kit/utils';

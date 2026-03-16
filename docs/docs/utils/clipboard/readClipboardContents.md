@@ -7,12 +7,17 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/clipboard/readClipboardContents/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
-const readClipboardContents: (value: string) => Promise<ClipboardItems>
+const readClipboardContents: () => Promise<ClipboardItems>
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { readClipboardContents } from '@modern-kit/utils';
 

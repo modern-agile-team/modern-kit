@@ -7,12 +7,19 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/file/getBlobFromUrl/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const getBlobFromUrl: (url: string) => Promise<Blob>
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { getBlobFromUrl } from '@modern-kit/utils';
 

@@ -8,6 +8,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/objectKeys/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type ObjectKeys<T extends Record<PropertyKey, any>> = Exclude<
@@ -19,6 +21,8 @@ function objectKeys<T extends Record<PropertyKey, any>>(
   obj: T
 ): ObjectKeys<T>[];
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

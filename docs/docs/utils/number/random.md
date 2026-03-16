@@ -10,17 +10,21 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/number/random/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/random|17,637,495.39|0.0001|`fastest`|
-|lodash/random|8,151,192.01|0.0001|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/random | 17,637,495.39 | 0.0001 | `fastest` |
+| lodash/random | 8,151,192.01 | 0.0001 | - |
 
 - **modern-kit/random**
   - `2.16x` faster than lodash/random
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -29,20 +33,21 @@ function random(maximum: number): number;
 function random(minimum: number, maximum: number): number;
 ```
 
+<br />
+
 ## Usage
-
-
-### Default
-
+### 기본 사용법
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(10); // 0 이상 20 미만의 실수형 난수를 반환
+const result = random(10); // 0 이상 10 미만의 실수형 난수를 반환
 ```
 
+<br />
+
+### 범위 지정
 ```ts title="typescript"
 import { random } from '@modern-kit/utils';
 
-const result = random(5, 10); // 5 이상 20 미만의 실수형 난수를 반환
+const result = random(5, 10); // 5 이상 10 미만의 실수형 난수를 반환
 ```
-

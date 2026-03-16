@@ -7,6 +7,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/storage/storageManager/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface StorageData<T> {
@@ -36,6 +38,8 @@ class StorageManager<T extends Record<string, any>> {
 }
 ```
 
+<br />
+
 ## Usage
 
 ### 기본 사용법
@@ -58,6 +62,8 @@ const localStorage = new StorageManager<UserData>('localStorage');
 const sessionStorage = new StorageManager<UserData>('sessionStorage');
 ```
 
+<br />
+
 ### 단일 데이터 조작
 ```ts title="typescript"
 // 데이터 저장
@@ -66,17 +72,19 @@ localStorage.setItem('age', 30);
 localStorage.setItem('preferences', { theme: 'dark', language: 'ko' });
 
 // 데이터 조회
-const name = localStorage.getItem('name'); 
+const name = localStorage.getItem('name');
 // value: 'John'
 // type: string | null
 
-const age = localStorage.getItem('age'); 
+const age = localStorage.getItem('age');
 // value: 30
 // type: number | null
 
 // 데이터 삭제
 localStorage.removeItem('name');
 ```
+
+<br />
 
 ### 다중 데이터 조작
 ```ts title="typescript"
@@ -94,6 +102,8 @@ const items = localStorage.getItems(['name', 'age']);
 // 여러 데이터 한번에 삭제
 localStorage.removeItems(['name', 'age']);
 ```
+
+<br />
 
 ### 스토리지 전체 데이터 탐색 및 초기화
 ```ts title="typescript"
@@ -118,6 +128,8 @@ const count = storage.size(); // 3
 // 스토리지 전체 데이터 삭제
 storage.clear();
 ```
+
+<br />
 
 ### 인스턴스가 관리하는 스토리지 데이터 탐색 및 초기화
 ```ts title="typescript"

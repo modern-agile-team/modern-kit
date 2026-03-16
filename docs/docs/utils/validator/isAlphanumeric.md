@@ -14,6 +14,8 @@
 const isAlphanumeric: (value: string) => boolean
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isAlphanumeric } from '@modern-kit/utils';
@@ -25,6 +27,6 @@ isAlphanumeric('abc123'); // true
 isAlphanumeric('abc123!'); // false
 isAlphanumeric('abc 123'); // false
 isAlphanumeric(''); // false
-isAlphanumeric(😂); // false
-isAlphanumeric("한글"); // false
+isAlphanumeric('😂'); // false
+isAlphanumeric('한글'); // false
 ```

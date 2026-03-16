@@ -14,8 +14,10 @@
 function isMap(value: unknown): value is Map<any, any>
 ```
 
+<br />
+
 ## Usage
-``` ts title="typescript"
+```ts title="typescript"
 import { isMap } from '@modern-kit/utils';
 
 isMap(new Map()) // true

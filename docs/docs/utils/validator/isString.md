@@ -12,6 +12,8 @@
 const isString: (arg: unknown) => arg is string
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isString } from '@modern-kit/utils';

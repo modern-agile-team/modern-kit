@@ -19,13 +19,15 @@ chars가 배열인 경우 배열 내 문자열을 각 문자로 나누고 문자
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/trimStart|5,821,607.44|0.0001|`fastest`|
-|lodash/trimStart|765,539.13|0.0012|`slowest`|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/trimStart | 5,821,607.44 | 0.0001 | `fastest` |
+| lodash/trimStart | 765,539.13 | 0.0012 | `slowest` |
 
 - **modern-kit/trimStart**
   - `7.60x` faster than lodash/trimStart
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -33,6 +35,8 @@ function trimStart(str: string): string;
 
 function trimStart(str: string, chars: string | string[]): string;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -1,14 +1,15 @@
 # formatSizeStyleValue
 
-`css` 스타일 값으로 사용할 수 있도록 `<value>[suffix]` 형태로 변환해주는 유틸 합수입니다.
+`css` 스타일 값으로 사용할 수 있도록 `<value>[suffix]` 형태로 변환해주는 유틸 함수입니다.
 
-`suffix`옵션을 통해서 해당 값에 접미사를 붙여 반환할 수 있습니다. 해당 옵션이 없다면 `default`로 `px`을 접미사로 사용합니다.
+`suffix` 옵션을 통해서 해당 값에 접미사를 붙여 반환할 수 있습니다. 해당 옵션이 없다면 `default`로 `px`을 접미사로 사용합니다.
 
 <br />
 
 ## Code
-
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/style/formatSizeStyleValue/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -37,6 +38,13 @@ function formatSizeStyleValue(
   suffix?: SuffixUnit
 ): string
 ```
+
+<br />
+
+## References
+
+- [CSS values and units - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#lengths)
+<br />
 
 ## Usage
 ```ts title="typescript"

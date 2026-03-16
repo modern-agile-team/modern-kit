@@ -12,13 +12,19 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/parseDate/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const parseDate: (date: string | Date | number) => Date
 ```
 
+<br />
+
 ## Usage
+
 ### 유효한 날짜 형식
+
 ```ts title="typescript"
 import { parseDate } from '@modern-kit/utils';
 
@@ -43,6 +49,7 @@ parseDate(1714233600000); // new Date(1714233600000) 반환
 <br />
 
 ### 유효하지 않은 날짜 형식
+
 ```ts title="typescript"
 parseDate('invalid date'); // 에러 발생
 parseDate('2025a01a02'); // 에러 발생

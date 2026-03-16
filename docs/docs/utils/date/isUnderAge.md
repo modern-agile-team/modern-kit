@@ -9,6 +9,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/isUnderAge/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface IsUnderAgeParams {
@@ -25,8 +27,12 @@ function isUnderAge({
 }: IsUnderAgeParams): boolean;
 ```
 
+<br />
+
 ## Usage
+
 ### without inclusive
+
 ```ts title="typescript"
 import { isUnderAge } from '@modern-kit/utils';
 
@@ -40,7 +46,10 @@ isUnderAge({ birthDate: '2006-01-01', targetAge: 19 }); // false, 정확히 만 
 isUnderAge({ birthDate: '2005-12-31', targetAge: 19 }); // false
 ```
 
+<br />
+
 ### with inclusive
+
 - `inclusive` 값을 기준으로 기준 나이를 포함할지 여부를 결정합니다. (기본값: `false`)
 - `inclusive` 값이 `true`일 경우, 기준 나이를 포함하며, `false`일 경우, 기준 나이를 포함하지 않습니다.
 

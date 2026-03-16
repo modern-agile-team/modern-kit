@@ -3,7 +3,8 @@
 로컬 시간을 `UTC` 시간으로 변환합니다.
 
 `YYYY-MM-DD HH:mm:ss`와 같은 로컬 시간은 나라마다 다르게 해석됩니다.
-```ts
+
+```ts title="typescript"
 new Date('2025-01-01 09:30:15').getTime(); // 한국(서울): 1735704015000
 new Date('2025-01-01 09:30:15').getTime(); // 인도(뉴델리): 1735691415000
 ```
@@ -15,12 +16,18 @@ new Date('2025-01-01 09:30:15').getTime(); // 인도(뉴델리): 1735691415000
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getUTCTime/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function getUTCTime(birthDate: string | number | Date): number
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
 
 ```ts title="typescript"
 import { getUTCTime } from '@modern-kit/utils';

@@ -11,6 +11,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/throttle/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface ThrottleOptions {
@@ -32,6 +34,8 @@ const throttle: <F extends (...args: any[]) => void>(
 ) => ThrottledFunction<F>;
 ```
 
+<br />
+
 ## Usage
 ### 기본 사용법
 ```ts title="typescript"
@@ -47,6 +51,7 @@ throttledLog('첫 번째 호출'); // 즉시 실행
 throttledLog('두 번째 호출'); // 지연 시간 간격으로 실행됩니다.
 ```
 
+<br />
 
 ### AbortSignal 사용법
 ```ts title="typescript"

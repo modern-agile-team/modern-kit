@@ -12,6 +12,8 @@
 const isBoolean: (arg: unknown) => arg is boolean
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isBoolean } from '@modern-kit/utils';

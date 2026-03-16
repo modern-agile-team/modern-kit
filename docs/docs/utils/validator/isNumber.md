@@ -12,10 +12,11 @@
 const isNumber: (arg: unknown) => arg is number
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isNumber } from '@modern-kit/utils';
-
 
 isNumber(123); // true
 

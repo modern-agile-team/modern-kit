@@ -7,10 +7,14 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/capitalize/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function capitalize<T extends string>(str: T): Capitalize<T>
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

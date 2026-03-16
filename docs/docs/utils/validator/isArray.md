@@ -12,6 +12,8 @@
 const isArray: <T>(value: unknown) => value is T[] | readonly T[]
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isArray } from '@modern-kit/utils';

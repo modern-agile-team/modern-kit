@@ -7,6 +7,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatValueWithSymbol/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function formatValueWithSymbol(value: number | string, options: {
@@ -15,7 +17,10 @@ function formatValueWithSymbol(value: number | string, options: {
 }): string
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { formatValueWithSymbol } from '@modern-kit/utils';
 

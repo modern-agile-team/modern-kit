@@ -11,18 +11,19 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/clipboard/copyFallbackClipboardText/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 const copyFallbackClipboardText: (value: string) => string
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { copyFallbackClipboardText } from '@modern-kit/utils';
 
 const result = copyFallbackClipboardText("복사 할 텍스트");
 ```
-
-## Note
-- [Clipboard API - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard)
-- [Clipboard API Browser Compatibility - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard#browser_compatibility)

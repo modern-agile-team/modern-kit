@@ -12,6 +12,8 @@
 const isFloat = (value: unknown) => value is number;
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isFloat } from '@modern-kit/utils';

@@ -12,6 +12,8 @@
 const isFunction: (arg: unknown) => arg is Function
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isFunction } from '@modern-kit/utils';

@@ -19,17 +19,21 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/range/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/range|4,628,798.60|0.0002|`fastest`|
-|lodash/range|1,842,731.58|0.0003|`slowest`|
+| 이름 | hz | mean | 성능 |
+| ---- | ------------ | ------ | --------- |
+| modern-kit/range | 4,628,798.60 | 0.0002 | `fastest` |
+| lodash/range | 1,842,731.58 | 0.0003 | `slowest` |
 
 - **modern-kit/range**
   - `2.51x` faster than lodash/range
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -39,7 +43,10 @@ function range(start: number, end: number): number[];
 function range(start: number, end: number, step: number): number[];
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { range } from '@modern-kit/utils';
 
@@ -48,17 +55,23 @@ const result1 = range(5); // [0, 1, 2, 3, 4]
 const result2 = range(1, 6); // [1, 2, 3, 4, 5]
 const result3 = range(1, 6, 2); // [1, 3, 5]
 ```
+
+<br />
+
+### 내림차순 배열
 ```ts title="typescript"
 import { range } from '@modern-kit/utils';
 
-// 내림차순 배열
 const result5 = range(10, 5); // [10, 9, 8, 7, 6]
 const result6 = range(10, 0, 2); // [10, 8, 6, 4, 2]
 ```
+
+<br />
+
+### 음수 범위 처리
 ```ts title="typescript"
 import { range } from '@modern-kit/utils';
 
-// 음수 범위 처리
 const result7 = range(-5); // [0, -1, -2, -3, -4]
 const result8 = range(-10, -5); // [-10, -9, -8, -7, -6]
 const result9 = range(-10, 0, 2); // [-10, -8, -6, -4, -2]

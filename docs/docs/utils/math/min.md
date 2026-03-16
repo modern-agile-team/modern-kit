@@ -9,6 +9,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/min/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 // 함수 오버로딩
@@ -20,6 +22,8 @@ function min<T>(
 ): T;
 ```
 
+<br />
+
 ## Usage
 ### Default
 ```ts title="typescript"
@@ -28,6 +32,8 @@ import { min } from '@modern-kit/utils';
 const arr = [5, 2, 9, 1, 5, 6];
 const result1 = min(arr); // 1
 ```
+
+<br />
 
 ### Iteratee
 ```ts title="typescript"

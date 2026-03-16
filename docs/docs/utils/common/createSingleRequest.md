@@ -17,11 +17,11 @@
 <br />
 
 ## Code
-
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/common/createSingleRequest/index.ts)
 
-## Interface
+<br />
 
+## Interface
 ```ts title="typescript"
 function createSingleRequest(
   key?: string
@@ -30,10 +30,10 @@ function createSingleRequest(
 ) => (...args: Args) => Promise<T | undefined>;
 ```
 
+<br />
+
 ## Usage
-
 ### 기본 사용법
-
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 
@@ -46,8 +46,9 @@ wrappedFetch(); // 진행 중이므로 무시됨 (undefined 반환)
 // 첫 번째 호출이 완료된 뒤에는 다시 호출 가능
 ```
 
-### 여러 비동기 함수가 하나의 잠금 공유
+<br />
 
+### 여러 비동기 함수가 하나의 잠금 공유
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 
@@ -60,8 +61,9 @@ wrappedSubmit();
 wrappedSync(); // undefined 반환, 실행되지 않음
 ```
 
-### 인자 전달
+<br />
 
+### 인자 전달
 ```ts title="typescript"
 import { createSingleRequest } from '@modern-kit/utils';
 

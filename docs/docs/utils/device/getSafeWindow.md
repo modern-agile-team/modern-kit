@@ -9,12 +9,19 @@ Window 객체를 안전하게 가져오는 함수입니다.
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/device/getSafeWindow/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function getSafeWindow(): Window
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { getSafeWindow } from '@modern-kit/utils';
 

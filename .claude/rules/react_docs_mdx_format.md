@@ -87,7 +87,7 @@ ref: React.RefObject<T | null>;
 
 ## Usage
 
-### 기본 사용법 제목
+### 기본 사용법 제목 (단일 케이스라면 제외)
 
 \`\`\`tsx title="typescript"
 import { useHookName } from '@modern-kit/react';
@@ -145,6 +145,15 @@ export const Example2 = () => {
 
 <Example2 />
 ```
+
+<br />
+
+## References (참고 링크가 있을 때)
+
+- [참고 링크 1](https://example.com)
+- [참고 링크 2](https://example.com)
+
+<br />
 
 ---
 

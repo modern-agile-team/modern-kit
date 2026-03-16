@@ -8,6 +8,7 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/objectEntries/index.ts)
 
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -20,6 +21,8 @@ function objectEntries<T extends Record<PropertyKey, any>>(
   obj: T
 ): [ObjectKeys<T>, T[ObjectKeys<T>]][];
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"
@@ -35,7 +38,7 @@ const obj = {
 
  /**
   * type: ["a" | "b" | "c", 1 | 2 | 3][]
-  * value: 
+  * value:
     [
       ['a', 1],
       ['b', 2],

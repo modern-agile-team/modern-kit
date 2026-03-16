@@ -9,29 +9,36 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/array/difference/index.ts)
 
+<br />
+
 ## Benchmark
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
 ### Default
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/difference|9,251,611.33|0.0001|`fastest`|
-|lodash/difference|4,113,377.61|0.0002|`slowest`|
+
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/difference | 9,251,611.33 | 0.0001 | `fastest` |
+| lodash/difference | 4,113,377.61 | 0.0002 | `slowest` |
 
 - **modern-kit/difference**
   - `2.25x` faster than **lodash/difference**
 
 ### with iteratee
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/difference|11,133,900.99|0.0001|`fastest`|
-|lodash/differenceBy|3,211,808.45|0.0002|`slowest`|
+
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/difference | 11,133,900.99 | 0.0001 | `fastest` |
+| lodash/differenceBy | 3,211,808.45 | 0.0002 | `slowest` |
 
 - **modern-kit/difference**
   - `3.47x` faster than **lodash/differenceBy**
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 const difference: <T, U = T>(
   firstArr: T[] | readonly T[],
@@ -40,8 +47,12 @@ const difference: <T, U = T>(
 ) => T[];
 ```
 
+<br />
+
 ## Usage
+
 ### Default
+
 ```ts title="typescript"
 import { difference } from '@modern-kit/utils';
 
@@ -51,7 +62,10 @@ const arr2 = [2, 4];
 difference(arr1, arr2); // [1, 3]
 ```
 
+<br />
+
 ### Iteratee
+
 ```ts title="typescript"
 import { difference } from '@modern-kit/utils';
 

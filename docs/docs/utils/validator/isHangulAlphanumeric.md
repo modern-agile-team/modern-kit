@@ -12,12 +12,14 @@
 const isHangulAlphanumeric: (value: string) => boolean
 ```
 
+<br />
+
 ## Usage
 ```ts title="typescript"
 import { isHangulAlphanumeric } from '@modern-kit/utils';
 
 isHangulAlphanumeric('안녕하세요'); // true
-isHangulAlphanumeric('Hello123'); // true 
+isHangulAlphanumeric('Hello123'); // true
 isHangulAlphanumeric('123'); // true
 
 isHangulAlphanumeric('!@#'); // false

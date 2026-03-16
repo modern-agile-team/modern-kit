@@ -10,6 +10,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatCurrencyKRW/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function formatCurrencyKRW(
@@ -21,7 +23,10 @@ function formatCurrencyKRW(
 ): string;
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { formatCurrencyKRW } from '@modern-kit/utils';
 
@@ -32,13 +37,26 @@ formatCurrencyKRW('1234567');
 formatCurrencyKRW(-1234567);
 formatCurrencyKRW('-1234567');
 // '-1,234,567원'
+```
 
+<br />
+
+### 소수점 자리수 지정
+```ts title="typescript"
+import { formatCurrencyKRW } from '@modern-kit/utils';
 
 formatCurrencyKRW(1234567.1234, { decimal: 2 });
 // '1,234,567.12원'
 
 formatCurrencyKRW(-1234567.1234, { decimal: 2 });
 // '-1,234,567.12원'
+```
+
+<br />
+
+### 통화 기호(₩) 사용
+```ts title="typescript"
+import { formatCurrencyKRW } from '@modern-kit/utils';
 
 formatCurrencyKRW(1234567, { isSymbol: true });
 // '₩1,234,567'

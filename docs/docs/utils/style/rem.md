@@ -2,9 +2,9 @@
 
 `Root 요소(html)`의 `fontSize`를 기반으로 `pixel` 값을 `rem` 형태로 변환해주는 유틸 함수입니다.
 
-`suffix`옵션을 통해서 계산한 rem 값에 접미사로 `"rem"`을 붙여서 반환시킬 수 있습니다.
+`suffix` 옵션을 통해서 계산한 rem 값에 접미사로 `"rem"`을 붙여서 반환시킬 수 있습니다.
 
-`toFixedDigits` 옵션을 통해서 `고정 소수점 표기법(fixed-point notation)`으로 표시할 수 있습니다. 단, 불 필요한 소수점을 버리기 위해 `한번 더 숫자로 변환 후 반환`합니다.
+`toFixedDigits` 옵션을 통해서 `고정 소수점 표기법(fixed-point notation)`으로 표시할 수 있습니다. 단, 불필요한 소수점을 버리기 위해 `한번 더 숫자로 변환 후 반환`합니다.
 
 ```ts title="typescript"
 // as-is
@@ -14,12 +14,14 @@
 rem(17, { toFixedDigits: 10 }); // 1.0625
 ```
 
-기본적으로 해당 함수로 한번 호출 된 값은 반복 계산을 방지하기 위해 `캐싱 처리` 됩니다. 💡 단, 주의 할 점으로 런타임 중에 js로 Root 요소(html)의 fontSize를 변경한다면 의도대로 동작하지 않을 수 있습니다.
+기본적으로 해당 함수로 한번 호출 된 값은 반복 계산을 방지하기 위해 `캐싱 처리` 됩니다. 단, 주의 할 점으로 런타임 중에 js로 Root 요소(html)의 fontSize를 변경한다면 의도대로 동작하지 않을 수 있습니다.
 
 <br />
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/style/rem/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -30,6 +32,8 @@ interface RemOptions {
 
 const rem: (pixel: number, options?: RemOptions) => string | number;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -13,6 +13,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/file/convertImageToBlob/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type CanvasImageType = 'png' | 'jpeg' | 'jpg' | 'webp';
@@ -23,12 +25,14 @@ const convertImageToBlob: (
 ) => Promise<Blob>;
 ```
 
+<br />
+
 ## Usage
+
+### 기본 사용법
+
 ```ts title="typescript"
 import { convertImageToBlob } from '@modern-kit/utils';
 
 const imageBlob = await convertImageToBlob("이미지 src", 'png');
 ```
-
-## Note
-- [HTMLCanvasElement: toBlob() - MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob)

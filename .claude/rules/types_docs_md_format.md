@@ -13,6 +13,8 @@ CLAUDE가 참고해야하는 docs/types MD 파일 작성 포맷입니다.
 
 세부 설명. 타입 파라미터, 제약 조건, 특이사항 등 언급.
 
+<br />
+
 ## Interface
 
 \`\`\`ts title="typescript"
@@ -22,6 +24,8 @@ U = DefaultType
 
 > = /_ 타입 정의 _/;
 > \`\`\`
+
+<br />
 
 ## Type Parameters (타입 파라미터 설명이 필요할 때)
 
@@ -37,7 +41,7 @@ U = DefaultType
 
 ## Usage
 
-### 기본 케이스
+### 기본 케이스 (단일 케이스라면 제외)
 
 \`\`\`ts title="typescript"
 import { TypeName } from '@modern-kit/types';
@@ -54,6 +58,15 @@ type Example = TypeName<SomeType>
 // 추가 예시
 \`\`\`
 ```
+
+<br />
+
+## References (참고 링크가 있을 때)
+
+- [참고 링크 1](https://example.com)
+- [참고 링크 2](https://example.com)
+
+<br />
 
 ---
 

@@ -1,6 +1,6 @@
 # subtract
 
-숫자 배열의 요소들을 순차적으로 `뺄셈`하는 함수
+숫자 배열의 요소들을 순차적으로 `뺄셈`하는 함수입니다.
 
 `iteratee` 함수를 제공하는 경우 `iteratee` 함수를 기반으로 배열의 각 요소를 변환한 후 뺄셈합니다.
 
@@ -8,6 +8,8 @@
 
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/math/subtract/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -20,6 +22,8 @@ function subtract<T>(
 ): number;
 ```
 
+<br />
+
 ## Usage
 ### Default
 ```ts title="typescript"
@@ -27,6 +31,8 @@ import { subtract } from '@modern-kit/utils';
 
 const result1 = subtract([10, 2, 3]); // 5
 ```
+
+<br />
 
 ### Iteratee
 ```ts title="typescript"

@@ -11,13 +11,15 @@
 - `hz`: 초당 작업 수
 - `mean`: 평균 응답 시간(ms)
 
-|이름|hz|mean|성능|
-|------|---|---|---|
-|modern-kit/pick|1,693,028.73|0.0002|`fastest`|
-|lodash/pick|1,022,887.39|0.0010|-|
+| 이름 | hz | mean | 성능 |
+| --- | --- | --- | --- |
+| modern-kit/pick | 1,693,028.73 | 0.0002 | `fastest` |
+| lodash/pick | 1,022,887.39 | 0.0010 | `slowest` |
 
 - **modern-kit/pick**
   - `1.60x` faster than lodash/pick
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -26,6 +28,8 @@ function pick<T extends Record<PropertyKey, any>, K extends keyof T>(
   keys: K[] | readonly K[]
 ): Pick<T, K>;
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"

@@ -19,6 +19,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/date/getDateRange/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 type DateRangeOfUnit =
@@ -37,9 +39,12 @@ function getDateRange(
 ): { start: Date; end: Date }
 ```
 
+<br />
+
 ## Usage
 
 ### 로컬 타임존 기준
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 
@@ -99,7 +104,10 @@ dateRange.end.getDate(); // 15
 dateRange.end.getHours(); // 23
 ```
 
+<br />
+
 ### UTC 기준
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 
@@ -152,7 +160,10 @@ utcDateRange.end.toISOString(); // '2025-03-15T23:59:59.999Z' (UTC 기준)
 utcDateRange.end.getUTCHours(); // 23
 ```
 
+<br />
+
 ### 주의 범위 계산 예시
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 
@@ -180,7 +191,10 @@ saturdayWeekRange.start.getDate(); // 9 (해당 주 일요일)
 saturdayWeekRange.end.getDate(); // 15 (자기 자신)
 ```
 
+<br />
+
 ### 월/연 경계 처리
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 
@@ -217,7 +231,10 @@ yearWeekRange.end.getDate(); // 4
 yearWeekRange.end.getDay(); // 6 (토요일)
 ```
 
+<br />
+
 ### 윤년 처리
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 
@@ -234,7 +251,10 @@ normalYearRange.start.getDate(); // 1 (2025-02-01)
 normalYearRange.end.getDate(); // 28 (2025-02-28, 평년)
 ```
 
+<br />
+
 ### 실용적인 사용 예시
+
 ```ts title="typescript"
 import { getDateRange } from '@modern-kit/utils';
 

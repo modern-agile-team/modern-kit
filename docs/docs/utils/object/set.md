@@ -12,6 +12,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/set/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 export function set<
@@ -28,6 +30,8 @@ export function set<
 ```
 - [GetByPath 타입 참고](https://github.com/modern-agile-team/modern-kit/blob/main/packages/types/src/GetByPath/index.ts)
 - [PropertyPath 타입 참고](https://github.com/modern-agile-team/modern-kit/blob/main/packages/types/src/PropertyPath/index.ts)
+
+<br />
 
 ## Usage
 ### 기본 사용법

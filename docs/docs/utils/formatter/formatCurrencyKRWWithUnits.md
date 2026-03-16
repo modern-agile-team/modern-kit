@@ -7,6 +7,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatCurrencyKRWWithUnits/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function formatCurrencyKRWWithUnits(
@@ -17,15 +19,12 @@ function formatCurrencyKRWWithUnits(
 ): string;
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { formatCurrencyKRWWithUnits } from '@modern-kit/utils';
-
-const KRW_UNITS = [
-  { unit: '조', value: 1_000_000_000_000 },
-  { unit: '억', value: 100_000_000 },
-  { unit: '만', value: 10_000 },
-];
 
 formatCurrencyKRWWithUnits(1234567891234);
 formatCurrencyKRWWithUnits('1234567891234');
@@ -34,7 +33,14 @@ formatCurrencyKRWWithUnits('1234567891234');
 formatCurrencyKRWWithUnits(-123456789);
 formatCurrencyKRWWithUnits('-123456789');
 // '-1억 2,345만 6,789원'
+```
+
+<br />
+
+### 소수점 자리수 지정
+```ts title="typescript"
+import { formatCurrencyKRWWithUnits } from '@modern-kit/utils';
 
 formatCurrencyKRWWithUnits(123456789.1234, { decimal: 2 });
-// '1조 2,345억 6,789만 1,234.12원'
+// '1억 2,345만 6,789.12원'
 ```

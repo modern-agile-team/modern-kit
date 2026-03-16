@@ -1,4 +1,4 @@
-# formatNumberFloorUnit
+# formatNumberTruncate
 
 주어진 `숫자`를 주어진 `절삭 단위(1을 포함한 10의 제곱수(10/100/1000/...))`로 절삭하여 반환하는 함수입니다.
 
@@ -7,7 +7,9 @@
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatNumberFloorUnit/index.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/formatter/formatNumberTruncate/index.ts)
+
+<br />
 
 ## Interface
 ```ts title="typescript"
@@ -25,11 +27,14 @@ type TruncationUnit =
   | 10_000_000_000
   | 100_000_000_000
   | 1_000_000_000_000;
-  
+
 function formatNumberTruncate(value: number, truncationUnit: TruncationUnit): number
 ```
 
+<br />
+
 ## Usage
+### 기본 사용법
 ```ts title="typescript"
 import { formatNumberTruncate } from '@modern-kit/utils';
 

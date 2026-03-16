@@ -13,6 +13,8 @@
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/removeLetters/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface RemoveCharactersOptions {
@@ -24,6 +26,8 @@ interface RemoveCharactersOptions {
 
 function removeLetters(value: string, options?: RemoveCharactersOptions): string
 ```
+
+<br />
 
 ## Usage
 ```ts title="typescript"
