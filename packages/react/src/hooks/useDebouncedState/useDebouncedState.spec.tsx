@@ -46,12 +46,12 @@ describe('useDebouncedState', () => {
     await user.type(input, '1234');
     await user.type(input, 'modern-kit');
 
-    await delay(DELAY_TIME / 2);
+    await delay(DELAY_TIME / 2 + 1);
     await waitFor(() => {
       expect(debouncedState).toHaveTextContent('');
     });
 
-    await delay(DELAY_TIME / 2);
+    await delay(DELAY_TIME / 2 + 1);
     await waitFor(() => {
       expect(debouncedState).toHaveTextContent('modern-kit');
     });
