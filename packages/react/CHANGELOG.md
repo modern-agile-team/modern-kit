@@ -1,5 +1,16 @@
 # @modern-kit/react
 
+## 3.0.0
+
+### Major Changes
+
+- [#1068](https://github.com/modern-agile-team/modern-kit/pull/1068) [`8c44ed1`](https://github.com/modern-agile-team/modern-kit/commit/8c44ed1932d16aeee8d4dfc38670d7ce60198421) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useBlockMultipleAsyncCalls 로직 개선 - @ssi02014
+
+### Patch Changes
+
+- Updated dependencies [[`8c44ed1`](https://github.com/modern-agile-team/modern-kit/commit/8c44ed1932d16aeee8d4dfc38670d7ce60198421)]:
+  - @modern-kit/utils@3.0.0
+
 ## 2.9.1
 
 ### Patch Changes
