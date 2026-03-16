@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { retry } from '.';
 
 describe('retry', () => {
@@ -22,20 +22,29 @@ describe('retry', () => {
     expect(mockFn).toHaveBeenCalledTimes(3);
   });
 
-  it('지정된 delay만큼 시간을 지연하고 다시 시도해야 합니다.', async () => {
-    const mockFn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('failure'))
-      .mockRejectedValueOnce(new Error('failure'))
-      .mockResolvedValue('success');
+  describe('delay 옵션', () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
 
-    const start = Date.now();
-    const result = await retry(mockFn, { count: 3, delay: 100 });
-    const end = Date.now();
+    afterEach(() => {
+      vi.useRealTimers();
+    });
 
-    expect(result).toBe('success');
-    expect(end - start).toBeGreaterThanOrEqual(200);
-    expect(mockFn).toHaveBeenCalledTimes(3);
+    it('지정된 delay만큼 시간을 지연하고 다시 시도해야 합니다.', async () => {
+      const mockFn = vi
+        .fn()
+        .mockRejectedValueOnce(new Error('failure'))
+        .mockRejectedValueOnce(new Error('failure'))
+        .mockResolvedValue('success');
+
+      const promise = retry(mockFn, { count: 3, delay: 100 });
+      await vi.advanceTimersByTimeAsync(200);
+      const result = await promise;
+
+      expect(result).toBe('success');
+      expect(mockFn).toHaveBeenCalledTimes(3);
+    });
   });
 
   it('지정된 signal로 중단되어야 합니다.', async () => {
