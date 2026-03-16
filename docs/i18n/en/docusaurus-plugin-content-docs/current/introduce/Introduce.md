@@ -1,10 +1,10 @@
 # @modern-kit
 
-`@modern-kit`는 클라이언트 개발에 유용한 `리액트 컴포넌트`, `커스텀 훅` 및 `유틸리티 함수`, `타입`을 제공하는 라이브러리입니다.
+`@modern-kit` is a library providing useful `React components`, `custom hooks`, `utility functions`, and `types` for client-side development.
 
-클라이언트 개발에 필요한 모듈을 제공하는 것 뿐만아니라, 코드적으로 `다양한 레퍼런스를 제공` 하기 위한 목적을 갖고 있습니다.
+It aims not only to provide modules needed for client-side development, but also to offer a wide variety of code references.
 
-`@modern-kit`는 Next.js의 `SSR(Server Side Rendering)`환경에서도 호환되는 등 `CJS(CommonJs)`환경에서도 호환되기 위해 `CJS(CommonJs)`와 `ESM(ECMAScript Module)` 두 포맷을 모두 지원합니다.
+`@modern-kit` supports both `CJS(CommonJs)` and `ESM(ECMAScript Module)` formats to ensure compatibility with `CJS(CommonJs)` environments, including Next.js `SSR(Server Side Rendering)` environments.
 
 <br />
 
@@ -14,7 +14,7 @@
 
 ### @modern-kit/react <a href="https://www.npmjs.com/package/@modern-kit/react" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/react.svg" /></a>
 
-- React와 관련된 유용한 `컴포넌트`와 `커스텀 훅`을 제공하는 라이브러리입니다.
+- A library providing useful React components and custom hooks.
 
 <br />
 
@@ -45,30 +45,24 @@ const App = () => {
   }, 300);
 
   return <div>Modern Kit</div>;
-};
-```
-
-```ts
-// SubPath 사용 예시
-// tsconfig moduleResolution 옵션이 `bundler`일 경우
-import { useInterval } from '@modern-kit/react/hooks/useInterval';
-// tsconfig moduleResolution 옵션이 `node`일 경우
-import { useInterval } from '@modern-kit/react/dist/hooks/useInterval';
-
-const App = () => {
-  useInterval(() => {
-    console.log('interval');
-  }, 300);
-
-  return <div>Modern Kit</div>;
 }
+```
+```ts
+// SubPath import example
+// When tsconfig moduleResolution is `bundler`
+import { flatten } from '@modern-kit/utils/array/flatten';
+// When tsconfig moduleResolution is `node`
+import { flatten } from '@modern-kit/utils/dist/array/flatten';
+
+const arr = [1, [2, [3, 4], 5]];
+const result = flatten(arr); // [1, 2, 3, 4, 5]
 ```
 
 <br />
 
 ### @modern-kit/utils <a href="https://www.npmjs.com/package/@modern-kit/utils" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/utils.svg" /></a>
 
-- 클라이언트 개발에 유용한 `유틸리티 함수`를 제공하는 라이브러리입니다.
+- A library providing useful utility functions for client-side development.
 
 <br />
 
@@ -96,12 +90,11 @@ import { flatten } from '@modern-kit/utils';
 const arr = [1, [2, [3, 4], 5]];
 const result = flatten(arr); // [1, 2, 3, 4, 5]
 ```
-
 ```ts
-// SubPath 사용 예시
-// tsconfig moduleResolution 옵션이 `bundler`일 경우
+// SubPath import example
+// When tsconfig moduleResolution is `bundler`
 import { flatten } from '@modern-kit/utils/array/flatten';
-// tsconfig moduleResolution 옵션이 `node`일 경우
+// When tsconfig moduleResolution is `node`
 import { flatten } from '@modern-kit/utils/dist/array/flatten';
 
 const arr = [1, [2, [3, 4], 5]];
@@ -112,7 +105,7 @@ const result = flatten(arr); // [1, 2, 3, 4, 5]
 
 ### @modern-kit/types <a href="https://www.npmjs.com/package/@modern-kit/types" target="_blank"><img align="center" src="https://img.shields.io/npm/v/@modern-kit/types.svg" /></a>
 
-- 클라이언트 개발에 유용한 `유틸 타입`들을 제공하는 라이브러리 입니다.
+- A library providing useful TypeScript utility types for client-side development.
 
 <br />
 
@@ -137,8 +130,9 @@ pnpm i -D @modern-kit/types
 ```ts
 import { Merge } from '@modern-kit/types';
 
-type A = { a: string; b: number };
-type B = { b: string; c: boolean };
-type Result = Merge<A, B>;
+type A = { a: string, b: number }
+type B = { b: string, c: boolean }
+type Result = Merge<A, B>
 // { a: string, b: string, c: boolean }
 ```
+

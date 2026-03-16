@@ -1,0 +1,172 @@
+import { InView } from '@modern-kit/react';
+
+# InView
+
+`InView` is a component for declaratively using the `IntersectionObserver`.
+
+- Built using the **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** hook from `@modern-kit/react`.
+
+Calls a specific action function when the observed target enters the viewport (`onIntersectStart`) or leaves it (`onIntersectEnd`).
+
+<br />
+
+### Polymorphism
+The `InView` component supports the `as` prop for polymorphism.
+
+- By default, wraps children in a `div`, and the `as` prop allows changing the wrapper element tag (e.g., div → article).
+- The wrapper element becomes the observed target of the `IntersectionObserver`.
+
+### Composition & Rendering Delegation
+The `InView` component supports Composition and Rendering Delegation patterns via the `asChild` prop.
+
+- When `asChild` is `true`, it renders the child element as-is via Slot without a wrapper element.
+- The child element becomes the observed target of the `IntersectionObserver`.
+  - Slot only accepts a single child element.
+  - If a component is passed as a child to Slot, it must support `forwardRef` and spread `props`. Otherwise it will not work correctly.
+  - When using the `asChild` prop, please refer to the **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** documentation.
+
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InView/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface InViewProps extends UseIntersectionObserverProps {
+  children: React.ReactNode;
+  asChild?: boolean;
+}
+```
+```ts title="typescript"
+const InView: PolyForwardComponent<"div", InViewProps, React.ElementType>
+```
+
+<br />
+
+## Usage
+### Default
+- By default, wrapped in a `div`, which becomes the observed target of the `IntersectionObserver`.
+- Calls the `onIntersectStart`/`onIntersectEnd` callback when the element enters or leaves the viewport.
+```tsx title="typescript"
+import { InView } from '@modern-kit/react';
+
+const Example = () => {
+  const handleIntersectStart = () => {/* action */}
+  const handleIntersectEnd = () => {/* action */}
+
+  return (
+    <InView onIntersectStart={handleIntersectStart} onIntersectEnd={handleIntersectEnd}>
+      <div>Box1</div>
+    </InView>
+  );
+};
+```
+
+### as
+- The `as` prop allows rendering with a specific element, which becomes the observed target.
+- Calls the `onIntersectStart`/`onIntersectEnd` callback when the element enters or leaves the viewport.
+```tsx title="typescript"
+import { InView } from '@modern-kit/react';
+
+const Example = () => {
+  const handleIntersectStart = () => {/* action */}
+  const handleIntersectEnd = () => {/* action */}
+
+  return (
+    <InView
+      as='ul' // wraps children in a `ul` element instead of `div`
+      onIntersectStart={handleIntersectStart}
+      onIntersectEnd={handleIntersectEnd}
+    >
+      <li>List Item1</li>
+      <li>List Item2</li>
+    </InView>
+  );
+};
+```
+
+### asChild
+- When `asChild` is `true`, renders the child element as-is via Slot without a wrapper, and that element becomes the observed target.
+- Calls the `onIntersectStart`/`onIntersectEnd` callback when the child enters or leaves the viewport.
+```tsx title="typescript"
+import { InView } from '@modern-kit/react';
+
+const Example = () => {
+  const handleIntersectStart = () => {/* action */}
+  const handleIntersectEnd = () => {/* action */}
+
+  return (
+    <InView asChild onIntersectStart={handleIntersectStart} onIntersectEnd={handleIntersectEnd}>
+      <div>Box1</div>
+    </InView>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const inViewStyle = {
+    width: '100%',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: '21px',
+    padding: '0 20px',
+  }
+  return (
+    <div>
+      <div
+        style={{
+          height: '500px',
+          textAlign: 'center',
+          fontSize: '1.7rem',
+        }}>
+        <p>Scroll down.</p>
+        <p>Check the browser developer console.</p>
+      </div>
+
+      <InView
+        onIntersectStart={() => console.log('action onIntersectStart(1)')}
+        onIntersectEnd={() => console.log('action onIntersectEnd(1)')}
+        style={{ ...inViewStyle, background: '#c0392B' }}
+        calledOnce
+      >
+        <p>Box1</p>
+        <p>calledOnce: true</p>
+        <p>as: div</p>
+      </InView>
+      <div style={{ height: '300px' }} />
+      <InView
+        onIntersectStart={() => console.log('action onIntersectStart(2)')}
+        onIntersectEnd={() => console.log('action onIntersectEnd(2)')}
+        style={{ ...inViewStyle, background: '#89a5ea' }}
+      >
+        <li>Box2</li>
+        <li>calledOnce: false</li>
+        <li>as: ul</li>
+      </InView>
+      <div style={{ height: '300px' }} />
+      <InView
+        asChild
+        onIntersectStart={() => console.log('action onIntersectStart(3)')}
+        onIntersectEnd={() => console.log('action onIntersectEnd(3)')}
+        style={{ ...inViewStyle, background: '#77DD77' }}
+      >
+        <div>
+          <p>Box3</p>
+          <p>calledOnce: false</p>
+          <p>asChild: true</p>
+        </div>
+      </InView>
+      <div style={{ width: '100%', height: '500px', textAlign: 'center' }} />
+    </div>
+  );
+};
+
+<Example />
+
+## Note
+- [Intersection Observer API](https://developer.mozilla.org/ko/docs/Web/API/IntersectionObserver)

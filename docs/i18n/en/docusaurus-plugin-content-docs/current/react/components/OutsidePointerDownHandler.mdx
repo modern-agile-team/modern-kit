@@ -4,31 +4,31 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 
 # OutsidePointerDownHandler
 
-**[@modern-kit/useOutsidePointerDown](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown)** 훅을 선언적으로 활용 할 수 있는 컴포넌트입니다.
+A component for declaratively using the **[@modern-kit/useOutsidePointerDown](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useOutsidePointerDown)** hook.
 
-컴포넌트 외부 영역 클릭 및 터치 시 `onPointerDown` 함수를 실행하는 컴포넌트입니다.
+Calls the `onPointerDown` function when clicking or touching outside the component area.
 
 <br />
 
-### 다형성(polymorphism)
-`OutsidePointerDownHandler`컴포넌트는 `다형성`을 위해 `as` 속성을 지원합니다.
+### Polymorphism
+The `OutsidePointerDownHandler` component supports the `as` prop for polymorphism.
 
-- 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 `Wrapper` 요소의 태그를 변경해 렌더링할 수 있습니다. (ex. div -> article)
-- 이때, 해당 `Wrapper` 요소의 외부 영역을 클릭 및 터치 시 `onPointerDown` 콜백 함수가 호출됩니다.
+- By default, wraps children in a `div`, and the `as` prop allows changing the wrapper element tag (e.g., div → article).
+- Clicking or touching outside the wrapper element calls the `onPointerDown` callback.
 
-### 합성(Composition), 렌더링 위임(Rendering Delegation)
-`OutsidePointerDownHandler` 컴포넌트는 `asChild` 속성을 통해 `합성(Composition)`, `렌더링 위임(Rendering Delegation)` 패턴을 지원합니다.
+### Composition & Rendering Delegation
+The `OutsidePointerDownHandler` component supports Composition and Rendering Delegation patterns via the `asChild` prop.
 
-- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 래퍼 요소 없이 자식 요소를 그대로 렌더링합니다.
-- 이때, 자식 요소의 외부 영역을 클릭 및 터치 시 `onPointerDown` 콜백 함수가 호출됩니다.
-  - Slot의 자식은 `단일 요소`만 허용됩니다.
-  - Slot은 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 정상적으로 동작하지 않습니다.
-  - `asChild` 속성을 사용 할 경우 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
+- When `asChild` is `true`, renders the child element as-is via **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** without a wrapper.
+- Clicking or touching outside the child element calls the `onPointerDown` callback.
+  - Slot only accepts a single child element.
+  - If a component is passed as a child to Slot, it must support `forwardRef` and spread `props`. Otherwise it will not work correctly.
+  - When using the `asChild` prop, please refer to the **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** documentation.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/OutsidePointerDownHandler/index.tsx)
 
 <br />
 
@@ -55,10 +55,10 @@ const OutsidePointerDown: PolyForwardComponent<
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `ReactNode` | - | 감싸는 자식 요소 |
-| `onPointerDown` | `(targetElement: HTMLElement) => void` | - | 외부 클릭/터치 시 호출되는 콜백 함수 |
-| `excludeRefs` | `React.RefObject<HTMLElement \| null>[]` | `[]` | 외부 클릭 감지를 제외할 요소의 ref 배열 |
-| `asChild` | `boolean` | `false` | true이면 Slot을 통해 자식 요소를 그대로 렌더링 |
+| `children` | `ReactNode` | - | Child element to wrap |
+| `onPointerDown` | `(targetElement: HTMLElement) => void` | - | Callback called when clicking/touching outside |
+| `excludeRefs` | `React.RefObject<HTMLElement \| null>[]` | `[]` | Array of refs for elements to exclude from outside click detection |
+| `asChild` | `boolean` | `false` | When true, renders the child element as-is via Slot |
 
 ## Usage
 ### Default
@@ -80,9 +80,9 @@ const DefaultExample = () => {
         onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
         excludeRefs={[excludeRef]}
       >
-        <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
+        <div>Click outside the element and check the console.</div>
       </OutsidePointerDownHandler>
-      <div ref={excludeRef} style={excludeStyle}>외부 클릭 및 터치 감지를 제외할 요소의 ref 배열입니다.</div>
+      <div ref={excludeRef} style={excludeStyle}>ref array for elements to exclude from outside click/touch detection.</div>
     </div>
   );
 };
@@ -108,9 +108,9 @@ export const DefaultExample = () => {
         onPointerDown={() => console.log('DefaultExample Outside Clicked!')}
         excludeRefs={[excludeRef]}
       >
-        <div>외부 영역 클릭 후 콘솔을 확인해주세요.</div>
+        <div>Click outside the element and check the console.</div>
       </OutsidePointerDownHandler>
-      <div ref={excludeRef} style={excludeStyle}>외부 클릭 및 터치 감지를 제외할 요소의 ref 배열입니다.</div>
+      <div ref={excludeRef} style={excludeStyle}>ref array for elements to exclude from outside click/touch detection.</div>
     </div>
   );
 };
@@ -130,7 +130,7 @@ const Example = () => {
   return (
     <OutsidePointerDownHandler
       as="ul"
-      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      placeholder="Click outside the element and check the console."
       onPointerDown={() => console.log('As-Example Outside Clicked!')}
     >
       <li>List Item1</li>
@@ -144,7 +144,7 @@ export const AsExample = () => {
   return (
     <OutsidePointerDownHandler
       as="ul"
-      placeholder="외부 영역 클릭 후 콘솔을 확인해주세요."
+      placeholder="Click outside the element and check the console."
       onPointerDown={() => console.log('As-Example Outside Clicked!')}
     >
       <li>List Item1</li>
@@ -167,7 +167,7 @@ const AsChildExample = () => {
       asChild={true}
       onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
     >
-      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+      <input type="text" placeholder="Click outside the element and check the console." />
     </OutsidePointerDownHandler>
   );
 };
@@ -179,7 +179,7 @@ export const AsChildExample = () => {
       asChild={true}
       onPointerDown={() => console.log('AsChild-Example Outside Clicked!')}
     >
-      <input type="text" placeholder="외부 영역 클릭 후 콘솔을 확인해주세요." />
+      <input type="text" placeholder="Click outside the element and check the console." />
     </OutsidePointerDownHandler>
   );
 };

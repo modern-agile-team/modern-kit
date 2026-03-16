@@ -3,26 +3,26 @@ import { AspectRatio } from '@modern-kit/react';
 
 # AspectRatio
 
-주어진 **[aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)** 비율을 맞춰주기 위해 선언적으로 사용하는 유틸 컴포넌트입니다.
+A utility component for declaratively matching a given **[aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)**.
 
-미리 영역을 확보하여 `Layout Shift`를 방지하는데 효과적입니다.
+Effectively prevents `Layout Shift` by reserving space in advance.
 
 <br />
 
-### 다형성(polymorphism)
-`AspectRatio` 컴포넌트는 다형성을 위해 `as` 속성을 지원합니다.
+### Polymorphism
+The `AspectRatio` component supports the `as` prop for polymorphism.
 
-- 기본적으로 `div` 태그로 자식 요소를 감싸서 렌더링하며, `as` 속성을 통해 감싸는 `Wrapper` 요소의 태그를 변경해 렌더링할 수 있습니다. (ex. div -> article)
-- 이때, 해당 `Wrapper` 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+- By default, it wraps children in a `div`, and the `as` prop allows changing the wrapper element tag (e.g., div → article).
+- The `aspect-ratio` CSS property is applied to the wrapper element to reserve space.
 
-### 합성(Composition), 렌더링 위임(Rendering Delegation)
-`AspectRatio` 컴포넌트는 `asChild` 속성을 통해 `합성(Composition)`, `렌더링 위임(Rendering Delegation)` 패턴을 지원합니다.
+### Composition & Rendering Delegation
+The `AspectRatio` component supports the Composition and Rendering Delegation patterns via the `asChild` prop.
 
-- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 렌더링합니다. 
-- 이때, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
-  - Slot은 자식으로 `단일 요소`만 허용됩니다.
-  - Slot은 자식으로 컴포넌트가 올 경우 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 정상적으로 동작하지 않습니다.
-  - `asChild` 속성을 사용 할 경우 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 문서를 참고해주세요.
+- When `asChild` is `true`, it renders the child element directly via **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)**.
+- The `aspect-ratio` CSS property is applied directly to the child element.
+  - Slot only accepts a single child element.
+  - If a component is passed as a child to Slot, it must support `forwardRef` and spread `props`. Otherwise it will not work correctly.
+  - When using the `asChild` prop, please refer to the **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** documentation.
 
 <br />
 
@@ -49,17 +49,17 @@ const AspectRatio: PolyForwardComponent<"div", AspectRatioProps, React.ElementTy
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `JSX.Element` | - | 자식 요소 |
-| `ratio` | `number` | - | aspect-ratio 비율 값 |
-| `asChild` | `boolean` | `false` | true이면 Slot을 통해 자식 요소를 렌더링 |
-| `style` | `CSSProperties` | - | 인라인 스타일 |
-| `className` | `string` | - | CSS 클래스명 |
+| `children` | `JSX.Element` | - | Child element |
+| `ratio` | `number` | - | The aspect ratio value |
+| `asChild` | `boolean` | `false` | When true, renders the child element via Slot |
+| `style` | `CSSProperties` | - | Inline style |
+| `className` | `string` | - | CSS class name |
 
 <br />
 
 ## Usage
 ### Default
-- 기본적으로 `div` 요소에 감싸지며 해당 `div`에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+- By default, wraps children in a `div` and applies the `aspect-ratio` CSS property to reserve space.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
 
@@ -77,7 +77,7 @@ const Example = () => {
 ```
 
 ### as
-- `as` 속성을 통해 감싸는 요소를 `div`가 아닌 특정 요소로 변경해 렌더링할 수 있으며, 해당 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+- The `as` prop allows rendering with a specific element instead of `div`, applying `aspect-ratio` to that element to reserve space.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
 
@@ -95,7 +95,7 @@ const Example = () => {
 ```
 
 ### asChild
-- `asChild` 속성이 `true`라면 **[Slot](https://modern-agile-team.github.io/modern-kit/docs/react/components/Slot)** 을 통해 자식 요소를 그대로 렌더링하고, 자식 요소에 `aspect-ratio` 속성을 적용해 영역을 확보합니다.
+- When `asChild` is `true`, it renders the child element as-is via Slot and applies `aspect-ratio` directly to the child element.
 ```tsx title="typescript"
 import { AspectRatio } from '@modern-kit/react'
 
@@ -141,6 +141,5 @@ export const Example = () => {
 ## Example
 
 <Example />
-
 
 

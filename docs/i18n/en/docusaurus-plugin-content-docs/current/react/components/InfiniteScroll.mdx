@@ -3,14 +3,14 @@ import { InfiniteScroll } from '@modern-kit/react';
 
 # InfiniteScroll
 
-`무한 스크롤` 기능을 선언적으로 활용 할 수 있는 컴포넌트입니다.
+A component for declaratively implementing infinite scroll functionality.
 
-`@modern-kit/react`의 **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 훅을 사용하여 구현되었습니다.
+Built using the **[useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** hook from `@modern-kit/react`.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InfiniteScroll/index.tsx)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/InfiniteScroll/index.tsx)
 
 <br />
 
@@ -44,11 +44,11 @@ const InfiniteScroll: ({
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | 렌더링할 자식 요소 |
-| `onScrollAction` | `(entry: IntersectionObserverEntry) => void` | - | 스크롤 트리거 시 호출되는 콜백 함수 |
-| `triggerPosition` | `'before' \| 'after'` | `'after'` | 트리거 요소의 위치 |
-| `enabled` | `boolean` | `true` | 무한 스크롤 활성화 여부 |
-| `root` | `Element \| null` | `null` | IntersectionObserver root 요소 |
+| `children` | `React.ReactNode` | - | Child elements to render |
+| `onScrollAction` | `(entry: IntersectionObserverEntry) => void` | - | Callback function called when scroll trigger fires |
+| `triggerPosition` | `'before' \| 'after'` | `'after'` | Position of the trigger element |
+| `enabled` | `boolean` | `true` | Whether to enable infinite scroll |
+| `root` | `Element \| null` | `null` | IntersectionObserver root element |
 | `rootMargin` | `string` | `'0px'` | IntersectionObserver rootMargin |
 | `threshold` | `number \| number[]` | `0` | IntersectionObserver threshold |
 

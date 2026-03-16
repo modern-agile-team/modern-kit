@@ -2,16 +2,16 @@ import { LazyImage } from '@modern-kit/react';
 
 # LazyImage
 
-**[@modern-kit/react/useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** 를 활용해 이미지가 `viewport`에 노출될 때 할당된 이미지를 `Lazy Loading(지연 로딩)` 하는 이미지 컴포넌트입니다.
+An image component that uses **[@modern-kit/react/useIntersectionObserver](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useIntersectionObserver)** to lazy load images when they enter the viewport.
 
-Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고)
+Intersection Observer options can be configured (see `Note` below).
 
-만약, 이미지 `load` 중에 `특정 Fallback 컴포넌트`를 노출하고 싶다면, 이를 선언적으로 활용하기 위해 `LazyImage를 확장`해서 만든 **[FallbackLazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/FallbackLazyImage)** 가 있습니다.
+If you want to display a specific fallback component while an image is loading, use the **[FallbackLazyImage component](https://modern-agile-team.github.io/modern-kit/docs/react/components/FallbackLazyImage)**, which extends `LazyImage` for declarative use.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/LazyImage/index.tsx)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/LazyImage/index.tsx)
 
 <br />
 
@@ -19,7 +19,7 @@ Intersection Observer Option을 설정할 수 있습니다.(하단 `Note` 참고
 ```ts title="typescript"
 interface IntersectionObserverInit {
   root?: Element | Document | null;
-  rootMargin?: string; // default: '100px 0px'
+  rootMargin?: string;
   threshold?: number | number[];
 }
 ```
@@ -51,7 +51,7 @@ const Example = () => {
       {/* ... */}
     </div>
   );
-}; 
+};
 ```
 
 <br />
@@ -67,7 +67,7 @@ export const Example = () => {
           textAlign: 'center',
           fontSize: '2rem',
         }}>
-        스크롤 해주세요.
+        Scroll down.
       </div>
       <LazyImage
         src={

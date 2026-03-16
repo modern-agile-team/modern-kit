@@ -1,0 +1,93 @@
+# Portal
+
+The `Portal` component uses `React.createPortal` to render children into a DOM node outside the parent component's DOM hierarchy.
+
+By default, the `Portal` component renders children into `document.body`. However, by passing the `containerRef` prop, children can be rendered into a specific DOM element other than `document.body`.
+
+It also supports nested portals. Nesting multiple `Portal` components creates a nested portal DOM hierarchy.
+
+The `Portal` component is ideal for use with features like modals, dialogs, and tooltips.
+
+[React CreatePortal](https://react.dev/reference/react-dom/createPortal#rendering-a-modal-dialog-with-a-portal) Please refer to the following documentation.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Portal/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function Portal({
+  children,
+  containerRef,
+}: {
+  children: React.ReactNode;
+  containerRef?: React.RefObject<HTMLElement | null>;
+}): JSX.Element;
+```
+
+<br />
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Child component to render via portal |
+| `containerRef` | `React.RefObject<HTMLElement \| null>` | `document.body` | Ref to the DOM container where children will be rendered |
+
+## Usage
+### Default
+
+```tsx title="typescript"
+import { Portal } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <Portal>
+      <p>Example Portal</p>
+    </Portal>
+  );
+};
+```
+
+### Container
+
+```tsx title="typescript"
+import { Portal } from '@modern-kit/react'
+
+const Example = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <div>
+      <Portal containerRef={ref}>
+        <p>Example Portal</p>
+      </Portal>
+
+      <div id="outer" ref={ref} />
+    </div>
+  );
+};
+```
+
+### Nested
+
+```tsx title="typescript"
+import { Portal } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <Portal>
+      <p>Default Portal</p>
+      <Portal>
+        <p>Nested Portal1</p>
+        <Portal>
+          <p>Nested Portal2</p>
+        </Portal>
+      </Portal>
+    </Portal>
+  );
+};
+```

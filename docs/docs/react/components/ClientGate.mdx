@@ -21,6 +21,8 @@ import { ClientGate } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/ClientGate/index.tsx)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 
@@ -31,6 +33,15 @@ interface ClientGateProps {
 
 function ClientGate({ fallback, children }: ClientGateProps): JSX.Element;
 ```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | 클라이언트 환경에서 렌더링할 컴포넌트 |
+| `fallback` | `React.ReactNode` | `undefined` | 서버 환경에서 렌더링할 컴포넌트 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

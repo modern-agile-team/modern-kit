@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import { ClientGate } from '@modern-kit/react';
+
+# ClientGate
+
+`ClientGate` is a component that renders different content based on the rendering environment:
+- Client Side: renders the `children` component
+- Server Side: renders the `fallback` component
+
+In a `CSR (Client-Side Rendering)` environment, `children` are rendered even before the component mounts.
+
+When detecting client-side rendering with a typical `useEffect`, the following issues can occur:
+- Fallback is displayed on the initial render
+- Double rendering occurs — fallback first, then re-rendering with `children` after `useEffect` runs
+
+Uses `useSyncExternalStore` to prevent hydration mismatches between server and client.
+- https://tkdodo.eu/blog/avoiding-hydration-mismatches-with-use-sync-external-store#usesyncexternalstore
+
+<br />
+
+## Code
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/ClientGate/index.tsx)
+
+<br />
+
+## Interface
+```ts title="typescript"
+
+interface ClientGateProps {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+}
+
+function ClientGate({ fallback, children }: ClientGateProps): JSX.Element;
+```
+
+### Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Component rendered on the client side |
+| `fallback` | `React.ReactNode` | `undefined` | Component rendered on the server side |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { ClientGate } from '@modern-kit/react'
+
+const Example = () => {
+  return (
+    <ClientGate fallback={<div>Server environment.</div>}>
+      <div>Client environment.</div>
+    </ClientGate>
+  );
+};
+```
+
+## Example
+export const Example = () => {
+  return (
+    <ClientGate fallback={<div>Server environment.</div>}>
+      <div>Client environment.</div>
+    </ClientGate>
+  );
+};
+
+<Example />

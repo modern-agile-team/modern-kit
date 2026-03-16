@@ -3,9 +3,9 @@ import { Delay } from '@modern-kit/react';
 
 # Delay
 
-지정된 시간이 지난 후에 `자식 컴포넌트`를 렌더링하는 컴포넌트입니다.
+A component that renders its children after a specified delay.
 
-지연 시간 동안에는 `fallback` 컴포넌트가 렌더링됩니다.
+During the delay, the `fallback` component is rendered.
 
 <br />
 
@@ -30,9 +30,9 @@ const Delay: ({ children, delay, fallback }: DelayProps) => JSX.Element;
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | 지연 후 렌더링할 자식 컴포넌트 |
-| `delay` | `number` | - | 렌더링 지연 시간 (ms) |
-| `fallback` | `React.ReactNode` | `undefined` | 지연 시간 동안 렌더링할 컴포넌트 |
+| `children` | `React.ReactNode` | - | The child component to render after the delay |
+| `delay` | `number` | - | Rendering delay time in milliseconds |
+| `fallback` | `React.ReactNode` | `undefined` | Component rendered during the delay |
 
 <br />
 
@@ -46,10 +46,10 @@ const Example = () => {
       delay={2000}
       fallback={
         <div>
-          fallback입니다. 2초 뒤에 children이 렌더링됩니다.
+          Fallback. Children will render after 2 seconds.
         </div>
       }>
-      <div>children입니다.</div>
+      <div>Children content.</div>
     </Delay>
   );
 };
@@ -63,15 +63,14 @@ export const Example = () => {
       delay={2000}
       fallback={
         <div>
-          fallback입니다. 2초 뒤에 children이 렌더링됩니다.
+          Fallback. Children will render after 2 seconds.
         </div>
       }>
-      <div>children입니다.</div>
+      <div>Children content.</div>
     </Delay>
   );
 };
 
 <Example />
-
 
 

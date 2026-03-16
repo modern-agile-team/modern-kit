@@ -3,7 +3,7 @@ import { DebounceHandler } from '@modern-kit/react';
 
 # DebounceHandler
 
-자식 컴포넌트의 이벤트 핸들러에 디바운스(debounce)를 선언적으로 적용할 수 있는 컴포넌트입니다.
+A component that declaratively applies debounce to event handlers of child components.
 
 <br />
 
@@ -30,10 +30,10 @@ const DebounceHandler: ({ children, capture, wait, options, }: DebounceHandlerPr
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `JSX.Element` | - | 디바운스를 적용할 자식 요소 |
-| `capture` | `string` | - | 디바운스를 적용할 이벤트 핸들러 이름 (예: `"onClick"`) |
-| `wait` | `number` | - | 디바운스 대기 시간 (ms) |
-| `options` | `DebounceOptions` | `undefined` | 디바운스 옵션 |
+| `children` | `JSX.Element` | - | The child element to apply debounce to |
+| `capture` | `string` | - | The event handler name to apply debounce to (e.g., `"onClick"`) |
+| `wait` | `number` | - | Debounce wait time in milliseconds |
+| `options` | `DebounceOptions` | `undefined` | Debounce options |
 
 <br />
 
@@ -46,7 +46,7 @@ const Example = () => {
   const onClick = () => {
     console.log('debounce');
   };
-  
+
   return (
     <DebounceHandler capture="onClick" wait={500}>
       <button onClick={onClick}>Button</button>
@@ -88,7 +88,7 @@ const Example = () => {
 
 ## Example
 ### Button Click Case
-<p style={{ marginBottom: '4px' }}>브라우저의 개발자 도구의 콘솔에서 동작을 확인하세요.</p>
+<p style={{ marginBottom: '4px' }}>Check the behavior in the browser developer console.</p>
 <DebounceHandler capture="onClick" wait={500}>
   <button onClick={() => {
     console.log('debounce');

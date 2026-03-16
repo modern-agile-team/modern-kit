@@ -10,7 +10,7 @@ CLAUDE가 참고해야하는 docs/react MDX 파일 작성 포맷입니다.
 import { useHookName } from '@modern-kit/react';
 // 필요한 React import 추가 (useState, useEffect 등)
 
-# useHookName
+# useHookName (훅의 경우, 컴포넌트의 경우는 ComponentName)
 
 훅에 대한 한 줄 설명 (한국어).
 
@@ -40,7 +40,7 @@ ref: React.RefObject<T | null>;
 
 <br />
 
-### Options (옵션이 있을 때)
+### Options (옵션이 있을 때, 컴포넌트의 경우 Props)
 
 | Name      | Type    | Default  | Description   |
 | --------- | ------- | -------- | ------------- |
@@ -213,3 +213,13 @@ docs/i18n/en/docusaurus-plugin-content-docs/current/react/hooks/useHookName.mdx
 
 영어 번역본은 한국어 파일과 **동일한 구조**를 유지하며, 설명 텍스트만 영어로 작성합니다.
 코드 블록, 섹션 헤더(`## Code`, `## Interface`, `## Remarks`, `## Usage` 등), 파일 경로는 그대로 유지합니다.
+
+---
+
+## 실제 구현 코드 참고 방법
+
+아래 경로에 훅/컴포넌트 구현 코드가 있고, 해당 코드를 참고해서 작성해주세요.
+주석에 작성된 내용을 참고해서 작성해주세요.
+
+packages/react/src/hooks/useHookName/index.ts
+packages/react/src/components/ComponentName/index.tsx

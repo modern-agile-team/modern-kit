@@ -2,23 +2,23 @@ import { Iterator } from '@modern-kit/react';
 
 # Iterator
 
-주어진 배열을 반복하면서, 각 아이템을 렌더링하는 컴포넌트입니다.
+A component that iterates over a given array and renders each item.
 
-`itemKey`로 문자열을 넘겨주면, 각 요소에서 해당 프로퍼티 key의 값을 각 요소의 `unique key`로 설정합니다.
+When a string is passed as `itemKey`, the value of that property on each element is used as its unique key.
 
-문자열/숫자 배열의 경우 itemKey를 넘기지 않아도 자동으로 `${item}_${index}`형태로 지정됩니다.
+For arrays of strings or numbers, keys are automatically assigned in the format `${item}_${index}` even without specifying `itemKey`.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Iterator/index.tsx)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/Iterator/index.tsx)
 
 <br />
 
 ## Interface
 ```ts title="typescript"
 interface IteratorProps<T> {
-  items: T[] | readonly T[];
+  items: T[] | readonly T[] | undefined;
   itemKey?: T extends Record<PropertyKey, any> ? keyof T : string;
   renderItem: (item: T, index: number) => JSX.Element;
 }
@@ -36,9 +36,9 @@ const Iterator: <T>({
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `items` | `T[] \| readonly T[]` | - | 렌더링할 배열 |
-| `itemKey` | `keyof T \| string` | - | 각 요소의 고유 키로 사용할 프로퍼티명 |
-| `renderItem` | `(item: T, index: number) => JSX.Element` | - | 각 항목을 렌더링하는 함수 |
+| `items` | `T[] \| readonly T[] \| undefined` | - | Array to iterate and render |
+| `itemKey` | `keyof T \| string` | - | Property name to use as the unique key for each element |
+| `renderItem` | `(item: T, index: number) => JSX.Element` | - | Function to render each item |
 
 ## Usage
 ```tsx title="typescript"

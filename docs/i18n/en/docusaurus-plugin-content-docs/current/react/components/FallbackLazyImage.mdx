@@ -2,16 +2,16 @@ import { FallbackLazyImage } from '@modern-kit/react';
 
 # FallbackLazyImage
 
-**[LazyImage 컴포넌트](https://modern-agile-team.github.io/modern-kit/docs/react/components/LazyImage)** 를 확장해 이미지 `load 여부`에 따른 `Fallback 컴포넌트`를 렌더링 하는 컴포넌트 입니다.
+An extension of the **[LazyImage component](https://modern-agile-team.github.io/modern-kit/docs/react/components/LazyImage)** that renders a `Fallback` component based on the image load state.
 
-`src`와 더불어 `width`, `height`, `fallback` props를 필수로 넘겨줘야 하며, fallback의 크기는 해당 width, height와 동일하게 맞추는 것을 권장합니다.
+In addition to `src`, the `width`, `height`, and `fallback` props are required. It is recommended to match the `fallback` size to the specified `width` and `height`.
 
-`duration` props는 실제 이미지가 load 된 후, fallback 컴포넌트에서 실제 이미지로 전환 될 때 사용하는 **[transition-duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)** 값입니다. 
+The `duration` prop is the **[transition-duration](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration)** value used when transitioning from the fallback component to the actual image after it has loaded.
 
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/FallbackLazyImage/index.tsx)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/components/FallbackLazyImage/index.tsx)
 
 <br />
 
@@ -48,11 +48,11 @@ const FallbackLazyImage: React.ForwardRefExoticComponent<
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `src` | `string` | - | 이미지 URL |
-| `fallback` | `JSX.Element` | - | 이미지 로드 중 표시할 Fallback 컴포넌트 |
-| `width` | `string \| number` | - | 이미지 너비 |
-| `height` | `string \| number` | - | 이미지 높이 |
-| `duration` | `CSSProperties['transitionDuration']` | `'0.2s'` | Fallback에서 이미지로 전환 시 transition-duration |
+| `src` | `string` | - | Image URL |
+| `fallback` | `JSX.Element` | - | Fallback component displayed while the image is loading |
+| `width` | `string \| number` | - | Image width |
+| `height` | `string \| number` | - | Image height |
+| `duration` | `CSSProperties['transitionDuration']` | `'0.2s'` | transition-duration when switching from fallback to the actual image |
 
 ## Usage
 ### Default
@@ -63,8 +63,8 @@ import img1 from '../assets/img1.png';
 const Example = () => {
   const skeletonStyle = useMemo(
     () => ({
-      width: '400px', // 실제 img 크기와 동일하게 맞춰주세요.
-      height: '400px', // 실제 img 크기와 동일하게 맞춰주세요.
+      width: '400px', // Match the actual image size.
+      height: '400px', // Match the actual image size.
       backgroundColor: 'green',
     }),
     []
@@ -84,7 +84,7 @@ const Example = () => {
 ```
 
 ### Wrapper Styling: css
-- FallbackLazyImage 컴포넌트 내 `Image Wrapper`는 기본적으로 `lazy-image-wrapper` 클래스를 갖습니다. 해당 클래스를 활용하여 스타일을 제어 할 수 있습니다.
+- The `Image Wrapper` inside the `FallbackLazyImage` component has a default class `lazy-image-wrapper`. You can use this class to control its styling.
 ```css
 /* css stylesheet */
 .lazy-image-wrapper {
@@ -101,7 +101,7 @@ const Example = () => {
 ```
 
 ### Wrapper Styling: css-in-js
-- `css-in-js`의 `상속`기능을 활용하여 새로운 컴포넌트를 작성 할 수 있습니다.
+- You can create a new styled component using the inheritance feature of `css-in-js`.
 ```tsx
 const Image = styled(FallbackLazyImage)`
   border-radius: 12px;
@@ -132,7 +132,7 @@ export const Example = () => {
           textAlign: 'center',
           fontSize: '2rem',
         }}>
-        스크롤 해주세요.
+        Scroll down.
       </div>
       <FallbackLazyImage
         fallback={<div style={skeletonStyle} />}

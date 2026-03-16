@@ -2,25 +2,25 @@ import { Slot, Slottable } from '@modern-kit/react'
 
 # Slot
 
-주어진 Props를 직계 자식 컴포넌트에 병합하고, 자식 컴포넌트를 렌더링하는 컴포넌트입니다.
+A component that merges given props into its immediate child component and renders it.
 
-Slot은 부모 컴포넌트의 기능을 자식 컴포넌트와 합성하는 `합성(Composition)` 패턴을 구현합니다. 이를 통해:
+Slot implements the Composition pattern that combines a parent component's features with its child. This allows you to:
 
-- 부모 컴포넌트의 `props`, `ref`, `이벤트 핸들러` 등을 자식 컴포넌트에 전달할 수 있습니다
-- 자식 컴포넌트의 구현을 변경하지 않고도 새로운 기능을 추가할 수 있습니다
-- 컴포넌트 간의 결합도를 낮추고 재사용성을 높일 수 있습니다
+- Pass the parent component's `props`, `ref`, event handlers, etc. to the child component
+- Add new functionality without modifying the child component's implementation
+- Reduce coupling between components and improve reusability
 
-예를 들어 **[InView](https://modern-agile-team.github.io/modern-kit/docs/react/components/InView)** 나 **[AspectRatio](https://modern-agile-team.github.io/modern-kit/docs/react/components/AspectRatio)** 와 같은 컴포넌트에서 `asChild` prop을 사용해서, 래퍼 요소 없이 자식 컴포넌트에 직접 기능을 주입할 수 있습니다.
+For example, in components like **[InView](https://modern-agile-team.github.io/modern-kit/docs/react/components/InView)** or **[AspectRatio](https://modern-agile-team.github.io/modern-kit/docs/react/components/AspectRatio)**, using the `asChild` prop lets you inject functionality directly into the child without a wrapper element.
 
-Slot은 아래와 같은 특징이 있습니다.
-1. 자식 요소로 `단일 요소`만 허용됩니다.
+Slot has the following characteristics.
+1. Only a single child element is accepted.
 ```tsx title="typescript"
-// 가능
+// Allowed
 <Slot>
   <div>Contents</div>
 </Slot>
 
-// 가능
+// Allowed
 <Slot>
   <div>
     <div>Contents1</div>
@@ -30,14 +30,14 @@ Slot은 아래와 같은 특징이 있습니다.
 ```
 
 ```tsx title="typescript"
-// 불가능
+// Not allowed
 <Slot>
   <div>Contents1</div>
   <div>Contents2</div>
 </Slot>
 ```
 
-2. 자식 요소로 컴포넌트가 온다면 해당 컴포넌트는 필수적으로 `forwardRef`, `props`를 허용해야 합니다. 허용하지 않으면 기능이 정상적으로 동작하지 않습니다.
+2. If a component is passed as a child, it must support `forwardRef` and spread `props`. Otherwise the functionality will not work correctly.
 - **[radix-ui#your-component-must-spread-props](https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-spread-props)**
 - **[radix-ui#your-component-must-forward-ref](https://www.radix-ui.com/primitives/docs/guides/composition#your-component-must-forward-ref)**
 ```tsx title="typescript"

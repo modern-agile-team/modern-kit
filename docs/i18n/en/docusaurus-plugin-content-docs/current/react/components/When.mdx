@@ -3,9 +3,9 @@ import { When } from '@modern-kit/react';
 
 # When
 
-condition prop이 `true`면 자식 컴포넌트를 렌더링하고, `false`면 렌더링하지 않는 컴포넌트입니다.
+A component that renders its children when the `condition` prop is `true`, and renders nothing (or a fallback) when it is `false`.
 
-condition prop으로 `boolean을 반환하는 함수`도 허용됩니다.
+The `condition` prop also accepts a function that returns a `boolean`.
 
 <br />
 
@@ -33,9 +33,9 @@ const When: ({ children, condition, fallback }: WhenProps) => JSX.Element;
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode` | - | 조건이 true일 때 렌더링할 자식 컴포넌트 |
-| `condition` | `boolean \| (() => boolean)` | - | 렌더링 조건 |
-| `fallback` | `React.ReactNode` | `undefined` | 조건이 false일 때 렌더링할 컴포넌트 |
+| `children` | `React.ReactNode` | - | Child component rendered when condition is true |
+| `condition` | `boolean \| (() => boolean)` | - | The condition for rendering |
+| `fallback` | `React.ReactNode` | `undefined` | Component rendered when condition is false |
 
 ## Usage
 ```tsx title="typescript"
