@@ -1,0 +1,86 @@
+import { useVisibilityChange } from '@modern-kit/react';
+
+# useVisibilityChange
+
+A custom hook that registers callback functions to be called when the document's visibility state changes.
+
+When `document.visibilityState` becomes visible (`visible`), the `onShow` callback is called. When it becomes hidden (`hidden`), the `onHide` callback is called.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useVisibilityChange/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+type VisibilityChangeCallbackAction = (
+  event: Event,
+  visibilityState: DocumentVisibilityState
+) => void;
+
+interface useVisibilityChangeProps {
+  onShow?: VisibilityChangeCallbackAction;
+  onHide?: VisibilityChangeCallbackAction;
+  enabled?: boolean; // default: true
+}
+```
+```ts title="typescript"
+function useVisibilityChange({
+  onShow,
+  onHide,
+  enabled = true,
+}: UseVisibilityChangeProps = {}): void;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onShow` | `VisibilityChangeCallbackAction` | - | Callback called when the document becomes visible (`visible`) |
+| `onHide` | `VisibilityChangeCallbackAction` | - | Callback called when the document becomes hidden (`hidden`) |
+| `enabled` | `boolean` | `true` | Whether visibility change detection is enabled |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useVisibilityChange } from '@modern-kit/react';
+
+const Example = () => {
+  useVisibilityChange({
+    onShow: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */},
+    onHide: (event: Event, visibilityState: DocumentVisibilityState) => { /* ... */}
+  });
+
+  return (
+    <div>{/* ... */}</div>
+  )
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  useVisibilityChange({
+    onShow: () => {
+      window.alert('Welcome back to the page!');
+    },
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      Try switching to another tab and coming back!
+    </div>
+  )
+};
+
+<Example />

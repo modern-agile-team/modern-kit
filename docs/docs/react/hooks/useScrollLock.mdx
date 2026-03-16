@@ -2,7 +2,7 @@ import { useScrollLock } from '@modern-kit/react';
 
 # useScrollLock
 
-특정 요소의 스크롤을 `lock`, `unlock` 할 수 있는 커스텀 훅입니다. 
+특정 요소의 스크롤을 `lock`, `unlock` 할 수 있는 커스텀 훅입니다.
 
 `Modal`과 같은 컴포넌트가 렌더링 됐을 때, 배경 요소(`ex. document.body`)의 스크롤을 잠글 때 활용될 수 있습니다.
 
@@ -10,13 +10,16 @@ import { useScrollLock } from '@modern-kit/react';
 
 `unmount` 시에는 타겟 요소의 원래 `overflow` 값으로 다시 돌려놓습니다.
 
-
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollLock/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 interface UseScrollLockProps {
   autoLock?: boolean;
@@ -31,8 +34,30 @@ const useScrollLock: <T extends HTMLElement>({
 };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `autoLock` | `boolean` | `true` | 마운트 시 자동으로 스크롤을 잠글지 여부 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.MutableRefObject<Nullable<T>>` | 스크롤을 잠글 대상 요소에 연결할 ref. 연결하지 않으면 `document.body`가 대상이 됩니다. |
+| `lock` | `() => void` | 스크롤을 잠그는 함수 |
+| `unlock` | `() => void` | 스크롤 잠금을 해제하는 함수 |
+
+<br />
+
 ## Usage
+
 ### document.body
+
 ```tsx title="typescript"
 import { useScrollLock } from '@modern-kit/react';
 
@@ -46,6 +71,7 @@ const Example = () => {
 <br />
 
 ### Specific element
+
 ```tsx title="typescript"
 import { useScrollLock } from '@modern-kit/react';
 
@@ -74,6 +100,8 @@ const Example = () => {
   );
 };
 ```
+
+<br />
 
 ### Example
 

@@ -9,6 +9,8 @@ import { useFocus } from '@modern-kit/react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useFocus/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 
@@ -28,6 +30,27 @@ function useFocus<T extends HTMLElement>({
   onBlur,
 }: UseFocusProps = {}): UseFocusReturnType<T>
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `onFocus` | `(event: FocusEvent) => void` | - | 요소가 포커스를 받을 때 호출되는 콜백 |
+| `onBlur` | `(event: FocusEvent) => void` | - | 요소가 포커스를 잃을 때 호출되는 콜백 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 대상 요소에 연결할 ref |
+| `isFocus` | `boolean` | 대상 요소가 현재 포커스 상태인지 여부 |
+| `setFocus` | `() => void` | 대상 요소에 프로그래매틱하게 포커스를 부여하는 함수 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

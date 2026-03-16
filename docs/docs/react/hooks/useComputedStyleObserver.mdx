@@ -13,6 +13,8 @@ import { useState } from 'react';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useComputedStyleObserver/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface UseComputedStyleObserverReturnType<T extends HTMLElement> {
@@ -26,6 +28,26 @@ function useComputedStyleObserver<T extends HTMLElement>(
   key: string
 ): UseComputedStyleObserverReturnType<T>;
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `key` | `string` | 관찰할 CSS 스타일 속성 키 (예: `'width'`, `'color'`, `'font-size'`) |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `ref` | `React.RefObject<T \| null>` | 관찰할 타겟 요소에 연결할 ref 객체입니다. |
+| `value` | `string` | 현재 관찰 중인 computed style 값입니다. |
+| `setValue` | `(value: string) => void` | computed style 값을 직접 변경하는 함수입니다. |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

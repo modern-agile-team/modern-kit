@@ -1,0 +1,94 @@
+import { useFocus } from '@modern-kit/react';
+
+# useFocus
+
+A custom hook that returns the focus state of a target element and allows defining actions based on the focus state.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useFocus/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+
+interface UseFocusProps {
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
+}
+
+interface UseFocusReturnType<T extends HTMLElement> {
+  ref: React.RefObject<T | null>;
+  isFocus: boolean;
+  setFocus: () => void;
+}
+
+function useFocus<T extends HTMLElement>({
+  onFocus,
+  onBlur,
+}: UseFocusProps = {}): UseFocusReturnType<T>
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `onFocus` | `(event: FocusEvent) => void` | - | Callback invoked when the element receives focus |
+| `onBlur` | `(event: FocusEvent) => void` | - | Callback invoked when the element loses focus |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the target element |
+| `isFocus` | `boolean` | Whether the target element is currently focused |
+| `setFocus` | `() => void` | Function to programmatically focus the target element |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useFocus } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, isFocus, setFocus } = useFocus<HTMLInputElement>({
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
+  });
+
+  return (
+    <div>
+      <input ref={ref} />
+      <button onClick={() => setFocus()}>focus trigger</button>
+      <div>{isFocus ? 'Focus' : 'Blur'}</div>
+    </div>
+  )
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { ref, isFocus, setFocus } = useFocus({
+    onFocus: () => console.log("focus"),
+    onBlur: () => console.log("blur"),
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <input ref={ref} placeholder="Click to focus" />
+        <button onClick={() => setFocus()}>Focus trigger</button>
+      </div>
+      <span>Status: {isFocus ? 'Focus' : 'Blur'}</span>
+    </div>
+  )
+};
+
+<Example />

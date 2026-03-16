@@ -1,0 +1,183 @@
+import { useState } from 'react';
+import { useScrollEvent } from '@modern-kit/react';
+
+# useScrollEvent
+
+`useScrollEvent` is a React custom hook that tracks the scroll position of a specific element or the window. It provides scroll-related information such as scroll direction, progress, and position.
+
+You can configure the throttle delay for scroll events, whether to ignore the leading event (leading), whether to ignore the trailing event (trailing), and whether to enable scroll tracking (enabled).
+
+- Use the `throttleDelay` option to set the throttling delay for scroll events.
+- Use the `throttleLeading` option to control whether the leading scroll event fires during throttling.
+- Use the `throttleTrailing` option to control whether the trailing scroll event fires during throttling.
+- Use the `enabled` option to enable or disable scroll tracking.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollEvent/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseScrollProps {
+  throttleDelay?: number; // default: 0
+  throttleLeading?: boolean; // default: true
+  throttleTrailing?: boolean; // default: true
+  enabled?: boolean; // default: true
+}
+
+interface ScrollState {
+  scrollX: number;
+  scrollY: number;
+  scrollWidth: number;
+  scrollHeight: number;
+  direction: {
+    y: 'up' | 'down' | 'none'; // default: 'none'
+    x: 'left' | 'right' | 'none'; // default: 'none'
+  };
+  progress: {
+    y: number;
+    x: number;
+  };
+}
+```
+
+```ts title="typescript"
+function useScrollEvent<T extends HTMLElement>({
+  throttleDelay, // default: 0
+  throttleLeading, // default: true
+  throttleTrailing, // default: true
+  enabled, // default: true
+}: UseScrollProps = {}): {
+  ref: React.RefObject<T | null>;
+  scrollState: ScrollState;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `throttleDelay` | `number` | `0` | Throttling delay for scroll events (milliseconds) |
+| `throttleLeading` | `boolean` | `true` | Whether to fire the event at the start of the throttle interval |
+| `throttleTrailing` | `boolean` | `true` | Whether to fire the event at the end of the throttle interval |
+| `enabled` | `boolean` | `true` | Whether scroll tracking is enabled |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the element to track scroll. If not attached, tracks the window. |
+| `scrollState` | `ScrollState` | Scroll-related state including position, direction, and progress |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useScrollEvent } from '@modern-kit/react';
+
+const Example = () => {
+  const [enabled, setEnabled] = useState(true);
+  const { scrollState } = useScrollEvent({ enabled });
+
+  // Track scroll position of a specific element
+  const { ref, scrollState: containerScrollState } = useScrollEvent<HTMLDivElement>({
+    throttleDelay: 300,
+    enabled: true,
+  });
+
+  return (
+    <div>
+      <button onClick={() => setEnabled(!enabled)}>
+        {enabled ? 'Disable Scroll Tracking' : 'Enable Scroll Tracking'}
+      </button>
+
+      <div style={{ marginTop: '20px' }}>
+        <h3>Window Scroll Info</h3>
+        <p>Scroll Y: {scrollState.scrollY}px</p>
+        <p>Direction Y: {scrollState.direction.y}</p>
+        <p>Progress Y: {Math.round(scrollState.progress.y * 100)}%</p>
+      </div>
+
+      <div
+        ref={ref}
+        style={{
+          height: '200px',
+          overflow: 'auto',
+          border: '1px solid #ccc',
+          marginTop: '20px',
+          padding: '10px'
+        }}
+      >
+        <div style={{ height: '500px', background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)' }}>
+          <h3>Container Scroll Info</h3>
+          <p>Scroll Y: {containerScrollState.scrollY}px</p>
+          <p>Direction Y: {containerScrollState.direction.y}</p>
+          <p>Progress Y: {containerScrollState.progress.y}%</p>
+          <p>Try scrolling here</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [enabled, setEnabled] = useState(true);
+  const { scrollState } = useScrollEvent({ enabled });
+
+  const { ref, scrollState: containerScrollState } = useScrollEvent({
+    throttleDelay: 300,
+    enabled,
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setEnabled(!enabled)}>
+          {enabled ? 'Disable Scroll Tracking' : 'Enable Scroll Tracking'}
+        </button>
+      </div>
+
+      <div>
+        <h3>Window Scroll Info</h3>
+        <p>Scroll Y: {scrollState.scrollY}px</p>
+        <p>Direction Y: {scrollState.direction.y}</p>
+        <p>Progress Y: {scrollState.progress.y}%</p>
+      </div>
+
+      <div
+        ref={ref}
+        style={{
+          height: '200px',
+          overflow: 'auto',
+          border: '1px solid #ccc',
+          padding: '10px'
+        }}
+      >
+        <div style={{ height: '500px', background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)' }}>
+          <h3>Container Scroll Info</h3>
+          <p>Scroll Y: {containerScrollState.scrollY}px</p>
+          <p>Direction Y: {containerScrollState.direction.y}</p>
+          <p>Progress Y: {containerScrollState.progress.y}%</p>
+          <p>Try scrolling here</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+<Example />

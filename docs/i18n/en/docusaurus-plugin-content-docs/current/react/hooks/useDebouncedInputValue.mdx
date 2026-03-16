@@ -1,0 +1,103 @@
+import { useCallback, useState } from 'react';
+import { useDebouncedInputValue } from '@modern-kit/react'
+
+# useDebouncedInputValue
+
+A custom React hook that manages an `input value` with `debouncing` applied.
+
+Provides the `current input value` and the `debounced value`, along with functions for updating and resetting the value.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebouncedInputValue/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof useDebounce>;
+```
+```ts title="typescript"
+function useDebouncedInputValue(
+  initialValue: string,
+  wait: DebounceParameters[1],
+  options?: DebounceParameters[2]
+): {
+  value: string;
+  debouncedValue: string;
+  onChange: (value: string) => void;
+  onReset: () => void;
+  onClear: () => void;
+};
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `string` | Initial input value |
+| `wait` | `number` | Debounce delay time in milliseconds |
+| `options` | `{ maxWait?: number; leading?: boolean; trailing?: boolean; signal?: AbortSignal }` | Debounce behavior options |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | The current input value. |
+| `debouncedValue` | `string` | The debounced input value. |
+| `onChange` | `(value: string) => void` | A function to update the input value. |
+| `onReset` | `() => void` | A function to reset the input value to its initial value. |
+| `onClear` | `() => void` | A function to clear the input value to an empty string. |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDebouncedInputValue } from '@modern-kit/react';
+
+const Example = () => {
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue(500);
+
+  return (
+    <div>
+      <p>Current value: {value}</p>
+      <p>Debounced value: {debouncedValue}</p>
+      <div>
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
+      </div>
+      <div>
+        <button onClick={onReset}>Reset</button>
+        <button onClick={onClear}>Clear</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { value, debouncedValue, onChange, onReset, onClear } = useDebouncedInputValue("initial", 500);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Current value: {value}</p>
+      <p>Debounced value: {debouncedValue}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <input type='text' onChange={(e) => onChange(e.target.value)} value={value} />
+      </div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={onReset}>Reset</button>
+        <button onClick={onClear}>Clear</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

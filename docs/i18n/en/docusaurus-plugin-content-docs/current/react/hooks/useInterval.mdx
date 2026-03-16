@@ -1,0 +1,131 @@
+import { useInterval } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useInterval
+
+A custom hook for conveniently using `window.setInterval`.
+
+The second argument `options` can be either a `number` or an object of type `{ delay: SetIntervalParameters[1]; enabled?: boolean }`.
+
+If `options` is a `number`, that value becomes the `delay` for `setInterval`. If it is an object, you can additionally control whether `setInterval` runs via the `enabled` option.
+  - 💡 When `options` is a number type, `enabled` defaults to `true`.
+
+Returns `set`, `reset`, and `clear` functions for direct interval control.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useInterval/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface IntervalOptions {
+  delay: number;
+  enabled?: boolean;
+}
+```
+```ts title="typescript"
+// Function overloads
+function useInterval(
+  callback: () => void,
+  options: number
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
+
+function useInterval(
+  callback: () => void,
+  options: IntervalOptions
+): {
+  set: () => void;
+  clear: () => void;
+  reset: () => void;
+};
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `() => void` | Callback function to execute on each interval |
+| `options` | `number \| IntervalOptions` | Interval delay in milliseconds or a `{ delay: number; enabled?: boolean }` options object |
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `delay` | `number` | - | Interval delay in milliseconds |
+| `enabled` | `boolean` | `true` | Whether the interval runs automatically |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `set` | `() => void` | Starts the interval |
+| `clear` | `() => void` | Clears the interval |
+| `reset` | `() => void` | Resets the interval (clears and restarts) |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useInterval } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+
+  const { set, clear, reset } = useInterval(
+    () => setNumber(number + 1),
+    { delay: 1000, enabled: false } // does not auto-start
+  );
+
+  /*
+   * useInterval(() => {
+   *   setNumber(number + 1);
+   * }, 1000); // auto-starts
+   */
+
+  return (
+    <div>
+      <p>{number}</p>
+      <button onClick={set}>set</button>
+      <button onClick={clear}>clear</button>
+      <button onClick={reset}>reset</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const { set, clear, reset } = useInterval(
+    () => setNumber(number + 1),
+    { delay: 1000, enabled: false }
+  );
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Count: {number}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={set}>set</button>
+        <button onClick={clear}>clear</button>
+        <button onClick={reset}>reset</button>
+      </div>
+    </div>
+  );
+};
+
+
+
+<Example />

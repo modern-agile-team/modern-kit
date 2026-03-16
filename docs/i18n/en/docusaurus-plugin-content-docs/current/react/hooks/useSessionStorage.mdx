@@ -1,0 +1,172 @@
+import { useSessionStorage } from '@modern-kit/react';
+
+# useSessionStorage
+
+A custom hook that leverages **[useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore)** (supported from `React v18`) to subscribe to a specific `key` in session storage and synchronize the subscribed data whenever it changes.
+
+You can set an `initialValue` to return when the subscribed `key` does not exist in session storage. In `server-side rendering (SSR)` environments, session storage is not available, so `initialValue` is returned.
+
+`setState` can accept a value directly, or a function. When used as a function, the current state is passed as the argument.
+
+```ts
+const { state, setState, removeState } = useSessionStorage<number[]>({
+  key: 'test',
+  initialValue: [1, 2],
+});
+
+setState([1, 2, 3]);
+setState(state => [...state, 3]);
+```
+
+<br />
+
+Providing an `initialValue` enables more `precise type inference`.
+
+```ts
+const { state, setState } = useSessionStorage<number[]>({
+  key: 'test',
+});
+
+state; // number[] | null
+setState(state => {
+  state; // number[] | null
+});
+```
+
+```ts
+const { state, setState } = useSessionStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+});
+
+state; // number[]
+setState(state => {
+  state; // number[]
+});
+```
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useSessionStorage/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseSessionStorageWithoutInitialValueProps {
+  key: string;
+}
+
+interface UseSessionStorageWithInitialValueProps<T> {
+  key: string;
+  initialValue: T | (() => T);
+}
+
+type UseSessionStorageProps<T> =
+  | UseSessionStorageWithoutInitialValueProps
+  | UseSessionStorageWithInitialValueProps<T>;
+```
+```ts title="typescript"
+// Function overloading
+function useSessionStorage<T>({
+  key,
+  initialValue,
+}: UseSessionStorageWithInitialValueProps<T>): {
+  state: T;
+  setState: Dispatch<SetStateAction<T>>;
+  removeState: () => void;
+};
+
+function useSessionStorage<T = unknown>({
+  key,
+}: UseSessionStorageWithoutInitialValueProps): {
+  state: T | null;
+  setState: Dispatch<SetStateAction<T | null>>;
+  removeState: () => void;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `key` | `string` | - | The key to subscribe to in session storage |
+| `initialValue` | `T \| (() => T)` | `null` | The initial value to return when the key does not exist or in SSR environments |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `state` | `T` or `T \| null` | The current value from session storage. May be `null` if no `initialValue` is provided. |
+| `setState` | `Dispatch<SetStateAction<T>>` | Function to update the session storage value |
+| `removeState` | `() => void` | Function to remove the key from session storage |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useSessionStorage } from '@modern-kit/react';
+
+const Example = () => {
+  const { state, setState, removeState } = useSessionStorage<string>({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div>
+      <p>Check the session storage in your browser's DevTools!</p>
+      <p>state: {state}</p>
+      <button onClick={() => setState('foo')}>
+        {`Save "foo" to session storage key "test"`}
+      </button>
+      <button onClick={() => setState('bar')}>
+        {`Save "bar" to session storage key "test"`}
+      </button>
+      <button onClick={() => removeState()}>
+        {`Remove session storage key "test"`}
+      </button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { state, setState, removeState } = useSessionStorage({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Check the session storage in your browser's DevTools!</p>
+      <p>state: {state}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setState('foo')}>
+          {`Save "foo" to session storage key "test"`}
+        </button>
+        <button onClick={() => setState('bar')}>
+          {`Save "bar" to session storage key "test"`}
+        </button>
+        <button onClick={() => removeState()}>
+          {`Remove session storage key "test"`}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
+<Example />

@@ -40,12 +40,21 @@ ref: React.RefObject<T | null>;
 
 <br />
 
-### Options (옵션이 있을 때, 컴포넌트의 경우 Props)
+### Options (옵션[객체]이 있을 때, 컴포넌트의 경우 Props)
 
-| Name      | Type    | Default  | Description   |
-| --------- | ------- | -------- | ------------- |
-| `optionA` | `TypeA` | `기본값` | 설명 (한국어) |
-| `optionB` | `TypeB` | `기본값` | 설명 (한국어) |
+| Name      | Type    | Default    | Description   |
+| --------- | ------- | ---------- | ------------- |
+| `optionA` | `TypeA` | `DefaultA` | 설명 (한국어) |
+| `optionB` | `TypeB` | `DefaultB` | 설명 (한국어) |
+
+<br />
+
+### Parameters (파라미터[배열]이 있을 때)
+
+| Name         | Type         | Description   |
+| ------------ | ------------ | ------------- |
+| `parameterA` | `ParameterA` | 설명 (한국어) |
+| `parameterB` | `ParameterB` | 설명 (한국어) |
 
 <br />
 

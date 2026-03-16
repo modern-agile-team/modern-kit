@@ -12,9 +12,13 @@ SSR 환경에서 hydration 불일치를 방지하며, resize 이벤트가 발생
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useWindowSize/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function useWindowSize(debounceWait?: number): {
   width: number;
@@ -22,8 +26,29 @@ function useWindowSize(debounceWait?: number): {
 }
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `debounceWait` | `number` | - | 디바운스 대기 시간(밀리초). 설정하지 않으면 즉시 업데이트됩니다. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `width` | `number` | 현재 브라우저 창의 너비(px) |
+| `height` | `number` | 현재 브라우저 창의 높이(px) |
+
+<br />
+
 ## Usage
+
 ### Default
+
 ```tsx title="typescript"
 import { useWindowSize } from '@modern-kit/react';
 
@@ -31,8 +56,8 @@ const Example = () => {
   const windowSize = useWindowSize();
   const boxStyle = useMemo(() => {
     return {
-      width: '100%', 
-      background: '#439966', 
+      width: '100%',
+      background: '#439966',
       fontSize: '2rem',
       color: '#fff',
     }
@@ -52,8 +77,8 @@ export const DefaultExample = () => {
   const windowSize = useWindowSize();
   const boxStyle = useMemo(() => {
     return {
-      width: '100%', 
-      background: '#439966', 
+      width: '100%',
+      background: '#439966',
       fontSize: '2rem',
       color: '#fff',
     }
@@ -72,6 +97,7 @@ export const DefaultExample = () => {
 <br />
 
 ### Debounce
+
 ```tsx title="typescript"
 import { useWindowSize } from '@modern-kit/react';
 
@@ -79,8 +105,8 @@ const DebounceExample = () => {
   const windowSize = useWindowSize(300);
   const boxStyle = useMemo(() => {
     return {
-      width: '100%', 
-      background: '#0067A3', 
+      width: '100%',
+      background: '#0067A3',
       fontSize: '2rem',
       color: '#fff',
     }
@@ -100,8 +126,8 @@ export const DebounceExample = () => {
   const windowSize = useWindowSize(300);
   const boxStyle = useMemo(() => {
     return {
-      width: '100%', 
-      background: '#0067A3', 
+      width: '100%',
+      background: '#0067A3',
       fontSize: '2rem',
       color: '#fff',
     }

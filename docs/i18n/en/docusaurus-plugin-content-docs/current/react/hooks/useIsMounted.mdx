@@ -1,0 +1,56 @@
+import { useIsMounted } from '@modern-kit/react';
+
+# useIsMounted
+
+A custom hook that provides a state value indicating whether the component is `mounted`.
+
+It can be used in `SSR` environments to guarantee that the component has actually been mounted in the browser. `(Feat. Hydration Error)`
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIsMounted/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+const useIsMounted: () => boolean
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `isMounted` | `boolean` | `true` after the component has mounted, `false` before mount |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useIsMounted } from '@modern-kit/react';
+
+const Example = () => {
+  const isMounted = useIsMounted();
+
+  return <div>{isMounted ? 'done' : 'in progress'}</div>;
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const isMounted = useIsMounted();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div>{isMounted ? 'done' : 'in progress'}</div>
+    </div>
+  );
+};
+
+<Example />

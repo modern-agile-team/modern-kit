@@ -1,0 +1,101 @@
+import { useState } from 'react';
+import { useDebounce } from '@modern-kit/react'
+
+# useDebounce
+
+A hook that `debounces (delays)` the given callback function to prevent repeated calls within a specified time period.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebounce/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof debounce>;
+
+type DebounceReturnType<T extends (...args: any) => any> = ReturnType<
+  typeof debounce<T>
+>;
+```
+```ts title="typescript"
+function useDebounce<T extends (...args: any) => any>(
+  callback: T,
+  wait: DebounceParameters[1],
+  options?: DebounceParameters[2]
+): DebounceReturnType<T>;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `T` | The callback function to debounce |
+| `wait` | `number` | Delay time in milliseconds |
+| `options` | `{ maxWait?: number; leading?: boolean; trailing?: boolean; signal?: AbortSignal }` | Debounce behavior options |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDebounce } from '@modern-kit/react';
+
+const Example = () => {
+  const [count, setCount] = useState(1);
+  const [debouncedCount, setDebouncedCount] = useState(1);
+
+  const countUp = () => {
+    setCount(count + 1);
+  };
+
+  const debouncedCountUp = useDebounce(() => {
+    setDebouncedCount(debouncedCount + 1);
+  }, 1000);
+
+  return (
+    <div>
+      <div style={{ display: "flex" }}>
+        <button onClick={countUp}>Click button</button>
+        <div style={{ width: "50px" }} />
+        <button onClick={debouncedCountUp}>Click debounce button</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>debouncedCount: {debouncedCount}</p>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [count, setCount] = useState(1);
+  const [debouncedCount, setDebouncedCount] = useState(1);
+  const countUp = () => {
+    setCount(count + 1);
+  };
+  const debouncedCountUp = useDebounce(() => {
+    setDebouncedCount(debouncedCount + 1);
+  }, 1000);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={countUp}>Click button</button>
+        <button onClick={debouncedCountUp}>Click debounce button</button>
+      </div>
+      <div>
+        <p>count: {count}</p>
+        <p>debouncedCount: {debouncedCount}</p>
+      </div>
+    </div>
+  );
+};
+
+<Example />

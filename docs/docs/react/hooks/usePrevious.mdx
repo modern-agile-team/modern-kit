@@ -5,17 +5,34 @@ import { useState } from 'react';
 
 이전 렌더링에서 인수의 값을 반환하는 커스텀 훅입니다.
 
+현재 값이 변경될 때마다 이전 값을 저장하고, 컴포넌트가 다시 렌더링될 때 그 이전 값을 반환합니다.
+
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePrevious/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
-const usePrevious: <T>(value: T) => T;
+function usePrevious<T>(value: T): T;
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `value` | `T` | 이전 값을 추적할 현재 값 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useState } from 'react';
 import { usePrevious } from '@modern-kit/react';
@@ -37,6 +54,10 @@ const Example = () => {
   );
 };
 ```
+
+<br />
+
+### Example
 
 export const Example = () => {
   const [count, setCount] = useState(0);

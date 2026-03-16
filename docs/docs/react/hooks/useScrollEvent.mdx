@@ -15,9 +15,13 @@ import { useScrollEvent } from '@modern-kit/react';
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollEvent/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 interface UseScrollProps {
   throttleDelay?: number; // default: 0
@@ -54,37 +58,60 @@ function useScrollEvent<T extends HTMLElement>({
 };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `throttleDelay` | `number` | `0` | 스크롤 이벤트 쓰로틀링 딜레이(밀리초) |
+| `throttleLeading` | `boolean` | `true` | 쓰로틀링 시작 시점 이벤트 실행 여부 |
+| `throttleTrailing` | `boolean` | `true` | 쓰로틀링 마지막 이벤트 실행 여부 |
+| `enabled` | `boolean` | `true` | 스크롤 추적 기능 활성화 여부 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | 스크롤을 추적할 요소에 연결할 ref 객체. 연결하지 않으면 window를 추적합니다. |
+| `scrollState` | `ScrollState` | 스크롤 위치, 방향, 진행도 등 스크롤 관련 상태 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useScrollEvent } from '@modern-kit/react';
 
 const Example = () => {
   const [enabled, setEnabled] = useState(true);
   const { scrollState } = useScrollEvent({ enabled });
-  
+
   // 특정 요소의 스크롤 위치 추적
   const { ref, scrollState: containerScrollState } = useScrollEvent<HTMLDivElement>({
     throttleDelay: 300,
     enabled: true,
   });
-  
+
   return (
     <div>
       <button onClick={() => setEnabled(!enabled)}>
         {enabled ? '스크롤 추적 비활성화' : '스크롤 추적 활성화'}
       </button>
-      
+
       <div style={{ marginTop: '20px' }}>
         <h3>Window 스크롤 정보</h3>
         <p>Scroll Y: {scrollState.scrollY}px</p>
         <p>Direction Y: {scrollState.direction.y}</p>
         <p>Progress Y: {Math.round(scrollState.progress.y * 100)}%</p>
       </div>
-      
-      <div 
-        ref={ref} 
-        style={{ 
-          height: '200px', 
+
+      <div
+        ref={ref}
+        style={{
+          height: '200px',
           overflow: 'auto',
           border: '1px solid #ccc',
           marginTop: '20px',
@@ -104,34 +131,36 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [enabled, setEnabled] = useState(true);
   const { scrollState } = useScrollEvent({ enabled });
-  
+
   const { ref, scrollState: containerScrollState } = useScrollEvent({
     throttleDelay: 300,
     enabled,
   });
-  
+
   return (
     <div>
       <button onClick={() => setEnabled(!enabled)}>
         {enabled ? '스크롤 추적 비활성화' : '스크롤 추적 활성화'}
       </button>
-      
+
       <div style={{ marginTop: '20px' }}>
         <h3>Window 스크롤 정보</h3>
         <p>Scroll Y: {scrollState.scrollY}px</p>
         <p>Direction Y: {scrollState.direction.y}</p>
         <p>Progress Y: {scrollState.progress.y}%</p>
       </div>
-      
-      <div 
-        ref={ref} 
-        style={{ 
-          height: '200px', 
+
+      <div
+        ref={ref}
+        style={{
+          height: '200px',
           overflow: 'auto',
           border: '1px solid #ccc',
           marginTop: '20px',

@@ -28,6 +28,8 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useColorScheme/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 interface UseColorSchemeOptions {
@@ -52,6 +54,31 @@ function useColorScheme({
   shouldSetBodyClass,
 }: UseColorSchemeOptions = {}): UseColorSchemeReturnType;
 ```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultValue` | `ColorScheme \| (() => ColorScheme)` | - | `prefers-color-scheme`를 지원하지 않는 환경이거나 외부에서 테마 값을 전달받는 경우 사용할 기본 색상 테마입니다. |
+| `key` | `string` | `'color-scheme'` | 로컬 스토리지에 저장할 키 값입니다. |
+| `shouldSetBodyClass` | `boolean` | `false` | `true`이면 `document.body`의 class에 현재 색상 테마를 추가합니다. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `colorScheme` | `ColorScheme` | 현재 적용된 색상 테마(`dark` \| `light`)입니다. |
+| `preferredColorScheme` | `ColorScheme` | 사용자의 시스템 선호 색상 테마입니다. |
+| `setToggleMode` | `() => void` | 현재 색상 테마를 다크/라이트 모드 사이에서 전환합니다. |
+| `setDarkMode` | `() => void` | 현재 색상 테마를 다크 모드로 설정합니다. |
+| `setLightMode` | `() => void` | 현재 색상 테마를 라이트 모드로 설정합니다. |
+| `setPreferredMode` | `() => void` | 현재 색상 테마를 사용자 선호 색상(`prefers-color-scheme`)으로 설정합니다. |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

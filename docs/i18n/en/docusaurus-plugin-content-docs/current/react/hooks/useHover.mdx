@@ -1,0 +1,101 @@
+import { useHover } from '@modern-kit/react';
+import { useState } from 'react'
+
+# useHover
+
+A custom hook that returns the hover state of a target component and allows defining actions for mouse enter and mouse leave events.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useHover/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+const useHover: <T extends HTMLElement>({
+  onEnter?: (event: MouseEvent) => void,
+  onLeave?: (event: MouseEvent) => void,
+}) => {
+  ref: React.RefObject<T | null>,
+  isHovered: boolean
+}
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `onEnter` | `(event: MouseEvent) => void` | - | Callback invoked when the mouse enters the element |
+| `onLeave` | `(event: MouseEvent) => void` | - | Callback invoked when the mouse leaves the element |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the target element |
+| `isHovered` | `boolean` | Whether the mouse is currently over the element |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useHover } from '@modern-kit/react';
+
+const Example = () => {
+  const [counter, setCounter] = useState(0);
+
+  const { ref, isHovered } = useHover<HTMLDivElement>({
+    onEnter: () => setCounter((count) => count + 1),
+    onLeave: () => setCounter((count) => count - 1)
+  });
+
+  const style = {
+    width: '200px',
+    height: '200px',
+    backgroundColor: 'skyBlue'
+  };
+
+  return (
+    <>
+      <div ref={ref} style={style}>{isHovered ? 'hover' : 'leave'}</div>
+      <div>{counter}</div>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [counter, setCounter] = useState(0)
+  const { ref, isHovered } = useHover({
+    onEnter: () => setCounter((count) => count + 1),
+    onLeave: () => setCounter((count) => count - 1)
+  });
+  const style = {
+    width: '200px',
+    height: '200px',
+    backgroundColor: isHovered ? '#38bdf8' : '#bae6fd',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    transition: 'background-color 0.2s',
+    cursor: 'pointer',
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div ref={ref} style={style}>{isHovered ? 'Hovered' : 'Hover me'}</div>
+      <span>Enter/leave count: {counter}</span>
+    </div>
+  );
+};
+
+<Example />

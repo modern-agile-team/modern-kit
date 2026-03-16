@@ -1,0 +1,164 @@
+import { useState } from 'react';
+import { useIntersectionObserver } from '@modern-kit/react';
+
+# useIntersectionObserver
+
+A hook that can call specific action functions when the target element assigned a `ref` enters (`onIntersectStart`) or leaves (`onIntersectEnd`) the `Viewport`.
+
+Setting the `calledOnce` option to `true` allows `onIntersectStart` and `onIntersectEnd` to each be called only once.
+
+The `enabled` option controls whether the `onIntersect*` callback functions are invoked. If `false`, they will not execute even when the target element is exposed in the Viewport.
+
+Intersection Observer options can be configured (see `Remarks` below).
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useIntersectionObserver/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface IntersectionObserverInit {
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+
+interface UseIntersectionObserverProps extends IntersectionObserverInit {
+  onIntersectStart?: (entry: IntersectionObserverEntry) => void;
+  onIntersectEnd?: (entry: IntersectionObserverEntry) => void;
+  calledOnce?: boolean;
+  enabled?: boolean;
+}
+
+interface UseIntersectionObserverReturnType<T extends HTMLElement> {
+  ref: React.RefCallback<T>;
+  isIntersecting: boolean;
+  hasIntersected: boolean;
+}
+```
+```ts title="typescript"
+function useIntersectionObserver<T extends HTMLElement>({
+  onIntersectStart,
+  onIntersectEnd,
+  enabled, // default: true
+  calledOnce, // default: false
+  root, // default: null
+  threshold, // default: 0
+  rootMargin, // default: '0px 0px 0px 0px'
+  }: UseIntersectionObserverProps = {}): UseIntersectionObserverReturnType<T>;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `onIntersectStart` | `(entry: IntersectionObserverEntry) => void` | - | Callback invoked when the target enters the viewport |
+| `onIntersectEnd` | `(entry: IntersectionObserverEntry) => void` | - | Callback invoked when the target leaves the viewport |
+| `calledOnce` | `boolean` | `false` | If `true`, each callback is invoked only once |
+| `enabled` | `boolean` | `true` | Whether the observer callbacks are active |
+| `root` | `Element \| Document \| null` | `null` | The element used as the viewport |
+| `threshold` | `number \| number[]` | `0` | Visibility ratio threshold(s) to trigger callbacks |
+| `rootMargin` | `string` | `'0px 0px 0px 0px'` | Margin around the root element |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `ref` | `React.RefCallback<T>` | Ref callback to attach to the target element |
+| `isIntersecting` | `boolean` | Whether the target is currently intersecting the viewport |
+| `hasIntersected` | `boolean` | Whether the target has ever intersected the viewport |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useIntersectionObserver } from '@modern-kit/react';
+
+const Example = () => {
+  const [value, setValue] = useState(0);
+  const [enabled, setEnabled] = useState(true);
+
+  const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver({
+    onIntersectStart: (entry) => {
+      console.log("onIntersectStart: ", entry);
+      setValue(value + 1);
+    },
+    onIntersectEnd: (entry) => {
+      console.log("onIntersectEnd: ", entry);
+      setValue(value + 1);
+    },
+    enabled,
+  });
+
+  const boxStyle = {
+    height: "800px",
+    backgroundColor: "teal"
+  }
+
+  return (
+    <div>
+      <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
+      <p>isIntersecting: {`${isIntersecting}`}</p>
+      <p>hasIntersected: {`${hasIntersected}`}</p>
+
+      <div style={boxStyle} />
+      <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
+        <div>Target element <br/> value: {value}</div>
+      </div>
+
+      <div style={boxStyle} />
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [value, setValue] = useState(0);
+  const [enabled, setEnabled] = useState(true);
+  const { ref: targetRef, isIntersecting, hasIntersected } = useIntersectionObserver({
+    onIntersectStart: (entry) => {
+      console.log("onIntersectStart: ", entry);
+      setValue(value + 1);
+    },
+    onIntersectEnd: (entry) => {
+      console.log("onIntersectEnd: ", entry);
+      setValue(value + 1);
+    },
+    enabled,
+  });
+  const boxStyle = {
+    height: "800px",
+    backgroundColor: "teal"
+  }
+  return (
+    <div>
+      <button onClick={() => setEnabled(!enabled)}>Enabled: {`${enabled}`}</button>
+      <p>isIntersecting: {`${isIntersecting}`}</p>
+      <p>hasIntersected: {`${hasIntersected}`}</p>
+
+      <div style={boxStyle} />
+      <div ref={targetRef} style={{ color: "white", fontSize: "24px", backgroundColor: "blue" }}>
+        <div>Target element <br/> value: {value}</div>
+      </div>
+
+      <div style={boxStyle} />
+    </div>
+  );
+};
+
+<Example />
+
+## Remarks
+
+:::tip Reference
+- [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver)
+:::

@@ -1,0 +1,230 @@
+import { useScrollTo } from '@modern-kit/react';
+import { useRef } from 'react';
+
+# useScrollTo
+
+A custom hook that provides `scroll` functionality.
+
+Assigning the `containerRef` returned by the hook to a specific element scrolls that element.
+If `containerRef` is not assigned, `window` is scrolled.
+
+The `scrollToPosition` function scrolls based on a `position` such as top or left.
+
+The `scrollToElement` function scrolls to the `target element` passed as an argument. It accepts optional `offsetY/X` values.
+
+```tsx
+const { containerRef } = useScrollTo();
+// containerRef: Window | null
+```
+```tsx
+const { containerRef } = useScrollTo<HTMLDivElement>();
+// containerRef: HTMLDivElement | null
+
+<div ref={containerRef} />
+```
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useScrollTo/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+type ScrollBehavior = "auto" | "instant" | "smooth";
+
+type Align = 'start' | 'center' | 'end';
+
+interface ScrollOptions {
+  behavior?: ScrollBehavior; // default: 'auto'
+}
+
+interface ScrollToOptions extends ScrollOptions {
+  left?: number; // default: 0
+  top?: number; // default: 0
+}
+
+interface ScrollToElementOptions {
+  offsetX?: number; // default: 0
+  offsetY?: number; // default: 0
+  behavior?: ScrollBehavior; // default: 'auto'
+  alignY?: Align; // default: 'start'
+  alignX?: Align; // default: 'start'
+}
+
+interface UseScrollToReturnType<T extends HTMLElement> {
+  containerRef: React.RefObject<T | null>;
+  scrollToPosition: (scrollToOptions?: ScrollToOptions) => void;
+  scrollToElement: <E extends HTMLElement>(
+    target: E,
+    scrollToElementOptions?: ScrollToElementOptions
+  ) => void;
+}
+```
+```ts title="typescript"
+function useScrollTo<T extends HTMLElement>(): UseScrollToReturnType<T>
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `containerRef` | `React.RefObject<T \| null>` | Ref for the container element to control scrolling. If not set, `window` is used as the default. |
+| `scrollToPosition` | `(scrollToOptions?: ScrollToOptions) => void` | Function to scroll to a specified coordinate (top, left) |
+| `scrollToElement` | `(target, scrollToElementOptions?) => void` | Function to scroll to a specified element |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useScrollTo } from '@modern-kit/react';
+
+const Example = () => {
+  const { containerRef, scrollToPosition, scrollToElement } = useScrollTo<HTMLDivElement>();
+  const targetRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScrollToPosition = () => {
+    scrollToPosition({
+      behavior: 'smooth',
+      top: 400,
+    });
+  };
+
+  const handleScrollToElement = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+    });
+  };
+
+  const handleScrollToElementOffset = (offset: number) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      offsetY: offset,
+    });
+  };
+
+  const handleScrollToElementAlign = (type: Align) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      alignY: type,
+    });
+  };
+  return (
+    <div>
+      <div>
+        <button onClick={handleScrollToPosition}>Scroll to Position</button>
+        <button onClick={handleScrollToElement}>Scroll to Target Element</button>
+        <button onClick={() => handleScrollToElementOffset(200)}>
+          Scroll to Target Element offset 200
+        </button>
+        <button onClick={() => handleScrollToElementOffset(-200)}>
+          Scroll to Target Element offset -200
+        </button>
+      </div>
+
+      <div>
+        <button onClick={() => handleScrollToElementAlign('start')}>
+          Scroll to Target Element align start
+        </button>
+        <button onClick={() => handleScrollToElementAlign('center')}>
+          Scroll to Target Element align center
+        </button>
+        <button onClick={() => handleScrollToElementAlign('end')}>
+          Scroll to Target Element align end
+        </button>
+      </div>
+
+      <div
+        ref={containerRef}
+        style={{ width: '500px', height: '800px', overflow: 'scroll' }}>
+        <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
+        <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
+        <div ref={targetRef} style={{ height: '400px', background: 'coral', fontSize: '24px' }}>
+          target Box
+        </div>
+        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
+        <div style={{ height: '400px', background: 'black' }}>InnerBox4</div>
+      </div>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { containerRef, scrollToPosition, scrollToElement } = useScrollTo();
+  const targetRef = useRef(null);
+  const handleScrollToPosition = () => {
+    scrollToPosition({
+      behavior: 'smooth',
+      top: 400,
+    });
+  };
+  const handleScrollToElement = () => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+    });
+  };
+  const handleScrollToElementOffset = (offset) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      offsetY: offset,
+    });
+  };
+  const handleScrollToElementAlign = (type) => {
+    scrollToElement(targetRef.current, {
+      behavior: 'smooth',
+      alignY: type,
+    });
+  };
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleScrollToPosition}>Scroll to Position</button>
+        <button onClick={handleScrollToElement}>Scroll to Target Element</button>
+        <button onClick={() => handleScrollToElementOffset(200)}>
+          Scroll to Target Element offset 200
+        </button>
+        <button onClick={() => handleScrollToElementOffset(-200)}>
+          Scroll to Target Element offset -200
+        </button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => handleScrollToElementAlign('start')}>
+          Scroll to Target Element align start
+        </button>
+        <button onClick={() => handleScrollToElementAlign('center')}>
+          Scroll to Target Element align center
+        </button>
+        <button onClick={() => handleScrollToElementAlign('end')}>
+          Scroll to Target Element align end
+        </button>
+      </div>
+
+      <div
+        ref={containerRef}
+        style={{ width: '500px', height: '800px', overflow: 'scroll' }}>
+        <div style={{ height: '400px', background: 'green' }}>InnerBox1</div>
+        <div style={{ height: '400px', background: 'red' }}>InnerBox2</div>
+        <div ref={targetRef} style={{ height: '400px', background: 'coral', fontSize: '24px' }}>
+          target Box
+        </div>
+        <div style={{ height: '400px', background: 'aqua' }}>InnerBox4</div>
+        <div style={{ height: '400px', background: 'black' }}>InnerBox4</div>
+      </div>
+    </div>
+  );
+};
+
+
+<Example />

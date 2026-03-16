@@ -1,0 +1,77 @@
+import { useCallback, useState } from 'react';
+import { useDebouncedState } from '@modern-kit/react'
+
+# useDebouncedState
+
+A debounced version of `useState`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebouncedState/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type DebounceParameters = Parameters<typeof useDebounce>;
+
+type DebounceReturnType<T extends (...args: any) => any> = ReturnType<
+  typeof useDebounce<T>
+>;
+```
+```ts title="typescript"
+function useDebouncedState<T>(
+  initialState: T,
+  wait: DebounceParameters[1],
+  options?: DebounceParameters[2]
+): [T, DebounceReturnType<Dispatch<React.SetStateAction<T>>>];
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialState` | `T` | Initial state value |
+| `wait` | `number` | Debounce delay time in milliseconds |
+| `options` | `{ maxWait?: number; leading?: boolean; trailing?: boolean; signal?: AbortSignal }` | Debounce behavior options |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState } from 'react';
+import { useDebouncedState } from '@modern-kit/react';
+
+const Example = () => {
+  const [debouncedState, setDebouncedState] = useDebouncedState<string>("", 500);
+
+  return (
+    <div>
+      <p>Debounced state: {debouncedState}</p>
+      <div>
+        <input type='text' onChange={(e) => setDebouncedState(e.target.value)} />
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [debouncedState, setDebouncedState] = useDebouncedState("", 500);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Debounced state: {debouncedState}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <input type='text' onChange={(e) => setDebouncedState(e.target.value)} placeholder="Type something..." />
+      </div>
+    </div>
+  );
+};
+
+<Example />

@@ -1,0 +1,142 @@
+import { useColorScheme } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useColorScheme
+
+A hook for managing the user's Color Scheme (dark mode or light mode).
+
+Returns the current Color Scheme state and set functions for controlling it.
+
+[`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) may not be supported on Android versions below 10, and there are cases where Color Scheme information is provided externally (e.g., passed via `UserAgent` when a native app opens a webview). In such cases, `defaultValue` can be used.
+
+This allows you to `maintain a Color Scheme provided externally`, or manage a `self-contained Color Scheme policy` when used standalone on the web.
+
+### state
+- `colorScheme`: The currently applied color theme (`dark`, `light`). If a value is stored in local storage, it uses that value.
+If there is no stored value and `defaultValue` is set, it takes `defaultValue` first.
+If `defaultValue` is not set, it falls back to the user's preferred color scheme (`prefers-color-scheme`).
+- `preferredColorScheme`: The user's preferred color theme, determined by system settings.
+
+### set
+- `setToggleMode`: Toggles the current color theme between `dark mode` and `light mode`.
+- `setDarkMode`: Sets the current color theme to `dark mode`.
+- `setLightMode`: Sets the current color theme to `light mode`.
+- `setPreferredMode` - Sets the current color theme to the user's preferred color scheme (`prefers-color-scheme`).
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useColorScheme/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseColorSchemeOptions {
+  defaultValue?: (() => ColorScheme) | ColorScheme;
+  key?: string; // default: COLOR_SCHEME_DEFAULT_KEY: 'color-scheme'
+  shouldSetBodyClass?: boolean; // default: false
+}
+
+interface UseColorSchemeReturnType {
+  colorScheme: ColorScheme;
+  preferredColorScheme: ColorScheme;
+  setToggleMode: () => void;
+  setDarkMode: () => void;
+  setLightMode: () => void;
+  setPreferredMode: () => void;
+}
+```
+```ts title="typescript"
+function useColorScheme({
+  defaultValue,
+  key,
+  shouldSetBodyClass,
+}: UseColorSchemeOptions = {}): UseColorSchemeReturnType;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `defaultValue` | `ColorScheme \| (() => ColorScheme)` | - | The default color theme to use when `prefers-color-scheme` is not supported or when the theme is provided externally. |
+| `key` | `string` | `'color-scheme'` | The key used to store the value in local storage. |
+| `shouldSetBodyClass` | `boolean` | `false` | If `true`, adds the current color theme as a class on `document.body`. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `colorScheme` | `ColorScheme` | The currently applied color theme (`dark` \| `light`). |
+| `preferredColorScheme` | `ColorScheme` | The user's system preferred color theme. |
+| `setToggleMode` | `() => void` | Toggles the current color theme between dark and light mode. |
+| `setDarkMode` | `() => void` | Sets the current color theme to dark mode. |
+| `setLightMode` | `() => void` | Sets the current color theme to light mode. |
+| `setPreferredMode` | `() => void` | Sets the current color theme to the user's preferred color scheme (`prefers-color-scheme`). |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+const Example = () => {
+  const {
+    colorScheme,
+    preferredColorScheme,
+    setToggleMode,
+    setDarkMode,
+    setLightMode,
+    setPreferredMode,
+  } = useColorScheme({
+    shouldSetBodyClass: true, // if true, adds colorScheme to the body class
+  });
+
+  return (
+    <div>
+      <p>colorScheme: {`${colorScheme}`}</p>
+      <p>preferredColorScheme: {`${preferredColorScheme}`}</p>
+      <div>
+        <button onClick={setToggleMode}>Toggle mode</button>
+        <button onClick={setDarkMode}>Dark mode</button>
+        <button onClick={setLightMode}>Light mode</button>
+        <button onClick={setPreferredMode}>Preferred mode</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const {
+    colorScheme,
+    preferredColorScheme,
+    setToggleMode,
+    setDarkMode,
+    setLightMode,
+    setPreferredMode,
+  } = useColorScheme({
+    shouldSetBodyClass: true,
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>colorScheme: {`${colorScheme}`}</p>
+      <p>preferredColorScheme: {`${preferredColorScheme}`}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={setToggleMode}>Toggle mode</button>
+        <button onClick={setDarkMode}>Dark mode</button>
+        <button onClick={setLightMode}>Light mode</button>
+        <button onClick={setPreferredMode}>Preferred mode</button>
+      </div>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

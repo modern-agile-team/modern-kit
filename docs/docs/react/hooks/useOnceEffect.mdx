@@ -5,17 +5,34 @@ import { useState } from 'react';
 
 컴포넌트가 마운트될 때 한 번만 실행되는 커스텀 훅입니다.
 
+`useEffect`에 빈 의존성 배열(`[]`)을 전달하는 것과 동일하게 동작하지만, 의도를 명시적으로 드러냅니다.
+
 <br />
 
 ## Code
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOnceEffec/index.ts)
+
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useOnceEffect/index.ts)
+
+<br />
 
 ## Interface
+
 ```ts title="typescript"
 function useOnceEffect(effectCallback: EffectCallback): void
 ```
 
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | 마운트 시 한 번 실행할 effect 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useOnceEffect } from '@modern-kit/react';
 
@@ -35,7 +52,9 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [count, setCount] = useState(0);
@@ -71,4 +90,3 @@ export const Example = () => {
 };
 
 <Example />
-

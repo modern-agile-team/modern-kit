@@ -1,0 +1,39 @@
+# useUnmount
+
+A custom hook that calls a callback function when the component is `unmounted`.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useUnmount/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useUnmount(callback: () => void): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `() => void` | Callback function to invoke on unmount |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useUnmount } from '@modern-kit/react';
+
+const Example = () => {
+  useUnmount(() => console.log("unmount"));
+
+  return <>{/* ... */}</>;
+};
+```

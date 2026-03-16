@@ -12,19 +12,10 @@ import { useDebouncedInputValue } from '@modern-kit/react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDebouncedInputValue/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
-/**
- * @interface DebounceParameters
- * @template T - 콜백 함수 타입입니다.
- * @param {DebounceParameters[0]} callback - 디바운스할 콜백 함수입니다.
- * @param {DebounceParameters[1]} wait - 지연시킬 시간(밀리초)입니다.
- * @param {DebounceParameters[2]} options - 디바운스 동작과 관련된 옵션 객체입니다.
- * @param {AbortSignal} options.signal - 디바운스된 함수를 취소하기 위한 선택적 AbortSignal입니다.
- * @param {number} options.maxWait - 최대 대기 시간(밀리초)입니다.
- * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
- * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
- */
 type DebounceParameters = Parameters<typeof useDebounce>;
 ```
 ```ts title="typescript"
@@ -40,6 +31,30 @@ function useDebouncedInputValue(
   onClear: () => void;
 };
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `initialValue` | `string` | 초기 입력 값 |
+| `wait` | `number` | 디바운스 지연 시간(밀리초) |
+| `options` | `{ maxWait?: number; leading?: boolean; trailing?: boolean; signal?: AbortSignal }` | 디바운스 동작 옵션 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | 현재 입력 값입니다. |
+| `debouncedValue` | `string` | 디바운싱이 적용된 입력 값입니다. |
+| `onChange` | `(value: string) => void` | 입력 값을 업데이트하는 함수입니다. |
+| `onReset` | `() => void` | 입력 값을 초기값으로 리셋하는 함수입니다. |
+| `onClear` | `() => void` | 입력 값을 빈 문자열로 초기화하는 함수입니다. |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

@@ -1,0 +1,151 @@
+import { useEventListener } from '@modern-kit/react';
+import { useState, useRef } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useEventListener
+
+Adds an `event listener` to the specified element and `automatically removes` it when the component unmounts.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useEventListener/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+type EventListenerAvailableElement =
+  | Window
+  | Document
+  | HTMLElement
+  | SVGElement
+  | MediaQueryList;
+
+type TargetElement<T extends EventListenerAvailableElement> =
+  | T
+  | RefObject<T | null | undefined>;
+```
+```ts title="typescript"
+// useEventListener interface based on Window events
+function useEventListener<K extends keyof WindowEventMap>(
+  element: Window | null,
+  type: K,
+  listener: (event: WindowEventMap[K]) => void,
+  options?: boolean | AddEventListenerOptions
+): void;
+
+// useEventListener interface based on Document events
+function useEventListener<K extends keyof DocumentEventMap>(
+  element: Document | null,
+  type: K,
+  listener: (event: DocumentEventMap[K]) => void,
+  options?: boolean | AddEventListenerOptions
+): void;
+
+// useEventListener interface based on MediaQueryList events
+function useEventListener<K extends keyof MediaQueryListEventMap>(
+  element: MediaQueryList | null,
+  type: K,
+  listener: (event: MediaQueryListEventMap[K]) => void,
+  options?: boolean | AddEventListenerOptions
+): void;
+
+// useEventListener interface based on Element events
+function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends HTMLElement
+>(
+  element: TargetElement<T> | null,
+  type: K,
+  listener: (event: HTMLElementEventMap[K]) => void,
+  options?: boolean | AddEventListenerOptions
+): void;
+
+// useEventListener interface based on SVGElement events
+function useEventListener<
+  K extends keyof SVGElementEventMap,
+  T extends SVGElement
+>(
+  element: TargetElement<T> | null,
+  type: K,
+  listener: (event: SVGElementEventMap[K]) => void,
+  options?: boolean | AddEventListenerOptions
+): void;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `element` | `TargetElement<T> \| Window \| Document \| MediaQueryList \| null` | The target element or ref to attach the event listener to |
+| `type` | `string` | The event type to listen for |
+| `listener` | `(event: Event) => void` | Callback function invoked when the event fires |
+| `options` | `boolean \| AddEventListenerOptions` | Event listener options |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useState, useRef } from 'react';
+import { useEventListener } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0)
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  useEventListener(document, 'click', () => {
+    console.log(number);
+  })
+
+  useEventListener(buttonRef, 'click', () => {
+    setNumber(number + 1);
+  })
+
+  return (
+    <div>
+      <p>number: {number}</p>
+      <button ref={buttonRef}>Add number</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Usage in SSR environments
+```tsx title="typescript"
+useEventListener(typeof window !== 'undefined' ? window : null, 'click', () => {
+  console.log(number);
+})
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0)
+  const buttonRef = useRef(null);
+
+  useEventListener(document, 'click', () => {
+    console.log(number);
+  })
+
+  useEventListener(buttonRef, 'click', () => {
+    setNumber(number + 1);
+  })
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>number: {number}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button ref={buttonRef}>Add number</button>
+      </div>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

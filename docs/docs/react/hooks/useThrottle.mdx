@@ -8,28 +8,16 @@ import { useThrottle } from '@modern-kit/react'
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useThrottle/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
-/**
- * @interface ThrottleParameters
- * @template T - 콜백 함수 타입입니다.  
- * @param {ThrottleParameters[0]} callback - 스로틀링할 콜백 함수입니다.
- * @param {ThrottleParameters[1]} wait - 스로틀링 시간(밀리초)입니다.
- * @param {ThrottleParameters[2]} options - 옵션 객체입니다.
- * @param {AbortSignal} options.signal - 스로틀링된 함수를 취소하기 위한 선택적 AbortSignal입니다.
- * @param {boolean} options.leading - 첫 번째 호출을 실행할지 여부입니다.
- * @param {boolean} options.trailing - 마지막 호출을 실행할지 여부입니다.
- */
 type ThrottleParameters = Parameters<typeof throttle>;
 
-/**
- * @interface ThrottleReturnType
- * @template T - 콜백 함수 타입입니다.
- * @param {() => void} cancel - 스로틀링된 함수의 대기 중인 실행을 취소합니다.
- * @param {() => void} flush - 대기 중인 실행이 있는 경우 스로틀링된 함수를 즉시 실행합니다.
- */
 type ThrottleReturnType<T extends (...args: any) => any> = ReturnType<
   typeof throttle<T>
 >;
@@ -42,7 +30,22 @@ function useThrottle<T extends (...args: any) => any>(
 ): ThrottleReturnType<T>;
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `callback` | `T` | - | 쓰로틀링할 콜백 함수 |
+| `wait` | `number` | - | 쓰로틀이 적용될 시간(밀리초) |
+| `options.signal` | `AbortSignal` | - | 쓰로틀링된 함수를 취소하기 위한 AbortSignal |
+| `options.leading` | `boolean` | `true` | 첫 번째 호출을 실행할지 여부 |
+| `options.trailing` | `boolean` | `true` | 마지막 호출을 실행할지 여부 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useState } from 'react';
 import { useThrottle } from '@modern-kit/react';
@@ -75,7 +78,9 @@ const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [count, setCount] = useState(1);

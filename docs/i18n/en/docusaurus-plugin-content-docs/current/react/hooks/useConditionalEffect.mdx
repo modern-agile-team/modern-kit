@@ -1,0 +1,90 @@
+import { useConditionalEffect } from '@modern-kit/react'
+import { useState } from 'react'
+
+# useConditionalEffect
+
+A custom hook that runs an effect only when the given condition is `true`.
+
+It checks the condition whenever the dependency array changes, and runs `effectCallback` when the condition is `true`.
+
+The condition can be passed as a boolean value or a function. When passed as a function, it receives the previous dependency array (`prevDeps`) and the current dependency array (`currentDeps`) as arguments, allowing for more fine-grained condition evaluation.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useConditionalEffect/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useConditionalEffect<D extends DependencyList>(
+  effectCallback: EffectCallback,
+  deps: D,
+  condition: boolean | ((prevDeps: D | undefined, currentDeps: D) => boolean)
+): void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | The effect function to execute |
+| `deps` | `D` | Dependency array |
+| `condition` | `boolean \| ((prevDeps: D \| undefined, currentDeps: D) => boolean)` | The condition to run the effect. A boolean or a function receiving previous and current dependency arrays |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useConditionalEffect } from '@modern-kit/react'
+
+const Example = () => {
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useConditionalEffect(() => {
+    setMessage(`count is greater than 5! (current: ${count})`);
+  }, [count], count > 5);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <p>{message}</p>
+    </div>
+  );
+}
+```
+
+## Example
+
+export const Example = () => {
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useConditionalEffect(() => {
+    setMessage(`count is greater than 5! (current: ${count})`);
+  }, [count], count > 5);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Count: {count}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setCount(count + 1)}>Increment</button>
+        <button onClick={() => setCount(count - 1)}>Decrement</button>
+        <button onClick={() => setCount(0)}>Reset</button>
+      </div>
+      <div style={{ padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+        <p style={{ fontSize: '14px', color: '#666', margin: '5px 0' }}>
+          {count > 5 ? `✅ ${message}` : '⏳ count is 5 or below'}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+<Example />

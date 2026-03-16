@@ -1,0 +1,115 @@
+import { useDependencyTimeout } from '@modern-kit/react';
+import { useState, DependencyList } from 'react';
+
+# useDependencyTimeout
+
+A custom hook that uses **[useTimeout](https://modern-agile-team.github.io/modern-kit/docs/react/hooks/useTimeout)** to reset the `Timeout` whenever a value in the provided dependency array changes.
+
+The first argument is a `callback` function.
+The second argument can be a `delay` number or a `TimerOptions` object. `TimerOptions` is an object containing `delay` and `enabled`.
+The third argument is a `deps` dependency array. When any value in this array changes, the `Timeout` is reset.
+
+Returns an object containing `set`, `reset`, and `clear` functions for directly controlling the `Timeout`.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useDependencyTimeout/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+export function useDependencyTimeout(
+  callback: () => void,
+  delay: number,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
+
+export function useDependencyTimeout(
+  callback: () => void,
+  options: TimeoutOptions,
+  deps: DependencyList
+): ReturnType<typeof useTimeout>;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `callback` | `() => void` | The function to execute after the delay |
+| `delay` | `number \| TimeoutOptions` | Delay in milliseconds or a `{ delay: number; enabled?: boolean }` options object |
+| `deps` | `DependencyList` | Dependency array — when a value changes, the Timeout is reset |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `set` | `() => void` | Manually starts the Timeout. |
+| `reset` | `() => void` | Resets and restarts the Timeout. |
+| `clear` | `() => void` | Cancels the Timeout. |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useDependencyTimeout } from '@modern-kit/react';
+
+const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
+
+  const { set, reset, clear } = useDependencyTimeout(() => {
+    setNumber(number + 1);
+  }, 1000, [boolean]);
+
+  /*
+   * useDependencyTimeout(() => {
+   *   setNumber(number + 1);
+   * }, { delay: 1000, enabled: true });
+   */
+
+  return (
+    <div>
+      <p>{number}</p>
+      <button onClick={() => setBoolean(!boolean)}>Toggle dependency</button>
+      <div>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const [number, setNumber] = useState(0);
+  const [boolean, setBoolean] = useState(false);
+
+  const { set, reset, clear } = useDependencyTimeout(() => {
+    setNumber(number + 1);
+  }, 1000, [boolean]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p>Count: {number}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setBoolean(!boolean)}>Toggle Dependency</button>
+      </div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => set()}>set</button>
+        <button onClick={() => reset()}>reset</button>
+        <button onClick={() => clear()}>clear</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

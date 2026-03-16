@@ -14,6 +14,8 @@ import { useState } from 'react'
 ## Code
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useConditionalEffect/index.ts)
 
+<br />
+
 ## Interface
 ```ts title="typescript"
 function useConditionalEffect<D extends DependencyList>(
@@ -22,6 +24,18 @@ function useConditionalEffect<D extends DependencyList>(
   condition: boolean | ((prevDeps: D | undefined, currentDeps: D) => boolean)
 ): void
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `effectCallback` | `EffectCallback` | 실행할 effect 함수 |
+| `deps` | `D` | 의존성 배열 |
+| `condition` | `boolean \| ((prevDeps: D \| undefined, currentDeps: D) => boolean)` | effect를 실행할 조건. 불리언 값 또는 이전/현재 의존성 배열을 받는 함수 |
+
+<br />
 
 ## Usage
 ```tsx title="typescript"

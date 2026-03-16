@@ -38,6 +38,16 @@ function useBlockMultipleAsyncCalls(): UseBlockMultipleAsyncCallsReturnType
 
 <br />
 
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `isLoading` | `boolean` | 비동기 호출이 진행 중인지 여부입니다. |
+| `isError` | `boolean` | 비동기 호출 중 에러가 발생했는지 여부입니다. 다음 정상 호출 시 `false`로 초기화됩니다. |
+| `blockMultipleAsyncCalls` | `<T, Args>(callback: (...args: Args) => Promise<T>) => (...args: Args) => Promise<T \| undefined>` | 콜백 함수를 래핑하여 진행 중인 호출이 있을 때 중복 호출을 방지하는 함수입니다. |
+
+<br />
+
 ## Usage
 
 ### 기본 사용법

@@ -1,0 +1,77 @@
+import { useToggleState } from '@modern-kit/react';
+
+# useToggleState
+
+A hook that provides the ability to toggle between two values.
+
+It manages two values provided as defaults, and returns the selected value along with a function to toggle between the two.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useToggleState/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useToggleState<T>(value1: T, value2: T): [T, () => void]
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `value1` | `T` | The first toggle value |
+| `value2` | `T` | The second toggle value |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `[0]` | `T` | The currently selected value |
+| `[1]` | `() => void` | Function to toggle between the two values |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useToggleState } from '@modern-kit/react';
+
+const Example = () => {
+  const [value, toggle] = useToggleState('ON', 'OFF');
+
+  return (
+    <div>
+      {value}
+      <button onClick={toggle}>Toggle Button</button>
+    </div>
+  );
+}
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const [value, toggle] = useToggleState('ON', 'OFF');
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div>{value}</div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={toggle}>Toggle Button</button>
+      </div>
+    </div>
+  );
+}
+
+<Example />

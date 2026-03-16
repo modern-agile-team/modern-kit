@@ -10,9 +10,13 @@ import { useState } from 'react';
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useStep/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 interface UseStepProps {
   maxStep: number;
@@ -40,7 +44,34 @@ const useStep: ({ maxStep, initialStep, infinite }: UseStepProps) => {
 };
 ```
 
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `maxStep` | `number` | - | 최대 step 수 |
+| `initialStep` | `number` | `0` | 초기 step 값 |
+| `infinite` | `boolean` | `false` | 최대/최솟값 도달 시 순환 여부 |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `currentStep` | `number` | 현재 step 값 |
+| `hasNextStep` | `boolean` | 다음 step으로 이동 가능한지 여부 |
+| `hasPrevStep` | `boolean` | 이전 step으로 이동 가능한지 여부 |
+| `setStep` | `(step: SetStateAction<number>, action?: StepAction) => void` | 특정 step으로 이동하는 함수 |
+| `goToNextStep` | `(action?: StepAction) => void` | 다음 step으로 이동하는 함수 |
+| `goToPrevStep` | `(action?: StepAction) => void` | 이전 step으로 이동하는 함수 |
+| `resetStep` | `(action?: StepAction) => void` | 초기 step으로 이동하는 함수 |
+
+<br />
+
 ## Usage
+
 ```tsx title="typescript"
 import { useStep } from '@modern-kit/react';
 
@@ -128,7 +159,9 @@ export const Example = () => {
 };
 ```
 
-## Example
+<br />
+
+### Example
 
 export const Example = () => {
   const [infinite, setInfinite] = useState(true);

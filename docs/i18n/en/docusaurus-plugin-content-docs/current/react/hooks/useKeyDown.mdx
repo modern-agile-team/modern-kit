@@ -1,0 +1,165 @@
+import { useKeyDown } from '@modern-kit/react';
+
+# useKeyDown
+
+When the element with the assigned `ref` is focused and a `keydown` event occurs, the hook triggers the callback mapped to that `key` in `keyDownCallbackMap`.
+
+The keys in `keyDownCallbackMap` must be values returned by `KeyboardEvent.key`.
+  - 💡 Commonly used `KeyboardEvent.key` values based on **[Key values for keyboard events - MDN](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)** support **type inference**. Keys not covered by type inference must be entered manually.
+  - 💡 **[KeyDownCallbackMap interface provided for type inference](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/keyDownCallbackMap.ts)**
+
+If you want to invoke a callback for **all `KeyboardEvent.key` values**, use the `allKeyDownCallback` option.
+  - 💡 **When `allKeyDownCallback` is set, callbacks defined in `keyDownCallbackMap` are ignored.**
+
+The `enabled` option lets you conditionally bind the keydown event.
+
+If `targetRef` is not assigned, the event is bound to `window` by default.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseKeyDownProps {
+  enabled?: boolean;
+  keyDownCallbackMap?: Partial<KeyDownCallbackMap>;
+  allKeyDownCallback?: (event: KeyboardEvent) => void;
+}
+```
+```ts title="typescript"
+// Function overloading
+function useKeyDown({
+  enabled,
+  keyDownCallbackMap,
+  allKeyDownCallback,
+}: UseKeyDownProps): { ref: React.RefObject<Window | null> };
+
+function useKeyDown<T extends HTMLElement>({
+  enabled,
+  keyDownCallbackMap,
+  allKeyDownCallback,
+}: UseKeyDownProps): { ref: React.RefObject<T | null> };
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `enabled` | `boolean` | `true` | Whether to activate the keyboard event listener |
+| `keyDownCallbackMap` | `Partial<KeyDownCallbackMap>` | `{}` | An object mapping specific keys to their respective callback functions |
+| `allKeyDownCallback` | `(event: KeyboardEvent) => void` | `-` | A common callback invoked for every key press. When set, takes priority over `keyDownCallbackMap` |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `ref` | `React.RefObject<T \| null>` | Ref to attach to the target element for key binding. Binds to `window` if not assigned |
+
+<br />
+
+## Remarks
+
+:::tip keyDownCallbackMap type inference
+
+Type inference is supported for commonly used `KeyboardEvent.key` values. Keys not covered must be entered as plain strings. See the [KeyDownCallbackMap interface](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useKeyDown/keyDownCallbackMap.ts) for the full list.
+
+:::
+
+<br />
+
+## Usage
+
+### AllKeyDownCallback
+
+A common callback invoked whenever any key is pressed.
+
+```tsx title="typescript"
+import { useKeyDown } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref } = useKeyDown<HTMLButtonElement>({
+    enabled: true, // default: true
+    allKeyDownCallback: (event) => console.log('All Key', event.key)
+  });
+
+  return <button ref={ref}>Button</button>;
+};
+```
+
+<br />
+
+### KeyDownCallbackMap
+
+Maps specific keys to callback functions and invokes the corresponding callback when each key is pressed.
+
+```tsx title="typescript"
+import { useKeyDown } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref } = useKeyDown<HTMLButtonElement>({
+    enabled: true, // default: true
+    keyDownCallbackMap: {
+      Enter: (event) => console.log('Enter', event.key),
+      Shift: (event) => console.log('Shift', event.key),
+      ' ': (event) => console.log('Space', event.key),
+    }
+  });
+
+  return (
+    <input
+      ref={ref}
+      placeholder="Focus here and press Enter, Shift, or Space"
+      style={{ width: '300px' }}
+    />
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { ref } = useKeyDown({
+    enabled: true, // default: true
+    keyDownCallbackMap: {
+      Enter: (event) => console.log('Enter', event.key),
+      Shift: (event) => console.log('Shift', event.key),
+      ' ': (event) => console.log('Space', event.key),
+    }
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <input
+        ref={ref}
+        placeholder="Focus here and press Enter, Shift, or Space"
+        style={{ width: '300px' }}
+      />
+    </div>
+  );
+};
+
+<Example />
+
+<br />
+
+## Remarks
+
+:::tip References
+
+- [Key values for keyboard events(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
+- [KeyboardEvent.key(en) - MDN](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key)
+- [KeyboardEvent.key(ko) - MDN](https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key)
+
+:::

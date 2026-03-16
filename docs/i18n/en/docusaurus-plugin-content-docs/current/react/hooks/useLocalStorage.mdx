@@ -1,0 +1,184 @@
+import { useLocalStorage } from '@modern-kit/react';
+
+# useLocalStorage
+
+A custom hook that subscribes to a specific `key` in localStorage using **[useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore)** (available from React v18) and synchronizes state whenever the subscribed data changes.
+
+If the subscribed `key` does not exist in localStorage, you can set a default value via `initialValue`. In **server-side rendering (SSR)** environments where localStorage is unavailable, `initialValue` is returned.
+
+`setState` accepts either a value directly or a function. When using a function, the current state is provided as an argument.
+
+```ts
+const { state, setState, removeState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [1, 2],
+});
+
+setState([1, 2, 3]);
+setState(state => [...state, 3]);
+```
+
+<br />
+
+Providing `initialValue` enables **more precise type inference**.
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+});
+
+state; // number[] | null
+setState(state => {
+  state; // number[] | null
+});
+```
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+});
+
+state; // number[]
+setState(state => {
+  state; // number[]
+});
+```
+
+The `visibilityChange` option detects browser tab visibility changes and synchronizes `state` when the tab becomes visible again. This is useful for cross-tab synchronization, since localStorage is shared across tabs unlike `sessionStorage`.
+
+```ts
+const { state, setState } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [1, 2],
+  visibilityChange: true,
+});
+```
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useLocalStorage/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseLocalStorageWithoutInitialValueProps {
+  key: string;
+  visibilityChange?: boolean;
+}
+
+interface UseLocalStorageWithInitialValueProps<T> {
+  key: string;
+  initialValue: T | (() => T);
+  visibilityChange?: boolean;
+}
+
+type UseLocalStorageProps<T> =
+  | UseLocalStorageWithoutInitialValueProps
+  | UseLocalStorageWithInitialValueProps<T>;
+```
+```ts title="typescript"
+// Function overloading
+function useLocalStorage<T>({
+  key,
+  initialValue,
+}: UseLocalStorageWithInitialValueProps<T>): {
+  state: T;
+  setState: Dispatch<SetStateAction<T>>;
+  removeState: () => void;
+};
+
+function useLocalStorage<T = unknown>({
+  key,
+}: UseLocalStorageWithoutInitialValueProps): {
+  state: T | null;
+  setState: Dispatch<SetStateAction<T | null>>;
+  removeState: () => void;
+};
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `key` | `string` | `-` | The key used to store and retrieve data from localStorage |
+| `initialValue` | `T \| (() => T)` | `-` | The initial value returned when the key does not exist in localStorage. Can be a function |
+| `visibilityChange` | `boolean` | `false` | Whether to synchronize state when the tab becomes visible |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `state` | `T \| null` | The current value stored in localStorage. Falls back to `initialValue` or `null` |
+| `setState` | `Dispatch<SetStateAction<T \| null>>` | Function to update the value in localStorage |
+| `removeState` | `() => void` | Function to remove the value for the given `key` from localStorage |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useLocalStorage } from '@modern-kit/react';
+
+const Example = () => {
+  const { state, setState, removeState } = useLocalStorage<string>({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div>
+      <p>Check localStorage in your browser's DevTools!</p>
+      <p>state: {state}</p>
+      <button onClick={() => setState('foo')}>
+        {`Save "foo" to localStorage key "test"`}
+      </button>
+      <button onClick={() => setState('bar')}>
+        {`Save "bar" to localStorage key "test"`}
+      </button>
+      <button onClick={() => removeState()}>
+        {`Remove localStorage key "test"`}
+      </button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { state, setState, removeState } = useLocalStorage({
+    key: 'test',
+    initialValue: 'default',
+  });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Check localStorage in your browser's DevTools!</p>
+      <p style={{ margin: 0 }}>state: {state}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setState('foo')}>
+          {`Save "foo" to localStorage key "test"`}
+        </button>
+        <button onClick={() => setState('bar')}>
+          {`Save "bar" to localStorage key "test"`}
+        </button>
+        <button onClick={() => removeState()}>
+          {`Remove localStorage key "test"`}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

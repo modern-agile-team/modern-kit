@@ -1,0 +1,148 @@
+import { useWindowSize } from '@modern-kit/react';
+import { useMemo } from 'react';
+
+# useWindowSize
+
+A custom hook that tracks and returns the current browser window's width and height.
+
+It prevents hydration mismatches in SSR environments, and provides a `debounce` feature to prevent unnecessary calls when resize events fire.
+
+If a debounce wait time (`debounceWait`) is set, it operates with debouncing; if not set, it updates immediately.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useWindowSize/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useWindowSize(debounceWait?: number): {
+  width: number;
+  height: number;
+}
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `debounceWait` | `number` | - | Debounce wait time in milliseconds. If not set, updates immediately. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `width` | `number` | Current browser window width (px) |
+| `height` | `number` | Current browser window height (px) |
+
+<br />
+
+## Usage
+
+### Default
+
+```tsx title="typescript"
+import { useWindowSize } from '@modern-kit/react';
+
+const Example = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      Try resizing the browser window. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DefaultExample = () => {
+  const windowSize = useWindowSize();
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%',
+      background: '#439966',
+      fontSize: '2rem',
+      color: '#fff',
+      padding: '16px',
+      borderRadius: '8px',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      Try resizing the browser window. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DefaultExample />
+
+<br />
+
+### Debounce
+
+```tsx title="typescript"
+import { useWindowSize } from '@modern-kit/react';
+
+const DebounceExample = () => {
+  const windowSize = useWindowSize(300);
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%',
+      background: '#0067A3',
+      fontSize: '2rem',
+      color: '#fff',
+    }
+  }, []);
+
+  return (
+    <div style={boxStyle}>
+      Try resizing the browser window. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+```
+
+export const DebounceExample = () => {
+  const windowSize = useWindowSize(300);
+  const boxStyle = useMemo(() => {
+    return {
+      width: '100%',
+      background: '#0067A3',
+      fontSize: '2rem',
+      color: '#fff',
+      padding: '16px',
+      borderRadius: '8px',
+    }
+  }, []);
+  return (
+    <div style={boxStyle}>
+      Try resizing the browser window. <br />
+      width: {windowSize.width}px <br />
+      height: {windowSize.height}px
+    </div>
+  );
+};
+
+<DebounceExample />

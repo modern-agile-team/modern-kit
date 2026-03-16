@@ -1,0 +1,166 @@
+import { useClipboard } from '@modern-kit/react';
+import { useState, useEffect } from 'react';
+import img from '../../../../../../assets/react.png';
+
+# useClipboard
+
+Returns an object containing functions that interact with the `clipboard` and the stored data.
+
+Data copied to the clipboard is stored in the `copiedData` state. `copyText` and `copyImage` return a `success flag (Boolean)`.
+
+- `copyText` copies the given text to the clipboard.
+- `copyImage` copies the given image URL to the clipboard.
+
+Data read from the clipboard is stored in the `readData` state. `readText` and `readContents` return a `success flag (Boolean)`.
+
+- `readText` reads text data stored in the clipboard.
+- `readContents` reads various types of content from the clipboard, including text, HTML, and images.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useClipboard/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+function useClipboard(): {
+  copiedData: string | Blob | null;
+  readData: string | ClipboardItems | null;
+  readText: () => Promise<boolean>;
+  readContents: () => Promise<boolean>;
+  copyText: (value: string) => Promise<boolean>;
+  copyImage: (src: string, options?: { toText: boolean }) => Promise<boolean>;
+};
+```
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `copiedData` | `string \| Blob \| null` | The most recently copied data in the clipboard. |
+| `readData` | `string \| ClipboardItems \| null` | Data read from the clipboard. |
+| `copyText` | `(value: string) => Promise<boolean>` | Copies the given text to the clipboard. Returns whether the operation succeeded. |
+| `copyImage` | `(src: string, options?: { toText: boolean }) => Promise<boolean>` | Copies the given image URL to the clipboard. Returns whether the operation succeeded. |
+| `readText` | `() => Promise<boolean>` | Reads text data stored in the clipboard. Returns whether the operation succeeded. |
+| `readContents` | `() => Promise<boolean>` | Reads various content types (text, HTML, images, etc.) from the clipboard. Returns whether the operation succeeded. |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useClipboard } from '@modern-kit/react';
+import img from '../../assets/img.png';
+
+const Example = () => {
+  const { copiedData, readData, copyText, copyImage, readContents, readText } = useClipboard();
+  const [text, setText] = useState('');
+
+  const handleCopyText = async () => {
+    const isSuccess = await copyText(text);
+    alert(`isSuccess: ${isSuccess}, copied to clipboard. Check the browser console.`);
+  };
+
+  const handleCopyImage = async () => {
+    const isSuccess = await copyImage(img);
+    alert(`isSuccess: ${isSuccess}, copied to clipboard. Check the browser console.`);
+  };
+
+  const handleReadText = async () => {
+    const isSuccess = await readText(text);
+    alert(`isSuccess: ${isSuccess}, fetched data from clipboard. Check the browser console.`);
+  };
+
+  const handleReadContents = async () => {
+    const isSuccess = await readContents(img);
+    alert(`isSuccess: ${isSuccess}, fetched data from clipboard. Check the browser console.`);
+  };
+
+  useEffect(() => {
+    console.log("copiedData: ", copiedData);
+    console.log("readData: ", readData);
+  }, [copiedData, readData])
+
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button onClick={handleCopyText}>Copy text to clipboard</button>
+      </div>
+      <br />
+      <div>
+        <img src={img} alt="image" width={120} height={120} />
+        <button onClick={handleCopyImage}>Copy image to clipboard</button>
+      </div>
+      <br />
+      <div>
+        <button onClick={handleReadText}>Read clipboard text</button>
+        <button onClick={handleReadContents}>Read clipboard contents</button>
+      </div>
+    </div>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { copiedData, readData, copyText, copyImage, readContents, readText } = useClipboard();
+  const [text, setText] = useState('');
+
+  const handleCopyText = async () => {
+    const isSuccess = await copyText(text);
+    alert(`isSuccess: ${isSuccess}, copied to clipboard. Check the browser console.`);
+  };
+
+  const handleCopyImage = async () => {
+    const isSuccess = await copyImage(img);
+    alert(`isSuccess: ${isSuccess}, copied to clipboard. Check the browser console.`);
+  };
+
+  const handleReadText = async () => {
+    const isSuccess = await readText(text);
+    alert(`isSuccess: ${isSuccess}, fetched data from clipboard. Check the browser console.`);
+  };
+
+  const handleReadContents = async () => {
+    const isSuccess = await readContents(img);
+    alert(`isSuccess: ${isSuccess}, fetched data from clipboard. Check the browser console.`);
+  };
+
+  useEffect(() => {
+    console.log("copiedData: ", copiedData);
+    console.log("readData: ", readData);
+  }, [copiedData, readData])
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Enter text to copy"
+        />
+        <button onClick={handleCopyText}>Copy text to clipboard</button>
+      </div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <img src={img} alt="image" width={120} height={120} />
+        <button onClick={handleCopyImage}>Copy image to clipboard</button>
+      </div>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={handleReadText}>Read clipboard text</button>
+        <button onClick={handleReadContents}>Read clipboard contents</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />

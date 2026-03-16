@@ -1,0 +1,46 @@
+# useMergeRefs
+
+A custom hook for merging multiple `ref` objects into a single ref callback.
+
+It merges the given refs and returns a single `ref callback`. When the returned callback is passed to a component, the DOM element or instance of that component is applied to all provided refs simultaneously.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMergeRefs/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useMergeRefs<T = unknown>(...refs: React.Ref<T>[]): (instance: T | null) => void
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `...refs` | `React.Ref<T>[]` | List of refs to merge |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import React, { forwardRef, useRef } from 'react';
+import { useMergeRefs } from '@modern-kit/react';
+
+interface Props {
+  /* ... */
+}
+
+const Example = forwardRef<HTMLDivElement, Props>((props, ref) => {
+  const childRef = useRef<HTMLDivElement | null>(null);
+
+  return <div ref={useMergeRefs(childRef, ref)}>{/* ... */}</div>;
+});
+```

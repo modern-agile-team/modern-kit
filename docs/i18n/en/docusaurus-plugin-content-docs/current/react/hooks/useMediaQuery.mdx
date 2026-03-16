@@ -1,0 +1,75 @@
+import { useMediaQuery } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# useMediaQuery
+
+A custom hook for easily checking whether a media query string is matched.
+
+Returns a `boolean` indicating whether the current viewport satisfies the given media query condition. Use `defaultValue` to specify a fallback value in environments where the media query result cannot be determined (e.g., SSR).
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMediaQuery/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useMediaQuery(mediaQueryString: string, defaultValue?: boolean): boolean
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `mediaQueryString` | `string` | `-` | A string representing the media query condition (e.g., `'(min-width: 768px)'`) |
+| `defaultValue` | `boolean` | `false` | Fallback value used when the media query result cannot be determined |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useMediaQuery } from '@modern-kit/react';
+
+const Example = () => {
+  const isMatch = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <div>
+      <p>
+        {isMatch
+          ? 'The viewport width is 768px or wider.'
+          : 'The viewport width is less than 768px.'}
+      </p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const isMatch = useMediaQuery('(min-width: 768px)');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Try resizing the browser window!</p>
+      <p style={{ margin: 0 }}>
+        {isMatch
+          ? 'The viewport width is 768px or wider.'
+          : 'The viewport width is less than 768px.'}
+      </p>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

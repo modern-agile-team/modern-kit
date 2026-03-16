@@ -1,0 +1,56 @@
+import { usePreventBrowserScrollRestoration } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# usePreventBrowserScrollRestoration
+
+A hook that prevents the browser's default scroll restoration behavior.
+
+When the component mounts, it sets `window.history.scrollRestoration` to `'manual'` to disable the browser's automatic scroll restoration. When the component unmounts, the original value is restored.
+
+This hook is used when implementing custom scroll restoration logic to prevent conflicts with the browser's default behavior.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreventBrowserScrollRestoration/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+const usePreventBrowserScrollRestoration: () => void;
+```
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { usePreventBrowserScrollRestoration } from '@modern-kit/react';
+
+const MyComponent = () => {
+  usePreventBrowserScrollRestoration();
+
+  return <div>window.history.scrollRestoration: {window.history.scrollRestoration}</div>;
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  usePreventBrowserScrollRestoration();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>window.history.scrollRestoration: {window.history.scrollRestoration}</p>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>

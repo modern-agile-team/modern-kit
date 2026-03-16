@@ -1,0 +1,82 @@
+import { useSafeContext } from '@modern-kit/react'
+import { createContext } from 'react'
+
+# useSafeContext
+
+A custom hook for `safely accessing` a React Context.
+
+If the Context has no default value (null/undefined), it throws an error when used outside of a Provider.
+If the Context has a default value, no error is thrown when used outside of a Provider — the default value is returned instead.
+
+When no error is thrown, the hook returns a `NonNullable` Context value since access was safe.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useSafeContext/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+function useSafeContext<T>(context: Context<T>): NonNullable<T>
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `context` | `Context<T>` | The React Context to access safely |
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { useSafeContext } from '@modern-kit/react'
+import { createContext } from 'react'
+
+const ThemeContext = createContext<{ theme: string } | null>(null);
+ThemeContext.displayName = 'ThemeContext';
+
+function MyComponent() {
+  // Since access is safe, a NonNullable Context value is returned.
+  // context: { theme: 'dark' }
+  const context = useSafeContext(ThemeContext);
+  return <div>Current theme: {context.theme}</div>;
+}
+
+<ThemeContext.Provider value={{ theme: 'dark' }}>
+  <MyComponent />
+</ThemeContext.Provider>
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const ThemeContext = createContext(null);
+  ThemeContext.displayName = 'ThemeContext';
+
+  const MyComponent = () => {
+    const context = useSafeContext(ThemeContext);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+        Current theme: {context.theme}
+      </div>
+    );
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme: 'dark' }}>
+      <MyComponent />
+    </ThemeContext.Provider>
+  );
+};
+
+<Example />

@@ -1,0 +1,85 @@
+import { usePreferredColorScheme } from '@modern-kit/react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+# usePreferredColorScheme
+
+Returns `dark` or `light` based on the user's color scheme preference (**[prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)**).
+
+- `light`: Returned when the user prefers the `light` theme on their system, or has not indicated any preference.
+- `dark`: Returned when the user has indicated they prefer the `dark` theme on their system.
+
+Users can specify their preferred theme in their **operating system settings** or **user agent settings**.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/usePreferredColorScheme/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+const usePreferredColorScheme: () => "dark" | "light"
+```
+
+<br />
+
+## Remarks
+
+:::tip References
+
+- [Prefers Color Scheme - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+
+:::
+
+<br />
+
+## Usage
+
+```tsx title="typescript"
+import { usePreferredColorScheme } from '@modern-kit/react';
+
+const Example = () => {
+  const colorScheme = usePreferredColorScheme();
+
+  return (
+    <div>
+      <p>Try changing the theme in your OS system settings.</p>
+      <p>ColorScheme: <b>{colorScheme}</b></p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const colorScheme = usePreferredColorScheme();
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <p style={{ margin: 0 }}>Try changing the theme in your OS system settings.</p>
+      <p style={{ margin: 0 }}>ColorScheme: <b>{colorScheme}</b></p>
+    </div>
+  );
+};
+
+<BrowserOnly>
+  {() => <Example />}
+</BrowserOnly>
+
+<br />
+
+## Image
+
+### 1. Light Theme
+![Screenshot - Light Theme](https://github.com/modern-agile-team/modern-kit/assets/64779472/79c6298b-72f1-4f50-b644-93762d4d59e1)
+
+<br />
+
+### 2. Dark Theme
+![Screenshot - Dark Theme](https://github.com/modern-agile-team/modern-kit/assets/64779472/ab735906-9f8c-4e8e-9688-f6cde1786ec9)

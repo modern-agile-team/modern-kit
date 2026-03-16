@@ -2,16 +2,31 @@
 
 인자로 주어진 여러 개의 `ref`를 하나로 병합할 때 활용할 수 있는 커스텀 훅입니다.
 
+주어진 ref들을 병합하여 하나의 `ref callback`을 반환합니다. 반환된 `ref callback`을 컴포넌트에 전달하면, 해당 컴포넌트의 DOM 요소나 인스턴스가 제공된 모든 ref에 적용됩니다.
+
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useMergeRefs/index.ts)
+
+<br />
 
 ## Interface
 
 ```ts title="typescript"
-const useMergeRefs: <T = unknown>(...refs: React.Ref<T>[]) => (instance: T | null) => void
+function useMergeRefs<T = unknown>(...refs: React.Ref<T>[]): (instance: T | null) => void
 ```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `...refs` | `React.Ref<T>[]` | 병합할 ref 목록 |
+
+<br />
 
 ## Usage
 

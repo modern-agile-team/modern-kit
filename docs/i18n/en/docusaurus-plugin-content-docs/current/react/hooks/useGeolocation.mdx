@@ -1,0 +1,393 @@
+import { useGeolocation } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useGeolocation
+
+A custom hook that retrieves the user's current location using the browser's Geolocation API.
+
+You can fetch the location once (`get`) or track it in real time (`watch`).
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useGeolocation/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseGeolocationOptions extends PositionOptions {
+  mountBehavior?: 'watch' | 'get';
+}
+
+interface UseGeolocationReturn {
+  data: GeolocationData | null;
+  error: GeolocationPositionError | Error | null;
+  loading: boolean;
+  isWatching: boolean;
+  get: () => void;
+  watch: () => void;
+  stopWatch: () => void;
+}
+
+type GeolocationData = GeolocationPosition['coords'] & { timestamp: number };
+
+function useGeolocation(options?: UseGeolocationOptions): UseGeolocationReturn;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `enableHighAccuracy` | `boolean` | `false` | Whether to request high-accuracy location (uses GPS, increases battery usage) |
+| `timeout` | `number` | `Infinity` | Maximum time allowed to obtain location information (milliseconds) |
+| `maximumAge` | `number` | `0` | Maximum age of cached location information (milliseconds) |
+| `mountBehavior` | `'watch' \| 'get'` | `'get'` | How to fetch location when the hook mounts |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+|------|------|-------------|
+| `data` | `GeolocationData \| null` | Location data (latitude, longitude, accuracy, altitude, timestamp, etc.) |
+| `error` | `GeolocationPositionError \| Error \| null` | Error information |
+| `loading` | `boolean` | Whether location information is being fetched |
+| `isWatching` | `boolean` | Whether real-time location tracking is active |
+| `get` | `() => void` | Function to fetch the current location once |
+| `watch` | `() => void` | Function to start real-time location tracking |
+| `stopWatch` | `() => void` | Function to stop real-time location tracking |
+
+<br />
+
+### GeolocationData
+
+| Name | Type | Description |
+|------|------|-------------|
+| `latitude` | `number` | Latitude |
+| `longitude` | `number` | Longitude |
+| `accuracy` | `number` | Location accuracy (meters) |
+| `altitude` | `number \| null` | Altitude (meters) |
+| `altitudeAccuracy` | `number \| null` | Altitude accuracy (meters) |
+| `heading` | `number \| null` | Direction of movement (0°–360°, north-based) |
+| `speed` | `number \| null` | Movement speed (m/s) |
+| `timestamp` | `number` | Time when location was acquired |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+- **HTTPS required**: The Geolocation API only works in `HTTPS` environments for security reasons. (`localhost` is an exception)
+- **User permission required**: Before accessing location information, the browser shows a permission prompt to the user. If denied, an error is returned.
+- **SSR environment**: In server-side rendering environments, `navigator.geolocation` does not exist; the hook detects this and returns an error.
+- **Battery usage**: Using `enableHighAccuracy: true` provides more accurate location via GPS but increases battery consumption.
+- **Watch mode**: When using real-time tracking (`watch`) mode, tracking is automatically stopped when the component unmounts.
+:::
+
+<br />
+
+:::tip Error Handling
+Common errors from the Geolocation API:
+- `PERMISSION_DENIED` (code: 1): User denied location access
+- `POSITION_UNAVAILABLE` (code: 2): Location information is unavailable
+- `TIMEOUT` (code: 3): Location information could not be obtained within the specified time
+:::
+
+<br />
+
+## Usage
+
+### Basic Usage (Fetch Location Once)
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const LocationComponent = () => {
+  const { data, error, loading } = useGeolocation();
+
+  if (loading) return <div>Fetching location...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return null;
+
+  return (
+    <div>
+      <p>Latitude: {data.latitude}</p>
+      <p>Longitude: {data.longitude}</p>
+      <p>Accuracy: {data.accuracy}m</p>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Real-Time Location Tracking
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const RealTimeLocation = () => {
+  const { data, isWatching, watch, stopWatch } = useGeolocation({
+    mountBehavior: 'watch',
+    enableHighAccuracy: true
+  });
+
+  return (
+    <div>
+      <p>Tracking status: {isWatching ? 'Tracking' : 'Stopped'}</p>
+      {data && (
+        <>
+          <p>Latitude: {data.latitude}</p>
+          <p>Longitude: {data.longitude}</p>
+        </>
+      )}
+      <button onClick={isWatching ? stopWatch : watch}>
+        {isWatching ? 'Stop Tracking' : 'Start Tracking'}
+      </button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Manually Fetching Location
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const ManualLocation = () => {
+  // Setting mountBehavior to undefined prevents automatic location fetching on mount
+  const { data, loading, get } = useGeolocation({
+    mountBehavior: undefined
+  });
+
+  return (
+    <div>
+      <button onClick={get} disabled={loading}>
+        {loading ? 'Loading...' : 'Get Current Location'}
+      </button>
+      {data && (
+        <p>Latitude: {data.latitude}, Longitude: {data.longitude}</p>
+      )}
+    </div>
+  );
+};
+```
+
+<br />
+
+### Setting Timeout and High Accuracy Options
+
+```tsx title="typescript"
+import { useGeolocation } from '@modern-kit/react';
+
+const PreciseLocation = () => {
+  const { data, error } = useGeolocation({
+    enableHighAccuracy: true,  // Use GPS
+    timeout: 10000,            // 10 second timeout
+    maximumAge: 60000,         // Allow cached location up to 1 minute
+  });
+
+  if (error) {
+    return <div>Unable to get location: {error.message}</div>;
+  }
+
+  return data ? (
+    <div>Precise location: {data.latitude}, {data.longitude}</div>
+  ) : null;
+};
+```
+
+<br />
+
+## Example
+
+export const Example = () => {
+  const { data, error, loading, isWatching, get, watch, stopWatch } = useGeolocation({
+    enableHighAccuracy: true,
+    timeout: 10000,
+  });
+
+  const formatCoord = (num) => num?.toFixed(6) ?? '-';
+  const formatAccuracy = (num) => num?.toFixed(1) ?? '-';
+  const formatTimestamp = (ts) => ts ? new Date(ts).toLocaleTimeString('en-US') : '-';
+
+  return (
+    <div>
+      <div style={{ marginBottom: '20px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Allow <strong>location access</strong> in your browser</li>
+          <li>Click the <strong>'Get Current Location'</strong> button to view your location</li>
+          <li>Use the <strong>'Start Real-Time Tracking'</strong> button to track location changes</li>
+        </ol>
+      </div>
+
+      {/* Status display */}
+      <div style={{
+        display: 'flex',
+        gap: '10px',
+        marginBottom: '15px',
+        flexWrap: 'wrap'
+      }}>
+        <span style={{
+          padding: '4px 12px',
+          borderRadius: '20px',
+          fontSize: '13px',
+          fontWeight: '500',
+          backgroundColor: loading ? '#fef3c7' : '#e5e7eb',
+          color: loading ? '#d97706' : '#6b7280'
+        }}>
+          {loading ? '⏳ Loading...' : '✓ Standby'}
+        </span>
+        <span style={{
+          padding: '4px 12px',
+          borderRadius: '20px',
+          fontSize: '13px',
+          fontWeight: '500',
+          backgroundColor: isWatching ? '#dcfce7' : '#e5e7eb',
+          color: isWatching ? '#16a34a' : '#6b7280'
+        }}>
+          {isWatching ? '📡 Tracking...' : '⏸ Tracking stopped'}
+        </span>
+      </div>
+
+      {/* Button group */}
+      <div style={{
+        display: 'flex',
+        gap: '10px',
+        marginBottom: '20px',
+        flexWrap: 'wrap'
+      }}>
+        <button
+          onClick={get}
+          disabled={loading}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            fontWeight: '500',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.6 : 1
+          }}
+        >
+          📍 Get Current Location
+        </button>
+        <button
+          onClick={isWatching ? stopWatch : watch}
+          style={{
+            padding: '10px 20px',
+            borderRadius: '8px',
+            border: 'none',
+            backgroundColor: isWatching ? '#ef4444' : '#22c55e',
+            color: 'white',
+            fontWeight: '500',
+            cursor: 'pointer'
+          }}
+        >
+          {isWatching ? '⏹ Stop Tracking' : '▶️ Start Real-Time Tracking'}
+        </button>
+      </div>
+
+      {/* Error display */}
+      {error && (
+        <div style={{
+          padding: '15px',
+          backgroundColor: '#fef2f2',
+          border: '1px solid #fecaca',
+          borderRadius: '8px',
+          marginBottom: '15px',
+          color: '#dc2626'
+        }}>
+          <strong>❌ Error:</strong> {error.message}
+        </div>
+      )}
+
+      {/* Location data display */}
+      {data && (
+        <div style={{
+          border: '2px solid #3b82f6',
+          borderRadius: '12px',
+          padding: '20px',
+          backgroundColor: '#f8fafc'
+        }}>
+          <h4 style={{ margin: '0 0 15px 0', color: '#1e40af' }}>📍 Location Info</h4>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '12px'
+          }}>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Latitude</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatCoord(data.latitude)}</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Longitude</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatCoord(data.longitude)}</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Accuracy</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatAccuracy(data.accuracy)}m</div>
+            </div>
+            <div style={{
+              padding: '12px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Timestamp</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: '#1f2937' }}>{formatTimestamp(data.timestamp)}</div>
+            </div>
+          </div>
+
+          {/* Altitude info (if available) */}
+          {data.altitude != null && (
+            <div style={{ marginTop: '15px', padding: '12px', backgroundColor: '#f0f9ff', borderRadius: '8px' }}>
+              <div style={{ fontSize: '12px', color: '#0369a1', marginBottom: '4px' }}>Altitude</div>
+              <div style={{ fontSize: '16px', fontWeight: '600', color: '#0c4a6e' }}>
+                {data.altitude.toFixed(1)}m (accuracy: {data.altitudeAccuracy?.toFixed(1) ?? '-'}m)
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Info message */}
+      <div style={{
+        marginTop: '20px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>💡 Note:</strong> Location accuracy may vary depending on the browser and device. Using the
+        <code style={{ backgroundColor: '#e0e7ff', padding: '2px 6px', borderRadius: '4px', margin: '0 4px' }}>enableHighAccuracy: true</code>
+        option enables GPS for more accurate positioning.
+      </div>
+    </div>
+  );
+};
+
+<Example />

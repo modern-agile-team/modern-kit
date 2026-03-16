@@ -1,0 +1,97 @@
+import { useComputedStyleObserver } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useComputedStyleObserver
+
+A React hook that `observes and manages` a specific `computed style` value of a target element in real time.
+
+- Uses **[MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)** to invoke a callback whenever the element's style attribute changes.
+- Reflects changes made directly via **[CSSStyleDeclaration: setProperty](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty)** in real time.
+
+<br />
+
+## Code
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useComputedStyleObserver/index.ts)
+
+<br />
+
+## Interface
+```ts title="typescript"
+interface UseComputedStyleObserverReturnType<T extends HTMLElement> {
+  ref: React.RefObject<T | null>;
+  value: string;
+  setValue: (value: string) => void;
+}
+```
+```ts title="typescript"
+function useComputedStyleObserver<T extends HTMLElement>(
+  key: string
+): UseComputedStyleObserverReturnType<T>;
+```
+
+<br />
+
+### Parameters
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `key` | `string` | The CSS style property key to observe (e.g. `'width'`, `'color'`, `'font-size'`) |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `ref` | `React.RefObject<T \| null>` | A ref object to attach to the target element to observe. |
+| `value` | `string` | The current observed computed style value. |
+| `setValue` | `(value: string) => void` | A function to directly update the computed style value. |
+
+<br />
+
+## Usage
+```tsx title="typescript"
+import { useComputedStyleObserver } from '@modern-kit/react';
+
+const Example = () => {
+  const { ref, value, setValue } =
+    useComputedStyleObserver<HTMLDivElement>('color');
+
+  return (
+    <>
+      <div ref={ref} style={{ width: '100px', height: '100px', backgroundColor: 'skyblue' }} />
+      <div>
+        <p>Current width: {`${value}`}</p>
+        <button onClick={() => setValue('100px')}>Set width to 100px (setValue)</button>
+        <button onClick={() => setValue('300px')}>Set width to 300px (setValue)</button>
+
+        <br />
+
+        <button onClick={() => ref.current?.style.setProperty('width', '100px')}>Set width to 100px (setProperty)</button>
+        <button onClick={() => ref.current?.style.setProperty('width', '300px')}>Set width to 300px (setProperty)</button>
+      </div>
+    </>
+  );
+};
+```
+
+## Example
+
+export const Example = () => {
+  const { ref, value, setValue } = useComputedStyleObserver('width');
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+      <div ref={ref} style={{ width: '100px', height: '100px', backgroundColor: 'skyblue' }} />
+      <p>Current width: {`${value}`}</p>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <button onClick={() => setValue('100px')}>Set width to 100px (setValue)</button>
+        <button onClick={() => setValue('300px')}>Set width to 300px (setValue)</button>
+        <button onClick={() => ref.current?.style.setProperty('width', '100px')}>Set width to 100px (setProperty)</button>
+        <button onClick={() => ref.current?.style.setProperty('width', '300px')}>Set width to 300px (setProperty)</button>
+      </div>
+    </div>
+  );
+};
+
+<Example />
