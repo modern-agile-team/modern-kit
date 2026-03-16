@@ -373,6 +373,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/code-frame@npm:^7.29.0":
+  version: 7.29.0
+  resolution: "@babel/code-frame@npm:7.29.0"
+  dependencies:
+    "@babel/helper-validator-identifier": "npm:^7.28.5"
+    js-tokens: "npm:^4.0.0"
+    picocolors: "npm:^1.1.1"
+  checksum: 10c0/d34cc504e7765dfb576a663d97067afb614525806b5cad1a5cc1a7183b916fec8ff57fa233585e3926fd5a9e6b31aae6df91aa81ae9775fb7a28f658d3346f0d
+  languageName: node
+  linkType: hard
+
 "@babel/compat-data@npm:^7.22.6, @babel/compat-data@npm:^7.22.9":
   version: 7.22.9
   resolution: "@babel/compat-data@npm:7.22.9"
@@ -1145,6 +1156,13 @@ __metadata:
   version: 7.27.1
   resolution: "@babel/helper-validator-identifier@npm:7.27.1"
   checksum: 10c0/c558f11c4871d526498e49d07a84752d1800bf72ac0d3dad100309a2eaba24efbf56ea59af5137ff15e3a00280ebe588560534b0e894a4750f8b1411d8f78b84
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/helper-validator-identifier@npm:7.28.5"
+  checksum: 10c0/42aaebed91f739a41f3d80b72752d1f95fd7c72394e8e4bd7cdd88817e0774d80a432451bcba17c2c642c257c483bf1d409dd4548883429ea9493a3bc4ab0847
   languageName: node
   linkType: hard
 
@@ -22206,18 +22224,21 @@ __metadata:
   linkType: hard
 
 "rollup-plugin-dts@npm:^6.1.1":
-  version: 6.3.0
-  resolution: "rollup-plugin-dts@npm:6.3.0"
+  version: 6.4.0
+  resolution: "rollup-plugin-dts@npm:6.4.0"
   dependencies:
-    "@babel/code-frame": "npm:^7.27.1"
+    "@babel/code-frame": "npm:^7.29.0"
+    "@jridgewell/remapping": "npm:^2.3.5"
+    "@jridgewell/sourcemap-codec": "npm:^1.5.5"
+    convert-source-map: "npm:^2.0.0"
     magic-string: "npm:^0.30.21"
   peerDependencies:
     rollup: ^3.29.4 || ^4
-    typescript: ^4.5 || ^5.0
+    typescript: ^4.5 || ^5.0 || ^6.0
   dependenciesMeta:
     "@babel/code-frame":
       optional: true
-  checksum: 10c0/7eae726f0a15651a4705d49771cc02d2c7fb35fe107ada03cdacade5ed8bf026af066f1fc8936dde2c07da269d03dd790110589cd3b0c7062ed3bedc0f3c75ee
+  checksum: 10c0/421c5482ae90805ff2a92d6c6b124f15d00d375377742ae8c7c8d394fbddc33f52872ec8391c0219cba8178769bf5adc6dab29623ee6458d16ab0a6d69811587
   languageName: node
   linkType: hard
 
