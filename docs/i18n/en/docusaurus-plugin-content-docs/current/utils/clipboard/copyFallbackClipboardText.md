@@ -21,7 +21,6 @@ const copyFallbackClipboardText: (value: string) => string
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { copyFallbackClipboardText } from '@modern-kit/utils';
 

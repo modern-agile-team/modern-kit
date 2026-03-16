@@ -17,7 +17,6 @@ function formatNumberWithCommas(value: number | string): string
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { formatNumberWithCommas } from '@modern-kit/utils';
 

@@ -19,7 +19,6 @@ const abRandom: () => 0 | 1
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { abRandom } from '@modern-kit/utils';
 

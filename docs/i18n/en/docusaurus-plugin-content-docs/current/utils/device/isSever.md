@@ -20,8 +20,6 @@ function isServer(): boolean
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { isServer } from '@modern-kit/utils';
 

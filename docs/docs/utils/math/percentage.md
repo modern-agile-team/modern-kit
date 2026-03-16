@@ -17,7 +17,6 @@ function percentage(value: number, total: number): number
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { percentage } from '@modern-kit/utils';
 

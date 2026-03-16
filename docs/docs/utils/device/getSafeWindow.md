@@ -20,8 +20,6 @@ function getSafeWindow(): Window
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getSafeWindow } from '@modern-kit/utils';
 

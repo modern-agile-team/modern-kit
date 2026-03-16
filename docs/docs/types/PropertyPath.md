@@ -7,6 +7,8 @@
   - 깊이 제한 (10레벨)
   - 실제 옵셔널 프로퍼티에만 `옵셔널` 경로 포함
 
+<br />
+
 ## Interface
 
 ```ts title="typescript"
@@ -31,11 +33,34 @@ type PropertyPath<
     }[keyof T & string];
 ```
 
+<br />
+
+## Type Parameters
+
+| Name    | Constraint      | Default     | Description                         |
+| ------- | --------------- | ----------- | ----------------------------------- |
+| `T`     | -               | -           | 경로를 추출할 대상 객체 타입        |
+| `Limit` | `unknown[]`     | `[]`        | 재귀 깊이 제한을 위한 내부 파라미터 |
+
+<br />
+
 ## Usage
 
+### 기본 케이스
+
 ```ts title="typescript"
+import { PropertyPath } from '@modern-kit/types';
+
 type Paths = PropertyPath<{ a: string; b: { c: number; d: string } }>;
 // "a" | "b" | "b.c" | "b.d"
+```
+
+<br />
+
+### 옵셔널 프로퍼티 케이스
+
+```ts title="typescript"
+import { PropertyPath } from '@modern-kit/types';
 
 type Paths = PropertyPath<{ a: string; b?: { c: number; d: string } }>;
 // "a" | "b" | "b?.c" | "b?.d"

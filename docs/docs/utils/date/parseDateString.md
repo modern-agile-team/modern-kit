@@ -22,8 +22,6 @@ const parseDateString: (date: string) => Date
 
 ## Usage
 
-### 유효한 날짜 형식
-
 ```ts title="typescript"
 import { parseDateString } from '@modern-kit/utils';
 

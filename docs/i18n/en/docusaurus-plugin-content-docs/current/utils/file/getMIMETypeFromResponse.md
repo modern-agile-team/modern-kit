@@ -22,8 +22,6 @@ const getMIMETypeFromResponse: (response: Response) => string
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getMIMETypeFromResponse, isMIMEType } from '@modern-kit/utils';
 

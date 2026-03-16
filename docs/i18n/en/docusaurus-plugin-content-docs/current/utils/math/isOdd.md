@@ -17,7 +17,6 @@ function isOdd(value: number): boolean;
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { isOdd } from '@modern-kit/utils';
 

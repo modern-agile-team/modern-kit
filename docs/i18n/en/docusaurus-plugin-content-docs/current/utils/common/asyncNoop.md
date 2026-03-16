@@ -17,7 +17,6 @@ const asyncNoop: () => Promise<void>;
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { asyncNoop } from '@modern-kit/utils';
 

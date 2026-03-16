@@ -18,8 +18,6 @@ function isIOS(): boolean
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { isIOS } from '@modern-kit/utils';
 

@@ -17,7 +17,6 @@ const copyClipboardText: (value: string) => Promise<string>
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { copyClipboardText } from '@modern-kit/utils';
 

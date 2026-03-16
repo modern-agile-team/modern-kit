@@ -18,8 +18,6 @@ function isIOS(): boolean
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { isIOS } from '@modern-kit/utils';
 

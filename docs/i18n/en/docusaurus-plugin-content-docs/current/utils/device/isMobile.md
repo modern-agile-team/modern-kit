@@ -18,8 +18,6 @@ function isMobile(): boolean
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { isMobile } from '@modern-kit/utils';
 

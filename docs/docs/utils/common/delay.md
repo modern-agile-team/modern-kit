@@ -23,7 +23,6 @@ const delay: (time: number) => Promise<void>;
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { delay } from '@modern-kit/utils';
 

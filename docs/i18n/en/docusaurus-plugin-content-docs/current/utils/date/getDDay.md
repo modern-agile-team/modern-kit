@@ -25,8 +25,6 @@ function getDDay(date: string | number | Date): {
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getDDay } from '@modern-kit/utils';
 

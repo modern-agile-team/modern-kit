@@ -17,7 +17,6 @@ function readClipboardText(): Promise<string>
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { readClipboardText } from '@modern-kit/utils';
 

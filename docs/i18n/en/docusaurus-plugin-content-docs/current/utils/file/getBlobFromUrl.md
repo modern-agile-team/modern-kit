@@ -18,8 +18,6 @@ const getBlobFromUrl: (url: string) => Promise<Blob>
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getBlobFromUrl } from '@modern-kit/utils';
 

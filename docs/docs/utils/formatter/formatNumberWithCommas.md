@@ -17,7 +17,6 @@ function formatNumberWithCommas(value: number | string): string
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { formatNumberWithCommas } from '@modern-kit/utils';
 

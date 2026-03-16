@@ -18,8 +18,6 @@ function isMobile(): boolean
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { isMobile } from '@modern-kit/utils';
 

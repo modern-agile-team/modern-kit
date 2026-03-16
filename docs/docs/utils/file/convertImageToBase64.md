@@ -29,8 +29,6 @@ const convertImageToBase64: (
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { convertImageToBase64 } from '@modern-kit/utils';
 

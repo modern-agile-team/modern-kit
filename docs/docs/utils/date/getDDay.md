@@ -25,8 +25,6 @@ function getDDay(date: string | number | Date): {
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getDDay } from '@modern-kit/utils';
 

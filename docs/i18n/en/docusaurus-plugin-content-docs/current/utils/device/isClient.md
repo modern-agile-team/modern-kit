@@ -20,8 +20,6 @@ function isClient(): boolean
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { isClient } from '@modern-kit/utils';
 

@@ -18,8 +18,6 @@ function isAOS(): boolean
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { isAOS } from '@modern-kit/utils';
 

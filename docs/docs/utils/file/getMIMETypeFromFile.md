@@ -22,8 +22,6 @@ const getMIMETypeFromFile: (file: File) => string
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getMIMETypeFromFile, isMIMEType } from '@modern-kit/utils';
 

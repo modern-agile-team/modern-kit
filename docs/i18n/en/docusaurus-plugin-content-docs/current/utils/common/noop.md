@@ -17,7 +17,6 @@ const noop: () => void
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { noop } from '@modern-kit/utils';
 

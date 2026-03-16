@@ -36,7 +36,6 @@ function clamp(value: number, min: number, max: number): number;
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { clamp } from '@modern-kit/utils';
 

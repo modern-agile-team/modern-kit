@@ -29,8 +29,6 @@ const convertImageToBlob: (
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { convertImageToBlob } from '@modern-kit/utils';
 

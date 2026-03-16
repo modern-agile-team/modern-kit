@@ -17,7 +17,6 @@ const identity: <T>(value: T) => T;
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { identity } from '@modern-kit/utils';
 

@@ -31,7 +31,6 @@ function cloneDeep<T>(value: T): T;
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { cloneDeep } from '@modern-kit/utils';
 

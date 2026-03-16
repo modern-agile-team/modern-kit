@@ -18,8 +18,6 @@ function getAge(birthDate: string | number | Date): number
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getAge } from '@modern-kit/utils';
 

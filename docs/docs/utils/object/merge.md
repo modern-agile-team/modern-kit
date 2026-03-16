@@ -22,7 +22,6 @@ function merge<
 <br />
 
 ## Usage
-### Default
 ```ts title="typescript"
 import { merge } from '@modern-kit/utils';
 

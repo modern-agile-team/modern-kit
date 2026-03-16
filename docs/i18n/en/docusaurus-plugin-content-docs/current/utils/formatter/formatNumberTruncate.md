@@ -34,7 +34,6 @@ function formatNumberTruncate(value: number, truncationUnit: TruncationUnit): nu
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { formatNumberTruncate } from '@modern-kit/utils';
 

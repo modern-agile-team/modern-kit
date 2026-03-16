@@ -27,7 +27,6 @@ const hexToRgba: (hex: string, alpha?: number) => {
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { hexToRgba } from '@modern-kit/utils';
 

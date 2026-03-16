@@ -1,8 +1,10 @@
 # ObjectEntries
 
-Object.entries 함수의 반환 타입을 명확하게 정의하기 위해 사용 할 수 있습니다.
+`Object.entries` 함수의 반환 타입을 명확하게 정의하기 위해 사용할 수 있습니다.
 
 `[key, value]` 형태의 튜플로 반환하며, `symbol` 타입의 키는 제외됩니다.
+
+<br />
 
 ## Interface
 
@@ -13,13 +15,27 @@ type ObjectEntries<T extends Record<PropertyKey, any>> = [
 ][];
 ```
 
+<br />
+
 ## Usage
 
+### 타입 추출 케이스
+
 ```ts title="typescript"
-type MyObject = { a: string, b: number };
-type MyEntries = ObjectEntries<MyObject> // ['a' | 'b', string | number][]
+import { ObjectEntries } from '@modern-kit/types';
+
+type MyObject = { a: string; b: number };
+type MyEntries = ObjectEntries<MyObject>; // ['a' | 'b', string | number][]
+```
+
+<br />
+
+### Object.entries 타입 단언 케이스
+
+```ts title="typescript"
+import { ObjectEntries } from '@modern-kit/types';
 
 const obj = { a: 1, b: 2, c: 3 } as const;
 const entries = Object.entries(obj) as ObjectEntries<typeof obj>;
 // ["a" | "b" | "c", 1 | 2 | 3][]
-``` 
+```

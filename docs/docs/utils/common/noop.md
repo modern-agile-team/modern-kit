@@ -17,7 +17,6 @@ const noop: () => void
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { noop } from '@modern-kit/utils';
 

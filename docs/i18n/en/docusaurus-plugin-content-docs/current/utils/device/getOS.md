@@ -24,8 +24,6 @@ function getOS(): "server" | "ios" | "android" | "otherMobile" | "web"
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getOS } from '@modern-kit/utils';
 

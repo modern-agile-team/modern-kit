@@ -20,8 +20,6 @@ function isClient(): boolean
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { isClient } from '@modern-kit/utils';
 

@@ -17,7 +17,6 @@ const readClipboardContents: () => Promise<ClipboardItems>
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { readClipboardContents } from '@modern-kit/utils';
 

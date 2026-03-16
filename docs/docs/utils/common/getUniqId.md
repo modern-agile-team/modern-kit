@@ -17,7 +17,6 @@ const getUniqId: () => string
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { getUniqId } from '@modern-kit/utils';
 

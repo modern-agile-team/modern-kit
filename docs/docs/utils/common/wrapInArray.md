@@ -19,7 +19,6 @@ const wrapInArray: <T>(value: T | T[]) => T[]
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { wrapInArray } from '@modern-kit/utils';
 

@@ -22,8 +22,6 @@ const parseDateString: (date: string) => Date
 
 ## Usage
 
-### Valid Date Formats
-
 ```ts title="typescript"
 import { parseDateString } from '@modern-kit/utils';
 

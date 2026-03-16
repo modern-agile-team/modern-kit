@@ -17,7 +17,6 @@ function isEven(value: number): boolean;
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { isEven } from '@modern-kit/utils';
 

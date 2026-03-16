@@ -22,8 +22,6 @@ const getMIMETypeFromUrl: (url: string) => Promise<string>
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { getMIMETypeFromUrl, isMIMEType } from '@modern-kit/utils';
 

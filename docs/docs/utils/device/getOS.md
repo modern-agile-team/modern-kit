@@ -24,8 +24,6 @@ function getOS(): "server" | "ios" | "android" | "otherMobile" | "web"
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getOS } from '@modern-kit/utils';
 

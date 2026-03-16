@@ -36,7 +36,6 @@ function size(value: string | Record<PropertyKey, any>): number
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { size } from '@modern-kit/utils';
 

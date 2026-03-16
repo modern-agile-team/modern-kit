@@ -19,7 +19,6 @@ const abRandom: () => 0 | 1
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { abRandom } from '@modern-kit/utils';
 

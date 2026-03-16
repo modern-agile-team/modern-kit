@@ -20,7 +20,6 @@ function formatValueWithSymbol(value: number | string, options: {
 <br />
 
 ## Usage
-### 기본 사용법
 ```ts title="typescript"
 import { formatValueWithSymbol } from '@modern-kit/utils';
 

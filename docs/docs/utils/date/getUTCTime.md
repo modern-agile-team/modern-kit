@@ -27,8 +27,6 @@ function getUTCTime(birthDate: string | number | Date): number
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getUTCTime } from '@modern-kit/utils';
 

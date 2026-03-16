@@ -17,7 +17,6 @@ const getUniqTime: () => number
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { getUniqTime } from '@modern-kit/utils';
 

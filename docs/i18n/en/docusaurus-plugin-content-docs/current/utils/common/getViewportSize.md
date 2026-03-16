@@ -21,7 +21,6 @@ const getViewportSize: () => {
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { getViewportSize } from '@modern-kit/utils';
 

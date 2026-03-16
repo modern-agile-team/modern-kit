@@ -29,8 +29,6 @@ const convertImageToBase64: (
 
 ## Usage
 
-### Basic Usage
-
 ```ts title="typescript"
 import { convertImageToBase64 } from '@modern-kit/utils';
 

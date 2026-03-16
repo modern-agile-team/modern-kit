@@ -84,7 +84,7 @@ options?: OptionsType
 
 ## Usage
 
-### 기본 사용법
+### 기본 사용법 제목 (단일 케이스라면 제외)
 
 \`\`\`ts title="typescript"
 import { functionName } from '@modern-kit/utils';
@@ -152,7 +152,6 @@ import { functionName } from '@modern-kit/utils';
 
 ### Usage 섹션
 
-- 단일 케이스라도 `### 기본 사용법` 서브섹션 헤더를 작성
 - 여러 케이스가 있을 때 `### 케이스 제목` 서브섹션으로 분리하고, 사이에 `<br />` 삽입
 
 ### GitHub 링크 경로 패턴

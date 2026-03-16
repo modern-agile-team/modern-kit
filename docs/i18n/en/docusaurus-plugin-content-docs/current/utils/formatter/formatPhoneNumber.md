@@ -17,7 +17,6 @@ const formatPhoneNumber: (value: string) => string
 <br />
 
 ## Usage
-### Basic Usage
 ```ts title="typescript"
 import { formatPhoneNumber } from '@modern-kit/utils';
 

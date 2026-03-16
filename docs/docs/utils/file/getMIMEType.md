@@ -22,8 +22,6 @@ const getMIMEType: (data: string | File | Response) => Promise<string>
 
 ## Usage
 
-### 기본 사용법
-
 ```ts title="typescript"
 import { getMIMEType, isMIMEType } from '@modern-kit/utils';
 
