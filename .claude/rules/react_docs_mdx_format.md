@@ -12,9 +12,9 @@ import { useHookName } from '@modern-kit/react';
 
 # useHookName (훅의 경우, 컴포넌트의 경우는 ComponentName)
 
-훅에 대한 한 줄 설명 (한국어).
+훅에 대한 한 줄 설명.
 
-세부 설명 (한국어). `ref` 등 주요 옵션/특징 언급.
+세부 설명. `ref` 등 주요 옵션/특징 언급.
 
 <br />
 
@@ -46,7 +46,6 @@ ref: React.RefObject<T | null>;
 | --------- | ------- | -------- | ------------- |
 | `optionA` | `TypeA` | `기본값` | 설명 (한국어) |
 | `optionB` | `TypeB` | `기본값` | 설명 (한국어) |
-| ...       | ...     | ...      | ...           |
 
 <br />
 
@@ -56,7 +55,6 @@ ref: React.RefObject<T | null>;
 | -------------- | ------------ | -------------------- |
 | `returnValueA` | `ReturnType` | 반환값 설명 (한국어) |
 | `returnValueB` | `ReturnType` | 반환값 설명 (한국어) |
-| ...            | ...          | ...                  |
 
 <br />
 
