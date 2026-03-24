@@ -37,7 +37,7 @@
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
     "gh-pages": "^6.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^6.0.2"
   },
   "browserslist": {
     "production": [
