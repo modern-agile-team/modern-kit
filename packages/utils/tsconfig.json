@@ -3,9 +3,8 @@
   "include": ["src"],
   "exclude": ["src/**/*.bench.ts"],
   "compilerOptions": {
-    "baseUrl": "./src",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "skipLibCheck": true,
-    "rootDir": "./src"
-  },
+    "skipLibCheck": true
+  }
 }
