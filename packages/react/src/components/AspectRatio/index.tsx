@@ -1,8 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { polymorphicForwardRef } from '../../utils/polymorphicForwardRef';
 import { Slot } from '../../components/Slot';
-import styles from './AspectRatio.modules.css';
-import classNames from 'classnames';
 
 interface AspectRatioProps {
   children: React.JSX.Element;
@@ -67,21 +65,12 @@ export const AspectRatio = polymorphicForwardRef<'div', AspectRatioProps>(
     const AspectRatioWrapper = asChild ? Slot : as;
 
     const slotStyle: CSSProperties = {
+      display: 'block',
+      width: '100%',
       aspectRatio: ratio,
       ...style,
     };
 
-    const className = asChild
-      ? props.className
-      : classNames(styles.aspectRatioWrapper, props.className);
-
-    return (
-      <AspectRatioWrapper
-        ref={ref}
-        style={slotStyle}
-        className={className}
-        {...props}
-      />
-    );
+    return <AspectRatioWrapper ref={ref} style={slotStyle} {...props} />;
   }
 );
