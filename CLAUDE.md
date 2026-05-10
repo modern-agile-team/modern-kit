@@ -68,10 +68,10 @@ packages/utils/src/
 ### Build System
 
 - **Lerna** manages the monorepo with independent versioning
-- **Yarn Berry** (v4) as package manager
-- **Rollup** builds packages to CJS(`.cjs`) / ESM(`.mjs`) / type declarations(`.d.ts`)
-- Entry points are auto-discovered from directory structure via `build.utils.mjs`
-- **Vitest** for testing with React Testing Library integration
+- **Yarn Berry** (v4) as the package manager
+- **Rolldown** builds packages to CJS (`.cjs`), ESM (`.mjs`), and type declarations (`.d.ts`)
+- Entry points are auto-discovered from the directory structure via `build.utils.mjs`
+- **Vitest** is used for testing, with React Testing Library integration
 
 ### Export Strategy
 

@@ -12,7 +12,7 @@ import { isEqualInternal } from './isEqual.utils';
  * isEqual({ a: 1 }, { b: 1 }); // false
  */
 export function isEqual(source: any, target: any): boolean {
-  const visited = new WeakMap();
+  const visited = new WeakMap<object, any>();
 
   return isEqualInternal(source, target, visited);
 }

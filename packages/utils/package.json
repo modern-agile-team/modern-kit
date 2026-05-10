@@ -56,7 +56,7 @@
     "lodash-es": "^4.17.21",
     "rolldown": "^1.0.0",
     "rolldown-plugin-dts": "^0.25.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.0.4"
   },
   "engines": {
