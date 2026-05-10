@@ -12,7 +12,7 @@ afterEach(() => {
 });
 
 const createTestPromiseFunc =
-  (fn: Mock<any>, time: number, value?: any, isError = false) =>
+  (fn: Mock<() => void>, time: number, value?: any, isError = false) =>
   () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
