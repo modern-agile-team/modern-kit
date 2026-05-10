@@ -14,7 +14,7 @@ For detailed project architecture and development workflow, refer to `CLAUDE.md`
 
 ### TypeScript
 
-- Use TypeScript 5.1+ with strict mode enabled
+- Use TypeScript 6+ with strict mode enabled
 - Write clear and specific type definitions
 - Avoid `any` type, prefer `unknown` or generics
 - Use `export type` for type-only exports
