@@ -49,7 +49,7 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
-    "@vitest/coverage-istanbul": "^4.0.4",
+    "@vitest/coverage-istanbul": "^4.1.5",
     "eslint": "^10.0.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.0",
@@ -60,7 +60,7 @@
     "rolldown-plugin-dts": "^0.25.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^6.0.3",
-    "vitest": "^4.0.4"
+    "vitest": "^4.1.5"
   },
   "dependencies": {
     "@modern-kit/utils": "workspace:^"
