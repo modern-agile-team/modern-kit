@@ -1,5 +1,16 @@
 # @modern-kit/react
 
+## 3.1.0
+
+### Minor Changes
+
+- [#1087](https://github.com/modern-agile-team/modern-kit/pull/1087) [`7f0b2ea`](https://github.com/modern-agile-team/modern-kit/commit/7f0b2eab8fb8bae3fc1790002f08c2f57355ed0b) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: rolldown 적용 - @ssi02014
+
+### Patch Changes
+
+- Updated dependencies [[`7f0b2ea`](https://github.com/modern-agile-team/modern-kit/commit/7f0b2eab8fb8bae3fc1790002f08c2f57355ed0b)]:
+  - @modern-kit/utils@3.2.0
+
 ## 3.0.1
 
 ### Patch Changes
