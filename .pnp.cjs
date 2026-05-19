@@ -48,7 +48,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@changesets/changelog-github", "npm:0.6.0"],\
+          ["@changesets/changelog-github", "npm:0.7.0"],\
           ["@changesets/cli", "npm:2.30.0"],\
           ["@eslint/js", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.1"],\
           ["@types/node", "npm:25.5.0"],\
@@ -5846,10 +5846,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@changesets/changelog-github", [\
-      ["npm:0.6.0", {\
-        "packageLocation": "./.yarn/cache/@changesets-changelog-github-npm-0.6.0-0d169cc03b-b2f20cfda2.zip/node_modules/@changesets/changelog-github/",\
+      ["npm:0.7.0", {\
+        "packageLocation": "./.yarn/cache/@changesets-changelog-github-npm-0.7.0-6771fd069c-8054f8d505.zip/node_modules/@changesets/changelog-github/",\
         "packageDependencies": [\
-          ["@changesets/changelog-github", "npm:0.6.0"],\
+          ["@changesets/changelog-github", "npm:0.7.0"],\
           ["@changesets/get-github-info", "npm:0.8.0"],\
           ["@changesets/types", "npm:6.1.0"],\
           ["dotenv", "npm:8.6.0"]\
@@ -23477,7 +23477,7 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@changesets/changelog-github", "npm:0.6.0"],\
+          ["@changesets/changelog-github", "npm:0.7.0"],\
           ["@changesets/cli", "npm:2.30.0"],\
           ["@eslint/js", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.1"],\
           ["@types/node", "npm:25.5.0"],\
