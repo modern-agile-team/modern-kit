@@ -1,6 +1,7 @@
 export * from './deleteFalsyProperties';
 export * from './findKey';
 export * from './findLastKey';
+export * from './fromPairs';
 export * from './get';
 export * from './invert';
 export * from './mapKeys';
@@ -14,3 +15,4 @@ export * from './omitBy';
 export * from './pick';
 export * from './pickBy';
 export * from './set';
+export * from './toPairs';
