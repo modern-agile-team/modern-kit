@@ -165,16 +165,22 @@ describe('retry', () => {
       expect(func).toHaveBeenCalledTimes(4);
     });
 
-    it('shouldRetry에 전달하는 함수는 발생한 에러와 옵션을 인자로 받아야 합니다.', async () => {
+    it('shouldRetry에 전달하는 함수는 발생한 에러와 시도 인덱스(attempt)를 인자로 받아야 합니다.', async () => {
       const error = new Error('실패');
       const func = vi.fn().mockRejectedValue(error);
-      const shouldRetry = vi.fn().mockReturnValue(false);
+      const shouldRetry = vi.fn().mockReturnValue(true);
 
       await expect(
         retry(func, { count: 3, delay: 0, shouldRetry })
       ).rejects.toBe(error);
 
-      expect(shouldRetry).toHaveBeenCalledWith(error);
+      expect(shouldRetry).toHaveBeenCalledTimes(4);
+      expect(shouldRetry.mock.calls).toEqual([
+        [error, 0],
+        [error, 1],
+        [error, 2],
+        [error, 3],
+      ]);
     });
 
     it('shouldRetry를 지정하지 않으면 기본적으로 모두 재시도해야 합니다.', async () => {

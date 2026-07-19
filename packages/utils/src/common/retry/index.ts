@@ -5,7 +5,7 @@ import { delay as delayFn } from '../delay';
 interface RetryOptionsBase {
   count: number;
   signal?: AbortSignal;
-  shouldRetry?: ((error: unknown) => boolean) | boolean;
+  shouldRetry?: ((error: unknown, attempt: number) => boolean) | boolean;
 }
 
 interface RetryOptionsWithDelay extends RetryOptionsBase {
@@ -114,7 +114,7 @@ export async function retry<T>(
  * @param {RetryOptionsWithDelay} options - 고정 간격 재시도 옵션 객체입니다.
  * @param {number} options.delay - 재시도 사이의 고정 간격(밀리초)입니다.
  * @param {number} [options.count=3] - 재시도 횟수를 설정합니다.
- * @param {((error: unknown) => boolean) | boolean} [options.shouldRetry=true] - 재시도 여부를 결정합니다. 함수를 전달하면 발생한 에러를 인자로 받아 `boolean`을 반환하며, `false`(또는 `false` 반환) 시 재시도하지 않고 즉시 에러를 던집니다.
+ * @param {((error: unknown, attempt: number) => boolean) | boolean} [options.shouldRetry=true] - 재시도 여부를 결정합니다. 함수를 전달하면 발생한 에러와 현재 시도 인덱스(`attempt`, 0부터 시작)를 인자로 받아 `boolean`을 반환하며, `false`(또는 `false` 반환) 시 재시도하지 않고 즉시 에러를 던집니다.
  * @param {AbortSignal} [options.signal] - 재시도 작업을 중단할 수 있는 AbortSignal을 설정합니다.
  * @returns {Promise<T>} - Promise를 반환하는 함수의 결과를 반환합니다.
  *
@@ -125,6 +125,14 @@ export async function retry<T>(
  * @example
  * const data = await retry(asyncFn, { delay: 1000, shouldRetry: isRetryable });
  * // isRetryable가 false를 반환하는 에러는 재시도하지 않고 즉시 던집니다.
+ *
+ * @example
+ * const data = await retry(asyncFn, {
+ *   count: 5,
+ *   delay: 1000,
+ *   shouldRetry: (error, attempt) => attempt < 2,
+ * });
+ * // attempt(0부터 시작)가 2 미만일 때까지만 재시도합니다. (총 3번 시도)
  *
  * @example
  * const controller = new AbortController();
@@ -148,7 +156,7 @@ export async function retry<T>(
  * @param {RetryOptionsWithBackoff} options - 지수 백오프 재시도 옵션 객체입니다.
  * @param {number} options.backoff - 지수 백오프의 시작 간격(밀리초)입니다. 매 시도마다 2배씩 증가합니다.
  * @param {number} [options.count=3] - 재시도 횟수를 설정합니다.
- * @param {((error: unknown) => boolean) | boolean} [options.shouldRetry=true] - 재시도 여부를 결정합니다. 함수를 전달하면 발생한 에러를 인자로 받아 `boolean`을 반환하며, `false`(또는 `false` 반환) 시 재시도하지 않고 즉시 에러를 던집니다.
+ * @param {((error: unknown, attempt: number) => boolean) | boolean} [options.shouldRetry=true] - 재시도 여부를 결정합니다. 함수를 전달하면 발생한 에러와 현재 시도 인덱스(`attempt`, 0부터 시작)를 인자로 받아 `boolean`을 반환하며, `false`(또는 `false` 반환) 시 재시도하지 않고 즉시 에러를 던집니다.
  * @param {AbortSignal} [options.signal] - 재시도 작업을 중단할 수 있는 AbortSignal을 설정합니다.
  * @returns {Promise<T>} - Promise를 반환하는 함수의 결과를 반환합니다.
  *
@@ -180,7 +188,7 @@ export async function retry<T>(
 
   let error;
 
-  for (let i = 0; i <= count; i++) {
+  for (let attempt = 0; attempt <= count; attempt++) {
     if (signal?.aborted) {
       throw new Error('aborted로 인해 재시도 작업이 중단되었습니다.');
     }
@@ -191,15 +199,15 @@ export async function retry<T>(
       error = err;
 
       const _shouldRetry = isFunction(shouldRetry)
-        ? shouldRetry(err)
+        ? shouldRetry(err, attempt)
         : (shouldRetry ?? true);
 
       if (!_shouldRetry) {
         throw err;
       }
 
-      if (i < count) {
-        await delayFn(getDelayTime(delay, backoff, i));
+      if (attempt < count) {
+        await delayFn(getDelayTime(delay, backoff, attempt));
       }
     }
   }
