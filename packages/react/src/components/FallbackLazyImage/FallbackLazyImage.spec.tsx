@@ -44,8 +44,8 @@ describe('FallbackLazyImage', () => {
     expect(img1).not.toHaveAttribute('src', 'img1');
 
     // style
-    expect(img1).toHaveStyle('width: 400');
-    expect(img1).toHaveStyle('height: 400');
+    expect(img1).toHaveAttribute('width', '400');
+    expect(img1).toHaveAttribute('height', '400');
     expect(img1).toHaveStyle('transition: opacity 0.2s');
   });
 

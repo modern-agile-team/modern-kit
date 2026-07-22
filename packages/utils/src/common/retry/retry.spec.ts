@@ -47,7 +47,7 @@ describe('retry', () => {
   });
 
   describe('count 옵션', () => {
-    it('옵션을 전달하지 않으면 기본 1회 시도해야 합니다.', async () => {
+    it('옵션을 전달하지 않으면 재시도 없이 1회만 시도해야 합니다.', async () => {
       const func = vi.fn().mockRejectedValue(new Error('실패'));
 
       await expect(retry(func)).rejects.toThrow('실패');
@@ -55,14 +55,14 @@ describe('retry', () => {
       expect(func).toHaveBeenCalledTimes(1);
     });
 
-    it('숫자 인자로 시도 횟수를 지정할 수 있어야 합니다.', async () => {
+    it('숫자 인자로 재시도 횟수를 지정하면 초기 시도를 포함해 count + 1회 시도해야 합니다.', async () => {
       const func = vi.fn().mockRejectedValue(new Error('실패'));
 
       await expect(retry(func, 5)).rejects.toThrow('실패');
       expect(func).toHaveBeenCalledTimes(6);
     });
 
-    it('options.count로 시도 횟수를 지정할 수 있어야 합니다.', async () => {
+    it('options.count로 재시도 횟수를 지정하면 초기 시도를 포함해 count + 1회 시도해야 합니다.', async () => {
       const func = vi.fn().mockRejectedValue(new Error('실패'));
 
       await expect(retry(func, { count: 2, delay: 0 })).rejects.toThrow('실패');
@@ -83,16 +83,32 @@ describe('retry', () => {
     });
   });
 
-  describe('backoff 옵션 (지수 백오프)', () => {
-    it('시작값에서 매 시도마다 2배씩 증가하는 간격으로 대기하되, 마지막 시도 후에는 대기하지 않아야 합니다.', async () => {
+  describe('delay 옵션 (함수)', () => {
+    it('delay에 함수를 전달하면 매 시도마다 함수의 반환값(ms)만큼 대기해야 합니다.', async () => {
       const func = vi.fn().mockRejectedValue(new Error('실패'));
 
-      await expect(retry(func, { count: 4, backoff: 300 })).rejects.toThrow(
-        '실패'
-      );
+      await expect(
+        retry(func, { count: 4, delay: (attempt) => 300 * 2 ** attempt })
+      ).rejects.toThrow('실패');
 
       const delayTimes = mockedDelay.mock.calls.map(([time]) => time);
       expect(delayTimes).toEqual([300, 600, 1200, 2400]);
+    });
+
+    it('delay 함수는 시도 인덱스(attempt)와 발생한 에러를 인자로 받아야 합니다.', async () => {
+      const error = new Error('실패');
+      const func = vi.fn().mockRejectedValue(error);
+      const delayFn = vi.fn().mockReturnValue(0);
+
+      await expect(retry(func, { count: 3, delay: delayFn })).rejects.toBe(
+        error
+      );
+
+      expect(delayFn.mock.calls).toEqual([
+        [0, error],
+        [1, error],
+        [2, error],
+      ]);
     });
   });
 
@@ -108,7 +124,7 @@ describe('retry', () => {
       expect(mockedDelay).toHaveBeenCalledTimes(3);
     });
 
-    it('count가 1이면 재시도 없이 대기하지 않고 에러를 던져야 합니다.', async () => {
+    it('count가 1이면 1회 재시도한 뒤 마지막 시도 후에는 대기 없이 에러를 던져야 합니다.', async () => {
       const func = vi.fn().mockRejectedValue(new Error('실패'));
 
       await expect(retry(func, { count: 1, delay: 1000 })).rejects.toThrow(
