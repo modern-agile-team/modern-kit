@@ -1,5 +1,17 @@
 # @modern-kit/utils
 
+## 3.3.0
+
+### Minor Changes
+
+- [#1095](https://github.com/modern-agile-team/modern-kit/pull/1095) [`2783bf6`](https://github.com/modern-agile-team/modern-kit/commit/2783bf6c01e2af49548a262f392b3c577b1f8083) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): toPairs, fromPairs 추가 - @ssi02014
+
+### Patch Changes
+
+- [#1099](https://github.com/modern-agile-team/modern-kit/pull/1099) [`c61a4b8`](https://github.com/modern-agile-team/modern-kit/commit/c61a4b8490b025987cf7ac164323e9e839263f1d) Thanks [@electrohyun](https://github.com/electrohyun)! - fix(utils): size, getDateRange 배럴 export 누락 수정 - @electrohyun
+
+- [#1095](https://github.com/modern-agile-team/modern-kit/pull/1095) [`2783bf6`](https://github.com/modern-agile-team/modern-kit/commit/2783bf6c01e2af49548a262f392b3c577b1f8083) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): retry 기본 옵션 추가 - @ssi02014
+
 ## 3.2.0
 
 ### Minor Changes
