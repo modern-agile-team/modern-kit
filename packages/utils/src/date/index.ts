@@ -1,5 +1,6 @@
 export * from './getAge';
 export * from './getDateEndOf';
+export * from './getDateRange';
 export * from './getDateStartOf';
 export * from './getDDay';
 export * from './getUTCTime';
