@@ -18,4 +18,5 @@ export * from './range';
 export * from './retry';
 export * from './size';
 export * from './throttle';
+export * from './traverseTree';
 export * from './wrapInArray';
