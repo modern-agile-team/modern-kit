@@ -51,7 +51,7 @@ const RAW_RUNTIME_STATE =
           ["@changesets/changelog-github", "npm:0.7.0"],\
           ["@changesets/cli", "npm:2.30.0"],\
           ["@eslint/js", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.1"],\
-          ["@types/node", "npm:25.5.0"],\
+          ["@types/node", "npm:26.1.2"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.3.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
@@ -9768,7 +9768,7 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/react", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#workspace:packages/react"],\
           ["@modern-kit/utils", "workspace:packages/utils"],\
           ["@tsconfig/docusaurus", "npm:2.0.9"],\
-          ["@types/node", "npm:25.5.0"],\
+          ["@types/node", "npm:26.1.2"],\
           ["@types/react", "npm:19.2.13"],\
           ["@types/react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:19.2.3"],\
           ["clsx", "npm:2.1.1"],\
@@ -12040,6 +12040,14 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/node", "npm:25.5.0"],\
           ["undici-types", "npm:7.18.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:26.1.2", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-26.1.2-13e3ff0b99-a45503222c.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:26.1.2"],\
+          ["undici-types", "npm:8.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -23475,7 +23483,7 @@ const RAW_RUNTIME_STATE =
           ["@changesets/changelog-github", "npm:0.7.0"],\
           ["@changesets/cli", "npm:2.30.0"],\
           ["@eslint/js", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.0.1"],\
-          ["@types/node", "npm:25.5.0"],\
+          ["@types/node", "npm:26.1.2"],\
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.3.0"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
@@ -30761,6 +30769,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/undici-types-npm-7.18.2-3e6d69d829-85a7918911.zip/node_modules/undici-types/",\
         "packageDependencies": [\
           ["undici-types", "npm:7.18.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.3.0", {\
+        "packageLocation": "./.yarn/cache/undici-types-npm-8.3.0-d34470de3e-c8aa7e2fbe.zip/node_modules/undici-types/",\
+        "packageDependencies": [\
+          ["undici-types", "npm:8.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
