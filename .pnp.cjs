@@ -58,7 +58,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:17.8.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.9.6"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:8.59.2"]\
         ],\
@@ -23566,7 +23566,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:17.8.0"],\
           ["lerna", "npm:9.0.3"],\
           ["modern-kit", "workspace:."],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.9.6"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:8.59.2"]\
         ],\
@@ -27195,10 +27195,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:3.8.1", {\
-        "packageLocation": "./.yarn/unplugged/prettier-npm-3.8.1-04022a855f/node_modules/prettier/",\
+      ["npm:3.9.6", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.9.6-ad164eec07/node_modules/prettier/",\
         "packageDependencies": [\
-          ["prettier", "npm:3.8.1"]\
+          ["prettier", "npm:3.9.6"]\
         ],\
         "linkType": "HARD"\
       }]\
