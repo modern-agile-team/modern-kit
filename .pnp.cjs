@@ -659,19 +659,6 @@ const RAW_RUNTIME_STATE =
           ["jsesc", "npm:3.0.2"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:8.0.0-rc.4", {\
-        "packageLocation": "./.yarn/cache/@babel-generator-npm-8.0.0-rc.4-0b4318760f-5315aa2267.zip/node_modules/@babel/generator/",\
-        "packageDependencies": [\
-          ["@babel/generator", "npm:8.0.0-rc.4"],\
-          ["@babel/parser", "npm:8.0.0-rc.4"],\
-          ["@babel/types", "npm:8.0.0-rc.4"],\
-          ["@jridgewell/gen-mapping", "npm:0.3.13"],\
-          ["@jridgewell/trace-mapping", "npm:0.3.31"],\
-          ["@types/jsesc", "npm:2.5.1"],\
-          ["jsesc", "npm:3.0.2"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["@babel/helper-annotate-as-pure", [\
@@ -1484,13 +1471,6 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-string-parser", "npm:7.27.1"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:8.0.0-rc.4", {\
-        "packageLocation": "./.yarn/cache/@babel-helper-string-parser-npm-8.0.0-rc.4-2bf12eea4a-8e9950d36b.zip/node_modules/@babel/helper-string-parser/",\
-        "packageDependencies": [\
-          ["@babel/helper-string-parser", "npm:8.0.0-rc.4"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["@babel/helper-validator-identifier", [\
@@ -1533,13 +1513,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@babel-helper-validator-identifier-npm-7.28.5-1953d49d2b-42aaebed91.zip/node_modules/@babel/helper-validator-identifier/",\
         "packageDependencies": [\
           ["@babel/helper-validator-identifier", "npm:7.28.5"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.0.0-rc.4", {\
-        "packageLocation": "./.yarn/cache/@babel-helper-validator-identifier-npm-8.0.0-rc.4-cb70af8abe-dc523bdc20.zip/node_modules/@babel/helper-validator-identifier/",\
-        "packageDependencies": [\
-          ["@babel/helper-validator-identifier", "npm:8.0.0-rc.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1729,14 +1702,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@babel/parser", "npm:7.29.3"],\
           ["@babel/types", "npm:7.29.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.0.0-rc.4", {\
-        "packageLocation": "./.yarn/cache/@babel-parser-npm-8.0.0-rc.4-35b5f8245b-3f3c6c7b62.zip/node_modules/@babel/parser/",\
-        "packageDependencies": [\
-          ["@babel/parser", "npm:8.0.0-rc.4"],\
-          ["@babel/types", "npm:8.0.0-rc.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5731,15 +5696,6 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-string-parser", "npm:7.27.1"],\
           ["@babel/helper-validator-identifier", "npm:7.28.5"],\
           ["@babel/types", "npm:7.29.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.0.0-rc.4", {\
-        "packageLocation": "./.yarn/cache/@babel-types-npm-8.0.0-rc.4-b9ba9f8fec-fd6ba6dceb.zip/node_modules/@babel/types/",\
-        "packageDependencies": [\
-          ["@babel/helper-string-parser", "npm:8.0.0-rc.4"],\
-          ["@babel/helper-validator-identifier", "npm:8.0.0-rc.4"],\
-          ["@babel/types", "npm:8.0.0-rc.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9812,7 +9768,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:19.2.4"],\
           ["rolldown", "npm:1.2.0"],\
-          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.25.0"],\
+          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["vitest", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:4.1.5"]\
@@ -9842,7 +9798,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:f4931470e5aa2cf6ae863e5bcaf3e3037e732bd5038f166feb73275e68b98183a75b52bc650a18430306b102cecf89f182160e707c0c34c55da0d9d4a82fee04#npm:19.2.4"],\
           ["rolldown", "npm:1.2.0"],\
-          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.25.0"],\
+          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
           ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["vitest", "virtual:f4931470e5aa2cf6ae863e5bcaf3e3037e732bd5038f166feb73275e68b98183a75b52bc650a18430306b102cecf89f182160e707c0c34c55da0d9d4a82fee04#npm:4.1.5"]\
@@ -9874,7 +9830,7 @@ const RAW_RUNTIME_STATE =
           ["jsdom", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:30.0.0"],\
           ["lodash-es", "npm:4.17.21"],\
           ["rolldown", "npm:1.2.0"],\
-          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.25.0"],\
+          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["vitest", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:4.1.5"]\
         ],\
@@ -11968,15 +11924,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/jsesc", [\
-      ["npm:2.5.1", {\
-        "packageLocation": "./.yarn/cache/@types-jsesc-npm-2.5.1-3d8289fff0-12ba7bf596.zip/node_modules/@types/jsesc/",\
-        "packageDependencies": [\
-          ["@types/jsesc", "npm:2.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/json-schema", [\
       ["npm:7.0.12", {\
         "packageLocation": "./.yarn/cache/@types-json-schema-npm-7.0.12-f05cfc0e99-2c39946ae3.zip/node_modules/@types/json-schema/",\
@@ -13072,6 +13019,231 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@yuku-codegen/binding-android-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-android-arm64-npm-0.8.3-02e7079b9c/node_modules/@yuku-codegen/binding-android-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-android-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-darwin-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-darwin-arm64-npm-0.8.3-ded473c037/node_modules/@yuku-codegen/binding-darwin-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-darwin-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-darwin-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-darwin-x64-npm-0.8.3-8d23dab2c1/node_modules/@yuku-codegen/binding-darwin-x64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-darwin-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-freebsd-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-freebsd-x64-npm-0.8.3-c209a9c9d2/node_modules/@yuku-codegen/binding-freebsd-x64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-freebsd-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-arm-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-arm-gnu-npm-0.8.3-e72474057f/node_modules/@yuku-codegen/binding-linux-arm-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-arm-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-arm-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-arm-musl-npm-0.8.3-12ffedefd5/node_modules/@yuku-codegen/binding-linux-arm-musl/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-arm-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-arm64-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-arm64-gnu-npm-0.8.3-b6a6cb0e6c/node_modules/@yuku-codegen/binding-linux-arm64-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-arm64-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-arm64-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-arm64-musl-npm-0.8.3-aad02b0acb/node_modules/@yuku-codegen/binding-linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-arm64-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-x64-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-x64-gnu-npm-0.8.3-2772efc5c8/node_modules/@yuku-codegen/binding-linux-x64-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-x64-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-linux-x64-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-linux-x64-musl-npm-0.8.3-c3fbe2d977/node_modules/@yuku-codegen/binding-linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-linux-x64-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-win32-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-win32-arm64-npm-0.8.3-95d91a9d87/node_modules/@yuku-codegen/binding-win32-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-win32-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-codegen/binding-win32-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-codegen-binding-win32-x64-npm-0.8.3-3a22a32056/node_modules/@yuku-codegen/binding-win32-x64/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-win32-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-android-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-android-arm64-npm-0.8.3-a7fb3c5b2f/node_modules/@yuku-parser/binding-android-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-android-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-darwin-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-darwin-arm64-npm-0.8.3-3518d84f33/node_modules/@yuku-parser/binding-darwin-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-darwin-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-darwin-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-darwin-x64-npm-0.8.3-8f544e3218/node_modules/@yuku-parser/binding-darwin-x64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-darwin-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-freebsd-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-freebsd-x64-npm-0.8.3-6d0253d999/node_modules/@yuku-parser/binding-freebsd-x64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-freebsd-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-arm-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-arm-gnu-npm-0.8.3-d6132d2ac5/node_modules/@yuku-parser/binding-linux-arm-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-arm-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-arm-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-arm-musl-npm-0.8.3-b467fe7dae/node_modules/@yuku-parser/binding-linux-arm-musl/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-arm-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-arm64-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-arm64-gnu-npm-0.8.3-fdf16346d0/node_modules/@yuku-parser/binding-linux-arm64-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-arm64-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-arm64-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-arm64-musl-npm-0.8.3-121da1a61d/node_modules/@yuku-parser/binding-linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-arm64-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-x64-gnu", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-x64-gnu-npm-0.8.3-091e8edb3b/node_modules/@yuku-parser/binding-linux-x64-gnu/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-x64-gnu", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-linux-x64-musl", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-linux-x64-musl-npm-0.8.3-dc9956cd81/node_modules/@yuku-parser/binding-linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-linux-x64-musl", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-win32-arm64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-win32-arm64-npm-0.8.3-3a1b212bec/node_modules/@yuku-parser/binding-win32-arm64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-win32-arm64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-parser/binding-win32-x64", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/unplugged/@yuku-parser-binding-win32-x64-npm-0.8.3-72fcc39df0/node_modules/@yuku-parser/binding-win32-x64/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-win32-x64", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@yuku-toolchain/types", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/cache/@yuku-toolchain-types-npm-0.8.3-5a59e0b5ef-310d8bcb8f.zip/node_modules/@yuku-toolchain/types/",\
+        "packageDependencies": [\
+          ["@yuku-toolchain/types", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@zkochan/js-yaml", [\
       ["npm:0.0.7", {\
         "packageLocation": "./.yarn/cache/@zkochan-js-yaml-npm-0.0.7-931c761308-c8b3525717.zip/node_modules/@zkochan/js-yaml/",\
@@ -13731,18 +13903,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["ast-kit", [\
-      ["npm:3.0.0-beta.1", {\
-        "packageLocation": "./.yarn/cache/ast-kit-npm-3.0.0-beta.1-eee5b0fb06-27a0309d49.zip/node_modules/ast-kit/",\
-        "packageDependencies": [\
-          ["@babel/parser", "npm:8.0.0-rc.4"],\
-          ["ast-kit", "npm:3.0.0-beta.1"],\
-          ["estree-walker", "npm:3.0.3"],\
-          ["pathe", "npm:2.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["astring", [\
       ["npm:1.8.6", {\
         "packageLocation": "./.yarn/cache/astring-npm-1.8.6-f6cb013b92-31f0914459.zip/node_modules/astring/",\
@@ -14116,15 +14276,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/binary-extensions-npm-2.2.0-180c33fec7-d73d8b8972.zip/node_modules/binary-extensions/",\
         "packageDependencies": [\
           ["binary-extensions", "npm:2.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["birpc", [\
-      ["npm:4.0.0", {\
-        "packageLocation": "./.yarn/cache/birpc-npm-4.0.0-2cc419e494-61f4e893ff.zip/node_modules/birpc/",\
-        "packageDependencies": [\
-          ["birpc", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16691,11 +16842,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:77286b7b92f95cda4091424875ae7090a84f63d542e6ed5d80f47cf1e1b65b16343f04b0d7d040f854745a7cb4093ede5893c91342129fe87423591e919b298d#npm:3.0.0", {\
-        "packageLocation": "./.yarn/__virtual__/dts-resolver-virtual-e7d6b42080/0/cache/dts-resolver-npm-3.0.0-191408e714-ae52c4e09b.zip/node_modules/dts-resolver/",\
+      ["virtual:31046de1c8f762c1dc75b4f05f3883d6264a6b04b2df739462ec9107d3c7c4ee9eb42f047cc4b60a0fe4b5b17f79a9dea041f5935e26fe29c53e2a6c3f9d1136#npm:3.0.0", {\
+        "packageLocation": "./.yarn/__virtual__/dts-resolver-virtual-85a9918f4c/0/cache/dts-resolver-npm-3.0.0-191408e714-ae52c4e09b.zip/node_modules/dts-resolver/",\
         "packageDependencies": [\
           ["@types/oxc-resolver", null],\
-          ["dts-resolver", "virtual:77286b7b92f95cda4091424875ae7090a84f63d542e6ed5d80f47cf1e1b65b16343f04b0d7d040f854745a7cb4093ede5893c91342129fe87423591e919b298d#npm:3.0.0"],\
+          ["dts-resolver", "virtual:31046de1c8f762c1dc75b4f05f3883d6264a6b04b2df739462ec9107d3c7c4ee9eb42f047cc4b60a0fe4b5b17f79a9dea041f5935e26fe29c53e2a6c3f9d1136#npm:3.0.0"],\
           ["oxc-resolver", null]\
         ],\
         "packagePeers": [\
@@ -23848,6 +23999,13 @@ const RAW_RUNTIME_STATE =
           ["obug", "npm:2.1.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.1.4", {\
+        "packageLocation": "./.yarn/cache/obug-npm-2.1.4-8198a96fd9-34a0ee97cd.zip/node_modules/obug/",\
+        "packageDependencies": [\
+          ["obug", "npm:2.1.4"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["on-finished", [\
@@ -27858,44 +28016,42 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["rolldown-plugin-dts", [\
-      ["npm:0.25.0", {\
-        "packageLocation": "./.yarn/cache/rolldown-plugin-dts-npm-0.25.0-eb918021f8-0277e644fe.zip/node_modules/rolldown-plugin-dts/",\
+      ["npm:0.28.0", {\
+        "packageLocation": "./.yarn/cache/rolldown-plugin-dts-npm-0.28.0-efdd979c3f-28f8ca83ae.zip/node_modules/rolldown-plugin-dts/",\
         "packageDependencies": [\
-          ["rolldown-plugin-dts", "npm:0.25.0"]\
+          ["rolldown-plugin-dts", "npm:0.28.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.25.0", {\
-        "packageLocation": "./.yarn/__virtual__/rolldown-plugin-dts-virtual-77286b7b92/0/cache/rolldown-plugin-dts-npm-0.25.0-eb918021f8-0277e644fe.zip/node_modules/rolldown-plugin-dts/",\
+      ["virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0", {\
+        "packageLocation": "./.yarn/__virtual__/rolldown-plugin-dts-virtual-31046de1c8/0/cache/rolldown-plugin-dts-npm-0.28.0-efdd979c3f-28f8ca83ae.zip/node_modules/rolldown-plugin-dts/",\
         "packageDependencies": [\
-          ["@babel/generator", "npm:8.0.0-rc.4"],\
-          ["@babel/helper-validator-identifier", "npm:8.0.0-rc.4"],\
-          ["@babel/parser", "npm:8.0.0-rc.4"],\
-          ["@ts-macro/tsc", null],\
           ["@types/rolldown", null],\
-          ["@types/ts-macro__tsc", null],\
           ["@types/typescript", null],\
           ["@types/typescript__native-preview", null],\
+          ["@types/volar__typescript", null],\
           ["@types/vue-tsc", null],\
           ["@typescript/native-preview", null],\
-          ["ast-kit", "npm:3.0.0-beta.1"],\
-          ["birpc", "npm:4.0.0"],\
-          ["dts-resolver", "virtual:77286b7b92f95cda4091424875ae7090a84f63d542e6ed5d80f47cf1e1b65b16343f04b0d7d040f854745a7cb4093ede5893c91342129fe87423591e919b298d#npm:3.0.0"],\
+          ["@volar/typescript", null],\
+          ["dts-resolver", "virtual:31046de1c8f762c1dc75b4f05f3883d6264a6b04b2df739462ec9107d3c7c4ee9eb42f047cc4b60a0fe4b5b17f79a9dea041f5935e26fe29c53e2a6c3f9d1136#npm:3.0.0"],\
           ["get-tsconfig", "npm:5.0.0-beta.5"],\
-          ["obug", "npm:2.1.1"],\
+          ["obug", "npm:2.1.4"],\
           ["rolldown", "npm:1.2.0"],\
-          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.25.0"],\
+          ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
-          ["vue-tsc", null]\
+          ["vue-tsc", null],\
+          ["yuku-ast", "npm:0.8.3"],\
+          ["yuku-codegen", "npm:0.8.3"],\
+          ["yuku-parser", "npm:0.8.3"]\
         ],\
         "packagePeers": [\
-          "@ts-macro/tsc",\
           "@types/rolldown",\
-          "@types/ts-macro__tsc",\
           "@types/typescript",\
           "@types/typescript__native-preview",\
+          "@types/volar__typescript",\
           "@types/vue-tsc",\
           "@typescript/native-preview",\
+          "@volar/typescript",\
           "rolldown",\
           "typescript",\
           "vue-tsc"\
@@ -31789,6 +31945,61 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/yoctocolors-cjs-npm-2.1.3-968713fbd8-584168ef98.zip/node_modules/yoctocolors-cjs/",\
         "packageDependencies": [\
           ["yoctocolors-cjs", "npm:2.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["yuku-ast", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/cache/yuku-ast-npm-0.8.3-e4db6b7909-2b7e17dd41.zip/node_modules/yuku-ast/",\
+        "packageDependencies": [\
+          ["@yuku-toolchain/types", "npm:0.8.3"],\
+          ["yuku-ast", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["yuku-codegen", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/cache/yuku-codegen-npm-0.8.3-58efc819dc-c3157395ad.zip/node_modules/yuku-codegen/",\
+        "packageDependencies": [\
+          ["@yuku-codegen/binding-android-arm64", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-darwin-arm64", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-darwin-x64", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-freebsd-x64", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-arm-gnu", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-arm-musl", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-arm64-gnu", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-arm64-musl", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-x64-gnu", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-linux-x64-musl", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-win32-arm64", "npm:0.8.3"],\
+          ["@yuku-codegen/binding-win32-x64", "npm:0.8.3"],\
+          ["@yuku-toolchain/types", "npm:0.8.3"],\
+          ["yuku-codegen", "npm:0.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["yuku-parser", [\
+      ["npm:0.8.3", {\
+        "packageLocation": "./.yarn/cache/yuku-parser-npm-0.8.3-1a5c938ced-9a4f3fcb9e.zip/node_modules/yuku-parser/",\
+        "packageDependencies": [\
+          ["@yuku-parser/binding-android-arm64", "npm:0.8.3"],\
+          ["@yuku-parser/binding-darwin-arm64", "npm:0.8.3"],\
+          ["@yuku-parser/binding-darwin-x64", "npm:0.8.3"],\
+          ["@yuku-parser/binding-freebsd-x64", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-arm-gnu", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-arm-musl", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-arm64-gnu", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-arm64-musl", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-x64-gnu", "npm:0.8.3"],\
+          ["@yuku-parser/binding-linux-x64-musl", "npm:0.8.3"],\
+          ["@yuku-parser/binding-win32-arm64", "npm:0.8.3"],\
+          ["@yuku-parser/binding-win32-x64", "npm:0.8.3"],\
+          ["@yuku-toolchain/types", "npm:0.8.3"],\
+          ["yuku-ast", "npm:0.8.3"],\
+          ["yuku-parser", "npm:0.8.3"]\
         ],\
         "linkType": "HARD"\
       }]\
