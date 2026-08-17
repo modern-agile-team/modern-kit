@@ -3666,14 +3666,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/changelog-github@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@changesets/changelog-github@npm:0.7.0"
+"@changesets/changelog-github@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@changesets/changelog-github@npm:1.0.0"
   dependencies:
-    "@changesets/get-github-info": "npm:^0.8.0"
-    "@changesets/types": "npm:^6.1.0"
-    dotenv: "npm:^8.1.0"
-  checksum: 10c0/8054f8d5057e79eccf6658712603c9df04906f6b9c7a8b3581e63d178328ca9ba7cb27e4f2241115c3c3430099dd92ebdea097be86921d0a3cd0d07e06e896eb
+    "@changesets/get-github-info": "npm:^1.0.0"
+    "@changesets/types": "npm:^7.0.0"
+  checksum: 10c0/c53082e33b9b78330324634407e8ec06e3d1466d6266e0cd8cb3d72955b0a12009d09b3b09e560fe444b47fca31029ad442ba1af55aa04db401f6f7bbf1353a0
   languageName: node
   linkType: hard
 
@@ -3750,13 +3749,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/get-github-info@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@changesets/get-github-info@npm:0.8.0"
+"@changesets/get-github-info@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@changesets/get-github-info@npm:1.0.0"
   dependencies:
-    dataloader: "npm:^1.4.0"
-    node-fetch: "npm:^2.5.0"
-  checksum: 10c0/b7c53e368a1e77504a704de3080ee99c63e7610c3a69549ab6709089bdb3ae2faed33059852033440afe8225827504aae8124c464a65cd91a9ada1de1955cb9e
+    dataloader: "npm:^2.2.3"
+  checksum: 10c0/ae395c58bb360a425e09f07b342f6de49fdb1e21e9c196a9a821f87d6999fdbaab0e3c588ab5a748e54921d143912b2a9f44c4e7f1761944a7c6106a8449073f
   languageName: node
   linkType: hard
 
@@ -3861,6 +3859,13 @@ __metadata:
   version: 6.1.0
   resolution: "@changesets/types@npm:6.1.0"
   checksum: 10c0/b4cea3a4465d1eaf0bbd7be1e404aca5a055a61d4cc72aadcb73bbbda1670b4022736b8d3052616cbf1f451afa0637545d077697f4b923236539af9cd5abce6c
+  languageName: node
+  linkType: hard
+
+"@changesets/types@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@changesets/types@npm:7.0.0"
+  checksum: 10c0/494e09ff94968c1c81521f5ac8c6ab60a1e30d7d0cd9ea7f83c2cbac92efba38b03e008ee6fb4592d90b05d69bad864b6ae8155827d52a51c652f5c24d36ec83
   languageName: node
   linkType: hard
 
@@ -11123,10 +11128,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dataloader@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "dataloader@npm:1.4.0"
-  checksum: 10c0/5fa4c843b9e60195092f1fc7e2acaff318ed46886dc670ddff683bc560f12d4079e6d1e77749501b7e111a8582d26a2aa2a2fbe6d7d5e1520cef64f4e1fd242d
+"dataloader@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "dataloader@npm:2.2.3"
+  checksum: 10c0/9b9a056fbc863ca86da87d59e053e871e263b4966aa4d55e40d61a65e96815fae5530ca220629064ca5f8e3000c0c4ec93292e170c38ff393fb34256b4d7c1aa
   languageName: node
   linkType: hard
 
@@ -11558,13 +11563,6 @@ __metadata:
   version: 16.4.7
   resolution: "dotenv@npm:16.4.7"
   checksum: 10c0/be9f597e36a8daf834452daa1f4cc30e5375a5968f98f46d89b16b983c567398a330580c88395069a77473943c06b877d1ca25b4afafcdd6d4adb549e8293462
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^8.1.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: 10c0/6750431dea8efbd54b9f2d9681b04e1ccc7989486461dcf058bb708d9e3d63b04115fcdf8840e38ad1e24a4a2e1e7c1560626c5e3ac7bc09371b127c49e2d45f
   languageName: node
   linkType: hard
 
@@ -17293,7 +17291,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "modern-kit@workspace:."
   dependencies:
-    "@changesets/changelog-github": "npm:^0.7.0"
+    "@changesets/changelog-github": "npm:^1.0.0"
     "@changesets/cli": "npm:^2.27.1"
     "@eslint/js": "npm:^10.0.1"
     "@types/node": "npm:^26.1.2"
@@ -17427,20 +17425,6 @@ __metadata:
     emojilib: "npm:^2.4.0"
     skin-tone: "npm:^2.0.0"
   checksum: 10c0/e688333373563aa8308df16111eee2b5837b53a51fb63bf8b7fbea2896327c5d24c9984eb0c8ca6ac155d4d9c194dcf1840d271033c1b588c7c45a3b65339ef7
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^2.5.0":
-  version: 2.7.0
-  resolution: "node-fetch@npm:2.7.0"
-  dependencies:
-    whatwg-url: "npm:^5.0.0"
-  peerDependencies:
-    encoding: ^0.1.0
-  peerDependenciesMeta:
-    encoding:
-      optional: true
-  checksum: 10c0/b55786b6028208e6fbe594ccccc213cab67a72899c9234eb59dba51062a299ea853210fcf526998eaa2867b0963ad72338824450905679ff0fa304b8c5093ae8
   languageName: node
   linkType: hard
 
@@ -22265,13 +22249,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tr46@npm:~0.0.3":
-  version: 0.0.3
-  resolution: "tr46@npm:0.0.3"
-  checksum: 10c0/047cb209a6b60c742f05c9d3ace8fa510bff609995c129a37ace03476a9b12db4dbf975e74600830ef0796e18882b2381fb5fb1f6b4f96b832c374de3ab91a11
-  languageName: node
-  linkType: hard
-
 "tree-dump@npm:^1.0.3, tree-dump@npm:^1.1.0":
   version: 1.1.0
   resolution: "tree-dump@npm:1.1.0"
@@ -23200,13 +23177,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webidl-conversions@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "webidl-conversions@npm:3.0.1"
-  checksum: 10c0/5612d5f3e54760a797052eb4927f0ddc01383550f542ccd33d5238cfd65aeed392a45ad38364970d0a0f4fea32e1f4d231b3d8dac4a3bdd385e5cf802ae097db
-  languageName: node
-  linkType: hard
-
 "webidl-conversions@npm:^8.0.1":
   version: 8.0.1
   resolution: "webidl-conversions@npm:8.0.1"
@@ -23466,16 +23436,6 @@ __metadata:
     tr46: "npm:^6.0.0"
     webidl-conversions: "npm:^8.0.1"
   checksum: 10c0/08fe809e90e1d20f6de631c9cdf312623fe5526731dc176ad38967c7d0f34e6e9700cbc0bad5ecd3d5ea8c62737a487883948e85937432f3a598746d8e05e80e
-  languageName: node
-  linkType: hard
-
-"whatwg-url@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "whatwg-url@npm:5.0.0"
-  dependencies:
-    tr46: "npm:~0.0.3"
-    webidl-conversions: "npm:^3.0.0"
-  checksum: 10c0/1588bed84d10b72d5eec1d0faa0722ba1962f1821e7539c535558fb5398d223b0c50d8acab950b8c488b4ba69043fd833cc2697056b167d8ad46fac3995a55d5
   languageName: node
   linkType: hard
 
