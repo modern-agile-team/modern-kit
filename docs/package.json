@@ -25,19 +25,19 @@
     "@modern-kit/utils": "workspace:*",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "catalog:stable/react",
+    "react-dom": "catalog:stable/react"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/theme-classic": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "@tsconfig/docusaurus": "^2.0.9",
-    "@types/node": "^26.1.2",
-    "@types/react": "^19.2.13",
-    "@types/react-dom": "^19.2.3",
+    "@types/node": "catalog:stable/node",
+    "@types/react": "catalog:stable/react",
+    "@types/react-dom": "catalog:stable/react",
     "gh-pages": "^6.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:stable/typescript"
   },
   "browserslist": {
     "production": [

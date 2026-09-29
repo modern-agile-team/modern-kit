@@ -121,6 +121,10 @@ describe('[feature name]', () => {
 ### Dependencies
 
 - Use `workspace:^` protocol for internal package dependencies
+- Use `catalog:<name>` protocol for shared external dependencies defined in `.yarnrc.yml` `catalogs` (e.g. `"typescript": "catalog:stable/typescript"`)
+  - Never hard-code a version in `package.json` for a dependency that exists in a catalog
+  - Upgrade versions only in `.yarnrc.yml`, then run `yarn install`
+  - Add dependencies shared by two or more workspaces to a catalog instead of pinning them per workspace
 - Set peerDependencies carefully
 - Clearly distinguish between devDependencies and dependencies
 

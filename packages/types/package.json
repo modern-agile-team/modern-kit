@@ -32,9 +32,9 @@
     "access": "public"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.5"
+    "eslint": "catalog:stable/eslint",
+    "typescript": "catalog:stable/typescript",
+    "vitest": "catalog:stable/test"
   },
   "engines": {
     "node": ">=24",

@@ -73,6 +73,46 @@ packages/utils/src/
 - Entry points are auto-discovered from the directory structure via `build.utils.mjs`
 - **Vitest** is used for testing, with React Testing Library integration
 
+### Dependency Catalogs
+
+Shared dependency versions are managed with [Yarn Catalogs](https://yarnpkg.com/features/catalogs) in `.yarnrc.yml`. This prevents duplicate installs and keeps every workspace on the same version.
+
+```yaml
+# .yarnrc.yml
+catalogs:
+  stable/react:
+    react: ^19.2.4
+    react-dom: ^19.2.4
+    '@types/react': ^19.2.13
+    '@types/react-dom': ^19.2.3
+  stable/node:
+    '@types/node': ^26.1.2
+  stable/typescript:
+    typescript: ^6.0.3
+  stable/eslint:
+    eslint: ^10.0.0
+  stable/test:
+    vitest: ^4.1.5
+    '@vitest/coverage-istanbul': ^4.1.5
+    jsdom: ^30.0.0
+  stable/rolldown:
+    rolldown: ^1.0.0
+    rolldown-plugin-dts: ^0.28.0
+```
+
+```jsonc
+// package.json — reference the catalog instead of a version range
+"devDependencies": {
+  "typescript": "catalog:stable/typescript",
+  "vitest": "catalog:stable/test"
+}
+```
+
+- If a dependency is listed in a catalog, **always** use `catalog:<name>` — never hard-code a version in `package.json`
+- To upgrade, change the version **only in `.yarnrc.yml`**, then run `yarn install`
+- When a new dependency is used by two or more workspaces, add it to an existing catalog (or a new `stable/<group>` catalog) instead of pinning it per workspace
+- Workspace-specific dependencies used in only one place may keep a normal version range
+
 ### Export Strategy
 
 ```typescript
@@ -295,6 +335,7 @@ export function getOS() {
 - **No `any`** — use `unknown` or generics
 - **Readonly arrays** — support `T[] | readonly T[]` in parameters
 - **Internal dependencies** — use `workspace:^` protocol; `@modern-kit/utils` is available in the react package
+- **Shared external dependencies** — use `catalog:<name>` protocol defined in `.yarnrc.yml` (see Dependency Catalogs)
 - **Package manager** — always use `yarn` (never npm)
 
 ## Naming Conventions
