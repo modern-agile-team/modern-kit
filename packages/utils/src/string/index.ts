@@ -3,6 +3,7 @@ export * from './countSubstringOccurrences';
 export * from './escape';
 export * from './escapeRegExp';
 export * from './excludeChars';
+export * from './excludeNumber';
 export * from './extractChars';
 export * from './extractLetters';
 export * from './extractNumber';
