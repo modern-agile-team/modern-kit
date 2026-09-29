@@ -14,3 +14,4 @@ export * from './trimStart';
 export * from './trimEnd';
 export * from './truncate';
 export * from './unescape';
+export * from './words';
