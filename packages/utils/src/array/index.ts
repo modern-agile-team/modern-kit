@@ -12,6 +12,7 @@ export * from './flatMapDeep';
 export * from './flatten';
 export * from './flattenDeep';
 export * from './flattenDeepThenMap';
+export * from './forEachAsync';
 export * from './forEachRight';
 export * from './groupBy';
 export * from './intersection';
