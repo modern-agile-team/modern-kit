@@ -7,9 +7,13 @@ It works like `Array.prototype.reduce` and only iterates over the object's own e
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/reduceObject/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function reduceObject<T extends Record<PropertyKey, any>, A>(
   obj: T,
@@ -24,6 +28,7 @@ function reduceObject<T extends Record<PropertyKey, any>, A>(
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { reduceObject } from '@modern-kit/utils';
 

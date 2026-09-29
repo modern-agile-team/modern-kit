@@ -7,19 +7,28 @@ Like `Array.prototype.forEach`, it simply iterates without returning a value, an
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/forEachObject/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function forEachObject<T extends Record<PropertyKey, any>>(
   obj: T,
-  callback: (value: T[keyof T], key: `${Exclude<keyof T, symbol>}`, obj: T) => void
+  callback: (
+    value: T[keyof T],
+    key: `${Exclude<keyof T, symbol>}`,
+    obj: T
+  ) => void
 ): void;
 ```
 
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { forEachObject } from '@modern-kit/utils';
 

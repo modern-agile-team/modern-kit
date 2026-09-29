@@ -4,7 +4,8 @@ A function that excludes characters from a given string according to the specifi
 
 It is the exact opposite of `extractChars`, which keeps the specified types: it strips out the specified types instead.
 
-By default, it `excludes letters only`. The following options can be configured:
+By default, it `excludes letters only` (`{ letters: true }`). When `options` is passed, any option left out is treated as `false`, so set `letters: true` explicitly if you also want to exclude letters. The following options can be configured:
+
 - `letters`: Specifies whether to exclude letters from the string. Combining marks (accents, etc.) are excluded together.
 - `numbers`: Specifies whether to exclude numbers from the string.
 - `specialCharacters`: Specifies whether to exclude special characters from the string.
@@ -13,25 +14,31 @@ By default, it `excludes letters only`. The following options can be configured:
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/excludeChars/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 interface ExcludeCharsOptions {
-  letters?: boolean; // default: true
-  numbers?: boolean; // default: false
-  specialCharacters?: boolean; // default: false
-  whiteSpace?: boolean; // default: false
+  letters?: boolean;
+  numbers?: boolean;
+  specialCharacters?: boolean;
+  whiteSpace?: boolean;
 }
 
-function excludeChars(value: string, options?: ExcludeCharsOptions): string
+function excludeChars(
+  value: string,
+  options?: ExcludeCharsOptions // default: { letters: true }
+): string;
 ```
 
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { excludeChars } from '@modern-kit/utils';
 

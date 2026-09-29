@@ -2,14 +2,18 @@
 
 주어진 객체의 각 key와 value를 주어진 `iteratee` 함수 결과에 따라 함께 변환하여 새로운 객체를 반환합니다.
 
-`iteratee` 는 `[새 key, 새 value]` 튜플을 반환해야 하며, 변환된 key 가 겹치면 나중에 순회한 값으로 덮어씁니다.
+`iteratee`는 `[새 key, 새 value]` 튜플을 반환해야 하며, 변환된 key가 겹치면 나중에 순회한 값으로 덮어씁니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/mapEntries/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function mapEntries<
   T extends Record<PropertyKey, any>,
@@ -28,6 +32,7 @@ function mapEntries<
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { mapEntries } from '@modern-kit/utils';
 

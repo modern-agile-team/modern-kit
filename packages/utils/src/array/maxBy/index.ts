@@ -8,7 +8,7 @@
  *
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 반환값: { a: 3 }
- * maxBy([], x => x.a); // 반환값: undefined
+ * maxBy([] as { a: number }[], x => x.a); // 반환값: undefined
  * maxBy([3, NaN, 1], x => x); // 반환값: NaN (built-in Math.max와 동일)
  * maxBy(
  *   [
@@ -33,7 +33,7 @@ export function maxBy<T>(
  *
  * @example
  * maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 반환값: { a: 3 }
- * maxBy([], x => x.a); // 반환값: undefined
+ * maxBy([] as { a: number }[], x => x.a); // 반환값: undefined
  * maxBy([3, NaN, 1], x => x); // 반환값: NaN (built-in Math.max와 동일)
  * maxBy(
  *   [

@@ -2,16 +2,18 @@
 
 Prefixes regular expression special characters (`^` `$` `\` `.` `*` `+` `?` `(` `)` `[` `]` `{` `}` `|`) in a string with a backslash, so that they are matched literally instead of as a pattern.
 
-`-` and `/`, which have no special meaning in a pattern body, are not escaped.
+`-` and `/`, which have no special meaning in a pattern body outside character classes (`[...]`), are not escaped. Be careful with `-` when placing the result inside a character class.
 
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/escapeRegExp/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 function escapeRegExp(str: string): string;
 ```
@@ -19,6 +21,7 @@ function escapeRegExp(str: string): string;
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { escapeRegExp } from '@modern-kit/utils';
 

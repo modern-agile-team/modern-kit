@@ -13,9 +13,13 @@ JS objects always list integer-like keys (`'1'`, `'10'`) first in ascending orde
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/sortKeys/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function sortKeys<T extends Record<PropertyKey, any>>(
   obj: T,
@@ -26,7 +30,9 @@ function sortKeys<T extends Record<PropertyKey, any>>(
 <br />
 
 ## Usage
+
 ### Basic Usage
+
 ```ts title="typescript"
 import { sortKeys } from '@modern-kit/utils';
 
@@ -34,7 +40,10 @@ sortKeys({ c: 3, a: 1, b: 2 });
 // { a: 1, b: 2, c: 3 }
 ```
 
+<br />
+
 ### Using comparator
+
 ```ts title="typescript"
 import { sortKeys } from '@modern-kit/utils';
 

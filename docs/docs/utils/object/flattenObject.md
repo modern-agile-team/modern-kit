@@ -1,19 +1,23 @@
 # flattenObject
 
-중첩된 객체를 경로 문자열을 key 로 가진 한 단계짜리 객체로 평탄화합니다.
+중첩된 객체를 경로 문자열을 key로 가진 한 단계짜리 객체로 평탄화합니다.
 
-- 순수 객체와 배열만 펼치며, 배열은 인덱스를 key 로 사용합니다. (`tags.0`, `tags.1`)
-- 빈 객체와 빈 배열은 key 가 사라지지 않도록 값 그대로 유지합니다.
+- 순수 객체와 배열만 펼치며, 배열은 인덱스를 key로 사용합니다. (`tags.0`, `tags.1`)
+- 빈 객체와 빈 배열은 key가 사라지지 않도록 값 그대로 유지합니다.
 - `Date`, `Map`, `Set`, `File`, 클래스 인스턴스 등 순수 객체가 아닌 값은 펼치지 않고 그대로 유지합니다.
-- 객체 자신의 열거 가능한 string key 만 대상이며, 원본 객체를 변경하지 않습니다.
+- 객체 자신의 열거 가능한 string key만 대상이며, 원본 객체를 변경하지 않습니다.
 - 순환 참조가 있는 객체는 지원하지 않습니다.
 
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/flattenObject/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function flattenObject<T extends Record<PropertyKey, any>>(
   obj: T,
@@ -24,6 +28,7 @@ function flattenObject<T extends Record<PropertyKey, any>>(
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { flattenObject } from '@modern-kit/utils';
 

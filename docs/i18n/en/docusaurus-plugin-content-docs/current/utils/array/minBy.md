@@ -4,7 +4,7 @@ Finds the element that yields the minimum value when the `iteratee` function is 
 
 - If multiple elements share the minimum value, the first one is returned.
 - Returns `undefined` if the array is empty.
-- If the `iteratee` returns `NaN` for an element, that element is returned immediately. (same as built-in `Math.min`)
+- If the `iteratee` returns `NaN` for an element, that element is returned immediately. (like built-in `Math.min`, `NaN` takes precedence)
 - When a non-empty tuple type (`readonly [T, ...T[]]`) is passed, the return type is inferred as `T`.
 
 <br />
@@ -37,7 +37,7 @@ function minBy<T>(
 import { minBy } from '@modern-kit/utils';
 
 minBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x) => x.a); // { a: 1 }
-minBy([], (x) => x.a); // undefined
+minBy([] as { a: number }[], (x) => x.a); // undefined
 minBy([3, NaN, 1], (x) => x); // NaN
 
 minBy(

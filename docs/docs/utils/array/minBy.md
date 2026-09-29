@@ -4,7 +4,7 @@
 
 - 최소값이 여러 개일 경우 첫 번째 요소를 반환합니다.
 - 배열이 비어있다면 `undefined`를 반환합니다.
-- `iteratee`의 결과가 `NaN`인 요소가 있으면 해당 요소를 즉시 반환합니다. (built-in `Math.min`과 동일)
+- `iteratee`의 결과가 `NaN`인 요소가 있으면 해당 요소를 즉시 반환합니다. (built-in `Math.min`처럼 `NaN`을 우선합니다)
 - 비어 있지 않은 튜플 타입(`readonly [T, ...T[]]`)을 전달하면 반환 타입이 `T`로 추론됩니다.
 
 <br />
@@ -37,7 +37,7 @@ function minBy<T>(
 import { minBy } from '@modern-kit/utils';
 
 minBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x) => x.a); // { a: 1 }
-minBy([], (x) => x.a); // undefined
+minBy([] as { a: number }[], (x) => x.a); // undefined
 minBy([3, NaN, 1], (x) => x); // NaN
 
 minBy(

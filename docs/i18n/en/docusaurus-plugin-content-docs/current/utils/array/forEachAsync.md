@@ -1,10 +1,10 @@
 # forEachAsync
 
-Invokes the provided `callback function` for each element of the given array, waiting for the Promise returned by the callback to settle.
+Invokes the provided callback function (`callback`) for each element of the given array, waiting for the Promise returned by the callback to settle.
 
 By default it runs **sequentially**, calling the next element's callback only after the previous one has completed. Set `options.parallel` to `true` to run in parallel. Note that the completion order of each element is not guaranteed when running in parallel.
 
-If a callback throws, (in sequential mode) the remaining elements are not processed and the returned Promise rejects.
+If a callback throws in sequential mode, the remaining elements are not processed and the returned Promise rejects. In parallel mode, the Promise rejects with the first error, but the other callbacks that have already started keep running.
 
 <br />
 
@@ -34,6 +34,16 @@ function forEachAsync<T>(
 
 <br />
 
+## Parameters
+
+| Name               | Type                                                                                  | Default | Description                                |
+| ------------------ | ------------------------------------------------------------------------------------- | ------- | ------------------------------------------ |
+| `arr`              | `T[] \| readonly T[]`                                                                 | -       | The array to iterate over.                 |
+| `callback`         | `(currentValue: T, index: number, arr: T[] \| readonly T[]) => void \| Promise<void>` | -       | The function to invoke for each element.   |
+| `options.parallel` | `boolean`                                                                             | `false` | If `true`, runs all callbacks in parallel. |
+
+<br />
+
 ## Usage
 
 ### Sequential execution
@@ -53,6 +63,8 @@ await forEachAsync(ids, async (id, index) => {
 
 console.log('All deleted.');
 ```
+
+<br />
 
 ### Parallel execution
 

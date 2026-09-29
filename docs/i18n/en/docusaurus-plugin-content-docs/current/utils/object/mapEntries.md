@@ -7,9 +7,13 @@ The `iteratee` must return a `[newKey, newValue]` tuple. If transformed keys col
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/mapEntries/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function mapEntries<
   T extends Record<PropertyKey, any>,
@@ -28,6 +32,7 @@ function mapEntries<
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { mapEntries } from '@modern-kit/utils';
 

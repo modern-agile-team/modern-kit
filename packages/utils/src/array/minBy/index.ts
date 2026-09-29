@@ -7,7 +7,7 @@
  * @returns {T} `iteratee` 함수로 판단된 최소 값을 가지는 요소입니다.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 반환값: { a: 1 }
- * minBy([], x => x.a); // 반환값: undefined
+ * minBy([] as { a: number }[], x => x.a); // 반환값: undefined
  * minBy([3, NaN, 1], x => x); // 반환값: NaN (built-in Math.min와 동일)
  * minBy(
  *   [
@@ -32,7 +32,7 @@ export function minBy<T>(
  * @returns {T | undefined} `iteratee` 함수로 판단된 최소 값을 가지는 요소, 또는 배열이 비어 있으면 `undefined`를 반환합니다.
  * @example
  * minBy([{ a: 1 }, { a: 2 }, { a: 3 }], x => x.a); // 반환값: { a: 1 }
- * minBy([], x => x.a); // 반환값: undefined
+ * minBy([] as { a: number }[], x => x.a); // 반환값: undefined
  * minBy([3, NaN, 1], x => x); // 반환값: NaN (built-in Math.min와 동일)
  * minBy(
  *   [

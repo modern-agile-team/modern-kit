@@ -4,7 +4,7 @@ Finds the element that yields the maximum value when the `iteratee` function is 
 
 - If multiple elements share the maximum value, the first one is returned.
 - Returns `undefined` if the array is empty.
-- If the `iteratee` returns `NaN` for an element, that element is returned immediately. (same as built-in `Math.max`)
+- If the `iteratee` returns `NaN` for an element, that element is returned immediately. (like built-in `Math.max`, `NaN` takes precedence)
 - When a non-empty tuple type (`readonly [T, ...T[]]`) is passed, the return type is inferred as `T`.
 
 <br />
@@ -37,7 +37,7 @@ function maxBy<T>(
 import { maxBy } from '@modern-kit/utils';
 
 maxBy([{ a: 1 }, { a: 2 }, { a: 3 }], (x) => x.a); // { a: 3 }
-maxBy([], (x) => x.a); // undefined
+maxBy([] as { a: number }[], (x) => x.a); // undefined
 maxBy([3, NaN, 1], (x) => x); // NaN
 
 maxBy(

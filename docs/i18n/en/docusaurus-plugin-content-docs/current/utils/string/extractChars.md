@@ -2,7 +2,8 @@
 
 A function that extracts characters from a given string according to the specified options.
 
-By default, it `extracts letters only`. The following options can be configured:
+By default, it `extracts letters only` (`{ letters: true }`). When `options` is passed, any option left out is treated as `false`, so set `letters: true` explicitly if you also want to extract letters. The following options can be configured:
+
 - `letters`: Specifies whether to extract letters from the string. Combining marks (accents, etc.) are extracted together.
 - `numbers`: Specifies whether to extract numbers from the string.
 - `specialCharacters`: Specifies whether to extract special characters from the string. ZWJ/variation selectors that join emoji sequences are extracted together.
@@ -13,25 +14,31 @@ It does not break combining marks in NFD-normalized strings or ZWJ-joined emoji 
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/extractChars/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 interface ExtractCharsOptions {
-  letters?: boolean; // default: true
-  numbers?: boolean; // default: false
-  specialCharacters?: boolean; // default: false
-  whiteSpace?: boolean; // default: false
+  letters?: boolean;
+  numbers?: boolean;
+  specialCharacters?: boolean;
+  whiteSpace?: boolean;
 }
 
-function extractChars(value: string, options?: ExtractCharsOptions): string
+function extractChars(
+  value: string,
+  options?: ExtractCharsOptions // default: { letters: true }
+): string;
 ```
 
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { extractChars } from '@modern-kit/utils';
 

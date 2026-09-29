@@ -7,18 +7,21 @@ It removes all numbers from the input string and returns the remaining character
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/string/excludeNumber/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
-function excludeNumber(value: string): string
+function excludeNumber(value: string): string;
 ```
 
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { excludeNumber } from '@modern-kit/utils';
 

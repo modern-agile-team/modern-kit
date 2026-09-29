@@ -11,9 +11,13 @@ Flattens a nested object into a single-level object whose keys are path strings.
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/object/flattenObject/index.ts)
 
+<br />
+
 ## Interface
+
 ```ts title="typescript"
 function flattenObject<T extends Record<PropertyKey, any>>(
   obj: T,
@@ -24,6 +28,7 @@ function flattenObject<T extends Record<PropertyKey, any>>(
 <br />
 
 ## Usage
+
 ```ts title="typescript"
 import { flattenObject } from '@modern-kit/utils';
 
