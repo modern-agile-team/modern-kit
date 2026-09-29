@@ -7,7 +7,6 @@ export * from './excludeNumber';
 export * from './extractChars';
 export * from './extractLetters';
 export * from './extractNumber';
-export * from './removeLetters';
 export * from './repeatCharacters';
 export * from './reverseString';
 export * from './serialize';
