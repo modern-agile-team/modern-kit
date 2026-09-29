@@ -6,6 +6,7 @@ export * from './forEachObject';
 export * from './fromPairs';
 export * from './get';
 export * from './invert';
+export * from './mapEntries';
 export * from './mapKeys';
 export * from './mapValues';
 export * from './merge';
