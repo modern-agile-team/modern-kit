@@ -1,6 +1,7 @@
 export * from './capitalize';
 export * from './countSubstringOccurrences';
 export * from './escape';
+export * from './escapeRegExp';
 export * from './extractLetters';
 export * from './extractNumber';
 export * from './removeLetters';
