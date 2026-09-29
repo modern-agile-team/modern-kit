@@ -19,4 +19,5 @@ export * from './pick';
 export * from './pickBy';
 export * from './reduceObject';
 export * from './set';
+export * from './sortKeys';
 export * from './toPairs';
