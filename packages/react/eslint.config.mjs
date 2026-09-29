@@ -22,4 +22,14 @@ export default [
       'react-hooks/immutability': 'off',
     },
   },
+  {
+    // 모듈 확장(declare module)은 빈 interface 로 기존 타입을 extends 해야 하므로 허용합니다.
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-empty-object-type': [
+        'error',
+        { allowInterfaces: 'with-single-extends' },
+      ],
+    },
+  },
 ];
