@@ -34,6 +34,19 @@ nvm install
 nvm use
 ```
 
+- Dependencies shared across workspaces are managed with [Yarn Catalogs](https://yarnpkg.com/features/catalogs). This prevents duplicate installs and keeps every workspace on the same version.
+  - Versions are defined under `catalogs` in the root `.yarnrc.yml`. In `package.json`, reference them with `catalog:<name>` instead of a version.
+  - To update a version, change it only in `.yarnrc.yml` and then run `yarn install`.
+  - When adding a new dependency used by two or more workspaces, register it in a catalog first.
+
+```jsonc
+// package.json
+"devDependencies": {
+  "typescript": "catalog:stable/typescript",
+  "vitest": "catalog:stable/test"
+}
+```
+
 - Before creating a PR, make sure **lint**, **typecheck**, and **test** all pass.
 
 ```shell

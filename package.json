@@ -27,14 +27,14 @@
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.0",
     "@eslint/js": "^10.0.1",
-    "@types/node": "^26.1.2",
-    "eslint": "^10.0.0",
+    "@types/node": "catalog:stable/node",
+    "eslint": "catalog:stable/eslint",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unused-imports": "^4.2.0",
     "globals": "^17.6.0",
     "lerna": "^10.0.0",
     "prettier": "^3.8.1",
-    "typescript": "^6.0.3",
+    "typescript": "catalog:stable/typescript",
     "typescript-eslint": "^8.59.2"
   },
   "engines": {

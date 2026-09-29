@@ -34,6 +34,19 @@ nvm install
 nvm use
 ```
 
+- 여러 워크스페이스에서 공통으로 사용하는 의존성은 [Yarn Catalogs](https://yarnpkg.com/features/catalogs)로 관리합니다. 중복 설치를 방지하고 모든 워크스페이스가 같은 버전을 공유하기 위함입니다.
+  - 버전은 루트의 `.yarnrc.yml` `catalogs`에 정의되어 있으며, `package.json`에서는 버전 대신 `catalog:<이름>`으로 참조해주세요.
+  - 버전 업데이트는 `.yarnrc.yml`에서만 수정한 뒤 `yarn install`을 실행해주세요.
+  - 두 개 이상의 워크스페이스에서 사용하는 의존성을 새로 추가하는 경우, 카탈로그에 먼저 등록해주세요.
+
+```jsonc
+// package.json
+"devDependencies": {
+  "typescript": "catalog:stable/typescript",
+  "vitest": "catalog:stable/test"
+}
+```
+
 - PR 생성 전에 아래 명령어로 **lint**, **typecheck**, **test**를 모두 통과했는지 확인해주세요.
 
 ```shell
