@@ -1,6 +1,7 @@
 export * from './deleteFalsyProperties';
 export * from './findKey';
 export * from './findLastKey';
+export * from './flattenObject';
 export * from './fromPairs';
 export * from './get';
 export * from './invert';
