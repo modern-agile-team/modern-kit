@@ -185,7 +185,7 @@ function isRefObject<T>(
 > **Test environment & global mocking rules: `.claude/rules/testing_rules.md`** — read it before writing or editing any test.
 >
 > - DOM environment is `happy-dom` (not jsdom). `@modern-kit/utils` runs in `node` by default; add `// @vitest-environment happy-dom` on the first line only when real DOM APIs are needed
-> - Both packages use `pool: 'vmForks'` (vm context per test file)
+> - All packages (react, utils, types) use `pool: 'vmThreads'`; tests must pass regardless of pool
 > - Replace globals with `vi.stubGlobal` + `vi.unstubAllGlobals()`; never `Object.defineProperty(window, ...)` / `globalThis.window = ...`
 
 ### Test File Structure

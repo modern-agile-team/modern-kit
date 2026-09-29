@@ -9,7 +9,7 @@ export default defineConfig({
     environment: 'happy-dom',
     globals: false,
     setupFiles: './vitest.setup.mts',
-    pool: 'vmForks',
+    pool: 'vmThreads',
     coverage: {
       provider: 'istanbul',
       exclude: [

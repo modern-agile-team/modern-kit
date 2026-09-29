@@ -9,7 +9,7 @@ export default defineConfig({
     environment: 'node',
     setupFiles: './vitest.setup.mts',
     globals: false,
-    pool: 'vmForks',
+    pool: 'vmThreads',
     coverage: {
       provider: 'istanbul',
       exclude: [
