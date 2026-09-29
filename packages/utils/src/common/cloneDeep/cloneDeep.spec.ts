@@ -101,7 +101,13 @@ describe('cloneDeep', () => {
 
     expect(copiedObj[enumerableSymbol]).toEqual({ a: 1 });
     expect(copiedObj[enumerableSymbol]).not.toBe(originObj[enumerableSymbol]);
+<<<<<<< HEAD
     expect(Object.getOwnPropertySymbols(copiedObj)).toEqual([enumerableSymbol]);
+=======
+    expect(Object.getOwnPropertySymbols(copiedObj)).toEqual([
+      enumerableSymbol,
+    ]);
+>>>>>>> 24817925 (chore: vitest v5 적용)
   });
 
   it('`__proto__` key 는 프로토타입을 바꾸지 않고 own 속성으로 복사해야 합니다', () => {
