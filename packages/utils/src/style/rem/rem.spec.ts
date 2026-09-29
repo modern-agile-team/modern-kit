@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import {
   describe,
   it,
@@ -8,8 +9,14 @@ import {
   afterEach,
 } from 'vitest';
 import { rem } from '.';
+import { isClient } from '../../device';
 
-const originWindow = globalThis.window;
+// window 는 DOM 환경·pool 에 따라 재정의할 수 없으므로, 환경 판별 함수를 모킹합니다.
+vi.mock('../../device', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../device')>()),
+  isClient: vi.fn(() => true),
+}));
+
 let getComputedStyleSpy: MockInstance;
 
 beforeEach(() => {
@@ -18,7 +25,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  globalThis.window = originWindow;
   getComputedStyleSpy.mockRestore();
 });
 
@@ -62,7 +68,7 @@ describe('rem', () => {
   });
 
   it('클라이언트 환경이 아닐 경우 에러를 발생시켜야 한다.', () => {
-    globalThis.window = undefined as any;
+    vi.mocked(isClient).mockReturnValueOnce(false);
 
     expect(() => rem(16)).toThrowError();
   });

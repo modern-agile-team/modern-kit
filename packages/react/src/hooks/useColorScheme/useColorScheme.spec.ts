@@ -3,24 +3,21 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useColorScheme } from '.';
 
 const TEST_KEY = 'test-key';
-const originalMatchMedia = window.matchMedia;
-
 beforeEach(() => {
-  Object.defineProperty(window, 'matchMedia', {
-    value: vi.fn().mockImplementation((query) => {
+  vi.stubGlobal(
+    'matchMedia',
+    vi.fn().mockImplementation((query) => {
       return {
         matches: query === '(prefers-color-scheme: dark)',
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
       };
-    }),
-  });
+    })
+  );
 });
 
 afterEach(() => {
-  Object.defineProperty(window, 'matchMedia', {
-    value: originalMatchMedia,
-  });
+  vi.unstubAllGlobals();
 });
 
 describe('useColorScheme', () => {

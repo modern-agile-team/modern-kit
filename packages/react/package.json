@@ -53,7 +53,7 @@
     "eslint": "catalog:stable/eslint",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "jsdom": "catalog:stable/test",
+    "happy-dom": "catalog:stable/test",
     "react": "catalog:stable/react",
     "react-dom": "catalog:stable/react",
     "rolldown": "catalog:stable/rolldown",

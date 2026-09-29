@@ -108,7 +108,7 @@ describe('useScrollEvent', () => {
           x: 20, // (100 / 500) * 100
         },
       });
-    })
+    });
   });
 
   it('enabled 옵션으로 스크롤 이벤트를 제어해야 합니다.', async () => {
@@ -139,7 +139,6 @@ describe('useScrollEvent', () => {
 
     const container = screen.getByRole('scroll-container');
 
-    // JSDOM의 한계로 명시적으로 scrollHeight와 scrollWidth 설정
     Object.defineProperty(container, 'scrollHeight', {
       value: 1000,
       configurable: true,

@@ -6,9 +6,10 @@ export default defineConfig({
   test: {
     name: packageJson.name,
     dir: './src',
-    environment: 'jsdom',
+    environment: 'node',
     setupFiles: './vitest.setup.mts',
     globals: false,
+    pool: 'vmForks',
     coverage: {
       provider: 'istanbul',
       exclude: [

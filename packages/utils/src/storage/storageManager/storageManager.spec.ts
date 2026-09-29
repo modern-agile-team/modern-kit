@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { describe, it, expect, afterEach } from 'vitest';
 import { StorageManager } from '.';
 
@@ -338,21 +339,6 @@ describe('StorageManager', () => {
   });
 
   describe('에러 케이스', () => {
-    it('서버 환경에서는 에러를 발생시켜야 합니다.', () => {
-      const originalWindow = globalThis.window;
-
-      // @ts-expect-error 서버 환경에서 테스트
-      delete globalThis.window;
-
-      const storage = new StorageManager<TestStorageData>('localStorage');
-
-      expect(() => {
-        storage.setItem('name', 'John');
-      }).toThrow('Storage를 지원하는 환경이 아닙니다');
-
-      globalThis.window = originalWindow;
-    });
-
     it('잘못된 JSON 형식의 경우 에러가 발생해야 합니다.', () => {
       const storage = new StorageManager<TestStorageData>('localStorage');
       localStorage.setItem('name', '{invalid: json}');

@@ -1,22 +1,9 @@
-import {
-  describe,
-  it,
-  expect,
-  vi,
-  MockInstance,
-  beforeEach,
-  afterEach,
-} from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { isMobile } from '.';
 
-let windowSpy: MockInstance;
-
-beforeEach(() => {
-  windowSpy = vi.spyOn(window, 'window', 'get');
-});
-
+// node 환경에는 window 가 없으므로, 테스트마다 window 를 주입(stubGlobal)해 클라이언트/서버 환경을 흉내냅니다.
 afterEach(() => {
-  windowSpy.mockRestore();
+  vi.unstubAllGlobals();
 });
 
 describe('isMobile', () => {
@@ -34,12 +21,10 @@ describe('isMobile', () => {
     ];
 
     USER_AGENTS.forEach((value) => {
-      windowSpy.mockImplementation(() => {
-        return {
-          navigator: {
-            userAgent: value,
-          },
-        };
+      vi.stubGlobal('window', {
+        navigator: {
+          userAgent: value,
+        },
       });
 
       expect(isMobile()).toBe(true);
@@ -47,7 +32,7 @@ describe('isMobile', () => {
   });
 
   it('서버 환경에서는 false를 반환해야 한다', () => {
-    windowSpy.mockImplementation(() => undefined);
+    vi.stubGlobal('window', undefined);
     expect(isMobile()).toBe(false);
   });
 });

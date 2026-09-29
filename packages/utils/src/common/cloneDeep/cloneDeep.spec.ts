@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { describe, it, expect } from 'vitest';
 import { cloneDeep } from '.';
 
@@ -100,9 +101,7 @@ describe('cloneDeep', () => {
 
     expect(copiedObj[enumerableSymbol]).toEqual({ a: 1 });
     expect(copiedObj[enumerableSymbol]).not.toBe(originObj[enumerableSymbol]);
-    expect(Object.getOwnPropertySymbols(copiedObj)).toEqual([
-      enumerableSymbol,
-    ]);
+    expect(Object.getOwnPropertySymbols(copiedObj)).toEqual([enumerableSymbol]);
   });
 
   it('`__proto__` key 는 프로토타입을 바꾸지 않고 own 속성으로 복사해야 합니다', () => {

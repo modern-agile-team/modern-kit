@@ -4,24 +4,21 @@ import { useMediaQuery } from '.';
 import { renderHook } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 
-const originalMatchMedia = window.matchMedia;
-
 beforeEach(() => {
-  Object.defineProperty(window, 'matchMedia', {
-    value: vi.fn().mockImplementation((query) => {
+  vi.stubGlobal(
+    'matchMedia',
+    vi.fn().mockImplementation((query) => {
       return {
         matches: query === '(min-width: 600px)',
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
       };
-    }),
-  });
+    })
+  );
 });
 
 afterEach(() => {
-  Object.defineProperty(window, 'matchMedia', {
-    value: originalMatchMedia,
-  });
+  vi.unstubAllGlobals();
 });
 
 const TestComponent = ({

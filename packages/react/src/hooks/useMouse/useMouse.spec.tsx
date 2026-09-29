@@ -4,6 +4,25 @@ import { fireEvent, screen } from '@testing-library/react';
 
 import { useMouse } from '.';
 
+/**
+ * happy-dom 의 MouseEvent 는 pageX/pageY 를 0 으로 고정하고 init 값도 무시하므로,
+ * 이벤트를 직접 생성해 pageX/pageY 를 정의한 뒤 발생시킵니다.
+ */
+const fireMouseMove = (target: Document | Element) => {
+  const event = new MouseEvent('mousemove', {
+    bubbles: true,
+    clientX: 150,
+    clientY: 150,
+    screenX: 150,
+    screenY: 150,
+  });
+
+  Object.defineProperty(event, 'pageX', { value: 150 });
+  Object.defineProperty(event, 'pageY', { value: 150 });
+
+  fireEvent(target, event);
+};
+
 describe('useMouse with connected ref', () => {
   const RefConnectedComponent = () => {
     const { ref, position } = useMouse<HTMLDivElement>();
@@ -57,12 +76,7 @@ describe('useMouse with connected ref', () => {
       toJSON: () => {}, // 타입에러를 해결하기 위해 추가합니다.
     });
 
-    fireEvent.mouseMove(box, {
-      clientX: 150,
-      clientY: 150,
-      screenX: 150,
-      screenY: 150,
-    });
+    fireMouseMove(box);
 
     expect(screen.getByText('clientX: 150')).toBeInTheDocument();
     expect(screen.getByText('clientY: 150')).toBeInTheDocument();
@@ -100,12 +114,7 @@ describe('useMouse without connected ref', () => {
   it('첫 렌더링시 position이 null이어야 합니다', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
-    fireEvent.mouseMove(document, {
-      clientX: 150,
-      clientY: 150,
-      screenX: 150,
-      screenY: 150,
-    });
+    fireMouseMove(document);
 
     expect(screen.getByText('clientX: 150')).toBeInTheDocument();
     expect(screen.getByText('clientY: 150')).toBeInTheDocument();
@@ -122,12 +131,7 @@ describe('useMouse without connected ref', () => {
   it('마우스가 움직일 때 마우스 위치, 상대적 마우스 위치, 요소 위치가 null이어야 합니다', async () => {
     renderSetup(<RefNonConnectedComponent />);
 
-    fireEvent.mouseMove(document, {
-      clientX: 150,
-      clientY: 150,
-      screenX: 150,
-      screenY: 150,
-    });
+    fireMouseMove(document);
 
     expect(screen.getByText('clientX: 150')).toBeInTheDocument();
     expect(screen.getByText('clientY: 150')).toBeInTheDocument();
