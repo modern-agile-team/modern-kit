@@ -6,6 +6,7 @@ export * from './isArray';
 export * from './isBlob';
 export * from './isBoolean';
 export * from './isDate';
+export * from './isEmpty';
 export * from './isEqual';
 export * from './isFloat';
 export * from './isFunction';

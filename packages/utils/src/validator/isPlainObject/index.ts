@@ -18,8 +18,18 @@ import { isReference } from '../isReference';
 export function isPlainObject(
   value: unknown
 ): value is Record<PropertyKey, any> {
+  if (!isReference(value)) return false;
+
+  const proto = Object.getPrototypeOf(value);
+
+  const hasObjectPrototype =
+    proto === null ||
+    proto === Object.prototype ||
+    Object.getPrototypeOf(proto) === null;
+
+  // Math, JSON 처럼 프로토타입이 Object.prototype 인 내장 객체는 태그로 걸러냅니다.
   return (
-    isReference(value) &&
+    hasObjectPrototype &&
     Object.prototype.toString.call(value) === '[object Object]'
   );
 }
