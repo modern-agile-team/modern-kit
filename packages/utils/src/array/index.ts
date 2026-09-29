@@ -16,6 +16,7 @@ export * from './forEachAsync';
 export * from './forEachRight';
 export * from './groupBy';
 export * from './intersection';
+export * from './keyBy';
 export * from './mapRight';
 export * from './partition';
 export * from './shuffle';
