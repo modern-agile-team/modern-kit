@@ -19,26 +19,22 @@ export function useAsyncProcessQueue<T = unknown, E = unknown>({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRequestQueue = useCallback(async () => {
-    if (requestQueue.current.length === 0) {
-      return;
-    }
+    while (requestQueue.current.length > 0) {
+      const requestFunc = requestQueue.current[0];
+      setIsLoading(true);
 
-    const requestFunc = requestQueue.current[0];
-    setIsLoading(true);
+      try {
+        const res = await requestFunc();
 
-    try {
-      const res = await requestFunc();
-
-      setData(res as T);
-      setError(null);
-    } catch (err) {
-      setData(null);
-      setError(err as E);
-    } finally {
-      requestQueue.current.shift();
-      setIsLoading(false);
-
-      await handleRequestQueue();
+        setData(res as T);
+        setError(null);
+      } catch (err) {
+        setData(null);
+        setError(err as E);
+      } finally {
+        requestQueue.current.shift();
+        setIsLoading(false);
+      }
     }
   }, []);
 
