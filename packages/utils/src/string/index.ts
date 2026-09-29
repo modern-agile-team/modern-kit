@@ -8,7 +8,6 @@ export * from './extractChars';
 export * from './extractLetters';
 export * from './extractNumber';
 export * from './removeLetters';
-export * from './removeSpecialCharacters';
 export * from './repeatCharacters';
 export * from './reverseString';
 export * from './serialize';
