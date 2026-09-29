@@ -20,13 +20,13 @@ describe('delay', () => {
     await expect(promise).resolves.toBeUndefined();
   });
 
-  it('유효하지 않은 시간이 주어지면 거부해야 합니다.', () => {
+  it('유효하지 않은 시간이 주어지면 거부해야 합니다.', async () => {
     const errorMessage = 'Invalid time value';
 
-    expect(delay(-100)).rejects.toThrow(errorMessage);
-    expect(delay(NaN)).rejects.toThrow(errorMessage);
-    expect(delay(Infinity)).rejects.toThrow(errorMessage);
-    expect(delay(-Infinity)).rejects.toThrow(errorMessage);
-    expect(delay(0.123)).rejects.toThrow(errorMessage);
+    await expect(delay(-100)).rejects.toThrow(errorMessage);
+    await expect(delay(NaN)).rejects.toThrow(errorMessage);
+    await expect(delay(Infinity)).rejects.toThrow(errorMessage);
+    await expect(delay(-Infinity)).rejects.toThrow(errorMessage);
+    await expect(delay(0.123)).rejects.toThrow(errorMessage);
   });
 });
