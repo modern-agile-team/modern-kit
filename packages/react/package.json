@@ -58,7 +58,6 @@
     "react-dom": "catalog:stable/react",
     "rolldown": "catalog:stable/rolldown",
     "rolldown-plugin-dts": "catalog:stable/rolldown",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "catalog:stable/typescript",
     "vite": "catalog:stable/vite",
     "vitest": "catalog:stable/test"

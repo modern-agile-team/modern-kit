@@ -9747,7 +9747,6 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:19.3.0"],\
           ["rolldown", "npm:1.2.0"],\
           ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
-          ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["vite", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:8.3.1"],\
           ["vitest", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:5.0.2"]\
@@ -9778,7 +9777,6 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:7dc1ddde2d34b86ba227cf048b6f4555d805144c8b73a72e4de57fb5681311d4d2ba7642c0274bee255356c969f37a26c0b79c626e2a6dea851f999a1502ca4f#npm:19.3.0"],\
           ["rolldown", "npm:1.2.0"],\
           ["rolldown-plugin-dts", "virtual:c1880e9304d9a3f41f70832a3686cc183762f34f175965fa7d8f3dcb85f95d5592cbd0c09ea32431c9305ef07668e5847055a578fa362ec3f6feb507679c1fd5#npm:0.28.0"],\
-          ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"],\
           ["typescript", "patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"],\
           ["vite", "virtual:cff87ecb7758c1d7f92e8273b49133b36914e388da6b0bd4e5be3c458500f2be637e2fb766e59ba99e1e603cded00df27d9f02354caaa41bf9c30b47fc90487f#npm:8.3.1"],\
           ["vitest", "virtual:f4931470e5aa2cf6ae863e5bcaf3e3037e732bd5038f166feb73275e68b98183a75b52bc650a18430306b102cecf89f182160e707c0c34c55da0d9d4a82fee04#npm:5.0.2"]\
@@ -27751,28 +27749,6 @@ const RAW_RUNTIME_STATE =
           "rolldown",\
           "typescript",\
           "vue-tsc"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["rollup-plugin-peer-deps-external", [\
-      ["npm:2.2.4", {\
-        "packageLocation": "./.yarn/cache/rollup-plugin-peer-deps-external-npm-2.2.4-907ae6e3f2-86c969e381.zip/node_modules/rollup-plugin-peer-deps-external/",\
-        "packageDependencies": [\
-          ["rollup-plugin-peer-deps-external", "npm:2.2.4"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4", {\
-        "packageLocation": "./.yarn/__virtual__/rollup-plugin-peer-deps-external-virtual-97c8ef6dba/0/cache/rollup-plugin-peer-deps-external-npm-2.2.4-907ae6e3f2-86c969e381.zip/node_modules/rollup-plugin-peer-deps-external/",\
-        "packageDependencies": [\
-          ["@types/rollup", null],\
-          ["rollup", null],\
-          ["rollup-plugin-peer-deps-external", "virtual:563eed158f288bf047abf61326cfdc1b076276a41a223b281dee4039a373b8c1e3d5e41486e9928091cdfb6a89b62a99962c89651b2d2d575c0040f364c40d41#npm:2.2.4"]\
-        ],\
-        "packagePeers": [\
-          "@types/rollup",\
-          "rollup"\
         ],\
         "linkType": "HARD"\
       }]\
