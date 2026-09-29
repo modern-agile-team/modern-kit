@@ -1,14 +1,15 @@
 /// <reference types="vitest" />
 import { coverageConfigDefaults, defineConfig } from 'vitest/config';
-import packageJson from './package.json';
+import packageJson from './package.json' with { type: 'json' };
 
 export default defineConfig({
   test: {
     name: packageJson.name,
     dir: './src',
-    environment: 'jsdom',
+    environment: 'happy-dom',
     globals: false,
     setupFiles: './vitest.setup.mts',
+    pool: 'vmForks',
     coverage: {
       provider: 'istanbul',
       exclude: [

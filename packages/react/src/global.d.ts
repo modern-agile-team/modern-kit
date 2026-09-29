@@ -1,9 +1,9 @@
-import 'vitest';
-import { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
-import '@testing-library/jest-dom';
+import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
 
-declare global {
-  namespace Vi {
-    type Assertion<T = any> = TestingLibraryMatchers<T, void>;
-  }
+declare module 'vitest' {
+  interface Assertion<T = any> extends TestingLibraryMatchers<any, T> {}
+  interface AsymmetricMatchersContaining extends TestingLibraryMatchers<
+    any,
+    any
+  > {}
 }

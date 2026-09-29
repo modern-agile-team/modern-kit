@@ -37,6 +37,8 @@ describe('useScrollLock', () => {
     const { result } = renderHook(() => useScrollLock());
     const divElement = document.createElement('div');
 
+    // 문서에 연결되지 않은 요소는 getComputedStyle 결과가 비어있으므로 body 에 추가합니다.
+    document.body.appendChild(divElement);
     divElement.style.overflow = 'auto';
     result.current.ref.current = divElement;
 
@@ -51,5 +53,7 @@ describe('useScrollLock', () => {
     });
 
     expect(divElement.style.overflow).toBe('auto');
+
+    divElement.remove();
   });
 });

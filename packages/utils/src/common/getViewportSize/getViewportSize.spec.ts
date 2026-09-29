@@ -1,30 +1,17 @@
-import {
-  describe,
-  it,
-  expect,
-  vi,
-  MockInstance,
-  beforeEach,
-  afterEach,
-} from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { getViewportSize } from '.';
 
-let windowSpy: MockInstance;
-
-beforeEach(() => {
-  windowSpy = vi.spyOn(window, 'window', 'get');
-});
-
+// node 환경에는 window 가 없으므로, 테스트마다 window 를 주입(stubGlobal)해 클라이언트/서버 환경을 흉내냅니다.
 afterEach(() => {
-  windowSpy.mockRestore();
+  vi.unstubAllGlobals();
 });
 
 describe('getViewportSize', () => {
   it('width 500과 height 300을 반환해야 합니다.', () => {
-    windowSpy.mockImplementation(() => ({
+    vi.stubGlobal('window', {
       innerWidth: 500,
       innerHeight: 300,
-    }));
+    });
 
     const { width, height } = getViewportSize();
 
@@ -36,7 +23,7 @@ describe('getViewportSize', () => {
   });
 
   it('window가 정의되지 않은 경우 width 0과 height 0을 반환해야 합니다.', () => {
-    windowSpy.mockImplementation(() => undefined);
+    vi.stubGlobal('window', undefined);
 
     const { width, height } = getViewportSize();
 

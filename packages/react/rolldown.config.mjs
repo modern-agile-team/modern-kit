@@ -1,19 +1,20 @@
 import { createRequire } from 'node:module';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { dts } from 'rolldown-plugin-dts';
 import { defineConfig } from 'rolldown';
-import { createInput, formatEntry } from '../../scripts/build.utils.mjs';
+import {
+  createInput,
+  formatEntry,
+  externalMatcher,
+} from '../../scripts/build.utils.mjs';
 
 const pkg = createRequire(import.meta.url)('./package.json');
 
 const input = createInput(['hooks', 'components', 'utils']);
 
-const external = [
+const external = externalMatcher([
   ...Object.keys(pkg.dependencies),
   ...Object.keys(pkg.peerDependencies),
-];
-
-const sharedPlugins = [peerDepsExternal()];
+]);
 
 const sharedOutput = {
   dir: './dist',
@@ -32,7 +33,6 @@ export default defineConfig([
       chunkFileNames: '_chunk/[name]-[hash:7].cjs',
     },
     external,
-    plugins: sharedPlugins,
   },
   {
     input,
@@ -43,6 +43,6 @@ export default defineConfig([
       chunkFileNames: '_chunk/[name]-[hash:7].mjs',
     },
     external,
-    plugins: [dts(), ...sharedPlugins],
+    plugins: [dts()],
   },
 ]);

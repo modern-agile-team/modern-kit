@@ -58,6 +58,7 @@ packages/utils/src/
   [category]/[feature]/
     index.ts
     [feature].spec.ts
+    [feature].server.spec.ts  # Server-env (no window) cases, runs in node (optional)
     [feature].bench.ts    # Benchmark (optional, compared against lodash)
     [feature].test-d.ts   # Type inference validation (optional)
     internal.ts           # Internal helpers (optional)
@@ -71,7 +72,7 @@ packages/utils/src/
 - **Yarn Berry** (v4) as the package manager
 - **Rolldown** builds packages to CJS (`.cjs`), ESM (`.mjs`), and type declarations (`.d.ts`)
 - Entry points are auto-discovered from the directory structure via `build.utils.mjs`
-- **Vitest** is used for testing, with React Testing Library integration
+- **Vitest** is used for testing (`happy-dom` environment), with React Testing Library integration
 
 ### Dependency Catalogs
 
@@ -181,6 +182,12 @@ function isRefObject<T>(
 
 ## Testing Conventions
 
+> **Test environment & global mocking rules: `.claude/rules/testing_rules.md`** — read it before writing or editing any test.
+>
+> - DOM environment is `happy-dom` (not jsdom). `@modern-kit/utils` runs in `node` by default; add `// @vitest-environment happy-dom` on the first line only when real DOM APIs are needed
+> - Both packages use `pool: 'vmForks'` (vm context per test file)
+> - Replace globals with `vi.stubGlobal` + `vi.unstubAllGlobals()`; never `Object.defineProperty(window, ...)` / `globalThis.window = ...`
+
 ### Test File Structure
 
 ```typescript
@@ -240,11 +247,18 @@ afterEach(() => {
 });
 ```
 
-### Browser API Spying
+### Browser API Spying / Global Stubbing
 
 ```typescript
+// Spy on an existing method
 const spy = vi.spyOn(window, 'addEventListener');
 expect(spy).toHaveBeenCalledWith('click', expect.any(Function), undefined);
+
+// Replace a global value (restore in afterEach)
+vi.stubGlobal('matchMedia', vi.fn());
+afterEach(() => {
+  vi.unstubAllGlobals();
+});
 ```
 
 ### Type Inference Validation (`.test-d.ts`)

@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach, vi, expectTypeOf } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useSessionStorage } from '.';
 import { renderToString } from 'react-dom/server';
+import { StorageManager } from '@modern-kit/utils';
 
 afterEach(() => {
   sessionStorage.clear();
@@ -111,7 +112,7 @@ describe('useSessionStorage', () => {
   it('sessionStorage에 아이템 설정이 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useSessionStorage({ key: 'test' }));
 
-    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    vi.spyOn(StorageManager.prototype, 'setItem').mockImplementation(() => {
       throw new Error();
     });
 
@@ -121,7 +122,7 @@ describe('useSessionStorage', () => {
   it('sessionStorage에서 아이템 제거가 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useSessionStorage({ key: 'test' }));
 
-    vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+    vi.spyOn(StorageManager.prototype, 'removeItem').mockImplementation(() => {
       throw new Error();
     });
 

@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach, vi, expectTypeOf } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useLocalStorage } from '.';
 import { renderToString } from 'react-dom/server';
+import { StorageManager } from '@modern-kit/utils';
 
 const visibilityStateSpyOn = vi.spyOn(document, 'visibilityState', 'get');
 const event = new Event('visibilitychange');
@@ -114,7 +115,7 @@ describe('useLocalStorage', () => {
   it('localStorage에 아이템 설정이 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useLocalStorage({ key: 'test' }));
 
-    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    vi.spyOn(StorageManager.prototype, 'setItem').mockImplementation(() => {
       throw new Error();
     });
 
@@ -124,7 +125,7 @@ describe('useLocalStorage', () => {
   it('localStorage에서 아이템 제거가 실패할 때 에러가 발생해야 합니다', async () => {
     const { result } = renderHook(() => useLocalStorage({ key: 'test' }));
 
-    vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+    vi.spyOn(StorageManager.prototype, 'removeItem').mockImplementation(() => {
       throw new Error();
     });
 

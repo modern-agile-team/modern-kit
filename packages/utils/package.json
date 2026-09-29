@@ -51,11 +51,12 @@
     "@types/lodash-es": "^4.17.12",
     "@vitest/coverage-istanbul": "catalog:stable/test",
     "eslint": "catalog:stable/eslint",
-    "jsdom": "catalog:stable/test",
+    "happy-dom": "catalog:stable/test",
     "lodash-es": "^4.17.21",
     "rolldown": "catalog:stable/rolldown",
     "rolldown-plugin-dts": "catalog:stable/rolldown",
     "typescript": "catalog:stable/typescript",
+    "vite": "catalog:stable/vite",
     "vitest": "catalog:stable/test"
   },
   "engines": {
