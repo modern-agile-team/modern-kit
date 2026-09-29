@@ -38,6 +38,8 @@
   "scripts": {
     "test": "vitest --typecheck",
     "test:run": "vitest run --coverage --typecheck",
+    "test:heap": "vitest run --logHeapUsage --reporter=verbose 2>&1 | node ../../scripts/heap-summary.mjs",
+    "test:heap:report": "yarn test:heap > heap-report.txt",
     "build": "rm -rf dist && rolldown -c",
     "typecheck": "tsc --noEmit",
     "eslint": "eslint"
