@@ -22,3 +22,4 @@ export * from './set';
 export * from './sortKeys';
 export * from './sortKeysDeep';
 export * from './toPairs';
+export * from './unset';
