@@ -25,3 +25,4 @@ junit.xml
 
 # testing
 coverage
+heap-report.txt
