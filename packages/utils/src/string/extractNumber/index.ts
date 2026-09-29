@@ -1,4 +1,4 @@
-import { extractLetters } from '../extractLetters';
+import { extractChars } from '../extractChars';
 
 /**
  * @description 문자열에서 숫자만 추출하는 함수입니다.
@@ -14,5 +14,5 @@ import { extractLetters } from '../extractLetters';
  * extractNumber("전화번호: 010-1234-5678"); // "01012345678"
  */
 export function extractNumber(value: string): string {
-  return extractLetters(value, { numbers: true });
+  return extractChars(value, { numbers: true });
 }
