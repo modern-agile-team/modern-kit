@@ -18,6 +18,7 @@ export * from './groupBy';
 export * from './intersection';
 export * from './keyBy';
 export * from './mapRight';
+export * from './maxBy';
 export * from './partition';
 export * from './shuffle';
 export * from './swap';
