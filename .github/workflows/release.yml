@@ -28,14 +28,14 @@ jobs:
       - name: testing 🚀
         run: yarn test
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          title: 'chore: version packages'
-          commit: 'chore: version packages'
-          version: yarn changeset:version
-          publish: yarn changeset:publish
+          pr-title: 'chore: version packages'
+          commit-message: 'chore: version packages'
+          version-script: yarn changeset:version
+          publish-script: yarn changeset:publish
+          # 기본값은 github.token 이며, v2 부터 env 의 GITHUB_TOKEN 은 읽지 않습니다.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           # changesets v3 는 Yarn Berry 에서 `yarn npm publish` 로 배포하며, Yarn 은 .npmrc 를 읽지 않습니다.
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
