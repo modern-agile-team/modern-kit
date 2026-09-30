@@ -1,0 +1,43 @@
+name: Heap Usage
+# vm 방식 pool 의 워커 메모리 누적을 CI 러너에서 실측합니다.
+# PR CI 시간에 영향을 주지 않도록 Actions 탭에서 수동으로 실행합니다.
+on:
+  workflow_dispatch:
+
+jobs:
+  Heap-Usage:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v5
+      - run: corepack enable
+      - name: Node Setup 🔔
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - name: install 🔨
+        run: yarn install --immutable
+      - name: build 🔨
+        run: yarn build:all
+      - name: heap usage 📊
+        shell: bash
+        run: |
+          echo "## Heap Usage ($(nproc) vCPU, $(free -g | awk '/Mem:/{print $2}') GB)" >> "$GITHUB_STEP_SUMMARY"
+
+          for pkg in utils react; do
+            echo "::group::@modern-kit/$pkg"
+            (cd "packages/$pkg" && yarn vitest run --logHeapUsage --reporter=verbose 2>&1) \
+              | node scripts/heap-summary.mjs \
+              | tee "heap-$pkg.txt"
+            echo "::endgroup::"
+
+            {
+              echo "### @modern-kit/$pkg"
+              echo '```'
+              sed -n '/── Summary ──/,$p' "heap-$pkg.txt"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          done
