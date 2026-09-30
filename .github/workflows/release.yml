@@ -37,3 +37,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # changesets v3 는 Yarn Berry 에서 `yarn npm publish` 로 배포하며, Yarn 은 .npmrc 를 읽지 않습니다.
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
