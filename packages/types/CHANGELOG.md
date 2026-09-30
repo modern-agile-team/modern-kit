@@ -1,5 +1,11 @@
 # @modern-kit/types
 
+## 2.1.1
+
+### Patch Changes
+
+- [#1122](https://github.com/modern-agile-team/modern-kit/pull/1122) [`533e73d`](https://github.com/modern-agile-team/modern-kit/commit/533e73d87d3570d77e69a4b7548fac5b09b7c280) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: yarn catalog 적용 - @ssi02014
+
 ## 2.1.0
 
 ### Minor Changes
