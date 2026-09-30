@@ -1,5 +1,65 @@
 # @modern-kit/utils
 
+## 3.4.0
+
+### Minor Changes
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): mapEntries 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): forEachObject 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): excludeChars 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): sortKeysDeep 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): isEmpty 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): flattenObject 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): unset 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): minBy 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): words 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): sortKeys 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): removeLetters 제거 (excludeChars로 대체) - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): extractLetters 제거 (extractChars로 대체) - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): removeSpecialCharacters 제거 (excludeChars로 대체) - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): max 제거 (array/maxBy로 대체) - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): min 제거 (array/minBy로 대체) - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): excludeNumber 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): extractChars 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): escape, unescape 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): escapeRegExp 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): truncate 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): forEachAsync 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): maxBy 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): keyBy 추가 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(utils): reduceObject 추가 - @ssi02014
+
+### Patch Changes
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): isPlainObject 순수 객체 판별 로직 개선 - @ssi02014
+
+- [#1121](https://github.com/modern-agile-team/modern-kit/pull/1121) [`5529fb4`](https://github.com/modern-agile-team/modern-kit/commit/5529fb49a09bf842b8ecbd6c57432234cfab0a7b) Thanks [@ssi02014](https://github.com/ssi02014)! - fix(utils): cloneDeep 클래스 인스턴스·Error 프로토타입 유지 및 복사 불가 객체 대응 - @ssi02014
+
+- [#1122](https://github.com/modern-agile-team/modern-kit/pull/1122) [`533e73d`](https://github.com/modern-agile-team/modern-kit/commit/533e73d87d3570d77e69a4b7548fac5b09b7c280) Thanks [@ssi02014](https://github.com/ssi02014)! - chore: yarn catalog 적용 - @ssi02014
+
 ## 3.3.0
 
 ### Minor Changes
