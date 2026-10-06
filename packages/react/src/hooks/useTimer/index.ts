@@ -57,7 +57,7 @@ interface UseTimerReturnType {
 
 type UseTimerEndAtReturnType = Pick<
   UseTimerReturnType,
-  'remainingMs' | 'hours' | 'minutes' | 'seconds' | 'isComplete'
+  'remainingMs' | 'hours' | 'minutes' | 'seconds' | 'isRunning' | 'isComplete'
 >;
 
 /**
@@ -67,11 +67,11 @@ type UseTimerEndAtReturnType = Pick<
  * 화면을 보고 있을 때만 시간이 흘러야 한다면 `pauseOnHidden` 을 사용합니다.
  *
  * @param {UseTimerWithDurationMsOptions} options - 타이머 설정
- * @param {number} options.durationMs - 타이머 시간(ms). 소수는 정수부만 사용합니다.
+ * @param {number} options.durationMs - 타이머 시간(ms). 소수는 정수부만 사용합니다. 값이 바뀌면 처음 상태로 다시 맞추며, `autoStart` 이면 바로 다시 시작합니다.
  * @param {boolean} [options.autoStart=false] - 마운트 시 바로 시작할지 여부
  * @param {boolean} [options.pauseOnHidden=false] - 실행 중에 화면이 숨겨지면 멈추고, 다시 보이면 남은 시간부터 이어서 진행합니다.
  * @param {number} [options.intervalMs=1000] - 남은 시간을 갱신하는 간격(ms)
- * @param {Function} [options.onTick] - 남은 시간이 갱신될 때마다 남은 시간(ms)을 인자로 호출됩니다.
+ * @param {Function} [options.onTick] - `intervalMs` 마다 남은 시간(ms)을 인자로 호출됩니다.
  * @param {Function} [options.onComplete] - 실행 중에 남은 시간이 0이 되면 호출됩니다.
  *
  * @returns {UseTimerReturnType} 남은 시간과 상태, 제어 함수들을 담은 객체
@@ -121,14 +121,15 @@ export function useTimer(
  * @param {number | Date | null | undefined} options.endAt - 종료 시각. 값이 바뀌면 새 종료 시각으로 다시 맞춥니다. 데이터를 불러오는 중처럼 `null` / `undefined` 이거나 유효하지 않은 값이면 멈춘 채 대기합니다.
  * 시간대에 따라 해석이 달라지지 않도록 timestamp 나 오프셋이 명시된 ISO 문자열(`'2026-12-31T23:59:59+09:00'`, `'...Z'`)로 만든 `Date` 를 권장합니다.
  * @param {number} [options.intervalMs=1000] - 남은 시간을 갱신하는 간격(ms)
- * @param {Function} [options.onTick] - 남은 시간이 갱신될 때마다 남은 시간(ms)을 인자로 호출됩니다.
+ * @param {Function} [options.onTick] - `intervalMs` 마다 남은 시간(ms)을 인자로 호출됩니다.
  * @param {Function} [options.onComplete] - 남은 시간이 0이 되면 호출됩니다. 마운트 시 이미 지난 `endAt` 이거나 대기 상태(`null` / `undefined`)로 바뀐 경우에는 호출되지 않습니다.
  *
- * @returns {UseTimerEndAtReturnType} 남은 시간을 담은 객체
+ * @returns {UseTimerEndAtReturnType} 남은 시간과 상태를 담은 객체
  * - `remainingMs`: 남은 시간(ms)
  * - `hours`: 남은 시간의 시 단위. 24 이상이 될 수 있습니다.
  * - `minutes`: 남은 시간의 분 단위 (0~59)
  * - `seconds`: 남은 시간의 초 단위 (0~59). 1초 미만이 남으면 1로 올림합니다.
+ * - `isRunning`: 종료 시각을 향해 진행 중인지 여부. 대기 상태이거나 완료되면 `false` 입니다.
  * - `isComplete`: 종료 시각에 도달했는지 여부. 대기 상태에서는 `false` 입니다.
  *
  * @example
@@ -188,7 +189,7 @@ export function useTimer(
   const remainingMs =
     timer.endAt !== null ? Math.max(0, timer.endAt - now) : timer.remainingMs;
 
-  // endAt 이 바뀌면 새 종료 시각으로 다시 맞춥니다.
+  // endAt 또는 durationMs 가 바뀌면 처음 상태로 다시 맞춥니다.
   useDidUpdateEffect(() => {
     const current = Date.now();
     const nextTimer = createInitialState(current);
@@ -200,7 +201,7 @@ export function useTimer(
     if (endAt !== null && timer.endAt !== null && nextTimer.remainingMs <= 0) {
       onComplete();
     }
-  }, [endAt]);
+  }, [endAt, durationMs]);
 
   // 실행 중에 남은 시간이 0이 되면 멈추고 완료 콜백을 호출합니다.
   useEffect(() => {

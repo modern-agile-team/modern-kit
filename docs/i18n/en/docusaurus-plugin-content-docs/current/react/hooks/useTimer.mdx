@@ -5,13 +5,13 @@ import { useState } from 'react';
 
 A custom timer hook that calculates the remaining time for a given duration (`durationMs`) or until an end time (`endAt`).
 
-Instead of counting ticks, it calculates the remaining time from **the difference between the end time and the current time**. So even if the browser throttles timers in a background tab, the actual remaining time is shown when you come back.
+Instead of counting ticks, it calculates the remaining time from **the difference between the end time and the current time**, so even if the browser throttles timers in a background tab, the actual remaining time is shown when you come back.
 
 <br />
 
 It works in two modes depending on the options.
 - `durationMs`: A timer that runs for the given duration. Provides the `start`, `pause`, `reset`, `restart`, and `addTime` control functions.
-- `endAt`: Calculates the remaining time until an end time determined externally. It starts immediately on mount, and since the end time is determined externally, it provides no control functions.
+- `endAt`: Calculates the remaining time until a fixed end time. It starts immediately on mount, and since the end time is determined externally, it provides no control functions.
 
 <br />
 
@@ -60,7 +60,7 @@ interface UseTimerReturnType {
 
 type UseTimerEndAtReturnType = Pick<
   UseTimerReturnType,
-  'remainingMs' | 'hours' | 'minutes' | 'seconds' | 'isComplete'
+  'remainingMs' | 'hours' | 'minutes' | 'seconds' | 'isRunning' | 'isComplete'
 >;
 ```
 
@@ -78,13 +78,13 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `durationMs` | `number` | - | **(durationMs mode)** Timer duration (ms). Only the integer part of decimals is used. Cannot be used with `endAt`. |
+| `durationMs` | `number` | - | **(durationMs mode)** Timer duration (ms). Only the integer part of decimals is used. When the value changes, the timer is reset to its initial state. |
 | `autoStart` | `boolean` | `false` | **(durationMs mode)** Whether to start immediately on mount |
 | `pauseOnHidden` | `boolean` | `false` | **(durationMs mode)** Pauses when the page is hidden while running, and resumes from the remaining time when it becomes visible again. |
-| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt mode)** End time (timestamp or `Date`). When the value changes, the timer re-syncs to the new end time. If `null` / `undefined` or invalid, it stays stopped and waits. A timestamp or a `Date` created from an ISO string with an explicit offset is recommended. |
-| `intervalMs` | `number` | `1000` | **(common)** Interval (ms) for updating the remaining time. It only determines how often the UI updates and does not affect accuracy. Only the integer part of decimals is used, and values less than 1 or invalid fall back to the default (`1000`). |
-| `onTick` | `(remainingMs: number) => void` | - | **(common)** Called with the remaining time (ms) whenever the remaining time is updated. |
-| `onComplete` | `() => void` | - | **(common)** Called when the remaining time reaches 0 while running. |
+| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt mode)** End time (timestamp or `Date`). When the value changes, the timer re-syncs to the new end time. If `null` / `undefined` or invalid, it stays stopped and waits. |
+| `intervalMs` | `number` | `1000` | Interval (ms) for updating the remaining time. Values less than 1 or invalid fall back to the default. |
+| `onTick` | `(remainingMs: number) => void` | - | Called with the remaining time (ms) every `intervalMs`. |
+| `onComplete` | `() => void` | - | Called when the remaining time reaches 0 while running. |
 
 <br />
 
@@ -96,40 +96,35 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 | `hours` | `number` | Hours of the remaining time. Can be 24 or more. |
 | `minutes` | `number` | Minutes of the remaining time (0–59) |
 | `seconds` | `number` | Seconds of the remaining time (0–59). Rounded up to 1 when less than a second remains. |
-| `isComplete` | `boolean` | Whether the remaining time is 0. It is `false` in the waiting state (`null` / `undefined`) of endAt mode. |
-| `isRunning` | `boolean` | **(durationMs mode)** Whether the timer is running |
+| `isRunning` | `boolean` | Whether the timer is running. It is `false` in the waiting state of endAt mode. |
+| `isComplete` | `boolean` | Whether the remaining time is 0. It is `false` in the waiting state of endAt mode. |
 | `start` | `() => void` | **(durationMs mode)** Starts the timer. If paused, it resumes from the remaining time. |
 | `pause` | `() => void` | **(durationMs mode)** Pauses the timer. The remaining time is kept. |
 | `reset` | `() => void` | **(durationMs mode)** Stops the timer and resets the remaining time to `durationMs`. |
 | `restart` | `() => void` | **(durationMs mode)** Resets the remaining time to `durationMs` and starts immediately. Works even after the timer has completed. |
-| `addTime` | `(ms: number) => void` | **(durationMs mode)** Adds `ms` to the remaining time. Pass a negative number to subtract time. |
+| `addTime` | `(ms: number) => void` | **(durationMs mode)** Adds `ms` to the remaining time. A negative value subtracts time, but never below 0. Only the integer part of decimals is used, and `NaN` / `Infinity` are ignored. |
 
 <br />
 
 ## Remarks
 
 :::caution Caution
-- `durationMs` and `endAt` cannot be used together.
-  - In `endAt` mode, the `autoStart` and `pauseOnHidden` options are not available, and the control functions (`start`, `pause`, `reset`, `restart`, `addTime`) and `isRunning` are not returned.
-- By default, time spent in the background also counts as elapsed. (If you leave with 50 minutes left and come back 10 minutes later, 40 minutes remain.)
-  - If time should only pass while the page is visible, use `pauseOnHidden`.
-  - If a `pauseOnHidden` timer is started while the page is hidden (mounted with `autoStart` or `start` called), it starts when the page first becomes visible.
-  - If `pause` is called while paused by `pauseOnHidden`, the timer does not resume when the page becomes visible again.
-- Once completed, calling `start` does not start the timer again. Use `restart` to start over from the beginning.
-- `addTime` never brings the remaining time below 0. Only the integer part of decimals is used, and `NaN` / `Infinity` are ignored.
-- In `endAt` mode, `onComplete` is not called if `endAt` has already passed on mount, or if it changes to the waiting state (`null` / `undefined`).
-  - If it changes to an already-passed `endAt` while running, the timer completes and `onComplete` is called.
-- For `endAt`, use a timestamp or a `Date` created from an ISO string with an explicit offset (`'2026-12-31T23:59:59+09:00'`, `'...Z'`) so that it is not interpreted differently depending on the time zone.
-- In SSR, `endAt` mode may cause hydration warnings because the current time differs between server rendering and hydration.
-  - Rendering only on the client with [`useIsClient`](./useIsClient) is recommended.
+- `durationMs` and `endAt` cannot be used together, and the `autoStart` and `pauseOnHidden` options are not available in `endAt` mode.
+- **durationMs mode**
+  - By default, time spent in the background also counts as elapsed. (If you leave with 50 minutes left and come back 10 minutes later, 40 minutes remain.) If time should only pass while the page is visible, use `pauseOnHidden`.
+  - Once completed, calling `start` does not start the timer again. Use `restart` to start over from the beginning.
+  - When the timer is reset by a `durationMs` change, it restarts immediately if `autoStart` is set; otherwise it stops, even if it was running.
+- **endAt mode**
+  - Use a timestamp or a `Date` created from an ISO string with an explicit offset (`'2026-12-31T23:59:59+09:00'`, `'...Z'`) so that it is not interpreted differently depending on the time zone.
+  - `onComplete` is not called if `endAt` has already passed on mount, or if it changes to the waiting state (`null` / `undefined`).
+  - In SSR, the current time differs between server rendering and hydration, which may cause hydration warnings. Rendering only on the client with [`useIsClient`](./useIsClient) is recommended.
 :::
 
 <br />
 
 :::tip intervalMs and accuracy
-- The remaining time is recalculated as `end time - current time` on every update, so `intervalMs` only determines how often the UI updates.
-- Updates are aligned to the moments when the remaining time is a multiple of `intervalMs`, so the seconds display does not drift.
-- For a smooth millisecond display, set a small `intervalMs` (e.g. `100`) and use `remainingMs`.
+- The remaining time is recalculated as `end time - current time` on every update, so `intervalMs` only determines how often the UI updates and does not affect accuracy.
+- For a millisecond display, set a small `intervalMs` (e.g. `100`) and use `remainingMs`.
 :::
 
 <br />
@@ -198,8 +193,9 @@ const Example = () => {
   // Remaining time until a fixed end time
   const { hours, minutes, seconds, isComplete } = useTimer({
     endAt: new Date('2026-12-31T23:59:59+09:00'),
-    onComplete: () => alert('Finished.'),
   });
+
+  if (isComplete) return <p>Finished.</p>;
 
   return (
     <p>
@@ -220,12 +216,14 @@ const Example = ({ id }: { id: string }) => {
   // Waits while loading data from the server (auction?.endAt === undefined) and starts as soon as endAt arrives
   const { data: auction, refetch } = useAuctionQuery(id);
 
-  const { hours, minutes, seconds, isComplete } = useTimer({
+  const { hours, minutes, seconds, isRunning, isComplete } = useTimer({
     endAt: auction?.endAt,
     onComplete: () => refetch(),
   });
 
   if (isComplete) return <p>Closed.</p>;
+  // In the waiting state (loading or invalid endAt), both isRunning and isComplete are false.
+  if (!isRunning) return <p>Loading...</p>;
 
   return (
     <p>
@@ -351,7 +349,7 @@ An example that simulates loading a deadline from a server.
 export const Example2 = () => {
   const [endAt, setEndAt] = useState(null);
   const [log, setLog] = useState('');
-  const { minutes, seconds, isComplete } = useTimer({
+  const { minutes, seconds, isRunning, isComplete } = useTimer({
     endAt,
     onComplete: () => setLog('⏰ Closed!'),
   });
@@ -372,7 +370,7 @@ export const Example2 = () => {
         <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
           <li>Click a button to load the deadline. (1 second delay)</li>
           <li>The timer waits while loading (<code>endAt: null</code>) and starts as soon as the value arrives.</li>
-          <li>Clicking another button while running re-syncs the timer to the new deadline.</li>
+          <li>Clicking another button while running makes the timer wait again, then re-syncs it to the new deadline.</li>
         </ol>
       </div>
 
@@ -380,7 +378,7 @@ export const Example2 = () => {
         {pad(minutes)}:{pad(seconds)}
       </p>
       <p>
-        isComplete: <code>{String(isComplete)}</code>
+        isRunning: <code>{String(isRunning)}</code> / isComplete: <code>{String(isComplete)}</code>
       </p>
 
       <div style={{ display: 'flex', gap: '8px' }}>
@@ -399,7 +397,7 @@ export const Example2 = () => {
         color: '#1f2937'
       }}>
         <strong>💡 Key point:</strong> In <code>endAt</code> mode, the timer runs as soon as you pass an end time.
-        It waits while the value is <code>null</code> / <code>undefined</code>, and <code>isComplete</code> is <code>false</code> in that state.
+        It waits while the value is <code>null</code> / <code>undefined</code>, and both <code>isRunning</code> and <code>isComplete</code> are <code>false</code> in that state.
       </div>
     </div>
   );

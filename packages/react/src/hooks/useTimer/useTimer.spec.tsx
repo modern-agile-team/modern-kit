@@ -149,6 +149,32 @@ describe('useTimer', () => {
       expect(result.current.isRunning).toBe(true);
       expect(result.current.remainingMs).toBe(2 * SECOND);
     });
+
+    it('대기 중에 durationMs가 바뀌면 새 값으로 맞추고, 시작하지 않아야 합니다.', () => {
+      const { result, rerender } = renderHook(
+        ({ durationMs }) => useTimer({ durationMs }),
+        { initialProps: { durationMs: 5 * MINUTE } }
+      );
+
+      rerender({ durationMs: 10 * MINUTE });
+
+      expect(result.current.isRunning).toBe(false);
+      expect(result.current.remainingMs).toBe(10 * MINUTE);
+    });
+
+    it('실행 중에 durationMs가 바뀌면 새 값부터 다시 시작해야 합니다.', () => {
+      const { result, rerender } = renderHook(
+        ({ durationMs }) => useTimer({ durationMs, autoStart: true }),
+        { initialProps: { durationMs: 5 * MINUTE } }
+      );
+
+      act(() => vi.advanceTimersByTime(MINUTE));
+      rerender({ durationMs: 10 * MINUTE });
+      act(() => vi.advanceTimersByTime(SECOND));
+
+      expect(result.current.isRunning).toBe(true);
+      expect(result.current.remainingMs).toBe(10 * MINUTE - SECOND);
+    });
   });
 
   describe('완료', () => {
@@ -354,7 +380,7 @@ describe('useTimer', () => {
       ['timestamp', () => Date.now() + HOUR],
       ['Date', () => new Date(Date.now() + HOUR)],
     ])(
-      'endAt(%s)까지 남은 시간으로 초기화되고, 바로 시작해야 합니다.',
+      'endAt(%s)까지 남은 시간으로 초기화되고, 바로 시작하며, 종료 시각에 도달하면 멈춰야 합니다.',
       (_, getEndAt) => {
         const endAt = getEndAt();
         const { result } = renderHook(() => useTimer({ endAt }));
@@ -362,6 +388,12 @@ describe('useTimer', () => {
         act(() => vi.advanceTimersByTime(SECOND));
 
         expect(result.current.remainingMs).toBe(HOUR - SECOND);
+        expect(result.current.isRunning).toBe(true);
+
+        act(() => vi.advanceTimersByTime(HOUR - SECOND));
+
+        expect(result.current.isRunning).toBe(false);
+        expect(result.current.isComplete).toBe(true);
       }
     );
 
@@ -374,6 +406,7 @@ describe('useTimer', () => {
         act(() => vi.advanceTimersByTime(10 * SECOND));
 
         expect(result.current.remainingMs).toBe(0);
+        expect(result.current.isRunning).toBe(false);
         expect(result.current.isComplete).toBe(false);
         expect(onComplete).not.toHaveBeenCalled();
       }
@@ -385,9 +418,12 @@ describe('useTimer', () => {
         { initialProps: { endAt: undefined as number | undefined } }
       );
 
+      expect(result.current.isRunning).toBe(false);
+
       rerender({ endAt: Date.now() + HOUR });
       act(() => vi.advanceTimersByTime(SECOND));
 
+      expect(result.current.isRunning).toBe(true);
       expect(result.current.remainingMs).toBe(HOUR - SECOND);
 
       rerender({ endAt: Date.now() + 2 * HOUR });
@@ -411,6 +447,7 @@ describe('useTimer', () => {
         rerender({ endAt: getNextEndAt() });
 
         expect(result.current.remainingMs).toBe(0);
+        expect(result.current.isRunning).toBe(false);
         expect(result.current.isComplete).toBe(shouldComplete);
         expect(onComplete).toHaveBeenCalledTimes(shouldComplete ? 1 : 0);
       }
@@ -422,6 +459,7 @@ describe('useTimer', () => {
         useTimer({ endAt: Date.now() - MINUTE, onComplete })
       );
 
+      expect(result.current.isRunning).toBe(false);
       expect(result.current.isComplete).toBe(true);
       expect(onComplete).not.toHaveBeenCalled();
     });
