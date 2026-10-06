@@ -10,14 +10,14 @@ tick 횟수를 세는 방식이 아니라 **종료 시각과 현재 시각의 �
 <br />
 
 옵션에 따라 두 가지 방식으로 동작합니다.
-- `durationMs`: 지정한 시간만큼 동작하는 타이머입니다. `start`, `pause`, `reset`, `addTime` 제어 함수를 제공합니다.
-- `endAt`: 서버가 내려준 마감 시각처럼 정해진 종료 시각까지 남은 시간을 계산합니다. 마운트 시 바로 시작하며, 제어 함수는 제공하지 않습니다.
+- `durationMs`: 지정한 시간만큼 동작하는 타이머입니다. `start`, `pause`, `reset`, `restart`, `addTime` 제어 함수를 제공합니다.
+- `endAt`: 외부에서 정해진 종료 시각까지 남은 시간을 계산합니다. 마운트 시 바로 시작하며, 종료 시각은 외부에서 정해지는 값이므로 제어 함수는 제공하지 않습니다.
 
 <br />
 
 ## Code
 
-[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimer/useTimer.ts)
+[🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimer/index.ts)
 
 <br />
 
@@ -54,6 +54,7 @@ interface UseTimerReturnType {
   start: () => void;
   pause: () => void;
   reset: () => void;
+  restart: () => void;
   addTime: (ms: number) => void;
 }
 
@@ -80,8 +81,8 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 | `durationMs` | `number` | - | **(durationMs 모드)** 타이머 시간(ms). 소수는 정수부만 사용합니다. `endAt` 과 함께 사용할 수 없습니다. |
 | `autoStart` | `boolean` | `false` | **(durationMs 모드)** 마운트 시 바로 시작할지 여부 |
 | `pauseOnHidden` | `boolean` | `false` | **(durationMs 모드)** 실행 중에 화면이 숨겨지면 멈추고, 다시 보이면 남은 시간부터 이어서 진행합니다. |
-| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt 모드)** 종료 시각(timestamp 또는 `Date`). 값이 바뀌면 새 종료 시각으로 다시 맞춥니다. `null` / `undefined` 이거나 유효하지 않은 값이면 멈춘 채 대기합니다. |
-| `intervalMs` | `number` | `1000` | **(공통)** 남은 시간을 갱신하는 간격(ms). 화면 갱신 주기만 결정하며 정확도와는 무관합니다. |
+| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt 모드)** 종료 시각(timestamp 또는 `Date`). 값이 바뀌면 새 종료 시각으로 다시 맞춥니다. `null` / `undefined` 이거나 유효하지 않은 값이면 멈춘 채 대기합니다. timestamp 나 오프셋이 명시된 ISO 문자열로 만든 `Date` 를 권장합니다. |
+| `intervalMs` | `number` | `1000` | **(공통)** 남은 시간을 갱신하는 간격(ms). 화면 갱신 주기만 결정하며 정확도와는 무관합니다. 소수는 정수부만 사용하고, 1 미만이거나 유효하지 않은 값이면 기본값(`1000`)을 사용합니다. |
 | `onTick` | `(remainingMs: number) => void` | - | **(공통)** 남은 시간이 갱신될 때마다 남은 시간(ms)을 인자로 호출됩니다. |
 | `onComplete` | `() => void` | - | **(공통)** 실행 중에 남은 시간이 0이 되면 호출됩니다. |
 
@@ -100,6 +101,7 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 | `start` | `() => void` | **(durationMs 모드)** 타이머를 시작합니다. 일시정지 상태였다면 남은 시간부터 이어서 진행합니다. |
 | `pause` | `() => void` | **(durationMs 모드)** 타이머를 일시정지합니다. 남은 시간은 유지됩니다. |
 | `reset` | `() => void` | **(durationMs 모드)** 타이머를 멈추고 남은 시간을 `durationMs` 로 되돌립니다. |
+| `restart` | `() => void` | **(durationMs 모드)** 남은 시간을 `durationMs` 로 되돌리고 바로 시작합니다. 완료된 뒤에도 다시 시작할 수 있습니다. |
 | `addTime` | `(ms: number) => void` | **(durationMs 모드)** 남은 시간에 `ms` 만큼 누적합니다. 음수를 전달하면 시간을 줄입니다. |
 
 <br />
@@ -108,14 +110,18 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 
 :::caution 주의사항
 - `durationMs` 와 `endAt` 은 함께 사용할 수 없습니다.
-  - `endAt` 모드에서는 `autoStart`, `pauseOnHidden` 옵션을 사용할 수 없으며, 제어 함수(`start`, `pause`, `reset`, `addTime`)와 `isRunning` 도 반환하지 않습니다.
+  - `endAt` 모드에서는 `autoStart`, `pauseOnHidden` 옵션을 사용할 수 없으며, 제어 함수(`start`, `pause`, `reset`, `restart`, `addTime`)와 `isRunning` 도 반환하지 않습니다.
 - 기본적으로 백그라운드에 있던 시간도 흐른 것으로 계산합니다. (50분 남은 상태로 10분 뒤 돌아오면 40분)
   - 화면을 보고 있을 때만 시간이 흘러야 한다면 `pauseOnHidden` 을 사용하세요.
-  - 백그라운드 탭에서 `autoStart` 와 `pauseOnHidden` 을 함께 사용해 마운트되면, 화면이 처음 보일 때 시작합니다.
+  - 화면이 숨겨진 상태에서 `pauseOnHidden` 타이머를 시작하면(`autoStart` 로 마운트되거나 `start` 를 호출한 경우), 화면이 처음 보일 때 시작합니다.
   - `pauseOnHidden` 으로 멈춘 상태에서 `pause` 를 호출하면, 화면이 다시 보여도 이어서 진행하지 않습니다.
+- 완료된 뒤에는 `start` 를 호출해도 다시 시작하지 않습니다. 처음부터 다시 시작하려면 `restart` 를 사용하세요.
 - `addTime` 은 남은 시간을 0 아래로 내리지 않으며, 소수는 정수부만 사용하고 `NaN` / `Infinity` 는 무시합니다.
 - `endAt` 모드의 `onComplete` 는 마운트 시 이미 지난 `endAt` 이거나, 대기 상태(`null` / `undefined`)로 바뀐 경우에는 호출되지 않습니다.
   - 실행 중에 이미 지난 `endAt` 으로 바뀌면 완료로 처리하고 `onComplete` 를 호출합니다.
+- `endAt` 은 시간대에 따라 해석이 달라지지 않도록 timestamp 나 오프셋이 명시된 ISO 문자열(`'2026-12-31T23:59:59+09:00'`, `'...Z'`)로 만든 `Date` 를 권장합니다.
+- `endAt` 모드는 SSR 환경에서 서버 렌더링과 hydration 시점의 현재 시각이 달라 hydration 경고가 발생할 수 있습니다.
+  - [`useIsClient`](./useIsClient) 로 클라이언트에서만 렌더링하는 것을 권장합니다.
 :::
 
 <br />
@@ -136,7 +142,7 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 import { useTimer } from '@modern-kit/react';
 
 const Example = () => {
-  const { hours, minutes, seconds, isRunning, start, pause, reset, addTime } =
+  const { hours, minutes, seconds, isRunning, start, pause, reset, restart, addTime } =
     useTimer({
       durationMs: 60 * 60 * 1000, // 1시간
       onComplete: () => alert('끝'),
@@ -151,6 +157,7 @@ const Example = () => {
         {isRunning ? 'pause' : 'start'}
       </button>
       <button onClick={reset}>reset</button>
+      <button onClick={restart}>restart</button>
       <button onClick={() => addTime(10 * 60 * 1000)}>+10분</button>
     </div>
   );
@@ -187,8 +194,30 @@ const Example = () => {
 ```tsx title="typescript"
 import { useTimer } from '@modern-kit/react';
 
+const Example = () => {
+  // 정해진 종료 시각까지 남은 시간
+  const { hours, minutes, seconds, isComplete } = useTimer({
+    endAt: new Date('2026-12-31T23:59:59+09:00'),
+    onComplete: () => alert('종료되었습니다.'),
+  });
+
+  return (
+    <p>
+      {hours}:{minutes}:{seconds}
+    </p>
+  );
+};
+```
+
+<br />
+
+### 서버 데이터로 endAt 받기
+
+```tsx title="typescript"
+import { useTimer } from '@modern-kit/react';
+
 const Example = ({ id }: { id: string }) => {
-  // 데이터를 불러오는 동안(auction?.endAt === undefined)은 대기하고, endAt 이 들어오면 바로 시작
+  // 서버에서 데이터를 불러오는 동안(auction?.endAt === undefined)은 대기하고, endAt 이 들어오면 바로 시작
   const { data: auction, refetch } = useAuctionQuery(id);
 
   const { hours, minutes, seconds, isComplete } = useTimer({
@@ -214,7 +243,7 @@ export const pad = (value) => String(value).padStart(2, '0');
 
 export const Example = () => {
   const [log, setLog] = useState('');
-  const { hours, minutes, seconds, isRunning, isComplete, start, pause, reset, addTime } =
+  const { hours, minutes, seconds, isRunning, isComplete, start, pause, reset, restart, addTime } =
     useTimer({
       durationMs: 10 * 1000,
       onComplete: () => setLog('⏰ 타이머 완료!'),
@@ -228,6 +257,7 @@ export const Example = () => {
           <li><strong>start</strong> 버튼을 눌러 10초 타이머를 시작하세요.</li>
           <li><strong>pause</strong> 후 다시 <strong>start</strong>를 누르면 남은 시간부터 이어서 진행됩니다.</li>
           <li><strong>+5초 / -5초</strong> 버튼으로 남은 시간을 조절해 보세요.</li>
+          <li>완료된 뒤 <strong>start</strong>는 동작하지 않으며, <strong>restart</strong>를 누르면 처음부터 다시 시작합니다.</li>
         </ol>
       </div>
 
@@ -241,6 +271,7 @@ export const Example = () => {
       <div style={{ display: 'flex', gap: '8px' }}>
         <button onClick={isRunning ? pause : start}>{isRunning ? 'pause' : 'start'}</button>
         <button onClick={() => { reset(); setLog(''); }}>reset</button>
+        <button onClick={() => { restart(); setLog(''); }}>restart</button>
         <button onClick={() => addTime(5000)}>+5초</button>
         <button onClick={() => addTime(-5000)}>-5초</button>
       </div>
@@ -255,7 +286,7 @@ export const Example = () => {
         fontSize: '14px',
         color: '#1f2937'
       }}>
-        <strong>💡 핵심:</strong> <code>start</code>, <code>pause</code>, <code>reset</code>, <code>addTime</code>으로 타이머를 직접 제어할 수 있으며,
+        <strong>💡 핵심:</strong> <code>start</code>, <code>pause</code>, <code>reset</code>, <code>restart</code>, <code>addTime</code>으로 타이머를 직접 제어할 수 있으며,
         남은 시간이 0이 되면 <code>onComplete</code>가 호출됩니다.
       </div>
     </div>
@@ -286,11 +317,11 @@ export const Example1 = () => {
 
       <p>
         기본: <strong>{pad(defaultTimer.minutes)}:{pad(defaultTimer.seconds)}</strong>
-        <button style={{ marginLeft: '8px' }} onClick={() => { defaultTimer.reset(); defaultTimer.start(); }}>restart</button>
+        <button style={{ marginLeft: '8px' }} onClick={defaultTimer.restart}>restart</button>
       </p>
       <p>
         pauseOnHidden: <strong>{pad(pausedTimer.minutes)}:{pad(pausedTimer.seconds)}</strong>
-        <button style={{ marginLeft: '8px' }} onClick={() => { pausedTimer.reset(); pausedTimer.start(); }}>restart</button>
+        <button style={{ marginLeft: '8px' }} onClick={pausedTimer.restart}>restart</button>
       </p>
 
       <div style={{

@@ -10,14 +10,14 @@ Instead of counting ticks, it calculates the remaining time from **the differenc
 <br />
 
 It works in two modes depending on the options.
-- `durationMs`: A timer that runs for the given duration. Provides the `start`, `pause`, `reset`, and `addTime` control functions.
-- `endAt`: Calculates the remaining time until a fixed end time, such as a deadline provided by the server. It starts immediately on mount and provides no control functions.
+- `durationMs`: A timer that runs for the given duration. Provides the `start`, `pause`, `reset`, `restart`, and `addTime` control functions.
+- `endAt`: Calculates the remaining time until an end time determined externally. It starts immediately on mount, and since the end time is determined externally, it provides no control functions.
 
 <br />
 
 ## Code
 
-[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimer/useTimer.ts)
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimer/index.ts)
 
 <br />
 
@@ -54,6 +54,7 @@ interface UseTimerReturnType {
   start: () => void;
   pause: () => void;
   reset: () => void;
+  restart: () => void;
   addTime: (ms: number) => void;
 }
 
@@ -80,8 +81,8 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 | `durationMs` | `number` | - | **(durationMs mode)** Timer duration (ms). Only the integer part of decimals is used. Cannot be used with `endAt`. |
 | `autoStart` | `boolean` | `false` | **(durationMs mode)** Whether to start immediately on mount |
 | `pauseOnHidden` | `boolean` | `false` | **(durationMs mode)** Pauses when the page is hidden while running, and resumes from the remaining time when it becomes visible again. |
-| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt mode)** End time (timestamp or `Date`). When the value changes, the timer re-syncs to the new end time. If `null` / `undefined` or invalid, it stays stopped and waits. |
-| `intervalMs` | `number` | `1000` | **(common)** Interval (ms) for updating the remaining time. It only determines how often the UI updates and does not affect accuracy. |
+| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt mode)** End time (timestamp or `Date`). When the value changes, the timer re-syncs to the new end time. If `null` / `undefined` or invalid, it stays stopped and waits. A timestamp or a `Date` created from an ISO string with an explicit offset is recommended. |
+| `intervalMs` | `number` | `1000` | **(common)** Interval (ms) for updating the remaining time. It only determines how often the UI updates and does not affect accuracy. Only the integer part of decimals is used, and values less than 1 or invalid fall back to the default (`1000`). |
 | `onTick` | `(remainingMs: number) => void` | - | **(common)** Called with the remaining time (ms) whenever the remaining time is updated. |
 | `onComplete` | `() => void` | - | **(common)** Called when the remaining time reaches 0 while running. |
 
@@ -100,6 +101,7 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 | `start` | `() => void` | **(durationMs mode)** Starts the timer. If paused, it resumes from the remaining time. |
 | `pause` | `() => void` | **(durationMs mode)** Pauses the timer. The remaining time is kept. |
 | `reset` | `() => void` | **(durationMs mode)** Stops the timer and resets the remaining time to `durationMs`. |
+| `restart` | `() => void` | **(durationMs mode)** Resets the remaining time to `durationMs` and starts immediately. Works even after the timer has completed. |
 | `addTime` | `(ms: number) => void` | **(durationMs mode)** Adds `ms` to the remaining time. Pass a negative number to subtract time. |
 
 <br />
@@ -108,14 +110,18 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 
 :::caution Caution
 - `durationMs` and `endAt` cannot be used together.
-  - In `endAt` mode, the `autoStart` and `pauseOnHidden` options are not available, and the control functions (`start`, `pause`, `reset`, `addTime`) and `isRunning` are not returned.
+  - In `endAt` mode, the `autoStart` and `pauseOnHidden` options are not available, and the control functions (`start`, `pause`, `reset`, `restart`, `addTime`) and `isRunning` are not returned.
 - By default, time spent in the background also counts as elapsed. (If you leave with 50 minutes left and come back 10 minutes later, 40 minutes remain.)
   - If time should only pass while the page is visible, use `pauseOnHidden`.
-  - When mounted in a background tab with both `autoStart` and `pauseOnHidden`, the timer starts when the page first becomes visible.
+  - If a `pauseOnHidden` timer is started while the page is hidden (mounted with `autoStart` or `start` called), it starts when the page first becomes visible.
   - If `pause` is called while paused by `pauseOnHidden`, the timer does not resume when the page becomes visible again.
+- Once completed, calling `start` does not start the timer again. Use `restart` to start over from the beginning.
 - `addTime` never brings the remaining time below 0. Only the integer part of decimals is used, and `NaN` / `Infinity` are ignored.
 - In `endAt` mode, `onComplete` is not called if `endAt` has already passed on mount, or if it changes to the waiting state (`null` / `undefined`).
   - If it changes to an already-passed `endAt` while running, the timer completes and `onComplete` is called.
+- For `endAt`, use a timestamp or a `Date` created from an ISO string with an explicit offset (`'2026-12-31T23:59:59+09:00'`, `'...Z'`) so that it is not interpreted differently depending on the time zone.
+- In SSR, `endAt` mode may cause hydration warnings because the current time differs between server rendering and hydration.
+  - Rendering only on the client with [`useIsClient`](./useIsClient) is recommended.
 :::
 
 <br />
@@ -136,7 +142,7 @@ function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
 import { useTimer } from '@modern-kit/react';
 
 const Example = () => {
-  const { hours, minutes, seconds, isRunning, start, pause, reset, addTime } =
+  const { hours, minutes, seconds, isRunning, start, pause, reset, restart, addTime } =
     useTimer({
       durationMs: 60 * 60 * 1000, // 1 hour
       onComplete: () => alert('Done'),
@@ -151,6 +157,7 @@ const Example = () => {
         {isRunning ? 'pause' : 'start'}
       </button>
       <button onClick={reset}>reset</button>
+      <button onClick={restart}>restart</button>
       <button onClick={() => addTime(10 * 60 * 1000)}>+10 min</button>
     </div>
   );
@@ -187,8 +194,30 @@ const Example = () => {
 ```tsx title="typescript"
 import { useTimer } from '@modern-kit/react';
 
+const Example = () => {
+  // Remaining time until a fixed end time
+  const { hours, minutes, seconds, isComplete } = useTimer({
+    endAt: new Date('2026-12-31T23:59:59+09:00'),
+    onComplete: () => alert('Finished.'),
+  });
+
+  return (
+    <p>
+      {hours}:{minutes}:{seconds}
+    </p>
+  );
+};
+```
+
+<br />
+
+### Receiving endAt from Server Data
+
+```tsx title="typescript"
+import { useTimer } from '@modern-kit/react';
+
 const Example = ({ id }: { id: string }) => {
-  // Waits while loading (auction?.endAt === undefined) and starts as soon as endAt arrives
+  // Waits while loading data from the server (auction?.endAt === undefined) and starts as soon as endAt arrives
   const { data: auction, refetch } = useAuctionQuery(id);
 
   const { hours, minutes, seconds, isComplete } = useTimer({
@@ -214,7 +243,7 @@ export const pad = (value) => String(value).padStart(2, '0');
 
 export const Example = () => {
   const [log, setLog] = useState('');
-  const { hours, minutes, seconds, isRunning, isComplete, start, pause, reset, addTime } =
+  const { hours, minutes, seconds, isRunning, isComplete, start, pause, reset, restart, addTime } =
     useTimer({
       durationMs: 10 * 1000,
       onComplete: () => setLog('⏰ Timer complete!'),
@@ -228,6 +257,7 @@ export const Example = () => {
           <li>Click <strong>start</strong> to start the 10-second timer.</li>
           <li>Click <strong>pause</strong> and then <strong>start</strong> again to resume from the remaining time.</li>
           <li>Adjust the remaining time with the <strong>+5s / -5s</strong> buttons.</li>
+          <li>After completion, <strong>start</strong> does nothing; click <strong>restart</strong> to start over from the beginning.</li>
         </ol>
       </div>
 
@@ -241,6 +271,7 @@ export const Example = () => {
       <div style={{ display: 'flex', gap: '8px' }}>
         <button onClick={isRunning ? pause : start}>{isRunning ? 'pause' : 'start'}</button>
         <button onClick={() => { reset(); setLog(''); }}>reset</button>
+        <button onClick={() => { restart(); setLog(''); }}>restart</button>
         <button onClick={() => addTime(5000)}>+5s</button>
         <button onClick={() => addTime(-5000)}>-5s</button>
       </div>
@@ -255,7 +286,7 @@ export const Example = () => {
         fontSize: '14px',
         color: '#1f2937'
       }}>
-        <strong>💡 Key point:</strong> You can control the timer directly with <code>start</code>, <code>pause</code>, <code>reset</code>, and <code>addTime</code>,
+        <strong>💡 Key point:</strong> You can control the timer directly with <code>start</code>, <code>pause</code>, <code>reset</code>, <code>restart</code>, and <code>addTime</code>,
         and <code>onComplete</code> is called when the remaining time reaches 0.
       </div>
     </div>
@@ -286,11 +317,11 @@ export const Example1 = () => {
 
       <p>
         Default: <strong>{pad(defaultTimer.minutes)}:{pad(defaultTimer.seconds)}</strong>
-        <button style={{ marginLeft: '8px' }} onClick={() => { defaultTimer.reset(); defaultTimer.start(); }}>restart</button>
+        <button style={{ marginLeft: '8px' }} onClick={defaultTimer.restart}>restart</button>
       </p>
       <p>
         pauseOnHidden: <strong>{pad(pausedTimer.minutes)}:{pad(pausedTimer.seconds)}</strong>
-        <button style={{ marginLeft: '8px' }} onClick={() => { pausedTimer.reset(); pausedTimer.start(); }}>restart</button>
+        <button style={{ marginLeft: '8px' }} onClick={pausedTimer.restart}>restart</button>
       </p>
 
       <div style={{

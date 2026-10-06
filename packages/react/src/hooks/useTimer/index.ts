@@ -51,6 +51,7 @@ interface UseTimerReturnType {
   start: () => void;
   pause: () => void;
   reset: () => void;
+  restart: () => void;
   addTime: (ms: number) => void;
 }
 
@@ -62,12 +63,8 @@ type UseTimerEndAtReturnType = Pick<
 /**
  * @description 지정한 시간(ms)만큼 동작하는 타이머 훅입니다.
  *
- * tick 수를 세는 `useCountdown` 과 달리 종료 시각과 현재 시각의 차이로 남은 시간을 계산합니다.
- *
  * 기본적으로 백그라운드에 있던 시간도 흐른 것으로 계산합니다. (50분 남은 상태로 10분 뒤 돌아오면 40분)
  * 화면을 보고 있을 때만 시간이 흘러야 한다면 `pauseOnHidden` 을 사용합니다.
- *
- * SSR 에서는 서버와 클라이언트의 현재 시각이 달라 hydration 경고가 날 수 있으므로, `useIsClient` 로 클라이언트에서만 렌더링하는 것을 권장합니다.
  *
  * @param {UseTimerWithDurationMsOptions} options - 타이머 설정
  * @param {number} options.durationMs - 타이머 시간(ms). 소수는 정수부만 사용합니다.
@@ -87,6 +84,7 @@ type UseTimerEndAtReturnType = Pick<
  * - `start`: 타이머를 시작합니다. 일시정지 상태였다면 남은 시간부터 이어서 진행합니다.
  * - `pause`: 타이머를 일시정지합니다. 남은 시간은 유지됩니다.
  * - `reset`: 타이머를 멈추고 남은 시간을 `durationMs` 로 되돌립니다.
+ * - `restart`: 남은 시간을 `durationMs` 로 되돌리고 바로 시작합니다. 완료된 뒤에도 다시 시작할 수 있습니다.
  * - `addTime`: 남은 시간에 `ms`만큼 누적합니다. 0 아래로는 내려가지 않으며, 소수는 정수부만 사용하고 `NaN` / `Infinity` 는 무시합니다.
  *
  * @example
@@ -115,12 +113,13 @@ export function useTimer(
  * @description 종료 시각(`endAt`)까지 남은 시간을 계산하는 타이머 훅입니다.
  *
  * 마운트 시 바로 시작하며, 종료 시각과 현재 시각의 차이로 남은 시간을 계산하므로 백그라운드 탭에서 돌아와도 실제 남은 시간이 표시됩니다.
- * 마감 시각은 서버가 정하는 값이므로 시작(`start`)·일시정지(`pause`) 등의 제어 함수는 제공하지 않으며, 마감이 바뀌면 새 `endAt` 을 전달합니다.
+ * 종료 시각은 외부에서 정해지는 값이므로 시작(`start`)·일시정지(`pause`) 등의 제어 함수는 제공하지 않으며, 종료 시각이 바뀌면 새 `endAt` 을 전달합니다.
  *
- * SSR 에서는 서버와 클라이언트의 현재 시각이 달라 hydration 경고가 날 수 있으므로, `useIsClient` 로 클라이언트에서만 렌더링하는 것을 권장합니다.
+ * SSR 에서는 서버 렌더링과 hydration 시점의 현재 시각이 달라 hydration 경고가 날 수 있으므로, `useIsClient` 로 클라이언트에서만 렌더링하는 것을 권장합니다.
  *
  * @param {UseTimerWithEndAtOptions} options - 타이머 설정
  * @param {number | Date | null | undefined} options.endAt - 종료 시각. 값이 바뀌면 새 종료 시각으로 다시 맞춥니다. 데이터를 불러오는 중처럼 `null` / `undefined` 이거나 유효하지 않은 값이면 멈춘 채 대기합니다.
+ * 시간대에 따라 해석이 달라지지 않도록 timestamp 나 오프셋이 명시된 ISO 문자열(`'2026-12-31T23:59:59+09:00'`, `'...Z'`)로 만든 `Date` 를 권장합니다.
  * @param {number} [options.intervalMs=1000] - 남은 시간을 갱신하는 간격(ms)
  * @param {Function} [options.onTick] - 남은 시간이 갱신될 때마다 남은 시간(ms)을 인자로 호출됩니다.
  * @param {Function} [options.onComplete] - 남은 시간이 0이 되면 호출됩니다. 마운트 시 이미 지난 `endAt` 이거나 대기 상태(`null` / `undefined`)로 바뀐 경우에는 호출되지 않습니다.
@@ -133,14 +132,14 @@ export function useTimer(
  * - `isComplete`: 종료 시각에 도달했는지 여부. 대기 상태에서는 `false` 입니다.
  *
  * @example
- * // 서버에서 내려준 마감시각까지 남은 시간
+ * // 정해진 종료 시각까지 남은 시간
  * const { hours, minutes, seconds, isComplete } = useTimer({
- *   endAt: new Date(serverEndAt),
- *   onComplete: () => refetch(),
+ *   endAt: new Date('2026-12-31T23:59:59+09:00'),
+ *   onComplete: () => alert('종료되었습니다.'),
  * });
  *
  * @example
- * // 데이터를 불러오는 동안은 대기하고, endAt 이 들어오면 바로 시작
+ * // 서버에서 데이터를 불러오는 동안은 대기하고, endAt 이 들어오면 바로 시작
  * const { data: auction } = useAuctionQuery(id);
  * const { minutes, seconds } = useTimer({ endAt: auction?.endAt });
  */
@@ -255,6 +254,11 @@ export function useTimer(
     }));
   }, [updateTimer, durationMs, endAt]);
 
+  const restart = useCallback(() => {
+    reset();
+    start();
+  }, [reset, start]);
+
   const addTime = useCallback(
     (ms: number) => {
       if (!Number.isFinite(ms)) return;
@@ -328,6 +332,7 @@ export function useTimer(
     start,
     pause,
     reset,
+    restart,
     addTime,
   };
 }
