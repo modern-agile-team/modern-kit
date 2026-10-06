@@ -1,25 +1,31 @@
 import { describe, it, expect } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react';
 import { useToggleState } from '.';
 
 describe('useToggleState', () => {
-  it('초기 상태가 올바르게 초기화되어야 합니다', async () => {
+  it('초기 상태로 초기화되야 합니다.', async () => {
     const { result } = renderHook(() => useToggleState('ON', 'OFF'));
     const [value] = result.current;
 
     expect(value).toEqual('ON');
   });
 
-  it('실행 시 value1과 value2 사이에서 상태가 토글되어야 합니다', async () => {
+  it('value1과 value2 사이의 상태를 토글해야 합니다.', async () => {
     const { result } = renderHook(() => useToggleState('ON', 'OFF'));
     const toggle = result.current[1];
+    const setValue = result.current[2];
 
     expect(result.current[0]).toEqual('ON');
 
-    toggle();
-    waitFor(() => expect(result.current[0]).toEqual('OFF'));
+    act(() => {
+      toggle();
+    });
+    expect(result.current[0]).toEqual('OFF');
 
-    toggle();
-    waitFor(() => expect(result.current[0]).toEqual('ON'));
+    act(() => toggle());
+    expect(result.current[0]).toEqual('ON');
+
+    act(() => setValue('OFF'));
+    expect(result.current[0]).toEqual('OFF');
   });
 });

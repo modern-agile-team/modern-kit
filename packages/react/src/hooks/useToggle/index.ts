@@ -19,6 +19,6 @@ import { useToggleState } from '../useToggleState';
  */
 export function useToggle(
   defaultValue: boolean = false
-): [boolean, () => void] {
+): [boolean, () => void, React.Dispatch<React.SetStateAction<boolean>>] {
   return useToggleState(defaultValue, !defaultValue);
 }
