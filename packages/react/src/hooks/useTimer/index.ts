@@ -11,6 +11,7 @@ import {
   resumeTimer,
   toSafeMs,
   toTimestamp,
+  toIntervalMs,
 } from './useTimer.utils';
 
 interface UseTimerBaseOptions {
@@ -66,6 +67,8 @@ type UseTimerEndAtReturnType = Pick<
  * 기본적으로 백그라운드에 있던 시간도 흐른 것으로 계산합니다. (50분 남은 상태로 10분 뒤 돌아오면 40분)
  * 화면을 보고 있을 때만 시간이 흘러야 한다면 `pauseOnHidden` 을 사용합니다.
  *
+ * SSR 에서는 서버와 클라이언트의 현재 시각이 달라 hydration 경고가 날 수 있으므로, `useIsClient` 로 클라이언트에서만 렌더링하는 것을 권장합니다.
+ *
  * @param {UseTimerWithDurationMsOptions} options - 타이머 설정
  * @param {number} options.durationMs - 타이머 시간(ms). 소수는 정수부만 사용합니다.
  * @param {boolean} [options.autoStart=false] - 마운트 시 바로 시작할지 여부
@@ -114,6 +117,8 @@ export function useTimer(
  * 마운트 시 바로 시작하며, 종료 시각과 현재 시각의 차이로 남은 시간을 계산하므로 백그라운드 탭에서 돌아와도 실제 남은 시간이 표시됩니다.
  * 마감 시각은 서버가 정하는 값이므로 시작(`start`)·일시정지(`pause`) 등의 제어 함수는 제공하지 않으며, 마감이 바뀌면 새 `endAt` 을 전달합니다.
  *
+ * SSR 에서는 서버와 클라이언트의 현재 시각이 달라 hydration 경고가 날 수 있으므로, `useIsClient` 로 클라이언트에서만 렌더링하는 것을 권장합니다.
+ *
  * @param {UseTimerWithEndAtOptions} options - 타이머 설정
  * @param {number | Date | null | undefined} options.endAt - 종료 시각. 값이 바뀌면 새 종료 시각으로 다시 맞춥니다. 데이터를 불러오는 중처럼 `null` / `undefined` 이거나 유효하지 않은 값이면 멈춘 채 대기합니다.
  * @param {number} [options.intervalMs=1000] - 남은 시간을 갱신하는 간격(ms)
@@ -146,11 +151,8 @@ export function useTimer(
 export function useTimer(
   options: UseTimerWithDurationMsOptions | UseTimerWithEndAtOptions
 ): UseTimerReturnType {
-  const {
-    intervalMs = 1000,
-    onTick: onTickProp,
-    onComplete: onCompleteProp,
-  } = options;
+  const { onTick: onTickProp, onComplete: onCompleteProp } = options;
+  const intervalMs = toIntervalMs(options.intervalMs);
   // endAt 이 null 이어도 endAt 모드(대기 상태)이므로, 모드는 durationMs 유무로 구분합니다.
   const durationMs =
     options.durationMs == null ? undefined : toSafeMs(options.durationMs);
@@ -220,12 +222,19 @@ export function useTimer(
   );
 
   const start = useCallback(() => {
-    updateTimer((prev, current) =>
-      prev.endAt !== null || prev.remainingMs <= 0
-        ? prev
-        : resumeTimer(prev, current)
-    );
-  }, [updateTimer]);
+    updateTimer((prev, current) => {
+      if (prev.endAt !== null || prev.remainingMs <= 0) {
+        return prev;
+      }
+
+      // 숨겨진 상태에서 시작하면 hide 이벤트가 다시 오지 않으므로, 처음 보일 때 시작하도록 대기합니다.
+      if (pauseOnHidden && isDocumentHidden()) {
+        return { ...prev, pausedByHidden: true };
+      }
+
+      return resumeTimer(prev, current);
+    });
+  }, [updateTimer, pauseOnHidden]);
 
   const pause = useCallback(() => {
     updateTimer((prev, current) => {

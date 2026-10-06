@@ -22,6 +22,14 @@ export const resumeTimer = (prev: TimerState, current: number): TimerState => ({
   pausedByHidden: false,
 });
 
+const DEFAULT_INTERVAL_MS = 1000;
+
+/** 갱신 간격을 정수로 맞춥니다. 1 미만이거나 유효하지 않은 값이면 기본값(`1000`)을 사용합니다. */
+export const toIntervalMs = (intervalMs: number | undefined) =>
+  intervalMs !== undefined && Number.isFinite(intervalMs) && intervalMs >= 1
+    ? Math.trunc(intervalMs)
+    : DEFAULT_INTERVAL_MS;
+
 /** ms 값을 정수로 맞춥니다. 소수는 정수부만 사용하고, `NaN` / `Infinity` 는 0 으로 처리합니다. */
 export const toSafeMs = (ms: number) =>
   Number.isFinite(ms) ? Math.trunc(ms) : 0;
