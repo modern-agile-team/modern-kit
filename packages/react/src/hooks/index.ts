@@ -56,6 +56,7 @@ export * from './useSessionStorage';
 export * from './useStep';
 export * from './useThrottle';
 export * from './useTimeout';
+export * from './useTimer';
 export * from './useToggle';
 export * from './useToggleState';
 export * from './useUnmount';

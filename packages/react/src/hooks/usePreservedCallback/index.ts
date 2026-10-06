@@ -1,3 +1,4 @@
+import { noop } from '@modern-kit/utils';
 import { useCallback, useRef } from 'react';
 
 /**
@@ -15,13 +16,13 @@ import { useCallback, useRef } from 'react';
  * preservedCallback();
  */
 export function usePreservedCallback<T extends (...args: any[]) => any>(
-  callback: T
+  callback: T | undefined
 ): T {
-  const callbackRef = useRef<T>(callback);
+  const callbackRef = useRef<T>(callback ?? (noop as T));
 
-  callbackRef.current = callback;
+  callbackRef.current = callback ?? (noop as T);
 
   return useCallback((...args: any[]) => {
-    return callbackRef.current(...args);
+    return callbackRef.current?.(...args);
   }, []) as T;
 }

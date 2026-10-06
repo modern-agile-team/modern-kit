@@ -1,0 +1,377 @@
+import { useTimer } from '@modern-kit/react';
+import { useState } from 'react';
+
+# useTimer
+
+A custom timer hook that calculates the remaining time for a given duration (`durationMs`) or until an end time (`endAt`).
+
+Instead of counting ticks, it calculates the remaining time from **the difference between the end time and the current time**. So even if the browser throttles timers in a background tab, the actual remaining time is shown when you come back.
+
+<br />
+
+It works in two modes depending on the options.
+- `durationMs`: A timer that runs for the given duration. Provides the `start`, `pause`, `reset`, and `addTime` control functions.
+- `endAt`: Calculates the remaining time until a fixed end time, such as a deadline provided by the server. It starts immediately on mount and provides no control functions.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useTimer/useTimer.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseTimerBaseOptions {
+  intervalMs?: number;
+  onTick?: (remainingMs: number) => void;
+  onComplete?: () => void;
+}
+
+interface UseTimerWithDurationMsOptions extends UseTimerBaseOptions {
+  durationMs: number;
+  endAt?: never;
+  autoStart?: boolean;
+  pauseOnHidden?: boolean;
+}
+
+interface UseTimerWithEndAtOptions extends UseTimerBaseOptions {
+  endAt: number | Date | null | undefined;
+  durationMs?: never;
+  autoStart?: never;
+  pauseOnHidden?: never;
+}
+
+interface UseTimerReturnType {
+  remainingMs: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isRunning: boolean;
+  isComplete: boolean;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+  addTime: (ms: number) => void;
+}
+
+type UseTimerEndAtReturnType = Pick<
+  UseTimerReturnType,
+  'remainingMs' | 'hours' | 'minutes' | 'seconds' | 'isComplete'
+>;
+```
+
+```ts title="typescript"
+// 1. A timer that runs for the duration given by durationMs
+function useTimer(options: UseTimerWithDurationMsOptions): UseTimerReturnType;
+
+// 2. A timer that calculates the remaining time until the end time given by endAt
+function useTimer(options: UseTimerWithEndAtOptions): UseTimerEndAtReturnType;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `durationMs` | `number` | - | **(durationMs mode)** Timer duration (ms). Only the integer part of decimals is used. Cannot be used with `endAt`. |
+| `autoStart` | `boolean` | `false` | **(durationMs mode)** Whether to start immediately on mount |
+| `pauseOnHidden` | `boolean` | `false` | **(durationMs mode)** Pauses when the page is hidden while running, and resumes from the remaining time when it becomes visible again. |
+| `endAt` | `number \| Date \| null \| undefined` | - | **(endAt mode)** End time (timestamp or `Date`). When the value changes, the timer re-syncs to the new end time. If `null` / `undefined` or invalid, it stays stopped and waits. |
+| `intervalMs` | `number` | `1000` | **(common)** Interval (ms) for updating the remaining time. It only determines how often the UI updates and does not affect accuracy. |
+| `onTick` | `(remainingMs: number) => void` | - | **(common)** Called with the remaining time (ms) whenever the remaining time is updated. |
+| `onComplete` | `() => void` | - | **(common)** Called when the remaining time reaches 0 while running. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `remainingMs` | `number` | Remaining time (ms) |
+| `hours` | `number` | Hours of the remaining time. Can be 24 or more. |
+| `minutes` | `number` | Minutes of the remaining time (0–59) |
+| `seconds` | `number` | Seconds of the remaining time (0–59). Rounded up to 1 when less than a second remains. |
+| `isComplete` | `boolean` | Whether the remaining time is 0. It is `false` in the waiting state (`null` / `undefined`) of endAt mode. |
+| `isRunning` | `boolean` | **(durationMs mode)** Whether the timer is running |
+| `start` | `() => void` | **(durationMs mode)** Starts the timer. If paused, it resumes from the remaining time. |
+| `pause` | `() => void` | **(durationMs mode)** Pauses the timer. The remaining time is kept. |
+| `reset` | `() => void` | **(durationMs mode)** Stops the timer and resets the remaining time to `durationMs`. |
+| `addTime` | `(ms: number) => void` | **(durationMs mode)** Adds `ms` to the remaining time. Pass a negative number to subtract time. |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+- `durationMs` and `endAt` cannot be used together.
+  - In `endAt` mode, the `autoStart` and `pauseOnHidden` options are not available, and the control functions (`start`, `pause`, `reset`, `addTime`) and `isRunning` are not returned.
+- By default, time spent in the background also counts as elapsed. (If you leave with 50 minutes left and come back 10 minutes later, 40 minutes remain.)
+  - If time should only pass while the page is visible, use `pauseOnHidden`.
+  - When mounted in a background tab with both `autoStart` and `pauseOnHidden`, the timer starts when the page first becomes visible.
+  - If `pause` is called while paused by `pauseOnHidden`, the timer does not resume when the page becomes visible again.
+- `addTime` never brings the remaining time below 0. Only the integer part of decimals is used, and `NaN` / `Infinity` are ignored.
+- In `endAt` mode, `onComplete` is not called if `endAt` has already passed on mount, or if it changes to the waiting state (`null` / `undefined`).
+  - If it changes to an already-passed `endAt` while running, the timer completes and `onComplete` is called.
+:::
+
+<br />
+
+:::tip intervalMs and accuracy
+- The remaining time is recalculated as `end time - current time` on every update, so `intervalMs` only determines how often the UI updates.
+- Updates are aligned to the moments when the remaining time is a multiple of `intervalMs`, so the seconds display does not drift.
+- For a smooth millisecond display, set a small `intervalMs` (e.g. `100`) and use `remainingMs`.
+:::
+
+<br />
+
+## Usage
+
+### durationMs Timer
+
+```tsx title="typescript"
+import { useTimer } from '@modern-kit/react';
+
+const Example = () => {
+  const { hours, minutes, seconds, isRunning, start, pause, reset, addTime } =
+    useTimer({
+      durationMs: 60 * 60 * 1000, // 1 hour
+      onComplete: () => alert('Done'),
+    });
+
+  return (
+    <div>
+      <p>
+        {hours}:{minutes}:{seconds}
+      </p>
+      <button onClick={isRunning ? pause : start}>
+        {isRunning ? 'pause' : 'start'}
+      </button>
+      <button onClick={reset}>reset</button>
+      <button onClick={() => addTime(10 * 60 * 1000)}>+10 min</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Pause When Hidden (pauseOnHidden)
+
+```tsx title="typescript"
+import { useTimer } from '@modern-kit/react';
+
+const Example = () => {
+  // Pauses in the background and resumes from the remaining time when you come back
+  const { minutes, seconds } = useTimer({
+    durationMs: 10 * 60 * 1000,
+    autoStart: true,
+    pauseOnHidden: true,
+  });
+
+  return (
+    <p>
+      {minutes}:{seconds}
+    </p>
+  );
+};
+```
+
+<br />
+
+### endAt Timer
+
+```tsx title="typescript"
+import { useTimer } from '@modern-kit/react';
+
+const Example = ({ id }: { id: string }) => {
+  // Waits while loading (auction?.endAt === undefined) and starts as soon as endAt arrives
+  const { data: auction, refetch } = useAuctionQuery(id);
+
+  const { hours, minutes, seconds, isComplete } = useTimer({
+    endAt: auction?.endAt,
+    onComplete: () => refetch(),
+  });
+
+  if (isComplete) return <p>Closed.</p>;
+
+  return (
+    <p>
+      Time left: {hours}:{minutes}:{seconds}
+    </p>
+  );
+};
+```
+
+<br />
+
+export const pad = (value) => String(value).padStart(2, '0');
+
+### Example (durationMs Timer)
+
+export const Example = () => {
+  const [log, setLog] = useState('');
+  const { hours, minutes, seconds, isRunning, isComplete, start, pause, reset, addTime } =
+    useTimer({
+      durationMs: 10 * 1000,
+      onComplete: () => setLog('⏰ Timer complete!'),
+    });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Click <strong>start</strong> to start the 10-second timer.</li>
+          <li>Click <strong>pause</strong> and then <strong>start</strong> again to resume from the remaining time.</li>
+          <li>Adjust the remaining time with the <strong>+5s / -5s</strong> buttons.</li>
+        </ol>
+      </div>
+
+      <p style={{ fontSize: '32px', fontWeight: 'bold', margin: '10px 0' }}>
+        {pad(hours)}:{pad(minutes)}:{pad(seconds)}
+      </p>
+      <p>
+        isRunning: <code>{String(isRunning)}</code> / isComplete: <code>{String(isComplete)}</code>
+      </p>
+
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button onClick={isRunning ? pause : start}>{isRunning ? 'pause' : 'start'}</button>
+        <button onClick={() => { reset(); setLog(''); }}>reset</button>
+        <button onClick={() => addTime(5000)}>+5s</button>
+        <button onClick={() => addTime(-5000)}>-5s</button>
+      </div>
+      <p>{log}</p>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px',
+        color: '#1f2937'
+      }}>
+        <strong>💡 Key point:</strong> You can control the timer directly with <code>start</code>, <code>pause</code>, <code>reset</code>, and <code>addTime</code>,
+        and <code>onComplete</code> is called when the remaining time reaches 0.
+      </div>
+    </div>
+  );
+};
+
+<Example />
+
+<br />
+
+### Example1 (Background Behavior Comparison)
+
+An example comparing the default behavior with `pauseOnHidden: true`.
+
+export const Example1 = () => {
+  const defaultTimer = useTimer({ durationMs: 60 * 1000, autoStart: true });
+  const pausedTimer = useTimer({ durationMs: 60 * 1000, autoStart: true, pauseOnHidden: true });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Switch to another tab and wait for <strong>about 10 seconds</strong>.</li>
+          <li>Come back to this tab and compare the two timers.</li>
+        </ol>
+      </div>
+
+      <p>
+        Default: <strong>{pad(defaultTimer.minutes)}:{pad(defaultTimer.seconds)}</strong>
+        <button style={{ marginLeft: '8px' }} onClick={() => { defaultTimer.reset(); defaultTimer.start(); }}>restart</button>
+      </p>
+      <p>
+        pauseOnHidden: <strong>{pad(pausedTimer.minutes)}:{pad(pausedTimer.seconds)}</strong>
+        <button style={{ marginLeft: '8px' }} onClick={() => { pausedTimer.reset(); pausedTimer.start(); }}>restart</button>
+      </p>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px',
+        color: '#1f2937'
+      }}>
+        <strong>💡 Key point:</strong> The default timer counts time spent in the background as elapsed,
+        while the <code>pauseOnHidden</code> timer pauses while the page is hidden and resumes from the remaining time.
+      </div>
+    </div>
+  );
+};
+
+<Example1 />
+
+<br />
+
+### Example2 (endAt Timer)
+
+An example that simulates loading a deadline from a server.
+
+export const Example2 = () => {
+  const [endAt, setEndAt] = useState(null);
+  const [log, setLog] = useState('');
+  const { minutes, seconds, isComplete } = useTimer({
+    endAt,
+    onComplete: () => setLog('⏰ Closed!'),
+  });
+
+  const fetchEndAt = (ms) => {
+    setLog('⏳ Loading the deadline...');
+    setEndAt(null);
+    setTimeout(() => {
+      setEndAt(Date.now() + ms);
+      setLog('');
+    }, 1000);
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Click a button to load the deadline. (1 second delay)</li>
+          <li>The timer waits while loading (<code>endAt: null</code>) and starts as soon as the value arrives.</li>
+          <li>Clicking another button while running re-syncs the timer to the new deadline.</li>
+        </ol>
+      </div>
+
+      <p style={{ fontSize: '32px', fontWeight: 'bold', margin: '10px 0' }}>
+        {pad(minutes)}:{pad(seconds)}
+      </p>
+      <p>
+        isComplete: <code>{String(isComplete)}</code>
+      </p>
+
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button onClick={() => fetchEndAt(10 * 1000)}>Closes in 10s</button>
+        <button onClick={() => fetchEndAt(60 * 1000)}>Closes in 1 min</button>
+      </div>
+      <p>{log}</p>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px',
+        color: '#1f2937'
+      }}>
+        <strong>💡 Key point:</strong> In <code>endAt</code> mode, the timer runs as soon as you pass an end time.
+        It waits while the value is <code>null</code> / <code>undefined</code>, and <code>isComplete</code> is <code>false</code> in that state.
+      </div>
+    </div>
+  );
+};
+
+<Example2 />
