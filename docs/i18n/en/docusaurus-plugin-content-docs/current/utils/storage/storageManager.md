@@ -5,26 +5,45 @@ A browser storage management class that provides type safety. It supports both `
 <br />
 
 ## Code
+
 [🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/storage/storageManager/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 interface StorageData<T> {
   key: keyof T;
   value: T[keyof T];
 }
 
+interface StorageManagerOptions {
+  throwOnError?: boolean;
+}
+
+type GetItemOptions = StorageManagerOptions;
+
 class StorageManager<T extends Record<string, any>> {
-  constructor(type: 'localStorage' | 'sessionStorage');
+  constructor(
+    type: 'localStorage' | 'sessionStorage',
+    options?: StorageManagerOptions
+  );
 
   setItem<K extends keyof T>(key: K, value: T[K]): void;
   setItems(data: StorageData<T>[]): void;
-  getItem<K extends keyof T>(key: K): T[K] | null;
-  getItems<K extends keyof T>(keys: K[]): { key: K; value: T[K] | null }[];
+  getItem<K extends keyof T>(key: K, options?: GetItemOptions): T[K] | null;
+  getRawItem<K extends keyof T>(
+    key: K,
+    options?: GetItemOptions
+  ): string | null;
+  getItems<K extends keyof T>(
+    keys: K[],
+    options?: GetItemOptions
+  ): { key: K; value: T[K] | null }[];
   removeItem<K extends keyof T>(key: K): void;
   removeItems<K extends keyof T>(keys: K[]): void;
+  hasItem<K extends keyof T>(key: K): boolean;
   keys(): (keyof T)[];
   values(): (T[keyof T] | null)[];
   entries(): [keyof T, T[keyof T] | null][];
@@ -40,9 +59,30 @@ class StorageManager<T extends Record<string, any>> {
 
 <br />
 
+## Parameters
+
+| Name                   | Type                                 | Default | Description                                                                          |
+| ---------------------- | ------------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `type`                 | `'localStorage' \| 'sessionStorage'` | -       | The storage type to use                                                              |
+| `options.throwOnError` | `boolean`                            | `true`  | Whether to throw when data cannot be read. When `false`, `null` is returned instead. |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+
+- `null` and `undefined` are stored as strings (`'null'`, `'undefined'`) just like the native storage, and `getItem` returns `null` and `undefined` respectively.
+- `throwOnError` only applies to methods that **read** values (`getItem`, `getRawItem`, `getItems`, and methods built on them such as `hasItem`, `values`, `entries`).
+- `hasItem` only checks whether the key exists, without parsing the value. To also check that the value is neither `null` nor `undefined`, use `getItem(key) != null`.
+  :::
+
+<br />
+
 ## Usage
 
 ### Basic Usage
+
 ```ts title="typescript"
 import { StorageManager } from '@modern-kit/utils';
 
@@ -65,6 +105,7 @@ const sessionStorage = new StorageManager<UserData>('sessionStorage');
 <br />
 
 ### Single Item Operations
+
 ```ts title="typescript"
 // Save data
 localStorage.setItem('name', 'John');
@@ -87,6 +128,7 @@ localStorage.removeItem('name');
 <br />
 
 ### Multiple Items Operations
+
 ```ts title="typescript"
 // Save multiple items at once
 localStorage.setItems([
@@ -106,6 +148,7 @@ localStorage.removeItems(['name', 'age']);
 <br />
 
 ### Browsing and Clearing All Storage Data
+
 ```ts title="typescript"
 const storage = new StorageManager<UserData>('localStorage');
 
@@ -132,6 +175,7 @@ storage.clear();
 <br />
 
 ### Browsing and Clearing Instance-Managed Storage Data
+
 ```ts title="typescript"
 const storage = new StorageManager<UserData>('localStorage');
 
@@ -153,4 +197,49 @@ const count = storage.ownSize(); // 2
 
 // Delete all data managed by the instance
 storage.ownClear();
+```
+
+<br />
+
+### Reading Raw Strings
+
+`getRawItem` returns the stored value as an unparsed raw string. Use it to inspect non-JSON values or values that `getItem` cannot parse.
+
+```ts title="typescript"
+storage.setItem('name', 'John');
+
+storage.getRawItem('name'); // '"John"'
+```
+
+<br />
+
+### Checking Key Existence
+
+`hasItem` only checks whether the key exists, without parsing the value. To also check that the value is neither `null` nor `undefined`, use `getItem(key) != null`.
+
+```ts title="typescript"
+const storage = new StorageManager<{ name: string | null }>('localStorage');
+
+storage.setItem('name', null);
+
+storage.hasItem('name'); // true, the key exists
+storage.getItem('name') != null; // false, stored as null
+```
+
+<br />
+
+### Error Handling (throwOnError)
+
+By default, an error is thrown when data cannot be read (invalid JSON, blocked storage access, etc.). Set the default behavior with the instance option and override it per call. The per-call option takes precedence over the instance option.
+
+```ts title="typescript"
+// Per instance: returns null on failure
+const storage = new StorageManager<UserData>('localStorage', {
+  throwOnError: false,
+});
+
+storage.getItem('name'); // null on failure
+
+// Per call: throws for this call only
+storage.getItem('name', { throwOnError: true });
 ```

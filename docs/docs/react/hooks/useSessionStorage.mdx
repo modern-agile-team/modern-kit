@@ -45,6 +45,16 @@ setState(state => {
 });
 ```
 
+`throwOnError` 옵션으로 저장된 값을 가져오지 못했을 때(잘못된 JSON, 스토리지 접근 차단 등)의 동작을 정할 수 있습니다. 기본값은 `true`로 에러를 발생시키며, `false`이면 에러 대신 `initialValue`(없으면 `null`)를 사용합니다.
+
+```ts
+const { state } = useSessionStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+  throwOnError: false,
+});
+```
+
 <br />
 
 ## Code
@@ -56,25 +66,28 @@ setState(state => {
 ## Interface
 
 ```ts title="typescript"
-interface UseSessionStorageWithoutInitialValueProps {
+interface UseSessionStorageWithoutInitialValueOptions {
   key: string;
+  throwOnError?: boolean;
 }
 
-interface UseSessionStorageWithInitialValueProps<T> {
+interface UseSessionStorageWithInitialValueOptions<T> {
   key: string;
   initialValue: T | (() => T);
+  throwOnError?: boolean;
 }
 
-type UseSessionStorageProps<T> =
-  | UseSessionStorageWithoutInitialValueProps
-  | UseSessionStorageWithInitialValueProps<T>;
+type UseSessionStorageOptions<T> =
+  | UseSessionStorageWithoutInitialValueOptions
+  | UseSessionStorageWithInitialValueOptions<T>;
 ```
 ```ts title="typescript"
 // 함수 오버로딩
 function useSessionStorage<T>({
   key,
   initialValue,
-}: UseSessionStorageWithInitialValueProps<T>): {
+  throwOnError,
+}: UseSessionStorageWithInitialValueOptions<T>): {
   state: T;
   setState: Dispatch<SetStateAction<T>>;
   removeState: () => void;
@@ -82,7 +95,8 @@ function useSessionStorage<T>({
 
 function useSessionStorage<T = unknown>({
   key,
-}: UseSessionStorageWithoutInitialValueProps): {
+  throwOnError,
+}: UseSessionStorageWithoutInitialValueOptions): {
   state: T | null;
   setState: Dispatch<SetStateAction<T | null>>;
   removeState: () => void;
@@ -97,6 +111,7 @@ function useSessionStorage<T = unknown>({
 | ---- | ---- | ------- | ----------- |
 | `key` | `string` | - | 세션 스토리지에서 구독할 키 |
 | `initialValue` | `T \| (() => T)` | `null` | 키가 존재하지 않거나 SSR 환경에서 반환할 초기값 |
+| `throwOnError` | `boolean` | `true` | 저장된 값을 가져오지 못했을 때 에러를 발생시킬지 여부. `false`이면 `initialValue`(없으면 `null`)를 사용 |
 
 <br />
 
@@ -107,6 +122,16 @@ function useSessionStorage<T = unknown>({
 | `state` | `T` 또는 `T \| null` | 세션 스토리지의 현재 값. `initialValue`가 없으면 `null`이 될 수 있습니다. |
 | `setState` | `Dispatch<SetStateAction<T>>` | 세션 스토리지 값을 업데이트하는 함수 |
 | `removeState` | `() => void` | 세션 스토리지에서 해당 키를 삭제하는 함수 |
+
+<br />
+
+## Remarks
+
+:::caution 주의사항
+
+- `setState(null)`, `setState(undefined)`는 세션 스토리지에 그대로 저장되며, `state`도 `initialValue`가 아닌 저장한 값을 반환합니다. 저장된 값을 지우고 `initialValue`로 되돌리려면 `removeState`를 사용하세요.
+- `throwOnError`는 값을 **가져올 때**에만 적용됩니다. `setState`, `removeState`에서 세션 스토리지 쓰기에 실패하면 항상 에러가 발생합니다.
+:::
 
 <br />
 

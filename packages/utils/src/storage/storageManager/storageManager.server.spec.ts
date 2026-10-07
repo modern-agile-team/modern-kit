@@ -11,4 +11,12 @@ describe('StorageManager (server)', () => {
       storage.setItem('name', 'John');
     }).toThrow('Storage를 지원하는 환경이 아닙니다');
   });
+
+  it('서버 환경에서 throwOnError가 false이면 에러를 발생시키지 않고 null을 반환해야 합니다.', () => {
+    const storage = new StorageManager<{ name: string }>('localStorage', {
+      throwOnError: false,
+    });
+
+    expect(storage.getItem('name')).toBeNull();
+  });
 });

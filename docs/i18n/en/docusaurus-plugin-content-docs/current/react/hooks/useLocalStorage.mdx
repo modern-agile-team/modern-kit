@@ -55,6 +55,16 @@ const { state, setState } = useLocalStorage<number[]>({
 });
 ```
 
+The `throwOnError` option controls what happens when the stored value cannot be read (invalid JSON, blocked storage access, etc.). It defaults to `true` and throws an error; when `false`, `initialValue` (or `null` if not provided) is used instead.
+
+```ts
+const { state } = useLocalStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+  throwOnError: false,
+});
+```
+
 <br />
 
 ## Code
@@ -66,27 +76,31 @@ const { state, setState } = useLocalStorage<number[]>({
 ## Interface
 
 ```ts title="typescript"
-interface UseLocalStorageWithoutInitialValueProps {
+interface UseLocalStorageWithoutInitialValueOptions {
   key: string;
   visibilityChange?: boolean;
+  throwOnError?: boolean;
 }
 
-interface UseLocalStorageWithInitialValueProps<T> {
+interface UseLocalStorageWithInitialValueOptions<T> {
   key: string;
   initialValue: T | (() => T);
   visibilityChange?: boolean;
+  throwOnError?: boolean;
 }
 
-type UseLocalStorageProps<T> =
-  | UseLocalStorageWithoutInitialValueProps
-  | UseLocalStorageWithInitialValueProps<T>;
+type UseLocalStorageOptions<T> =
+  | UseLocalStorageWithoutInitialValueOptions
+  | UseLocalStorageWithInitialValueOptions<T>;
 ```
 ```ts title="typescript"
 // Function overloading
 function useLocalStorage<T>({
   key,
   initialValue,
-}: UseLocalStorageWithInitialValueProps<T>): {
+  visibilityChange,
+  throwOnError,
+}: UseLocalStorageWithInitialValueOptions<T>): {
   state: T;
   setState: Dispatch<SetStateAction<T>>;
   removeState: () => void;
@@ -94,7 +108,9 @@ function useLocalStorage<T>({
 
 function useLocalStorage<T = unknown>({
   key,
-}: UseLocalStorageWithoutInitialValueProps): {
+  visibilityChange,
+  throwOnError,
+}: UseLocalStorageWithoutInitialValueOptions): {
   state: T | null;
   setState: Dispatch<SetStateAction<T | null>>;
   removeState: () => void;
@@ -110,6 +126,7 @@ function useLocalStorage<T = unknown>({
 | `key` | `string` | `-` | The key used to store and retrieve data from localStorage |
 | `initialValue` | `T \| (() => T)` | `-` | The initial value returned when the key does not exist in localStorage. Can be a function |
 | `visibilityChange` | `boolean` | `false` | Whether to synchronize state when the tab becomes visible |
+| `throwOnError` | `boolean` | `true` | Whether to throw when the stored value cannot be read. When `false`, `initialValue` (or `null`) is used |
 
 <br />
 
@@ -120,6 +137,16 @@ function useLocalStorage<T = unknown>({
 | `state` | `T \| null` | The current value stored in localStorage. Falls back to `initialValue` or `null` |
 | `setState` | `Dispatch<SetStateAction<T \| null>>` | Function to update the value in localStorage |
 | `removeState` | `() => void` | Function to remove the value for the given `key` from localStorage |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+
+- `setState(null)` and `setState(undefined)` are stored in localStorage as-is, and `state` returns the stored value rather than `initialValue`. Use `removeState` to clear the stored value and fall back to `initialValue`.
+- `throwOnError` only applies when **reading** values. If writing to localStorage fails in `setState` or `removeState`, an error is always thrown.
+:::
 
 <br />
 
