@@ -13,7 +13,9 @@ boolean 타입의 state를 Toggle로 쉽게 사용할 수 있는 커스텀 훅 �
 ## Interface
 
 ```ts title="typescript"
-function useToggle(defaultValue?: boolean): [boolean, () => void]
+function useToggle(
+  defaultValue?: boolean
+): [boolean, () => void, React.Dispatch<React.SetStateAction<boolean>>];
 ```
 
 <br />
@@ -32,6 +34,7 @@ function useToggle(defaultValue?: boolean): [boolean, () => void]
 | ---- | ---- | ----------- |
 | `[0]` | `boolean` | 현재 토글 상태 |
 | `[1]` | `() => void` | 토글 상태를 전환하는 함수 |
+| `[2]` | `React.Dispatch<React.SetStateAction<boolean>>` | 상태를 직접 설정하는 함수 |
 
 <br />
 
@@ -41,12 +44,13 @@ function useToggle(defaultValue?: boolean): [boolean, () => void]
 import { useToggle } from '@modern-kit/react';
 
 const Example = () => {
-  const [bool, toggle] = useToggle(false);
+  const [bool, toggle, setBool] = useToggle(false);
 
   return (
     <div>
       {bool && <p>render</p>}
       <button onClick={toggle}>Toggle Button</button>
+      <button onClick={() => setBool(false)}>Close</button>
     </div>
   );
 }

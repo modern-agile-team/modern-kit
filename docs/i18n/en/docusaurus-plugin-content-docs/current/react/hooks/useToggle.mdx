@@ -13,7 +13,9 @@ A custom hook that makes it easy to use a boolean state as a Toggle.
 ## Interface
 
 ```ts title="typescript"
-function useToggle(defaultValue?: boolean): [boolean, () => void]
+function useToggle(
+  defaultValue?: boolean
+): [boolean, () => void, React.Dispatch<React.SetStateAction<boolean>>];
 ```
 
 <br />
@@ -32,6 +34,7 @@ function useToggle(defaultValue?: boolean): [boolean, () => void]
 | ---- | ---- | ----------- |
 | `[0]` | `boolean` | The current toggle state |
 | `[1]` | `() => void` | Function to switch the toggle state |
+| `[2]` | `React.Dispatch<React.SetStateAction<boolean>>` | Function to set the state directly |
 
 <br />
 
@@ -41,12 +44,13 @@ function useToggle(defaultValue?: boolean): [boolean, () => void]
 import { useToggle } from '@modern-kit/react';
 
 const Example = () => {
-  const [bool, toggle] = useToggle(false);
+  const [bool, toggle, setBool] = useToggle(false);
 
   return (
     <div>
       {bool && <p>render</p>}
       <button onClick={toggle}>Toggle Button</button>
+      <button onClick={() => setBool(false)}>Close</button>
     </div>
   );
 }

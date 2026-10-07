@@ -1,4 +1,11 @@
 import { useCallback, useState } from 'react';
+
+export type UseToggleStateReturnType<T> = [
+  T,
+  () => void,
+  React.Dispatch<React.SetStateAction<T>>,
+];
+
 /**
  * @description 두 개의 값을 토글하는 기능을 제공하는 훅입니다.
  * 기본값으로 제공된 두 개의 값을 관리하며, 선택된 값과 두 값을 토글할 수 있는 함수를 반환합니다.
@@ -15,12 +22,15 @@ import { useCallback, useState } from 'react';
  * toggle();
  * value; // 'OFF'
  */
-export function useToggleState<T>(value1: T, value2: T): [T, () => void] {
+export function useToggleState<T>(
+  value1: T,
+  value2: T
+): UseToggleStateReturnType<T> {
   const [value, setValue] = useState(value1);
 
   const toggle = useCallback(() => {
     setValue((prev) => (prev === value1 ? value2 : value1));
   }, [value1, value2]);
 
-  return [value, toggle];
+  return [value, toggle, setValue];
 }

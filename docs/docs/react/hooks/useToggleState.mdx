@@ -17,7 +17,13 @@ import { useToggleState } from '@modern-kit/react';
 ## Interface
 
 ```ts title="typescript"
-function useToggleState<T>(value1: T, value2: T): [T, () => void]
+type UseToggleStateReturnType<T> = [
+  T,
+  () => void,
+  React.Dispatch<React.SetStateAction<T>>,
+];
+
+function useToggleState<T>(value1: T, value2: T): UseToggleStateReturnType<T>;
 ```
 
 <br />
@@ -37,6 +43,7 @@ function useToggleState<T>(value1: T, value2: T): [T, () => void]
 | ---- | ---- | ----------- |
 | `[0]` | `T` | 현재 선택된 값 |
 | `[1]` | `() => void` | 두 값 사이를 토글하는 함수 |
+| `[2]` | `React.Dispatch<React.SetStateAction<T>>` | 값을 직접 설정하는 함수 |
 
 <br />
 
@@ -46,12 +53,13 @@ function useToggleState<T>(value1: T, value2: T): [T, () => void]
 import { useToggleState } from '@modern-kit/react';
 
 const Example = () => {
-  const [value, toggle] = useToggleState('ON', 'OFF');
+  const [value, toggle, setValue] = useToggleState('ON', 'OFF');
 
   return (
     <div>
       {value}
       <button onClick={toggle}>Toggle Button</button>
+      <button onClick={() => setValue('OFF')}>OFF</button>
     </div>
   );
 }

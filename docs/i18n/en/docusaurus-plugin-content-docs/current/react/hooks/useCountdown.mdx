@@ -1,0 +1,234 @@
+import { useCountdown } from '@modern-kit/react';
+
+# useCountdown
+
+A custom countdown hook that decreases a value by 1 every interval (`intervalMs`).
+
+It stops automatically when it reaches `countStop`, and returns control functions to start, pause, reset, restart, and add to the count.
+
+<br />
+
+## Code
+
+[🔗 View source code](https://github.com/modern-agile-team/modern-kit/blob/main/packages/react/src/hooks/useCountdown/index.ts)
+
+<br />
+
+## Interface
+
+```ts title="typescript"
+interface UseCountdownOptions {
+  countStart: number;
+  countStop?: number;
+  intervalMs?: number;
+  onComplete?: (count: number) => void;
+  onTick?: (count: number) => void;
+  pauseOnHidden?: boolean;
+}
+
+interface UseCountdownReturnType {
+  count: number;
+  isComplete: boolean;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+  restart: () => void;
+  addCount: (amount: number) => void;
+}
+```
+
+```ts title="typescript"
+function useCountdown(options: UseCountdownOptions): UseCountdownReturnType;
+```
+
+<br />
+
+### Options
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `countStart` | `number` | - | The starting value of the countdown. Only the integer part of decimals is used. |
+| `countStop` | `number` | `0` | The value at which the countdown stops. Only the integer part of decimals is used. |
+| `intervalMs` | `number` | `1000` | Countdown interval (ms) |
+| `onTick` | `(count: number) => void` | - | Called with the result of each tick whenever the value decreases. |
+| `onComplete` | `(count: number) => void` | - | Called with that value (`countStop`) when the countdown reaches `countStop`. |
+| `pauseOnHidden` | `boolean` | `false` | Pauses when the page is hidden while running, and resumes when it becomes visible again. |
+
+<br />
+
+### Returns
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `count` | `number` | The current count |
+| `isComplete` | `boolean` | Whether the current count has reached (or gone below) `countStop` |
+| `start` | `() => void` | Starts the countdown. |
+| `pause` | `() => void` | Pauses the countdown. The current count is kept, and calling `start` continues from it. |
+| `reset` | `() => void` | Stops the countdown and resets it to the starting value. |
+| `restart` | `() => void` | Resets to the starting value and starts immediately. Works even after the countdown has completed. |
+| `addCount` | `(amount: number) => void` | Adds `amount` to the current count. Only the integer part of decimals is used, and the count never goes below `countStop`. |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+- Because it counts ticks, the count does not match the actual elapsed time in a background tab, where the browser throttles or pauses timers.
+  - If the count should only decrease while the page is visible, use `pauseOnHidden`.
+  - If it must match the actual time, use [`useTimer`](./useTimer).
+- Once completed, calling `start` does not decrease the count again. Use `restart` to start over from the beginning.
+:::
+
+<br />
+
+## Usage
+
+### Basic Usage
+
+```tsx title="typescript"
+import { useCountdown } from '@modern-kit/react';
+
+const Example = () => {
+  // A 60-second countdown that decreases by 1 every second (intervalMs)
+  const { count, isComplete, start, pause, reset, restart, addCount } =
+    useCountdown({
+      countStart: 60,
+      onTick: (count) => console.log('tick', count), // result of this tick
+      onComplete: (count) => console.log('done', count), // count === countStop
+    });
+
+  return (
+    <div>
+      <p>{isComplete ? 'Done' : count}</p>
+      <button onClick={start}>start</button>
+      <button onClick={pause}>pause</button>
+      <button onClick={reset}>reset</button>
+      <button onClick={restart}>restart</button>
+      <button onClick={() => addCount(5)}>+5</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Pause When Hidden (pauseOnHidden)
+
+```tsx title="typescript"
+import { useCountdown } from '@modern-kit/react';
+
+const Example = () => {
+  // Pauses when the browser tab goes to the background and resumes when you come back
+  const { count, start } = useCountdown({
+    countStart: 60,
+    pauseOnHidden: true,
+  });
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={start}>start</button>
+    </div>
+  );
+};
+```
+
+<br />
+
+### Example
+
+export const Example = () => {
+  const { count, isComplete, start, pause, reset, restart, addCount } =
+    useCountdown({ countStart: 10 });
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Click <strong>start</strong> to count down from 10.</li>
+          <li>Click <strong>pause</strong> and then <strong>start</strong> again to continue.</li>
+          <li>Adjust the value with the <strong>+5 / -5</strong> buttons. It never goes below 0.</li>
+          <li>After completion, <strong>start</strong> does nothing; click <strong>restart</strong> to start over from the beginning.</li>
+        </ol>
+      </div>
+
+      <p style={{ fontSize: '32px', fontWeight: 'bold', margin: '10px 0' }}>{count}</p>
+      <p>
+        isComplete: <code>{String(isComplete)}</code>
+      </p>
+
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <button onClick={start}>start</button>
+        <button onClick={pause}>pause</button>
+        <button onClick={reset}>reset</button>
+        <button onClick={restart}>restart</button>
+        <button onClick={() => addCount(5)}>+5</button>
+        <button onClick={() => addCount(-5)}>-5</button>
+      </div>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px',
+        color: '#1f2937'
+      }}>
+        <strong>💡 Key point:</strong> The countdown stops automatically when it reaches <code>countStop</code> (default <code>0</code>),
+        and you can increase or decrease the value with <code>addCount</code>.
+      </div>
+    </div>
+  );
+};
+
+<Example />
+
+<br />
+
+### Example1 (Background Behavior Comparison)
+
+An example comparing the default behavior with `pauseOnHidden: true`.
+
+export const Example1 = () => {
+  const defaultCountdown = useCountdown({ countStart: 60 });
+  const pausedCountdown = useCountdown({ countStart: 60, pauseOnHidden: true });
+
+  const startBoth = () => {
+    defaultCountdown.restart();
+    pausedCountdown.restart();
+  };
+
+  return (
+    <div>
+      <div style={{ marginBottom: '15px' }}>
+        <h4 style={{ margin: '0 0 10px 0' }}>🧪 How to test</h4>
+        <ol style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.6' }}>
+          <li>Click <strong>start</strong> to start both countdowns together.</li>
+          <li>Switch to another tab and wait for <strong>about 10 seconds</strong>.</li>
+          <li>Come back to this tab and compare the two values.</li>
+        </ol>
+      </div>
+
+      <p>Default: <strong>{defaultCountdown.count}</strong></p>
+      <p>pauseOnHidden: <strong>{pausedCountdown.count}</strong></p>
+      <button onClick={startBoth}>start</button>
+
+      <div style={{
+        marginTop: '15px',
+        padding: '12px',
+        backgroundColor: '#f0f9ff',
+        borderLeft: '3px solid #3b82f6',
+        borderRadius: '4px',
+        fontSize: '14px',
+        color: '#1f2937'
+      }}>
+        <strong>💡 Key point:</strong> The <code>pauseOnHidden</code> countdown pauses while the page is hidden and then continues.
+        The default countdown keeps decreasing while hidden, but may decrease less than the actual elapsed time when the browser throttles timers.
+      </div>
+    </div>
+  );
+};
+
+<Example1 />
