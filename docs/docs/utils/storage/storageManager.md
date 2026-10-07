@@ -5,11 +5,13 @@
 <br />
 
 ## Code
+
 [🔗 실제 구현 코드 확인](https://github.com/modern-agile-team/modern-kit/blob/main/packages/utils/src/storage/storageManager/index.ts)
 
 <br />
 
 ## Interface
+
 ```ts title="typescript"
 interface StorageData<T> {
   key: keyof T;
@@ -31,7 +33,10 @@ class StorageManager<T extends Record<string, any>> {
   setItem<K extends keyof T>(key: K, value: T[K]): void;
   setItems(data: StorageData<T>[]): void;
   getItem<K extends keyof T>(key: K, options?: GetItemOptions): T[K] | null;
-  getRawItem<K extends keyof T>(key: K, options?: GetItemOptions): string | null;
+  getRawItem<K extends keyof T>(
+    key: K,
+    options?: GetItemOptions
+  ): string | null;
   getItems<K extends keyof T>(
     keys: K[],
     options?: GetItemOptions
@@ -56,10 +61,10 @@ class StorageManager<T extends Record<string, any>> {
 
 ## Parameters
 
-| Name                   | Type                                  | Default | Description                                                                                       |
-| ---------------------- | ------------------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| `type`                 | `'localStorage' \| 'sessionStorage'` | -       | 사용할 스토리지 타입                                                                              |
-| `options.throwOnError` | `boolean`                             | `true`  | 데이터를 가져오지 못했을 때 에러를 발생시킬지 여부. `false`이면 에러 대신 `null`을 반환합니다. |
+| Name                   | Type                                 | Default | Description                                                                                    |
+| ---------------------- | ------------------------------------ | ------- | ---------------------------------------------------------------------------------------------- |
+| `type`                 | `'localStorage' \| 'sessionStorage'` | -       | 사용할 스토리지 타입                                                                           |
+| `options.throwOnError` | `boolean`                            | `true`  | 데이터를 가져오지 못했을 때 에러를 발생시킬지 여부. `false`이면 에러 대신 `null`을 반환합니다. |
 
 <br />
 
@@ -69,13 +74,15 @@ class StorageManager<T extends Record<string, any>> {
 
 - `null`, `undefined`도 기본 스토리지와 동일하게 문자열(`'null'`, `'undefined'`)로 저장되며, `getItem`은 각각 `null`, `undefined`를 반환합니다.
 - `throwOnError`는 값을 **가져오는** 메서드(`getItem`, `getRawItem`, `getItems`와 이를 사용하는 `hasItem`, `values`, `entries` 등)에만 적용됩니다.
-:::
+- `hasItem`은 값을 파싱하지 않고 키의 존재 여부만 확인합니다. 값이 `null`, `undefined`가 아닌지까지 확인하려면 `getItem(key) != null`을 사용하세요.
+  :::
 
 <br />
 
 ## Usage
 
 ### 기본 사용법
+
 ```ts title="typescript"
 import { StorageManager } from '@modern-kit/utils';
 
@@ -98,6 +105,7 @@ const sessionStorage = new StorageManager<UserData>('sessionStorage');
 <br />
 
 ### 단일 데이터 조작
+
 ```ts title="typescript"
 // 데이터 저장
 localStorage.setItem('name', 'John');
@@ -120,6 +128,7 @@ localStorage.removeItem('name');
 <br />
 
 ### 다중 데이터 조작
+
 ```ts title="typescript"
 // 여러 데이터 한번에 저장
 localStorage.setItems([
@@ -139,6 +148,7 @@ localStorage.removeItems(['name', 'age']);
 <br />
 
 ### 스토리지 전체 데이터 탐색 및 초기화
+
 ```ts title="typescript"
 const storage = new StorageManager<UserData>('localStorage');
 
@@ -165,6 +175,7 @@ storage.clear();
 <br />
 
 ### 인스턴스가 관리하는 스토리지 데이터 탐색 및 초기화
+
 ```ts title="typescript"
 const storage = new StorageManager<UserData>('localStorage');
 
@@ -191,6 +202,7 @@ storage.ownClear();
 <br />
 
 ### 원본 문자열 조회
+
 `getRawItem`은 저장된 값을 파싱하지 않은 원본 문자열로 가져옵니다. JSON이 아닌 값이나 `getItem`으로 파싱하지 못하는 값을 확인할 때 사용합니다.
 
 ```ts title="typescript"
@@ -201,7 +213,23 @@ storage.getRawItem('name'); // '"John"'
 
 <br />
 
+### 키 존재 여부 확인
+
+`hasItem`은 값을 파싱하지 않고 키가 있는지만 확인합니다. 값이 `null`, `undefined`가 아닌지까지 확인하려면 `getItem(key) != null`을 사용합니다.
+
+```ts title="typescript"
+const storage = new StorageManager<{ name: string | null }>('localStorage');
+
+storage.setItem('name', null);
+
+storage.hasItem('name'); // true, 키가 있음
+storage.getItem('name') != null; // false, null로 저장됨
+```
+
+<br />
+
 ### 에러 처리 (throwOnError)
+
 기본적으로 데이터를 가져오지 못하면(잘못된 JSON, 스토리지 접근 차단 등) 에러가 발생합니다. 인스턴스 옵션으로 기본 동작을 정하고, 호출 단위 옵션으로 덮어쓸 수 있습니다. 호출 옵션이 인스턴스 옵션보다 우선합니다.
 
 ```ts title="typescript"

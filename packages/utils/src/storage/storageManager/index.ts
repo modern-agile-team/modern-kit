@@ -26,6 +26,7 @@ export type GetItemOptions = StorageManagerOptions;
  * @method getItems - 스토리지에서 여러 데이터를 한번에 가져옵니다.
  * @method removeItem - 스토리지에서 단일 데이터를 삭제합니다.
  * @method removeItems - 스토리지에서 여러 데이터를 한번에 삭제합니다.
+ * @method hasItem - 스토리지에 데이터가 있는지 확인합니다.
  *
  * @method keys - 스토리지에 저장된 모든 키를 반환합니다.
  * @method values - 스토리지에 저장된 모든 값을 반환합니다.
@@ -250,22 +251,24 @@ export class StorageManager<T extends Record<string, any>> {
   /**
    * @description 스토리지에 저장된 데이터가 있는지 확인합니다.
    *
+   * 값을 파싱하지 않고 키의 존재 여부만 확인합니다. 값이 `null`, `undefined` 가 아닌지까지 확인하려면 `getItem(key) != null` 을 사용합니다.
+   *
    * @param {keyof T} key - 확인할 데이터의 키
    *
-   * @returns {boolean} - 데이터가 있으면 true, 없으면 false.
-   * throwOnError 가 false 이면 가져오는데 실패한 데이터도 false 를 반환합니다.
+   * @returns {boolean} - 키가 있으면 true, 없으면 false.
+   * throwOnError가 false 이면 스토리지 접근에 실패했을 때 false 를 반환합니다.
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
    *
    * storage.setItem('name', 'John');
-   * localStorage.setItem('age', '30');
+   * localStorage.setItem('age', 'invalid json');
    *
-   * storage.hasItem('name'); // true, 스토리지에 저장된 데이터가 있음
-   * storage.hasItem('age'); // true, 스토리지에 저장된 데이터가 있음
+   * storage.hasItem('name'); // true, 스토리지에 키가 있음
+   * storage.hasItem('age'); // true, 파싱할 수 없는 값이어도 키가 있음
    */
   hasItem<K extends keyof T>(key: K): boolean {
-    return this.getItem(key) != null;
+    return this.getRawItem(key) !== null;
   }
 
   /**

@@ -111,6 +111,26 @@ describe('StorageManager', () => {
     });
   });
 
+  describe('hasItem', () => {
+    it.each([
+      ['JSON 값', '"John"'],
+      ['JSON이 아닌 값', INVALID_JSON],
+      ['null 문자열', 'null'],
+      ['undefined 문자열', 'undefined'],
+    ])('%s 이 저장된 키는 true를 반환해야 합니다.', (_, rawValue) => {
+      const storage = new StorageManager<TestStorageData>('localStorage');
+      localStorage.setItem('name', rawValue);
+
+      expect(storage.hasItem('name')).toBe(true);
+    });
+
+    it('존재하지 않는 키의 경우 false를 반환해야 합니다.', () => {
+      const storage = new StorageManager<TestStorageData>('localStorage');
+
+      expect(storage.hasItem('name')).toBe(false);
+    });
+  });
+
   describe('removeItem / removeItems', () => {
     it('단일 또는 여러 아이템을 삭제할 수 있어야 합니다.', () => {
       const storage = new StorageManager<TestStorageData>('localStorage');
@@ -227,7 +247,7 @@ describe('StorageManager', () => {
       ]);
     });
 
-    it('인스턴스 옵션이 false이면 values/entries/hasItem도 에러를 발생시키지 않아야 합니다.', () => {
+    it('인스턴스 옵션이 false이면 values/entries도 에러를 발생시키지 않아야 합니다.', () => {
       const storage = new StorageManager<TestStorageData>('localStorage', {
         throwOnError: false,
       });
@@ -239,7 +259,6 @@ describe('StorageManager', () => {
         ['name', null],
         ['age', 30],
       ]);
-      expect(storage.hasItem('name')).toBe(false);
     });
   });
 });
