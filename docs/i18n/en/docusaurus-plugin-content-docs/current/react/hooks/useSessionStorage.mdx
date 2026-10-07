@@ -45,6 +45,16 @@ setState(state => {
 });
 ```
 
+The `throwOnError` option controls what happens when the stored value cannot be read (invalid JSON, blocked storage access, etc.). It defaults to `true` and throws an error; when `false`, `initialValue` (or `null` if not provided) is used instead.
+
+```ts
+const { state } = useSessionStorage<number[]>({
+  key: 'test',
+  initialValue: [],
+  throwOnError: false,
+});
+```
+
 <br />
 
 ## Code
@@ -56,25 +66,28 @@ setState(state => {
 ## Interface
 
 ```ts title="typescript"
-interface UseSessionStorageWithoutInitialValueProps {
+interface UseSessionStorageWithoutInitialValueOptions {
   key: string;
+  throwOnError?: boolean;
 }
 
-interface UseSessionStorageWithInitialValueProps<T> {
+interface UseSessionStorageWithInitialValueOptions<T> {
   key: string;
   initialValue: T | (() => T);
+  throwOnError?: boolean;
 }
 
-type UseSessionStorageProps<T> =
-  | UseSessionStorageWithoutInitialValueProps
-  | UseSessionStorageWithInitialValueProps<T>;
+type UseSessionStorageOptions<T> =
+  | UseSessionStorageWithoutInitialValueOptions
+  | UseSessionStorageWithInitialValueOptions<T>;
 ```
 ```ts title="typescript"
 // Function overloading
 function useSessionStorage<T>({
   key,
   initialValue,
-}: UseSessionStorageWithInitialValueProps<T>): {
+  throwOnError,
+}: UseSessionStorageWithInitialValueOptions<T>): {
   state: T;
   setState: Dispatch<SetStateAction<T>>;
   removeState: () => void;
@@ -82,7 +95,8 @@ function useSessionStorage<T>({
 
 function useSessionStorage<T = unknown>({
   key,
-}: UseSessionStorageWithoutInitialValueProps): {
+  throwOnError,
+}: UseSessionStorageWithoutInitialValueOptions): {
   state: T | null;
   setState: Dispatch<SetStateAction<T | null>>;
   removeState: () => void;
@@ -97,6 +111,7 @@ function useSessionStorage<T = unknown>({
 | ---- | ---- | ------- | ----------- |
 | `key` | `string` | - | The key to subscribe to in session storage |
 | `initialValue` | `T \| (() => T)` | `null` | The initial value to return when the key does not exist or in SSR environments |
+| `throwOnError` | `boolean` | `true` | Whether to throw when the stored value cannot be read. When `false`, `initialValue` (or `null`) is used |
 
 <br />
 
@@ -107,6 +122,16 @@ function useSessionStorage<T = unknown>({
 | `state` | `T` or `T \| null` | The current value from session storage. May be `null` if no `initialValue` is provided. |
 | `setState` | `Dispatch<SetStateAction<T>>` | Function to update the session storage value |
 | `removeState` | `() => void` | Function to remove the key from session storage |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+
+- `setState(null)` and `setState(undefined)` are stored in session storage as-is, and `state` returns the stored value rather than `initialValue`. Use `removeState` to clear the stored value and fall back to `initialValue`.
+- `throwOnError` only applies when **reading** values. If writing to session storage fails in `setState` or `removeState`, an error is always thrown.
+:::
 
 <br />
 

@@ -5,14 +5,23 @@ interface StorageData<T> {
   value: T[keyof T];
 }
 
+export interface StorageManagerOptions {
+  throwOnError?: boolean;
+}
+
+export type GetItemOptions = StorageManagerOptions;
+
 /**
  * @description 스토리지 관리 클래스
  *
  * @template T - 스토리지에 저장할 데이터의 타입
  * @param {'localStorage' | 'sessionStorage'} type - 스토리지 타입 (localStorage 또는 sessionStorage)
+ * @param {StorageManagerOptions} [options] - 스토리지 옵션
+ * @param {boolean} [options.throwOnError=true] - 데이터를 가져오는데 실패했을 때 에러를 발생시킬지 여부
  *
  * @method setItem - 스토리지에 단일 데이터를 저장합니다.
  * @method getItem - 스토리지에서 단일 데이터를 가져옵니다.
+ * @method getRawItem - 스토리지에서 단일 데이터를 파싱하지 않은 원본 문자열로 가져옵니다.
  * @method setItems - 스토리지에 여러 데이터를 한번에 저장합니다.
  * @method getItems - 스토리지에서 여러 데이터를 한번에 가져옵니다.
  * @method removeItem - 스토리지에서 단일 데이터를 삭제합니다.
@@ -36,14 +45,25 @@ interface StorageData<T> {
  * storage.setItem('name', 'John');
  * storage.getItem('name'); // 'John'
  * storage.removeItem('name');
+ *
+ * @example
+ * // 데이터를 가져오는데 실패해도 에러를 발생시키지 않고 null 을 반환합니다.
+ * const storage = new StorageManager<{ name: string }>('localStorage', {
+ *   throwOnError: false,
+ * });
  */
 export class StorageManager<T extends Record<string, any>> {
   private storageType: 'localStorage' | 'sessionStorage';
   private managedKeys: Set<keyof T>;
+  private options: StorageManagerOptions;
 
-  constructor(type: 'localStorage' | 'sessionStorage') {
+  constructor(
+    type: 'localStorage' | 'sessionStorage',
+    options: StorageManagerOptions = {}
+  ) {
     this.storageType = type;
     this.managedKeys = new Set();
+    this.options = options;
   }
 
   private get storage(): Window['localStorage'] | Window['sessionStorage'] {
@@ -51,6 +71,24 @@ export class StorageManager<T extends Record<string, any>> {
       throw new Error('Storage를 지원하는 환경이 아닙니다');
     }
     return window[this.storageType];
+  }
+
+  private handleError(
+    key: keyof T,
+    err: unknown,
+    options?: GetItemOptions
+  ): null {
+    const throwOnError =
+      options?.throwOnError ?? this.options.throwOnError ?? true;
+
+    if (throwOnError) {
+      throw new Error(
+        `"${String(key)}" 아이템을 가져오는데 실패했습니다: ${err}`,
+        { cause: err }
+      );
+    }
+
+    return null;
   }
 
   /**
@@ -64,10 +102,6 @@ export class StorageManager<T extends Record<string, any>> {
    * storage.setItem('name', 'John');
    */
   setItem<K extends keyof T>(key: K, value: T[K]): void {
-    if (value == null) {
-      return;
-    }
-
     this.storage.setItem(key as string, JSON.stringify(value));
     this.managedKeys.add(key);
   }
@@ -93,29 +127,64 @@ export class StorageManager<T extends Record<string, any>> {
    * @description 스토리지에 저장된 단일 데이터를 가져옵니다.
    *
    * @param {keyof T} key - 가져올 데이터의 키
+   * @param {GetItemOptions} [options] - 이번 호출에만 적용할 옵션. 인스턴스 옵션보다 우선합니다.
+   * @param {boolean} [options.throwOnError=true] - 데이터를 가져오는데 실패했을 때 에러를 발생시킬지 여부
    *
-   * @returns {T[keyof T] | null} - 가져온 데이터의 값
+   * @returns {T[keyof T] | null} - 가져온 데이터의 값. 데이터가 없으면 null, `undefined` 로 저장된 경우 undefined 를 반환합니다. throwOnError 가 false 이면 실패 시 null 을 반환합니다.
    *
-   * @throws {Error} - 데이터를 가져오는데 실패할 경우 오류를 발생시킵니다.
+   * @throws {Error} - throwOnError 가 true(기본값)일 때 데이터를 가져오는데 실패할 경우 오류를 발생시킵니다.
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
    * storage.getItem('name'); // 'John'
    * // type: string | null
+   *
+   * storage.getItem('name', { throwOnError: false }); // 실패하면 null
    */
-  getItem<K extends keyof T>(key: K): T[K] | null {
+  getItem<K extends keyof T>(key: K, options?: GetItemOptions): T[K] | null {
     try {
-      const getItem = this.storage.getItem(key as string);
+      const rawValue = this.storage.getItem(key as string);
 
-      if (getItem == null || getItem === 'undefined') {
+      if (rawValue == null) {
         return null;
       }
 
-      return parseJSON(getItem);
+      if (rawValue === 'undefined') {
+        return undefined as T[K];
+      }
+
+      return parseJSON(rawValue);
     } catch (err) {
-      throw new Error(`"${String(key)}" 아이템을 가져오는데 실패했습니다"`, {
-        cause: err,
-      });
+      return this.handleError(key, err, options);
+    }
+  }
+
+  /**
+   * @description 스토리지에 저장된 단일 데이터를 파싱하지 않은 원본 문자열로 가져옵니다.
+   *
+   * JSON 이 아닌 값이나 `getItem` 으로 파싱하지 못하는 값을 확인할 때 사용합니다.
+   *
+   * @param {keyof T} key - 가져올 데이터의 키
+   * @param {GetItemOptions} [options] - 이번 호출에만 적용할 옵션. 인스턴스 옵션보다 우선합니다.
+   * @param {boolean} [options.throwOnError=true] - 데이터를 가져오는데 실패했을 때 에러를 발생시킬지 여부
+   *
+   * @returns {string | null} - 저장된 원본 문자열. 데이터가 없거나, throwOnError 가 false 이고 실패하면 null 을 반환합니다.
+   *
+   * @throws {Error} - throwOnError 가 true(기본값)일 때 데이터를 가져오는데 실패할 경우 오류를 발생시킵니다.
+   *
+   * @example
+   * const storage = new StorageManager<{ name: string, age: number }>('localStorage');
+   * storage.setItem('name', 'John');
+   * storage.getRawItem('name'); // '"John"'
+   */
+  getRawItem<K extends keyof T>(
+    key: K,
+    options?: GetItemOptions
+  ): string | null {
+    try {
+      return this.storage.getItem(key as string);
+    } catch (err) {
+      return this.handleError(key, err, options);
     }
   }
 
@@ -124,6 +193,8 @@ export class StorageManager<T extends Record<string, any>> {
    *
    * @template K - 가져올 데이터의 키 타입
    * @param {K[]} keys - 가져올 데이터의 키 배열
+   * @param {GetItemOptions} [options] - 이번 호출에만 적용할 옵션. 인스턴스 옵션보다 우선합니다.
+   * @param {boolean} [options.throwOnError=true] - 데이터를 가져오는데 실패했을 때 에러를 발생시킬지 여부
    *
    * @returns {{ key: K; value: T[K] | null }[]} - 가져온 데이터의 값 배열. 매칭되는 키에 대해 데이터가 없으면 null을 반환합니다.
    *
@@ -135,11 +206,14 @@ export class StorageManager<T extends Record<string, any>> {
    * //   value: string | number | null;
    * // }[]
    */
-  getItems<K extends keyof T>(keys: K[]): { key: K; value: T[K] | null }[] {
+  getItems<K extends keyof T>(
+    keys: K[],
+    options?: GetItemOptions
+  ): { key: K; value: T[K] | null }[] {
     return keys.map((key) => {
       return {
         key,
-        value: this.getItem(key),
+        value: this.getItem(key, options),
       };
     });
   }
@@ -178,7 +252,8 @@ export class StorageManager<T extends Record<string, any>> {
    *
    * @param {keyof T} key - 확인할 데이터의 키
    *
-   * @returns {boolean} - 데이터가 있으면 true, 없으면 false
+   * @returns {boolean} - 데이터가 있으면 true, 없으면 false.
+   * throwOnError 가 false 이면 가져오는데 실패한 데이터도 false 를 반환합니다.
    *
    * @example
    * const storage = new StorageManager<{ name: string, age: number }>('localStorage');

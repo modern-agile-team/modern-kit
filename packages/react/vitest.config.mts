@@ -14,7 +14,7 @@ export default defineConfig({
       provider: 'istanbul',
       exclude: [
         'src/utils/**',
-        'src/_internal/**',
+        'src/_internal/test/**',
         'src/**/internal.ts',
         'src/**/*.utils.ts',
         'src/hooks/useClipboard',

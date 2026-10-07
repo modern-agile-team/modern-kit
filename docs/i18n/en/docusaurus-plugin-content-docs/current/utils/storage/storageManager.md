@@ -16,15 +16,29 @@ interface StorageData<T> {
   value: T[keyof T];
 }
 
+interface StorageManagerOptions {
+  throwOnError?: boolean;
+}
+
+type GetItemOptions = StorageManagerOptions;
+
 class StorageManager<T extends Record<string, any>> {
-  constructor(type: 'localStorage' | 'sessionStorage');
+  constructor(
+    type: 'localStorage' | 'sessionStorage',
+    options?: StorageManagerOptions
+  );
 
   setItem<K extends keyof T>(key: K, value: T[K]): void;
   setItems(data: StorageData<T>[]): void;
-  getItem<K extends keyof T>(key: K): T[K] | null;
-  getItems<K extends keyof T>(keys: K[]): { key: K; value: T[K] | null }[];
+  getItem<K extends keyof T>(key: K, options?: GetItemOptions): T[K] | null;
+  getRawItem<K extends keyof T>(key: K, options?: GetItemOptions): string | null;
+  getItems<K extends keyof T>(
+    keys: K[],
+    options?: GetItemOptions
+  ): { key: K; value: T[K] | null }[];
   removeItem<K extends keyof T>(key: K): void;
   removeItems<K extends keyof T>(keys: K[]): void;
+  hasItem<K extends keyof T>(key: K): boolean;
   keys(): (keyof T)[];
   values(): (T[keyof T] | null)[];
   entries(): [keyof T, T[keyof T] | null][];
@@ -37,6 +51,25 @@ class StorageManager<T extends Record<string, any>> {
   ownSize(): number;
 }
 ```
+
+<br />
+
+## Parameters
+
+| Name                   | Type                                  | Default | Description                                                                                  |
+| ---------------------- | ------------------------------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `type`                 | `'localStorage' \| 'sessionStorage'` | -       | The storage type to use                                                                      |
+| `options.throwOnError` | `boolean`                             | `true`  | Whether to throw when data cannot be read. When `false`, `null` is returned instead. |
+
+<br />
+
+## Remarks
+
+:::caution Caution
+
+- `null` and `undefined` are stored as strings (`'null'`, `'undefined'`) just like the native storage, and `getItem` returns `null` and `undefined` respectively.
+- `throwOnError` only applies to methods that **read** values (`getItem`, `getRawItem`, `getItems`, and methods built on them such as `hasItem`, `values`, `entries`).
+:::
 
 <br />
 
@@ -153,4 +186,32 @@ const count = storage.ownSize(); // 2
 
 // Delete all data managed by the instance
 storage.ownClear();
+```
+
+<br />
+
+### Reading Raw Strings
+`getRawItem` returns the stored value as an unparsed raw string. Use it to inspect non-JSON values or values that `getItem` cannot parse.
+
+```ts title="typescript"
+storage.setItem('name', 'John');
+
+storage.getRawItem('name'); // '"John"'
+```
+
+<br />
+
+### Error Handling (throwOnError)
+By default, an error is thrown when data cannot be read (invalid JSON, blocked storage access, etc.). Set the default behavior with the instance option and override it per call. The per-call option takes precedence over the instance option.
+
+```ts title="typescript"
+// Per instance: returns null on failure
+const storage = new StorageManager<UserData>('localStorage', {
+  throwOnError: false,
+});
+
+storage.getItem('name'); // null on failure
+
+// Per call: throws for this call only
+storage.getItem('name', { throwOnError: true });
 ```
