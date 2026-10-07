@@ -10,34 +10,21 @@ const isDocumentHidden = () =>
   typeof document !== 'undefined' && document.visibilityState === 'hidden';
 
 interface UseCountdownOptions {
-  /** 카운트다운 시작 값. 소수는 정수부만 사용됩니다. */
   countStart: number;
-  /** 카운트다운이 멈출 값. 기본값 `0`. 소수는 정수부만 사용됩니다. */
   countStop?: number;
-  /** 카운트 간격(ms). 기본값 `1000` */
   intervalMs?: number;
-  /** 카운트다운이 `countStop`에 도달했을 때 그 값(`countStop`)을 인자로 호출됩니다. */
   onComplete?: (count: number) => void;
-  /** 카운트다운이 감소할 때마다 매 tick, 이번 tick의 결과값을 인자로 호출됩니다. */
   onTick?: (count: number) => void;
-  /** 실행 중에 화면이 숨겨지면 멈추고, 다시 보이면 이어서 진행합니다. 기본값 `false` */
   pauseOnHidden?: boolean;
 }
 
 interface UseCountdownReturnType {
-  /** 현재 카운트 값 */
   count: number;
-  /** 현재 카운트가 `countStop`에 도달(이하)했는지 여부 (`count <= countStop`) */
   isComplete: boolean;
-  /** 카운트다운을 시작합니다. */
   start: () => void;
-  /** 카운트다운을 일시정지합니다. 현재 카운트는 유지되며, `start` 하면 이어서 진행합니다. */
   pause: () => void;
-  /** 카운트다운을 멈추고 시작 값으로 되돌립니다. */
   reset: () => void;
-  /** 시작 값으로 되돌리고 바로 시작합니다. 완료된 뒤에도 다시 시작할 수 있습니다. */
   restart: () => void;
-  /** 현재 카운트에 `amount`만큼 누적합니다. `countStop` 아래로는 내려가지 않습니다. */
   addCount: (amount: number) => void;
 }
 
@@ -49,6 +36,12 @@ interface UseCountdownReturnType {
  * 화면을 보고 있을 때만 줄어들어야 한다면 `pauseOnHidden` 을, 실제 시각과 맞아야 한다면 `useTimer` 를 사용합니다.
  *
  * @param {UseCountdownOptions} options - 카운트다운 설정
+ * @param {number} options.countStart - 카운트다운 시작 값. 소수는 정수부만 사용됩니다.
+ * @param {number} [options.countStop=0] - 카운트다운이 멈출 값. 소수는 정수부만 사용됩니다.
+ * @param {number} [options.intervalMs=1000] - 카운트 간격(ms)
+ * @param {(count: number) => void} [options.onComplete] - 카운트다운이 `countStop`에 도달했을 때 그 값(`countStop`)을 인자로 호출됩니다.
+ * @param {(count: number) => void} [options.onTick] - 카운트다운이 감소할 때마다 매 tick, 이번 tick의 결과값을 인자로 호출됩니다.
+ * @param {boolean} [options.pauseOnHidden=false] - 실행 중에 화면이 숨겨지면 멈추고, 다시 보이면 이어서 진행합니다.
  * @returns {UseCountdownReturnType} 현재 카운트 값과 상태, 제어 함수들을 담은 객체.
  * - `count`: 현재 카운트 값
  * - `isComplete`: `countStop`에 도달했는지 여부
@@ -103,7 +96,10 @@ export function useCountdown({
   const [isCountdownRunning, setCountdownRunning] = useState(false);
   const [isPausedByHidden, setPausedByHidden] = useState(false);
 
-  const checkIsComplete = useCallback((value: number) => value <= stopCount, [stopCount]);
+  const checkIsComplete = useCallback(
+    (value: number) => value <= stopCount,
+    [stopCount]
+  );
 
   const start = useCallback(() => {
     if (pauseOnHidden && isDocumentHidden()) {
@@ -146,7 +142,9 @@ export function useCountdown({
   const addCount = useCallback(
     (amount: number) => {
       // 소수 입력은 정수부만 누적하고, countStop 아래로는 내려가지 않게 클램프합니다.
-      setCounter((prev) => clamp(prev + Math.trunc(amount), stopCount, Infinity));
+      setCounter((prev) =>
+        clamp(prev + Math.trunc(amount), stopCount, Infinity)
+      );
     },
     [stopCount, setCounter]
   );
