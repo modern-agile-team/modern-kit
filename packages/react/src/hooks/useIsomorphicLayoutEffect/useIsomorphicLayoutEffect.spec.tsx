@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 
 // 모듈 평가 시점에 환경을 판단하므로, 매 테스트마다 모듈을 새로 불러옵니다.
 // 비교 대상인 react 도 같은 모듈 레지스트리에서 불러와야 동일한 인스턴스가 보장됩니다.
@@ -12,9 +12,12 @@ const importModules = async () => {
 };
 
 describe('useIsomorphicLayoutEffect', () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
   afterEach(() => {
     vi.doUnmock('@modern-kit/utils');
-    vi.resetModules();
   });
 
   it('서버 환경에서는 useEffect를 사용해야 합니다', async () => {
