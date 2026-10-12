@@ -1,5 +1,11 @@
 # @modern-kit/utils
 
+## 3.5.0
+
+### Minor Changes
+
+- [#1138](https://github.com/modern-agile-team/modern-kit/pull/1138) [`e292dd2`](https://github.com/modern-agile-team/modern-kit/commit/e292dd22731b3bb7f70c404f2c8e1cb4d04696cd) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: StorageManager/useLocalStorage/useSessionStorage throwOnError 옵션 추가 및 스토리지 훅 공통화 - @ssi02014
+
 ## 3.4.0
 
 ### Minor Changes
