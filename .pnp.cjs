@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.8.1"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
-          ["globals", "npm:17.13.0"],\
+          ["globals", "npm:17.14.0"],\
           ["lerna", "npm:10.1.0"],\
           ["modern-kit", "workspace:."],\
           ["prettier", "npm:3.9.6"],\
@@ -18628,10 +18628,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:17.13.0", {\
-        "packageLocation": "./.yarn/cache/globals-npm-17.13.0-c41b01048d-8371d9e4e5.zip/node_modules/globals/",\
+      ["npm:17.14.0", {\
+        "packageLocation": "./.yarn/cache/globals-npm-17.14.0-6eda6238c7-422d17c24e.zip/node_modules/globals/",\
         "packageDependencies": [\
-          ["globals", "npm:17.13.0"]\
+          ["globals", "npm:17.14.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -22651,7 +22651,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:10.8.1"],\
           ["eslint-plugin-import", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:2.32.0"],\
           ["eslint-plugin-unused-imports", "virtual:ab809d7a51c6dab120da2072430db4ad7cead7ffb76bc404f75c637e64bb6b898e5efe1775501490bd08c0b87e12ee1238c136267af25e291a31c6c2f8976dee#npm:4.4.1"],\
-          ["globals", "npm:17.13.0"],\
+          ["globals", "npm:17.14.0"],\
           ["lerna", "npm:10.1.0"],\
           ["modern-kit", "workspace:."],\
           ["prettier", "npm:3.9.6"],\
