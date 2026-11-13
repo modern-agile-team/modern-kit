@@ -1,5 +1,20 @@
 # @modern-kit/react
 
+## 3.2.0
+
+### Minor Changes
+
+- [#1138](https://github.com/modern-agile-team/modern-kit/pull/1138) [`e292dd2`](https://github.com/modern-agile-team/modern-kit/commit/e292dd22731b3bb7f70c404f2c8e1cb4d04696cd) Thanks [@ssi02014](https://github.com/ssi02014)! - feat: StorageManager/useLocalStorage/useSessionStorage throwOnError 옵션 추가 및 스토리지 훅 공통화 - @ssi02014
+
+- [#1135](https://github.com/modern-agile-team/modern-kit/pull/1135) [`de3440a`](https://github.com/modern-agile-team/modern-kit/commit/de3440a30052626f1aa982754e2337147a6170b2) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useTimer 신규 훅 추가 - @ssi02014
+
+- [#1137](https://github.com/modern-agile-team/modern-kit/pull/1137) [`1ad6be0`](https://github.com/modern-agile-team/modern-kit/commit/1ad6be0a5f8013e1e5a3ad52f5a439a4abaf8dcd) Thanks [@ssi02014](https://github.com/ssi02014)! - feat(react): useCountdown 훅 추가 - @ssi02014
+
+### Patch Changes
+
+- Updated dependencies [[`e292dd2`](https://github.com/modern-agile-team/modern-kit/commit/e292dd22731b3bb7f70c404f2c8e1cb4d04696cd)]:
+  - @modern-kit/utils@3.5.0
+
 ## 3.1.1
 
 ### Patch Changes
